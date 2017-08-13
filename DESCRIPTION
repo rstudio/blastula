@@ -1,0 +1,18 @@
+Package: blastula
+Title: Easily Send HTML Email Messages
+Version: 0.1
+Authors@R: person("Rich", "Iannone", email = "riannone@eme.com", role = c("aut", "cre"))
+Description: Easily send great-looking HTML email messages from R.
+Depends: R (>= 3.4.0)
+License: MIT + file LICENSE
+Imports:
+    commonmark (>= 1.2),
+    glue (>= 1.1.1),
+    htmltools (>= 0.3.6),
+    magrittr (>= 1.5),
+    mailR (>= 0.4.1),
+    rJava (>= 0.9-8),
+    stringr (>= 1.2.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
