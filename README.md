@@ -1,6 +1,6 @@
 <img src="inst/graphics/blastula_diagram.png">
 
-Sometimes we need to send an email message based on the result of some automated analysis process. For those such instances, let's endeavor to send out some pretty-nice-looking HTML email messages. I mean, we have the technology. We can now make these emails a bit easier on the eyes. The **blastula** package makes it easy to sent out HTML emails. We can use **markdown**, we can inject **R** code and objects into our email text. The best way to demonstrate this is to just show an example workflow...
+Sometimes we need to send an email message based on the result of some automated analysis process. For those such instances, let's endeavor to send out some pretty-nice-looking HTML email messages. I mean, we have the technology. We can now make these emails a bit easier on the eyes. The **blastula** package makes it easy to send out HTML emails. We can use **markdown**, we can inject **R** code and objects into our email text. The best way to demonstrate this is to just show an example workflow...
 
 ### Sending an email message
 
