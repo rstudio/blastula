@@ -71,7 +71,7 @@ preview_email(email = email_object)
 
 <img src="inst/graphics/rstudio_preview_email.png">
 
-Looks good. Time to email this. I'd previously set up my email credentials in a file using the `create_email_creds_file()` function. Here's an example of how one might create a creds file as a hidden file in the home directory (`~`). 
+Looks good. Time to email this. I'd previously set up my email credentials in a file using the `create_email_creds_file()` function. Here's an example of how one might create a creds file as a hidden file in the home directory (`~`).
 
 ```r
 # Create a credentials file to facilitate
@@ -85,18 +85,31 @@ create_email_creds_file(
   password = "************")
 ```
 
-Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `recipients` argument can accept a vector of email addresses for mass mailings.
+Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `recipients` argument can accept a vector of email addresses for mass mailings. If using a credentials file seems like not a very good practice, one can instead set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
 
 ```r
+# Sending email using a credentials file
 send_email_out(
   message = email_object,
   from = "mike@smile.de",
   recipients = "riannone@me.com",
   subject = "This is NOT junk mail.",
   creds_file = "email_creds")
+  
+# Sending email using environment variables
+send_email_out(
+  message = email_object,
+  from = "mike@smile.de",
+  recipients = "riannone@me.com",
+  subject = "This is NOT junk mail.",
+  sender = Sys.getenv("bls_sender"),
+  host = Sys.getenv("bls_host"),
+  port = Sys.getenv("bls_host"),
+  user = Sys.getenv("bls_username"),
+  password = Sys.getenv("bls_password"))
 ```
 
-Oddly enough, this message did appear in my Junk Mail folder. I fished it out, and this is how it appears:
+Oddly enough, when I checked my email client, this message did appear in my Junk Mail folder. I fished it out, and this is how it appeared:
 
 <img src="inst/graphics/email_message.png">
 
