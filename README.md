@@ -127,7 +127,7 @@ Oddly enough, when I checked my email client, this message did appear in my Junk
 
 Which is great. The underlying HTML/CSS is meant to be resilient and display properly across a wide range of email clients and webmail services.
 
-### Other things you can add to an email message
+### Adding a table to an email message
 
 You can add HTML tables to the message. Here's an example using a **formattable** table generated via its `format_table()` function.
 
@@ -193,6 +193,35 @@ This is how the email preview appears:
 <img src="inst/graphics/formattable_preview.png">
 
 Bear in mind that wider tables are less responsive than text with smaller viewport widths, so, previewing the message is vital (along with recognizing whether recipients will be primarily viewing on mobile or desktop).
+
+### Adding HTML tags with inline CSS
+
+You can add custom HTML within the markdown text. This provides an opportunity to style the text using inline CSS. In this example, header text is centered with the `text-align` style and link text is rendered in the `code` style using `<code>` tags. 
+
+```r
+library(blastula)
+
+# Center the header text with some HTML tags, and,
+# use the <code> tag for a link
+compose_email(
+  body = "
+
+  <h2 style=\"text-align:center;\">This Heading is Centered</h2>
+
+  That worked because we can insert HTML tags and \\
+  include inline CSS. Check out this webpage for \\
+  more information on this topic:
+
+  <code>[CSS Align](https://www.w3schools.com/css/css_align.asp)</code>
+
+  Cheers
+  ") %>%
+  preview_email()
+```
+
+This is how the email preview appears:
+
+<img src="inst/graphics/html_tags_inline_css.png">
 
 ### Installation of the package
 
