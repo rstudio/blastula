@@ -16,6 +16,8 @@ So far, the functions in this package are:
 When you compose an email, you can use character objects in the global workspace and splice those into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
 
 ```r
+library(dplyr)
+
 # Get a nicely formatted date/time string
 current_date_time <-
   paste0(
