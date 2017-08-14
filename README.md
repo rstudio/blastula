@@ -134,6 +134,7 @@ You can add HTML tables to the message. Here's an example using a **formattable*
 ```r
 library(blastula)
 library(formattable)
+library(magrittr)
 
 # Create a data frame
 df <- data.frame(
@@ -200,6 +201,7 @@ You can add custom HTML within the markdown text. This provides an opportunity t
 
 ```r
 library(blastula)
+library(magrittr)
 
 # Center the header text with some HTML tags, and,
 # use the <code> tag for a link
