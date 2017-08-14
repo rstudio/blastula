@@ -1,6 +1,6 @@
 <img src="inst/graphics/blastula_diagram.png">
 
-Sometimes we need to send an email message based on the result of some automated analysis process. For those such instances, let's endeavor to send out some pretty-nice-looking HTML email messages. I mean, we have the technology. We can now make these emails a bit easier on the eyes. The **blastula** package makes it easy to send out HTML emails. We can use **markdown**, we can inject **R** code and objects into our email text. The best way to demonstrate this is to just show an example workflow...
+Sometimes we need to send out email messages based on the results of automated analysis processes. For these such instances, let's endeavor to send out some pretty-nice-looking HTML email messages. The **blastula** package makes it easy to send out HTML emails that are a little bit easier on the eyes. As an added bonus we can take advantage both **markdown** and **R** code when composing our email text. The best way to demonstrate this is to just show an example workflow...
 
 ### Sending an email message
 
@@ -8,16 +8,15 @@ Here's an example that shows a basic workflow for composing the message, preview
 
 So far, the functions in this package are:
 
-- `create_email_creds_file()`: generates an on-disk, serialized file with email credentials
 - `compose_email()`: generates the email message content inside the `email_message`-class object
 - `preview_email()`: makes the email message created by `compose_email()` viewable in the RStudio Viewer
-- `send_email_out()`: sends the `email_message` object to one or more recipients
+- `send_email_out()`: sends the HTML-based email to one or more recipients
+- `create_email_creds_file()`: generates an optional on-disk, serialized file with email credentials
 
 When you compose an email, you can use character objects in the global workspace and splice those into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
 
 ```r
-# Create some character objects in the global workspace
-
+# Get a nicely formatted date/time string
 current_date_time <-
   paste0(
     format(Sys.time(), "%A, %B "),
@@ -29,13 +28,16 @@ current_date_time <-
     toupper(format(Sys.time(), " %p")),
     format(Sys.time(), " (%Z)"))
 
+# Assign a very long image URL to `img_link`
 img_link <-
   "https://marketplace.canva.com/MAA_AbacFmo/2/0/thumbnail_large/canva-basic-good-vibes-email-header-MAA_AbacFmo.jpg"
 ```
 
 Now, we can use the `compose_email()` to compose the email! There are two main arguments here, `body` and `footer`. You can supply **markdown** text to each of these. So things like `##`, links, tables, and all other valid **markdown** conventions should render to valid HTML.
 
-Furthermore, string interpolation works by enclosing valid **R** code inside of curly braces. Below the very long link to an image is referenced to the `img_link` object from the global workspace. We can also supply variables in the `compose_email()` function directly. The `{sender}` part references not an object in the global workspace but the named argument `sender = "Mike"` in the function call. (The order of searching is from within the function first, then the global environment.) The `date_time` character object is nicely inserted in the footer of the email.
+Furthermore, string interpolation is possible and it works by enclosing valid **R** code inside of curly braces (`{...}`). Below the image URL (as part of the `![...](...)` **markdown** link contruction) is referenced to the `img_link` object from the global workspace. Note also that `{current_date_time}` references a character object that took quite a few piped statements of **R** to generate. The end result is the date/time string being nicely inserted in the footer of the email without complicating the `compose_email()` function call itself with lots of **R** statements.
+
+We can also supply variables in the `compose_email()` function directly. For example, the `{sender}` part references an object *not* in the global workspace but rather it refers the named argument `sender = "Mike"` in the function call. (The order of searching is from within the function first, then the search moves to variables in the global environment.) 
 
 ```r
 email_object <-
@@ -58,7 +60,7 @@ email_object <-
     sender = "Mike")
 ```
 
-Some more notes on style are useful here. The `\\` is a helpful line continuation marker. It'll help you break long lines up when composing but won't introduce line breaks or new paragraphs. I recommend formatting like above with few indents so as not to induce the `quote`-type formatting. Any literal quotation marks should be escaped using a single `\`. Blank lines between non-blank lines indicate new paragraphs. And, again, any valid **R** code can be enclosed inside `{...}` (e.g., `{Sys.Date()}`).
+Some more notes on style are useful here. The `\\` is a helpful line continuation marker. It'll help you break long lines up when composing but won't introduce line breaks or new paragraphs. I recommend formatting like above with few indents so as not to induce the `quote`-type formatting. Any literal quotation marks should be escaped using a single `\`. Blank lines separating blocks of text result in new paragraphs. And, again, any valid **R** code can be enclosed inside `{...}` (e.g., `{Sys.Date()}`).
 
 After creating the email message, you'll most certainly want to look at it to ensure that the formatting is what you want it to be. This is done with the `preview_email()` function. It's easy to use!
 
@@ -94,7 +96,7 @@ send_email_out(
   from = "mike@smile.de",
   recipients = "riannone@me.com",
   subject = "This is NOT junk mail.",
-  creds_file = "email_creds")
+  creds_file = "~/.email_file")
   
 # Sending email using environment variables
 send_email_out(
@@ -113,7 +115,7 @@ Oddly enough, when I checked my email client, this message did appear in my Junk
 
 <img src="inst/graphics/email_message.png">
 
-Which is great. The underlying HTML/CSS is meant to display properly across a wide range of email clients and webmail services.
+Which is great. The underlying HTML/CSS is meant to be resilient and display properly across a wide range of email clients and webmail services.
 
 ### Installation of the package
 
