@@ -42,6 +42,8 @@ Furthermore, string interpolation is possible and it works by enclosing valid **
 We can also supply variables in the `compose_email()` function directly. For example, the `{sender}` part references an object *not* in the global workspace but rather it refers the named argument `sender = "Mike"` in the function call. (The order of searching is from within the function first, then the search moves to variables in the global environment.) 
 
 ```r
+library(blastula)
+
 email_object <-
   compose_email(
     body = "
@@ -67,6 +69,8 @@ Some more notes on style are useful here. The `\\` is a helpful line continuatio
 After creating the email message, you'll most certainly want to look at it to ensure that the formatting is what you want it to be. This is done with the `preview_email()` function. It's easy to use!
 
 ```r
+library(blastula)
+
 # Preview the email
 preview_email(email = email_object)
 ```
@@ -78,6 +82,8 @@ preview_email(email = email_object)
 Looks good. Time to email this. I'd previously set up my email credentials in a file using the `create_email_creds_file()` function. Here's an example of how one might create a creds file as a hidden file in the home directory (`~`).
 
 ```r
+library(blastula)
+
 # Create a credentials file to facilitate
 # the sending of email messages
 create_email_creds_file(
@@ -92,6 +98,8 @@ create_email_creds_file(
 Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `recipients` argument can accept a vector of email addresses for mass mailings. If using a credentials file seems like not a very good practice, one can instead set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
 
 ```r
+library(blastula)
+
 # Sending email using a credentials file
 send_email_out(
   message = email_object,
@@ -118,6 +126,73 @@ Oddly enough, when I checked my email client, this message did appear in my Junk
 <img src="inst/graphics/email_message.png">
 
 Which is great. The underlying HTML/CSS is meant to be resilient and display properly across a wide range of email clients and webmail services.
+
+### Other things you can add to an email message
+
+You can add HTML tables to the message. Here's an example using a **formattable** table generated via its `format_table()` function.
+
+```r
+library(blastula)
+library(formattable)
+
+# Create a data frame
+df <- data.frame(
+  id = 1:10,
+  name = c("Bob", "Ashley", "James", "David", "Jenny", 
+           "Hans", "Leo", "John", "Emily", "Lee"), 
+  age = c(28, 27, 30, 28, 29, 29, 27, 27, 31, 30),
+  grade = c("C", "A", "A", "C", "B", "B", "B", "A", "C", "C"),
+  test1_score = c(8.9, 9.5, 9.6, 8.9, 9.1, 9.3, 9.3, 9.9, 8.5, 8.6),
+  test2_score = c(9.1, 9.1, 9.2, 9.1, 8.9, 8.5, 9.2, 9.3, 9.1, 8.8),
+  final_score = c(9, 9.3, 9.4, 9, 9, 8.9, 9.25, 9.6, 8.8, 8.7),
+  registered = c(TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE),
+  stringsAsFactors = FALSE)
+
+# Create an HTML table with `format_table()`
+formatted_table <-
+  format_table(
+    x = df,
+    list(
+      age = color_tile("white", "orange"),
+      grade = 
+        formatter(
+          "span",
+          style = x ~ ifelse(
+            x == "A", 
+            style(color = "green", font.weight = "bold"), NA)), 
+      area(col = c(test1_score, test2_score)) ~ normalize_bar("pink", 0.2),
+      final_score = 
+        formatter(
+          "span",
+          style = x ~ style(color = ifelse(rank(-x) <= 3, "green", "gray")),
+          x ~ sprintf("%.2f (rank: %02d)", x, rank(-x))),
+      registered = 
+        formatter(
+          "span",
+          style = x ~ style(color = ifelse(x, "green", "red")),
+          x ~ icontext(ifelse(x, "ok", "remove"), ifelse(x, "Yes", "No")))
+    ))
+    
+# Create and preview the email message
+compose_email(
+  body = "
+  Hello,
+
+  Here are the grades you've been hounding me \\
+  for all this past week. Overall, everyone did \\
+  quite well. I'm impressed.
+
+  {formatted_table}
+  <br />
+  Cheers,<br />The grader") %>%
+  preview_email()
+```
+
+This is how the email preview appears:
+
+<img src="inst/graphics/formattable_preview.png">
+
+Bear in mind that wider tables are less responsive than text with smaller viewport widths, so, previewing the message is vital (along with recognizing whether recipients will be primarily viewing on mobile or desktop).
 
 ### Installation of the package
 
