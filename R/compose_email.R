@@ -206,7 +206,7 @@ compose_email <- function(body = NULL,
     margin-left: 5px; }}
 
     a {{
-    color: #3498db;
+    color: #3498DB;
     text-decoration: underline; }}
 
     /* -------------------------------------
@@ -220,15 +220,15 @@ compose_email <- function(body = NULL,
     .btn table {{
     width: auto; }}
     .btn table td {{
-    background-color: #ffffff;
+    background-color: #FFFFFF;
     border-radius: 5px;
     text-align: center; }}
     .btn a {{
-    background-color: #ffffff;
-    border: solid 1px #3498db;
+    background-color: #FFFFFF;
+    border: solid 1px #3498DB;
     border-radius: 5px;
     box-sizing: border-box;
-    color: #3498db;
+    color: #3498DB;
     cursor: pointer;
     display: inline-block;
     font-size: 14px;
@@ -239,12 +239,12 @@ compose_email <- function(body = NULL,
     text-transform: capitalize; }}
 
     .btn-primary table td {{
-    background-color: #3498db; }}
+    background-color: #3498DB; }}
 
     .btn-primary a {{
-    background-color: #3498db;
-    border-color: #3498db;
-    color: #ffffff; }}
+    background-color: #3498DB;
+    border-color: #3498DB;
+    color: #FFFFFF; }}
 
     /* -------------------------------------
     OTHER STYLES
