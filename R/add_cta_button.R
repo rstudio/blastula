@@ -11,9 +11,10 @@
 #' inside the main content area. Options are
 #' \code{left} (the default), \code{right},
 #' and \code{center}.
-#' @return a character object with HTML code
-#' that can be placed into the message body
-#' wherever the CTA button should appear.
+#' @return a character object with an HTML
+#' fragment that can be placed inside the
+#' message body wherever the CTA button
+#' should appear.
 #' @examples
 #' # Create the button as an HTML fragment
 #' cta_button <-
