@@ -9,6 +9,7 @@ Imports:
     commonmark (>= 1.2),
     glue (>= 1.1.1),
     htmltools (>= 0.3.6),
+    knitr (>= 1.16),
     magrittr (>= 1.5),
     mailR (>= 0.4.1),
     rJava (>= 0.9-8),
