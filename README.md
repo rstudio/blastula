@@ -87,7 +87,7 @@ library(blastula)
 # Create a credentials file to facilitate
 # the sending of email messages
 create_email_creds_file(
-  file = "~/.email_file",
+  file = "~/.e_creds",
   sender = "correspondences@blastula.org",
   host = "smtp.blastula.org",
   port = 465,
@@ -106,7 +106,7 @@ send_email_out(
   from = "mike@smile.de",
   recipients = "riannone@me.com",
   subject = "This is NOT junk mail.",
-  creds_file = "~/.email_file")
+  creds_file = "~/.e_creds")
   
 # Sending email using environment variables
 send_email_out(
@@ -194,6 +194,82 @@ This is how the email preview appears:
 <img src="inst/graphics/formattable_preview.png">
 
 Bear in mind that wider tables are less responsive than text with smaller viewport widths, so, previewing the message is vital (along with recognizing whether recipients will be primarily viewing on mobile or desktop).
+
+### Adding a call-to-action (CTA) button to an email message
+
+You can add a CTA button to the message. Simply use the `add_cta_button()` helper function, which generates an HTML fragment that can be injected into the message. The function can be called either in the global environment (referencing the object `cta_button` inside `{...}` as below) called within the email message body itself (which is less recommended due to readability considerations).
+
+```r
+# Create a CTA button as an
+# HTML fragment to be included
+# in the message
+cta_button <-
+  add_cta_button(
+    url = "http://www.thebestwebsite.com",
+    text = "Press This Button",
+    align = "center")
+
+# Compose the email and include the
+# `cta_button` HTML fragment in a
+# single line
+compose_email(
+  body = "
+  Hello!
+
+  Below is a call. It's a call to \\
+  action. Press it!
+
+  {cta_button}
+
+  (I really hope you press it.)
+
+  Cheers
+  ") %>%
+  preview_email()
+```
+
+This is how the email preview appears:
+
+<img src="inst/graphics/cta_button_preview.png">
+
+### Adding a local image to an email message
+
+It's really a cinch to include images hosted on the Web using the Markdown approach shown earlier. But, what about local image files you have on your comp? Well that's easy too! Use the `add_image()` helper function and you'll get an HTML fragment that can be placed into the message wherever you'd like the image to be. Again, this can function be used either in the global environment or within the email message body itself. I'll refer to an image that is available in the package.
+
+```r
+# Create an HTML fragment that
+# contains an image
+img_file_path <-
+  system.file(
+    "graphics",
+    "melon_cat.png",
+    package = "blastula")
+
+img_file_html <-
+  add_image(
+    file = img_file_path)
+
+# Include the image in the email
+# message body by simply referencing
+# the `img_file_html` object
+compose_email(
+  body = "
+  Hello!
+  
+  Take a look at this image:
+
+  {img_file_html}
+
+  Funny, right?
+  ") %>%
+  preview_email()
+```
+
+This is how the email preview appears:
+
+<img src="inst/graphics/local_image_preview.png">
+
+I *do* think it's funny. And useful.
 
 ### Adding HTML tags with inline CSS
 
