@@ -28,8 +28,14 @@
 #' with the email account.
 #' @param use_ssl a logical value to
 #' indicate whether to use SSL.
+#' @param use_tls a logical value to
+#' indicate whether to use TLS.
 #' @param authenticate a logical value to
 #' indicate whether to use authenication.
+#' @param debug a logical value to indicate
+#' whether a detailed debug information
+#' should be printed to the console
+#' during sending of email.
 #' @importFrom mailR send.mail
 #' @export send_email_out
 
@@ -44,14 +50,15 @@ send_email_out <- function(message,
                            user = NULL,
                            password = NULL,
                            use_ssl = TRUE,
-                           authenticate = TRUE) {
+                           use_tls = FALSE,
+                           authenticate = TRUE,
+                           debug = FALSE) {
 
   # Verify that the `message` object
   # is of the class `email_message`
   if (!inherits(x = message, what = "email_message")) {
     stop("The object provided in `message` must be created by the `compose_email()` function.")
   }
-
 
   if (is.null(subject)) {
     subject_text <- "<no subject>"
@@ -71,7 +78,8 @@ send_email_out <- function(message,
     user <- credentials[4]
     password <- credentials[5]
     use_ssl <- as.logical(credentials[6])
-    authenticate <- as.logical(credentials[7])
+    use_tls <- as.logical(credentials[7])
+    authenticate <- as.logical(credentials[8])
   }
 
   if (!is.null(from)) {
@@ -93,9 +101,10 @@ send_email_out <- function(message,
       port = port,
       user.name = user,
       passwd = password,
-      ssl = use_ssl),
+      ssl = use_ssl,
+      tls = use_tls),
     authenticate = authenticate,
-    send = TRUE,
     html = TRUE,
-    encoding = "utf-8")
+    encoding = "utf-8",
+    debug = debug)
 }
