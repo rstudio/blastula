@@ -5,7 +5,7 @@
 \title{Create a file with email access credentials}
 \usage{
 create_email_creds_file(file, sender, host, port, user, password,
-  use_ssl = TRUE, authenticate = TRUE)
+  use_ssl = TRUE, use_tls = FALSE, authenticate = TRUE)
 }
 \arguments{
 \item{file}{a file path for the credentials file
@@ -25,6 +25,9 @@ to be stored on disk.}
 \item{use_ssl}{an option as to whether to use
 SSL; supply a \code{TRUE} or \code{FALSE}
 value (\code{TRUE} is the default value).}
+
+\item{use_tls}{a logical value to
+indicate whether to use TLS.}
 
 \item{authenticate}{an option as to whether to
 authenticate; supply a \code{TRUE} or \code{FALSE}

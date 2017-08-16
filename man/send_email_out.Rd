@@ -6,7 +6,8 @@
 \usage{
 send_email_out(message, subject = NULL, from = NULL, recipients = NULL,
   creds_file = NULL, sender = NULL, host = NULL, port = NULL,
-  user = NULL, password = NULL, use_ssl = TRUE, authenticate = TRUE)
+  user = NULL, password = NULL, use_ssl = TRUE, use_tls = FALSE,
+  authenticate = TRUE, debug = FALSE)
 }
 \arguments{
 \item{message}{the email message object,
@@ -47,8 +48,16 @@ with the email account.}
 \item{use_ssl}{a logical value to
 indicate whether to use SSL.}
 
+\item{use_tls}{a logical value to
+indicate whether to use TLS.}
+
 \item{authenticate}{a logical value to
 indicate whether to use authenication.}
+
+\item{debug}{a logical value to indicate
+whether a detailed debug information
+should be printed to the console
+during sending of email.}
 }
 \description{
 Send an email message to one
