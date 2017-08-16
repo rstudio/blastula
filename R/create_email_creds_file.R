@@ -13,6 +13,8 @@
 #' @param use_ssl an option as to whether to use
 #' SSL; supply a \code{TRUE} or \code{FALSE}
 #' value (\code{TRUE} is the default value).
+#' @param use_tls a logical value to
+#' indicate whether to use TLS.
 #' @param authenticate an option as to whether to
 #' authenticate; supply a \code{TRUE} or \code{FALSE}
 #' value (\code{TRUE} is the default value).
@@ -37,6 +39,7 @@ create_email_creds_file <- function(file,
                                     user,
                                     password,
                                     use_ssl = TRUE,
+                                    use_tls = FALSE,
                                     authenticate = TRUE) {
 
   # Ensure that `use_ssl` is either TRUE or FALSE
@@ -58,6 +61,7 @@ create_email_creds_file <- function(file,
     user = as.character(user),
     password = as.character(password),
     use_ssl = as.character(use_ssl),
+    use_tls = as.character(use_tls),
     authenticate = as.character(authenticate))
 
   # Save the credential values as a file
