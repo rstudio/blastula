@@ -140,7 +140,6 @@ You can add HTML tables to the message. Here's an example using a **formattable*
 ```r
 library(blastula)
 library(formattable)
-library(magrittr)
 
 # Create a data frame
 df <- data.frame(
@@ -206,6 +205,8 @@ Bear in mind that wider tables are less responsive than text with smaller viewpo
 You can add a CTA button to the message. Simply use the `add_cta_button()` helper function, which generates an HTML fragment that can be injected into the message. The function can be called either in the global environment (referencing the object `cta_button` inside `{...}` as below) called within the email message body itself (which is less recommended due to readability considerations).
 
 ```r
+library(blastula)
+
 # Create a CTA button as an
 # HTML fragment to be included
 # in the message
@@ -243,6 +244,8 @@ This is how the email preview appears:
 It's really a cinch to include images hosted on the Web using the Markdown approach shown earlier. But, what about local image files you have on your comp? Well that's easy too! Use the `add_image()` helper function and you'll get an HTML fragment that can be placed into the message wherever you'd like the image to be. Again, this can function be used either in the global environment or within the email message body itself. I'll refer to an image that is available in the package.
 
 ```r
+library(blastula)
+
 # Create an HTML fragment that
 # contains an image
 img_file_path <-
@@ -277,13 +280,51 @@ This is how the email preview appears:
 
 I *do* think it's funny. And useful.
 
+### Adding a ggplot plot object to an email message
+
+It's not at all difficult to insert a **ggplot** plot into an email message. The function to use for that is `add_ggplot()`. An example:
+
+```r
+library(blastula)
+library(ggplot2)
+
+# Create a ggplot plot object
+plot <- 
+  ggplot(
+    data = mtcars,
+    aes(
+      x = disp, y = hp,
+      color = wt, size = mpg)) +
+  geom_point()
+
+# Let's use the `add_ggplot()`
+# helper function right inside the
+# email message body this time
+compose_email(
+  body = "
+  Hello!
+  
+  Take a look at this plot:
+  
+  {add_ggplot(plot_object = plot, width = 7, height = 5)}
+  
+  It's a nice plot.
+  
+  Cheers
+  ") %>%
+  preview_email()
+```
+
+This is how the email preview appears:
+
+<img src="inst/graphics/embedded_ggplot_preview.png">
+
 ### Adding HTML tags with inline CSS
 
 You can add custom HTML within the markdown text. This provides an opportunity to style the text using inline CSS. In this example, header text is centered with the `text-align` style and link text is rendered in the `code` style using `<code>` tags. 
 
 ```r
 library(blastula)
-library(magrittr)
 
 # Center the header text with some HTML tags, and,
 # use the <code> tag for a link
