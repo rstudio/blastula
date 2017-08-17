@@ -61,5 +61,5 @@ email <-
     {plot_html}
 
     So useful, right?
-    ")
+    ") \%>\% preview_email()
 }
