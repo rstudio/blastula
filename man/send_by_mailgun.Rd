@@ -4,7 +4,7 @@
 \alias{send_by_mailgun}
 \title{Send an email message through the Mailgun API}
 \usage{
-send_by_mailgun(message, subject = NULL, from, recipient, url, api_key)
+send_by_mailgun(message, subject = NULL, from, recipients, url, api_key)
 }
 \arguments{
 \item{message}{the email message object,
@@ -20,8 +20,8 @@ sender. This does not have to be
 the same email that is associated with
 the account actually sending the message.}
 
-\item{recipient}{the email address of the
-recipient.}
+\item{recipients}{a vector of email
+addresses.}
 
 \item{url}{the URL for the sending domain.}
 
