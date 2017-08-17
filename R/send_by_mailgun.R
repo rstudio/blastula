@@ -12,8 +12,8 @@
 #' sender. This does not have to be
 #' the same email that is associated with
 #' the account actually sending the message.
-#' @param recipient the email address of the
-#' recipient.
+#' @param recipients a vector of email
+#' addresses.
 #' @param url the URL for the sending domain.
 #' @param api_key the API key registered to
 #' the mailgun service.
@@ -23,7 +23,7 @@
 send_by_mailgun <- function(message,
                             subject = NULL,
                             from,
-                            recipient,
+                            recipients,
                             url,
                             api_key) {
 
@@ -39,6 +39,8 @@ send_by_mailgun <- function(message,
     subject_text <- glue::glue(subject)
   }
 
+  recipients <- paste(recipients, collapse = ", ")
+
   # Post the message to Mailgun
   httr::POST(
     url = url,
@@ -46,7 +48,7 @@ send_by_mailgun <- function(message,
     encode = "form",
     body = list(
       from = from,
-      to = recipient,
+      to = recipients,
       subject = subject,
       html = message$html_html))
 }
