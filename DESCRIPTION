@@ -10,6 +10,7 @@ Imports:
     ggplot2 (>= 2.2.1),
     glue (>= 1.1.1),
     htmltools (>= 0.3.6),
+    httr (>= 1.2.1),
     knitr (>= 1.16),
     magrittr (>= 1.5),
     mailR (>= 0.4.1),
