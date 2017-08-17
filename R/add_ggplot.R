@@ -36,17 +36,17 @@
 #' # the `plot_html` object
 #' email <-
 #'   compose_email(
-#'     body = "
-#'     Hello!
+#'   body = "
+#'   Hello!
 #'
-#'     Here is a very important plot \\
-#'     that will change the way you \\
-#'     look at cars forever.
+#'   Here is a very important plot \\
+#'   that will change the way you \\
+#'   look at cars forever.
 #'
-#'     {plot_html}
+#'   {plot_html}
 #'
-#'     So useful, right?
-#'     ") %>% preview_email()
+#'   So useful, right?
+#'   ") %>% preview_email()
 #' @importFrom ggplot2 ggsave
 #' @export add_ggplot
 

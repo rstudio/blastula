@@ -17,6 +17,39 @@
 #' @param url the URL for the sending domain.
 #' @param api_key the API key registered to
 #' the mailgun service.
+#' @examples
+#' \dontrun{
+#' # Create a simple email message using
+#' # Markdown formatting
+#' email <-
+#'   compose_email(
+#'   body = "
+#'   Hello!
+#'
+#'   ## This a section heading
+#'
+#'   We can use Markdown formatting \\
+#'   to **embolden** text or to add \\
+#'   *emphasis*. This is exciting, \\
+#'   right?
+#'
+#'   Cheers")
+#'
+#' # Generate a vector of recipients
+#' recipient_list <-
+#'   c("person_1@site.net",
+#'     "person_2@site.net")
+#'
+#' # Send it to multiple people through
+#' # the Mailgun API
+#' email %>%
+#'   send_by_mailgun(
+#'     subject = "Sent through Mailgun",
+#'     from = "The Sender <sender@send.org>",
+#'     recipients = recipient_list,
+#'     url = "<..mailgun_sending_domain..>",
+#'     api = "<..mailgun_api_key..>")
+#' }
 #' @import httr
 #' @export send_by_mailgun
 
