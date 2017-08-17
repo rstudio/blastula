@@ -6,12 +6,18 @@ Sometimes we need to send out email messages based on the results of automated a
 
 Here's an example that shows a basic workflow for composing the message, previewing the content, creating optional on-disk credentials for email, and sending out the message.
 
-So far, the functions in this package are:
+There are 4 main functions in this package are:
 
 - `compose_email()`: generates the email message content inside the `email_message`-class object
 - `preview_email()`: makes the email message created by `compose_email()` viewable in the RStudio Viewer
 - `send_email_out()`: sends the HTML-based email to one or more recipients
 - `create_email_creds_file()`: generates an optional on-disk, serialized file with email credentials
+
+Some helper functions allow for easy injection of objects in the message body. These are:
+
+- `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
+- `add_image()`: with a local image file, insert it into message
+- `add_ggplot()`: add a ggplot plot object as an inline image
 
 When you compose an email, you can use character objects in the global workspace and splice those into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
 
