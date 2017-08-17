@@ -17,7 +17,7 @@
 #' @param url the URL for the sending domain.
 #' @param api_key the API key registered to
 #' the mailgun service.
-#' @importFrom httr POST authenicate
+#' @import httr
 #' @export send_by_mailgun
 
 send_by_mailgun <- function(message,
@@ -42,11 +42,11 @@ send_by_mailgun <- function(message,
   # Post the message to Mailgun
   httr::POST(
     url = url,
-    httr::authenticate("api", api_key),
+    authenticate("api", api_key),
     encode = "form",
     body = list(
       from = from,
-      to = to,
+      to = recipient,
       subject = subject,
       html = message$html_html))
 }
