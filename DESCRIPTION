@@ -2,14 +2,14 @@ Package: blastula
 Title: Easily Send HTML Email Messages
 Version: 0.1
 Authors@R: person("Rich", "Iannone", email = "riannone@me.com", role = c("aut", "cre"))
-Description: The blastula package makes it easy to compose and send out 
-    responsive HTML email messages that render perfectly across a range of
-    email clients and device sizes. Messages are composed using 'Markdown' and
-    a text interpolation system that allows for the injection of evaluated R
-    code within the message body, footer, and subject line. Helper functions
-    let the user insert embedded images, web link buttons, and 'ggplot2' plot
-    objects into the message body. Messages can be sent through an 'SMTP'
-    server or through the 'Mailgun' API service <http://mailgun.com/>.
+Description: Compose and send out responsive HTML email messages that render
+    perfectly across a range of email clients and device sizes. Messages are
+    composed using 'Markdown' and a text interpolation system that allows for
+    the injection of evaluated R code within the message body, footer, and
+    subject line. Helper functions let the user insert embedded images, web
+    link buttons, and 'ggplot2' plot objects into the message body. Messages
+    can be sent through an 'SMTP' server or through the 'Mailgun' API service
+    <http://mailgun.com/>.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 Imports:
