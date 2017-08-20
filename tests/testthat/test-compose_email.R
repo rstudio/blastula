@@ -2,8 +2,7 @@ context("Message Composition")
 
 test_that("composing a simple message is possible", {
 
-  # Create a simple email
-  # message with no text
+  # Create a simple email message with no text
   email <- compose_email()
 
   # Expect an object of class `email_message`
