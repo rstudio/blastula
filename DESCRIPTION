@@ -1,7 +1,7 @@
 Package: blastula
 Title: Easily Send HTML Email Messages
 Version: 0.1
-Authors@R: person("Rich", "Iannone", email = "riannone@eme.com", role = c("aut", "cre"))
+Authors@R: person("Rich", "Iannone", email = "riannone@me.com", role = c("aut", "cre"))
 Description: Easily send great-looking HTML email messages from R.
 Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
