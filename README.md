@@ -355,10 +355,24 @@ This is how the email preview appears:
 
 **blastula** is used in an **R** environment. If you don't have an **R** installation, it can be obtained from the [**Comprehensive R Archive Network (CRAN)**](https://cran.r-project.org/).
 
+The **CRAN** version of this package can be obtained using the following statement:
+
+```r
+install.packages("blastula")
+```
+
 You can install the development version of **blastula** from **GitHub** using the **devtools** package.
 
 ```r
 devtools::install_github("rich-iannone/blastula")
 ```
 
-If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an issue at [github](https://github.com/rich-iannone/blastula/issues).
+If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/blastula/issues).
+
+## Code of Conduct
+
+[Contributor Code of Conduct](https://github.com/rich-iannone/blastula/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+## License
+
+MIT &copy; Richard Iannone
