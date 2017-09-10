@@ -1,8 +1,23 @@
-# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: r
 
-language: R
-sudo: false
-cache: packages
+r:
+  - oldrel
+  - release
+  - devel
+
+warnings_are_errors: false
+
+sudo: required
+
+r_packages:
+  - rstudioapi
+  - stringr
+  - shiny
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
 
 after_success:
   - Rscript -e 'covr::codecov()'
