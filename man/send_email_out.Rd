@@ -5,9 +5,9 @@
 \title{Send an email message}
 \usage{
 send_email_out(message, subject = NULL, from = NULL, recipients = NULL,
-  creds_file = NULL, sender = NULL, host = NULL, port = NULL,
-  user = NULL, password = NULL, use_ssl = TRUE, use_tls = FALSE,
-  authenticate = TRUE, debug = FALSE)
+  attachments = NULL, creds_file = NULL, sender = NULL, host = NULL,
+  port = NULL, user = NULL, password = NULL, use_ssl = TRUE,
+  use_tls = FALSE, authenticate = TRUE, debug = FALSE)
 }
 \arguments{
 \item{message}{the email message object,
@@ -25,6 +25,9 @@ the account actually sending the message.}
 
 \item{recipients}{a vector of email
 addresses.}
+
+\item{attachments}{a vector of paths
+to files to be attached to the email.}
 
 \item{creds_file}{an optional path to
 an email credentials file. This file
