@@ -13,6 +13,8 @@
 #' the account actually sending the message.
 #' @param recipients a vector of email
 #' addresses.
+#' @param attachments a vector of paths
+#' to files to be attached to the email.
 #' @param creds_file an optional path to
 #' an email credentials file. This file
 #' must be created by the
@@ -43,6 +45,7 @@ send_email_out <- function(message,
                            subject = NULL,
                            from = NULL,
                            recipients = NULL,
+                           attachments = NULL,
                            creds_file = NULL,
                            sender = NULL,
                            host = NULL,
@@ -106,5 +109,6 @@ send_email_out <- function(message,
     authenticate = authenticate,
     html = TRUE,
     encoding = "utf-8",
+    attach.files = attachments,
     debug = debug)
 }
