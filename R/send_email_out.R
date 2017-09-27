@@ -39,6 +39,7 @@
 #' should be printed to the console
 #' during sending of email.
 #' @importFrom mailR send.mail
+#' @importFrom glue glue
 #' @export send_email_out
 
 send_email_out <- function(message,
