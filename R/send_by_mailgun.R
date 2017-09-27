@@ -51,6 +51,7 @@
 #'     api = "<..mailgun_api_key..>")
 #' }
 #' @import httr
+#' @importFrom glue glue
 #' @export send_by_mailgun
 
 send_by_mailgun <- function(message,
