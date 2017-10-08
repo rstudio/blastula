@@ -125,7 +125,7 @@ send_email_out(
   subject = "This is NOT junk mail.",
   sender = Sys.getenv("bls_sender"),
   host = Sys.getenv("bls_host"),
-  port = Sys.getenv("bls_host"),
+  port = Sys.getenv("bls_port"),
   user = Sys.getenv("bls_username"),
   password = Sys.getenv("bls_password"))
 ```
