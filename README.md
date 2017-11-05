@@ -123,11 +123,11 @@ send_email_out(
   from = "mike@smile.de",
   recipients = "riannone@me.com",
   subject = "This is NOT junk mail.",
-  sender = Sys.getenv("bls_sender"),
-  host = Sys.getenv("bls_host"),
-  port = Sys.getenv("bls_port"),
-  user = Sys.getenv("bls_username"),
-  password = Sys.getenv("bls_password"))
+  sender = Sys.getenv("BLS_SENDER"),
+  host = Sys.getenv("BLS_HOST"),
+  port = Sys.getenv("BLS_PORT"),
+  user = Sys.getenv("BLS_USER_NAME"),
+  password = Sys.getenv("BLS_PASSWORD"))
 ```
 
 Oddly enough, when I checked my email client, this message did appear in my Junk Mail folder. I fished it out, and this is how it appeared:
