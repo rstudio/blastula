@@ -4,3 +4,5 @@
 ^cran-comments\.md$
 ^codecov\.yml$
 ^CONDUCT\.md$
+inst/mac_os
+inst/win
