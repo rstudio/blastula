@@ -4,7 +4,7 @@
 \alias{add_cta_button}
 \title{Helper function for adding a CTA button}
 \usage{
-add_cta_button(url, text, align = "left")
+add_cta_button(url, text, align = "center")
 }
 \arguments{
 \item{url}{a URL for the button.}
@@ -14,8 +14,8 @@ the CTA button.}
 
 \item{align}{the alignment of the button
 inside the main content area. Options are
-\code{left} (the default), \code{right},
-and \code{center}.}
+\code{center} (the default), \code{left},
+and \code{right}.}
 }
 \value{
 a character object with an HTML
@@ -35,8 +35,7 @@ the button's alignment.
 cta_button <-
   add_cta_button(
     url = "http://www.website.net",
-    text = "Press This Button",
-    align = "center")
+    text = "Press This Button")
 
 # Include the button in the email
 # message body by simply referencing
