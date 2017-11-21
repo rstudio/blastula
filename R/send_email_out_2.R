@@ -144,4 +144,9 @@ send_email_out_2 <- function(message,
   if (file.exists("message_inlined.html")) {
     file.remove("message_inlined.html")
   }
+
+  # Remove the binary file
+  if (file.exists("mailsend")) {
+    file.remove("mailsend")
+  }
 }
