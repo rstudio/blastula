@@ -122,7 +122,7 @@ Then, after doing that, try sending the message again.", call. = FALSE)
   # Send the message
   command <-
     glue::glue(
-      "{bin_location} -to {to_address} \\
+      "{bin_location} -to {recipients} \\
     -from {sender} -ssl -port {port} -auth -smtp {host} \\
     -sub \"{subject}\" +cc +bc -v \\
     -content-type \"multipart/related\" \\
