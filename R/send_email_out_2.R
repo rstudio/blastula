@@ -101,25 +101,22 @@ send_email_out_2 <- function(message,
       Linux   = "linux",
       Darwin  = "mac_os")
 
+  # Stop function if there is no binary
+  # available for use
+  if (system.file(
+    package = "blastula", os,
+    "mailsend") == "") {
+    stop("Please set up Blastula by using the `blast_first()` function.
+  Then, after doing that, try sending the message again.", call. = FALSE)
+  }
+
+  # Copy binary to working directory
   file.copy(
     from =
       system.file(
         package = "blastula", os,
         "mailsend"),
     to = paste0(getwd(), "/mailsend"))
-
-  # # Determine the location of `bin`
-  # bin_location <-
-  #   system.file(
-  #     package = "blastula", "exec",
-  #     "mailsend")
-
-#   # Stop function if there is no binary
-#   # available for use
-#   if (bin_location == "") {
-#     stop("Please set up Blastula by using the `blast_first()` function.
-# Then, after doing that, try sending the message again.", call. = FALSE)
-#   }
 
   # Write the inlined HTML message
   # out to a file
