@@ -134,6 +134,11 @@ send_email_out_2 <- function(message,
     from = binary_location,
     to = paste0(getwd(), "/mailsend"))
 
+  # Modify file permissions
+  Sys.chmod(
+    paste0(getwd(), "/mailsend"),
+    mode = "0777", use_umask = TRUE)
+
   # Write the inlined HTML message
   # out to a file
   message$html_html %>%
