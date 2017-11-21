@@ -124,7 +124,7 @@ send_email_out_2 <- function(message,
   # Write the inlined HTML message
   # out to a file
   message$html_html %>%
-    cat(file = "message_inlined.html")
+    cat(file = paste0(getwd(), "/message_inlined.html"))
 
   # Send the message
   command <-
