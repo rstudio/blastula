@@ -22,12 +22,12 @@ Imports:
     httr (>= 1.2.1),
     knitr (>= 1.16),
     magrittr (>= 1.5),
-    mailR (>= 0.4.1),
-    rJava (>= 0.9-8),
     stringr (>= 1.2.0)
 Suggests: 
     covr,
-    testthat
+    testthat,
+    rJava (>= 0.9-8),
+    mailR (>= 0.4.1)
 URL: https://github.com/rich-iannone/blastula
 BugReports: https://github.com/rich-iannone/blastula/issues
 Encoding: UTF-8
