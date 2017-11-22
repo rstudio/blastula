@@ -4,10 +4,11 @@
 \alias{send_email_out_2}
 \title{Send an email message // Experimental implementation}
 \usage{
-send_email_out_2(message, subject = NULL, from = NULL, recipients = NULL,
-  attachments = NULL, creds_file = NULL, sender = NULL, host = NULL,
-  port = NULL, user = NULL, password = NULL, use_ssl = TRUE,
-  use_tls = FALSE, authenticate = TRUE, debug = FALSE)
+send_email_out_2(message, subject = NULL, from = NULL, to = NULL,
+  cc = NULL, bcc = NULL, attachments = NULL, creds_file = NULL,
+  sender = NULL, host = NULL, port = NULL, user = NULL,
+  password = NULL, use_ssl = TRUE, use_tls = FALSE, authenticate = TRUE,
+  verbose = FALSE, debug = FALSE)
 }
 \arguments{
 \item{message}{the email message object,
@@ -23,7 +24,13 @@ sender. This does not have to be
 the same email that is associated with
 the account actually sending the message.}
 
-\item{recipients}{a vector of email
+\item{to}{a vector of email
+addresses.}
+
+\item{cc}{a vector of email
+addresses.}
+
+\item{bcc}{a vector of email
 addresses.}
 
 \item{attachments}{a vector of paths
@@ -57,10 +64,16 @@ indicate whether to use TLS.}
 \item{authenticate}{a logical value to
 indicate whether to use authenication.}
 
+\item{verbose}{a logical value indicating
+whether verbose messages should be
+printed to the console during sending
+of email.}
+
 \item{debug}{a logical value to indicate
-whether a detailed debug information
-should be printed to the console
-during sending of email.}
+whether the mail sending statement
+should be printed to the console. No
+emails are sent when debug is set to
+\code{TRUE}.}
 }
 \description{
 Send an email message to one
