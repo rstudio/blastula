@@ -111,17 +111,17 @@ library(blastula)
 
 # Sending email using a credentials file
 send_email_out(
-  message = email_object,
+  message = msg,
   from = "mike@smile.de",
-  recipients = "riannone@me.com",
+  to = "riannone@me.com",
   subject = "This is NOT junk mail.",
-  creds_file = "~/.e_creds")
+  creds_file = "e_creds")
   
 # Sending email using environment variables
 send_email_out(
   message = email_object,
   from = "mike@smile.de",
-  recipients = "riannone@me.com",
+  to = "riannone@me.com",
   subject = "This is NOT junk mail.",
   sender = Sys.getenv("BLS_SENDER"),
   host = Sys.getenv("BLS_HOST"),
