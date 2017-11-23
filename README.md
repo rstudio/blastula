@@ -111,11 +111,11 @@ library(blastula)
 
 # Sending email using a credentials file
 send_email_out(
-  message = msg,
+  message = message,
   from = "mike@smile.de",
   to = "riannone@me.com",
   subject = "This is NOT junk mail.",
-  creds_file = "e_creds")
+  creds_file = "~/.e_creds")
   
 # Sending email using environment variables
 send_email_out(
@@ -309,7 +309,7 @@ compose_email(
   
   Take a look at this plot:
   
-  {add_ggplot(plot_object = plot, width = 7, height = 5)}
+  {add_ggplot(plot_object = plot, width = 1, height = 1)}
   
   It's a nice plot.
   
