@@ -14,15 +14,17 @@ Description: Compose and send out responsive HTML email messages that render
 Depends: R (>= 3.2.1)
 License: MIT + file LICENSE
 Imports:
-    commonmark (>= 1.2),
+    commonmark (>= 1.4),
     downloader (>= 0.4),
+    dplyr (>= 0.7.4),
     ggplot2 (>= 2.2.1),
     glue (>= 1.1.1),
     htmltools (>= 0.3.6),
     httr (>= 1.2.1),
-    knitr (>= 1.16),
+    knitr (>= 1.17),
     magrittr (>= 1.5),
-    stringr (>= 1.2.0)
+    stringr (>= 1.2.0),
+    tidyr (>= 0.7.2)
 Suggests: 
     covr,
     testthat,
