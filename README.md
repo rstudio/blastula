@@ -309,7 +309,7 @@ compose_email(
   
   Take a look at this plot:
   
-  {add_ggplot(plot_object = plot, width = 1, height = 1)}
+  {add_ggplot(plot_object = plot, width = 5, height = 5)}
   
   It's a nice plot.
   
