@@ -9,7 +9,7 @@ Sometimes we need to send out email messages based on the results of automated a
 
 Here's an example that shows a basic workflow for composing the message, previewing the content, creating optional on-disk credentials for email, and sending out the message.
 
-There are 4 main functions in this package:
+These four functions can help us do just that:
 
 - `compose_email()`: generates the email message content inside the `email_message`-class object
 - `preview_email()`: makes the email message created by `compose_email()` viewable in the **RStudio** Viewer
