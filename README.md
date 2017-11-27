@@ -104,7 +104,7 @@ create_email_creds_file(
   password = "************")
 ```
 
-Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `recipients` argument can accept a vector of email addresses for mass mailings. If using a credentials file seems like not a very good practice, one can instead set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
+Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `to` argument can accept a vector of email addresses for mass mailings. If using a credentials file seems like not a very good practice, one can instead set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
 
 ```r
 library(blastula)
