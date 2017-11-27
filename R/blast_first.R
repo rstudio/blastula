@@ -20,6 +20,7 @@ blast_first <- function() {
     dir.create(paste0(find.package("blastula"), "/exec"))
   }
 
+  # Download the correct binary
   if (os == "mac_os") {
     downloader::download(
       url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/mac_os/mailsend",
@@ -39,6 +40,6 @@ blast_first <- function() {
     file.exists(
       system.file("exec", "mailsend", package = "blastula"))) {
 
-    message("You are now set up to send email messages with the `send_mail_out_2()` function.")
+    message("You are now set up to send email messages with the `send_mail_out()` function.")
   }
 }
