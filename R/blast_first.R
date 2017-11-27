@@ -40,6 +40,6 @@ blast_first <- function() {
     file.exists(
       system.file("exec", "mailsend", package = "blastula"))) {
 
-    message("You are now set up to send email messages with the `send_mail_out()` function.")
+    message("You are now set up to send email messages with the `send_email_out()` function.")
   }
 }
