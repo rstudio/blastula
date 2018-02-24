@@ -1,8 +1,22 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
 <img src="man/figures/blastula_diagram.png">
 
-[![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula) [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
+[![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
+[![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
 Sometimes we need to send out email messages based on the results of automated analysis processes. For these such instances, let's endeavor to send out some pretty-nice-looking HTML email messages. The **blastula** package makes it easy to send out HTML emails that are a little bit easier on the eyes. As an added bonus we can take advantage of both **markdown** and R code when composing our email text. The best way to demonstrate this is to just show an example workflow...
 
@@ -12,20 +26,20 @@ Here's an example that shows a basic workflow for composing the message, preview
 
 These four functions can help us do just that:
 
--   `compose_email()`: generates the email message content inside the `email_message`-class object
--   `preview_email()`: makes the email message created by `compose_email()` viewable in the **RStudio** Viewer
--   `send_email_out()`: sends the HTML-based email to one or more recipients
--   `create_email_creds_file()`: generates an optional on-disk, serialized file with email credentials
+- `compose_email()`: generates the email message content inside the `email_message`-class object
+- `preview_email()`: makes the email message created by `compose_email()` viewable in the **RStudio** Viewer
+- `send_email_out()`: sends the HTML-based email to one or more recipients
+- `create_email_creds_file()`: generates an optional on-disk, serialized file with email credentials
 
 Some helper functions allow for easy injection of objects in the message body. These are:
 
--   `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
--   `add_image()`: with a local image file, insert it into message
--   `add_ggplot()`: add a ggplot plot object as an inline image
+- `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
+- `add_image()`: with a local image file, insert it into message
+- `add_ggplot()`: add a ggplot plot object as an inline image
 
 When you compose an email, you can use character objects in the global workspace and splice those into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
 
-``` r
+```r
 library(magrittr)
 
 # Get a nicely formatted date/time string
@@ -49,9 +63,9 @@ Now, we can use the `compose_email()` to compose the email! There are two main a
 
 Furthermore, string interpolation is possible and it works by enclosing valid R code inside of curly braces (`{...}`). Below the image URL (as part of the `![...](...)` **markdown** link contruction) is referenced to the `img_link` object from the global workspace. Note also that `{current_date_time}` references a character object that took quite a few piped statements of R to generate. The end result is the date/time string being nicely inserted in the footer of the email without complicating the `compose_email()` function call itself with lots of R statements.
 
-We can also supply variables in the `compose_email()` function directly. For example, the `{sender}` part references an object *not* in the global workspace but rather it refers the named argument `sender = "Mike"` in the function call. (The order of searching is from within the function first, then the search moves to variables in the global environment.)
+We can also supply variables in the `compose_email()` function directly. For example, the `{sender}` part references an object *not* in the global workspace but rather it refers the named argument `sender = "Mike"` in the function call. (The order of searching is from within the function first, then the search moves to variables in the global environment.) 
 
-``` r
+```r
 library(blastula)
 
 email_object <-
@@ -78,7 +92,7 @@ Some more notes on style are useful here. The `\\` is a helpful line continuatio
 
 After creating the email message, you'll most certainly want to look at it to ensure that the formatting is what you want it to be. This is done with the `preview_email()` function. It's easy to use!
 
-``` r
+```r
 library(blastula)
 
 # Preview the email
@@ -91,7 +105,7 @@ preview_email(email = email_object)
 
 Looks good. Time to email this. I'd previously set up my email credentials in a file using the `create_email_creds_file()` function. Here's an example of how one might create a creds file as a hidden file in the home directory (`~`).
 
-``` r
+```r
 library(blastula)
 
 # Create a credentials file to facilitate
@@ -107,7 +121,7 @@ create_email_creds_file(
 
 Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `to` argument can accept a vector of email addresses for mass mailings. If using a credentials file seems like not a very good practice, one can instead set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
 
-``` r
+```r
 library(blastula)
 
 # Sending email using a credentials file
@@ -141,7 +155,7 @@ Which is great. The underlying HTML/CSS is meant to be resilient and display pro
 
 You can add HTML tables to the message. Here's an example using a **formattable** table generated via its `format_table()` function.
 
-``` r
+```r
 library(blastula)
 library(formattable)
 
@@ -208,7 +222,7 @@ Bear in mind that wider tables are less responsive than text with smaller viewpo
 
 You can add a CTA button to the message. Simply use the `add_cta_button()` helper function, which generates an HTML fragment that can be injected into the message. The function can be called either in the global environment (referencing the object `cta_button` inside `{...}` as below) called within the email message body itself (which is less recommended due to readability considerations).
 
-``` r
+```r
 library(blastula)
 
 # Create a CTA button as an
@@ -247,7 +261,7 @@ This is how the email preview appears:
 
 It's really a cinch to include images hosted on the Web using the Markdown approach shown earlier. But, what about local image files you have on your comp? Well that's easy too! Use the `add_image()` helper function and you'll get an HTML fragment that can be placed into the message wherever you'd like the image to be. Again, this can function be used either in the global environment or within the email message body itself. I'll refer to an image that is available in the package.
 
-``` r
+```r
 library(blastula)
 
 # Create an HTML fragment that
@@ -288,7 +302,7 @@ I *do* think it's funny. And useful.
 
 It's not at all difficult to insert a **ggplot** plot into an email message. The function to use for that is `add_ggplot()`. An example:
 
-``` r
+```r
 library(blastula)
 library(ggplot2)
 
@@ -325,9 +339,9 @@ This is how the email preview appears:
 
 ### Adding HTML tags with inline CSS
 
-You can add custom HTML within the markdown text. This provides an opportunity to style the text using inline CSS. In this example, header text is centered with the `text-align` style and link text is rendered in the `code` style using `<code>` tags.
+You can add custom HTML within the markdown text. This provides an opportunity to style the text using inline CSS. In this example, header text is centered with the `text-align` style and link text is rendered in the `code` style using `<code>` tags. 
 
-``` r
+```r
 library(blastula)
 
 # Center the header text with some HTML tags, and,
@@ -358,24 +372,22 @@ This is how the email preview appears:
 
 The **CRAN** version of this package can be obtained using the following statement:
 
-``` r
+```r
 install.packages("blastula")
 ```
 
 You can install the development version of **blastula** from **GitHub** using the **devtools** package.
 
-``` r
+```r
 devtools::install_github("rich-iannone/blastula")
 ```
 
 If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/blastula/issues).
 
-Code of Conduct
----------------
+## Code of Conduct
 
 [Contributor Code of Conduct](https://github.com/rich-iannone/blastula/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-License
--------
+## License
 
-MIT © Richard Iannone
+MIT &copy; Richard Iannone
