@@ -4,22 +4,25 @@
 \alias{create_email_creds_file}
 \title{Create a file with email access credentials}
 \usage{
-create_email_creds_file(file, sender, host, port, user, password,
-  use_ssl = TRUE, use_tls = FALSE, authenticate = TRUE)
+create_email_creds_file(provider = NULL, host = NULL, user = NULL,
+  password = NULL, sender = NULL, port = NULL, use_ssl = TRUE,
+  use_tls = FALSE, authenticate = TRUE)
 }
 \arguments{
-\item{file}{a file path for the credentials file
-to be stored on disk.}
-
-\item{sender}{the sender name.}
+\item{provider}{an optional provider email provider
+with which an STMP account is available. Options
+include \code{gmail}, \code{outlook},
+\code{office365}, and \code{icloud}.}
 
 \item{host}{the \code{host} name.}
 
-\item{port}{the port number.}
-
 \item{user}{the username for the email account.}
 
-\item{password}{the password associated with the
+\item{password}{the password associated with the}
+
+\item{sender}{the sender name.}
+
+\item{port}{the port number.
 \code{user}'s email address.}
 
 \item{use_ssl}{an option as to whether to use
