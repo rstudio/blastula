@@ -5,7 +5,6 @@ smtp_settings <- function() {
     "gmail",      "smtp.gmail.com",          465,   TRUE,     FALSE,    TRUE,          "Gmail",
     "outlook",    "smtp-mail.outlook.com",   587,   FALSE,    TRUE,     TRUE,          "Outlook.com",
     "office365",  "smtp.office365.com",      587,   FALSE,    TRUE,     TRUE,          "Office365.com",
-    "icloud",     "smtp.mail.me.com",        587,   FALSE,     TRUE,    TRUE,          "iCloud Mail"
   )
 }
 
