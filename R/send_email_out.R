@@ -86,9 +86,9 @@
 #' @export send_email_out
 
 send_email_out <- function(message,
+                           from,
+                           to,
                            subject = NULL,
-                           from = NULL,
-                           to = NULL,
                            cc = NULL,
                            bcc = NULL,
                            attachments = NULL,
