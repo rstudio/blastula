@@ -5,9 +5,6 @@
 #' as created by the \code{compose_email()}
 #' function. The object's class is
 #' \code{email_message}
-#' @param subject the subject of the
-#' message, which is usually a brief summary
-#' of the topic of the message.
 #' @param from the email address of the
 #' sender. This does not have to be
 #' the same email that is associated with
@@ -16,6 +13,9 @@
 #' serving as primary recipients for the
 #' message. For secondary recipients, use
 #' the \code{cc} and \code{bcc} arguments.
+#' @param subject the subject of the
+#' message, which is usually a brief summary
+#' of the topic of the message.
 #' @param cc a vector of email addresses
 #' for sending the messsage as a carbon
 #' copy. This list of for those who are to
