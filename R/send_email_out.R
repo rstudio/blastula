@@ -139,13 +139,10 @@ send_email_out <- function(message,
     authenticate <- as.logical(credentials[8])
   }
 
-  if (use_ssl & use_tls) {
-    use_ssl <- FALSE
-    use_tls <- TRUE
-  }
-
-  if (is.null(to)) {
-    to <- from
+  if (is.null(subject)) {
+    subject_text <- "<no subject>"
+  } else {
+    subject_text <- glue::glue(subject)
   }
 
   if (length(to) > 1) {
