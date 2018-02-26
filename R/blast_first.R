@@ -26,7 +26,8 @@ blast_first <- function() {
     suppressMessages(
       downloader::download(
         url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/mac_os/mailsend",
-        destfile = paste0(find.package("blastula"), "/exec/mailsend"))
+        destfile = paste0(find.package("blastula"), "/exec/mailsend"),
+        quiet = TRUE)
     )
 
   } else if (os == "win") {
@@ -34,7 +35,8 @@ blast_first <- function() {
     suppressMessages(
       downloader::download(
         url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/win/mailsend",
-        destfile = paste0(find.package("blastula"), "/exec/mailsend"))
+        destfile = paste0(find.package("blastula"), "/exec/mailsend"),
+        quiet = TRUE)
     )
 
   } else if (os == "linux") {
@@ -42,7 +44,8 @@ blast_first <- function() {
     suppressMessages(
       downloader::download(
         url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/linux/mailsend",
-        destfile = paste0(find.package("blastula"), "/exec/mailsend"))
+        destfile = paste0(find.package("blastula"), "/exec/mailsend"),
+        quiet = TRUE)
     )
   }
 }
