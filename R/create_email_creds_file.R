@@ -87,15 +87,21 @@ create_email_creds_file <- function(provider = NULL,
     use_tls = as.character(use_tls),
     authenticate = as.character(authenticate))
 
-  # Construct a file name
-  file <-
-    paste0(
-      ".bls_",
-      stringr::str_replace_all(
-        string = host,
-        pattern = "\\.",
-        replacement = "_"))
+  if (is.null(creds_file_name)) {
 
-  # Save the credential values as a file
+    # Construct a file name
+    file <-
+      paste0(
+        ".bls_",
+        stringr::str_replace_all(
+          string = host,
+          pattern = "\\.",
+          replacement = "_"))
+
+  } else {
+    file <- as.character(creds_file_name)
+  }
+
+  # Save the credential values as an RDS file
   saveRDS(credentials, file = file)
 }
