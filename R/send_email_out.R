@@ -1,6 +1,7 @@
 #' Send an email message
-#' @description Send an email message to one
-#' or more recipients.
+#'
+#' Send an email message to one or more
+#' recipients.
 #' @param message the email message object,
 #' as created by the \code{compose_email()}
 #' function. The object's class is
@@ -83,8 +84,7 @@
 #' @importFrom glue glue
 #' @importFrom dplyr tibble bind_cols pull
 #' @importFrom tidyr unite
-#' @export send_email_out
-
+#' @export
 send_email_out <- function(message,
                            from,
                            to,

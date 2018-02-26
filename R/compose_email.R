@@ -1,5 +1,6 @@
 #' Create the email message
-#' @description Create an email message. String
+#'
+#' Create an email message. String
 #' interpolation is possible for the text
 #' comprising the email body, footer, and
 #' preheader text. This is done by using
@@ -81,7 +82,7 @@
 #' @importFrom commonmark markdown_html
 #' @importFrom stringr str_replace_all
 #' @importFrom htmltools HTML
-#' @export compose_email
+#' @export
 compose_email <- function(body = NULL,
                           footer = NULL,
                           .preheader_text = NULL,

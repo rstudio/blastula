@@ -1,7 +1,7 @@
 #' Helper function for adding an ggplot
-#' @description Add an ggplot plot inside
-#' the body of the email with this helper
-#' function.
+#'
+#' Add an ggplot plot inside the body of the
+#' email with this helper function.
 #' @param plot_object the ggplot plot object.
 #' @param height the height of the output
 #' plot in inches.
@@ -48,8 +48,7 @@
 #'   So useful, right?
 #'   ") %>% preview_email()
 #' @importFrom ggplot2 ggsave
-#' @export add_ggplot
-
+#' @export
 add_ggplot <- function(plot_object,
                        width,
                        height) {

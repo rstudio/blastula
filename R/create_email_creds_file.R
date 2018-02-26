@@ -1,7 +1,8 @@
 #' Create a file with email access credentials
-#' @description Creates a file with access
-#' credentials for the purpose of automatically
-#' emailing notification messages.
+#'
+#' Create a file with access credentials for
+#' the purpose of automatically emailing
+#' notification messages.
 #' @param user the username for the email account.
 #' @param password the password associated with the
 #' email account.
@@ -37,8 +38,7 @@
 #' }
 #' @importFrom stringr str_replace_all
 #' @importFrom dplyr pull filter
-#' @export create_email_creds_file
-
+#' @export
 create_email_creds_file <- function(user,
                                     password,
                                     provider = NULL,

@@ -1,6 +1,7 @@
 #' Send an email message using the mailR package
-#' @description Send an email message to one
-#' or more recipients.
+#'
+#' Send an email message to one or more
+#' recipients.
 #' @param message the email message object,
 #' as created by the \code{compose_email()}
 #' function. The object's class is
@@ -39,8 +40,7 @@
 #' should be printed to the console
 #' during sending of email.
 #' @importFrom glue glue
-#' @export send_by_mailr
-
+#' @export
 send_by_mailr <- function(message,
                           subject = NULL,
                           from = NULL,

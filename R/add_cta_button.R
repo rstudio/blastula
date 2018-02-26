@@ -1,5 +1,6 @@
 #' Helper function for adding a CTA button
-#' @description Add a call to action button
+#'
+#' Add a call to action button
 #' inside the body of the email with this
 #' helper function. There are options to
 #' specify the button text, the URL, and
@@ -38,8 +39,7 @@
 #'     Cheers
 #'     ")
 #' @importFrom glue glue
-#' @export add_cta_button
-
+#' @export
 add_cta_button <- function(url,
                            text,
                            align = "center") {

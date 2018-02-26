@@ -1,7 +1,7 @@
 #' Helper function for adding an image
-#' @description Add an image inside the
-#' body of the email with this helper
-#' function.
+#'
+#' Add an image inside the body of the
+#' email with this helper function.
 #' @param file a path to an image file.
 #' @return a character object with an HTML
 #' fragment that can be placed inside the
@@ -36,8 +36,7 @@
 #'     ")
 #' @importFrom glue glue
 #' @importFrom knitr image_uri
-#' @export add_image
-
+#' @export
 add_image <- function(file) {
 
   uri <- knitr::image_uri(f = file)

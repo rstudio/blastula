@@ -1,10 +1,11 @@
-#' Setup function to get SMTP mail working effectively
-#' @description Run this function first to
-#' obtain SMTP mailing functionality, which is
+#' Setup function to get SMTP mail
+#' working effectively
+#'
+#' Run this function first to obtain SMTP
+#' mailing functionality, which is
 #' important for sending out email.
 #' @importFrom downloader download
-#' @export blast_first
-
+#' @export
 blast_first <- function() {
 
   # Get the system OS type
