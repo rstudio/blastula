@@ -114,6 +114,6 @@ emails are sent when debug is set to
 \code{TRUE}.}
 }
 \description{
-Send an email message to one
-or more recipients.
+Send an email message to one or more
+recipients.
 }

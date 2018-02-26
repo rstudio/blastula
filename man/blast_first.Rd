@@ -2,12 +2,13 @@
 % Please edit documentation in R/blast_first.R
 \name{blast_first}
 \alias{blast_first}
-\title{Setup function to get SMTP mail working effectively}
+\title{Setup function to get SMTP mail
+working effectively}
 \usage{
 blast_first()
 }
 \description{
-Run this function first to
-obtain SMTP mailing functionality, which is
+Run this function first to obtain SMTP
+mailing functionality, which is
 important for sending out email.
 }

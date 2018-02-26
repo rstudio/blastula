@@ -44,9 +44,9 @@ have its name constructed in the following way:
 \code{.bls_<host_name>}.}
 }
 \description{
-Creates a file with access
-credentials for the purpose of automatically
-emailing notification messages.
+Create a file with access credentials for
+the purpose of automatically emailing
+notification messages.
 }
 \examples{
 \dontrun{

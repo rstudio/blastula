@@ -16,9 +16,8 @@ message body wherever the image should
 appear.
 }
 \description{
-Add an image inside the
-body of the email with this helper
-function.
+Add an image inside the body of the
+email with this helper function.
 }
 \examples{
 # Create an HTML fragment that

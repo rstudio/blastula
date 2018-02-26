@@ -22,9 +22,8 @@ message body wherever the plot image
 should appear.
 }
 \description{
-Add an ggplot plot inside
-the body of the email with this helper
-function.
+Add an ggplot plot inside the body of the
+email with this helper function.
 }
 \examples{
 library(ggplot2)

@@ -29,9 +29,8 @@ addresses.}
 the mailgun service.}
 }
 \description{
-Send an email message via
-the Mailgun API. This requires an account
-with Mailgun.
+Send an email message via the Mailgun API.
+This requires an account with Mailgun.
 }
 \examples{
 \dontrun{

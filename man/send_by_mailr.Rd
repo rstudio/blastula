@@ -63,6 +63,6 @@ should be printed to the console
 during sending of email.}
 }
 \description{
-Send an email message to one
-or more recipients.
+Send an email message to one or more
+recipients.
 }
