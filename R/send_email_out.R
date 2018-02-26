@@ -108,16 +108,19 @@ send_email_out <- function(message,
                            verbose = FALSE,
                            debug = FALSE) {
 
+  # If mailsend binary is not available, then
+  # call `blast_first()` to get it
+  if (
+    !file.exists(
+      system.file("exec", "mailsend", package = "blastula"))) {
+
+    blast_first()
+  }
+
   # Verify that the `message` object
   # is of the class `email_message`
   if (!inherits(x = message, what = "email_message")) {
     stop("The object provided in `message` must be created by the `compose_email()` function.")
-  }
-
-  if (is.null(subject)) {
-    subject_text <- "<no subject>"
-  } else {
-    subject_text <- glue::glue(subject)
   }
 
   # If a path to a credentials file is provided,
