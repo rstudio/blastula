@@ -200,6 +200,7 @@ send_email_out <- function(message,
       }
     }
 
+    # Create the attachment expression
     attach_expr <-
       attach_tbl %>%
       tidyr::unite(expr, colnames(attach_tbl), sep = " ") %>%
@@ -262,8 +263,8 @@ send_email_out <- function(message,
   command <-
     glue::glue(
 "{paste0(getwd(), \"/mailsend\")} \\
--from {from} \\
--name {sender} \\
+-from \"{from}\" \\
+-name \"{sender}\" \\
 -t \"{to}\" \\
 {ifelse(!is.null(cc), paste0('-cc ', cc), '+cc')} \\
 {ifelse(!is.null(bcc), paste0('-bc ', bcc), '+bc')} \\
@@ -275,7 +276,7 @@ send_email_out <- function(message,
 -port {port} \\
 -auth \\
 -user {user} \\
--pass {password} \\
+-pass \"{password}\" \\
 {ifelse(verbose, '-v', '')} \\
 -mime-type \"text/html\" \\
 -enc-type \"us-ascii\" \\
