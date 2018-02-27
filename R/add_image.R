@@ -12,8 +12,8 @@
 #' # contains an image
 #' img_file_path <-
 #'   system.file(
-#'     "graphics",
-#'     "melon_cat.png",
+#'     "img",
+#'     "test_image.png",
 #'     package = "blastula")
 #'
 #' img_file_html <-
@@ -32,7 +32,7 @@
 #'
 #'     {img_file_html}
 #'
-#'     Funny, right?
+#'     Useful, right?
 #'     ")
 #' @importFrom glue glue
 #' @importFrom knitr image_uri
