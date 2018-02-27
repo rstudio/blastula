@@ -24,8 +24,8 @@ email with this helper function.
 # contains an image
 img_file_path <-
   system.file(
-    "graphics",
-    "melon_cat.png",
+    "img",
+    "test_image.png",
     package = "blastula")
 
 img_file_html <-
@@ -44,6 +44,6 @@ email <-
 
     {img_file_html}
 
-    Funny, right?
+    Useful, right?
     ")
 }
