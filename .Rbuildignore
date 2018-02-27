@@ -6,5 +6,5 @@
 ^CONDUCT\.md$
 ^inst/mac_os$
 ^inst/win$
-^/inst/linux$
+^inst/linux$
 ^README\.Rmd$
