@@ -108,6 +108,9 @@ send_email_out <- function(message,
                            verbose = FALSE,
                            debug = FALSE) {
 
+  # Add binding to a global variable
+  expr <- NULL
+
   # If mailsend binary is not available, then
   # call `blast_first()` to get it
   if (
