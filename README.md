@@ -4,7 +4,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula) [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
-Sometimes we need to send out email messages based on the results of automated analysis processes. For these such instances, let's endeavor to send out some pretty-nice-looking HTML email messages. The **blastula** package makes it easy to send out HTML emails that are a little bit easier on the eyes. As an added bonus we can take advantage of both **markdown** and R code when composing our email text. The best way to demonstrate this is to just show an example workflow...
+Sometimes we need to send out email messages based on the results of automated analysis processes. The **blastula** package makes it easy to send out HTML emails from R that are a little bit easier on the eyes. In doing so we can take advantage of both **Markdown** and R code when composing our email text. The best way to demonstrate this is to just show an example workflow...
 
 ### Sending an email message
 
@@ -15,15 +15,15 @@ These four functions can help us do just that:
 -   `compose_email()`: generates the email message content inside the `email_message`-class object
 -   `preview_email()`: makes the email message created by `compose_email()` viewable in the **RStudio** Viewer
 -   `send_email_out()`: sends the HTML-based email to one or more recipients
--   `create_email_creds_file()`: generates an optional on-disk, serialized file with email credentials
+-   `create_email_creds_file()`: generates an optional on-disk file with email credentials
 
-Some helper functions allow for easy injection of objects in the message body. These are:
+Some helper functions allow for easy insertion of objects in the message body. These are:
 
 -   `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
 -   `add_image()`: with a local image file, insert it into message
 -   `add_ggplot()`: add a ggplot plot object as an inline image
 
-When you compose an email, you can use character objects in the global workspace and splice those into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
+When you compose an email, you can put character objects from the global workspace into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
 
 ``` r
 library(magrittr)
