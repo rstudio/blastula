@@ -4,7 +4,25 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula) [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
-Sometimes we need to send out email messages based on the results of automated analysis processes. The **blastula** package makes it easy to send out HTML emails from R that are a little bit easier on the eyes. In doing so we can take advantage of both **Markdown** and R code when composing our email text. The best way to demonstrate this is to just show an example workflow...
+Sometimes we need to send out email messages based on the results of automated analysis processes. The **blastula** package makes it easy to send out HTML emails from R that are a little bit easier on the eyes. In doing so we can take advantage of both **Markdown** and R code when composing our email text.
+
+### Installation Requirements
+
+The **CRAN** version of **blastula** requires that the **rJava** and **mailR** package are installed. A system requirement for **rJava** is that the Java JRE is installed on the system.
+
+The development version of **blastula** (installed via `devtools::install_github("rich-iannone/blastula"`)) doesn't require **rJava** or **mailR** to be installed. Instead, there is a requirement for `openssl`.
+
+On OS X, it is recommended that homebrew be used to install `openssl`:
+
+    brew install openssl
+
+On RHEL, Fedora, or CentOS, `openssl-devel` is necessary:
+
+    sudo yum install openssl-devel
+
+With Ubuntu or Debian, we need `libssl-dev`:
+
+    sudo apt-get install -y libssl-dev
 
 ### Sending an email message
 
@@ -20,7 +38,7 @@ These four functions can help us do just that:
 Some helper functions allow for easy insertion of objects in the message body. These are:
 
 -   `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
--   `add_image()`: with a local image file, insert it into message
+-   `add_image()`: with a local image file, insert it into message (it resizes the image to fit the content area)
 -   `add_ggplot()`: add a ggplot plot object as an inline image
 
 When you compose an email, you can put character objects from the global workspace into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
@@ -92,8 +110,6 @@ preview_email(email = email_object)
 Looks good. Time to email this. I'd previously set up my email credentials in a file using the `create_email_creds_file()` function. Here's an example of how one might create a creds file as a hidden file in the home directory (`~`).
 
 ``` r
-library(blastula)
-
 # Create a credentials file to facilitate
 # the sending of email messages
 create_email_creds_file(
@@ -105,7 +121,21 @@ create_email_creds_file(
   password = "************")
 ```
 
-Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `to` argument can accept a vector of email addresses for mass mailings. If using a credentials file seems like not a very good practice, one can instead set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
+In the development version of **blastula**, this function is somewhat different but it allows you to use preset SMTP settings. For example, if you'd like to send email through **Gmail**, there is a shorthand for creating this credentials file:
+
+``` r
+# Create a credentials file for sending
+# email through Gmail
+create_email_creds_file(
+  user = "user_name@gmail.com",
+  password = "************",
+  provider = "gmail",
+  sender = "Sender Name")
+```
+
+This will create a hidden credentials file in the working directory, the name of which is based on the provider (you can optionally specify the name with the `creds_file_name` argument). One additional note about using **Gmail** to send out email: you must first change account settings to let less secure apps use your account. Details on how to make this account-level change can be found in [this support document](https://support.google.com/accounts/answer/6010255).
+
+Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `to` argument can accept a vector of email addresses for mass mailings. Alternatively, one can set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
 
 ``` r
 library(blastula)
@@ -245,7 +275,7 @@ This is how the email preview appears:
 
 ### Adding a local image to an email message
 
-It's really a cinch to include images hosted on the Web using the Markdown approach shown earlier. But, what about local image files you have on your comp? Well that's easy too! Use the `add_image()` helper function and you'll get an HTML fragment that can be placed into the message wherever you'd like the image to be. Again, this can function be used either in the global environment or within the email message body itself. I'll refer to an image that is available in the package.
+It's really a cinch to include images hosted on the Web using the Markdown approach shown earlier. But, what about local image files? Well that's easy too! Use the `add_image()` helper function and you'll get an HTML fragment that can be placed into the message wherever you'd like the image to be. Again, this function can be used either in the global environment or within the email message body itself. I'll point to image that is available in the package.
 
 ``` r
 library(blastula)
@@ -254,8 +284,8 @@ library(blastula)
 # contains an image
 img_file_path <-
   system.file(
-    "graphics",
-    "melon_cat.png",
+    "img",
+    "test_image.png",
     package = "blastula")
 
 img_file_html <-
@@ -273,7 +303,7 @@ compose_email(
 
   {img_file_html}
 
-  Funny, right?
+  It is of color bars.
   ") %>%
   preview_email()
 ```
@@ -281,8 +311,6 @@ compose_email(
 This is how the email preview appears:
 
 <img src="man/figures/local_image_preview.png">
-
-I *do* think it's funny. And useful.
 
 ### Adding a ggplot plot object to an email message
 
