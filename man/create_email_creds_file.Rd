@@ -16,8 +16,11 @@ email account.}
 
 \item{provider}{an optional provider email provider
 with which an STMP account is available. Options
-include \code{gmail}, \code{outlook}, and
-\code{office365}.}
+currently include \code{gmail}, \code{outlook},
+and \code{office365}. If nothing is provided then
+values for \code{host}, \code{port},
+\code{sender}, \code{use_ssl}, \code{use_tls},
+and \code{authenticate} are expected.}
 
 \item{host}{the \code{host} name.}
 
@@ -30,7 +33,9 @@ SSL; supply a \code{TRUE} or \code{FALSE}
 value (\code{TRUE} is the default value).}
 
 \item{use_tls}{a logical value to
-indicate whether to use TLS.}
+indicate whether to use TLS; supply a \code{TRUE}
+or \code{FALSE} value (\code{FALSE} is the
+default value).}
 
 \item{authenticate}{an option as to whether to
 authenticate; supply a \code{TRUE} or \code{FALSE}
