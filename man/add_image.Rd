@@ -16,7 +16,7 @@ message body wherever the image should
 appear.
 }
 \description{
-Add an image inside the body of the
+Add a local image inside the body of the
 email with this helper function.
 }
 \examples{
@@ -40,7 +40,7 @@ email <-
     body = "
     Hello!
 
-    Take a look at this image:
+    Have a look at this image:
 
     {img_file_html}
 
