@@ -1,6 +1,6 @@
 #' Helper function for adding an image
 #'
-#' Add an image inside the body of the
+#' Add a local image inside the body of the
 #' email with this helper function.
 #' @param file a path to an image file.
 #' @return a character object with an HTML
@@ -28,7 +28,7 @@
 #'     body = "
 #'     Hello!
 #'
-#'     Take a look at this image:
+#'     Have a look at this image:
 #'
 #'     {img_file_html}
 #'
