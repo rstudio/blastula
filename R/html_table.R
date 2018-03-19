@@ -438,7 +438,7 @@ add_body_style <- function(html_tbl,
 #' Take a suitably styled HTML table object and
 #' transform it to an HTML fragment. This is the
 #' final step in the \code{build_html_table()} ->
-#' \code{add_column_style()} -> \code{emit_html()}
+#' \code{add_..._style()} -> \code{emit_html()}
 #' pattern.
 #' @param html_tbl an HTML table object that is
 #' created using the \code{build_html_table()}
@@ -570,8 +570,8 @@ emit_html <- function(html_tbl) {
     thead_closing_component,
     tbody_component,
     table_body_component,
-    table_closing_component,
-    "<!--/html_preserve-->",
+    table_closing_component, "<br />",
+    "<!--/html_preserve-->\n",
     collapse = "") %>%
     knitr::asis_output()
 }
