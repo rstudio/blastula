@@ -11,36 +11,103 @@
 #' tibble.
 #' @return an HTML table object.
 #' @importFrom purrr map_chr map_df
-#' @importFrom dplyr as_tibble rename mutate bind_rows
+#' @importFrom dplyr as_tibble tibble select rename rename_at mutate
+#' @importFrom dplyr bind_rows inner_join
+#' @importFrom tibble rownames_to_column
 #' @export
 build_html_table <- function(tbl) {
 
+  # If column names contain data (i.e. not numbered),
+  # then incorporate the rownames as a column (called
+  # `rowname`)
+  if (!(all(row.names(tbl) == 1:nrow(tbl) %>% as.character()))) {
+
+    tbl <-
+      tbl %>%
+      tibble::rownames_to_column()
+  }
+
+  # Automatically select columns that are not
+  # `list` columns
+  tbl <-
+    tbl %>%
+    select_if(
+      .predicate = function(x) class(x) != "list")
+
+  # Obtain a vector of column types from `tbl`
   tbl_classes <-
     seq(ncol(tbl)) %>%
     purrr::map_chr(
       .f = function(x) tbl[[x]] %>% class())
 
+  # Create a tibble that contains basic metadata
+  # for the `table` component of the table
+  table_table <-
+    dplyr::tibble(
+      content = NA_character_,
+      type = "character",
+      row = -3L,
+      column = 0L,
+      column_name = "_table_")
+
+  # Create a tibble that contains basic metadata
+  # for the `thead` component of the table
+  table_thead <-
+    dplyr::tibble(
+      content = NA_character_,
+      type = "character",
+      row = -2L,
+      column = 0L,
+      column_name = "_thead_")
+
+  # Create a tibble that contains basic metadata
+  # for the `tbody` component of the table
+  table_tbody <-
+    dplyr::tibble(
+      content = NA_character_,
+      type = "character",
+      row = -1L,
+      column = 0L,
+      column_name = "_tbody_")
+
+  # Create a tibble that contains basic metadata
+  # for the table header component of the table
   table_heading <-
     tbl %>%
     names() %>%
     dplyr::as_tibble() %>%
     dplyr::rename(content = value) %>%
     dplyr::mutate(type = "character") %>%
-    dplyr::mutate(row = 0) %>%
-    dplyr::mutate(column = 1:nrow(.))
+    dplyr::mutate(row = 0L) %>%
+    dplyr::mutate(column = 1:nrow(.)) %>%
+    dplyr::mutate(column_name = content)
 
+  # Create a tibble that contains basic metadata
+  # for the table body component of the table
   table_body <-
-    seq(nrow(tbl)) %>%
+    seq(nrow(tbl)) %>% as.integer() %>%
     purrr::map_df(
       .f = function(x) {
         tbl[x, ] %>% t() %>%
           dplyr::as_tibble() %>%
-          dplyr::rename(content = V1) %>%
+          dplyr::rename_at(.vars = 1, .funs = function(x) "content") %>%
           dplyr::mutate(type = tbl_classes) %>%
           dplyr::mutate(row = x) %>%
           dplyr::mutate(column = 1:nrow(.))})
 
+  # Join in the column names into the `table_body`
+  # tibble from `table_heading`
+  table_body <-
+    table_body %>%
+    dplyr::inner_join(
+      table_heading %>% select(column, column_name),
+      by = "column")
+
+  # Bind rows from `table_heading` and `table_body`
   dplyr::bind_rows(
+    table_table,
+    table_thead,
+    table_tbody,
     table_heading,
     table_body)
 }
@@ -50,21 +117,26 @@ build_html_table <- function(tbl) {
 #' Modify column styles for a table within an HTML
 #' table object. This is part of an intermediate set
 #' of step in the \code{build_html_table()} ->
-#' \code{add_column_style()} -> \code{emit_html()}
+#' \code{add_..._style()} -> \code{emit_html()}
 #' pattern.
 #' @param html_tbl an HTML table object that is
 #' created using the \code{build_html_table()}
 #' function.
 #' @param columns an optional vector of column index
-#' numbers that are to be targeted for transformation.
-#' If nothing is provided here then the style will
-#' be applied to all columns.
+#' numbers or column names (available in the
+#' \code{html_tbl}'s \code{column} and
+#' \code{column_name} variables, respectively) that
+#' are to be targeted for transformation. If nothing
+#' is provided here then the style will be applied
+#' to all columns.
 #' @param property the CSS style property that is
 #' to the added.
 #' @param values values for the CSS style property.
-#' This should be provided as a single-length
-#' character vector, where multiple values for the
-#' same property are separated by a space character.
+#' This could be provided as a single-length
+#' character string representing to exact string
+#' to be inserted, or, as a vector of values where
+#' the individual values for the property will
+#' be transformed to a space-separated string.
 #' @return an HTML table object.
 #' @importFrom dplyr pull bind_rows filter mutate arrange
 #' @importFrom rlang UQ
@@ -74,13 +146,40 @@ add_column_style <- function(html_tbl,
                              property,
                              values) {
 
+  # For any `values`, ensure that they are
+  # transformed to character objects and that
+  # vector components are collapsed to a single
+  # string
+  values <-
+    paste(values, collapse = " ") %>%
+    as.character()
+
+  # If nothing is provided to `columns` then apply
+  # the style property to all columns in the table
   if (is.null(columns)) {
     columns <-
       html_tbl %>%
       dplyr::pull(column) %>%
+      unique() %>%
+      base::setdiff(0L)
+  }
+
+  # If the values provided in columns are stings,
+  # we assume that column names are provided; in
+  # this case, transform the column names to column
+  # numbers for later transformation
+  if (all(is.character(columns))) {
+    columns <-
+      html_tbl %>%
+      dplyr::filter(column_name %in% columns) %>%
+      dplyr::pull(column) %>%
       unique()
   }
 
+  # If the property is not yet in the `html_tbl`
+  # object, then, (1) create the column, (2) add in
+  # the values selectively to the targeted columns,
+  # (3) use `NA_character_` for non-targeted columns
   if (!(property %in% colnames(html_tbl))) {
 
     html_tbl_style <-
@@ -94,6 +193,10 @@ add_column_style <- function(html_tbl,
       dplyr::arrange(row, column)
   }
 
+  # If the property is already in the `html_tbl`
+  # object, then, (1) add in the values selectively to
+  # the targeted columns, and (2) ensure that the
+  # non-targeted columns are untouched
   if (property %in% colnames(html_tbl)) {
 
     html_tbl_style <-
@@ -108,6 +211,226 @@ add_column_style <- function(html_tbl,
 
   html_tbl_style
 }
+
+
+
+#' Add inline CSS styles to the HTML table object
+#'
+#' Modify the overall table style for a table
+#' within an HTML table object. This is part of
+#' an intermediate set of step in the
+#' \code{build_html_table()} ->
+#' \code{add_..._style()} -> \code{emit_html()}
+#' pattern.
+#' @param html_tbl an HTML table object that is
+#' created using the \code{build_html_table()}
+#' function.
+#' @param property the CSS style property that is
+#' to the added.
+#' @param values values for the CSS style property.
+#' This could be provided as a single-length
+#' character string representing to exact string
+#' to be inserted, or, as a vector of values where
+#' the individual values for the property will
+#' be transformed to a space-separated string.
+#' @return an HTML table object.
+#' @importFrom dplyr pull bind_rows filter mutate arrange
+#' @importFrom rlang UQ
+#' @export
+add_table_style <- function(html_tbl,
+                            property,
+                            values) {
+
+  # For any `values`, ensure that they are
+  # transformed to character objects and that
+  # vector components are collapsed to a single
+  # string
+  values <-
+    paste(values, collapse = " ") %>%
+    as.character()
+
+  # If the property is not yet in the `html_tbl`
+  # object, then, (1) create the column, (2) add in
+  # the values selectively to the <table> element,
+  # (3) use `NA_character_` for non-targeted elements
+  if (!(property %in% colnames(html_tbl))) {
+
+    html_tbl_style <-
+      dplyr::bind_rows(
+        html_tbl %>%
+          dplyr::filter(row == -3L) %>%
+          dplyr::mutate(rlang::UQ(property) := values),
+        html_tbl %>%
+          dplyr::filter(row != -3L) %>%
+          dplyr::mutate(rlang::UQ(property) := NA_character_)) %>%
+      dplyr::arrange(row, column)
+  }
+
+  # If the property is already in the `html_tbl`
+  # object, then, (1) add in the values selectively to
+  # the <table> element, and (2) ensure that the
+  # non-targeted elements are untouched
+  if (property %in% colnames(html_tbl)) {
+
+    html_tbl_style <-
+      dplyr::bind_rows(
+        html_tbl %>%
+          dplyr::filter(row == -3L) %>%
+          dplyr::mutate(rlang::UQ(property) := values),
+        html_tbl %>%
+          dplyr::filter(row != -3L)) %>%
+      dplyr::arrange(row, column)
+  }
+
+  html_tbl_style
+}
+
+
+
+#' Add inline CSS styles to the header of an HTML table object
+#'
+#' Modify the style of the header for a table
+#' within an HTML table object. This is part of
+#' an intermediate set of step in the
+#' \code{build_html_table()} ->
+#' \code{add_..._style()} -> \code{emit_html()}
+#' pattern.
+#' @param html_tbl an HTML table object that is
+#' created using the \code{build_html_table()}
+#' function.
+#' @param property the CSS style property that is
+#' to the added.
+#' @param values values for the CSS style property.
+#' This could be provided as a single-length
+#' character string representing to exact string
+#' to be inserted, or, as a vector of values where
+#' the individual values for the property will
+#' be transformed to a space-separated string.
+#' @return an HTML table object.
+#' @importFrom dplyr pull bind_rows filter mutate arrange
+#' @importFrom rlang UQ
+#' @export
+add_header_style <- function(html_tbl,
+                             property,
+                             values) {
+
+  # For any `values`, ensure that they are
+  # transformed to character objects and that
+  # vector components are collapsed to a single
+  # string
+  values <-
+    paste(values, collapse = " ") %>%
+    as.character()
+
+  # If the property is not yet in the `html_tbl`
+  # object, then, (1) create the column, (2) add in
+  # the values selectively to the <thead> element,
+  # (3) use `NA_character_` for non-targeted elements
+  if (!(property %in% colnames(html_tbl))) {
+
+    html_tbl_style <-
+      dplyr::bind_rows(
+        html_tbl %>%
+          dplyr::filter(row == -2L) %>%
+          dplyr::mutate(rlang::UQ(property) := values),
+        html_tbl %>%
+          dplyr::filter(row != -2L) %>%
+          dplyr::mutate(rlang::UQ(property) := NA_character_)) %>%
+      dplyr::arrange(row, column)
+  }
+
+  # If the property is already in the `html_tbl`
+  # object, then, (1) add in the values selectively to
+  # the <thead> element, and (2) ensure that the
+  # non-targeted elements are untouched
+  if (property %in% colnames(html_tbl)) {
+
+    html_tbl_style <-
+      dplyr::bind_rows(
+        html_tbl %>%
+          dplyr::filter(row == -2L) %>%
+          dplyr::mutate(rlang::UQ(property) := values),
+        html_tbl %>%
+          dplyr::filter(row != -2L)) %>%
+      dplyr::arrange(row, column)
+  }
+
+  html_tbl_style
+}
+
+
+
+#' Add inline CSS styles to the body of an HTML table object
+#'
+#' Modify the style of the body for a table
+#' within an HTML table object. This is part of
+#' an intermediate set of step in the
+#' \code{build_html_table()} ->
+#' \code{add_..._style()} -> \code{emit_html()}
+#' pattern.
+#' @param html_tbl an HTML table object that is
+#' created using the \code{build_html_table()}
+#' function.
+#' @param property the CSS style property that is
+#' to the added.
+#' @param values values for the CSS style property.
+#' This could be provided as a single-length
+#' character string representing to exact string
+#' to be inserted, or, as a vector of values where
+#' the individual values for the property will
+#' be transformed to a space-separated string.
+#' @return an HTML table object.
+#' @importFrom dplyr pull bind_rows filter mutate arrange
+#' @importFrom rlang UQ
+#' @export
+add_body_style <- function(html_tbl,
+                           property,
+                           values) {
+
+  # For any `values`, ensure that they are
+  # transformed to character objects and that
+  # vector components are collapsed to a single
+  # string
+  values <-
+    paste(values, collapse = " ") %>%
+    as.character()
+
+  # If the property is not yet in the `html_tbl`
+  # object, then, (1) create the column, (2) add in
+  # the values selectively to the <tbody> element,
+  # (3) use `NA_character_` for non-targeted elements
+  if (!(property %in% colnames(html_tbl))) {
+
+    html_tbl_style <-
+      dplyr::bind_rows(
+        html_tbl %>%
+          dplyr::filter(row == -1L) %>%
+          dplyr::mutate(rlang::UQ(property) := values),
+        html_tbl %>%
+          dplyr::filter(row != -1L) %>%
+          dplyr::mutate(rlang::UQ(property) := NA_character_)) %>%
+      dplyr::arrange(row, column)
+  }
+
+  # If the property is already in the `html_tbl`
+  # object, then, (1) add in the values selectively to
+  # the <tbody> element, and (2) ensure that the
+  # non-targeted elements are untouched
+  if (property %in% colnames(html_tbl)) {
+
+    html_tbl_style <-
+      dplyr::bind_rows(
+        html_tbl %>%
+          dplyr::filter(row == -1L) %>%
+          dplyr::mutate(rlang::UQ(property) := values),
+        html_tbl %>%
+          dplyr::filter(row != -1L)) %>%
+      dplyr::arrange(row, column)
+  }
+
+  html_tbl_style
+}
+
 
 
 #' Transform a HTML table object to an HTML fragment
@@ -129,40 +452,99 @@ add_column_style <- function(html_tbl,
 #' @export
 emit_html <- function(html_tbl) {
 
-  for (i in 5:ncol(html_tbl)) {
+  if (ncol(html_tbl) >= 6) {
 
-    if (i == 5) style_names <- colnames(html_tbl)[5:ncol(html_tbl)]
+    for (i in 6:ncol(html_tbl)) {
 
-    for (j in 1:nrow(html_tbl)) {
+      if (i == 6) style_names <- colnames(html_tbl)[6:ncol(html_tbl)]
 
-      html_tbl[j, i] <-
-        paste0(colnames(html_tbl)[i], ":", html_tbl[j, i] %>% dplyr::pull(), ";")
+      for (j in 1:nrow(html_tbl)) {
+
+        if (is.na(html_tbl[j, i])) {
+
+          html_tbl[j, i] <- ""
+
+        } else {
+
+          html_tbl[j, i] <-
+            paste0(colnames(html_tbl)[i], ":", html_tbl[j, i] %>% dplyr::pull(), ";")
+        }
+      }
     }
   }
 
+  if (ncol(html_tbl) >= 6) {
+
+    table_content_styles <-
+      html_tbl %>%
+      tidyr::unite(col = style_attrs, 6:ncol(html_tbl), sep = "")
+
+  } else {
+
+    table_content_styles <-
+      html_tbl %>%
+      dplyr::mutate(style_attrs = "")
+  }
+
   table_content_styles <-
-    html_tbl %>%
-    tidyr::unite(col = style_attrs, 5:ncol(html_tbl), sep = "") %>%
+    table_content_styles %>%
     dplyr::mutate(style_attrs = case_when(
-      row == 0 ~ glue::glue("<th style=\"{style_attrs}\">{content}</th>") %>% as.character(),
-      row != 0 ~ glue::glue("<td style=\"{style_attrs}\">{content}</td>") %>% as.character()))
+      row %in% c(-1, -2, -3) & style_attrs != "" ~ style_attrs,
+      row %in% c(-1, -2, -3) & style_attrs == "" ~ "",
+      row ==  0 & style_attrs != "" ~ glue::glue("<th style=\"{style_attrs}\">{content}</th>") %>% as.character(),
+      row ==  0 & style_attrs == "" ~ glue::glue("<th>{content}</th>") %>% as.character(),
+      row  >  0 & style_attrs != "" ~ glue::glue("<td style=\"{style_attrs}\">{content}</td>") %>% as.character(),
+      row  >  0 & style_attrs == "" ~ glue::glue("<td>{content}</td>") %>% as.character()))
 
+  style_attrs_table <-
+    table_content_styles %>%
+    dplyr::filter(row == -3L) %>%
+    dplyr::select(style_attrs) %>%
+    dplyr::pull()
 
-  table_opening_component <-
-    "<table style=\"width:100%;\">\n <thead>\n   <tr>\n"
+  style_attrs_thead <-
+    table_content_styles %>%
+    dplyr::filter(row == -2L) %>%
+    dplyr::select(style_attrs) %>%
+    dplyr::pull()
 
+  style_attrs_tbody <-
+    table_content_styles %>%
+    dplyr::filter(row == -1L) %>%
+    dplyr::select(style_attrs) %>%
+    dplyr::pull()
+
+  # Construct the `<table>` tag
+  table_component <-
+    ifelse(style_attrs_table == "", "<table>\n",
+           glue::glue("<table style=\"{style_attrs_table}\">\n") %>%
+             as.character())
+
+  # Construct the `<thead>` tag
+  thead_component <-
+    ifelse(style_attrs_thead == "", " <thead>\n   <tr>\n",
+           glue::glue("<thead style=\"{style_attrs_thead}\">\n <thead>\n   <tr>\n") %>%
+             as.character())
+
+  # Build the table heading component
   table_heading_component <-
     table_content_styles %>%
     dplyr::filter(row == 0) %>%
     dplyr::pull(style_attrs) %>%
     paste("   ", ., "\n", collapse = "")
 
-  table_heading_component_2 <-
-    " </thead>\n<tbody>\n"
+  # Define the thead closing component
+  thead_closing_component <- " </thead>\n"
 
+  tbody_component <-
+    ifelse(style_attrs_tbody == "", " <tbody>\n",
+           glue::glue(" <tbody style=\"{style_attrs_tbody}\">\n") %>%
+             as.character())
+
+  # Build the table body component
   table_body_component <-
     table_content_styles %>%
-    dplyr::filter(row != 0) %>%
+    dplyr::filter(row > 0) %>%
     dplyr::pull(row) %>%
     unique() %>%
     purrr::map(.f = function(x) {
@@ -172,19 +554,19 @@ emit_html <- function(html_tbl) {
         dplyr::pull(style_attrs) %>%
         paste("   ", ., collapse = "\n") %>%
         paste0("  <tr>\n", ., "\n  </tr>\n")
-    })
-
-  table_body_component <-
-    table_body_component %>%
+    }) %>%
     rlang::squash_chr() %>%
     paste(collapse = "")
 
+  # Define the table closing component
   table_closing_component <- "</tbody>\n</table>\n"
 
   paste(
-    table_opening_component,
+    table_component,
+    thead_component,
     table_heading_component,
-    table_heading_component_2,
+    thead_closing_component,
+    tbody_component,
     table_body_component,
     table_closing_component,
     collapse = "")
@@ -219,14 +601,14 @@ add_table <- function(tbl) {
 
   numeric_columns <-
     html_table %>%
-    dplyr::filter(row != 0) %>%
+    dplyr::filter(row > 0) %>%
     dplyr::filter(type %in% c("integer", "numeric")) %>%
     dplyr::pull(column) %>%
     unique()
 
   character_columns <-
     html_table %>%
-    dplyr::filter(row != 0) %>%
+    dplyr::filter(row > 0) %>%
     dplyr::filter(type == "character") %>%
     dplyr::pull(column) %>%
     unique()
@@ -258,7 +640,10 @@ add_table <- function(tbl) {
       values = "5px") %>%
     add_column_style(
       property = "border-bottom",
-      values = "1px solid #ddd")
+      values = "1px solid #ddd") %>%
+    add_table_style(
+      property = "width",
+      values = "100%")
 
-  emit_html_table(html_tbl = html_table)
+  emit_html(html_tbl = html_table)
 }
