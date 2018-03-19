@@ -596,13 +596,28 @@ emit_html <- function(html_tbl) {
 #' fragment that can be placed inside the
 #' message body wherever the table should
 #' appear.
-#' @importFrom dplyr filter pull
+#' @importFrom dplyr filter pull mutate
+#' @importFrom stringr str_replace_all str_to_title
 #' @export
 add_table <- function(tbl) {
 
   html_table <-
     build_html_table(tbl = tbl)
 
+  # Perform NA replacement with em dashes
+  html_table <-
+    html_table %>%
+    dplyr::mutate(content = ifelse(is.na(content) & row > 0, "&#8212", content))
+
+  # Perform column name transformation
+  html_table <-
+    html_table %>%
+    dplyr::mutate(
+      content = ifelse(
+        row == 0,
+        content %>% stringr::str_replace_all("_", " ") %>% stringr::str_to_title(), content))
+
+  # Get column indices for numeric columns
   numeric_columns <-
     html_table %>%
     dplyr::filter(row > 0) %>%
@@ -610,6 +625,7 @@ add_table <- function(tbl) {
     dplyr::pull(column) %>%
     unique()
 
+  # Get column indices for character-based columns
   character_columns <-
     html_table %>%
     dplyr::filter(row > 0) %>%
@@ -617,6 +633,7 @@ add_table <- function(tbl) {
     dplyr::pull(column) %>%
     unique()
 
+  # Align text for any numeric columns to the right
   if (length(numeric_columns) > 0) {
 
     html_table <-
@@ -627,6 +644,7 @@ add_table <- function(tbl) {
         values = "right")
   }
 
+  # Align text for any character-based columns to the left
   if (length(character_columns) > 0) {
 
     html_table <-
@@ -642,6 +660,12 @@ add_table <- function(tbl) {
     add_column_style(
       property = "padding",
       values = "5px") %>%
+    add_header_style(
+      property = "border-top",
+      values = "2px solid #ddd") %>%
+    add_header_style(
+      property = "border-bottom",
+      values = "2px solid #ddd") %>%
     add_column_style(
       property = "border-bottom",
       values = "1px solid #ddd") %>%
