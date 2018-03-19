@@ -12,17 +12,22 @@ created using the \code{build_html_table()}
 function.}
 
 \item{columns}{an optional vector of column index
-numbers that are to be targeted for transformation.
-If nothing is provided here then the style will
-be applied to all columns.}
+numbers or column names (available in the
+\code{html_tbl}'s \code{column} and
+\code{column_name} variables, respectively) that
+are to be targeted for transformation. If nothing
+is provided here then the style will be applied
+to all columns.}
 
 \item{property}{the CSS style property that is
 to the added.}
 
 \item{values}{values for the CSS style property.
-This should be provided as a single-length
-character vector, where multiple values for the
-same property are separated by a space character.}
+This could be provided as a single-length
+character string representing to exact string
+to be inserted, or, as a vector of values where
+the individual values for the property will
+be transformed to a space-separated string.}
 }
 \value{
 an HTML table object.
@@ -31,6 +36,6 @@ an HTML table object.
 Modify column styles for a table within an HTML
 table object. This is part of an intermediate set
 of step in the \code{build_html_table()} ->
-\code{add_column_style()} -> \code{emit_html()}
+\code{add_..._style()} -> \code{emit_html()}
 pattern.
 }
