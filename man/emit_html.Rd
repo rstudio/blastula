@@ -18,6 +18,6 @@ an HTML table object.
 Take a suitably styled HTML table object and
 transform it to an HTML fragment. This is the
 final step in the \code{build_html_table()} ->
-\code{add_column_style()} -> \code{emit_html()}
+\code{add_..._style()} -> \code{emit_html()}
 pattern.
 }
