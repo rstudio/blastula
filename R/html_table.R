@@ -523,7 +523,7 @@ emit_html <- function(html_tbl) {
   # Construct the `<thead>` tag
   thead_component <-
     ifelse(style_attrs_thead == "", " <thead>\n   <tr>\n",
-           glue::glue("<thead style=\"{style_attrs_thead}\">\n <thead>\n   <tr>\n") %>%
+           glue::glue("<thead style=\"{style_attrs_thead}\">\n   <tr>\n") %>%
              as.character())
 
   # Build the table heading component
