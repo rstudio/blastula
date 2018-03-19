@@ -449,6 +449,7 @@ add_body_style <- function(html_tbl,
 #' @importFrom tidyr unite
 #' @importFrom purrr map
 #' @importFrom rlang squash_chr
+#' @importFrom knitr asis_output
 #' @export
 emit_html <- function(html_tbl) {
 
@@ -562,6 +563,7 @@ emit_html <- function(html_tbl) {
   table_closing_component <- "</tbody>\n</table>\n"
 
   paste(
+    "<!--html_preserve-->\n",
     table_component,
     thead_component,
     table_heading_component,
@@ -569,7 +571,9 @@ emit_html <- function(html_tbl) {
     tbody_component,
     table_body_component,
     table_closing_component,
-    collapse = "")
+    "<!--/html_preserve-->",
+    collapse = "") %>%
+    knitr::asis_output()
 }
 
 
