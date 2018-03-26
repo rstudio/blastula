@@ -1,7 +1,7 @@
 Package: blastula
 Title: Easily Send HTML Email Messages
 Version: 0.2
-Authors@R: person("Rich", "Iannone", email = "riannone@me.com", role = c("aut", "cre"))
+Authors@R: person("Richard", "Iannone", email = "riannone@me.com", role = c("aut", "cre"))
 Maintainer: Richard Iannone <riannone@me.com>
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Messages are
@@ -30,9 +30,7 @@ Imports:
     tidyr (>= 0.8.0)
 Suggests: 
     covr,
-    testthat,
-    rJava (>= 0.9-8),
-    mailR (>= 0.4.1)
+    testthat
 URL: https://github.com/rich-iannone/blastula
 BugReports: https://github.com/rich-iannone/blastula/issues
 Encoding: UTF-8
