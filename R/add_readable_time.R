@@ -18,6 +18,7 @@
 #' inside any message component message wherever
 #' the function is called.
 #' @importFrom glue glue
+#' @importFrom stringr str_squish
 #' @export
 
 add_readable_time <- function(use_date = TRUE,
@@ -39,7 +40,7 @@ add_readable_time <- function(use_date = TRUE,
   if (use_time) {
     current_time <-
       paste0(
-        format(Sys.time(), "%l:%M") %>% trimws(),
+        format(Sys.time(), "%l:%M") %>% stringr::str_squish(),
         toupper(format(Sys.time(), " %p")))
 
     if (use_date) {
