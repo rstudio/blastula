@@ -25,30 +25,27 @@
 #'   to = "username@gmail.com",
 #'   creds_file = ".bls_smtp_gmail_com")
 #' }
-#' @import ggplot2
+#' @importFrom ggplot2 qplot
 #' @export
 prepare_test_message <- function() {
 
-  # Get a nicely formatted date/time string
-  current_date_time <-
-    paste0(
-      format(Sys.time(), "%A, %B "),
-      format(Sys.time(), "%d") %>% as.numeric(),
-      ", ",
-      format(Sys.time(), "%Y"),
-      " at ",
-      format(Sys.time(), "%l:%M") %>% trimws(),
-      toupper(format(Sys.time(), " %p")),
-      format(Sys.time(), " (%Z)"))
+  # Set a seed to make the plot reproducible
+  set.seed(23)
 
-  # Create a ggplot plot object
+  # Create a ggplot object with `qplot()`
   ggplot_object <-
-    ggplot(
-      data = mtcars,
-      aes(
-        x = disp, y = hp,
-        color = wt, size = mpg)) +
-    geom_point()
+    ggplot2::qplot(
+      x = rnorm(1000, 150, 6.6),
+      geom = "histogram",
+      breaks = seq(130, 170, binwidth),
+      colour = I("black"), fill = I("white"),
+      xlab = "x", ylab = "y")
+
+  image_include <-
+    add_image(
+      system.file(
+        'img', 'pexels-photo-267151.jpeg',
+        package = 'blastula'))
 
   # Compose the email test message
   message <-
@@ -62,7 +59,7 @@ prepare_test_message <- function() {
 
   There are helpers to add things like images:
 
-  {add_image(system.file('img', 'pexels-photo-267151.jpeg', package = 'blastula'))}
+  {image_include}
 
   Or even things like a ggplot:
 
@@ -71,8 +68,7 @@ prepare_test_message <- function() {
   Cheers",
       footer = "
   Brought to you by the *blastula* R package
-
-  Sent on {current_date_time}")
+      ")
 
   message
 }
