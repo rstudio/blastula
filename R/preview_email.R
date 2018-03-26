@@ -7,6 +7,6 @@
 #' @export
 preview_email <- function(email) {
 
-  email[["html_html"]] %>% html_print()
+  email[["html_html"]] %>% htmltools::html_print()
 }
 
