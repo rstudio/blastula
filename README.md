@@ -1,16 +1,28 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <img src="man/figures/blastula_diagram.png">
 
-[![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula) [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
+[![Travis-CI Build
+Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
+[![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
-Sometimes we need to send out email messages based on the results of automated analysis processes. The **blastula** package makes it easy to send out HTML emails from R that are a little bit easier on the eyes. In doing so we can take advantage of both **Markdown** and R code when composing our email text.
+Sometimes we need to send out email messages based on the results of
+automated analysis processes. The **blastula** package makes it easy to
+send out HTML emails from R that are a little bit easier on the eyes. In
+doing so we can take advantage of both **Markdown** and R code when
+composing our email text.
 
 ### Installation Requirements
 
-The **CRAN** version of **blastula** requires that the **rJava** and **mailR** package are installed. A system requirement for **rJava** is that the Java JRE is installed on the system.
+The **CRAN** version of **blastula** requires that the **rJava** and
+**mailR** package are installed. A system requirement for **rJava** is
+that the Java JRE is installed on the system.
 
-The development version of **blastula** (installed via `devtools::install_github("rich-iannone/blastula"`)) doesn't require **rJava** or **mailR** to be installed. Instead, there is a requirement for `openssl`.
+The development version of **blastula** (installed via
+`devtools::install_github("rich-iannone/blastula"`)) doesn’t require
+**rJava** or **mailR** to be installed. Instead, there is a requirement
+for `openssl`.
 
 On OS X, it is recommended that homebrew be used to install `openssl`:
 
@@ -26,48 +38,71 @@ With Ubuntu or Debian, we need `libssl-dev`:
 
 ### Sending an email message
 
-Here's an example that shows a basic workflow for composing the message, previewing the content, creating optional on-disk credentials for email, and sending out the message.
+Here’s an example that shows a basic workflow for composing the message,
+previewing the content, creating optional on-disk credentials for email,
+and sending out the message.
 
 These four functions can help us do just that:
 
--   `compose_email()`: generates the email message content inside the `email_message`-class object
--   `preview_email()`: makes the email message created by `compose_email()` viewable in the **RStudio** Viewer
--   `send_email_out()`: sends the HTML-based email to one or more recipients
--   `create_email_creds_file()`: generates an optional on-disk file with email credentials
+  - `compose_email()`: generates the email message content inside the
+    `email_message`-class object
+  - `preview_email()`: makes the email message created by
+    `compose_email()` viewable in the **RStudio** Viewer
+  - `send_email_out()`: sends the HTML-based email to one or more
+    recipients
+  - `create_email_creds_file()`: generates an optional on-disk file with
+    email credentials
 
-Some helper functions allow for easy insertion of objects in the message body. These are:
+Some helper functions allow for easy insertion of HTML fragments into
+the message body. These are:
 
--   `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
--   `add_image()`: with a local image file, insert it into message (it resizes the image to fit the content area)
--   `add_ggplot()`: add a ggplot plot object as an inline image
+  - `add_image()`: with a local image file, insert it into message (it
+    resizes the image to fit the content area)
+  - `add_readable_time()`: adds the current time as a nicely readable
+    string.
+  - `add_cta_button()`: add a call-to-action (CTA) button with button
+    text and a link
+  - `add_ggplot()`: add a ggplot plot object as an inline image
 
-When you compose an email, you can put character objects from the global workspace into the message content. Here, I'll create a nicely formatted date/time string (`current_date_time`), and, assign a link to an web image to an object (`img_link`).
+When you compose an email, you can put character objects from the global
+workspace into the message content. Here, I’ll create a nicely formatted
+date/time string (`current_date_time`) with the package’s
+`add_readable_time()` function, and, assign a link to an web image to an
+object (`img_link`).
 
 ``` r
 library(magrittr)
 
 # Get a nicely formatted date/time string
-current_date_time <-
-  paste0(
-    format(Sys.time(), "%A, %B "),
-    format(Sys.time(), "%d") %>% as.numeric(),
-    ", ",
-    format(Sys.time(), "%Y"),
-    " at ",
-    format(Sys.time(), "%l:%M") %>% trimws(),
-    toupper(format(Sys.time(), " %p")),
-    format(Sys.time(), " (%Z)"))
+current_date_time <- add_readable_time()
 
 # Assign a very long image URL to `img_link`
 img_link <-
   "https://marketplace.canva.com/MAA_AbacFmo/2/0/thumbnail_large/canva-basic-good-vibes-email-header-MAA_AbacFmo.jpg"
 ```
 
-Now, we can use the `compose_email()` to compose the email! There are two main arguments here, `body` and `footer`. You can supply **markdown** text to each of these. So things like `##`, links, tables, and all other valid **markdown** conventions should render to valid HTML.
+Now, we can use the `compose_email()` to compose the email\! There are
+two main arguments here, `body` and `footer`. You can supply
+**markdown** text to each of these. So things like `##`, links, tables,
+and all other valid **markdown** conventions should render to valid
+HTML.
 
-Furthermore, string interpolation is possible and it works by enclosing valid R code inside of curly braces (`{...}`). Below the image URL (as part of the `![...](...)` **markdown** link contruction) is referenced to the `img_link` object from the global workspace. Note also that `{current_date_time}` references a character object that took quite a few piped statements of R to generate. The end result is the date/time string being nicely inserted in the footer of the email without complicating the `compose_email()` function call itself with lots of R statements.
+Furthermore, string interpolation is possible and it works by enclosing
+valid R code inside of curly braces (`{...}`). Below the image URL (as
+part of the `![...](...)` **markdown** link contruction) is referenced
+to the `img_link` object from the global workspace. Note also that
+`{current_date_time}` references a character object that took quite a
+few piped statements of R to generate. The end result is the date/time
+string being nicely inserted in the footer of the email without
+complicating the `compose_email()` function call itself with lots of R
+statements.
 
-We can also supply variables in the `compose_email()` function directly. For example, the `{sender}` part references an object *not* in the global workspace but rather it refers the named argument `sender = "Mike"` in the function call. (The order of searching is from within the function first, then the search moves to variables in the global environment.)
+We can also supply variables in the `compose_email()` function directly.
+For example, the `{sender}` part references an object *not* in the
+global workspace but rather it refers the named argument `sender =
+"Mike"` in the function call. (The order of searching is from within the
+function first, then the search moves to variables in the global
+environment.)
 
 ``` r
 library(blastula)
@@ -92,9 +127,18 @@ email_object <-
     sender = "Mike")
 ```
 
-Some more notes on style are useful here. The `\\` is a helpful line continuation marker. It'll help you break long lines up when composing but won't introduce line breaks or new paragraphs. I recommend formatting like above with few indents so as not to induce the `quote`-type formatting. Any literal quotation marks should be escaped using a single `\`. Blank lines separating blocks of text result in new paragraphs. And, again, any valid R code can be enclosed inside `{...}` (e.g., `{Sys.Date()}`).
+Some more notes on style are useful here. The `\\` is a helpful line
+continuation marker. It’ll help you break long lines up when composing
+but won’t introduce line breaks or new paragraphs. I recommend
+formatting like above with few indents so as not to induce the
+`quote`-type formatting. Any literal quotation marks should be escaped
+using a single `\`. Blank lines separating blocks of text result in new
+paragraphs. And, again, any valid R code can be enclosed inside `{...}`
+(e.g., `{Sys.Date()}`).
 
-After creating the email message, you'll most certainly want to look at it to ensure that the formatting is what you want it to be. This is done with the `preview_email()` function. It's easy to use!
+After creating the email message, you’ll most certainly want to look at
+it to ensure that the formatting is what you want it to be. This is done
+with the `preview_email()` function. It’s easy to use\!
 
 ``` r
 library(blastula)
@@ -103,11 +147,14 @@ library(blastula)
 preview_email(email = email_object)
 ```
 
-...and this is what I saw:
+…and this is what I saw:
 
 <img src="man/figures/rstudio_preview_email.png">
 
-Looks good. Time to email this. I'd previously set up my email credentials in a file using the `create_email_creds_file()` function. Here's an example of how one might create a creds file as a hidden file in the home directory (`~`).
+Looks good. Time to email this. I’d previously set up my email
+credentials in a file using the `create_email_creds_file()` function.
+Here’s an example of how one might create a creds file as a hidden file
+in the home directory (`~`).
 
 ``` r
 # Create a credentials file to facilitate
@@ -121,7 +168,10 @@ create_email_creds_file(
   password = "************")
 ```
 
-In the development version of **blastula**, this function is somewhat different but it allows you to use preset SMTP settings. For example, if you'd like to send email through **Gmail**, there is a shorthand for creating this credentials file:
+In the development version of **blastula**, this function is somewhat
+different but it allows you to use preset SMTP settings. For example, if
+you’d like to send email through **Gmail**, there is a shorthand for
+creating this credentials file:
 
 ``` r
 # Create a credentials file for sending
@@ -133,9 +183,20 @@ create_email_creds_file(
   sender = "Sender Name")
 ```
 
-This will create a hidden credentials file in the working directory, the name of which is based on the provider (you can optionally specify the name with the `creds_file_name` argument). One additional note about using **Gmail** to send out email: you must first change account settings to let less secure apps use your account. Details on how to make this account-level change can be found in [this support document](https://support.google.com/accounts/answer/6010255).
+This will create a hidden credentials file in the working directory, the
+name of which is based on the provider (you can optionally specify the
+name with the `creds_file_name` argument). One additional note about
+using **Gmail** to send out email: you must first change account
+settings to let less secure apps use your account. Details on how to
+make this account-level change can be found in [this support
+document](https://support.google.com/accounts/answer/6010255).
 
-Having generated that file, you can use the `send_email_out()` function to send the email. I sent the email just to myself but do note that the `to` argument can accept a vector of email addresses for mass mailings. Alternatively, one can set a number of environment variables and use `Sys.getenv()` calls for email credentials arguments in the `send_email_out()` statement.
+Having generated that file, you can use the `send_email_out()` function
+to send the email. I sent the email just to myself but do note that the
+`to` argument can accept a vector of email addresses for mass mailings.
+Alternatively, one can set a number of environment variables and use
+`Sys.getenv()` calls for email credentials arguments in the
+`send_email_out()` statement.
 
 ``` r
 library(blastula)
@@ -161,15 +222,19 @@ send_email_out(
   password = Sys.getenv("BLS_PASSWORD"))
 ```
 
-Oddly enough, when I checked my email client, this message did appear in my Junk Mail folder. I fished it out, and this is how it appeared:
+Oddly enough, when I checked my email client, this message did appear in
+my Junk Mail folder. I fished it out, and this is how it appeared:
 
 <img src="man/figures/email_message.png">
 
-Which is great. The underlying HTML/CSS is meant to be resilient and display properly across a wide range of email clients and webmail services.
+Which is great. The underlying HTML/CSS is meant to be resilient and
+display properly across a wide range of email clients and webmail
+services.
 
 ### Adding a table to an email message
 
-You can add HTML tables to the message. Here's an example using a **formattable** table generated via its `format_table()` function.
+You can add HTML tables to the message. Here’s an example using a
+**formattable** table generated via its `format_table()` function.
 
 ``` r
 library(blastula)
@@ -232,11 +297,19 @@ This is how the email preview appears:
 
 <img src="man/figures/formattable_preview.png">
 
-Bear in mind that wider tables are less responsive than text with smaller viewport widths, so, previewing the message is vital (along with recognizing whether recipients will be primarily viewing on mobile or desktop).
+Bear in mind that wider tables are less responsive than text with
+smaller viewport widths, so, previewing the message is vital (along with
+recognizing whether recipients will be primarily viewing on mobile or
+desktop).
 
 ### Adding a call-to-action (CTA) button to an email message
 
-You can add a CTA button to the message. Simply use the `add_cta_button()` helper function, which generates an HTML fragment that can be injected into the message. The function can be called either in the global environment (referencing the object `cta_button` inside `{...}` as below) called within the email message body itself (which is less recommended due to readability considerations).
+You can add a CTA button to the message. Simply use the
+`add_cta_button()` helper function, which generates an HTML fragment
+that can be injected into the message. The function can be called either
+in the global environment (referencing the object `cta_button` inside
+`{...}` as below) called within the email message body itself (which is
+less recommended due to readability considerations).
 
 ``` r
 library(blastula)
@@ -275,7 +348,13 @@ This is how the email preview appears:
 
 ### Adding a local image to an email message
 
-It's really a cinch to include images hosted on the Web using the Markdown approach shown earlier. But, what about local image files? Well that's easy too! Use the `add_image()` helper function and you'll get an HTML fragment that can be placed into the message wherever you'd like the image to be. Again, this function can be used either in the global environment or within the email message body itself. I'll point to image that is available in the package.
+It’s really a cinch to include images hosted on the Web using the
+Markdown approach shown earlier. But, what about local image files? Well
+that’s easy too\! Use the `add_image()` helper function and you’ll get
+an HTML fragment that can be placed into the message wherever you’d like
+the image to be. Again, this function can be used either in the global
+environment or within the email message body itself. I’ll point to image
+that is available in the package.
 
 ``` r
 library(blastula)
@@ -314,7 +393,8 @@ This is how the email preview appears:
 
 ### Adding a ggplot plot object to an email message
 
-It's not at all difficult to insert a **ggplot** plot into an email message. The function to use for that is `add_ggplot()`. An example:
+It’s not at all difficult to insert a **ggplot** plot into an email
+message. The function to use for that is `add_ggplot()`. An example:
 
 ``` r
 library(blastula)
@@ -353,7 +433,10 @@ This is how the email preview appears:
 
 ### Adding HTML tags with inline CSS
 
-You can add custom HTML within the markdown text. This provides an opportunity to style the text using inline CSS. In this example, header text is centered with the `text-align` style and link text is rendered in the `code` style using `<code>` tags.
+You can add custom HTML within the markdown text. This provides an
+opportunity to style the text using inline CSS. In this example, header
+text is centered with the `text-align` style and link text is rendered
+in the `code` style using `<code>` tags.
 
 ``` r
 library(blastula)
@@ -382,28 +465,34 @@ This is how the email preview appears:
 
 ### Installation of the package
 
-**blastula** is used in an R environment. If you don't have an R installation, it can be obtained from the [**Comprehensive R Archive Network (CRAN)**](https://cran.r-project.org/).
+**blastula** is used in an R environment. If you don’t have an R
+installation, it can be obtained from the [**Comprehensive R Archive
+Network (CRAN)**](https://cran.r-project.org/).
 
-The **CRAN** version of this package can be obtained using the following statement:
+The **CRAN** version of this package can be obtained using the following
+statement:
 
 ``` r
 install.packages("blastula")
 ```
 
-You can install the development version of **blastula** from **GitHub** using the **devtools** package.
+You can install the development version of **blastula** from **GitHub**
+using the **devtools** package.
 
 ``` r
 devtools::install_github("rich-iannone/blastula")
 ```
 
-If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/blastula/issues).
+If you encounter a bug, have usage questions, or want to share ideas to
+make this package better, feel free to file an
+[issue](https://github.com/rich-iannone/blastula/issues).
 
-Code of Conduct
----------------
+## Code of Conduct
 
-[Contributor Code of Conduct](https://github.com/rich-iannone/blastula/blob/master/CONDUCT.md). By participating in this project you agree to abide by its terms.
+[Contributor Code of
+Conduct](https://github.com/rich-iannone/blastula/blob/master/CONDUCT.md).
+By participating in this project you agree to abide by its terms.
 
-License
--------
+## License
 
 MIT © Richard Iannone
