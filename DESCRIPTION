@@ -1,6 +1,6 @@
 Package: blastula
 Title: Easily Send HTML Email Messages
-Version: 0.2
+Version: 0.2.0
 Authors@R: person("Richard", "Iannone", email = "riannone@me.com", role = c("aut", "cre"))
 Maintainer: Richard Iannone <riannone@me.com>
 Description: Compose and send out responsive HTML email messages that render
