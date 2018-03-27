@@ -55,8 +55,8 @@ create_email_creds_file <- function(user,
                                     authenticate = TRUE,
                                     creds_file_name = NULL) {
 
-  # Add binding to a global variable
-  short_name <- NULL
+  # Add bindings to global variables
+  short_name <- server <- NULL
 
   # Ensure that `use_ssl` is either TRUE or FALSE
   if (!(use_ssl %in% c(TRUE, FALSE))) {
