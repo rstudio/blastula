@@ -37,7 +37,7 @@ prepare_test_message <- function() {
     ggplot2::qplot(
       x = rnorm(1000, 150, 6.6),
       geom = "histogram",
-      breaks = seq(130, 170, binwidth),
+      breaks = seq(130, 170, 2),
       colour = I("black"), fill = I("white"),
       xlab = "x", ylab = "y")
 
