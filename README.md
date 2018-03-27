@@ -15,14 +15,7 @@ composing our email text.
 
 ### Installation Requirements
 
-The **CRAN** version of **blastula** requires that the **rJava** and
-**mailR** package are installed. A system requirement for **rJava** is
-that the Java JRE is installed on the system.
-
-The development version of **blastula** (installed via
-`devtools::install_github("rich-iannone/blastula"`)) doesn’t require
-**rJava** or **mailR** to be installed. Instead, there is a requirement
-for `openssl`.
+The **blastula** package requires the availability of `openssl`.
 
 On OS X, it is recommended that homebrew be used to install `openssl`:
 
