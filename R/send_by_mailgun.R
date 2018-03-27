@@ -16,7 +16,7 @@
 #' addresses.
 #' @param url the URL for the sending domain.
 #' @param api_key the API key registered to
-#' the mailgun service.
+#' the Mailgun service.
 #' @examples
 #' \dontrun{
 #' # Create a simple email message using
@@ -72,6 +72,7 @@ send_by_mailgun <- function(message,
     subject_text <- glue::glue(subject)
   }
 
+  # Collapse vector of recipients to a single string
   recipients <- paste(recipients, collapse = ", ")
 
   # Post the message to Mailgun

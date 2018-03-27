@@ -32,7 +32,7 @@ message, which is usually a brief summary
 of the topic of the message.}
 
 \item{cc}{a vector of email addresses
-for sending the messsage as a carbon
+for sending the message as a carbon
 copy. This list of for those who are to
 receive a copy of a message addressed
 primarily to another. The list of
@@ -96,7 +96,7 @@ indicate whether to use SSL.}
 indicate whether to use TLS.}
 
 \item{authenticate}{a logical value to
-indicate whether to use authenication.}
+indicate whether to use authentication.}
 
 \item{ehlo}{a logical value to indicate
 whether to force an EHLO command after

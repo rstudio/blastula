@@ -18,7 +18,7 @@
 #' message, which is usually a brief summary
 #' of the topic of the message.
 #' @param cc a vector of email addresses
-#' for sending the messsage as a carbon
+#' for sending the message as a carbon
 #' copy. This list of for those who are to
 #' receive a copy of a message addressed
 #' primarily to another. The list of
@@ -68,7 +68,7 @@
 #' @param use_tls a logical value to
 #' indicate whether to use TLS.
 #' @param authenticate a logical value to
-#' indicate whether to use authenication.
+#' indicate whether to use authentication.
 #' @param ehlo a logical value to indicate
 #' whether to force an EHLO command after
 #' connection to the SMTP host.
