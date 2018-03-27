@@ -26,6 +26,7 @@
 #'   creds_file = ".bls_smtp_gmail_com")
 #' }
 #' @importFrom ggplot2 qplot
+#' @importFrom stats rnorm
 #' @export
 prepare_test_message <- function() {
 
