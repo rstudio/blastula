@@ -1,3 +1,13 @@
+# blastula 0.2.0
+
+* Removed dependencies on Java; reworked `send_email_out()` uses a cross-platform binary to send email message via SMTP
+
+* Added the `prepare_test_message()` function to create test email messages for testing purposes
+
+* Added a `provider` argument to the `create_email_creds_file()` function to more easily configure SMTP settings in a credentials file
+
+* Added the function `add_readable_time()` to allow for easy insertion of a readable version of the present time in a message
+
 # blastula 0.1
 
 * Added functions to compose (`compose_email()`), preview (`preview_email()`), and send (`send_email_out()` and `send_by_mailgun()`) HTML email messages 
