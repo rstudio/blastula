@@ -76,26 +76,24 @@ img_link <-
 
 Now, we can use the `compose_email()` to compose the email\! There are
 two main arguments here, `body` and `footer`. You can supply
-**markdown** text to each of these. So things like `##`, links, tables,
-and all other valid **markdown** conventions should render to valid
-HTML.
+**markdown** text to each of these. All other valid **markdown**
+conventions should render to valid HTML.
 
-Furthermore, string interpolation is possible and it works by enclosing
+The insertion of HTML fragments or text can be performed by enclosing
 valid R code inside of curly braces (`{...}`). Below the image URL (as
-part of the `![...](...)` **markdown** link contruction) is referenced
+part of the `![...](...)` **markdown** link construction) is referenced
 to the `img_link` object from the global workspace. Note also that
-`{current_date_time}` references a character object that took quite a
-few piped statements of R to generate. The end result is the date/time
-string being nicely inserted in the footer of the email without
-complicating the `compose_email()` function call itself with lots of R
-statements.
+`{current_date_time}` references the `current_date_time` character
+object generated earlier via the `add_readable_time()` function. The end
+result is the insertion of the date/time string into the footer of the
+email. (Alternatively, `add_readable_time()` could have been called
+directly.)
 
 We can also supply variables in the `compose_email()` function directly.
 For example, the `{sender}` part references an object *not* in the
-global workspace but rather it refers the named argument `sender =
-"Mike"` in the function call. (The order of searching is from within the
-function first, then the search moves to variables in the global
-environment.)
+global workspace. Rather, it refers the named argument `sender = "Mike"`
+in the function call. The order of searching is from within the function
+first, then, the search moves to variables in the global environment.
 
 ``` r
 library(blastula)
@@ -131,7 +129,7 @@ paragraphs. And, again, any valid R code can be enclosed inside `{...}`
 
 After creating the email message, you’ll most certainly want to look at
 it to ensure that the formatting is what you want it to be. This is done
-with the `preview_email()` function. It’s easy to use\!
+with the `preview_email()` function.
 
 ``` r
 library(blastula)
@@ -144,45 +142,44 @@ preview_email(email = email_object)
 
 <img src="man/figures/rstudio_preview_email.png">
 
-Looks good. Time to email this. I’d previously set up my email
-credentials in a file using the `create_email_creds_file()` function.
-Here’s an example of how one might create a creds file as a hidden file
-in the home directory (`~`).
+I’d previously set up my email credentials in a file using the
+`create_email_creds_file()` function. Here’s an example of how one might
+create a creds file as a hidden file in the home directory (`~`).
 
 ``` r
 # Create a credentials file to facilitate
 # the sending of email messages
 create_email_creds_file(
-  file = "~/.e_creds",
-  sender = "correspondences@blastula.org",
+  user = "have_a@blastula.org",
+  password = "<user_password>",
   host = "smtp.blastula.org",
   port = 465,
-  user = "have_a@blastula.org",
-  password = "************")
+  sender = "correspondences@blastula.org",
+  creds_file_name = "~/.e_creds)
 ```
 
-In the development version of **blastula**, this function is somewhat
-different but it allows you to use preset SMTP settings. For example, if
-you’d like to send email through **Gmail**, there is a shorthand for
-creating this credentials file:
+You can also use preset SMTP settings. For example, if you’d like to
+send email through **Gmail**, we can supply `provider = gmail` to not
+have to worry about SMTP settings:
 
 ``` r
 # Create a credentials file for sending
 # email through Gmail
 create_email_creds_file(
   user = "user_name@gmail.com",
-  password = "************",
+  password = "<user_password>",
   provider = "gmail",
   sender = "Sender Name")
 ```
 
 This will create a hidden credentials file in the working directory, the
 name of which is based on the provider (you can optionally specify the
-name with the `creds_file_name` argument). One additional note about
-using **Gmail** to send out email: you must first change account
-settings to let less secure apps use your account. Details on how to
-make this account-level change can be found in [this support
-document](https://support.google.com/accounts/answer/6010255).
+name with the `creds_file_name` argument, as in the first example).
+
+One additional note about using **Gmail** to send out email: you must
+first change account settings to let less secure apps use your account.
+Details on how to make this account-level change can be found in [this
+support document](https://support.google.com/accounts/answer/6010255).
 
 Having generated that file, you can use the `send_email_out()` function
 to send the email. I sent the email just to myself but do note that the
@@ -196,7 +193,7 @@ library(blastula)
 
 # Sending email using a credentials file
 send_email_out(
-  message = message,
+  message = email_object,
   from = "mike@smile.de",
   to = "riannone@me.com",
   subject = "This is NOT junk mail.",
@@ -215,14 +212,12 @@ send_email_out(
   password = Sys.getenv("BLS_PASSWORD"))
 ```
 
-Oddly enough, when I checked my email client, this message did appear in
-my Junk Mail folder. I fished it out, and this is how it appeared:
+This is how the message appeared when received in the email client:
 
 <img src="man/figures/email_message.png">
 
-Which is great. The underlying HTML/CSS is meant to be resilient and
-display properly across a wide range of email clients and webmail
-services.
+The underlying HTML/CSS is meant to display properly across a wide range
+of email clients and webmail services.
 
 ### Adding a table to an email message
 
@@ -290,10 +285,9 @@ This is how the email preview appears:
 
 <img src="man/figures/formattable_preview.png">
 
-Bear in mind that wider tables are less responsive than text with
-smaller viewport widths, so, previewing the message is vital (along with
-recognizing whether recipients will be primarily viewing on mobile or
-desktop).
+Bear in mind that wider tables can break across the content areas, so,
+previewing the message is vital (along with recognizing whether
+recipients will be primarily viewing on mobile or desktop).
 
 ### Adding a call-to-action (CTA) button to an email message
 
@@ -301,8 +295,8 @@ You can add a CTA button to the message. Simply use the
 `add_cta_button()` helper function, which generates an HTML fragment
 that can be injected into the message. The function can be called either
 in the global environment (referencing the object `cta_button` inside
-`{...}` as below) called within the email message body itself (which is
-less recommended due to readability considerations).
+`{...}` as below) or called within the email message body itself (which
+is less recommended due to readability considerations).
 
 ``` r
 library(blastula)
@@ -342,12 +336,12 @@ This is how the email preview appears:
 ### Adding a local image to an email message
 
 It’s really a cinch to include images hosted on the Web using the
-Markdown approach shown earlier. But, what about local image files? Well
-that’s easy too\! Use the `add_image()` helper function and you’ll get
-an HTML fragment that can be placed into the message wherever you’d like
-the image to be. Again, this function can be used either in the global
-environment or within the email message body itself. I’ll point to image
-that is available in the package.
+Markdown approach shown earlier. For local image files we can use the
+`add_image()` helper function, which creates an HTML fragment that can
+be placed into the message wherever you’d like the image to appear.
+Again, this function can be used either in the global environment or
+within the email message body itself. I’ll point to image that is
+available in the package.
 
 ``` r
 library(blastula)
