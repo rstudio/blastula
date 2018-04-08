@@ -155,7 +155,7 @@ create_email_creds_file(
   host = "smtp.blastula.org",
   port = 465,
   sender = "correspondences@blastula.org",
-  creds_file_name = "~/.e_creds)
+  creds_file_name = "~/.e_creds")
 ```
 
 You can also use preset SMTP settings. For example, if you’d like to
