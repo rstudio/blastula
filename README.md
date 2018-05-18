@@ -8,9 +8,9 @@ Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://
 [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
 Sometimes we need to send out email messages based on the results of
-automated analysis processes. The **blastula** package makes it easy to
-send out HTML emails from R that are a little bit easier on the eyes. In
-doing so we can take advantage of both **Markdown** and R code when
+automated analytical processes. The **blastula** package makes it easy to
+send out HTML emails from R that are easier on the eyes. In
+doing so, we can take advantage of both **Markdown** and R code when
 composing our email text.
 
 ### Installation Requirements
@@ -60,7 +60,7 @@ the message body. These are:
 When you compose an email, you can put character objects from the global
 workspace into the message content. Here, I’ll create a nicely formatted
 date/time string (`current_date_time`) with the package’s
-`add_readable_time()` function, and, assign a link to an web image to an
+`add_readable_time()` function, and assign a link to a web image to an
 object (`img_link`).
 
 ``` r
@@ -93,7 +93,7 @@ We can also supply variables in the `compose_email()` function directly.
 For example, the `{sender}` part references an object *not* in the
 global workspace. Rather, it refers the named argument `sender = "Mike"`
 in the function call. The order of searching is from within the function
-first, then, the search moves to variables in the global environment.
+first, then the search moves to variables in the global environment.
 
 ``` r
 library(blastula)
@@ -124,7 +124,7 @@ but won’t introduce line breaks or new paragraphs. I recommend
 formatting like above with few indents so as not to induce the
 `quote`-type formatting. Any literal quotation marks should be escaped
 using a single `\`. Blank lines separating blocks of text result in new
-paragraphs. And, again, any valid R code can be enclosed inside `{...}`
+paragraphs. And again, any valid R code can be enclosed inside `{...}`
 (e.g., `{Sys.Date()}`).
 
 After creating the email message, you’ll most certainly want to look at
