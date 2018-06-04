@@ -29,6 +29,8 @@
 #' interpolation for the \code{body},
 #' \code{footer}, and \code{preheader_text}
 #' string data.
+#' @param .envir allows for setting the
+#' environment.
 #' @return an \code{email_message} object,
 #' which can be used for previewing with
 #' the \code{preview_email()} function or
@@ -87,7 +89,8 @@ compose_email <- function(body = NULL,
                           footer = NULL,
                           .preheader_text = NULL,
                           .title = NULL,
-                          ...) {
+                          ...,
+                          .envir = new.env()) {
 
   if (!is.null(.preheader_text)) {
     preheader_text <-
