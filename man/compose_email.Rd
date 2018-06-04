@@ -5,7 +5,7 @@
 \title{Create the email message}
 \usage{
 compose_email(body = NULL, footer = NULL, .preheader_text = NULL,
-  .title = NULL, ...)
+  .title = NULL, ..., .envir = new.env())
 }
 \arguments{
 \item{body}{the main body of text for
@@ -31,6 +31,9 @@ circumstances.}
 interpolation for the \code{body},
 \code{footer}, and \code{preheader_text}
 string data.}
+
+\item{.envir}{allows for setting the
+environment.}
 }
 \value{
 an \code{email_message} object,
