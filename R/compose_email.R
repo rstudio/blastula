@@ -89,33 +89,33 @@ compose_email <- function(body = NULL,
                           footer = NULL,
                           .preheader_text = NULL,
                           .title = NULL,
-                          ...,
-                          .envir = new.env()) {
+                          .envir = parent.frame(),
+                          ...) {
 
   if (!is.null(.preheader_text)) {
     preheader_text <-
-      glue::glue(.preheader_text, ...)
+      glue::glue(.preheader_text, ..., .envir = .envir)
   } else {
     preheader_text <- ""
   }
 
   if (!is.null(.preheader_text)) {
     title_text <-
-      glue::glue(.title, ...)
+      glue::glue(.title, ..., .envir = .envir)
   } else {
     title_text <- ""
   }
 
   if (!is.null(body)) {
     body_text <-
-      glue::glue(body, ...)
+      glue::glue(body, ..., .envir = .envir)
   } else {
     body_text <- ""
   }
 
   if (!is.null(footer)) {
     footer_text <-
-      glue::glue(footer, ...)
+      glue::glue(footer, ..., .envir = .envir)
   } else {
     footer_text <- ""
   }
@@ -134,7 +134,7 @@ compose_email <- function(body = NULL,
 
 # Generate the email message body
 body <-
-  glue(
+  glue::glue(
   "
 <!doctype html>
   <html>
@@ -264,8 +264,7 @@ body <-
   </tr>
   </table>
   </body>
-  </html>"
-  )
+  </html>")
 
   email_message <-
     list(
