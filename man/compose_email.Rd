@@ -5,7 +5,7 @@
 \title{Create the email message}
 \usage{
 compose_email(body = NULL, footer = NULL, .preheader_text = NULL,
-  .title = NULL, ..., .envir = new.env())
+  .title = NULL, .envir = parent.frame(), ...)
 }
 \arguments{
 \item{body}{the main body of text for
@@ -27,13 +27,13 @@ This is not the subject but the HTML title
 text which may appear in limited
 circumstances.}
 
+\item{.envir}{allows for setting the
+environment.}
+
 \item{...}{expression strings for string
 interpolation for the \code{body},
 \code{footer}, and \code{preheader_text}
 string data.}
-
-\item{.envir}{allows for setting the
-environment.}
 }
 \value{
 an \code{email_message} object,
