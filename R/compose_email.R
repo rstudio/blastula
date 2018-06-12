@@ -82,7 +82,7 @@
 #'   thing = "report")
 #' @importFrom glue glue
 #' @importFrom commonmark markdown_html
-#' @importFrom stringr str_replace_all
+#' @importFrom stringr str_replace str_replace_all str_detect str_extract_all
 #' @importFrom htmltools HTML
 #' @export
 compose_email <- function(body = NULL,
