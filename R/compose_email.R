@@ -132,10 +132,10 @@ compose_email <- function(body = NULL,
     stringr::str_replace_all(
       commonmark::markdown_html(footer_text), "\n", "")
 
-# Generate the email message body
-body <-
-  glue::glue(
-  "
+  # Generate the email message body
+  body <-
+    glue::glue(
+      "
 <!doctype html>
   <html>
   <head>
@@ -271,8 +271,53 @@ body <-
       html_str = as.character(body),
       html_html = body %>% htmltools::HTML())
 
+  # Extract encoded images from body
+  extracted_images <-
+    email_message$html_str %>%
+    stringr::str_extract_all(
+      "<img src=\"data:image/png;base64,.*?\"") %>%
+    unlist()
+
+  # Obtain a vector of randomized names for CIDs
+  get_cid_name <- function() sample(letters, 12) %>% paste(collapse = "")
+
+  for (i in seq(extracted_images)) {
+
+    if (i == 1) cid_names <- c()
+
+    cid_names <- c(cid_names, get_cid_name())
+  }
+
+  # Clean base64 image strings
+  for (i in seq(extracted_images)) {
+    extracted_images[i] <-
+      extracted_images[i] %>%
+      stringr::str_replace(
+        "<img src=\"data:image/png;base64,", "")
+  }
+
+  # Create a list with a base64 image per list element
+  extracted_images <- as.list(extracted_images)
+
+  # Apply `cid_names` to the `extracted_images` list
+  names(extracted_images) <- cid_names
+
+  # Add the list of extracted images to the
+  # `email_message` list object
+  email_message <-
+    c(email_message, list(images = extracted_images))
+
+  # Replace <img>...</img> tags with CID values
+  for (i in seq(extracted_images)) {
+    email_message$html_str <-
+      email_message$html_str %>%
+      stringr::str_replace(
+        pattern = "<img src=\"data:image/png;base64,.*?\"",
+        replacement = paste0("<img src=\"cid:", cid_names[i], "\""))
+  }
+
+  # Apply the `email_message` class
   attr(email_message, "class") <- "email_message"
 
   email_message
 }
-
