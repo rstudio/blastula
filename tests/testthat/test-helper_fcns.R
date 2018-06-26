@@ -16,7 +16,7 @@ test_that("creating a base64-encoded image is possible", {
 
   # Expect a base64 PNG within `img` tags
   expect_true(
-    grepl("<img cid=\"test_image.png__.*?\" src=\"data:image/png;base64,.*\" width=\"520\"/>", img_file_html))
+    grepl("<img cid=\".*?__test_image.png\" src=\"data:image/png;base64,.*\" width=\"520\"/>", img_file_html))
 })
 
 test_that("creating a base64-encoded ggplot is possible", {
@@ -42,5 +42,5 @@ test_that("creating a base64-encoded ggplot is possible", {
 
   # Expect a base64 PNG within `img` tags
   expect_true(
-    grepl("<img cid=\"temp_ggplot.png__.*?\" src=\"data:image/png;base64,.*\" width=\"520\"/>", plot_html))
+    grepl("<img cid=\".*?__temp_ggplot.png\" src=\"data:image/png;base64,.*\" width=\"520\"/>", plot_html))
 })
