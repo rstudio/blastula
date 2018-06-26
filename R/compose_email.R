@@ -82,7 +82,8 @@
 #'   thing = "report")
 #' @importFrom glue glue
 #' @importFrom commonmark markdown_html
-#' @importFrom stringr str_replace str_replace_all str_detect str_extract_all
+#' @importFrom stringr str_replace str_replace_all str_detect
+#' @importFrom stringr str_extract str_extract_all
 #' @importFrom htmltools HTML
 #' @export
 compose_email <- function(body = NULL,
@@ -272,31 +273,32 @@ compose_email <- function(body = NULL,
       html_html = body %>% htmltools::HTML())
 
   if (email_message$html_str %>%
-      stringr::str_detect("<img src=\"data:image/(png|jpeg);base64,.*?\"")) {
+      stringr::str_detect("<img cid=.*? src=\"data:image/(png|jpeg);base64,.*?\"")) {
 
     # Extract encoded images from body
     extracted_images <-
       email_message$html_str %>%
       stringr::str_extract_all(
-        "<img src=\"data:image/(png|jpeg);base64,.*?\"") %>%
+        "<img cid=.*? src=\"data:image/(png|jpeg);base64,.*?\"") %>%
       unlist()
 
-    # Obtain a vector of randomized names for CIDs
-    get_cid_name <- function() sample(letters, 12) %>% paste(collapse = "")
-
+    # Obtain a vector of CIDs
+    cid_names <- c()
     for (i in seq(extracted_images)) {
 
-      if (i == 1) cid_names <- c()
+      cid_name <- extracted_images[i] %>%
+        stringr::str_extract("cid=\".*?\"") %>%
+        stringr::str_replace_all("(cid=\"|\")", "")
 
-      cid_names <- c(cid_names, get_cid_name())
+      cid_names <- c(cid_names, cid_name)
     }
 
-    # Clean base64 image strings
+    # Clean the Base64 image strings
     for (i in seq(extracted_images)) {
       extracted_images[i] <-
         extracted_images[i] %>%
         stringr::str_replace(
-          "<img src=\"data:image/(png|jpeg);base64,", "")
+          "<img cid=.*? src=\"data:image/(png|jpeg);base64,", "")
     }
 
     # Create a list with a base64 image per list element
@@ -315,7 +317,7 @@ compose_email <- function(body = NULL,
       email_message$html_str <-
         email_message$html_str %>%
         stringr::str_replace(
-          pattern = "<img src=\"data:image/(png|jpeg);base64,.*?\"",
+          pattern = "<img cid=.*? src=\"data:image/(png|jpeg);base64,.*?\"",
           replacement = paste0("<img src=\"cid:", cid_names[i], "\""))
     }
   }

@@ -39,7 +39,15 @@
 #' @export
 add_image <- function(file) {
 
+  # Construct a CID based on the filename
+  # with a random string appended to it
+  cid <-
+    paste0(
+      basename(file), "__",
+      sample(letters, 12) %>% paste(collapse = ""))
+
+  # Create the image URI
   uri <- knitr::image_uri(f = file)
 
-  glue::glue("<img src=\"{uri}\" width=\"520\"/>\n")
+  glue::glue("<img cid=\"{cid}\" src=\"{uri}\" width=\"520\"/>\n")
 }
