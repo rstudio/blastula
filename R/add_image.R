@@ -40,11 +40,11 @@
 add_image <- function(file) {
 
   # Construct a CID based on the filename
-  # with a random string appended to it
+  # with a random string prepended to it
   cid <-
     paste0(
-      basename(file), "__",
-      sample(letters, 12) %>% paste(collapse = ""))
+      sample(letters, 12) %>% paste(collapse = ""), "__",
+      basename(file))
 
   # Create the image URI
   uri <- knitr::image_uri(f = file)
