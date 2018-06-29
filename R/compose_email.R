@@ -296,9 +296,11 @@ compose_email <- function(body = NULL,
     # Clean the Base64 image strings
     for (i in seq(extracted_images)) {
       extracted_images[i] <-
-        extracted_images[i] %>%
-        stringr::str_replace(
-          "<img cid=.*? src=\"data:image/(png|jpeg);base64,", "")
+        gsub(
+          ".{2}$", "",
+          extracted_images[i] %>%
+            stringr::str_replace(
+              "<img cid=.*? src=\"data:image/(png|jpeg);base64,", ""))
     }
 
     # Create a list with a base64 image per list element
