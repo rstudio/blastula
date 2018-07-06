@@ -50,13 +50,14 @@
 #' @importFrom ggplot2 ggsave
 #' @export
 add_ggplot <- function(plot_object,
-                       width,
-                       height) {
+                       width = 5,
+                       height = 5) {
 
   ggplot2::ggsave(
     device = "png",
     plot = plot_object,
     filename = "temp_ggplot.png",
+    dpi = 100,
     width = width,
     height = height)
 
