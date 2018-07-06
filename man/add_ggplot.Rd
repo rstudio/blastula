@@ -4,7 +4,7 @@
 \alias{add_ggplot}
 \title{Helper function for adding an ggplot}
 \usage{
-add_ggplot(plot_object, width, height)
+add_ggplot(plot_object, width = 5, height = 5)
 }
 \arguments{
 \item{plot_object}{the ggplot plot object.}
