@@ -297,7 +297,7 @@ compose_email <- function(body = NULL,
     for (i in seq(extracted_images)) {
       extracted_images[i] <-
         gsub(
-          ".{2}$", "",
+          ".{1}$", "",
           extracted_images[i] %>%
             stringr::str_replace(
               "<img cid=.*? src=\"data:image/(png|jpeg);base64,", ""))
