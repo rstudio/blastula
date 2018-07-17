@@ -40,10 +40,8 @@ email <-
     body = "
     Hello!
 
-    Have a look at this image:
+    Here is an image:
 
     {img_file_html}
-
-    Useful, right?
     ")
 }
