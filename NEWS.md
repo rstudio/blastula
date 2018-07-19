@@ -1,3 +1,9 @@
+# blastula 0.2.1
+
+* Moved local image URI data into list component, where references to image data are through CIDs
+
+* Implemented internal functions for Base64-encoding of local images, removing dependency on knitr
+
 # blastula 0.2.0
 
 * Removed dependencies on Java; reworked `send_email_out()` uses a cross-platform binary to send email message via SMTP
