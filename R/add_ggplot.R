@@ -27,9 +27,7 @@
 #' # embedded plot
 #' plot_html <-
 #'   add_ggplot(
-#'     plot_object = plot,
-#'     height = 5,
-#'     width = 7)
+#'     plot_object = plot)
 #'
 #' # Include the plot in the email
 #' # message body by simply referencing
@@ -45,21 +43,31 @@
 #'
 #'   {plot_html}
 #'
-#'   So useful, right?
-#'   ") %>% preview_email()
-#' @importFrom ggplot2 ggsave
+#'   Thanks.
+#'   ")
 #' @export
 add_ggplot <- function(plot_object,
                        width = 5,
                        height = 5) {
 
-  ggplot2::ggsave(
-    device = "png",
-    plot = plot_object,
-    filename = "temp_ggplot.png",
-    dpi = 100,
-    width = width,
-    height = height)
+  # nocov start
+
+  # If the `ggplot2` package is available, then
+  # use the `ggplot2::ggsave()` function
+  if (requireNamespace("ggplot2", quietly = TRUE)) {
+
+    ggplot2::ggsave(
+      device = "png",
+      plot = plot_object,
+      filename = "temp_ggplot.png",
+      dpi = 100,
+      width = width,
+      height = height)
+
+  } else {
+    stop("Please ensure that the `ggplot2` package is installed before using `add_ggplot()`.",
+         call. = FALSE)
+  }
 
   Sys.sleep(2)
 
@@ -69,4 +77,6 @@ add_ggplot <- function(plot_object,
   file.remove("temp_ggplot.png")
 
   image_html
+
+  # nocov end
 }
