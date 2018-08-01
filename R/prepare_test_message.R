@@ -30,6 +30,7 @@
 #'   to = "username@gmail.com",
 #'   creds_file = ".bls_smtp_gmail_com")
 #' }
+#' @importFrom stats rnorm
 #' @export
 prepare_test_message <- function(incl_ggplot = FALSE,
                                  incl_image = FALSE) {
@@ -48,7 +49,7 @@ prepare_test_message <- function(incl_ggplot = FALSE,
       # Create a ggplot object with `qplot()`
       ggplot_object <-
         ggplot2::qplot(
-          x = rnorm(1000, 150, 6.6),
+          x = stats::rnorm(1000, 150, 6.6),
           geom = "histogram",
           breaks = seq(130, 170, 2),
           colour = I("black"), fill = I("white"),
