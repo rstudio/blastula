@@ -4,13 +4,19 @@
 \alias{prepare_test_message}
 \title{Prepare a email test message object}
 \usage{
-prepare_test_message()
+prepare_test_message(incl_ggplot = FALSE, incl_image = FALSE)
+}
+\arguments{
+\item{incl_ggplot}{an option to include a ggplot plot within the body of the
+test message. This requires that the ggplot2 package is installed. By
+default, this is FALSE.}
+
+\item{incl_image}{an option to include a test image within the body of the
+test message. By default, this is FALSE.}
 }
 \description{
-Create an email test message object,
-which is helpful for sending a test
-message with the \code{send_email_out()}
-function.
+Create an email test message object, which is helpful for sending a test
+message with the \code{send_email_out()} function.
 }
 \examples{
 \dontrun{
@@ -24,7 +30,9 @@ create_email_creds_file(
   sender = "Sender Name")
 
 # Send oneself a test message to
-# test these new SMTP settings
+# test these new SMTP settings and also
+# to ensure that the message appears
+# correctly in the email client
 send_email_out(
   message = prepare_test_message(),
   sender = "Sender Name",

@@ -41,9 +41,7 @@ plot <-
 # embedded plot
 plot_html <-
   add_ggplot(
-    plot_object = plot,
-    height = 5,
-    width = 7)
+    plot_object = plot)
 
 # Include the plot in the email
 # message body by simply referencing
@@ -59,6 +57,6 @@ email <-
 
   {plot_html}
 
-  So useful, right?
-  ") \%>\% preview_email()
+  Thanks.
+  ")
 }
