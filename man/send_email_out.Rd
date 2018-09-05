@@ -4,12 +4,13 @@
 \alias{send_email_out}
 \title{Send an email message}
 \usage{
-send_email_out(message, from, to, subject = NULL, cc = NULL, bcc = NULL,
-  attachments = NULL, attach_mime_types = NULL, attach_encodings = NULL,
-  attach_dispositions = NULL, creds_file = NULL, sender = NULL,
-  host = NULL, port = NULL, user = NULL, password = NULL,
-  use_ssl = TRUE, use_tls = FALSE, authenticate = TRUE, ehlo = FALSE,
-  verbose = FALSE, debug = FALSE)
+send_email_out(message, from, to, subject = NULL, cc = NULL,
+  bcc = NULL, attachments = NULL, attach_mime_types = NULL,
+  attach_encodings = NULL, attach_dispositions = NULL,
+  creds_file = NULL, sender = NULL, host = NULL, port = NULL,
+  user = NULL, password = NULL, use_ssl = TRUE, use_tls = FALSE,
+  authenticate = TRUE, ehlo = FALSE, verbose = FALSE,
+  debug = FALSE)
 }
 \arguments{
 \item{message}{the email message object,
