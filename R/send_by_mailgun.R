@@ -50,7 +50,6 @@
 #'     url = "<..mailgun_sending_domain..>",
 #'     api = "<..mailgun_api_key..>")
 #' }
-#' @import httr
 #' @importFrom glue glue
 #' @export
 send_by_mailgun <- function(message,
@@ -59,6 +58,8 @@ send_by_mailgun <- function(message,
                             recipients,
                             url,
                             api_key) {
+
+  # nocov start
 
   # Verify that the `message` object
   # is of the class `email_message`
@@ -75,14 +76,23 @@ send_by_mailgun <- function(message,
   # Collapse vector of recipients to a single string
   recipients <- paste(recipients, collapse = ", ")
 
-  # Post the message to Mailgun
-  httr::POST(
-    url = url,
-    authenticate("api", api_key),
-    encode = "form",
-    body = list(
-      from = from,
-      to = recipients,
-      subject = subject,
-      html = message$html_html))
+  # If the `httr` package is available, then
+  #   post the message to Mailgun
+  if (requireNamespace("httr", quietly = TRUE)) {
+
+    # Post the message to Mailgun
+    httr::POST(
+      url = url,
+      authenticate("api", api_key),
+      encode = "form",
+      body = list(
+        from = from,
+        to = recipients,
+        subject = subject,
+        html = message$html_html))
+  } else {
+    message("The `httr` package is required to use the `send_by_mailgun()` function.")
+  }
+
+  # nocov end
 }
