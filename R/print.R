@@ -1,0 +1,10 @@
+#' Print the email object to the terminal and Viewer
+#'
+#' This function will provide a preview of the email message.
+#' @param x an \code{email_message} object.
+#' @keywords internal
+#' @export
+print.email_message <- function(x, ...) {
+
+  preview_email(x)
+}
