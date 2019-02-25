@@ -25,3 +25,21 @@ test_that("substr2 edge cases", {
   expect_error(substr2(c("abc", "def"), 1, 3))
 })
 
+
+test_that("gfsub basics", {
+  expect_identical(
+    gfsub("abcdefghijklmnopqrstuvwxyz", "[aeiouy]", toupper),
+    "AbcdEfghIjklmnOpqrstUvwxYz"
+  )
+
+  gfsub("&amp;", "&(.*?);", function(match, entity) {
+    expect_identical(entity, "amp")
+    NULL
+  })
+
+  output <- gfsub("hello &amp; goodbye", "&(.*?);", function(match, entity, bad_param) {
+    expect_error(bad_param)
+    NULL
+  })
+  expect_identical(output, "hello  goodbye")
+})

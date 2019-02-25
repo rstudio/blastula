@@ -71,8 +71,8 @@ gfsub <- function(string, pattern, func, ignore_case = FALSE) {
   for (match in matches) {
     out(substr2(string, pos, match["start",1]))
 
-    value <- substr2(string, match["start",1], match["end",1])
-    replacement <- func(value)
+    args <- as.list(substr2(string, match["start",], match["end",]))
+    replacement <- do.call(func, args)
     if (!is.null(replacement)) {
       out(replacement)
     }
@@ -173,17 +173,18 @@ replace_attr <- function(html, tag_name, attr_name, func) {
     attr_val <- substr2(tag_html, attr_loc)
     post <- substr2(tag_html, attr_loc[["end"]], nchar(tag_html) + 1L)
 
-    # TODO: Encode/decode automatically?
-    paste0(pre, func(attr_val), post)
+    paste0(pre,
+      htmltools::htmlEscape(func(html_unescape(attr_val)), attribute = TRUE),
+      post)
   })
 }
 
-replace_attr(
-  html = "<img src='whatever'> <div hi=bye> <IMG SRC='baz' alt=\"hi\"/>  <!-- <img src='no'> --> ]",
-  tag_name = "img",
-  attr_name = "src",
-  func = toupper
-)
+# replace_attr(
+#   html = "<img src='whatever'> <div hi=bye> <IMG SRC='baz' alt=\"hi\"/>  <!-- <img src='no'> --> ]",
+#   tag_name = "img",
+#   attr_name = "src",
+#   func = toupper
+# )
 
 src_to_datauri <- function(src, basedir) {
   if (grepl("^https?:", src, ignore.case = TRUE, perl = TRUE)) {
@@ -194,11 +195,13 @@ src_to_datauri <- function(src, basedir) {
   }
   if (grepl("^file:", src, ignore.case = TRUE, perl = TRUE)) {
     # TODO: implement
+    # TODO: URI unescape
     warning("TODO: implement file URLs")
   }
 
   # TODO: Test if src is a file path
   # TODO: Test if src is an absolute file path
+  # TODO: URI unescape
 
   full_path <- file.path(basedir, src)
   if (file.exists(full_path)) {
@@ -220,8 +223,6 @@ inline_images <- function(html_file) {
   basedir <- dirname(html_file)
   html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
   replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
-    # TODO: HTML unescape
-
     src <- src_to_datauri(src, basedir)
     src
   })
@@ -272,4 +273,44 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
     html_html = HTML(html_data_uri),
     images = as.list(images)
   ))
+}
+
+decode_hex <- function(hex) {
+  if (nchar(hex) %% 2 == 1) {
+    hex <- paste0("0", hex)
+  }
+  chars <- strsplit(hex, "")[[1]]
+  left <- chars[c(TRUE,FALSE)]
+  right <- chars[c(FALSE,TRUE)]
+  values <- strtoi(paste0(left, right), 16)
+  str <- rawToChar(as.raw(values))
+  Encoding(str) <- "UTF-8"
+  str
+}
+
+html_unescape <- function(html) {
+  gfsub(html, "&#x([0-9a-f]+);|&#([0-9]+);|&([a-z0-9]+);", ignore_case = TRUE,
+    function(entity, hex, dec, named) {
+      if (!is.na(hex)) {
+        decode_hex(hex)
+      } else if (!is.na(dec)) {
+        decode_hex(sprintf("%x", strtoi(dec, 10)))
+      } else if (!is.na(named)) {
+        switch(named,
+          amp = "&",
+          lt = "<",
+          gt = ">",
+          quot = "\"",
+          {
+            str <- html_entities[[entity]]
+            if (!is.null(str)) {
+              str
+            } else {
+              entity # not found
+            }
+          }
+        )
+      }
+    }
+  )
 }
