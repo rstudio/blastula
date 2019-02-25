@@ -1,86 +1,52 @@
 #' Send an email message
 #'
-#' Send an email message to one or more
-#' recipients.
-#' @param message the email message object,
-#' as created by the \code{compose_email()}
-#' function. The object's class is
-#' \code{email_message}
-#' @param from the email address of the
-#' sender. This does not have to be
-#' the same email that is associated with
-#' the account actually sending the message.
-#' @param to a vector of email addresses
-#' serving as primary recipients for the
-#' message. For secondary recipients, use
-#' the \code{cc} and \code{bcc} arguments.
-#' @param subject the subject of the
-#' message, which is usually a brief summary
-#' of the topic of the message.
-#' @param cc a vector of email addresses
-#' for sending the message as a carbon
-#' copy. This list of for those who are to
-#' receive a copy of a message addressed
-#' primarily to another. The list of
-#' recipients in the CC list is visible
-#' to all other recipients of the message.
-#' @param bcc a vector of email addresses
-#' for sending the message as blind carbon
-#' copies. Any email addresses provided
-#' here will receive the message and these
-#' email addresses will be concealed from
-#' other recipients (including others on
-#' the BCC list).
-#' @param attachments a vector of paths
-#' to files to be attached to the email.
-#' @param attach_mime_types an optional
-#' vector of mime types to use for
-#' each of the attachments specified in
-#' \code{attachments}. If not provided,
-#' mime types will be assigned based on
-#' file extensions.
-#' @param attach_encodings an optional
-#' vector of encoding types to use for
-#' each of the attachments specified in
-#' \code{attachments}. Options are
-#' \code{base64}, \code{7bit},
-#' \code{8bit}, or \code{none}.
-#' @param attach_dispositions an optional
-#' vector of disposition types for each
-#' of the attachments specified in
-#' \code{attachments}. Options are
-#' \code{inline} and \code{attachment}.
-#' @param creds_file an optional path to
-#' an email credentials file. This file
-#' must be created by the
-#' \code{create_email_creds_file()}
-#' function.
+#' Send an email message to one or more recipients.
+#' @param message the email message object, as created by the
+#'   \code{compose_email()} function. The object's class is \code{email_message}
+#' @param from the email address of the sender. This does not have to be the
+#'   same email that is associated with the account actually sending the
+#'   message.
+#' @param to a vector of email addresses serving as primary recipients for the
+#'   message. For secondary recipients, use the \code{cc} and \code{bcc}
+#'   arguments.
+#' @param subject the subject of the message, which is usually a brief summary
+#'   of the topic of the message.
+#' @param cc a vector of email addresses for sending the message as a carbon
+#'   copy. This list of for those who are to receive a copy of a message
+#'   addressed primarily to another. The list of recipients in the CC list is
+#'   visible to all other recipients of the message.
+#' @param bcc a vector of email addresses for sending the message as blind
+#'   carbon copies. Any email addresses provided here will receive the message
+#'   and these email addresses will be concealed from other recipients
+#'   (including others on the BCC list).
+#' @param attachments a vector of paths to files to be attached to the email.
+#' @param attach_mime_types an optional vector of mime types to use for each of
+#'   the attachments specified in \code{attachments}. If not provided, mime
+#'   types will be assigned based on file extensions.
+#' @param attach_encodings an optional vector of encoding types to use for each
+#'   of the attachments specified in \code{attachments}. Options are
+#'   \code{base64}, \code{7bit}, \code{8bit}, or \code{none}.
+#' @param attach_dispositions an optional vector of disposition types for each
+#'   of the attachments specified in \code{attachments}. Options are
+#'   \code{inline} and \code{attachment}.
+#' @param creds_file an optional path to an email credentials file. This file
+#'   must be created by the \code{create_email_creds_file()} function.
 #' @param sender the sender name.
 #' @param host the email host.
-#' @param port the port associated with
-#' the email account.
-#' @param user the username associated
-#' with the email account.
-#' @param password the password associated
-#' with the email account.
-#' @param use_ssl a logical value to
-#' indicate whether to use SSL.
-#' @param use_tls a logical value to
-#' indicate whether to use TLS.
-#' @param authenticate a logical value to
-#' indicate whether to use authentication.
-#' @param ehlo a logical value to indicate
-#' whether to force an EHLO command after
-#' connection to the SMTP host.
-#' @param verbose a logical value indicating
-#' whether verbose messages should be
-#' printed to the console during sending
-#' of email.
-#' @param debug a logical value to indicate
-#' whether the mail sending statement
-#' should be printed to the console. No
-#' emails are sent when debug is set to
-#' \code{TRUE}.
+#' @param port the port associated with the email account.
+#' @param user the username associated with the email account.
+#' @param password the password associated with the email account.
+#' @param use_ssl a logical value to indicate whether to use SSL.
+#' @param use_tls a logical value to indicate whether to use TLS.
+#' @param authenticate a logical value to indicate whether to use
+#'   authentication.
+#' @param ehlo a logical value to indicate whether to force an EHLO command
+#'   after connection to the SMTP host.
+#' @param verbose a logical value indicating whether verbose messages should be
+#'   printed to the console during sending of email.
+#' @param debug a logical value to indicate whether the mail sending statement
+#'   should be printed to the console. No emails are sent when debug is set to
+#'   \code{TRUE}.
 #' @importFrom glue glue
 #' @importFrom dplyr tibble bind_cols pull
 #' @importFrom tidyr unite

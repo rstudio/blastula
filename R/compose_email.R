@@ -1,41 +1,25 @@
 #' Create the email message
 #'
-#' Create an email message. String
-#' interpolation is possible for the text
-#' comprising the email body, footer, and
-#' preheader text. This is done by using
-#' curly braces to enclose R code chunks.
-#' Variables can be specified in the function
-#' call (using named arguments with \code{...}),
-#' and any variables not found in \code{...}
-#' will be searched for in the global
-#' environment.
-#' @param body the main body of text for
-#' the email message. Markdown can be used here
-#' (along with string interpolation via curly
-#' braces and named arguments) to construct the
-#' main text.
-#' @param footer the footer text for the email
-#' message. As with the \code{body}, Markdown
-#' and string interpolation can be used here.
-#' @param .preheader_text text that appears
-#' before the subject in some email clients.
-#' This must be plaintext.
-#' @param .title the title of the email message.
-#' This is not the subject but the HTML title
-#' text which may appear in limited
-#' circumstances.
-#' @param ... expression strings for string
-#' interpolation for the \code{body},
-#' \code{footer}, and \code{preheader_text}
-#' string data.
-#' @param .envir allows for setting the
-#' environment.
-#' @return an \code{email_message} object,
-#' which can be used for previewing with
-#' the \code{preview_email()} function or
-#' for sending out actual emails with the
-#' \code{send_email_out()} function.
+#' Create an email message. String interpolation is possible for the text
+#' comprising the email body, footer, and preheader text. This is done by using
+#' curly braces to enclose R code chunks. Variables can be specified in the
+#' function call (using named arguments with \code{...}), and any variables not
+#' found in \code{...} will be searched for in the global environment.
+#' @param body the main body of text for the email message. Markdown can be used
+#'   here (along with string interpolation via curly braces and named arguments)
+#'   to construct the main text.
+#' @param footer the footer text for the email message. As with the \code{body},
+#'   Markdown and string interpolation can be used here.
+#' @param .preheader_text text that appears before the subject in some email
+#'   clients. This must be plaintext.
+#' @param .title the title of the email message. This is not the subject but the
+#'   HTML title text which may appear in limited circumstances.
+#' @param ... expression strings for string interpolation for the \code{body},
+#'   \code{footer}, and \code{preheader_text} string data.
+#' @param .envir allows for setting the environment.
+#' @return an \code{email_message} object, which can be used for previewing with
+#'   the \code{preview_email()} function or for sending out actual emails with
+#'   the \code{send_email_out()} function.
 #' @examples
 #' # Create a simple email message using
 #' # Markdown formatting

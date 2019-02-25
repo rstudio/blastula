@@ -1,21 +1,14 @@
 #' Helper function for adding a CTA button
 #'
-#' Add a call to action button
-#' inside the body of the email with this
-#' helper function. There are options to
-#' specify the button text, the URL, and
-#' the button's alignment.
+#' Add a call to action button inside the body of the email with this helper
+#' function. There are options to specify the button text, the URL, and the
+#' button's alignment.
 #' @param url a URL for the button.
-#' @param text the text that is placed atop
-#' the CTA button.
-#' @param align the alignment of the button
-#' inside the main content area. Options are
-#' \code{center} (the default), \code{left},
-#' and \code{right}.
-#' @return a character object with an HTML
-#' fragment that can be placed inside the
-#' message body wherever the CTA button
-#' should appear.
+#' @param text the text that is placed atop the CTA button.
+#' @param align the alignment of the button inside the main content area.
+#'   Options are \code{center} (the default), \code{left}, and \code{right}.
+#' @return a character object with an HTML fragment that can be placed inside
+#'   the message body wherever the CTA button should appear.
 #' @examples
 #' # Create the button as an HTML fragment
 #' cta_button <-
