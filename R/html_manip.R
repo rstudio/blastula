@@ -112,8 +112,13 @@ parse_attr <- function(attr = "src='data'  alt    =  \"whatever\"  id = foo") {
         )
       )
     )
-    setNames(list(value), tolower(substr2(attr, name[[1]], name[[2]])))
+
+    # Return a named list with a single element
+    value_list <- list(value)
+    names(value_list) <- tolower(substr2(attr, name[[1]], name[[2]]))
+    value_list
   })
+  # Turn a list of named lists, into a single named list
   do.call("c", transformed_matches)
 }
 
