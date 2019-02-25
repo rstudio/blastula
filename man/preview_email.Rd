@@ -10,6 +10,5 @@ preview_email(email)
 \item{email}{an \code{email_message} object.}
 }
 \description{
-Preview an HTML email in the Viewer
-before sending it out.
+Preview an HTML email in the Viewer before sending it out.
 }

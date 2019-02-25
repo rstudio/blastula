@@ -7,17 +7,13 @@
 get_html_str(message)
 }
 \arguments{
-\item{message}{the email message object,
-as created by the \code{compose_email()}
-function. The object's class is
-\code{email_message}}
+\item{message}{the email message object, as created by the
+\code{compose_email()} function. The object's class is \code{email_message}}
 }
 \value{
-a character object containing the
-email message's HTML content.
+a character object containing the email message's HTML content.
 }
 \description{
-Get the HTML content string from an
-\code{email_message} object as a single-length
-character vector.
+Get the HTML content string from an \code{email_message} object as a
+single-length character vector.
 }

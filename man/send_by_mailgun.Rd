@@ -7,30 +7,24 @@
 send_by_mailgun(message, subject = NULL, from, recipients, url, api_key)
 }
 \arguments{
-\item{message}{the email message object,
-as created by the \code{compose_email()}
-function. The object's class is
-\code{email_message}}
+\item{message}{the email message object, as created by the
+\code{compose_email()} function. The object's class is \code{email_message}}
 
-\item{subject}{the subject of the
-email.}
+\item{subject}{the subject of the email.}
 
-\item{from}{the email address of the
-sender. This does not have to be
-the same email that is associated with
-the account actually sending the message.}
+\item{from}{the email address of the sender. This does not have to be the
+same email that is associated with the account actually sending the
+message.}
 
-\item{recipients}{a vector of email
-addresses.}
+\item{recipients}{a vector of email addresses.}
 
 \item{url}{the URL for the sending domain.}
 
-\item{api_key}{the API key registered to
-the Mailgun service.}
+\item{api_key}{the API key registered to the Mailgun service.}
 }
 \description{
-Send an email message via the Mailgun API.
-This requires an account with Mailgun.
+Send an email message via the Mailgun API. This requires an account with
+Mailgun.
 }
 \examples{
 \dontrun{

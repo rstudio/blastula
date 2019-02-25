@@ -9,26 +9,19 @@ add_cta_button(url, text, align = "center")
 \arguments{
 \item{url}{a URL for the button.}
 
-\item{text}{the text that is placed atop
-the CTA button.}
+\item{text}{the text that is placed atop the CTA button.}
 
-\item{align}{the alignment of the button
-inside the main content area. Options are
-\code{center} (the default), \code{left},
-and \code{right}.}
+\item{align}{the alignment of the button inside the main content area.
+Options are \code{center} (the default), \code{left}, and \code{right}.}
 }
 \value{
-a character object with an HTML
-fragment that can be placed inside the
-message body wherever the CTA button
-should appear.
+a character object with an HTML fragment that can be placed inside
+  the message body wherever the CTA button should appear.
 }
 \description{
-Add a call to action button
-inside the body of the email with this
-helper function. There are options to
-specify the button text, the URL, and
-the button's alignment.
+Add a call to action button inside the body of the email with this helper
+function. There are options to specify the button text, the URL, and the
+button's alignment.
 }
 \examples{
 # Create the button as an HTML fragment

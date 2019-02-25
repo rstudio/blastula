@@ -7,27 +7,22 @@
 add_readable_time(use_date = TRUE, use_time = TRUE, use_tz = TRUE)
 }
 \arguments{
-\item{use_date}{a logical value that indicates
-whether the current date should be included.}
+\item{use_date}{a logical value that indicates whether the current date
+should be included.}
 
-\item{use_time}{a logical value that indicates
-whether the current time should be included.}
+\item{use_time}{a logical value that indicates whether the current time
+should be included.}
 
-\item{use_tz}{a logical value that indicates
-whether the locale's time zone should be
-included.}
+\item{use_tz}{a logical value that indicates whether the locale's time zone
+should be included.}
 }
 \value{
-a character object that can be placed
-inside any message component message wherever
-the function is called.
+a character object that can be placed inside any message component
+  message wherever the function is called.
 }
 \description{
-Add a nicely-formatted date/time string
-inside the body of the email with this
-helper function. This will insert the current
-date/time/tz based on the caller's locale
-information at the time of the call. There
-are options to specify whether the date, time,
-and time zone parts are to be included.
+Add a nicely-formatted date/time string inside the body of the email with
+this helper function. This will insert the current date/time/tz based on the
+caller's locale information at the time of the call. There are options to
+specify whether the date, time, and time zone parts are to be included.
 }

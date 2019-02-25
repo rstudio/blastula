@@ -8,51 +8,35 @@ compose_email(body = NULL, footer = NULL, .preheader_text = NULL,
   .title = NULL, .envir = parent.frame(), ...)
 }
 \arguments{
-\item{body}{the main body of text for
-the email message. Markdown can be used here
-(along with string interpolation via curly
-braces and named arguments) to construct the
-main text.}
+\item{body}{the main body of text for the email message. Markdown can be used
+here (along with string interpolation via curly braces and named arguments)
+to construct the main text.}
 
-\item{footer}{the footer text for the email
-message. As with the \code{body}, Markdown
-and string interpolation can be used here.}
+\item{footer}{the footer text for the email message. As with the \code{body},
+Markdown and string interpolation can be used here.}
 
-\item{.preheader_text}{text that appears
-before the subject in some email clients.
-This must be plaintext.}
+\item{.preheader_text}{text that appears before the subject in some email
+clients. This must be plaintext.}
 
-\item{.title}{the title of the email message.
-This is not the subject but the HTML title
-text which may appear in limited
-circumstances.}
+\item{.title}{the title of the email message. This is not the subject but the
+HTML title text which may appear in limited circumstances.}
 
-\item{.envir}{allows for setting the
-environment.}
+\item{.envir}{allows for setting the environment.}
 
-\item{...}{expression strings for string
-interpolation for the \code{body},
-\code{footer}, and \code{preheader_text}
-string data.}
+\item{...}{expression strings for string interpolation for the \code{body},
+\code{footer}, and \code{preheader_text} string data.}
 }
 \value{
-an \code{email_message} object,
-which can be used for previewing with
-the \code{preview_email()} function or
-for sending out actual emails with the
-\code{send_email_out()} function.
+an \code{email_message} object, which can be used for previewing with
+  the \code{preview_email()} function or for sending out actual emails with
+  the \code{send_email_out()} function.
 }
 \description{
-Create an email message. String
-interpolation is possible for the text
-comprising the email body, footer, and
-preheader text. This is done by using
-curly braces to enclose R code chunks.
-Variables can be specified in the function
-call (using named arguments with \code{...}),
-and any variables not found in \code{...}
-will be searched for in the global
-environment.
+Create an email message. String interpolation is possible for the text
+comprising the email body, footer, and preheader text. This is done by using
+curly braces to enclose R code chunks. Variables can be specified in the
+function call (using named arguments with \code{...}), and any variables not
+found in \code{...} will be searched for in the global environment.
 }
 \examples{
 # Create a simple email message using

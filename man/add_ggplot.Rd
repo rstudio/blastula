@@ -9,21 +9,16 @@ add_ggplot(plot_object, width = 5, height = 5)
 \arguments{
 \item{plot_object}{the ggplot plot object.}
 
-\item{width}{the width of the output plot
-in inches.}
+\item{width}{the width of the output plot in inches.}
 
-\item{height}{the height of the output
-plot in inches.}
+\item{height}{the height of the output plot in inches.}
 }
 \value{
-a character object with an HTML
-fragment that can be placed inside the
-message body wherever the plot image
-should appear.
+a character object with an HTML fragment that can be placed inside
+  the message body wherever the plot image should appear.
 }
 \description{
-Add an ggplot plot inside the body of the
-email with this helper function.
+Add an ggplot plot inside the body of the email with this helper function.
 }
 \examples{
 library(ggplot2)
