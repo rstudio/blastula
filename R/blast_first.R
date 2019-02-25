@@ -1,8 +1,6 @@
-#' Setup function to get SMTP mail
-#' working effectively
+#' Setup function to get SMTP mail working effectively
 #'
-#' Run this function first to obtain SMTP
-#' mailing functionality, which is
+#' Run this function first to obtain SMTP mailing functionality, which is
 #' important for sending out email.
 #' @importFrom downloader download
 #' @export
@@ -17,8 +15,8 @@ blast_first <- function() {
       Darwin  = "mac_os")
 
   # Create `exec` directory
-  if (dir.exists(paste0(find.package("blastula"), "/exec")) == FALSE) {
-    dir.create(paste0(find.package("blastula"), "/exec"))
+  if (dir.exists(file.path(find.package("blastula"), "exec")) == FALSE) {
+    dir.create(file.path(find.package("blastula"), "exec"))
   }
 
   # Download the correct binary
@@ -27,7 +25,7 @@ blast_first <- function() {
     suppressMessages(
       downloader::download(
         url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/mac_os/mailsend",
-        destfile = paste0(find.package("blastula"), "/exec/mailsend"),
+        destfile = file.path(find.package("blastula"), "exec", "mailsend"),
         quiet = TRUE)
     )
 
@@ -36,7 +34,7 @@ blast_first <- function() {
     suppressMessages(
       downloader::download(
         url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/win/mailsend",
-        destfile = paste0(find.package("blastula"), "/exec/mailsend"),
+        destfile = file.path(find.package("blastula"), "exec", "mailsend"),
         quiet = TRUE)
     )
 
@@ -45,7 +43,7 @@ blast_first <- function() {
     suppressMessages(
       downloader::download(
         url = "https://raw.githubusercontent.com/rich-iannone/blastula/master/inst/linux/mailsend",
-        destfile = paste0(find.package("blastula"), "/exec/mailsend"),
+        destfile = file.path(find.package("blastula"), "exec", "mailsend"),
         quiet = TRUE)
     )
   }
