@@ -262,7 +262,7 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
     }
   })
 
-  structure(class = "email_message", list(
+  structure(class = c("blastula_message", "email_message"), list(
     html_str = html_cid,
     html_html = HTML(html_data_uri),
     images = as.list(images)

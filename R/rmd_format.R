@@ -80,3 +80,8 @@ blastula_email <- function(toc = FALSE, toc_depth = 3, toc_float = FALSE,
     ...
   )
 }
+
+#' @export
+knit_print.blastula_message <- function(x, ...) {
+  attach_email(x)
+}
