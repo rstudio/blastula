@@ -163,4 +163,4 @@ email <-
   )
 
 # Preview the email in the RStudio Viewer
-email %>% preview_email()
+email
