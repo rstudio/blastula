@@ -2,7 +2,7 @@
 % Please edit documentation in R/print.R
 \name{print.email_message}
 \alias{print.email_message}
-\title{Print the email object to the terminal and Viewer}
+\title{Print the email object to the Viewer}
 \usage{
 \method{print}{email_message}(x, ...)
 }
