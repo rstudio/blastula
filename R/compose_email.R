@@ -313,8 +313,3 @@ compose_email <- function(body = NULL,
 
   email_message
 }
-
-#' @export
-print.blastula_message <- function(x, ...) {
-  preview_email(x)
-}
