@@ -249,8 +249,6 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
   html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
 
   html_data_uri <- replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
-    # TODO: HTML unescape
-
     src_to_datauri(src, basedir)
   })
 
