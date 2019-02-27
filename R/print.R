@@ -4,7 +4,7 @@
 #' @param x an \code{email_message} object.
 #' @keywords internal
 #' @export
-print.blastula_message <- function(x, ...) {
+print.email_message <- function(x, ...) {
 
   preview_email(x)
 }

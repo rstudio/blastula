@@ -25,17 +25,12 @@ Imports:
     htmltools (>= 0.3.6),
     magrittr (>= 1.5),
     stringr (>= 1.3.1),
-    tidyr (>= 0.8.0),
-    mime,
-    base64enc
-Enhances:
-    knitr
+    tidyr (>= 0.8.0)
 Suggests: 
     covr,
     ggplot2,
     httr,
-    testthat,
-    rmarkdown
+    testthat
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
