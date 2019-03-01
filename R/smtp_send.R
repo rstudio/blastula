@@ -30,20 +30,6 @@ smtp_send <- function(email,
          call. = FALSE)
   }
 
-  # If a path to a credentials file is provided,
-  # read in the values
-  if (!is.null(creds_file)) {
-
-    # Read in email credentials from `creds_file`
-    credentials <- readRDS(creds_file)
-    sender <- ifelse(!is.null(sender), sender, credentials[1])
-    host <- ifelse(!is.null(host), host, credentials[2])
-    port <- ifelse(!is.null(port), port, as.integer(credentials[3]))
-    user <- ifelse(!is.null(user), user, credentials[4])
-    password <- ifelse(!is.null(password), password, credentials[5])
-    use_ssl <- as.logical(credentials[6])
-    use_tls <- as.logical(credentials[7])
-    authenticate <- as.logical(credentials[8])
   }
 
   # Write the inlined HTML message out to a file
