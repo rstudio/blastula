@@ -8,6 +8,7 @@
 # Output files from blastula
 .bls*
 .mailsend
+*creds*
 
 # Example code in package build process
 *-Ex.R
