@@ -86,10 +86,13 @@ send_email_out <- function(message,
     blast_first()
   }
 
-  # Verify that the `message` object
-  # is of the class `email_message`
-  if (!inherits(x = message, what = "email_message")) {
-    stop("The object provided in `message` must be created by the `compose_email()` function.")
+  # Verify that the `message` object is of the
+  # class `email_message`
+  if (!inherits(email, "email_message")) {
+    stop("The object provided in `email` must be an ",
+         "`email_message` object.\n",
+         " * This can be created with the `compose_email()` function.",
+         call. = FALSE)
   }
 
   # If a path to a credentials file is provided,
