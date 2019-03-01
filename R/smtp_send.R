@@ -46,9 +46,8 @@ smtp_send <- function(email,
     authenticate <- as.logical(credentials[8])
   }
 
-  # Write the inlined HTML message
-  # out to a file
-  message$html_html %>%
+  # Write the inlined HTML message out to a file
+  email$html_html %>%
     writeLines(con = "message_inlined.html")
 
   # Wrap the subject in single quotes
