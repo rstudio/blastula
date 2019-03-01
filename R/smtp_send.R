@@ -30,6 +30,9 @@ smtp_send <- function(email,
          call. = FALSE)
   }
 
+  # Establish the location of the `mailsend-go` binary
+  if (is.null(binary_loc)) {
+    # binary_loc <- find_mailsend()
   }
 
   # Write the inlined HTML message out to a file
