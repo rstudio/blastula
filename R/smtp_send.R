@@ -52,8 +52,27 @@ smtp_send <- function(email,
 
   # Wrap the subject in single quotes
   subject <- paste0("'", subject, "'")
-  #
-  # message <- paste0("'", message, "'")
+
+  # If a path to a credentials file is provided,
+  # read in the values
+  if (!is.null(creds_file)) {
+
+    credentials <- readRDS(creds_file) %>% as.list()
+
+  } else {
+
+    credentials <-
+      list(
+        sender = sender,
+        host = host,
+        port = port,
+        user = user,
+        password = password,
+        use_ssl = use_ssl,
+        use_tls = use_tls,
+        authenticate = authenticate
+      )
+  }
 
   # Send text email
   processx::run(
