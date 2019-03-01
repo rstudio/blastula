@@ -65,20 +65,20 @@ smtp_send <- function(email,
 
   # Send text email
   processx::run(
-    command = "/usr/local/bin/mailsend-go",
+    command = binary_loc,
     args = c(
       "-sub", subject,
-      "-smtp", host,
-      "-port", port, "-ssl",
+      "-smtp", credentials$host,
+      "-port", credentials$port,
+      ifelse(credentials$use_ssl, "-ssl", ""),
       "auth",
-      "-user", user, "-pass", password,
+        "-user", credentials$user, "-pass", credentials$password,
       "-from", from, "-to", to,
       "body",
         "-file", "message_inlined.html"),
     echo = echo,
     echo_cmd = debug
   )
-
 
   # Remove the `message_inlined.html` file
   if (file.exists("message_inlined.html")) {
