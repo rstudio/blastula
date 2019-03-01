@@ -67,7 +67,7 @@ smtp_send <- function(email,
                       authenticate = TRUE,
                       binary_loc = NULL,
                       echo = FALSE,
-                      debug = FALSE) {
+                      echo_cmd = FALSE) {
 
   # Verify that the `message` object
   # is of the class `email_message`
@@ -125,7 +125,7 @@ smtp_send <- function(email,
       "body",
         "-file", "message_inlined.html"),
     echo = echo,
-    echo_cmd = debug
+    echo_cmd = echo_cmd
   )
 
   # Remove the `message_inlined.html` file
