@@ -87,7 +87,15 @@ smtp_send <- function(email,
   email$html_html %>%
     writeLines(con = "message_inlined.html")
 
-  # Wrap the subject in single quotes
+  # Handle a subject line that's not provided and use
+  # `glue::glue()` for customizing a given `subject`
+  if (is.null(subject)) {
+    subject <- "<no subject>"
+  } else {
+    subject <- glue::glue(subject)
+  }
+
+  # Wrap the `subject` in single quotes
   subject <- paste0("'", subject, "'")
 
   # If a path to a credentials file is provided,
