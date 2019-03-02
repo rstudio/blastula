@@ -106,6 +106,9 @@ smtp_send <- function(email,
 
     credentials <- readRDS(creds_file) %>% as.list()
 
+    # Overwrite sender name if one is provided
+    if (!is.null(sender)) credentials$sender <- sender
+
   } else {
 
     credentials <-
