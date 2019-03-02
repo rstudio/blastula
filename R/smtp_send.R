@@ -95,8 +95,6 @@ smtp_send <- function(email,
     subject <- glue::glue(subject)
   }
 
-  # Wrap the `subject` in single quotes
-  subject <- paste0("'", subject, "'")
 
   # If a path to a credentials file is provided,
   # read in the values
