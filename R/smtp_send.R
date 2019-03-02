@@ -95,6 +95,10 @@ smtp_send <- function(email,
     subject <- glue::glue(subject)
   }
 
+  # Create comma-separated addresses
+  to <- make_address_list(to)
+  cc <- make_address_list(cc)
+  bcc <- make_address_list(bcc)
 
   # If a path to a credentials file is provided,
   # read in the values
