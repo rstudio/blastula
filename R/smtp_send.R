@@ -134,9 +134,20 @@ smtp_send <- function(email,
       ifelse(credentials$use_ssl, "-ssl", ""),
       "auth",
         "-user", credentials$user, "-pass", credentials$password,
-      "-from", from, "-to", to,
-      "body",
-        "-file", "message_inlined.html"),
+      "-fname", credentials$sender,
+      "-from", from,
+      "-to", to,
+      "-cc", cc,
+      "-bcc", bcc,
+      "attach",
+        "-file", "message_inlined.html",
+        "-mime-type", "text/html",
+        "-inline"
+      # "attach",
+      #   "-file", "image.png",
+      #   "-mime-type", "image/png",
+      #   "-inline"
+      ),
     echo = echo,
     echo_cmd = echo_cmd
   )
