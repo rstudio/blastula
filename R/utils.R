@@ -26,3 +26,13 @@ smtp_settings <- function() {
   )
 }
 
+#' Make a formatted address list string
+#' @param addresses a vector of addresses
+#' @noRd
+make_address_list <- function(addresses) {
+  if (!is.null(addresses)) {
+    return(paste(addresses, collapse = ","))
+  } else {
+    return(NULL)
+  }
+}
