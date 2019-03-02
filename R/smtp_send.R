@@ -84,7 +84,7 @@ smtp_send <- function(email,
   }
 
   # Write the inlined HTML message out to a file
-  email$html_html %>%
+  email$html_str %>%
     writeLines(con = "message_inlined.html")
 
   # Handle a subject line that's not provided and use
