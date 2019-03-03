@@ -102,7 +102,8 @@ smtp_send <- function(email,
     subject <- glue::glue(subject) %>% as.character()
   }
 
-  # Create comma-separated addresses
+  # Create comma-separated addresses for
+  # `to`, `cc`, and `bcc`
   to <- make_address_list(to)
   cc <- make_address_list(cc)
   bcc <- make_address_list(bcc)
