@@ -26,7 +26,7 @@ smtp_settings <- function() {
   )
 }
 
-#' Make a formatted address list string
+#' Make a single-length character vector with addresses
 #' @param addresses a vector of addresses
 #' @noRd
 make_address_list <- function(addresses) {
@@ -150,6 +150,7 @@ create_args_opts_vec <- function(run_args) {
   run_args_vec
 }
 
+#' Find a binary on the system path or working directory
 #' @param bin_name The name of the binary to search for
 #' @importFrom processx run
 #' @noRd
@@ -162,7 +163,7 @@ find_binary <- function(bin_name) {
     return(which_result)
   }
 
-  # Find binary in working directory
+  # Try to locate the binary in working directory
   which_result <-
     tryCatch(
       {
@@ -176,5 +177,7 @@ find_binary <- function(bin_name) {
     return(which_result)
   }
 
+  # If the binary isn't found in these locations,
+  # return `NULL`
   NULL
 }
