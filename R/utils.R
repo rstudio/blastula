@@ -36,3 +36,56 @@ make_address_list <- function(addresses) {
     return(NULL)
   }
 }
+
+#' Get a text string identifying the system's OS
+#' @noRd
+get_os_type <- function() {
+
+  if (.Platform$OS.type == "windows") {
+    return("windows")
+  }
+
+  if (unname(Sys.info()["sysname"] == "Linux")) {
+    return("linux")
+  }
+
+  if (.Platform$OS.type == "unix" && unname(Sys.info()["sysname"] == "Darwin")) {
+    return("mac_os")
+  }
+
+  if (.Platform$OS.type == "unix" && .Platform$OS.type != "Darwin") {
+    return("unix")
+  }
+
+  "unknown"
+}
+
+#' Is this system using Windows?
+#' @noRd
+is_windows_os <- function() {
+  get_os_type() == "windows"
+}
+
+#' Is this system using macOS?
+#' @noRd
+is_mac_os <- function() {
+  get_os_type() == "mac_os"
+}
+
+#' Is this system using Linux?
+#' @noRd
+is_linux_os <- function() {
+  get_os_type() == "linux"
+}
+
+#' Is this system using Unix (not macOS nor Linux)?
+#' @noRd
+is_unix_os <- function() {
+  get_os_type() == "unix"
+}
+
+#' Is this system using an unknown OS?
+#' @noRd
+is_unknown_os <- function() {
+  get_os_type() == "unknown"
+}
