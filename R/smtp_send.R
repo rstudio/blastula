@@ -99,7 +99,7 @@ smtp_send <- function(email,
   if (is.null(subject)) {
     subject <- "<no subject>"
   } else {
-    subject <- glue::glue(subject)
+    subject <- glue::glue(subject) %>% as.character()
   }
 
   # Create comma-separated addresses
