@@ -90,7 +90,14 @@ is_unknown_os <- function() {
   get_os_type() == "unknown"
 }
 
-#' Find a binary on the system
+#' Create a character object that signals `no_options`
+#' @noRd
+no_options <- function() {
+  no_opts <- "no_options"
+  class(no_opts) <- "no_options"
+  no_opts
+}
+
 #' @param bin_name The name of the binary to search for
 #' @importFrom processx run
 #' @noRd
