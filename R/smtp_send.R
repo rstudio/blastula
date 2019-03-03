@@ -151,6 +151,13 @@ smtp_send <- function(email,
         "-file", "message_inlined.html",
         "-mime-type", "text/html",
         "-inline"
+  # Set the `ssl` flag depending on the options provided
+  if (credentials$use_ssl) {
+    ssl_opt <- no_options()
+  } else {
+    ssl_opt <- no_arg()
+  }
+
   # Collect arguments and options for for `processx::run()`
   # as a list
   run_args <-
