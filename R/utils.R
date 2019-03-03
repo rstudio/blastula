@@ -12,7 +12,7 @@ smtp_settings <- function() {
     "yahoo_au_nz", "smtp.mail.yahoo.au",       465,   TRUE,     FALSE,    TRUE,          "email", "Yahoo AU/NZ",
     "aol",         "smtp.aol.com",             587,   TRUE,     TRUE,     TRUE,          "user",  "AOL",
     "mail_com",    "smtp.mail.com",            587,   FALSE,    TRUE,     TRUE,          "email", "Mail.com",
-    "gmx",         "mail.gmx.com",             587,   TRUE,     FALSE,     TRUE,          "email", "GMX",
+    "gmx",         "mail.gmx.com",             587,   TRUE,     FALSE,    TRUE,          "email", "GMX",
     "att",         "smtp.att.yahoo.com",       465,   TRUE,     FALSE,    TRUE,          "email", "AT&T",
     "verizon",     "outgoing.verizon.net",     587,   FALSE,    FALSE,    TRUE,          "email", "Verizon",
     "usa_net",     "smtp.postoffice.net",      465,   TRUE,     FALSE,    TRUE,          "email", "USA.NET",
