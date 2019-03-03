@@ -151,11 +151,31 @@ smtp_send <- function(email,
         "-file", "message_inlined.html",
         "-mime-type", "text/html",
         "-inline"
+  # Collect arguments and options for for `processx::run()`
+  # as a list
+  run_args <-
+    list(
+      `-sub` = subject,
+      `-smtp` = credentials$host,
+      `-port` = credentials$port,
+      `-ssl` = ssl_opt,
+      `auth` = no_options(),
+      `-user` = credentials$user,
+      `-pass` = credentials$password,
+      `-fname` = credentials$sender,
+      `-from` = from,
+      `-to` = to,
+      `-cc` = cc,
+      `-bcc` = bcc,
+      `attach` = no_options(),
+      `-file` = "message_inlined.html",
+      `-mime-type` = "text/html",
+      `-inline` = no_options()
       # "attach",
       #   "-file", "image.png",
       #   "-mime-type", "image/png",
       #   "-inline"
-      ),
+    )
     echo = echo,
     echo_cmd = echo_cmd
   )
