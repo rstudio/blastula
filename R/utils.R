@@ -98,6 +98,14 @@ no_options <- function() {
   no_opts
 }
 
+#' Create a character object that signals `no_arg`
+#' @noRd
+no_arg <- function() {
+  no_arg_ <- "no_arg"
+  class(no_arg_) <- "no_arg"
+  no_arg_
+}
+
 #' @param bin_name The name of the binary to search for
 #' @importFrom processx run
 #' @noRd
