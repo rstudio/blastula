@@ -33,7 +33,7 @@ make_address_list <- function(addresses) {
   if (!is.null(addresses)) {
     return(paste(addresses, collapse = ","))
   } else {
-    return(NULL)
+    return(no_arg())
   }
 }
 
