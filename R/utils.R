@@ -89,3 +89,33 @@ is_unix_os <- function() {
 is_unknown_os <- function() {
   get_os_type() == "unknown"
 }
+
+#' Find a binary on the system
+#' @param bin_name The name of the binary to search for
+#' @importFrom processx run
+#' @noRd
+find_binary <- function(bin_name) {
+
+  # Find binary on path with `Sys.which()`
+  which_result <- Sys.which(bin_name) %>% unname()
+
+  if (which_result != "") {
+    return(which_result)
+  }
+
+  # Find binary in working directory
+  which_result <-
+    tryCatch(
+      {
+        processx::run(command = "ls", args = bin_name)
+        file.path(getwd(), bin_name)
+      },
+      error = function(cond) ""
+    )
+
+  if (which_result != "") {
+    return(which_result)
+  }
+
+  NULL
+}
