@@ -164,6 +164,14 @@ smtp_send <- function(email,
       #   "-mime-type", "image/png",
       #   "-inline"
     )
+
+  # Clean up arguments and options; create the
+  # vector that's needed for `processx::run()`
+  run_args <-
+    run_args %>%
+    prune_args() %>%
+    create_args_opts_vec()
+
   # Send out email via `processx::run()`
   processx::run(
     command = binary_loc,
