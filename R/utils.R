@@ -106,6 +106,50 @@ no_arg <- function() {
   no_arg_
 }
 
+#' Create vectors of args and vals for a list element
+#' @param x an element of the `run_args` list
+#' @noRd
+get_arg_opts <- function(x) {
+
+  if (!inherits(x[[1]], "no_options")) {
+    arg_opts <- c(names(x), x[[1]])
+    } else {
+    arg_opts <- names(x)
+    }
+
+  arg_opts
+}
+
+#' Take a list of args/vals and prune unnecessary arguments
+#' @param run_args a list of arguments and associated options
+#' @noRd
+prune_args <- function(run_args) {
+
+  run_args[
+    !vapply(
+      run_args, function(x) inherits(x, "no_arg"),
+      FUN.VALUE = logical(1),
+      USE.NAMES = FALSE)]
+}
+
+#' Create a vector of command arguments and any associated options
+#' @param run_args a list of arguments and associated options
+#' @noRd
+create_args_opts_vec <- function(run_args) {
+
+  run_args_vec <- c()
+
+  for (i in seq(run_args)) {
+    run_args_vec <-
+      c(
+        run_args_vec,
+        run_args[i] %>% get_arg_opts()
+      )
+  }
+
+  run_args_vec
+}
+
 #' @param bin_name The name of the binary to search for
 #' @importFrom processx run
 #' @noRd
