@@ -1,4 +1,6 @@
-# SMTP providers with settings
+#' Get a tibble of SMTP providers with settings
+#' @importFrom dplyr tribble
+#' @noRd
 smtp_settings <- function() {
   dplyr::tribble(
     ~short_name,   ~server,                    ~port, ~use_ssl, ~use_tls, ~authenticate, ~user,   ~long_name,
