@@ -80,7 +80,14 @@ smtp_send <- function(email,
 
   # Establish the location of the `mailsend-go` binary
   if (is.null(binary_loc)) {
-    # binary_loc <- find_mailsend()
+    binary_loc <- find_binary("mailsend-go")
+    if (is.null(binary_loc)) {
+      stop("The binary file `mailsend-go` is not in the system path or \n",
+           "in the working directory:\n",
+           " * install `mailsend-go` using the instructions at ",
+           "https://github.com/muquit/mailsend-go#downloading-and-installing",
+           call. = FALSE)
+    }
   }
 
   # Write the inlined HTML message out to a file
