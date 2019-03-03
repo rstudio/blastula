@@ -132,25 +132,6 @@ smtp_send <- function(email,
       )
   }
 
-  # Send text email
-  processx::run(
-    command = binary_loc,
-    args = c(
-      "-sub", subject,
-      "-smtp", credentials$host,
-      "-port", credentials$port,
-      ifelse(credentials$use_ssl, "-ssl", ""),
-      "auth",
-        "-user", credentials$user, "-pass", credentials$password,
-      "-fname", credentials$sender,
-      "-from", from,
-      "-to", to,
-      "-cc", cc,
-      "-bcc", bcc,
-      "attach",
-        "-file", "message_inlined.html",
-        "-mime-type", "text/html",
-        "-inline"
   # Set the `ssl` flag depending on the options provided
   if (credentials$use_ssl) {
     ssl_opt <- no_options()
@@ -183,6 +164,10 @@ smtp_send <- function(email,
       #   "-mime-type", "image/png",
       #   "-inline"
     )
+  # Send out email via `processx::run()`
+  processx::run(
+    command = binary_loc,
+    args = run_args,
     echo = echo,
     echo_cmd = echo_cmd
   )
