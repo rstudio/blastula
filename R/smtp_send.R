@@ -172,18 +172,19 @@ smtp_send <- function(email,
     prune_args() %>%
     create_args_opts_vec()
 
-  # Send out email via `processx::run()`
-  processx::run(
-    command = binary_loc,
-    args = run_args,
-    echo = echo,
-    echo_cmd = echo_cmd
-  )
+  # Send out email via `processx::run()` and
+  # assign the result
+  send_result <-
+    processx::run(
+      command = binary_loc,
+      args = run_args,
+      echo = echo,
+      echo_cmd = echo_cmd
+    )
 
-  # Remove the `message_inlined.html` file
-  if (file.exists("message_inlined.html")) {
-    file.remove("message_inlined.html")
+  if (send_result$status == 0) {
+    message("The email message was sent successfully.\n")
+  } else {
+    message("The email message was NOT successfully sent.\n")
   }
 }
-
-
