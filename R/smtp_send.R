@@ -20,16 +20,6 @@
 #'   carbon copies. Any email addresses provided here will receive the message
 #'   and these email addresses will be concealed from other recipients
 #'   (including others on the BCC list).
-#' @param attachments A vector of paths to files to be attached to the email.
-#' @param attach_mime_types An optional vector of mime types to use for each of
-#'   the attachments specified in \code{attachments}. If not provided, mime
-#'   types will be assigned based on file extensions.
-#' @param attach_encodings An optional vector of encoding types to use for each
-#'   of the attachments specified in \code{attachments}. Options are
-#'   \code{base64}, \code{7bit}, \code{8bit}, or \code{none}.
-#' @param attach_dispositions An optional vector of disposition types for each
-#'   of the attachments specified in \code{attachments}. Options are
-#'   \code{inline} and \code{attachment}.
 #' @param creds_file An optional path to an email credentials file. This file
 #'   must be created by the \code{create_email_creds_file()} function.
 #' @param sender The sender name.
@@ -53,10 +43,6 @@ smtp_send <- function(email,
                       subject = NULL,
                       cc = NULL,
                       bcc = NULL,
-                      attachments = NULL,
-                      attach_mime_types = NULL,
-                      attach_encodings = NULL,
-                      attach_dispositions = NULL,
                       creds_file = NULL,
                       sender = NULL,
                       host = NULL,
