@@ -80,6 +80,9 @@ smtp_send <- function(email,
   email$html_str %>%
     writeLines(con = "message_inlined.html")
 
+  # Remove the file after the function exits
+  on.exit(file.remove("message_inlined.html"))
+
   # Handle a subject line that's not provided and use
   # `glue::glue()` for customizing a given `subject`
   if (is.null(subject)) {
