@@ -8,26 +8,19 @@ Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://
 [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
 Sometimes we need to send out email messages based on the results of
-automated analytical processes. The **blastula** package makes it easy to
-send out HTML emails from R that are easier on the eyes. In
-doing so, we can take advantage of both **Markdown** and R code when
+automated analysis processes. The **blastula** package makes it easy to
+send out HTML emails from R that are a little bit easier on the eyes. In
+doing so we can take advantage of both **Markdown** and R code when
 composing our email text.
 
 ### Installation Requirements
 
-The **blastula** package requires the availability of `openssl`.
-
-On OS X, it is recommended that homebrew be used to install `openssl`:
-
-    brew install openssl
-
-On RHEL, Fedora, or CentOS, `openssl-devel` is necessary:
-
-    sudo yum install openssl-devel
-
-With Ubuntu or Debian, we need `libssl-dev`:
-
-    sudo apt-get install -y libssl-dev
+Blastula is moving toward using a new binary for smtp mailing.
+Installation instructions can be found at the [muquit / mailsend-go
+repository](https://github.com/muquit/mailsend-go#downloading-and-installing).
+Once the `mailsend-go` binary is installed and on the system path, we
+can use the new `smtp_send()` function for sending email. The other
+function for sending email (`smtp_send()`) will be deprecated.
 
 ### Sending an email message
 
@@ -41,8 +34,7 @@ These four functions can help us do just that:
     `email_message`-class object
   - `preview_email()`: makes the email message created by
     `compose_email()` viewable in the **RStudio** Viewer
-  - `send_email_out()`: sends the HTML-based email to one or more
-    recipients
+  - `smtp_send()`: sends the HTML-based email to one or more recipients
   - `create_email_creds_file()`: generates an optional on-disk file with
     email credentials
 
@@ -60,7 +52,7 @@ the message body. These are:
 When you compose an email, you can put character objects from the global
 workspace into the message content. Here, I’ll create a nicely formatted
 date/time string (`current_date_time`) with the package’s
-`add_readable_time()` function, and assign a link to a web image to an
+`add_readable_time()` function, and, assign a link to an web image to an
 object (`img_link`).
 
 ``` r
@@ -93,7 +85,7 @@ We can also supply variables in the `compose_email()` function directly.
 For example, the `{sender}` part references an object *not* in the
 global workspace. Rather, it refers the named argument `sender = "Mike"`
 in the function call. The order of searching is from within the function
-first, then the search moves to variables in the global environment.
+first, then, the search moves to variables in the global environment.
 
 ``` r
 library(blastula)
@@ -124,7 +116,7 @@ but won’t introduce line breaks or new paragraphs. I recommend
 formatting like above with few indents so as not to induce the
 `quote`-type formatting. Any literal quotation marks should be escaped
 using a single `\`. Blank lines separating blocks of text result in new
-paragraphs. And again, any valid R code can be enclosed inside `{...}`
+paragraphs. And, again, any valid R code can be enclosed inside `{...}`
 (e.g., `{Sys.Date()}`).
 
 After creating the email message, you’ll most certainly want to look at
@@ -155,7 +147,7 @@ create_email_creds_file(
   host = "smtp.blastula.org",
   port = 465,
   sender = "correspondences@blastula.org",
-  creds_file_name = "~/.e_creds")
+  creds_file_name = "~/.e_creds)
 ```
 
 You can also use preset SMTP settings. For example, if you’d like to
@@ -181,26 +173,27 @@ first change account settings to let less secure apps use your account.
 Details on how to make this account-level change can be found in [this
 support document](https://support.google.com/accounts/answer/6010255).
 
-Having generated that file, you can use the `send_email_out()` function
-to send the email. I sent the email just to myself but do note that the
+Having generated that file, you can use the `smtp_send()` function to
+send the email. I sent the email just to myself but do note that the
 `to` argument can accept a vector of email addresses for mass mailings.
 Alternatively, one can set a number of environment variables and use
 `Sys.getenv()` calls for email credentials arguments in the
-`send_email_out()` statement.
+`smtp_send()` statement.
 
 ``` r
 library(blastula)
 
 # Sending email using a credentials file
-send_email_out(
+smtp_send(
   message = email_object,
   from = "mike@smile.de",
   to = "riannone@me.com",
   subject = "This is NOT junk mail.",
-  creds_file = "~/.e_creds")
+  creds_file = "~/.e_creds"
+  )
   
 # Sending email using environment variables
-send_email_out(
+smtp_send(
   message = email_object,
   from = "mike@smile.de",
   to = "riannone@me.com",
@@ -209,7 +202,8 @@ send_email_out(
   host = Sys.getenv("BLS_HOST"),
   port = Sys.getenv("BLS_PORT"),
   user = Sys.getenv("BLS_USER_NAME"),
-  password = Sys.getenv("BLS_PASSWORD"))
+  password = Sys.getenv("BLS_PASSWORD")
+  )
 ```
 
 This is how the message appeared when received in the email client:
