@@ -61,3 +61,16 @@ be printed to the console during the sending of email.}
 \description{
 Send an email message to one or more recipients via an SMTP server.
 }
+\examples{
+\\notrun{
+# Prepare a test message and send
+# the email out with `smtp_send()`
+prepare_test_message() \%>\%
+  smtp_send(
+    from = "sender@mail.com",
+    to = "recipient@mail.com",
+    subject = "Mail Subject",
+    creds_file = ".mail_creds"
+  )
+}
+}
