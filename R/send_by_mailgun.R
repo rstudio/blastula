@@ -70,23 +70,16 @@ send_by_mailgun <- function(message,
   # Collapse vector of recipients to a single string
   recipients <- paste(recipients, collapse = ", ")
 
-  # If the `httr` package is available, then
-  #   post the message to Mailgun
-  if (requireNamespace("httr", quietly = TRUE)) {
-
-    # Post the message to Mailgun
-    httr::POST(
-      url = url,
-      authenticate("api", api_key),
-      encode = "form",
-      body = list(
-        from = from,
-        to = recipients,
-        subject = subject,
-        html = message$html_html))
-  } else {
-    message("The `httr` package is required to use the `send_by_mailgun()` function.")
-  }
+  # Post the message to Mailgun
+  httr::POST(
+    url = url,
+    authenticate("api", api_key),
+    encode = "form",
+    body = list(
+      from = from,
+      to = recipients,
+      subject = subject,
+      html = message$html_html))
 
   # nocov end
 }
