@@ -8,3 +8,4 @@
 ^inst/win$
 ^inst/linux$
 ^README\.Rmd$
+^\.httr-oauth$
