@@ -4,7 +4,6 @@
 \alias{\%>\%}
 \title{The magrittr pipe}
 \description{
-blastula uses the pipe function, \code{\%>\%}
-to turn function composition into a series of
-imperative statements.
+blastula uses the pipe function, \code{\\\%>\\\%} to turn function composition into a
+series of imperative statements.
 }

@@ -11,7 +11,7 @@ add_image(file)
 }
 \value{
 a character object with an HTML fragment that can be placed inside
-  the message body wherever the image should appear.
+the message body wherever the image should appear.
 }
 \description{
 Add a local image inside the body of the email with this helper function.

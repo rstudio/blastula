@@ -16,7 +16,7 @@ Options are \code{center} (the default), \code{left}, and \code{right}.}
 }
 \value{
 a character object with an HTML fragment that can be placed inside
-  the message body wherever the CTA button should appear.
+the message body wherever the CTA button should appear.
 }
 \description{
 Add a call to action button inside the body of the email with this helper

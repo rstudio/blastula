@@ -27,16 +27,16 @@ HTML title text which may appear in limited circumstances.}
 \code{footer}, and \code{preheader_text} string data.}
 }
 \value{
-an \code{email_message} object, which can be used for previewing with
-  the \code{preview_email()} function or for sending out actual emails with
-  the \code{send_email_out()} function.
+an \code{email_message} object, which can be used for previewing with the
+\code{preview_email()} function or for sending out actual emails with the
+\code{send_email_out()} function.
 }
 \description{
 Create an email message. String interpolation is possible for the text
 comprising the email body, footer, and preheader text. This is done by using
 curly braces to enclose R code chunks. Variables can be specified in the
-function call (using named arguments with \code{...}), and any variables not
-found in \code{...} will be searched for in the global environment.
+function call (using named arguments with \code{...}), and any variables not found
+in \code{...} will be searched for in the global environment.
 }
 \examples{
 # Create a simple email message using

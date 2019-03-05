@@ -18,7 +18,7 @@ should be included.}
 }
 \value{
 a character object that can be placed inside any message component
-  message wherever the function is called.
+message wherever the function is called.
 }
 \description{
 Add a nicely-formatted date/time string inside the body of the email with

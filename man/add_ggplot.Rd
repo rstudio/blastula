@@ -7,7 +7,7 @@
 add_ggplot(plot_object, width = 5, height = 5)
 }
 \arguments{
-\item{plot_object}{the ggplot plot object.}
+\item{plot_object}{the \code{ggplot2} plot object.}
 
 \item{width}{the width of the output plot in inches.}
 
@@ -15,7 +15,7 @@ add_ggplot(plot_object, width = 5, height = 5)
 }
 \value{
 a character object with an HTML fragment that can be placed inside
-  the message body wherever the plot image should appear.
+the message body wherever the plot image should appear.
 }
 \description{
 Add an ggplot plot inside the body of the email with this helper function.
