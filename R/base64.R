@@ -1,4 +1,6 @@
-# Encode a raw string to a Base64 string
+#' Encode a raw string to a Base64 string
+#' @param raw The raw string to encode.
+#' @noRd
 encode_base64 <- function(raw) {
 
   b64 <- c(LETTERS, letters, 0:9, "+", "/")
@@ -36,7 +38,7 @@ encode_base64 <- function(raw) {
   paste(res[!is.na(res)], collapse = "")
 }
 
-#' Helper to set the MIME type
+#' Helper function that sets the MIME type
 #' @param file A file name with an extension.
 #' @importFrom tools file_ext
 #' @noRd
@@ -54,8 +56,9 @@ get_mime_type <- function(file) {
     paste("image", extension, sep = "/"))
 }
 
-# Get an image URI from an on-disk graphics file
-# as a Base64-encoded image string
+#' Get an Base64 image URI from an on-disk graphics file
+#' @param file The graphics file.
+#' @noRd
 get_image_uri <- function(file) {
 
   image_raw <-
