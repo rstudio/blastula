@@ -34,7 +34,7 @@
 #' @param echo_cmd A logical value indicating whether the system command should
 #'   be printed to the console during the sending of email.
 #' @examples
-#' \notrun{
+#' \dontrun{
 #' # Prepare a test message and send
 #' # the email out with `smtp_send()`
 #' prepare_test_message() %>%
