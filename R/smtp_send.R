@@ -33,6 +33,18 @@
 #' @param echo An option to print the standard output and error to the screen.
 #' @param echo_cmd A logical value indicating whether the system command should
 #'   be printed to the console during the sending of email.
+#' @examples
+#' \notrun{
+#' # Prepare a test message and send
+#' # the email out with `smtp_send()`
+#' prepare_test_message() %>%
+#'   smtp_send(
+#'     from = "sender@mail.com",
+#'     to = "recipient@mail.com",
+#'     subject = "Mail Subject",
+#'     creds_file = ".mail_creds"
+#'   )
+#' }
 #' @importFrom glue glue
 #' @importFrom dplyr tibble bind_cols pull
 #' @importFrom tidyr unite
