@@ -2,19 +2,19 @@
 % Please edit documentation in R/add_ggplot.R
 \name{add_ggplot}
 \alias{add_ggplot}
-\title{Helper function for adding an ggplot}
+\title{Create an HTML fragment for an embedded ggplot image}
 \usage{
 add_ggplot(plot_object, width = 5, height = 5)
 }
 \arguments{
-\item{plot_object}{the \code{ggplot2} plot object.}
+\item{plot_object}{The \code{ggplot2} plot object.}
 
-\item{width}{the width of the output plot in inches.}
+\item{width}{The width of the output plot in inches.}
 
-\item{height}{the height of the output plot in inches.}
+\item{height}{The height of the output plot in inches.}
 }
 \value{
-a character object with an HTML fragment that can be placed inside
+A character object with an HTML fragment that can be placed inside
 the message body wherever the plot image should appear.
 }
 \description{

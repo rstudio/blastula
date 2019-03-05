@@ -7,12 +7,14 @@
 prepare_test_message(incl_ggplot = FALSE, incl_image = FALSE)
 }
 \arguments{
-\item{incl_ggplot}{an option to include a ggplot plot within the body of the
-test message. This requires that the ggplot2 package is installed. By
-default, this is FALSE.}
+\item{incl_ggplot}{An option to include a ggplot plot within the body of the
+test message. This requires that the \code{ggplot2`` package is installed. By default, this is }FALSE`.}
 
-\item{incl_image}{an option to include a test image within the body of the
+\item{incl_image}{An option to include a test image within the body of the
 test message. By default, this is FALSE.}
+}
+\value{
+An \code{email_message} object.
 }
 \description{
 Create an email test message object, which is helpful for sending a test

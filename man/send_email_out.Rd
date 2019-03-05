@@ -13,71 +13,71 @@ send_email_out(message, from, to, subject = NULL, cc = NULL,
   debug = FALSE)
 }
 \arguments{
-\item{message}{the email message object, as created by the
+\item{message}{The email message object, as created by the
 \code{compose_email()} function. The object's class is \code{email_message}}
 
-\item{from}{the email address of the sender. This does not have to be the
+\item{from}{The email address of the sender. This does not have to be the
 same email that is associated with the account actually sending the
 message.}
 
-\item{to}{a vector of email addresses serving as primary recipients for the
+\item{to}{A vector of email addresses serving as primary recipients for the
 message. For secondary recipients, use the \code{cc} and \code{bcc}
 arguments.}
 
-\item{subject}{the subject of the message, which is usually a brief summary
+\item{subject}{The subject of the message, which is usually a brief summary
 of the topic of the message.}
 
-\item{cc}{a vector of email addresses for sending the message as a carbon
+\item{cc}{A vector of email addresses for sending the message as a carbon
 copy. This list of for those who are to receive a copy of a message
 addressed primarily to another. The list of recipients in the CC list is
 visible to all other recipients of the message.}
 
-\item{bcc}{a vector of email addresses for sending the message as blind
+\item{bcc}{A vector of email addresses for sending the message as blind
 carbon copies. Any email addresses provided here will receive the message
 and these email addresses will be concealed from other recipients
 (including others on the BCC list).}
 
-\item{attachments}{a vector of paths to files to be attached to the email.}
+\item{attachments}{A vector of paths to files to be attached to the email.}
 
-\item{attach_mime_types}{an optional vector of mime types to use for each of
+\item{attach_mime_types}{An optional vector of mime types to use for each of
 the attachments specified in \code{attachments}. If not provided, mime
 types will be assigned based on file extensions.}
 
-\item{attach_encodings}{an optional vector of encoding types to use for each
+\item{attach_encodings}{An optional vector of encoding types to use for each
 of the attachments specified in \code{attachments}. Options are
 \code{base64}, \code{7bit}, \code{8bit}, or \code{none}.}
 
-\item{attach_dispositions}{an optional vector of disposition types for each
+\item{attach_dispositions}{An optional vector of disposition types for each
 of the attachments specified in \code{attachments}. Options are
 \code{inline} and \code{attachment}.}
 
-\item{creds_file}{an optional path to an email credentials file. This file
+\item{creds_file}{An optional path to an email credentials file. This file
 must be created by the \code{create_email_creds_file()} function.}
 
-\item{sender}{the sender name.}
+\item{sender}{The sender name.}
 
-\item{host}{the email host.}
+\item{host}{The email host.}
 
-\item{port}{the port associated with the email account.}
+\item{port}{The port associated with the email account.}
 
-\item{user}{the username associated with the email account.}
+\item{user}{The username associated with the email account.}
 
-\item{password}{the password associated with the email account.}
+\item{password}{The password associated with the email account.}
 
-\item{use_ssl}{a logical value to indicate whether to use SSL.}
+\item{use_ssl}{A logical value to indicate whether to use SSL.}
 
-\item{use_tls}{a logical value to indicate whether to use TLS.}
+\item{use_tls}{A logical value to indicate whether to use TLS.}
 
-\item{authenticate}{a logical value to indicate whether to use
+\item{authenticate}{A logical value to indicate whether to use
 authentication.}
 
-\item{ehlo}{a logical value to indicate whether to force an EHLO command
+\item{ehlo}{A logical value to indicate whether to force an EHLO command
 after connection to the SMTP host.}
 
-\item{verbose}{a logical value indicating whether verbose messages should be
+\item{verbose}{A logical value indicating whether verbose messages should be
 printed to the console during sending of email.}
 
-\item{debug}{a logical value to indicate whether the mail sending statement
+\item{debug}{A logical value to indicate whether the mail sending statement
 should be printed to the console. No emails are sent when debug is set to
 \code{TRUE}.}
 }

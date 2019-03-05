@@ -2,22 +2,22 @@
 % Please edit documentation in R/add_readable_time.R
 \name{add_readable_time}
 \alias{add_readable_time}
-\title{Helper function for adding a humanized date/time}
+\title{Create an HTML fragment for a humanized date/time}
 \usage{
 add_readable_time(use_date = TRUE, use_time = TRUE, use_tz = TRUE)
 }
 \arguments{
-\item{use_date}{a logical value that indicates whether the current date
+\item{use_date}{A logical value that indicates whether the current date
 should be included.}
 
-\item{use_time}{a logical value that indicates whether the current time
+\item{use_time}{A logical value that indicates whether the current time
 should be included.}
 
-\item{use_tz}{a logical value that indicates whether the locale's time zone
+\item{use_tz}{A logical value that indicates whether the locale's time zone
 should be included.}
 }
 \value{
-a character object that can be placed inside any message component
+A character object that can be placed inside any message component
 message wherever the function is called.
 }
 \description{

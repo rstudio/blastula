@@ -2,16 +2,16 @@
 % Please edit documentation in R/add_cta_button.R
 \name{add_cta_button}
 \alias{add_cta_button}
-\title{Helper function for adding a CTA button}
+\title{Create an HTML fragment for a CTA button}
 \usage{
 add_cta_button(url, text, align = "center")
 }
 \arguments{
-\item{url}{a URL for the button.}
+\item{url}{A URL for the button.}
 
-\item{text}{the text that is placed atop the CTA button.}
+\item{text}{The text that is placed atop the CTA button.}
 
-\item{align}{the alignment of the button inside the main content area.
+\item{align}{The alignment of the button inside the main content area.
 Options are \code{center} (the default), \code{left}, and \code{right}.}
 }
 \value{

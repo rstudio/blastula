@@ -7,7 +7,7 @@
 preview_email(email)
 }
 \arguments{
-\item{email}{an \code{email_message} object.}
+\item{email}{An \code{email_message} object.}
 }
 \description{
 Preview an HTML email in the Viewer before sending it out.

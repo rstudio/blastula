@@ -2,41 +2,42 @@
 % Please edit documentation in R/compose_email.R
 \name{compose_email}
 \alias{compose_email}
-\title{Create the email message}
+\title{Create the email message body}
 \usage{
 compose_email(body = NULL, footer = NULL, .preheader_text = NULL,
   .title = NULL, .envir = parent.frame(), ...)
 }
 \arguments{
-\item{body}{the main body of text for the email message. Markdown can be used
+\item{body}{The main body of text for the email message. Markdown can be used
 here (along with string interpolation via curly braces and named arguments)
 to construct the main text.}
 
-\item{footer}{the footer text for the email message. As with the \code{body},
+\item{footer}{The footer text for the email message. As with the \code{body},
 Markdown and string interpolation can be used here.}
 
-\item{.preheader_text}{text that appears before the subject in some email
+\item{.preheader_text}{The text that appears before the subject in some email
 clients. This must be plaintext.}
 
-\item{.title}{the title of the email message. This is not the subject but the
+\item{.title}{The title of the email message. This is not the subject but the
 HTML title text which may appear in limited circumstances.}
 
-\item{.envir}{allows for setting the environment.}
+\item{.envir}{An opportunity to specify the environment. By default, this is
+the \code{parent.frame()}.}
 
-\item{...}{expression strings for string interpolation for the \code{body},
+\item{...}{Expression strings for string interpolation for the \code{body},
 \code{footer}, and \code{preheader_text} string data.}
 }
 \value{
-an \code{email_message} object, which can be used for previewing with the
-\code{preview_email()} function or for sending out actual emails with the
-\code{send_email_out()} function.
+An \code{email_message} object.
 }
 \description{
-Create an email message. String interpolation is possible for the text
-comprising the email body, footer, and preheader text. This is done by using
-curly braces to enclose R code chunks. Variables can be specified in the
-function call (using named arguments with \code{...}), and any variables not found
-in \code{...} will be searched for in the global environment.
+The \code{compose_email()} function allows us to easily create an email message
+body. We can use \code{glue}'s string interpolation semantics to incorporate
+external objects or evaluate R code within the message body, the footer, and
+the preheader text (using curly braces to enclose such R expressions). Local
+variables can be specified in the function call (using named arguments with
+\code{...}) and any variables not found in \code{...} will be searched for in the
+global environment.
 }
 \examples{
 # Create a simple email message using
@@ -56,8 +57,8 @@ email <-
   Cheers")
 
 # The email message can always be
-# previewed using `preview_email()`
-preview_email(email = email)
+# previewed by calling the object
+email
 
 # We can use string interpolation to
 # add in R code or strings assigned
@@ -65,7 +66,7 @@ preview_email(email = email)
 # obtained from the global workspace
 # or from temporary variables in the
 # function call
-sender_name <- "Mike"
+sender_name <- "Shelly"
 
 email <-
   compose_email(

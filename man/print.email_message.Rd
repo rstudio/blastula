@@ -7,7 +7,7 @@
 \method{print}{email_message}(x, ...)
 }
 \arguments{
-\item{x}{an \code{email_message} object.}
+\item{x}{An \code{email_message} object.}
 }
 \description{
 This function will provide a preview of the email message.

@@ -2,15 +2,15 @@
 % Please edit documentation in R/add_image.R
 \name{add_image}
 \alias{add_image}
-\title{Helper function for adding an image}
+\title{Create an HTML fragment for an embedded image}
 \usage{
 add_image(file)
 }
 \arguments{
-\item{file}{a path to an image file.}
+\item{file}{A path to an image file.}
 }
 \value{
-a character object with an HTML fragment that can be placed inside
+A character object with an HTML fragment that can be placed inside
 the message body wherever the image should appear.
 }
 \description{
