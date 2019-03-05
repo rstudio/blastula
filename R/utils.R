@@ -196,12 +196,50 @@ find_binary <- function(bin_name) {
   NULL
 }
 
-#' A slighly more sensible version of `gsub()`
-#' @param x The text to be transformed.
-#' @param pattern The regex pattern.
-#' @param replacement A replacement for the matched pattern.
+#' Upload an image to Imgur and return the response
+#' @importFrom httr POST add_headers upload_file stop_for_status content
+#' @importFrom xml2 as_list read_xml
 #' @noRd
-tidy_gsub <- function(x, pattern, replacement) {
+imgur_upload <- function(file, client_id) {
 
-  gsub(pattern, replacement, x)
+  response <-
+    httr::POST(
+      "https://api.imgur.com/3/image.xml",
+      config = httr::add_headers(
+        Authorization = paste("Client-ID", client_id)),
+      body = list(image = httr::upload_file(file))
+    )
+
+  # Convert HTTP error to a `stop()` message if return
+  # status isn't favorable
+  httr::stop_for_status(response, "upload to Imgur.")
+
+  # Get response content as raw bytes
+  result <-
+    (httr::content(response, as = "raw") %>%
+       xml2::read_xml() %>%
+       xml2::as_list()
+    )[[1]]
+
+  # If we get a `NULL` in the `link` field, then
+  # the image didn't get uploaded to Imgur
+  if (is.null(result$link[[1]])) {
+
+    stop(paste0("The image (", file ,") has failed to upload."),
+         call. = FALSE)
+  }
+
+  # Create a simplified list object from
+  # the result
+  list(
+    id = result$id[[1]],
+    link = result$link[[1]],
+    type = result$type[[1]],
+    anim = ifelse(result$animated[[1]] == "true", TRUE, FALSE),
+    width = result$width[[1]] %>% as.numeric(),
+    height = result$height[[1]] %>% as.numeric(),
+    size = result$size[[1]] %>% as.numeric()
+  )
 }
+
+# nocov end
