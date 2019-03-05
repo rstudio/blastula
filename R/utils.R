@@ -152,6 +152,18 @@ create_args_opts_vec <- function(run_args) {
   run_args_vec
 }
 
+#' A slighly more sensible version of `gsub()`
+#' @param x The text to be transformed.
+#' @param pattern The regex pattern.
+#' @param replacement A replacement for the matched pattern.
+#' @noRd
+tidy_gsub <- function(x, pattern, replacement) {
+
+  gsub(pattern, replacement, x)
+}
+
+# nocov start
+
 #' Find a binary on the system path or working directory
 #' @param bin_name The name of the binary to search for
 #' @importFrom processx run
