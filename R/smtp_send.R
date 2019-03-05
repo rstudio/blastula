@@ -158,10 +158,6 @@ smtp_send <- function(email,
       `-file` = "message_inlined.html",
       `-mime-type` = "text/html",
       `-inline` = no_options()
-      # "attach",
-      #   "-file", "image.png",
-      #   "-mime-type", "image/png",
-      #   "-inline"
     )
 
   # Clean up arguments and options; create the
