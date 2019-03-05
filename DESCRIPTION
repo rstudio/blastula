@@ -23,14 +23,15 @@ Imports:
     dplyr (>= 0.8.0.1),
     glue (>= 1.2.0),
     htmltools (>= 0.3.6),
+    httr (>= 1.4.0),
     magrittr (>= 1.5),
     processx (>= 3.2.1),
     stringr (>= 1.4.0),
-    tidyr (>= 0.8.2)
+    tidyr (>= 0.8.2),
+    xml2 (>= 2.2.0)
 Suggests: 
     covr,
     ggplot2,
-    httr,
     testthat
 Encoding: UTF-8
 LazyData: true
