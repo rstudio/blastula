@@ -183,3 +183,13 @@ find_binary <- function(bin_name) {
   # return `NULL`
   NULL
 }
+
+#' A slighly more sensible version of `gsub()`
+#' @param x The text to be transformed.
+#' @param pattern The regex pattern.
+#' @param replacement A replacement for the matched pattern.
+#' @noRd
+tidy_gsub <- function(x, pattern, replacement) {
+
+  gsub(pattern, replacement, x)
+}
