@@ -28,7 +28,7 @@ Imports:
     processx (>= 3.2.1),
     stringr (>= 1.4.0),
     tidyr (>= 0.8.2),
-    xml2 (>= 2.2.0)
+    xml2 (>= 1.2.0)
 Suggests: 
     covr,
     ggplot2,
