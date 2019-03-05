@@ -1,10 +1,10 @@
-#' Helper function for adding an ggplot
+#' Create an HTML fragment for an embedded ggplot image
 #'
 #' Add an ggplot plot inside the body of the email with this helper function.
-#' @param plot_object the ggplot plot object.
-#' @param height the height of the output plot in inches.
-#' @param width the width of the output plot in inches.
-#' @return a character object with an HTML fragment that can be placed inside
+#' @param plot_object The `ggplot2` plot object.
+#' @param height The height of the output plot in inches.
+#' @param width The width of the output plot in inches.
+#' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the plot image should appear.
 #' @examples
 #' library(ggplot2)
