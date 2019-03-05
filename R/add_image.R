@@ -1,8 +1,8 @@
-#' Helper function for adding an image
+#' Create an HTML fragment for an embedded image
 #'
 #' Add a local image inside the body of the email with this helper function.
-#' @param file a path to an image file.
-#' @return a character object with an HTML fragment that can be placed inside
+#' @param file A path to an image file.
+#' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
 #' @examples
 #' # Create an HTML fragment that

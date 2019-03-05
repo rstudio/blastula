@@ -1,12 +1,13 @@
 #' Prepare a email test message object
 #'
 #' Create an email test message object, which is helpful for sending a test
-#' message with the \code{send_email_out()} function.
-#' @param incl_ggplot an option to include a ggplot plot within the body of the
-#' test message. This requires that the ggplot2 package is installed. By
-#' default, this is FALSE.
-#' @param incl_image an option to include a test image within the body of the
-#' test message. By default, this is FALSE.
+#' message with the `send_email_out()` function.
+#' @param incl_ggplot An option to include a ggplot plot within the body of the
+#'   test message. This requires that the `ggplot2`` package is installed. By
+#'   default, this is `FALSE`.
+#' @param incl_image An option to include a test image within the body of the
+#'   test message. By default, this is FALSE.
+#' @return An `email_message` object.
 #' @examples
 #' \dontrun{
 #' # Create a credentials file to

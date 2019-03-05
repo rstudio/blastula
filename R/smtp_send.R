@@ -2,14 +2,13 @@
 #'
 #' Send an email message to one or more recipients via an SMTP server.
 #'
-#' @param email The email message object, as created by the
-#'   \code{compose_email()} function. The object's class is \code{email_message}
+#' @param email The email message object, as created by the `compose_email()`
+#'   function. The object's class is `email_message`
 #' @param from The email address of the sender. This does not have to be the
 #'   same email that is associated with the account actually sending the
 #'   message.
 #' @param to A vector of email addresses serving as primary recipients for the
-#'   message. For secondary recipients, use the \code{cc} and \code{bcc}
-#'   arguments.
+#'   message. For secondary recipients, use the `cc` and `bcc` arguments.
 #' @param subject The subject of the message, which is usually a brief summary
 #'   of the topic of the message.
 #' @param cc A vector of email addresses for sending the message as a carbon
@@ -21,7 +20,7 @@
 #'   and these email addresses will be concealed from other recipients
 #'   (including others on the BCC list).
 #' @param creds_file An optional path to an email credentials file. This file
-#'   must be created by the \code{create_email_creds_file()} function.
+#'   must be created by the `create_email_creds_file()` function.
 #' @param sender The sender name.
 #' @param host The email host.
 #' @param port The port associated with the email account.

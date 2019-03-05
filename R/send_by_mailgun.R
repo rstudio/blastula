@@ -2,15 +2,15 @@
 #'
 #' Send an email message via the Mailgun API. This requires an account with
 #' Mailgun.
-#' @param message the email message object, as created by the
-#'   \code{compose_email()} function. The object's class is \code{email_message}
-#' @param subject the subject of the email.
-#' @param from the email address of the sender. This does not have to be the
+#' @param message The email message object, as created by the `compose_email()`
+#'   function. The object's class is `email_message`
+#' @param subject The subject of the email.
+#' @param from The email address of the sender. This does not have to be the
 #'   same email that is associated with the account actually sending the
 #'   message.
-#' @param recipients a vector of email addresses.
-#' @param url the URL for the sending domain.
-#' @param api_key the API key registered to the Mailgun service.
+#' @param recipients A vector of email addresses.
+#' @param url The URL for the sending domain.
+#' @param api_key The API key registered to the Mailgun service.
 #' @examples
 #' \dontrun{
 #' # Create a simple email message using

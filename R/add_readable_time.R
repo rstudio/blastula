@@ -1,16 +1,16 @@
-#' Helper function for adding a humanized date/time
+#' Create an HTML fragment for a humanized date/time
 #'
 #' Add a nicely-formatted date/time string inside the body of the email with
 #' this helper function. This will insert the current date/time/tz based on the
 #' caller's locale information at the time of the call. There are options to
 #' specify whether the date, time, and time zone parts are to be included.
-#' @param use_date a logical value that indicates whether the current date
+#' @param use_date A logical value that indicates whether the current date
 #'   should be included.
-#' @param use_time a logical value that indicates whether the current time
+#' @param use_time A logical value that indicates whether the current time
 #'   should be included.
-#' @param use_tz a logical value that indicates whether the locale's time zone
+#' @param use_tz A logical value that indicates whether the locale's time zone
 #'   should be included.
-#' @return a character object that can be placed inside any message component
+#' @return A character object that can be placed inside any message component
 #'   message wherever the function is called.
 #' @importFrom glue glue
 #' @importFrom stringr str_squish
