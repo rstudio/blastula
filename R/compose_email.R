@@ -141,7 +141,8 @@ compose_email <- function(body = NULL,
     cid_names <- c()
     for (i in seq(extracted_images)) {
 
-      cid_name <- extracted_images[i] %>%
+      cid_name <-
+        extracted_images[i] %>%
         stringr::str_extract("cid=\".*?\"") %>%
         stringr::str_replace_all("(cid=\"|\")", "")
 
@@ -169,13 +170,14 @@ compose_email <- function(body = NULL,
     email_message <-
       c(email_message, list(images = extracted_images))
 
-    # Replace <img>...</img> tags with CID values
+    # Replace `<img>...</img>` tags with CID values
     for (i in seq(extracted_images)) {
       email_message$html_str <-
         email_message$html_str %>%
         stringr::str_replace(
           pattern = "<img cid=.*? src=\"data:image/(png|jpeg);base64,.*?\"",
-          replacement = paste0("<img src=\"cid:", cid_names[i], "\""))
+          replacement = paste0("<img src=\"cid:", cid_names[i], "\"")
+        )
     }
   }
 
