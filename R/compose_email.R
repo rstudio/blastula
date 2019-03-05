@@ -106,15 +106,15 @@ compose_email <- function(body = NULL,
   }
 
   html_preheader_text <-
-    stringr::str_replace_all(
+    tidy_gsub(
       commonmark::markdown_html(preheader_text), "\n", "")
 
   html_body_text <-
-    stringr::str_replace_all(
+    tidy_gsub(
       commonmark::markdown_html(body_text), "\n", "")
 
   html_footer_text <-
-    stringr::str_replace_all(
+    tidy_gsub(
       commonmark::markdown_html(footer_text), "\n", "")
 
   # Generate the email message body
