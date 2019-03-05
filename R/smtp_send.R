@@ -46,8 +46,6 @@
 #'   )
 #' }
 #' @importFrom glue glue
-#' @importFrom dplyr tibble bind_cols pull
-#' @importFrom tidyr unite
 #' @export
 smtp_send <- function(email,
                       from,
