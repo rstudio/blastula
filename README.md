@@ -5,7 +5,7 @@
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
 [![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
-## Blastula
+## blastula
 
 The **blastula** package makes it easy to produce and send HTML email
 from **R**. The message body can be highly customized with **Markdown**
@@ -16,14 +16,14 @@ text, the results of **R** expressions, and even raw HTML.
 Blastula is moving toward using a new binary for `smtp` mailing,
 provided by the **mailsend-go** project. This binary is cross-platform
 and works on Windows, macOS (via Homebrew), and Linux (Debian and RPM
-packages). Installation instructions can be found at the
+packages). Installation instructions can be found at
 [here](https://github.com/muquit/mailsend-go#downloading-and-installing).
 
 Once the `mailsend-go` binary is installed and on the system path, we
 can use the new `smtp_send()` function for sending email. The other
 function for sending email (`smtp_send()`) will undergo deprecation.
 
-### Sending an Email Message
+### Composing an Email Message Object
 
 Here’s an example that shows a basic workflow for composing the message,
 creating optional on-disk credentials for email, and sending out the
@@ -134,6 +134,8 @@ email_object
 
 <img src="man/figures/rstudio_preview_email.png">
 
+### Sending an Email Message
+
 We can store email credentials in a file using the
 `create_email_creds_file()` function. Here is an example showing how to
 create a credentials file as a hidden file in the working directory.
@@ -211,28 +213,30 @@ of email clients and webmail services.
 
 Blastula is moving toward using a new binary for `smtp` mailing,
 provided by the **mailsend-go** project. This binary is cross-platform
-and works on Windows, macOS (via Homebrew), and Linux (Debian and RPM
-packages). Installation instructions can be found at the
+and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux**
+(**Debian** and **RPM** packages). Installation instructions can be
+found at the
 [here](https://github.com/muquit/mailsend-go#downloading-and-installing).
 
 Once the `mailsend-go` binary is installed and on the system path, we
 can use the new `smtp_send()` function for sending email. The other
 function for sending email (`smtp_send()`) will undergo deprecation.
 
-Currently, the development version of the package (on GitHub) has the
-`smtp_send()` function.
+Currently, only the development version of the package (on **GitHub**)
+has the `smtp_send()` function.
 
 ### Notes on Sending Email through Gmail
 
 Before using **Gmail** to send out email through **blastula**, there is
-a key Gmail account setting that must changed from the default value. We
-have to allow *Less Secure Apps* to use your the Gmail account. Details
-on how to make this account-level change can be found in [this support
+a key **Gmail** account setting that must changed from the default
+value. We have to allow *Less Secure Apps* to use your the **Gmail**
+account. Details on how to make this account-level change can be found
+in [this support
 document](https://support.google.com/accounts/answer/6010255).
 
 ### Installation of the R package
 
-**blastula** is used in an R environment. If you don’t have an R
+**blastula** is used in an **R** environment. If you don’t have an **R**
 installation, it can be obtained from the [**Comprehensive R Archive
 Network (CRAN)**](https://cran.r-project.org/).
 
