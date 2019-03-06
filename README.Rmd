@@ -170,7 +170,7 @@ The underlying HTML/CSS is meant to display properly across a wide range of emai
 Blastula is moving toward using a new binary for `smtp` mailing, provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux** (**Debian** and **RPM** packages). Installation instructions
 can be found at the [here](https://github.com/muquit/mailsend-go#downloading-and-installing).
 
-Once the `mailsend-go` binary is installed and on the system path, we can use the new `smtp_send()` function for sending email. The other function for sending email  (`smtp_send()`) will undergo deprecation.
+Once the `mailsend-go` binary is installed and on the system path, we can use the new `smtp_send()` function for sending email. The other function for sending email  (`send_email_out()`) will undergo deprecation.
 
 Currently, only the development version of the package (on **GitHub**) has the `smtp_send()` function.
 

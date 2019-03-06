@@ -220,7 +220,8 @@ found at the
 
 Once the `mailsend-go` binary is installed and on the system path, we
 can use the new `smtp_send()` function for sending email. The other
-function for sending email (`smtp_send()`) will undergo deprecation.
+function for sending email (`send_email_out()`) will undergo
+deprecation.
 
 Currently, only the development version of the package (on **GitHub**)
 has the `smtp_send()` function.
