@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • blastula</title>
+<title>Deploy a local image to Imgur and create an image tag — add_imgur_image • blastula</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,15 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Deploy a local image to Imgur and create an image tag — add_imgur_image" />
+
+<meta property="og:description" content="Getting images into email message bodies (and expecting them to appear for
+the recipient) can be a harrowing experience. External images (i.e.,
+available at public URLs) work exceedingly well and most email clients will
+faithfully display these images. With the imgur_image() function, we can
+take a local image file or a ggplot2 plot object and send it to the Imgur
+service, and finally receive an image (&amp;lt;img&amp;gt;) tag that can be directly
+inserted into an email message using compose_email()." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -50,7 +58,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -102,53 +110,65 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/rich-iannone/blastula/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Deploy a local image to Imgur and create an image tag</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rich-iannone/blastula/blob/master/R/add_imgur_image.R'><code>R/add_imgur_image.R</code></a></small>
+    <div class="hidden name"><code>add_imgur_image.Rd</code></div>
     </div>
 
-    <div id="blastula-0-2-1" class="section level1">
-<h1 class="page-header">
-<a href="#blastula-0-2-1" class="anchor"></a>blastula 0.2.1<small> 2018-07-19 </small>
-</h1>
-<ul>
-<li><p>Moved local image URI data into list component, where references to image data are through CIDs</p></li>
-<li><p>Implemented internal functions for Base64-encoding of local images, removing dependency on knitr</p></li>
-</ul>
-</div>
-    <div id="blastula-0-2-0" class="section level1">
-<h1 class="page-header">
-<a href="#blastula-0-2-0" class="anchor"></a>blastula 0.2.0<small> 2018-03-27 </small>
-</h1>
-<ul>
-<li><p>Removed dependencies on Java; reworked <code><a href="../reference/send_email_out.html">send_email_out()</a></code> uses a cross-platform binary to send email message via SMTP</p></li>
-<li><p>Added the <code><a href="../reference/prepare_test_message.html">prepare_test_message()</a></code> function to create test email messages for testing purposes</p></li>
-<li><p>Added a <code>provider</code> argument to the <code><a href="../reference/create_email_creds_file.html">create_email_creds_file()</a></code> function to more easily configure SMTP settings in a credentials file</p></li>
-<li><p>Added the function <code><a href="../reference/add_readable_time.html">add_readable_time()</a></code> to allow for easy insertion of a readable version of the present time in a message</p></li>
-</ul>
-</div>
-    <div id="blastula-0-1" class="section level1">
-<h1 class="page-header">
-<a href="#blastula-0-1" class="anchor"></a>blastula 0.1<small> 2017-08-20 </small>
-</h1>
-<ul>
-<li><p>Added functions to compose (<code><a href="../reference/compose_email.html">compose_email()</a></code>), preview (<code><a href="../reference/preview_email.html">preview_email()</a></code>), and send (<code><a href="../reference/send_email_out.html">send_email_out()</a></code> and <code><a href="../reference/send_by_mailgun.html">send_by_mailgun()</a></code>) HTML email messages</p></li>
-<li><p>Added helper functions for inserting HTML fragments into the message body (<code><a href="../reference/add_cta_button.html">add_cta_button()</a></code>, <code><a href="../reference/add_image.html">add_image()</a></code>, and <code><a href="../reference/add_ggplot.html">add_ggplot()</a></code>)</p></li>
-<li><p>Added a function to help generate a secret credentials file for sending email through SMTP</p></li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    
+    <p>Getting images into email message bodies (and expecting them to appear for
+the recipient) can be a harrowing experience. External images (i.e.,
+available at public URLs) work exceedingly well and most email clients will
+faithfully display these images. With the <code>imgur_image()</code> function, we can
+take a local image file or a <code>ggplot2</code> plot object and send it to the Imgur
+service, and finally receive an image (<code>&lt;img&gt;</code>) tag that can be directly
+inserted into an email message using <code><a href='compose_email.html'>compose_email()</a></code>.</p>
+    
+    </div>
 
+    <pre class="usage"><span class='fu'>add_imgur_image</span>(<span class='no'>image</span>, <span class='kw'>client_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>image</th>
+      <td><p>The path to the local image we would like to deploy to Imgur and
+for which we'd like an image tag.</p></td>
+    </tr>
+    <tr>
+      <th>client_id</th>
+      <td><p>The Imgur Client ID value.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A character object with an HTML fragment that can be placed inside
+the message body wherever the image should appear.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>To take advantage of this, we need to first have an account with Imgur and
+then obtain a <code>Client-ID</code> key for the Imgur API. This can be easily done by
+going to <code>https://api.imgur.com/oauth2/addclient</code> and registering an
+application. Be sure to select the OAuth 2 authorization type without a
+callback URL.</p>
+    
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#blastula-0-2-1">0.2.1</a></li>
-        <li><a href="#blastula-0-2-0">0.2.0</a></li>
-        <li><a href="#blastula-0-1">0.1</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+          </ul>
+
+  </div>
 </div>
 
       <footer>

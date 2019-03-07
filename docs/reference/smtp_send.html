@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Send an email message — send_email_out • blastula</title>
+<title>Send an email message through SMTP — smtp_send • blastula</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Send an email message — send_email_out" />
+<meta property="og:title" content="Send an email message through SMTP — smtp_send" />
 
-<meta property="og:description" content="Send an email message to one or more recipients." />
+<meta property="og:description" content="Send an email message to one or more recipients via an SMTP server." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -104,32 +104,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Send an email message</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rich-iannone/blastula/blob/master/R/send_email_out.R'><code>R/send_email_out.R</code></a></small>
-    <div class="hidden name"><code>send_email_out.Rd</code></div>
+    <h1>Send an email message through SMTP</h1>
+    <small class="dont-index">Source: <a href='https://github.com/rich-iannone/blastula/blob/master/R/smtp_send.R'><code>R/smtp_send.R</code></a></small>
+    <div class="hidden name"><code>smtp_send.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Send an email message to one or more recipients.</p>
+    <p>Send an email message to one or more recipients via an SMTP server.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>send_email_out</span>(<span class='no'>message</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='kw'>subject</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bcc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attachments</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attach_mime_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>attach_encodings</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>attach_dispositions</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>smtp_send</span>(<span class='no'>email</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='kw'>subject</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>bcc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>creds_file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sender</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>host</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>port</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>user</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_ssl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>use_tls</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>authenticate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>ehlo</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>user</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>password</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use_ssl</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>authenticate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>binary_loc</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>echo</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>echo_cmd</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>message</th>
-      <td><p>The email message object, as created by the
-<code><a href='compose_email.html'>compose_email()</a></code> function. The object's class is <code>email_message</code></p></td>
+      <th>email</th>
+      <td><p>The email message object, as created by the <code><a href='compose_email.html'>compose_email()</a></code>
+function. The object's class is <code>email_message</code></p></td>
     </tr>
     <tr>
       <th>from</th>
@@ -140,8 +138,7 @@ message.</p></td>
     <tr>
       <th>to</th>
       <td><p>A vector of email addresses serving as primary recipients for the
-message. For secondary recipients, use the <code>cc</code> and <code>bcc</code>
-arguments.</p></td>
+message. For secondary recipients, use the <code>cc</code> and <code>bcc</code> arguments.</p></td>
     </tr>
     <tr>
       <th>subject</th>
@@ -161,28 +158,6 @@ visible to all other recipients of the message.</p></td>
 carbon copies. Any email addresses provided here will receive the message
 and these email addresses will be concealed from other recipients
 (including others on the BCC list).</p></td>
-    </tr>
-    <tr>
-      <th>attachments</th>
-      <td><p>A vector of paths to files to be attached to the email.</p></td>
-    </tr>
-    <tr>
-      <th>attach_mime_types</th>
-      <td><p>An optional vector of mime types to use for each of
-the attachments specified in <code>attachments</code>. If not provided, mime
-types will be assigned based on file extensions.</p></td>
-    </tr>
-    <tr>
-      <th>attach_encodings</th>
-      <td><p>An optional vector of encoding types to use for each
-of the attachments specified in <code>attachments</code>. Options are
-<code>base64</code>, <code>7bit</code>, <code>8bit</code>, or <code>none</code>.</p></td>
-    </tr>
-    <tr>
-      <th>attach_dispositions</th>
-      <td><p>An optional vector of disposition types for each
-of the attachments specified in <code>attachments</code>. Options are
-<code>inline</code> and <code>attachment</code>.</p></td>
     </tr>
     <tr>
       <th>creds_file</th>
@@ -214,39 +189,42 @@ must be created by the <code><a href='create_email_creds_file.html'>create_email
       <td><p>A logical value to indicate whether to use SSL.</p></td>
     </tr>
     <tr>
-      <th>use_tls</th>
-      <td><p>A logical value to indicate whether to use TLS.</p></td>
-    </tr>
-    <tr>
       <th>authenticate</th>
       <td><p>A logical value to indicate whether to use
 authentication.</p></td>
     </tr>
     <tr>
-      <th>ehlo</th>
-      <td><p>A logical value to indicate whether to force an EHLO command
-after connection to the SMTP host.</p></td>
+      <th>echo</th>
+      <td><p>An option to print the standard output and error to the screen.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>A logical value indicating whether verbose messages should be
-printed to the console during sending of email.</p></td>
-    </tr>
-    <tr>
-      <th>debug</th>
-      <td><p>A logical value to indicate whether the mail sending statement
-should be printed to the console. No emails are sent when debug is set to
-<code>TRUE</code>.</p></td>
+      <th>echo_cmd</th>
+      <td><p>A logical value indicating whether the system command should
+be printed to the console during the sending of email.</p></td>
     </tr>
     </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Prepare a test message and send</span>
+<span class='co'># the email out with `smtp_send()`</span>
+<span class='fu'><a href='prepare_test_message.html'>prepare_test_message</a></span>() <span class='kw'>%&gt;%</span>
+  <span class='fu'>smtp_send</span>(
+    <span class='kw'>from</span> <span class='kw'>=</span> <span class='st'>"sender@mail.com"</span>,
+    <span class='kw'>to</span> <span class='kw'>=</span> <span class='st'>"recipient@mail.com"</span>,
+    <span class='kw'>subject</span> <span class='kw'>=</span> <span class='st'>"Mail Subject"</span>,
+    <span class='kw'>creds_file</span> <span class='kw'>=</span> <span class='st'>".mail_creds"</span>
+  )
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

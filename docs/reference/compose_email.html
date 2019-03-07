@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create the email message — compose_email • blastula</title>
+<title>Create the email message body — compose_email • blastula</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,13 +30,17 @@
 
 
 
-<meta property="og:title" content="Create the email message — compose_email" />
+<meta property="og:title" content="Create the email message body — compose_email" />
 
-<meta property="og:description" content="Create an email message. String interpolation is possible for the text
-comprising the email body, footer, and preheader text. This is done by using
-curly braces to enclose R code chunks. Variables can be specified in the
-function call (using named arguments with ...), and any variables not
-found in ... will be searched for in the global environment." />
+<meta property="og:description" content="The compose_email() function allows us to easily create an email message
+body. We can use glue's string interpolation semantics to incorporate
+external objects or evaluate R code within the message body, the footer, and
+the preheader text (using curly braces to enclose such R expressions). Local
+variables can be specified in the function call (using named arguments with
+...) and any variables not found in ... will be searched for in the
+global environment." />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,18 +110,20 @@ found in ... will be searched for in the global environment." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create the email message</h1>
+    <h1>Create the email message body</h1>
     <small class="dont-index">Source: <a href='https://github.com/rich-iannone/blastula/blob/master/R/compose_email.R'><code>R/compose_email.R</code></a></small>
     <div class="hidden name"><code>compose_email.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create an email message. String interpolation is possible for the text
-comprising the email body, footer, and preheader text. This is done by using
-curly braces to enclose R code chunks. Variables can be specified in the
-function call (using named arguments with <code>...</code>), and any variables not
-found in <code>...</code> will be searched for in the global environment.</p>
+    <p>The <code>compose_email()</code> function allows us to easily create an email message
+body. We can use <code>glue</code>'s string interpolation semantics to incorporate
+external objects or evaluate R code within the message body, the footer, and
+the preheader text (using curly braces to enclose such R expressions). Local
+variables can be specified in the function call (using named arguments with
+<code>...</code>) and any variables not found in <code>...</code> will be searched for in the
+global environment.</p>
     
     </div>
 
@@ -129,41 +135,40 @@ found in <code>...</code> will be searched for in the global environment.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>body</th>
-      <td><p>the main body of text for the email message. Markdown can be used
+      <td><p>The main body of text for the email message. Markdown can be used
 here (along with string interpolation via curly braces and named arguments)
 to construct the main text.</p></td>
     </tr>
     <tr>
       <th>footer</th>
-      <td><p>the footer text for the email message. As with the <code>body</code>,
+      <td><p>The footer text for the email message. As with the <code>body</code>,
 Markdown and string interpolation can be used here.</p></td>
     </tr>
     <tr>
       <th>.preheader_text</th>
-      <td><p>text that appears before the subject in some email
+      <td><p>The text that appears before the subject in some email
 clients. This must be plaintext.</p></td>
     </tr>
     <tr>
       <th>.title</th>
-      <td><p>the title of the email message. This is not the subject but the
+      <td><p>The title of the email message. This is not the subject but the
 HTML title text which may appear in limited circumstances.</p></td>
     </tr>
     <tr>
       <th>.envir</th>
-      <td><p>allows for setting the environment.</p></td>
+      <td><p>An opportunity to specify the environment. By default, this is
+the <code><a href='https://www.rdocumentation.org/packages/base/topics/sys.parent'>parent.frame()</a></code>.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>expression strings for string interpolation for the <code>body</code>,
+      <td><p>Expression strings for string interpolation for the <code>body</code>,
 <code>footer</code>, and <code>preheader_text</code> string data.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an <code>email_message</code> object, which can be used for previewing with
-  the <code><a href='preview_email.html'>preview_email()</a></code> function or for sending out actual emails with
-  the <code><a href='send_email_out.html'>send_email_out()</a></code> function.</p>
+    <p>An <code>email_message</code> object.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -184,8 +189,8 @@ HTML title text which may appear in limited circumstances.</p></td>
   Cheers"</span>)
 
 <span class='co'># The email message can always be</span>
-<span class='co'># previewed using `preview_email()`</span>
-<span class='fu'><a href='preview_email.html'>preview_email</a></span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='no'>email</span>)
+<span class='co'># previewed by calling the object</span>
+<span class='no'>email</span>
 
 <span class='co'># We can use string interpolation to</span>
 <span class='co'># add in R code or strings assigned</span>
@@ -193,7 +198,7 @@ HTML title text which may appear in limited circumstances.</p></td>
 <span class='co'># obtained from the global workspace</span>
 <span class='co'># or from temporary variables in the</span>
 <span class='co'># function call</span>
-<span class='no'>sender_name</span> <span class='kw'>&lt;-</span> <span class='st'>"Mike"</span>
+<span class='no'>sender_name</span> <span class='kw'>&lt;-</span> <span class='st'>"Shelly"</span>
 
 <span class='no'>email</span> <span class='kw'>&lt;-</span>
   <span class='fu'>compose_email</span>(

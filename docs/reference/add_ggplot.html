@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function for adding an ggplot — add_ggplot • blastula</title>
+<title>Create an HTML fragment for an embedded ggplot image — add_ggplot • blastula</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,11 @@
 
 
 
-<meta property="og:title" content="Helper function for adding an ggplot — add_ggplot" />
+<meta property="og:title" content="Create an HTML fragment for an embedded ggplot image — add_ggplot" />
 
 <meta property="og:description" content="Add an ggplot plot inside the body of the email with this helper function." />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,7 +104,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function for adding an ggplot</h1>
+    <h1>Create an HTML fragment for an embedded ggplot image</h1>
     <small class="dont-index">Source: <a href='https://github.com/rich-iannone/blastula/blob/master/R/add_ggplot.R'><code>R/add_ggplot.R</code></a></small>
     <div class="hidden name"><code>add_ggplot.Rd</code></div>
     </div>
@@ -120,22 +122,22 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>plot_object</th>
-      <td><p>the ggplot plot object.</p></td>
+      <td><p>The <code>ggplot2</code> plot object.</p></td>
     </tr>
     <tr>
       <th>width</th>
-      <td><p>the width of the output plot in inches.</p></td>
+      <td><p>The width of the output plot in inches.</p></td>
     </tr>
     <tr>
       <th>height</th>
-      <td><p>the height of the output plot in inches.</p></td>
+      <td><p>The height of the output plot in inches.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a character object with an HTML fragment that can be placed inside
-  the message body wherever the plot image should appear.</p>
+    <p>A character object with an HTML fragment that can be placed inside
+the message body wherever the plot image should appear.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
