@@ -1,13 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<p align="center">
-
-<img /><img src="man/figures/logo.svg" align="center" height="500px" />
-
-</p>
-
-<br />
+# blastula <img src="man/figures/logo.svg" align="right" height="250px" />
 
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
