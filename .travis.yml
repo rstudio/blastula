@@ -25,7 +25,7 @@ jobs:
       if: branch = master
       r_binary_packages:
         - pkgdown
-      script:
+      after_success:
         - Rscript -e 'pkgdown::build_site()'
       deploy:
         provider: pages
