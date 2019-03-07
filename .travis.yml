@@ -1,22 +1,35 @@
-language: r
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-r:
-  - oldrel
-  - release
+language: R
+sudo: false
+cache: packages
 
-warnings_are_errors: false
+jobs:
+  include:
+    - stage: test
+      r: oldrel
+    - stage: test
+      r: devel
+    - stage: test
+      r: release
+    - stage: deploy
+      r: devel
+      if: branch = master
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+        keep-history: false
+        local-dir: docs
+      r_binary_packages:
+        - pkgdown
+      script:
+        - Rscript -e 'pkgdown::build_site()'
 
-sudo: required
+warnings_are_errors: true
 
-r_packages:
-  - rstudioapi
-  - stringr
-  - shiny
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+r_binary_packages:
+  - covr
 
 after_success:
   - Rscript -e 'covr::codecov()'
