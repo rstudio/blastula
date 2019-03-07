@@ -1,11 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<p align="center">
+
+<img /><img src="man/figures/logo.svg" align="center" height="500px" />
+
+</p>
+
+<br />
+
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
-[![codecov.io](https://codecov.io/github/rich-iannone/blastula/coverage.svg?branch=master)](https://codecov.io/github/rich-iannone/blastula?branch=master)
-
-## blastula
+[![Coverage
+status](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/github/rstudio/gt?branch=master)
 
 The **blastula** package makes it easy to produce and send HTML email
 from **R**. The message body can be highly customized with **Markdown**
