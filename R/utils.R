@@ -162,6 +162,33 @@ tidy_gsub <- function(x, pattern, replacement) {
   gsub(pattern, replacement, x)
 }
 
+#' Create a file attachment list
+#' @noRd
+create_attachment_list <- function(file_path,
+                                   attach_name,
+                                   mime_type,
+                                   disposition) {
+
+  list(
+    file_path = file_path,
+    attach_name = attach_name,
+    mime_type = mime_type,
+    disposition = disposition
+  )
+}
+
+#' Add an attachment list to `email$attachments`
+#' @noRd
+add_attachment_list <- function(email,
+                                attachment_list) {
+
+  email$attachments <-
+    c(email$attachments, list(attachment_list))
+
+  email
+}
+
+
 # nocov start
 
 #' Find a binary on the system path or working directory
