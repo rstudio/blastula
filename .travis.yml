@@ -3,15 +3,16 @@
 language: R
 sudo: false
 cache: packages
-warnings_are_errors: false
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
 
 jobs:
   include:
     - stage: test
       r: oldrel
-
-    - stage: test
-      r: devel
 
     - stage: test
       r: release
@@ -20,8 +21,12 @@ jobs:
       after_success:
         - Rscript -e 'covr::codecov()'
 
-    - stage: deploy
+    - stage: test
       r: devel
+      warnings_are_errors: false
+
+    - stage: deploy
+      r: release
       if: branch = master
       r_binary_packages:
         - pkgdown
@@ -29,7 +34,7 @@ jobs:
         - Rscript -e 'pkgdown::build_site()'
       deploy:
         provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-        keep-history: false
         local-dir: docs
+        skip-cleanup: true
+        keep-history: false
+        github-token: $GITHUB_TOKEN
