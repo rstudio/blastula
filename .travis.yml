@@ -3,6 +3,7 @@
 language: R
 sudo: false
 cache: packages
+warnings_are_errors: false
 
 notifications:
   email:
@@ -23,7 +24,6 @@ jobs:
 
     - stage: test
       r: devel
-      warnings_are_errors: false
 
     - stage: deploy
       r: release
