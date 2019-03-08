@@ -29,6 +29,9 @@
 #' @param use_ssl A logical value to indicate whether to use SSL.
 #' @param authenticate A logical value to indicate whether to use
 #'   authentication.
+#' @param binary_loc An option to supply the location of the `mailsend-go`
+#'   binary file should it not be on the system path or in the working
+#'   directory.
 #' @param echo An option to print the standard output and error to the screen.
 #' @param echo_cmd A logical value indicating whether the system command should
 #'   be printed to the console during the sending of email.
