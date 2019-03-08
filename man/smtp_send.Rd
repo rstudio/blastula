@@ -52,6 +52,10 @@ must be created by the \code{create_email_creds_file()} function.}
 \item{authenticate}{A logical value to indicate whether to use
 authentication.}
 
+\item{binary_loc}{An option to supply the location of the \code{mailsend-go}
+binary file should it not be on the system path or in the working
+directory.}
+
 \item{echo}{An option to print the standard output and error to the screen.}
 
 \item{echo_cmd}{A logical value indicating whether the system command should
