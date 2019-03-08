@@ -125,7 +125,9 @@ compose_email <- function(body = NULL,
   email_message <-
     list(
       html_str = body %>% as.character(),
-      html_html = body %>% htmltools::HTML())
+      html_html = body %>% htmltools::HTML(),
+      attachments = list()
+    )
 
   if (email_message$html_str %>%
       stringr::str_detect("<img cid=.*? src=\"data:image/(png|jpeg);base64,.*?\"")) {
@@ -156,7 +158,8 @@ compose_email <- function(body = NULL,
           ".{1}$", "",
           extracted_images[i] %>%
             stringr::str_replace(
-              "<img cid=.*? src=\"data:image/(png|jpeg);base64,", ""))
+              "<img cid=.*? src=\"data:image/(png|jpeg);base64,", "")
+        )
     }
 
     # Create a list with a base64 image per list element
