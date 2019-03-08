@@ -18,13 +18,16 @@
 #' @param client_id The Imgur Client ID value.
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
-#' @importFrom ggplot2 ggsave
 #' @importFrom glue glue
 #' @export
 add_imgur_image <- function(image,
                             client_id = NULL) {
 
   if (inherits(image, "ggplot")) {
+
+    # If the `ggplot2` package is available, then
+    # use the `ggplot2::ggsave()` function
+    if (requireNamespace("ggplot2", quietly = TRUE)) {
 
     # Generate a unique filename for the temporary,
     # on-disk image
@@ -57,6 +60,7 @@ add_imgur_image <- function(image,
     # through success or error, we remove
     # the on-disk image file)
     on.exit(file.remove(file_name))
+    }
   }
 
   # Upload the image to Imgur
