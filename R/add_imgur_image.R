@@ -18,6 +18,8 @@
 #' @param client_id The Imgur Client ID value.
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
+#' @importFrom ggplot2 ggsave
+#' @importFrom glue glue
 #' @export
 add_imgur_image <- function(image,
                             client_id = NULL) {
@@ -37,7 +39,7 @@ add_imgur_image <- function(image,
       )
 
     # Create SVG from ggplot
-    ggsave(
+    ggplot2::ggsave(
       filename = file_name,
       plot = image,
       device = "png",
