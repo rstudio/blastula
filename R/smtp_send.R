@@ -162,12 +162,19 @@ smtp_send <- function(email,
       `-inline` = no_options()
     )
 
+  # Create the vector of arguments related
+  # to file attachments
+  attachment_args_vec <- create_attachment_args_vec(email = email)
+
   # Clean up arguments and options; create the
   # vector that's needed for `processx::run()`
   run_args <-
     run_args %>%
     prune_args() %>%
-    create_args_opts_vec()
+    create_args_opts_vec() %>%
+    append_attachment_args_vec(
+      attachment_args_vec = attachment_args_vec
+    )
 
   # Send out email via `processx::run()` and
   # assign the result
