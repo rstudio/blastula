@@ -68,7 +68,8 @@ add_imgur_image <- function(image,
     imgur_upload(image, client_id)
 
   glue::glue(
-    "<a href=\"#\"><img src=\"{response_list$link}\" width=\"100%\"></a>"
+    "<a href=\"#\"><img src=\"{response_list$link}\" \\
+     style=\"max-width:512px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
   ) %>%
     as.character()
 }
