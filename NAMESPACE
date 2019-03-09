@@ -2,6 +2,7 @@
 
 S3method(print,email_message)
 export("%>%")
+export(add_attachment)
 export(add_cta_button)
 export(add_ggplot)
 export(add_image)
