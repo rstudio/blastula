@@ -28,6 +28,16 @@ smtp_settings <- function() {
   )
 }
 
+#' A slighly more sensible version of `gsub()`
+#' @param x The text to be transformed.
+#' @param pattern The regex pattern.
+#' @param replacement A replacement for the matched pattern.
+#' @noRd
+tidy_gsub <- function(x, pattern, replacement) {
+
+  gsub(pattern, replacement, x)
+}
+
 #' Make a single-length character vector with addresses
 #' @param addresses a vector of addresses
 #' @noRd
@@ -152,29 +162,17 @@ create_args_opts_vec <- function(run_args) {
   run_args_vec
 }
 
-#' A slighly more sensible version of `gsub()`
-#' @param x The text to be transformed.
-#' @param pattern The regex pattern.
-#' @param replacement A replacement for the matched pattern.
-#' @noRd
-tidy_gsub <- function(x, pattern, replacement) {
-
-  gsub(pattern, replacement, x)
-}
-
 #' Create a file attachment list
+#' @param file_path The path for the file to be attached.
+#' @param disposition The attachment's disposition, which is either set as
+#'   `attachment` (the default) or `inline`.
 #' @noRd
 create_attachment_list <- function(file_path,
-                                   attach_name,
-                                   mime_type,
                                    disposition) {
 
   list(
     file_path = file_path,
-    attach_name = attach_name,
-    mime_type = mime_type,
-    disposition = disposition
-  )
+    disposition = disposition)
 }
 
 #' Add an attachment list to `email$attachments`
@@ -188,6 +186,55 @@ add_attachment_list <- function(email,
   email
 }
 
+#' Create a vector of command arguments and any associated options for any file
+#' attachments
+#' @param email The email message object, as created by the `compose_email()`
+#'   function. The object's class is `email_message`
+#' @noRd
+create_attachment_args_vec <- function(email) {
+
+  if (length(email$attachments) == 0) {
+    return(character(0))
+  }
+
+  attachment_args_vec <- c()
+
+  for (i in seq(email$attachments)) {
+
+    # Collect arguments and options for for `processx::run()`
+    # as a list
+    attach_args <-
+      list(
+        `attach` = no_options(),
+        `-file` = email$attachments[[i]]$file_path,
+        `-inline` = no_options()
+      )
+
+    # Clean up arguments and options; create the
+    # vector that's needed for `processx::run()`
+    attachment_args_vec <-
+      c(attachment_args_vec,
+        attach_args %>%
+          prune_args() %>%
+          create_args_opts_vec()
+      )
+  }
+
+  attachment_args_vec
+}
+
+#' Append the vector of arguments and options for file attachments to the
+#' `args_opts_vec` vector of arguments and options
+#' @param args_opts_vec The vector created by the `create_args_opts_vec()`
+#'   function.
+#' @param attachment_args_vec The vector created by the
+#'   `create_attachment_args_vec()` utility function.
+#' @noRd
+append_attachment_args_vec <- function(args_opts_vec,
+                                       attachment_args_vec) {
+
+  c(args_opts_vec, attachment_args_vec)
+}
 
 # nocov start
 
