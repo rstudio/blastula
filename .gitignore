@@ -10,6 +10,9 @@
 .mailsend
 *creds*
 
+# Docs folder from `pkgdown::build_site()`
+docs/
+
 # Example code in package build process
 *-Ex.R
 
