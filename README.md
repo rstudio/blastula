@@ -12,18 +12,6 @@ The **blastula** package makes it easy to produce and send HTML email
 from **R**. The message body can be highly customized with **Markdown**
 text, the results of **R** expressions, and even raw HTML.
 
-### Installation Requirements
-
-Blastula is moving toward using a new binary for `smtp` mailing,
-provided by the **mailsend-go** project. This binary is cross-platform
-and works on Windows, macOS (via Homebrew), and Linux (Debian and RPM
-packages). Installation instructions can be found at
-[here](https://github.com/muquit/mailsend-go#downloading-and-installing).
-
-Once the `mailsend-go` binary is installed and on the system path, we
-can use the new `smtp_send()` function for sending email. The other
-function for sending email (`smtp_send()`) will undergo deprecation.
-
 ### Composing an Email Message Object
 
 Here’s an example that shows a basic workflow for composing the message,
@@ -100,7 +88,7 @@ it using my new camera.
 
 ![]({img_link})
       
-You should go if you get the chance.
+You *should go* if you get the chance.
 
 Sincerely,
 
