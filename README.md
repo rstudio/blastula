@@ -210,18 +210,37 @@ smtp_send(
 The underlying HTML/CSS is meant to display properly across a wide range
 of email clients and webmail services.
 
-### Installation Requirements
+### Installation Requirements (`mailsend-go`)
 
-Blastula is moving toward using a new binary for `smtp` mailing,
-provided by the **mailsend-go** project. This binary is cross-platform
-and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux**
-(**Debian** and **RPM** packages). Installation instructions can be
-found at the
-[here](https://github.com/muquit/mailsend-go#downloading-and-installing).
+The **blastula** package is moving toward using a new binary for `smtp`
+mailing, provided by the **mailsend-go** project. This binary is
+cross-platform and works on **Windows**, **macOS** (via **Homebrew)**,
+and **Linux** (**Debian** and **RPM** packages).
+
+#### macOS (Homebrew)
+
+Ensure that [Homebrew](https://brew.sh) is installed. Then use the
+following to install
+    `mailsend-go`:
+
+    $ brew tap muquit/mailsend-go https://github.com/muquit/mailsend-go.git
+    $ brew install mailsend-go
+
+#### Windows
+
+Get the latest
+[64-bit](https://github.com/muquit/mailsend-go/releases/download/v1.0.3/mailsend-go_1.0.3_windows_64-bit.zip)
+or
+[32-bit](https://github.com/muquit/mailsend-go/releases/download/v1.0.3/mailsend-go_1.0.3_windows_32-bit.zip)
+release. Unzip and copy `mailsend-go-dir\mailsend-go.exe` to the Windows
+PATH. Optionally, we can place the executable in the working directory
+of the **R** project that is sending email.
+
+#### Additional Notes
 
 Once the `mailsend-go` binary is installed and on the system path, we
-can use the new `smtp_send()` function for sending email. The other
-function for sending email (`send_email_out()`) will undergo
+can use the in-development `smtp_send()` function for sending email. The
+other function for sending email (`send_email_out()`) will undergo
 deprecation.
 
 Currently, only the development version of the package (on **GitHub**)
