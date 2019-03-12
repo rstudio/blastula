@@ -10,8 +10,8 @@
 #' @param body The main body of text for the email message. Markdown can be used
 #'   here (along with string interpolation via curly braces and named arguments)
 #'   to construct the main text.
-#' @param footer The footer text for the email message. As with the `body`,
-#'   Markdown and string interpolation can be used here.
+#' @param header,footer The header and footer text for the email message, As
+#'   with the `body`, Markdown and string interpolation can be used here.
 #' @param .preheader_text The text that appears before the subject in some email
 #'   clients. This must be plaintext.
 #' @param .title The title of the email message. This is not the subject but the
