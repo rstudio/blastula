@@ -99,5 +99,5 @@ prepare_test_message <- function(incl_ggplot = FALSE,
 
   message
 
-  # nocov start
+  # nocov end
 }
