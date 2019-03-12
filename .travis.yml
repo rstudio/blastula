@@ -32,7 +32,9 @@ jobs:
       r_binary_packages:
         - pkgdown
       script:
-        - Rscript -e "devtools::load_all(); pkgdown::build_site()"
+        - Rscript -e "devtools::install()"
+        - Rscript -e "pkgdown::build_site()"
+        - Rscript -e "remove.packages(devtools::as.package('.')$package)"
       deploy:
         provider: pages
         local-dir: docs
