@@ -18,6 +18,7 @@ jobs:
     - r: devel
 
     - stage: deploy
+      name: covr
       r: release
       r_binary_packages:
         - covr
@@ -25,12 +26,13 @@ jobs:
         - Rscript -e "covr::codecov()"
 
     - stage: deploy
+      name: pkgdown
       r: release
       if: branch IN (master)
       r_binary_packages:
         - pkgdown
       script:
-        - Rscript -e "pkgdown::build_site()"
+        - Rscript -e "devtools::load_all(); pkgdown::build_site()"
       deploy:
         provider: pages
         local-dir: docs
