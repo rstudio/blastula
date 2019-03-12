@@ -100,6 +100,13 @@ compose_email <- function(body = NULL,
     body_text <- ""
   }
 
+  if (!is.null(header)) {
+    header <-
+      glue::glue(header, ..., .envir = .envir)
+  } else {
+    header <- ""
+  }
+
   if (!is.null(footer)) {
     footer_text <-
       glue::glue(footer, ..., .envir = .envir)
@@ -116,6 +123,10 @@ compose_email <- function(body = NULL,
       commonmark::markdown_html(body_text), "\n", "")
 
   html_footer_text <-
+  html_header <-
+    tidy_gsub(
+      commonmark::markdown_html(header), "\n", "")
+
     tidy_gsub(
       commonmark::markdown_html(footer_text), "\n", "")
 
