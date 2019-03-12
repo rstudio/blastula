@@ -138,11 +138,11 @@ compose_email <- function(body = NULL,
     tidy_gsub(
       commonmark::markdown_html(body_text), "\n", "")
 
-  html_footer_text <-
   html_header <-
     tidy_gsub(
       commonmark::markdown_html(header), "\n", "")
 
+  html_footer <-
     tidy_gsub(
       commonmark::markdown_html(footer_text), "\n", "")
 
