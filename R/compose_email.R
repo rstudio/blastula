@@ -147,9 +147,10 @@ compose_email <- function(body = NULL,
       commonmark::markdown_html(footer_text), "\n", "")
 
   # Generate the email message body
-  body <-
-    glue::glue(bls_standard_template())
+  body <- glue::glue(bls_standard_template())
 
+  # Add the HTML bodies (two variants) to the
+  # `email_message` object
   email_message <-
     list(
       html_str = body %>% as.character(),
