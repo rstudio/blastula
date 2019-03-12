@@ -13,29 +13,24 @@ notifications:
 jobs:
   include:
     - stage: "R CMD check"
-      r:
-        - oldrel
-        - release
-        - devel
+      r: oldrel
+    - r: release
+    - r: devel
 
-    - stage: "codecov"
+    - stage: deploy
       r: release
       r_binary_packages:
         - covr
-      deploy:
-        provider: script
-        skip-cleanup: true
-        on:
-          all_branches: true
-        script: Rscript -e 'covr::codecov()'
+      script:
+        - Rscript -e "covr::codecov()"
 
     - stage: deploy
       r: release
       if: branch IN (master)
       r_binary_packages:
         - pkgdown
-      before_deploy:
-        - Rscript -e 'pkgdown::build_site()'
+      script:
+        - Rscript -e "pkgdown::build_site()"
       deploy:
         provider: pages
         local-dir: docs
