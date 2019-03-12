@@ -4,16 +4,20 @@
 \alias{compose_email}
 \title{Create the email message body}
 \usage{
-compose_email(body = NULL, footer = NULL, .preheader_text = NULL,
-  .title = NULL, .envir = parent.frame(), ...)
+compose_email(body = NULL, header = NULL, footer = NULL,
+  blocks = NULL, .preheader_text = NULL, .title = NULL,
+  .envir = parent.frame(), ...)
 }
 \arguments{
 \item{body}{The main body of text for the email message. Markdown can be used
 here (along with string interpolation via curly braces and named arguments)
 to construct the main text.}
 
-\item{footer}{The footer text for the email message. As with the \code{body},
-Markdown and string interpolation can be used here.}
+\item{header, footer}{The header and footer text for the email message, As
+with the \code{body}, Markdown and string interpolation can be used here.}
+
+\item{blocks}{A list of \code{block_*()} calls that enable the insertion of
+precomposed HTML blocks.}
 
 \item{.preheader_text}{The text that appears before the subject in some email
 clients. This must be plaintext.}
