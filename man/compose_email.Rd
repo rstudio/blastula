@@ -35,17 +35,17 @@ the \code{parent.frame()}.}
 An \code{email_message} object.
 }
 \description{
-The \code{compose_email()} function allows us to easily create an email message
-body. We can use \code{glue}'s string interpolation semantics to incorporate
-external objects or evaluate R code within the message body, the footer, and
-the preheader text (using curly braces to enclose such R expressions). Local
+The \code{compose_email()} function allows us to easily create an email message.
+We can use \code{glue}'s string interpolation semantics to incorporate external
+objects or evaluate R code within the message body, the footer, and the
+preheader text (using curly braces to enclose such R expressions). Local
 variables can be specified in the function call (using named arguments with
 \code{...}) and any variables not found in \code{...} will be searched for in the
 global environment.
 }
 \examples{
 # Create a simple email message using
-# Markdown formatting
+# Markdown-formatted text in `body`
 email <-
   compose_email(
   body = "
@@ -55,8 +55,7 @@ email <-
 
   We can use Markdown formatting \\\\
   to **embolden** text or to add \\\\
-  *emphasis*. This is exciting, \\\\
-  right?
+  *emphasis*.
 
   Cheers")
 
