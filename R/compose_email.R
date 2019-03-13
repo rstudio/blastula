@@ -1,9 +1,9 @@
 #' Create the email message body
 #'
-#' The `compose_email()` function allows us to easily create an email message
-#' body. We can use `glue`'s string interpolation semantics to incorporate
-#' external objects or evaluate R code within the message body, the footer, and
-#' the preheader text (using curly braces to enclose such R expressions). Local
+#' The `compose_email()` function allows us to easily create an email message.
+#' We can use `glue`'s string interpolation semantics to incorporate external
+#' objects or evaluate R code within the message body, the footer, and the
+#' preheader text (using curly braces to enclose such R expressions). Local
 #' variables can be specified in the function call (using named arguments with
 #' `...`) and any variables not found in `...` will be searched for in the
 #' global environment.
@@ -25,7 +25,7 @@
 #' @return An `email_message` object.
 #' @examples
 #' # Create a simple email message using
-#' # Markdown formatting
+#' # Markdown-formatted text in `body`
 #' email <-
 #'   compose_email(
 #'   body = "
@@ -35,8 +35,7 @@
 #'
 #'   We can use Markdown formatting \\
 #'   to **embolden** text or to add \\
-#'   *emphasis*. This is exciting, \\
-#'   right?
+#'   *emphasis*.
 #'
 #'   Cheers")
 #'
