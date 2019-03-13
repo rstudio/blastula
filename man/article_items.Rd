@@ -14,5 +14,39 @@ article_items(image = NULL, title = NULL, content = NULL)
 \item{content}{An optional paragraph of text for the article.}
 }
 \description{
-Specify the components of an article
+The \code{article_items()} function is used exclusively within \code{block_articles()},
+and having one or two calls will arrange the article blocklets in a row (or
+as a column at lower screen widths).
+}
+\examples{
+# Creating a block of two, side-by-side
+# articles is possible with two calls
+# of `article_items()`; remember to use
+# `block_articles()` and put all of that
+# in a `list()`
+compose_email(
+  blocks =
+    list(
+      block_articles(
+        article_items(
+          image = "https://i.imgur.com/dxSXzGb.jpg",
+          title = "Hong Kong",
+          content =
+            "Once home to fishermen and farmers, \\\\
+            modern Hong Kong is a teeming, \\\\
+            commercially-vibrant metropolis where \\\\
+            Chinese and Western influences fuse."
+        ),
+        article_items(
+          image = "https://i.imgur.com/bJzVIrG.jpg",
+          title = "Australia",
+          content =
+            "Australia ranks as one of the best \\\\
+            places to live in the world by all \\\\
+            indices of income, human development, \\\\
+            healthcare and civil rights."
+        )
+      )
+    )
+  )
 }

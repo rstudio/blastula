@@ -10,5 +10,40 @@ block_articles(...)
 \item{...}{One or two calls to \code{article_items()}.}
 }
 \description{
-A block of one or two articles with a multicolumn layout
+With \code{block_articles()}, we can create a single- or multi-column layout of
+articles. The articles are responsive to the screen width, so side-by-side
+articles will collapse and any of the optional images will resize
+accordingly. The function can accept one or two \code{article_items()} calls, each
+with varying amounts of text and imagery. Like all \code{block_*()} functions,
+\code{block_articles()} must be placed in a list object and that list can only be
+provided to the \code{blocks} argument of \code{compose_email()}.
+}
+\examples{
+# Create a block of two, side-by-side
+# articles with two `article_items()` calls
+# inside of `block_articles()`, itself
+# placed in a `list()`
+compose_email(
+  blocks =
+    list(
+      block_articles(
+        article_items(
+          image = "https://i.imgur.com/XMU8yJa.jpg",
+          title = "Taiwan",
+          content =
+            "It is a thriving mosaic of tradition, \\\\
+            culture, and high-tech development, \\\\
+            merging Eastern and Western influences."
+        ),
+        article_items(
+          image = "https://i.imgur.com/aYOm3Tk.jpg",
+          title = "Japan",
+          content =
+            "Japan is an archipelago consisting \\\\
+            of 6,852 islands along East Asia's \\\\
+            Pacific Coast."
+        )
+      )
+    )
+  )
 }

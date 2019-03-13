@@ -10,5 +10,44 @@ block_text(...)
 \item{...}{Paragraphs of text.}
 }
 \description{
-A block of text
+With \code{block_text()} we can define a text area and this can be easily combined
+with other \code{block_*()} functions. The text will take the entire width of the
+block and will resize according to screen width. Like all \code{block_*()}
+functions, \code{block_text()} must be placed in a list object and that list can
+only be provided to the \code{blocks} argument of \code{compose_email()}.
+}
+\examples{
+# Create a block of two, side-by-side
+# articles with two `article_items()` calls
+# inside of `block_articles()`, itself
+# placed in a `list()`; also, include some
+# text at the top with `block_text()`
+compose_email(
+  blocks =
+    list(
+      block_text(
+        "These are two of the cities I visited this year. \\\\
+        I liked them a lot, so, I'll visit them again!"),
+      block_articles(
+        article_items(
+          image = "https://i.imgur.com/dig0HQ2.jpg",
+          title = "Los Angeles",
+          content =
+            "I want to live in Los Angeles. \\\\
+            Not the one in Los Angeles. \\\\
+            No, not the one in South California. \\\\
+            They got one in South Patagonia."
+        ),
+        article_items(
+          image = "https://i.imgur.com/RUvqHV8.jpg",
+          title = "New York",
+          content =
+            "Start spreading the news. \\\\
+            I'm leaving today. \\\\
+            I want to be a part of it. \\\\
+            New York, New York."
+        )
+      )
+    )
+  )
 }
