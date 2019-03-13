@@ -6,7 +6,7 @@
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
 [![Coverage
-status](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/github/rstudio/gt?branch=master)
+status](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/github/rich-iannone/blastula?branch=master)
 
 The **blastula** package makes it easy to produce and send HTML email
 from **R**. The message body can be highly customized with **Markdown**
@@ -270,9 +270,9 @@ make this package better, feel free to file an
 
 ## Code of Conduct
 
-[Contributor Code of
-Conduct](https://github.com/rich-iannone/blastula/blob/master/CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of
+Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
+to abide by its terms.
 
 ## License
 
