@@ -1,0 +1,50 @@
+home:
+  strip_header: true
+
+reference:
+  - title: Composing an Email Message
+    desc: >
+      An email message can be easily created with the `compose_email()`
+      function. Want to attach files to the message? That's a cinch with
+      `add_attachment()`. We can experiment with a example email message using
+      `prepare_test_message()`.
+    contents:
+    - compose_email
+    - add_attachment
+    - prepare_test_message
+
+  - title: Add Inline Components
+    desc: >
+      Several types of useful HTML fragments generated and incorporated into the
+      email message content. We can create and use CTA buttons, links to images,
+      and more!
+    contents:
+    - add_image
+    - add_imgur_image
+    - add_cta_button
+    - add_ggplot
+    - add_readable_time
+
+  - title: HTML Blocks
+    desc: >
+      We can use HTML blocks to compose our email message. These functions are
+      placed inside of an unnamed list and the order determines the ordering of
+      the blocks. With these responsive, higher-level components, we can create
+      sophisticated email messages with minimal effort.
+    contents:
+    - block_title
+    - block_text
+    - block_articles
+    - article_items
+
+  - title: Email Sending
+    desc: >
+      Once the email looks good enough to send, we send through an SMTP server,
+      through the MailGun service, or simply extract the HTML message body and
+      go elsewhere. There is the convenient option to create and store SMTP
+      credentials with the `create_email_creds_file()` function.
+    contents:
+    - smtp_send
+    - send_by_mailgun
+    - get_html_str
+    - create_email_creds_file
