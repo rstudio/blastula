@@ -12,6 +12,7 @@
 
 # Docs folder from `pkgdown::build_site()`
 docs/
+inst/doc
 
 # Example code in package build process
 *-Ex.R
