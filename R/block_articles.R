@@ -1,8 +1,43 @@
 #' Specify the components of an article
 #'
+#' The `article_items()` function is used exclusively within `block_articles()`,
+#' and having one or two calls will arrange the article blocklets in a row (or
+#' as a column at lower screen widths).
+#'
 #' @param image An optional URL pointing to an image resource.
 #' @param title An optional title for the article.
 #' @param content An optional paragraph of text for the article.
+#' @examples
+#' # Creating a block of two, side-by-side
+#' # articles is possible with two calls
+#' # of `article_items()`; remember to use
+#' # `block_articles()` and put all of that
+#' # in a `list()`
+#' compose_email(
+#'   blocks =
+#'     list(
+#'       block_articles(
+#'         article_items(
+#'           image = "https://i.imgur.com/dxSXzGb.jpg",
+#'           title = "Hong Kong",
+#'           content =
+#'             "Once home to fishermen and farmers, \\
+#'             modern Hong Kong is a teeming, \\
+#'             commercially-vibrant metropolis where \\
+#'             Chinese and Western influences fuse."
+#'         ),
+#'         article_items(
+#'           image = "https://i.imgur.com/bJzVIrG.jpg",
+#'           title = "Australia",
+#'           content =
+#'             "Australia ranks as one of the best \\
+#'             places to live in the world by all \\
+#'             indices of income, human development, \\
+#'             healthcare and civil rights."
+#'         )
+#'       )
+#'     )
+#'   )
 #' @export
 article_items <- function(image = NULL,
                           title = NULL,
@@ -36,7 +71,43 @@ article_items <- function(image = NULL,
 
 #' A block of one or two articles with a multicolumn layout
 #'
+#' With `block_articles()`, we can create a single- or multi-column layout of
+#' articles. The articles are responsive to the screen width, so side-by-side
+#' articles will collapse and any of the optional images will resize
+#' accordingly. The function can accept one or two `article_items()` calls, each
+#' with varying amounts of text and imagery. Like all `block_*()` functions,
+#' `block_articles()` must be placed in a list object and that list can only be
+#' provided to the `blocks` argument of `compose_email()`.
+#'
 #' @param ... One or two calls to `article_items()`.
+#' @examples
+#' # Create a block of two, side-by-side
+#' # articles with two `article_items()` calls
+#' # inside of `block_articles()`, itself
+#' # placed in a `list()`
+#' compose_email(
+#'   blocks =
+#'     list(
+#'       block_articles(
+#'         article_items(
+#'           image = "https://i.imgur.com/XMU8yJa.jpg",
+#'           title = "Taiwan",
+#'           content =
+#'             "It is a thriving mosaic of tradition, \\
+#'             culture, and high-tech development, \\
+#'             merging Eastern and Western influences."
+#'         ),
+#'         article_items(
+#'           image = "https://i.imgur.com/aYOm3Tk.jpg",
+#'           title = "Japan",
+#'           content =
+#'             "Japan is an archipelago consisting \\
+#'             of 6,852 islands along East Asia's \\
+#'             Pacific Coast."
+#'         )
+#'       )
+#'     )
+#'   )
 #' @export
 block_articles <- function(...) {
 
