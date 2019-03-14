@@ -107,7 +107,7 @@ sending_date <-
   )
 
 # Compose the email message, passing in the
-# `sending_time` value to the `footer`
+# `sending_date` value to the `footer`
 compose_email(
   body = "
 Hello,
