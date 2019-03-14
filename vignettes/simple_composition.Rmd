@@ -1,0 +1,241 @@
+---
+title: "Simple Email Composition"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{simple_composition}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r library, include=FALSE}
+library(blastula)
+library(tidyverse)
+```
+
+## What Is an HTML Email Message as Offered by blastula?
+
+Before we get to the process of creating an HTML email message, it's a good idea to learn about the model of such a message in **blastula**. Here is a diagram, and it doesn't contain too many components (because simplicity in HTML email is a good thing).
+
+<br>
+<p align="center"><img src="../man/figures/html_email_model.svg" width="600px"></p>
+<br>
+
+The main components (from top to bottom) are the **header**, the **body**, and the **footer**. The **body** content is inside of a wrapper that functions to differentiate the main content from whatever is in the **header** and **footer** (above and below the **body**).
+
+Another thing to note is that the HTML used is responsive. Viewing the HTML in a viewport that is greater than or equal to 640 pixels will be different than seeing it with a viewport that's smaller. This is important because email on mobile devices will often take on the latter view, which is optimized for smaller display widths (e.g., larger font sizes, decreased vertical space between elements, resized images, etc.).
+
+When using **blastula**, we don't have to worry much about either view since the API is designed to make emails look their best in both of them. Because we can preview the email message before sending it out, we have a chance to manually resize the browser and inspect the message in a variety of display widths.
+
+## Creating a Simple HTML Email Message
+
+For those times where we'd only want to send a simple HTML email message, we can use the `compose_email()` function and focus on adding text content to the **body** component. So let's create a simple email message using some plain text inside `body`.
+
+```{r compose_simple, eval=FALSE}
+compose_email(
+  body = "
+Hello,
+
+I just wanted to let you know that the thing that you \\
+asked me for is ready to pick up. So, come over and \\
+do that.
+
+Cheers
+")
+```
+
+<p align="center"><img src="compose_simple-wide.png" width="600px"></p>
+
+<p align="center"><img src="compose_simple-narrow.png" width="380px"></p>
+
+<p align="center">This is how it looks, depending on the display width (wide at top, narrow below that).</p>
+
+<br>
+
+Markdown text can be used as input for the `body`, `header`, and `footer` arguments. So, use the usual Markdown-formatting you know and you'll get italicized text, bold text, lists, links, etc. The **commonmark** package is doing the conversion from Markdown to HTML, in case you were wondering.
+
+A few notes on code style and options. It's good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a linebreak, which will result in `text like this`. We can continue lines with the `\\` line continuation marker, which is great for keeping long paragraphs of text at a reasonable width. Any literal quotation marks should be escaped using a single `\`. Blank lines separating blocks of text result in new paragraphs.
+
+If we assign this to an object (like `email`), we can always preview the email message by calling the object itself (it automatically prints its HTML to the Viewer).
+
+We can use string interpolation to add in **R** code or strings assigned to variables. These variables can be obtained from the global workspace. Let's look at an example of that. Some text to interpolate will be assigned to `sender_name` (it'll be the name of the email sender).
+
+```{r sender_name_variable}
+sender_name <- "Shelly"
+```
+
+Now we can refer to the object in the global workspace inside of curly braces. Here's the revised `compose_email()` call and the wide version of the HTML email output. 
+
+```{r compose_interpolation_local, eval=FALSE}
+compose_email(
+  body = "
+Hello,
+
+I just wanted to let you know that the thing that you \\
+asked me for is ready to pick up. So, come over and \\
+do that.
+
+Cheers,
+
+{sender_name}"
+)
+```
+
+<p align="center"><img src="compose_interpolation_local-wide.png" width="600px"></p>
+
+<p align="center">Now we have the output of a variable spliced in. Nice.</p>
+
+<br>
+
+We can include longer **R** statements inside of the curly braces (like `{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %>% as.numeric(), ", ", format(Sys.time(), "%Y"))}`), however, that would be unwieldy. It's better to generate local variables with **R** statements and just introduce those variables to the email. Here's an example with the above statement that generates a human readable date based on the current time.
+
+```{r compose_interpolation_stmt, eval=FALSE}
+# Create a string with a nicely-formatted date;
+# we can format the statement in a tidy manner 
+sending_date <-
+  paste0(
+    format(Sys.time(), "%A, %B "),
+    format(Sys.time(), "%d") %>% as.numeric(),
+    ", ",
+    format(Sys.time(), "%Y")
+  )
+
+# Compose the email message, passing in the
+# `sending_time` value to the `footer`
+compose_email(
+  body = "
+Hello,
+
+I just wanted to let you know that the thing that you \\
+asked me for is ready to pick up. So, come over and \\
+do that.
+
+Cheers,
+
+{sender_name}
+",
+  footer = "
+Sent on {sending_date}.
+"
+)
+```
+
+<p align="center"><img src="compose_interpolation_stmt-wide.png" width="600px"></p>
+
+<p align="center">Complicated string formatting goes into variables, the variables go into the email components</p>
+
+<br>
+
+## Adding an Image to an HTML Email
+
+Adding images to an email message is either (1) a dicey proposition, (2) a questionable plan, (3) or an iffy proposal. Why? Who knows what the recipient will actually see. Will it be a wall of random text? A massive, misaligned image? Anything at all? The mere suggestion of adding imagery is enough to give one heart palpitations.
+
+Although the rules for images in HTML email have changed often, the method that seems to be working reasonably well these days is to use external images. There is a bit of upfront work in getting the image hosted somewhere but the payoff is that most (maybe all?) email services/clients will show the image. The **blastula** package has a function which takes some of the pain out of getting images to a hosting service, it is the `add_imgur_image()` function. **Imgur** is a fun site for sure (gifs galore!) but did you know that they have an API to make image uploading easy? They do, and this function takes advantage of that.
+
+Here's an example of an email that includes a local image that is deployed to **Imgur** (available at https://i.imgur.com/8uTB2Py.jpg) for indefinite hosting.
+
+```{r imgur_return_value_1, include=FALSE}
+
+imgur_image <- 
+  "<a href=\"#\"><img src=\"https://i.imgur.com/8uTB2Py.jpg\" style=\"max-width:600px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
+```
+
+```{r compose_imgur_local_image, eval=FALSE}
+
+# Send your image to Imgur with a Client Key;
+# the result is specially-crafted <img> tag
+# imgur_image <-
+#   add_imgur_image(
+#     image = "rickenbacker_4001_1972_fireglo.jpg",
+#     client_id = "<YOUR CLIENT ID>"
+#   )
+
+# Compose the email message, passing in the
+# `imgur_image` value and whatever else
+compose_email(
+  body = "
+Hello,
+
+I just wanted to let you know that the **1972 Rickenbacker \\
+4001** is here to pick up. Here is a picture of it:
+
+{imgur_image}
+
+Cheers,
+
+{sender_name}"
+)
+```
+
+<p align="center"><img src="compose_imgur_local_image-wide.png" width="600px"></p>
+
+<p align="center">Once you get that Imgur Client ID, this is really easy</p>
+
+<br>
+
+This is how you get the all-important Client ID from **Imgur**. First, [get an account with **Imgur**](https://help.imgur.com/hc/en-us/articles/210076633-Create-an-Account)! Once that's a thing accomplished, we can get the `Client-ID` key for the **Imgur API**. This can be easily done by
+going visiting [the API registration page](https://api.imgur.com/oauth2/addclient) while signed-in to register an application. Give it a name---any name you can think of---and be sure to select the `OAuth 2 authorization type without a callback URL` radio button (the second in the list). After filling in the other necessary information bits and proving that you're not a robot, you'll receive the Client ID key! You'll then have unfettered access to use any images, including animated gifs, in an HTML email message.
+
+Wait, there's more! Since this is **R** and we care a great deal about **ggplot2**, we can directly pass in a ggplot object to `add_imgur_image()` and expect a nice ggplot image to appear in the email message. Here's an example of how that works:
+
+```{r imgur_return_value_2, include=FALSE}
+
+imgur_image <- 
+  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width:600px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
+```
+
+```{r compose_imgur_ggplot, eval=FALSE}
+
+# Create the plot data
+variety <- rep(LETTERS[1:7], each = 40)
+treatment <- rep(c("high", "low"), each = 20)
+note <- seq(1:280) + sample(1:150, 280, replace = TRUE)
+data <- data.frame(variety, treatment, note)
+
+# Create the plot
+the_plot <-
+  ggplot(data, aes(x = variety, y = note, fill = treatment)) + 
+  geom_boxplot()
+
+# Send your ggplot to Imgur with a Client Key;
+# again, you get an <img> tag that works for email
+# imgur_image <-
+#   add_imgur_image(
+#     image = the_plot,
+#     client_id = "<YOUR CLIENT ID>"
+#   )
+
+# Compose the email message, passing in the
+# `imgur_image` value and whatever else
+compose_email(
+  body = "
+Hello,
+
+I just wanted to let you know that the *ggplot* you \\
+wanted to see is right here, in this email:
+
+{imgur_image}
+
+Cheers,
+
+{sender_name}"
+)
+```
+
+<p align="center"><img src="compose_imgur_ggplot-wide.png" width="600px"></p>
+
+<p align="center">A ggplot in your email message</p>
+
+<br>
+
+I don't know about you but I'd love to get a ggplot in *my* email.
+
+## Wrapping Up
+
+We now know how to send really simple email messages with just some text, and, slightly more complex messages with images inside. **Imgur** really saves the day when it comes to hosting images as their API service is very permissive and getting access is not at all difficult.
