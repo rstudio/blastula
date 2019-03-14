@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ```{r library, include=FALSE}
 library(blastula)
-library(tidyverse)
+library(ggplot2)
 ```
 
 ## What Is an HTML Email Message as Offered by blastula?
