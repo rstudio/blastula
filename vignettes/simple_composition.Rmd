@@ -147,7 +147,6 @@ imgur_image <-
 ```
 
 ```{r compose_imgur_local_image, eval=FALSE}
-
 # Send your image to Imgur with a Client Key;
 # the result is specially-crafted <img> tag
 # imgur_image <-
@@ -191,7 +190,6 @@ imgur_image <-
 ```
 
 ```{r compose_imgur_ggplot, eval=FALSE}
-
 # Create the plot data
 variety <- rep(LETTERS[1:7], each = 40)
 treatment <- rep(c("high", "low"), each = 20)
