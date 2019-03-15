@@ -1,6 +1,6 @@
 #' Specify the components of an article
 #'
-#' The `article_items()` function is used exclusively within `block_articles()`,
+#' The `article()` function is used exclusively within `block_articles()`,
 #' and having one, two, or three calls will arrange the articles in a row (or as
 #' a column of articles at lower screen widths).
 #'
@@ -10,14 +10,14 @@
 #' @examples
 #' # Creating a block of two, side-by-side
 #' # articles is possible with two calls
-#' # of `article_items()`; remember to use
+#' # of `article()`; remember to use
 #' # `block_articles()` and put all of that
 #' # in a `list()`
 #' compose_email(
 #'   blocks =
 #'     list(
 #'       block_articles(
-#'         article_items(
+#'         article(
 #'           image = "https://i.imgur.com/dxSXzGb.jpg",
 #'           title = "Hong Kong",
 #'           content =
@@ -26,7 +26,7 @@
 #'             commercially-vibrant metropolis where \\
 #'             Chinese and Western influences fuse."
 #'         ),
-#'         article_items(
+#'         article(
 #'           image = "https://i.imgur.com/bJzVIrG.jpg",
 #'           title = "Australia",
 #'           content =
@@ -39,7 +39,7 @@
 #'     )
 #'   )
 #' @export
-article_items <- function(image = NULL,
+article <- function(image = NULL,
                           title = NULL,
                           content = NULL) {
 
@@ -63,8 +63,8 @@ article_items <- function(image = NULL,
       title = title,
       content = content)
 
-  # Apply the `article_items` class
-  class(article_item_list) <- "article_items"
+  # Apply the `article` class
+  class(article_item_list) <- "article"
 
   article_item_list
 }
@@ -74,22 +74,22 @@ article_items <- function(image = NULL,
 #' With `block_articles()`, we can create a single- or multi-column layout of
 #' articles. The articles are responsive to the screen width, so side-by-side
 #' articles will collapse and any of the optional images will resize
-#' accordingly. The function can accept one to three `article_items()` calls,
+#' accordingly. The function can accept one to three `article()` calls,
 #' each with varying amounts of text and imagery. Like all `block_*()`
 #' functions, `block_articles()` must be placed in a list object and that list
 #' can only be provided to the `blocks` argument of `compose_email()`.
 #'
-#' @param ... One, two, or three calls to `article_items()`.
+#' @param ... One, two, or three calls to `article()`.
 #' @examples
 #' # Create a block of three, side-by-side
-#' # articles with three `article_items()`
+#' # articles with three `article()`
 #' # calls inside of `block_articles()`,
 #' # itself placed in a `list()`
 #' compose_email(
 #'   blocks =
 #'     list(
 #'       block_articles(
-#'         article_items(
+#'         article(
 #'           image = "https://i.imgur.com/XMU8yJa.jpg",
 #'           title = "Taiwan",
 #'           content =
@@ -97,7 +97,7 @@ article_items <- function(image = NULL,
 #'             culture, and high-tech development, \\
 #'             merging Eastern and Western influences."
 #'         ),
-#'         article_items(
+#'         article(
 #'           image = "https://i.imgur.com/aYOm3Tk.jpg",
 #'           title = "Japan",
 #'           content =
@@ -105,7 +105,7 @@ article_items <- function(image = NULL,
 #'             of 6,852 islands along East Asia's \\
 #'             Pacific Coast."
 #'         ),
-#'         article_items(
+#'         article(
 #'            image = "https://i.imgur.com/ekjFVOL.jpg",
 #'            title = "Singapore",
 #'            content =
@@ -121,17 +121,17 @@ block_articles <- function(...) {
 
   x <- list(...)
 
-  if (!all((lapply(x, class) %>% unlist()) %in% "article_items")) {
+  if (!all((lapply(x, class) %>% unlist()) %in% "article")) {
 
     stop("All objects provided to `block_articles()` must be of the ",
-         "class `article_items`:\n",
-         " * These objects are created by the `article_items()` function.",
+         "class `article`:\n",
+         " * These objects are created by the `article()` function.",
          call. = FALSE)
   }
 
   if (length(x) > 3) {
 
-    stop("There cannot be more than three `article_items` objects ",
+    stop("There cannot be more than three `article` objects ",
          "provided to `block_articles()`.",
          call. = FALSE)
   }

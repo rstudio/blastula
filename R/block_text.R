@@ -9,7 +9,7 @@
 #' @param ... Paragraphs of text.
 #' @examples
 #' # Create a block of two, side-by-side
-#' # articles with two `article_items()` calls
+#' # articles with two `article()` calls
 #' # inside of `block_articles()`, itself
 #' # placed in a `list()`; also, include some
 #' # text at the top with `block_text()`
@@ -20,7 +20,7 @@
 #'         "These are two of the cities I visited this year. \\
 #'         I liked them a lot, so, I'll visit them again!"),
 #'       block_articles(
-#'         article_items(
+#'         article(
 #'           image = "https://i.imgur.com/dig0HQ2.jpg",
 #'           title = "Los Angeles",
 #'           content =
@@ -29,7 +29,7 @@
 #'             No, not the one in South California. \\
 #'             They got one in South Patagonia."
 #'         ),
-#'         article_items(
+#'         article(
 #'           image = "https://i.imgur.com/RUvqHV8.jpg",
 #'           title = "New York",
 #'           content =
