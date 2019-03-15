@@ -1,8 +1,8 @@
 #' Specify the components of an article
 #'
 #' The `article_items()` function is used exclusively within `block_articles()`,
-#' and having one or two calls will arrange the article blocklets in a row (or
-#' as a column at lower screen widths).
+#' and having one, two, or three calls will arrange the articles in a row (or as
+#' a column of articles at lower screen widths).
 #'
 #' @param image An optional URL pointing to an image resource.
 #' @param title An optional title for the article.
@@ -69,22 +69,22 @@ article_items <- function(image = NULL,
   article_item_list
 }
 
-#' A block of one or two articles with a multicolumn layout
+#' A block of one, two, or three articles with a multicolumn layout
 #'
 #' With `block_articles()`, we can create a single- or multi-column layout of
 #' articles. The articles are responsive to the screen width, so side-by-side
 #' articles will collapse and any of the optional images will resize
-#' accordingly. The function can accept one or two `article_items()` calls, each
-#' with varying amounts of text and imagery. Like all `block_*()` functions,
-#' `block_articles()` must be placed in a list object and that list can only be
-#' provided to the `blocks` argument of `compose_email()`.
+#' accordingly. The function can accept one to three `article_items()` calls,
+#' each with varying amounts of text and imagery. Like all `block_*()`
+#' functions, `block_articles()` must be placed in a list object and that list
+#' can only be provided to the `blocks` argument of `compose_email()`.
 #'
-#' @param ... One or two calls to `article_items()`.
+#' @param ... One, two, or three calls to `article_items()`.
 #' @examples
-#' # Create a block of two, side-by-side
-#' # articles with two `article_items()` calls
-#' # inside of `block_articles()`, itself
-#' # placed in a `list()`
+#' # Create a block of three, side-by-side
+#' # articles with three `article_items()`
+#' # calls inside of `block_articles()`,
+#' # itself placed in a `list()`
 #' compose_email(
 #'   blocks =
 #'     list(
@@ -104,6 +104,14 @@ article_items <- function(image = NULL,
 #'             "Japan is an archipelago consisting \\
 #'             of 6,852 islands along East Asia's \\
 #'             Pacific Coast."
+#'         ),
+#'         article_items(
+#'            image = "https://i.imgur.com/ekjFVOL.jpg",
+#'            title = "Singapore",
+#'            content =
+#'              "Singapore is an island city-state \\
+#'              in Southeast Asia. It's lies at the \\
+#'              southern tip of the Malay Peninsula."
 #'         )
 #'       )
 #'     )
@@ -128,6 +136,10 @@ block_articles <- function(...) {
          call. = FALSE)
   }
 
+  if (length(x) == 3) {
+    return(block_article_3(items = x))
+  }
+
   if (length(x) == 2) {
     return(block_article_2(items = x))
   }
@@ -135,6 +147,132 @@ block_articles <- function(...) {
   if (length(x) == 1) {
     return(block_article_1(items = x))
   }
+}
+
+#' Obtain an inlined HTML fragment for three side-by-side articles
+#' @importFrom glue glue
+#' @noRd
+block_article_3 <- function(items) {
+
+  if (items[[1]]$image == "") {
+    x1_image <- ""
+  } else {
+    x1_image <-
+      glue::glue(
+        article_image_template_3(),
+        image = items[[1]]$image
+      )
+  }
+
+  if (items[[2]]$image == "") {
+    x2_image <- ""
+  } else {
+    x2_image <-
+      glue::glue(
+        article_image_template_3(),
+        image = items[[2]]$image
+      )
+  }
+
+  if (items[[3]]$image == "") {
+    x3_image <- ""
+  } else {
+    x3_image <-
+      glue::glue(
+        article_image_template_3(),
+        image = items[[3]]$image
+      )
+  }
+
+  x1_title <-
+    glue::glue(
+      article_title_template(),
+      title = items[[1]]$title
+    )
+
+  x2_title <-
+    glue::glue(
+      article_title_template(),
+      title = items[[2]]$title
+    )
+
+  x3_title <-
+    glue::glue(
+      article_title_template(),
+      title = items[[3]]$title
+    )
+
+  x1_content <-
+    glue::glue(
+      article_content_template_2(),
+      content = items[[1]]$content
+    )
+
+  x2_content <-
+    glue::glue(
+      article_content_template_2(),
+      content = items[[2]]$content
+    )
+
+  x3_content <-
+    glue::glue(
+      article_content_template_2(),
+      content = items[[3]]$content
+    )
+
+  glue::glue(
+  "<tr>
+    <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+      <!--[if (gte mso 9)|(IE)]>
+        <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+          <tr>
+            <td align=\"left\" valign=\"top\" width=\"33.333%\">
+      <![endif]-->
+      <div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
+        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
+          <tbody>
+            {x1_image}
+            {x1_title}
+            {x1_content}
+          </tbody>
+        </table>
+      </div>
+      <!--[if (gte mso 9)|(IE)]>
+        <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+          <tr>
+            <td align=\"left\" valign=\"top\" width=\"33.333%\">
+      <![endif]-->
+      <div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
+        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
+          <tbody>
+            {x2_image}
+            {x2_title}
+            {x2_content}
+          </tbody>
+        </table>
+      </div>
+      <!--[if (gte mso 9)|(IE)]>
+        <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+          <tr>
+            <td align=\"left\" valign=\"top\" width=\"33.333%\">
+      <![endif]-->
+      <div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
+        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
+          <tbody>
+            {x3_image}
+            {x3_title}
+            {x3_content}
+          </tbody>
+        </table>
+      </div>
+      <!--[if (gte mso 9)|(IE)]>
+            </td>
+          </tr>
+        </table>
+      <![endif]-->
+    </td>
+  </tr>"
+  ) %>% as.character()
 }
 
 #' Obtain an inlined HTML fragment for two side-by-side articles
@@ -147,7 +285,7 @@ block_article_2 <- function(items) {
   } else {
     x1_image <-
       glue::glue(
-        article_image_template(),
+        article_image_template_2(),
         image = items[[1]]$image
       )
   }
@@ -157,7 +295,7 @@ block_article_2 <- function(items) {
   } else {
     x2_image <-
       glue::glue(
-        article_image_template(),
+        article_image_template_2(),
         image = items[[2]]$image
       )
   }
@@ -176,13 +314,13 @@ block_article_2 <- function(items) {
 
   x1_content <-
     glue::glue(
-      article_content_template(),
+      article_content_template_2(),
       content = items[[1]]$content
     )
 
   x2_content <-
     glue::glue(
-      article_content_template(),
+      article_content_template_2(),
       content = items[[2]]$content
     )
 
@@ -263,34 +401,37 @@ block_article_1 <- function(items) {
 </tr>") %>% as.character()
 }
 
-#' A template for an article image HTML fragment
+
+#' A template for an article image HTML fragment (three across)
 #' @noRd
-article_image_template <- function() {
+article_image_template_3 <- function() {
 
 "                <tr>
                   <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-                    <img src=\"{image}\" alt=\"placeholder for image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
+                    <img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
                   </td>
                 </tr>
   "
 }
 
-#' A template for an article image HTML fragment that spans the full width
+#' A template for an article image HTML fragment (two across)
+#' @noRd
+article_image_template_2 <- function() {
+
+"                <tr>
+                  <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
+                    <img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
+                  </td>
+                </tr>
+  "
+}
+
+#' A template for an article image HTML fragment (one across)
 #' @noRd
 article_image_template_1 <- function() {
 
 "            <p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-              <img src=\"{image}\" alt=\"placeholder for image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
-            </p>
-  "
-}
-
-#' A template for an article content HTML fragment, spanning the full width
-#' @noRd
-article_content_template_1 <- function() {
-
-"            <p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-              {content}
+              <img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
             </p>
   "
 }
@@ -307,9 +448,19 @@ article_title_template <- function() {
   "
 }
 
-#' A template for article content as an HTML fragment
+#' A template for an article content HTML fragment (one across)
 #' @noRd
-article_content_template <- function() {
+article_content_template_1 <- function() {
+
+"            <p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
+              {content}
+            </p>
+  "
+}
+
+#' A template for an article content HTML fragment (two across)
+#' @noRd
+article_content_template_2 <- function() {
 
 "                <tr>
                   <td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">
@@ -318,3 +469,4 @@ article_content_template <- function() {
                 </tr>
   "
 }
+
