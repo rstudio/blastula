@@ -2,27 +2,27 @@
 % Please edit documentation in R/block_articles.R
 \name{block_articles}
 \alias{block_articles}
-\title{A block of one or two articles with a multicolumn layout}
+\title{A block of one, two, or three articles with a multicolumn layout}
 \usage{
 block_articles(...)
 }
 \arguments{
-\item{...}{One or two calls to \code{article_items()}.}
+\item{...}{One, two, or three calls to \code{article_items()}.}
 }
 \description{
 With \code{block_articles()}, we can create a single- or multi-column layout of
 articles. The articles are responsive to the screen width, so side-by-side
 articles will collapse and any of the optional images will resize
-accordingly. The function can accept one or two \code{article_items()} calls, each
-with varying amounts of text and imagery. Like all \code{block_*()} functions,
-\code{block_articles()} must be placed in a list object and that list can only be
-provided to the \code{blocks} argument of \code{compose_email()}.
+accordingly. The function can accept one to three \code{article_items()} calls,
+each with varying amounts of text and imagery. Like all \code{block_*()}
+functions, \code{block_articles()} must be placed in a list object and that list
+can only be provided to the \code{blocks} argument of \code{compose_email()}.
 }
 \examples{
-# Create a block of two, side-by-side
-# articles with two `article_items()` calls
-# inside of `block_articles()`, itself
-# placed in a `list()`
+# Create a block of three, side-by-side
+# articles with three `article_items()`
+# calls inside of `block_articles()`,
+# itself placed in a `list()`
 compose_email(
   blocks =
     list(
@@ -42,6 +42,14 @@ compose_email(
             "Japan is an archipelago consisting \\\\
             of 6,852 islands along East Asia's \\\\
             Pacific Coast."
+        ),
+        article_items(
+           image = "https://i.imgur.com/ekjFVOL.jpg",
+           title = "Singapore",
+           content =
+             "Singapore is an island city-state \\\\
+             in Southeast Asia. It's lies at the \\\\
+             southern tip of the Malay Peninsula."
         )
       )
     )

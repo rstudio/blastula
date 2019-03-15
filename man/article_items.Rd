@@ -15,8 +15,8 @@ article_items(image = NULL, title = NULL, content = NULL)
 }
 \description{
 The \code{article_items()} function is used exclusively within \code{block_articles()},
-and having one or two calls will arrange the article blocklets in a row (or
-as a column at lower screen widths).
+and having one, two, or three calls will arrange the articles in a row (or as
+a column of articles at lower screen widths).
 }
 \examples{
 # Creating a block of two, side-by-side
