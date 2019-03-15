@@ -35,7 +35,7 @@ reference:
     - block_title
     - block_text
     - block_articles
-    - article_items
+    - article
 
   - title: Email Sending
     desc: >
