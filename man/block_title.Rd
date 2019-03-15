@@ -18,7 +18,7 @@ that list can only be provided to the \code{blocks} argument of \code{compose_em
 }
 \examples{
 # Create a block of two, side-by-side
-# articles with two `article_items()` calls
+# articles with two `article()` calls
 # inside of `block_articles()`, itself
 # placed in a `list()`; also, include a
 # title at the top with `block_title()`
@@ -28,7 +28,7 @@ compose_email(
       block_title(
         "Two Cities I Visited Recently"),
       block_articles(
-        article_items(
+        article(
           image = "https://i.imgur.com/dig0HQ2.jpg",
           title = "Los Angeles",
           content =
@@ -37,7 +37,7 @@ compose_email(
             No, not the one in South California. \\\\
             They got one in South Patagonia."
         ),
-        article_items(
+        article(
           image = "https://i.imgur.com/RUvqHV8.jpg",
           title = "New York",
           content =
