@@ -160,6 +160,20 @@ block_articles <- function(...) {
   }
 }
 
+#' Print the block of articles
+#'
+#' This facilitates printing of the block of articles to the Viewer.
+#' @param x an object of class \code{block_articles}.
+#' @keywords internal
+#' @importFrom htmltools HTML html_print
+#' @export
+print.block_articles <- function(x, ...) {
+
+  x %>%
+    htmltools::HTML() %>%
+    htmltools::html_print()
+}
+
 #' Obtain an inlined HTML fragment for three side-by-side articles
 #' @importFrom glue glue
 #' @noRd
