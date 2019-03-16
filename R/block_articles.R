@@ -226,7 +226,8 @@ block_article_3 <- function(items) {
   x3_title <-
     glue::glue(
       article_title_template(),
-      title = items[[3]]$title
+      title = items[[3]]$title,
+      link = items[[3]]$link
     )
 
   x1_content <-
