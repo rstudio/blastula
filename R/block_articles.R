@@ -204,7 +204,8 @@ block_article_3 <- function(items) {
     x1_image <-
       glue::glue(
         article_image_template_3(),
-        image = items[[1]]$image
+        image = items[[1]]$image,
+        link = items[[1]]$link
       )
   }
 
@@ -214,7 +215,8 @@ block_article_3 <- function(items) {
     x2_image <-
       glue::glue(
         article_image_template_3(),
-        image = items[[2]]$image
+        image = items[[2]]$image,
+        link = items[[2]]$link
       )
   }
 
@@ -224,7 +226,8 @@ block_article_3 <- function(items) {
     x3_image <-
       glue::glue(
         article_image_template_3(),
-        image = items[[3]]$image
+        image = items[[3]]$image,
+        link = items[[3]]$link
       )
   }
 
@@ -338,7 +341,8 @@ block_article_2 <- function(items) {
     x1_image <-
       glue::glue(
         article_image_template_2(),
-        image = items[[1]]$image
+        image = items[[1]]$image,
+        link = items[[1]]$link
       )
   }
 
@@ -348,7 +352,8 @@ block_article_2 <- function(items) {
     x2_image <-
       glue::glue(
         article_image_template_2(),
-        image = items[[2]]$image
+        image = items[[2]]$image,
+        link = items[[2]]$link
       )
   }
 
@@ -434,7 +439,8 @@ block_article_1 <- function(items) {
     x1_image <-
       glue::glue(
         article_image_template_1(),
-        image = items[[1]]$image)
+        image = items[[1]]$image,
+        link = items[[1]]$link)
   }
 
   x1_content <-
@@ -472,7 +478,7 @@ article_image_template_3 <- function() {
 
 "                <tr>
                   <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-                    <img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
+                    <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
                   </td>
                 </tr>
   "
@@ -484,7 +490,7 @@ article_image_template_2 <- function() {
 
 "                <tr>
                   <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-                    <img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
+                    <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
                   </td>
                 </tr>
   "
@@ -495,7 +501,7 @@ article_image_template_2 <- function() {
 article_image_template_1 <- function() {
 
 "            <p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-              <img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\">
+              <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
             </p>
   "
 }
