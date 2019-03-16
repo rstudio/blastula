@@ -174,6 +174,25 @@ print.block_articles <- function(x, ...) {
     htmltools::html_print()
 }
 
+#' Print the article information in the console
+#'
+#' This facilitates printing of the article object to the console.
+#' @param x an object of class \code{article}.
+#' @keywords internal
+#' @export
+print.article <- function(x, ...) {
+
+  glue::glue("
+image: {x$image}
+title: {x$title}
+content: {x$content}
+link: {x$link}
+"
+  ) %>%
+    as.character() %>%
+    cat()
+}
+
 #' Obtain an inlined HTML fragment for three side-by-side articles
 #' @importFrom glue glue
 #' @noRd
