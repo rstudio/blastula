@@ -51,10 +51,18 @@ article <- function(image = NULL,
 
   if (is.null(title)) {
     title <- ""
+  } else {
+    title <- glue::glue(title) %>% as.character()
   }
 
   if (is.null(content)) {
     content <- ""
+  } else {
+    content <- glue::glue(content) %>% as.character()
+  }
+
+  if (is.null(link)) {
+    link <- ""
   }
 
   # Add the article components to the
