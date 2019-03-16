@@ -3,8 +3,8 @@
 #' With `block_text()` we can define a title text area and this can be easily
 #' combined with other `block_*()` functions. The title will take the entire
 #' width of the block and will resize according to screen width. Like all
-#' `block_*()` functions, `block_title()` must be placed in a list object and
-#' that list can only be provided to the `blocks` argument of `compose_email()`.
+#' `block_*()` functions, `block_title()` must be placed inside of `blocks()`
+#' and that object can be provided to the `body` argument of `compose_email()`.
 #'
 #' @param title A single of paragraph of text.
 #' @importFrom commonmark markdown_html
@@ -12,11 +12,11 @@
 #' # Create a block of two, side-by-side
 #' # articles with two `article()` calls
 #' # inside of `block_articles()`, itself
-#' # placed in a `list()`; also, include a
+#' # placed in `blocks()`; also, include a
 #' # title at the top with `block_title()`
 #' compose_email(
-#'   blocks =
-#'     list(
+#'   body =
+#'     blocks(
 #'       block_title(
 #'         "Two Cities I Visited Recently"),
 #'       block_articles(

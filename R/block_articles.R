@@ -13,10 +13,10 @@
 #' # articles is possible with two calls
 #' # of `article()`; remember to use
 #' # `block_articles()` and put all of that
-#' # in a `list()`
+#' # inside `blocks()`
 #' compose_email(
-#'   blocks =
-#'     list(
+#'   body =
+#'     blocks(
 #'       block_articles(
 #'         article(
 #'           image = "https://i.imgur.com/dxSXzGb.jpg",
@@ -95,10 +95,10 @@ article <- function(image = NULL,
 #' # Create a block of three, side-by-side
 #' # articles with three `article()`
 #' # calls inside of `block_articles()`,
-#' # itself placed in a `list()`
+#' # itself placed in `blocks()`
 #' compose_email(
-#'   blocks =
-#'     list(
+#'   body =
+#'     blocks(
 #'       block_articles(
 #'         article(
 #'           image = "https://i.imgur.com/XMU8yJa.jpg",
@@ -539,4 +539,3 @@ article_content_template_2 <- function() {
                 </tr>
   "
 }
-

@@ -3,19 +3,19 @@
 #' With `block_text()` we can define a text area and this can be easily combined
 #' with other `block_*()` functions. The text will take the entire width of the
 #' block and will resize according to screen width. Like all `block_*()`
-#' functions, `block_text()` must be placed in a list object and that list can
-#' only be provided to the `blocks` argument of `compose_email()`.
+#' functions, `block_text()` must be placed inside of `blocks()` and that object
+#' can be provided to the `body` argument of `compose_email()`.
 #'
 #' @param ... Paragraphs of text.
 #' @examples
 #' # Create a block of two, side-by-side
 #' # articles with two `article()` calls
 #' # inside of `block_articles()`, itself
-#' # placed in a `list()`; also, include some
+#' # placed in `blocks()`; also, include some
 #' # text at the top with `block_text()`
 #' compose_email(
-#'   blocks =
-#'     list(
+#'   body =
+#'     blocks(
 #'       block_text(
 #'         "These are two of the cities I visited this year. \\
 #'         I liked them a lot, so, I'll visit them again!"),
