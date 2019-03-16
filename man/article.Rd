@@ -4,7 +4,7 @@
 \alias{article}
 \title{Specify the components of an article}
 \usage{
-article(image = NULL, title = NULL, content = NULL)
+article(image = NULL, title = NULL, content = NULL, link = NULL)
 }
 \arguments{
 \item{image}{An optional URL pointing to an image resource.}
@@ -12,6 +12,8 @@ article(image = NULL, title = NULL, content = NULL)
 \item{title}{An optional title for the article.}
 
 \item{content}{An optional paragraph of text for the article.}
+
+\item{link}{An optional link to apply to the content elements.}
 }
 \description{
 The \code{article()} function is used exclusively within \code{block_articles()},
@@ -44,7 +46,7 @@ compose_email(
             "Australia ranks as one of the best \\\\
             places to live in the world by all \\\\
             indices of income, human development, \\\\
-            healthcare and civil rights."
+            healthcare, and civil rights."
         )
       )
     )
