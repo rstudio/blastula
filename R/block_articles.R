@@ -245,8 +245,9 @@ block_article_3 <- function(items) {
       content = items[[3]]$content
     )
 
-  glue::glue(
-  "<tr>
+  block <-
+    glue::glue(
+      "<tr>
     <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
       <!--[if (gte mso 9)|(IE)]>
         <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
@@ -297,7 +298,11 @@ block_article_3 <- function(items) {
       <![endif]-->
     </td>
   </tr>"
-  ) %>% as.character()
+    ) %>% as.character()
+
+  class(block) <- c("block_articles")
+
+  block
 }
 
 #' Obtain an inlined HTML fragment for two side-by-side articles
@@ -349,8 +354,9 @@ block_article_2 <- function(items) {
       content = items[[2]]$content
     )
 
-  glue::glue(
-  "<tr>
+  block <-
+    glue::glue(
+      "<tr>
   <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
     <!--[if (gte mso 9)|(IE)]>
     <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
@@ -386,7 +392,11 @@ block_article_2 <- function(items) {
     <![endif]-->
   </td>
 </tr>"
-  ) %>% as.character()
+    ) %>% as.character()
+
+  class(block) <- c("block_articles")
+
+  block
 }
 
 #' Obtain an inlined HTML fragment for a single, full-width article
@@ -409,8 +419,9 @@ block_article_1 <- function(items) {
       content = items[[1]]$content
     )
 
-  glue::glue(
-    "<tr>
+  block <-
+    glue::glue(
+      "<tr>
   <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
     <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
       <tbody>
@@ -424,6 +435,10 @@ block_article_1 <- function(items) {
     </table>
   </td>
 </tr>") %>% as.character()
+
+  class(block) <- c("block_articles")
+
+  block
 }
 
 
