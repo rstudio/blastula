@@ -7,6 +7,7 @@
 #' @param image An optional URL pointing to an image resource.
 #' @param title An optional title for the article.
 #' @param content An optional paragraph of text for the article.
+#' @param link An optional link to apply to the content elements.
 #' @examples
 #' # Creating a block of two, side-by-side
 #' # articles is possible with two calls
