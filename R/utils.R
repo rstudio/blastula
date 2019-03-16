@@ -236,6 +236,29 @@ append_attachment_args_vec <- function(args_opts_vec,
   c(args_opts_vec, attachment_args_vec)
 }
 
+#' Prepend a element to a list at a given position
+#' @param x The list object.
+#' @param values The values to prepend to the list.
+#' @param before The index position for the prepending operation.
+#' @noRd
+prepend_list <- function(x,
+                         values,
+                         before = 1) {
+
+  n <- length(x)
+
+  stopifnot(before > 0 && before <= n)
+
+  if (before == 1) {
+
+    c(values, x)
+
+  } else {
+
+    c(x[1:(before - 1)], values, x[before:n])
+  }
+}
+
 # nocov start
 
 #' Find a binary on the system path or working directory
