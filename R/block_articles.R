@@ -212,13 +212,15 @@ block_article_3 <- function(items) {
   x1_title <-
     glue::glue(
       article_title_template(),
-      title = items[[1]]$title
+      title = items[[1]]$title,
+      link = items[[1]]$link
     )
 
   x2_title <-
     glue::glue(
       article_title_template(),
-      title = items[[2]]$title
+      title = items[[2]]$title,
+      link = items[[2]]$link
     )
 
   x3_title <-
@@ -333,13 +335,15 @@ block_article_2 <- function(items) {
   x1_title <-
     glue::glue(
       article_title_template(),
-      title = items[[1]]$title
+      title = items[[1]]$title,
+      link = items[[1]]$link
     )
 
   x2_title <-
     glue::glue(
       article_title_template(),
-      title = items[[2]]$title
+      title = items[[2]]$title,
+      link = items[[2]]$link
     )
 
   x1_content <-
