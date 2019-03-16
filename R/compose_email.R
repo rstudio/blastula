@@ -93,10 +93,30 @@ compose_email <- function(body = NULL,
   }
 
   if (!is.null(body)) {
-    body_text <-
-      glue::glue(body, ..., .envir = .envir)
+
+    if (inherits(body, "blocks")) {
+
+      html_body_text <- paste(unlist(body), collapse = "\n")
+
+    } else {
+
+      body_text <-
+        glue::glue(body, ..., .envir = .envir)
+
+      html_body_text <-
+        body_text %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("\n", "")
+
+      html_body_text <-
+        glue::glue(
+          simple_html_block(),
+          html_paragraphs = html_body_text
+        )
+    }
+
   } else {
-    body_text <- ""
+    html_body_text <- ""
   }
 
   if (!is.null(header)) {
