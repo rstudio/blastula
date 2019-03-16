@@ -25,10 +25,10 @@ a column of articles at lower screen widths).
 # articles is possible with two calls
 # of `article()`; remember to use
 # `block_articles()` and put all of that
-# in a `list()`
+# inside `blocks()`
 compose_email(
-  blocks =
-    list(
+  body =
+    blocks(
       block_articles(
         article(
           image = "https://i.imgur.com/dxSXzGb.jpg",

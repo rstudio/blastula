@@ -13,18 +13,18 @@ block_text(...)
 With \code{block_text()} we can define a text area and this can be easily combined
 with other \code{block_*()} functions. The text will take the entire width of the
 block and will resize according to screen width. Like all \code{block_*()}
-functions, \code{block_text()} must be placed in a list object and that list can
-only be provided to the \code{blocks} argument of \code{compose_email()}.
+functions, \code{block_text()} must be placed inside of \code{blocks()} and that object
+can be provided to the \code{body} argument of \code{compose_email()}.
 }
 \examples{
 # Create a block of two, side-by-side
 # articles with two `article()` calls
 # inside of `block_articles()`, itself
-# placed in a `list()`; also, include some
+# placed in `blocks()`; also, include some
 # text at the top with `block_text()`
 compose_email(
-  blocks =
-    list(
+  body =
+    blocks(
       block_text(
         "These are two of the cities I visited this year. \\\\
         I liked them a lot, so, I'll visit them again!"),
