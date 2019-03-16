@@ -9,7 +9,9 @@
 #' global environment.
 #' @param body The main body of text for the email message. Markdown can be used
 #'   here (along with string interpolation via curly braces and named arguments)
-#'   to construct the main text.
+#'   to construct the main text. Alternatively, we can supply a set of
+#'   `block_*()` calls enclosed within the `blocks()` function to take advantage
+#'   of precomposed HTML blocks.
 #' @param header,footer The header and footer text for the email message, As
 #'   with the `body`, Markdown and string interpolation can be used here.
 #' @param .preheader_text The text that appears before the subject in some email
