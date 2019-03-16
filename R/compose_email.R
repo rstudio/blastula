@@ -12,8 +12,6 @@
 #'   to construct the main text.
 #' @param header,footer The header and footer text for the email message, As
 #'   with the `body`, Markdown and string interpolation can be used here.
-#' @param blocks A list of `block_*()` calls that enable the insertion of
-#'   precomposed HTML blocks.
 #' @param .preheader_text The text that appears before the subject in some email
 #'   clients. This must be plaintext.
 #' @param .title The title of the email message. This is not the subject but the
@@ -75,7 +73,6 @@
 compose_email <- function(body = NULL,
                           header = NULL,
                           footer = NULL,
-                          blocks = NULL,
                           .preheader_text = NULL,
                           .title = NULL,
                           .envir = parent.frame(),
@@ -114,19 +111,6 @@ compose_email <- function(body = NULL,
       glue::glue(footer, ..., .envir = .envir)
   } else {
     footer_text <- ""
-  }
-
-  if (!is.null(blocks)) {
-
-    if (inherits(blocks, "list")) {
-      blocks <- paste(unlist(blocks), collapse = "\n")
-    }
-
-    blocks <-
-      glue::glue(blocks, ..., .envir = .envir)
-
-  } else {
-    blocks <- ""
   }
 
   html_preheader_text <-
