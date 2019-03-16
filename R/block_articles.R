@@ -34,7 +34,7 @@
 #'             "Australia ranks as one of the best \\
 #'             places to live in the world by all \\
 #'             indices of income, human development, \\
-#'             healthcare and civil rights."
+#'             healthcare, and civil rights."
 #'         )
 #'       )
 #'     )
