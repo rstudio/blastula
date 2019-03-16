@@ -137,10 +137,6 @@ compose_email <- function(body = NULL,
     tidy_gsub(
       commonmark::markdown_html(preheader_text), "\n", "")
 
-  html_body_text <-
-    tidy_gsub(
-      commonmark::markdown_html(body_text), "\n", "")
-
   html_header <-
     tidy_gsub(
       commonmark::markdown_html(header), "\n", "")
