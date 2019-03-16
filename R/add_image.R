@@ -2,6 +2,9 @@
 #'
 #' Add a local image inside the body of the email with this helper function.
 #' @param file A path to an image file.
+#' @param alt Text description of image passed to the `alt` attribute inside of the image (`<img>`) tag
+#'     for use when image loading is disabled and on screen readers. `NULL` default produces blank
+#'     (`""`) alt text.
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
 #' @examples
@@ -31,7 +34,7 @@
 #'     ")
 #' @importFrom glue glue
 #' @export
-add_image <- function(file) {
+add_image <- function(file, alt = NULL) {
 
   # Construct a CID based on the filename
   # with a random string prepended to it
@@ -43,7 +46,15 @@ add_image <- function(file) {
   # Create the image URI
   uri <- get_image_uri(file = file)
 
+  # Determine alt text
+  alt_text <-
+    if (is.null(alt)) {
+      ""
+    } else {
+      alt
+    }
+
   # Generate the Base64-encoded image and place it
   # within <img> tags
-  glue::glue("<img cid=\"{cid}\" src=\"{uri}\" width=\"520\"/>\n")
+  glue::glue("<img cid=\"{cid}\" src=\"{uri}\" width=\"520\" alt=\"{alt_text}\"/>\n")
 }
