@@ -52,18 +52,19 @@
 #' email <-
 #'   compose_email(
 #'   body = "
-#'   Hello!
+#' Hello!
 #'
-#'   I just wanted to let you \\
-#'   know that the {thing} that \\
-#'   asked me for is ready to \\
-#'   pick up. So, come over and \\
-#'   do that.
+#' I just wanted to let you \\
+#' know that the {thing} that \\
+#' asked me for is ready to \\
+#' pick up. So, come over and \\
+#' do that.
 #'
-#'   Cheers,
+#' Cheers,
 #'
-#'   {sender_name}",
-#'   thing = "report")
+#' {sender_name}",
+#'   thing = "report"
+#'   )
 #' @importFrom glue glue
 #' @importFrom commonmark markdown_html
 #' @importFrom stringr str_replace str_replace_all str_detect
@@ -236,3 +237,4 @@ simple_html_block <- function() {
                   </td>
                 </tr>
                 "
+}
