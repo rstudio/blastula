@@ -40,8 +40,9 @@
 #'   )
 #' @export
 article <- function(image = NULL,
-                          title = NULL,
-                          content = NULL) {
+                    title = NULL,
+                    content = NULL,
+                    link = NULL) {
 
   if (is.null(image)) {
     image <- ""
