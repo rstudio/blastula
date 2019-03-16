@@ -71,7 +71,8 @@ article <- function(image = NULL,
     list(
       image = image,
       title = title,
-      content = content)
+      content = content,
+      link = link)
 
   # Apply the `article` class
   class(article_item_list) <- "article"
