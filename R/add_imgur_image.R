@@ -16,12 +16,16 @@
 #' @param image The path to the local image we would like to deploy to Imgur and
 #'   for which we'd like an image tag.
 #' @param client_id The Imgur Client ID value.
+#' @param alt Text description of image passed to the `alt` attribute inside of the image (`<img>`) tag
+#'     for use when image loading is disabled and on screen readers. `NULL` default produces blank
+#'     (`""`) alt text.
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
 #' @importFrom glue glue
 #' @export
 add_imgur_image <- function(image,
-                            client_id = NULL) {
+                            client_id = NULL,
+                            alt = NULL) {
 
   if (inherits(image, "ggplot")) {
 
@@ -67,8 +71,16 @@ add_imgur_image <- function(image,
   response_list <-
     imgur_upload(image, client_id)
 
+  # Determine alt text
+  alt_text <-
+    if (is.null(alt)) {
+      ""
+    } else {
+      alt
+    }
+
   glue::glue(
-    "<a href=\"#\"><img src=\"{response_list$link}\" \\
+    "<a href=\"#\"><img src=\"{response_list$link}\" alt=\"{alt_text}\" \\
      style=\"max-width:512px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
   ) %>%
     as.character()

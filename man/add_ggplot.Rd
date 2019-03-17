@@ -4,7 +4,7 @@
 \alias{add_ggplot}
 \title{Create an HTML fragment for an embedded ggplot image}
 \usage{
-add_ggplot(plot_object, width = 5, height = 5)
+add_ggplot(plot_object, width = 5, height = 5, alt = NULL)
 }
 \arguments{
 \item{plot_object}{The \code{ggplot2} plot object.}
@@ -12,6 +12,10 @@ add_ggplot(plot_object, width = 5, height = 5)
 \item{width}{The width of the output plot in inches.}
 
 \item{height}{The height of the output plot in inches.}
+
+\item{alt}{Text description of image passed to the \code{alt} attribute inside of the image (\code{<img>}) tag
+for use when image loading is disabled and on screen readers. Defaults to the \code{ggplot2} plot object's
+title, if exists. Override by passing alternative text or \code{""} for no text.}
 }
 \value{
 A character object with an HTML fragment that can be placed inside

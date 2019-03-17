@@ -4,10 +4,14 @@
 \alias{add_image}
 \title{Create an HTML fragment for an embedded image}
 \usage{
-add_image(file)
+add_image(file, alt = NULL)
 }
 \arguments{
 \item{file}{A path to an image file.}
+
+\item{alt}{Text description of image passed to the \code{alt} attribute inside of the image (\code{<img>}) tag
+for use when image loading is disabled and on screen readers. \code{NULL} default produces blank
+(\code{""}) alt text.}
 }
 \value{
 A character object with an HTML fragment that can be placed inside
