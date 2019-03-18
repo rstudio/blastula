@@ -14,7 +14,8 @@ With \code{block_text()} we can define a title text area and this can be easily
 combined with other \code{block_*()} functions. The title will take the entire
 width of the block and will resize according to screen width. Like all
 \code{block_*()} functions, \code{block_title()} must be placed inside of \code{blocks()}
-and that object can be provided to the \code{body} argument of \code{compose_email()}.
+and that object can be provided to the \code{body} or \code{footer} argument of
+\code{compose_email()}.
 }
 \examples{
 # Create a block of two, side-by-side

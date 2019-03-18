@@ -13,10 +13,10 @@ block_articles(...)
 With \code{block_articles()}, we can create a single- or multi-column layout of
 articles. The articles are responsive to the screen width, so side-by-side
 articles will collapse and any of the optional images will resize
-accordingly. The function can accept one to three \code{article()} calls,
-each with varying amounts of text and imagery. Like all \code{block_*()}
-functions, \code{block_articles()} must be placed in a list object and that list
-can only be provided to the \code{blocks} argument of \code{compose_email()}.
+accordingly. The function can accept one to three \code{article()} calls, each
+with varying amounts of text and imagery. Like all \code{block_*()} functions,
+\code{block_articles()} must be placed inside of \code{blocks()} and that object can be
+provided to the \code{body} or \code{footer} argument of \code{compose_email()}.
 }
 \examples{
 # Create a block of three, side-by-side

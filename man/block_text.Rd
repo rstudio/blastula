@@ -14,7 +14,7 @@ With \code{block_text()} we can define a text area and this can be easily combin
 with other \code{block_*()} functions. The text will take the entire width of the
 block and will resize according to screen width. Like all \code{block_*()}
 functions, \code{block_text()} must be placed inside of \code{blocks()} and that object
-can be provided to the \code{body} argument of \code{compose_email()}.
+can be provided to the \code{body} or \code{footer} argument of \code{compose_email()}.
 }
 \examples{
 # Create a block of two, side-by-side
