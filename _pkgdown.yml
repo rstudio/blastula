@@ -41,10 +41,10 @@ reference:
 
   - title: Email Sending
     desc: >
-      Once the email looks good enough to send, we send through an SMTP server,
-      through the MailGun service, or simply extract the HTML message body and
-      go elsewhere. There is the convenient option to create and store SMTP
-      credentials with the `create_email_creds_file()` function.
+      Once the email looks good enough to send, we can send it through an SMTP
+      server, with the MailGun service, or simply extract the HTML message body
+      and go elsewhere. There is also the convenient option to create and store
+      SMTP credentials with the `create_email_creds_file()` function.
     contents:
     - smtp_send
     - send_by_mailgun
