@@ -95,6 +95,7 @@ compose_email <- function(body = NULL,
     title_text <- ""
   }
 
+
   if (!is.null(body)) {
 
     if (inherits(body, "blocks")) {
@@ -129,12 +130,34 @@ compose_email <- function(body = NULL,
     header <- ""
   }
 
+
   if (!is.null(footer)) {
-    footer_text <-
-      glue::glue(footer, ..., .envir = .envir)
+
+    if (inherits(footer, "blocks")) {
+
+      html_footer <- paste(unlist(footer), collapse = "\n")
+
+    } else {
+
+      footer <-
+        glue::glue(footer, ..., .envir = .envir)
+
+      html_footer <-
+        footer %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("\n", "")
+
+      html_footer <-
+        glue::glue(
+          simple_html_block(),
+          html_paragraphs = html_footer
+        )
+    }
+
   } else {
-    footer_text <- ""
+    html_footer <- ""
   }
+
 
   html_preheader_text <-
     tidy_gsub(
@@ -143,10 +166,6 @@ compose_email <- function(body = NULL,
   html_header <-
     tidy_gsub(
       commonmark::markdown_html(header), "\n", "")
-
-  html_footer <-
-    tidy_gsub(
-      commonmark::markdown_html(footer_text), "\n", "")
 
   # Generate the email message body
   body <- glue::glue(bls_standard_template())
