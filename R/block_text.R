@@ -4,7 +4,7 @@
 #' with other `block_*()` functions. The text will take the entire width of the
 #' block and will resize according to screen width. Like all `block_*()`
 #' functions, `block_text()` must be placed inside of `blocks()` and that object
-#' can be provided to the `body` argument of `compose_email()`.
+#' can be provided to the `body` or `footer` argument of `compose_email()`.
 #'
 #' @param ... Paragraphs of text.
 #' @examples
