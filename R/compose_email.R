@@ -240,7 +240,7 @@ compose_email <- function(body = NULL,
   email_message
 }
 
-#' Template for a simple block of HTML
+#' Template for a simple block of HTML in the body
 #' @noRd
 simple_body_block <- function() {
 
