@@ -111,7 +111,6 @@ social_link_block_template <- function() {
                   </table>
                 </td>
               </tr>"
-
 }
 
 #' @importFrom glue glue
@@ -127,9 +126,13 @@ icon_for_social_service <- function(service,
          call. = FALSE)
   }
 
-  # If nothing is provided for variant,
-  # default to `bw`
-  if (is.null(variant)) {
+  # Ensure that the icon variant is valid; if
+  # nothing is provided for variant, default to `bw`
+  if (!is.null(variant) && !(variant %in% social_service_icon_variants())) {
+    stop("The given `variant` is not available for the social icons\n",
+         " * look inside the article at `?social_link` to see which are available\n",
+         call. = FALSE)
+  } else if (is.null(variant)) {
     variant <- "bw"
   }
 
