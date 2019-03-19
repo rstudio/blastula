@@ -217,10 +217,15 @@ social_service_icons <- function() {
     "tumblr",
     "deezer",
     "soundcloud",
-    "slideshare",
     "meetup",
     "etsy",
-    "reddit"
+    "reddit",
+    "stackoverflow",
+    "youku",
+    "baidu",
+    "sinaweibo",
+    "qq",
+    "douban"
   )
 }
 
