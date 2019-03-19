@@ -100,6 +100,7 @@ compose_email <- function(body = NULL,
 
     if (inherits(body, "blocks")) {
 
+      body <- render_blocks(blocks = body, context = "body")
       html_body_text <- paste(unlist(body), collapse = "\n")
 
     } else {
@@ -135,6 +136,7 @@ compose_email <- function(body = NULL,
 
     if (inherits(footer, "blocks")) {
 
+      footer <- render_blocks(blocks = footer, context = "footer")
       html_footer <- paste(unlist(footer), collapse = "\n")
 
     } else {
