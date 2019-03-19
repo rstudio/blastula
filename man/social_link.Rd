@@ -4,7 +4,7 @@
 \alias{social_link}
 \title{Specify the components of a social link}
 \usage{
-social_link(service, link, alt = NULL, icon = NULL, variant = NULL)
+social_link(service, link, icon = NULL, variant = NULL, alt = NULL)
 }
 \arguments{
 \item{service}{Either the name of a social media service or either of
@@ -12,15 +12,15 @@ social_link(service, link, alt = NULL, icon = NULL, variant = NULL)
 
 \item{link}{The relevant link to content on the \code{service}.}
 
-\item{alt}{Text description of image passed to the \code{alt} attribute inside of
-the image (\code{<img>}) tag for use when image loading is disabled and on
-screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
-
 \item{icon}{A link to an icon for the service. If \code{NULL}, then a link to a
 suitable image asset will be automatically created.}
 
 \item{variant}{The variant of the icon used for the \code{service} if \code{icon} is
 set to \code{NULL}.}
+
+\item{alt}{Text description of image passed to the \code{alt} attribute inside of
+the image (\code{<img>}) tag for use when image loading is disabled and on
+screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
 }
 \description{
 The \code{social_link()} function is used exclusively within
