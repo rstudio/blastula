@@ -41,17 +41,43 @@
 #'       )
 #'     )
 #'   )
-#' @importFrom commonmark markdown_html
-#' @importFrom glue glue
 #' @export
 block_text <- function(...) {
 
   x <- list(...)
 
+  class(x) <- "block_text"
+
+  x
+}
+
+#' @importFrom commonmark markdown_html
+#' @importFrom glue glue
+#' @noRd
+render_block_text <- function(x, context = "body") {
+
+  if (context == "body") {
+    font_size <- 14
+    font_color <- "#000000"
+    margin_bottom <- 12
+    padding <- 12
+  } else if (context == "footer") {
+    font_size <- 12
+    font_color <- "#999999"
+    margin_bottom <- 12
+    padding <- 10
+  }
+
+  paragraph <-
+    glue::glue(
+      "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; color: {font_color};font-size: {font_size}px; font-weight: normal; margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">"
+    ) %>%
+    as.character()
+
   text <-
     paste(x %>% unlist(), collapse = "\n") %>%
     commonmark::markdown_html() %>%
-    tidy_gsub("<p>", "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px; text-align: center;\">")
+    tidy_gsub("<p>", paragraph)
 
   glue::glue(text_block_template()) %>% as.character()
 }
@@ -61,11 +87,11 @@ block_text <- function(...) {
 text_block_template <- function() {
 
 "              <tr>
-                <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
+                <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: {font_size}px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
                   <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
                     <tbody>
                       <tr>
-                        <td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+                        <td style=\"font-family: Helvetica, sans-serif; font-size: {font_size}px; vertical-align: top;\" valign=\"top\">
                           {text}
                         </td>
                       </tr>
