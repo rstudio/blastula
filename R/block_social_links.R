@@ -72,7 +72,29 @@ block_social_links <- function(...) {
   x
 }
 
-#' A template for a title text HTML fragment
+#' @importFrom glue glue
+#' @noRd
+render_block_social_links <- function(x) {
+
+  for (i in seq_along(x)) {
+
+    link <- x[[i]]$link
+    icon <- x[[i]]$icon
+    alt <- x[[i]]$alt
+
+    x[[i]] <-
+      glue(
+        "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
+      ) %>%
+      as.character()
+  }
+
+  social_links <- x %>% unlist() %>% paste(collapse = "\n")
+
+  glue::glue(social_link_block_template()) %>% as.character()
+}
+
+#' A template for a social link HTML fragment
 #' @noRd
 socal_link_block_template <- function() {
 
