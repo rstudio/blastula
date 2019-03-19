@@ -9,8 +9,8 @@
 #' @param link The relevant link to content on the `service`.
 #' @param icon A link to an icon for the service. If `NULL`, then a link to a
 #'   suitable image asset will be automatically created.
-#' @param variant The variant of the icon used for the `service` if `icon` is
-#'   set to `NULL`.
+#' @param variant The variant of the icon to use. Options include `bw` (black
+#'   and white, the default), `color`, `dark_gray`, `gray`, and `light_gray`.
 #' @param alt Text description of image passed to the `alt` attribute inside of
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. `NULL` default produces blank (`""`) alt text.
