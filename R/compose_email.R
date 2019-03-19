@@ -7,21 +7,17 @@
 #' variables can be specified in the function call (using named arguments with
 #' `...`) and any variables not found in `...` will be searched for in the
 #' global environment.
-#' @param body The main body of text for the email message. Markdown can be used
-#'   here (along with string interpolation via curly braces and named arguments)
-#'   to construct the main text. Alternatively, we can supply a set of
-#'   `block_*()` calls enclosed within the `blocks()` function to take advantage
-#'   of precomposed HTML blocks.
-#' @param header,footer The header and footer text for the email message, As
-#'   with the `body`, Markdown and string interpolation can be used here.
-#' @param .preheader_text The text that appears before the subject in some email
-#'   clients. This must be plaintext.
+#' @param header,body,footer The three layout sections for HTML email, from top
+#'   to bottom. Markdown text can be supplied to each of these. String
+#'   interpolation is enabled via curly braces and named arguments in `...`.
+#'   Alternatively, we can supply a set of `block_*()` calls enclosed within the
+#'   `blocks()` function to take advantage of precomposed HTML blocks.
 #' @param .title The title of the email message. This is not the subject but the
 #'   HTML title text which may appear in limited circumstances.
 #' @param .envir An opportunity to specify the environment. By default, this is
 #'   the `parent.frame()`.
-#' @param ... Expression strings for string interpolation for the `body`,
-#'   `footer`, and `preheader_text` string data.
+#' @param ... Expression strings for string interpolation within the `header`,
+#'   `body` and `footer`.
 #' @return An `email_message` object.
 #' @examples
 #' # Create a simple email message using
