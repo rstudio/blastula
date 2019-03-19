@@ -188,6 +188,7 @@ print.block_articles <- function(x, ...) {
 #' This facilitates printing of the article object to the console.
 #' @param x an object of class \code{article}.
 #' @keywords internal
+#' @importFrom glue glue
 #' @export
 print.article <- function(x, ...) {
 
