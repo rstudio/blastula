@@ -29,13 +29,10 @@ social_link <- function(service,
     icon <- icon_for_social_service(service = service, variant = variant)
   }
 
-  # Determine alt text
-  alt_text <-
-    if (is.null(alt)) {
-      ""
-    } else {
-      alt
-    }
+  # Set default alt text if not provided
+  if (is.null(alt)) {
+    alt <- service
+  }
 
   # Add the social link components to the
   # `social_link_item_list` object
