@@ -12,18 +12,67 @@ social_link(service, link, icon = NULL, variant = NULL, alt = NULL)
 
 \item{link}{The relevant link to content on the \code{service}.}
 
-\item{icon}{A link to an icon for the service. If \code{NULL}, then a link to a
-suitable image asset will be automatically created.}
+\item{icon}{A link to an image representing the service. If not supplied,
+then a link to a suitable image asset will be automatically created.}
 
 \item{variant}{The variant of the icon to use. Options include \code{bw} (black
 and white, the default), \code{color}, \code{dark_gray}, \code{gray}, and \code{light_gray}.}
 
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
 the image (\code{<img>}) tag for use when image loading is disabled and on
-screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
+screen readers. If not supplied, then the name of the \code{service} will be
+used as alt text.}
 }
 \description{
 The \code{social_link()} function is used exclusively within
 \code{block_social_links()} with as many calls as the number of social media links
 required.
+}
+\examples{
+# Create an email message with some
+# articles in the `body`; in the footer,
+# add some social media icons linking
+# to web content
+compose_email(
+  body =
+    blocks(
+      block_title("Exciting Travel Destinations"),
+      block_articles(
+        article(
+          image = "https://i.imgur.com/dxSXzGb.jpg",
+          title = "Hong Kong",
+          content =
+            "Once home to fishermen and farmers, \\\\
+            modern Hong Kong is a teeming, \\\\
+            commercially-vibrant metropolis where \\\\
+            Chinese and Western influences fuse."
+        ),
+        article(
+          image = "https://i.imgur.com/bJzVIrG.jpg",
+          title = "Australia",
+          content =
+            "Australia ranks as one of the best \\\\
+            places to live in the world by all \\\\
+            indices of income, human development, \\\\
+            healthcare, and civil rights."
+        )
+      )
+    ),
+  footer =
+    blocks(
+      block_text("Thanks for reading! Find us here:"),
+      block_social_links(
+        social_link(
+          service = "pinterest",
+          link = "https://www.pinterest.ca/TravelLeisure/",
+          variant = "color"
+        ),
+        social_link(
+          service = "tripadvisor",
+          link = "https://www.tripadvisor.ca/TravelersChoice",
+          variant = "color"
+        )
+      )
+    )
+)
 }

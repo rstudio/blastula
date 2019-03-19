@@ -5,21 +5,14 @@
 \title{Create the email message body}
 \usage{
 compose_email(body = NULL, header = NULL, footer = NULL,
-  .preheader_text = NULL, .title = NULL, .envir = parent.frame(),
-  ...)
+  .title = NULL, .envir = parent.frame(), ...)
 }
 \arguments{
-\item{body}{The main body of text for the email message. Markdown can be used
-here (along with string interpolation via curly braces and named arguments)
-to construct the main text. Alternatively, we can supply a set of
-\code{block_*()} calls enclosed within the \code{blocks()} function to take advantage
-of precomposed HTML blocks.}
-
-\item{header, footer}{The header and footer text for the email message, As
-with the \code{body}, Markdown and string interpolation can be used here.}
-
-\item{.preheader_text}{The text that appears before the subject in some email
-clients. This must be plaintext.}
+\item{header, body, footer}{The three layout sections for HTML email, from top
+to bottom. Markdown text can be supplied to each of these. String
+interpolation is enabled via curly braces and named arguments in \code{...}.
+Alternatively, we can supply a set of \code{block_*()} calls enclosed within the
+\code{blocks()} function to take advantage of precomposed HTML blocks.}
 
 \item{.title}{The title of the email message. This is not the subject but the
 HTML title text which may appear in limited circumstances.}
@@ -27,8 +20,8 @@ HTML title text which may appear in limited circumstances.}
 \item{.envir}{An opportunity to specify the environment. By default, this is
 the \code{parent.frame()}.}
 
-\item{...}{Expression strings for string interpolation for the \code{body},
-\code{footer}, and \code{preheader_text} string data.}
+\item{...}{Expression strings for string interpolation within the \code{header},
+\code{body} and \code{footer}.}
 }
 \value{
 An \code{email_message} object.
