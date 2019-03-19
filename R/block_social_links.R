@@ -67,9 +67,9 @@ block_social_links <- function(...) {
 
   x <- list(...)
 
-  social_links <- x %>% paste(collapse = "\n")
+  class(x) <- "block_social_links"
 
-  glue(socal_link_block_template()) %>% as.character()
+  x
 }
 
 #' A template for a title text HTML fragment
