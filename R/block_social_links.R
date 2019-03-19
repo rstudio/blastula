@@ -7,19 +7,19 @@
 #' @param service Either the name of a social media service or either of
 #'   `website`, `email`, or `rss`.
 #' @param link The relevant link to content on the `service`.
-#' @param alt Text description of image passed to the `alt` attribute inside of
-#'   the image (`<img>`) tag for use when image loading is disabled and on
-#'   screen readers. `NULL` default produces blank (`""`) alt text.
 #' @param icon A link to an icon for the service. If `NULL`, then a link to a
 #'   suitable image asset will be automatically created.
 #' @param variant The variant of the icon used for the `service` if `icon` is
 #'   set to `NULL`.
+#' @param alt Text description of image passed to the `alt` attribute inside of
+#'   the image (`<img>`) tag for use when image loading is disabled and on
+#'   screen readers. `NULL` default produces blank (`""`) alt text.
 #' @export
 social_link <- function(service,
                         link,
-                        alt = NULL,
                         icon = NULL,
-                        variant = NULL) {
+                        variant = NULL,
+                        alt = NULL) {
 
   # Lowercase the input given as `service`
   service <- tolower(service)
