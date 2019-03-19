@@ -80,21 +80,16 @@ compose_email <- function(body = NULL,
                           .envir = parent.frame(),
                           ...) {
 
-  if (!is.null(.preheader_text)) {
-    preheader_text <-
-      glue::glue(.preheader_text, ..., .envir = .envir)
-  } else {
-    preheader_text <- ""
-  }
-
-  if (!is.null(.preheader_text)) {
+  # Define the title text for the email; use an
+  # empty string if not supplied
+  if (!is.null(.title)) {
     title_text <-
       glue::glue(.title, ..., .envir = .envir)
   } else {
     title_text <- ""
   }
 
-
+  # Define the email body section
   if (!is.null(body)) {
 
     if (inherits(body, "blocks")) {
@@ -123,13 +118,7 @@ compose_email <- function(body = NULL,
     html_body_text <- ""
   }
 
-  if (!is.null(header)) {
-    header <-
-      glue::glue(header, ..., .envir = .envir)
-  } else {
-    header <- ""
-  }
-
+  # Define the email footer section
   if (!is.null(footer)) {
 
     if (inherits(footer, "blocks")) {
@@ -148,24 +137,48 @@ compose_email <- function(body = NULL,
         tidy_gsub("\n", "")
 
       html_footer <-
-        glue::glue(
-          simple_footer_block(),
-          html_paragraphs = html_footer
-        )
+        render_blocks(
+          blocks =
+            blocks(
+              block_text(html_footer)),
+          context = "footer"
+        )[[1]]
     }
 
   } else {
     html_footer <- ""
   }
 
+  # Define the email header section
+  if (!is.null(header)) {
 
-  html_preheader_text <-
-    tidy_gsub(
-      commonmark::markdown_html(preheader_text), "\n", "")
+    if (inherits(header, "blocks")) {
 
-  html_header <-
-    tidy_gsub(
-      commonmark::markdown_html(header), "\n", "")
+      header <- render_blocks(blocks = header, context = "header")
+      html_header <- paste(unlist(header), collapse = "\n")
+
+    } else {
+
+      header <-
+        glue::glue(header, ..., .envir = .envir)
+
+      html_header <-
+        header %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("\n", "")
+
+      html_header <-
+        render_blocks(
+          blocks =
+            blocks(
+              block_text(html_header)),
+          context = "header"
+        )[[1]]
+    }
+
+  } else {
+    html_header <- ""
+  }
 
   # Generate the email message body
   body <- glue::glue(bls_standard_template())
