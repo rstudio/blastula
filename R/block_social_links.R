@@ -7,13 +7,61 @@
 #' @param service Either the name of a social media service or either of
 #'   `website`, `email`, or `rss`.
 #' @param link The relevant link to content on the `service`.
-#' @param icon A link to an icon for the service. If `NULL`, then a link to a
-#'   suitable image asset will be automatically created.
+#' @param icon A link to an image representing the service. If not supplied,
+#'   then a link to a suitable image asset will be automatically created.
 #' @param variant The variant of the icon to use. Options include `bw` (black
 #'   and white, the default), `color`, `dark_gray`, `gray`, and `light_gray`.
 #' @param alt Text description of image passed to the `alt` attribute inside of
 #'   the image (`<img>`) tag for use when image loading is disabled and on
-#'   screen readers. `NULL` default produces blank (`""`) alt text.
+#'   screen readers. If not supplied, then the name of the `service` will be
+#'   used as alt text.
+#' @examples
+#' # Create an email message with some
+#' # articles in the `body`; in the footer,
+#' # add some social media icons linking
+#' # to web content
+#' compose_email(
+#'   body =
+#'     blocks(
+#'       block_title("Exciting Travel Destinations"),
+#'       block_articles(
+#'         article(
+#'           image = "https://i.imgur.com/dxSXzGb.jpg",
+#'           title = "Hong Kong",
+#'           content =
+#'             "Once home to fishermen and farmers, \\
+#'             modern Hong Kong is a teeming, \\
+#'             commercially-vibrant metropolis where \\
+#'             Chinese and Western influences fuse."
+#'         ),
+#'         article(
+#'           image = "https://i.imgur.com/bJzVIrG.jpg",
+#'           title = "Australia",
+#'           content =
+#'             "Australia ranks as one of the best \\
+#'             places to live in the world by all \\
+#'             indices of income, human development, \\
+#'             healthcare, and civil rights."
+#'         )
+#'       )
+#'     ),
+#'   footer =
+#'     blocks(
+#'       block_text("Thanks for reading! Find us here:"),
+#'       block_social_links(
+#'         social_link(
+#'           service = "pinterest",
+#'           link = "https://www.pinterest.ca/TravelLeisure/",
+#'           variant = "color"
+#'         ),
+#'         social_link(
+#'           service = "tripadvisor",
+#'           link = "https://www.tripadvisor.ca/TravelersChoice",
+#'           variant = "color"
+#'         )
+#'       )
+#'     )
+#' )
 #' @export
 social_link <- function(service,
                         link,
@@ -55,8 +103,9 @@ social_link <- function(service,
 #' With `block_social_links()`, we can create a block of social media links and
 #' links to websites, email, or RSS feeds. The function can accept as many
 #' `social_link()` calls as seen fit to email. Like all `block_*()` functions,
-#' `block_social_links()` must be placed inside of `blocks()` and that object
-#' can be provided to the `body` or `footer` argument of `compose_email()`.
+#' `block_text()` must be placed inside of `blocks()` and the resultant `blocks`
+#' object can be provided to the `body`, `header`, or `footer` arguments of
+#' `compose_email()`.
 #'
 #' @param ... One or more calls to `social_link()`.
 #' @export

@@ -87,8 +87,9 @@ article <- function(image = NULL,
 #' articles will collapse and any of the optional images will resize
 #' accordingly. The function can accept one to three `article()` calls, each
 #' with varying amounts of text and imagery. Like all `block_*()` functions,
-#' `block_articles()` must be placed inside of `blocks()` and that object can be
-#' provided to the `body` or `footer` argument of `compose_email()`.
+#' `block_text()` must be placed inside of `blocks()` and the resultant `blocks`
+#' object can be provided to the `body`, `header`, or `footer` arguments of
+#' `compose_email()`.
 #'
 #' @param ... One, two, or three calls to `article()`.
 #' @examples

@@ -3,9 +3,9 @@
 #' With `block_title()` we can define a title text area and this can be easily
 #' combined with other `block_*()` functions. The title will take the entire
 #' width of the block and will resize according to screen width. Like all
-#' `block_*()` functions, `block_title()` must be placed inside of `blocks()`
-#' and that object can be provided to the `body` or `footer` argument of
-#' `compose_email()`.
+#' `block_*()` functions, `block_text()` must be placed inside of `blocks()` and
+#' the resultant `blocks` object can be provided to the `body`, `header`, or
+#' `footer` arguments of `compose_email()`.
 #'
 #' @param ... Paragraphs of title text.
 #' @examples
