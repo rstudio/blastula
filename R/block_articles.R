@@ -335,7 +335,7 @@ block_article_3 <- function(items) {
   </tr>"
     ) %>% as.character()
 
-  class(block) <- c("block_articles")
+  class(block) <- "block_articles"
 
   block
 }
@@ -433,7 +433,7 @@ block_article_2 <- function(items) {
 </tr>"
     ) %>% as.character()
 
-  class(block) <- c("block_articles")
+  class(block) <- "block_articles"
 
   block
 }
@@ -476,7 +476,7 @@ block_article_1 <- function(items) {
   </td>
 </tr>") %>% as.character()
 
-  class(block) <- c("block_articles")
+  class(block) <- "block_articles"
 
   block
 }
