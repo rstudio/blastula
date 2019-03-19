@@ -113,6 +113,22 @@ block_social_links <- function(...) {
 
   x <- list(...)
 
+  # Stop function if nothing is provided
+  if (length(x) == 0) {
+    stop("One or more `social_link()` items must be supplied.",
+         call. = FALSE)
+  }
+
+  # Stop function if all of the items
+  # provided aren't of the class `social_link`
+  if (!all((lapply(x, class) %>% unlist()) %in% "social_link")) {
+
+    stop("All objects provided to `block_social_links()` must be of the ",
+         "class `social_link`:\n",
+         " * These objects are created by the `social_link()` function.",
+         call. = FALSE)
+  }
+
   class(x) <- "block_social_links"
 
   x
