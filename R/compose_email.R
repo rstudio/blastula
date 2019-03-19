@@ -242,7 +242,7 @@ compose_email <- function(body = NULL,
 
 #' Template for a simple block of HTML
 #' @noRd
-simple_html_block <- function() {
+simple_body_block <- function() {
 
 "                <tr>
                   <td class=\"wrapper\" style=\"font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;\">
