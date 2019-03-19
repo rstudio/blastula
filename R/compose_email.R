@@ -149,7 +149,7 @@ compose_email <- function(body = NULL,
 
       html_footer <-
         glue::glue(
-          simple_html_block(),
+          simple_footer_block(),
           html_paragraphs = html_footer
         )
     }
