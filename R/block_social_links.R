@@ -146,6 +146,7 @@ icon_for_social_service <- function(service,
     as.character()
 }
 
+#' @noRd
 social_service_icons <- function() {
 
   c(
@@ -174,5 +175,17 @@ social_service_icons <- function() {
     "meetup",
     "etsy",
     "reddit"
+  )
+}
+
+#' @noRd
+social_service_icon_variants <- function() {
+
+  c(
+    "color",
+    "bw",
+    "dark_gray",
+    "gray",
+    "light_gray"
   )
 }
