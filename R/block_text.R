@@ -61,7 +61,7 @@ render_block_text <- function(x, context = "body") {
     font_color <- "#000000"
     margin_bottom <- 12
     padding <- 12
-  } else if (context == "footer") {
+  } else if (context %in% c("header", "footer")) {
     font_size <- 12
     font_color <- "#999999"
     margin_bottom <- 12
