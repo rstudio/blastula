@@ -37,16 +37,20 @@ social_link <- function(service,
       alt
     }
 
-  social_link <-
-    glue(
-      "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt_text}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
-    ) %>%
-    as.character()
+  # Add the social link components to the
+  # `social_link_item_list` object
+  social_link_item_list <-
+    list(
+      service = service,
+      link = link,
+      icon = icon,
+      variant = variant,
+      alt = alt)
 
   # Apply the `social_link` class
-  class(social_link) <- "social_link"
+  class(social_link_item_list) <- "social_link"
 
-  social_link
+  social_link_item_list
 }
 
 #' A block of one, two, or three articles with a multicolumn layout
