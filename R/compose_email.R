@@ -115,7 +115,7 @@ compose_email <- function(body = NULL,
 
       html_body_text <-
         glue::glue(
-          simple_html_block(),
+          simple_body_block(),
           html_paragraphs = html_body_text
         )
     }
@@ -130,7 +130,6 @@ compose_email <- function(body = NULL,
   } else {
     header <- ""
   }
-
 
   if (!is.null(footer)) {
 
