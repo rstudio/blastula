@@ -15,8 +15,8 @@ social_link(service, link, icon = NULL, variant = NULL, alt = NULL)
 \item{icon}{A link to an icon for the service. If \code{NULL}, then a link to a
 suitable image asset will be automatically created.}
 
-\item{variant}{The variant of the icon used for the \code{service} if \code{icon} is
-set to \code{NULL}.}
+\item{variant}{The variant of the icon to use. Options include \code{bw} (black
+and white, the default), \code{color}, \code{dark_gray}, \code{gray}, and \code{light_gray}.}
 
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
 the image (\code{<img>}) tag for use when image loading is disabled and on
