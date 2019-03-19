@@ -147,6 +147,13 @@ block_articles <- function(...) {
          call. = FALSE)
   }
 
+  class(x) <- "block_articles"
+
+  x
+}
+
+render_block_articles <- function(x) {
+
   if (length(x) == 3) {
     return(block_article_3(items = x))
   }
