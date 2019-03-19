@@ -96,7 +96,7 @@ render_block_social_links <- function(x) {
 
 #' A template for a social link HTML fragment
 #' @noRd
-socal_link_block_template <- function() {
+social_link_block_template <- function() {
 
   "              <tr>
                 <td class=\"content-block\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; padding-top: 0; padding-bottom: 24px; font-size: 12px; color: #999999; text-align: center;\" valign=\"top\" align=\"center\">
