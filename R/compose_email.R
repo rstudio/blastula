@@ -76,7 +76,6 @@
 compose_email <- function(body = NULL,
                           header = NULL,
                           footer = NULL,
-                          .preheader_text = NULL,
                           .title = NULL,
                           .envir = parent.frame(),
                           ...) {
