@@ -103,9 +103,9 @@ social_link <- function(service,
 #' With `block_social_links()`, we can create a block of social media links and
 #' links to websites, email, or RSS feeds. The function can accept as many
 #' `social_link()` calls as seen fit to email. Like all `block_*()` functions,
-#' `block_text()` must be placed inside of `blocks()` and the resultant `blocks`
-#' object can be provided to the `body`, `header`, or `footer` arguments of
-#' `compose_email()`.
+#' `block_social_links()` must be placed inside of `blocks()` and the resultant
+#' `blocks` object can be provided to the `body`, `header`, or `footer`
+#' arguments of `compose_email()`.
 #'
 #' @param ... One or more calls to `social_link()`.
 #' @export

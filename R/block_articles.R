@@ -9,36 +9,19 @@
 #' @param content An optional paragraph of text for the article.
 #' @param link An optional link to apply to the content elements.
 #' @examples
-#' # Creating a block of two, side-by-side
-#' # articles is possible with two calls
-#' # of `article()`; remember to use
-#' # `block_articles()` and put all of that
-#' # inside `blocks()`
-#' compose_email(
-#'   body =
-#'     blocks(
-#'       block_articles(
-#'         article(
-#'           image = "https://i.imgur.com/dxSXzGb.jpg",
-#'           title = "Hong Kong",
-#'           content =
-#'             "Once home to fishermen and farmers, \\
-#'             modern Hong Kong is a teeming, \\
-#'             commercially-vibrant metropolis where \\
-#'             Chinese and Western influences fuse."
-#'         ),
-#'         article(
-#'           image = "https://i.imgur.com/bJzVIrG.jpg",
-#'           title = "Australia",
-#'           content =
-#'             "Australia ranks as one of the best \\
-#'             places to live in the world by all \\
-#'             indices of income, human development, \\
-#'             healthcare, and civil rights."
-#'         )
-#'       )
-#'     )
-#'   )
+#' # We can define an article with a link
+#' # to an image, title text, some content,
+#' # and a link to relevant content
+#' article(
+#'   image = "https://i.imgur.com/dxSXzGb.jpg",
+#'   title = "Hong Kong",
+#'   content =
+#'     "Once home to fishermen and farmers, \\
+#'     modern Hong Kong is a teeming, \\
+#'     commercially-vibrant metropolis where \\
+#'     Chinese and Western influences fuse.",
+#'   link = "http://www.discoverhongkong.com"
+#' )
 #' @export
 article <- function(image = NULL,
                     title = NULL,
@@ -87,9 +70,9 @@ article <- function(image = NULL,
 #' articles will collapse and any of the optional images will resize
 #' accordingly. The function can accept one to three `article()` calls, each
 #' with varying amounts of text and imagery. Like all `block_*()` functions,
-#' `block_text()` must be placed inside of `blocks()` and the resultant `blocks`
-#' object can be provided to the `body`, `header`, or `footer` arguments of
-#' `compose_email()`.
+#' `block_articles()` must be placed inside of `blocks()` and the resultant
+#' `blocks` object can be provided to the `body`, `header`, or `footer`
+#' arguments of `compose_email()`.
 #'
 #' @param ... One, two, or three calls to `article()`.
 #' @examples
