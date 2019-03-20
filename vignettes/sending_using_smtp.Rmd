@@ -1,0 +1,208 @@
+---
+title: "Sending Email Using SMTP"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sending_using_smtp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r library, include=FALSE}
+library(blastula)
+```
+
+After we create the an `email_message` object with `compose_email()`, we can choose to send it through an SMTP server using **blastula**'s `smtp_send()` function. There is some system setup required before sending a **blastula** email message via SMTP. The main considerations are:
+
+- installation of the cross-platform `mailsend-go` binary
+- modifying an account-level setting on Gmail if using that for sending email
+- optionally storing SMTP server and auth settings and as a credentials file or as environment variables
+
+We'll go through each of these setup steps before getting into several sending examples with `smtp_send()`.
+
+## Installation of `mailsend-go`
+
+The **blastula** package is moving toward using a new binary for `smtp` mailing, provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew**), and **Linux** (**Debian** and **RPM** packages).
+
+### Windows
+
+Get the latest [64-bit](https://github.com/muquit/mailsend-go/releases/download/v1.0.3/mailsend-go_1.0.3_windows_64-bit.zip) or [32-bit](https://github.com/muquit/mailsend-go/releases/download/v1.0.3/mailsend-go_1.0.3_windows_32-bit.zip) release.
+
+Unzip and copy `mailsend-go-dir\mailsend-go.exe` to the Windows PATH. Optionally, we can place the executable in the working directory of the **R** project that is sending email.
+
+### macOS (Homebrew)
+
+Ensure that [Homebrew](https://brew.sh) is installed. Then use the following to install `mailsend-go`:
+
+```
+$ brew tap muquit/mailsend-go https://github.com/muquit/mailsend-go.git
+$ brew install mailsend-go
+```
+
+### Ubuntu and Debian
+
+Get the latest release of the [Debian package](https://github.com/muquit/mailsend-go/releases/download/v1.0.3/mailsend-go_linux_64-bit.deb). Then use the following to install `mailsend-go`:
+
+```
+$ sudo dpkg -i mailsend-go_linux_64-bit.deb 
+```
+
+### RPM Package
+
+Get the latest release of the [RPM package](https://github.com/muquit/mailsend-go/releases/download/v1.0.3/mailsend-go_linux_64-bit.rpm). Then use the following to install `mailsend-go`:
+
+```
+$ rpm -Uvh mailsend-go_linux_64-bit.rpm
+```
+
+## Requirement for Using Gmail
+
+Before using **Gmail** to send out email through **blastula**, there is a key **Gmail** account setting that must changed from the default value. We have to allow *Less Secure Apps* to use your the **Gmail** account. Details on how to make this account-level change can be found in [this support document](https://support.google.com/accounts/answer/6010255).
+
+## Creating a Credentials File
+
+We can store email credentials in a file using the `create_email_creds_file()` function. Here is an example showing how to create a credentials file as a hidden file (named `.email_creds`) in the working directory.
+
+```{r credentials_1, eval=FALSE}
+# Create a credentials file to facilitate
+# the sending of email messages
+create_email_creds_file(
+  user = "personal@email.net",
+  password = "<user_password>",
+  host = "smtp.youremailserver.org",
+  port = 465,
+  use_ssl = TRUE,
+  sender = "The User's Name",
+  creds_file_name = ".email_creds"
+)
+```
+
+We can also use preset SMTP settings. For example, if we would like to send email through **Gmail**, we can supply `provider = gmail` to not have to worry about the SMTP server details.
+
+```{r credentials_2, eval=FALSE}
+# Create a credentials file for sending
+# email through Gmail
+create_email_creds_file(
+  user = "user_name@gmail.com",
+  password = "<user_password>",
+  provider = "gmail",
+  sender = "Sender Name"
+)
+```
+
+This will create a hidden credentials file in the working directory, the name of which is based on the provider (you can optionally specify the name with the `creds_file_name` argument, as in the first example).
+
+## Sending Email 
+
+Once the `mailsend-go` binary is installed and on the system path, we can use the in-development `smtp_send()` function for sending email. 
+
+Currently, only the development version of the package (on **GitHub**) has the `smtp_send()` function. The other function for sending email, `send_email_out()`, will undergo deprecation.
+
+Let's create a simple test message with the `prepare_test_message()` function.
+
+```{r prepare_test_message, eval=FALSE}
+# Create the test message, this returns
+# an `email_message` object
+test_message <- prepare_test_message()
+
+# Preview the message in the Viewer
+test_message
+```
+
+<p align="center"><img src="prepare_test_message.png" width="600px"></p>
+
+<p align="center">The test message</p>
+
+Now that this test message is available, we can experiment with the sending of it to a personal email account.
+
+```{r smtp_send_creds, eval=FALSE}
+# Sending email to a personal account
+# using the credentials file
+smtp_send(
+  email = email_object,
+  from = "personal@email.net",
+    to = "personal@email.net",
+  subject = "Testing the `smtp_send()` function",
+  creds_file = ".email_creds"
+)
+```
+
+If the SMTP credentials are correctly set, we will get the following message in the console:
+
+```
+The email message was sent successfully.
+```
+
+We can alternatively use environment variables or even plaintext to send the email message through `smtp_send()`. Here is an example where environment variables contain the key pieces of information for the `sender`, `host`, `port`, `user`, and `password` arguments.
+
+```{r smtp_send_2, eval=FALSE}
+# Sending email using environment variables
+smtp_send(
+  email = email_object,
+  from = "personal@email.net",
+    to = "personal@email.net",
+  subject = "Testing the `smtp_send()` function",
+  sender = Sys.getenv("BLS_SENDER"),
+  host = Sys.getenv("BLS_HOST"),
+  port = Sys.getenv("BLS_PORT"),
+  user = Sys.getenv("BLS_USER_NAME"),
+  password = Sys.getenv("BLS_PASSWORD")
+)
+```
+
+Should you have the `mailsend-go` executable in a location that is not in the system path or in the working directory, we can specify its exact location using the `binary_loc` argument.
+
+```{r smtp_binary_loc, eval=FALSE}
+# Sending email to a personal account
+# using the credentials file
+smtp_send(
+  email = email_object,
+  from = "personal@email.net",
+    to = "personal@email.net",
+  subject = "Testing the `smtp_send()` function",
+  creds_file = ".email_creds",
+  binary_loc = "/path/to/mailsend" 
+)
+```
+
+Want to debug the usage of the `mailsend-go` command during sending? We can use the `echo` and `echo_cmd` arguments. Setting `echo` to `TRUE` will print the standard output and error to the console during sending. If `echo_cmd` is set to `TRUE`, we will get the system command printed to the console during the send. Here's an example where both options are enabled:
+
+```{r smtp_send_echo, eval=FALSE}
+# Sending email and echoing the system
+# command, the stdout, and the stderr
+smtp_send(
+  email = email_object,
+  from = "personal@email.net",
+    to = "personal@email.net",
+  subject = "Testing the `smtp_send()` function",
+  creds_file = "gmail_creds",
+  echo = TRUE,
+  echo_cmd = TRUE
+)
+```
+
+```
+Running /usr/local/bin/mailsend-go -sub 'Testing the `smtp_send()` function' \
+  -smtp smtp.youremailserver.org -port 465 -ssl auth -user 'personal@email.net' -pass \
+  <user_password> -fname 'Full Name' -from 'personal@email.net' -to \
+  'personal@email.net' attach -file message_inlined.html -mime-type text/html \
+  -inline
+Mail Sent Successfully
+The email message was sent successfully.
+```
+
+## Concluding
+
+This covers the basics on how to get up and running on sending emails through **blastula**'s SMTP functionality. Again, this article applies only to the in-development version of **blastula**, which can be installed using:
+
+```{r install_github, eval=FALSE}
+remotes::install_github("rich-iannone/blastula")
+```
+
+Because the `smtp_send()` is quite new, there are bound to be some problems with it. If you encounter a bug or just have a question or feature request, please file an [issue](https://github.com/rich-iannone/blastula/issues).
