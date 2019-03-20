@@ -83,6 +83,20 @@ render_block_title <- function(x, context = "body") {
   glue::glue(title_block_template()) %>% as.character()
 }
 
+#' Print a title block
+#'
+#' This facilitates printing of the title block to the Viewer.
+#' @param x an object of class \code{block_title}.
+#' @keywords internal
+#' @importFrom htmltools HTML html_print
+#' @export
+print.block_title <- function(x, ...) {
+
+  x %>%
+    render_block_title() %>%
+    htmltools::HTML() %>%
+    htmltools::html_print()
+}
 
 #' A template for a title text HTML fragment
 #' @noRd

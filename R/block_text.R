@@ -83,6 +83,21 @@ render_block_text <- function(x, context = "body") {
   glue::glue(text_block_template()) %>% as.character()
 }
 
+#' Print a text block
+#'
+#' This facilitates printing of the text block to the Viewer.
+#' @param x an object of class \code{block_text}.
+#' @keywords internal
+#' @importFrom htmltools HTML html_print
+#' @export
+print.block_text <- function(x, ...) {
+
+  x %>%
+    render_block_text(context = "body") %>%
+    htmltools::HTML() %>%
+    htmltools::html_print()
+}
+
 #' A template for a text HTML fragment
 #' @noRd
 text_block_template <- function() {
