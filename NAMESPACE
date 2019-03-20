@@ -2,7 +2,11 @@
 
 S3method(print,article)
 S3method(print,block_articles)
+S3method(print,block_social_links)
+S3method(print,block_text)
+S3method(print,block_title)
 S3method(print,email_message)
+S3method(print,social_link)
 export("%>%")
 export(add_attachment)
 export(add_cta_button)
