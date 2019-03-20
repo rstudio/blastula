@@ -13,7 +13,7 @@ block_social_links(...)
 With \code{block_social_links()}, we can create a block of social media links and
 links to websites, email, or RSS feeds. The function can accept as many
 \code{social_link()} calls as seen fit to email. Like all \code{block_*()} functions,
-\code{block_text()} must be placed inside of \code{blocks()} and the resultant \code{blocks}
-object can be provided to the \code{body}, \code{header}, or \code{footer} arguments of
-\code{compose_email()}.
+\code{block_social_links()} must be placed inside of \code{blocks()} and the resultant
+\code{blocks} object can be provided to the \code{body}, \code{header}, or \code{footer}
+arguments of \code{compose_email()}.
 }

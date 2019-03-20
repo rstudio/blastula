@@ -21,34 +21,17 @@ and having one, two, or three calls will arrange the articles in a row (or as
 a column of articles at lower screen widths).
 }
 \examples{
-# Creating a block of two, side-by-side
-# articles is possible with two calls
-# of `article()`; remember to use
-# `block_articles()` and put all of that
-# inside `blocks()`
-compose_email(
-  body =
-    blocks(
-      block_articles(
-        article(
-          image = "https://i.imgur.com/dxSXzGb.jpg",
-          title = "Hong Kong",
-          content =
-            "Once home to fishermen and farmers, \\\\
-            modern Hong Kong is a teeming, \\\\
-            commercially-vibrant metropolis where \\\\
-            Chinese and Western influences fuse."
-        ),
-        article(
-          image = "https://i.imgur.com/bJzVIrG.jpg",
-          title = "Australia",
-          content =
-            "Australia ranks as one of the best \\\\
-            places to live in the world by all \\\\
-            indices of income, human development, \\\\
-            healthcare, and civil rights."
-        )
-      )
-    )
-  )
+# We can define an article with a link
+# to an image, title text, some content,
+# and a link to relevant content
+article(
+  image = "https://i.imgur.com/dxSXzGb.jpg",
+  title = "Hong Kong",
+  content =
+    "Once home to fishermen and farmers, \\\\
+    modern Hong Kong is a teeming, \\\\
+    commercially-vibrant metropolis where \\\\
+    Chinese and Western influences fuse.",
+  link = "http://www.discoverhongkong.com"
+)
 }
