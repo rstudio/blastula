@@ -2,7 +2,7 @@
 % Please edit documentation in R/block_articles.R
 \name{print.block_articles}
 \alias{print.block_articles}
-\title{Print the block of articles}
+\title{Print a block of articles}
 \usage{
 \method{print}{block_articles}(x, ...)
 }
@@ -10,6 +10,6 @@
 \item{x}{an object of class \code{block_articles}.}
 }
 \description{
-This facilitates printing of the block of articles to the Viewer.
+This facilitates printing of a block of articles to the Viewer.
 }
 \keyword{internal}

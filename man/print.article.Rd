@@ -2,7 +2,7 @@
 % Please edit documentation in R/block_articles.R
 \name{print.article}
 \alias{print.article}
-\title{Print the article information in the console}
+\title{Print an article component in the console}
 \usage{
 \method{print}{article}(x, ...)
 }
@@ -10,6 +10,6 @@
 \item{x}{an object of class \code{article}.}
 }
 \description{
-This facilitates printing of the article object to the console.
+This facilitates printing of an article object to the console.
 }
 \keyword{internal}
