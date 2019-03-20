@@ -19,8 +19,6 @@ library(blastula)
 library(ggplot2)
 ```
 
-## What Is an HTML Email Message as Offered by blastula?
-
 Before we get to the process of creating an HTML email message, it's a good idea to learn about the model of such a message in **blastula**. Here is a diagram, and it doesn't contain too many components (because simplicity in HTML email is a good thing).
 
 <br>
@@ -93,7 +91,9 @@ Cheers,
 
 <br>
 
-We can include longer **R** statements inside of the curly braces (like `{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %>% as.numeric(), ", ", format(Sys.time(), "%Y"))}`), however, that would be unwieldy. It's better to generate local variables with **R** statements and just introduce those variables to the email. Here's an example with the above statement that generates a human readable date based on the current time.
+We can include longer **R** statements inside of the curly braces (like `{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %>% as.numeric(), ", ", format(Sys.time(), "%Y"))}`), however, that would be unwieldy. It's better to generate local variables with **R** statements and just introduce those variables to the email. 
+
+In the next example, let's first store the result of that statement in a local variable (`sending_date`). Then, the variable will be placed in the **footer** of the message (using the `footer` argument) along with leading text.
 
 ```{r compose_interpolation_stmt, eval=FALSE}
 # Create a string with a nicely-formatted date;
@@ -131,6 +131,8 @@ Sent on {sending_date}.
 <p align="center">Complicated string formatting goes into variables, the variables go into the email components</p>
 
 <br>
+
+Content in the **footer** and **header** sections is styled differently than **body** content (**footer** text will be somewhat smaller for one thing). The main message typically goes into the **body** whereas supplementary information works better in the **footer**.
 
 ## Adding an Image to an HTML Email
 
