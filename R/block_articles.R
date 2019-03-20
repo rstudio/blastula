@@ -151,9 +151,9 @@ render_block_articles <- function(x) {
   }
 }
 
-#' Print the block of articles
+#' Print a block of articles
 #'
-#' This facilitates printing of the block of articles to the Viewer.
+#' This facilitates printing of a block of articles to the Viewer.
 #' @param x an object of class \code{block_articles}.
 #' @keywords internal
 #' @importFrom htmltools HTML html_print
@@ -166,9 +166,9 @@ print.block_articles <- function(x, ...) {
     htmltools::html_print()
 }
 
-#' Print the article information in the console
+#' Print an article component in the console
 #'
-#' This facilitates printing of the article object to the console.
+#' This facilitates printing of an article object to the console.
 #' @param x an object of class \code{article}.
 #' @keywords internal
 #' @importFrom glue glue
