@@ -168,7 +168,7 @@ function to send the email.
 ``` r
 # Sending email using a credentials file
 smtp_send(
-  message = email_object,
+  email = email_object,
   from = "user@site.org",
   to = "another_user@web.net",
   subject = "Testing the `smtp_send()` function",
@@ -183,7 +183,7 @@ Alternatively, one can set a number of environment variables and use
 ``` r
 # Sending email using environment variables
 smtp_send(
-  message = email_object,
+  email = email_object,
   from = "user@site.org",
   to = "another_user@web.net",
   subject = "Testing the `smtp_send()` function",
