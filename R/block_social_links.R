@@ -156,6 +156,50 @@ render_block_social_links <- function(x) {
   glue::glue(social_link_block_template()) %>% as.character()
 }
 
+#' Print a block of social links
+#'
+#' This facilitates printing of a block of social links to the Viewer.
+#' @param x an object of class \code{block_social_links}.
+#' @keywords internal
+#' @importFrom htmltools HTML html_print
+#' @export
+print.block_social_links <- function(x, ...) {
+
+  x %>%
+    render_block_social_links() %>%
+    htmltools::HTML() %>%
+    htmltools::html_print()
+}
+
+#' Print a social link component in the console
+#'
+#' This facilitates printing of a social link object to the console.
+#' @param x an object of class \code{social_link}.
+#' @keywords internal
+#' @importFrom glue glue
+#' @export
+print.social_link <- function(x, ...) {
+
+  # Modify the URL for an icon that's hosted on GitHub
+  icon <-
+    x$icon %>%
+    tidy_gsub(
+      paste0("https://", social_icons_host_stub()),
+      "<blastula_hosted>"
+    )
+
+  glue::glue("
+service: {x$service}
+link: {x$link}
+icon: {icon}
+variant: {x$variant}
+alt text: {x$alt}
+"
+  ) %>%
+    as.character() %>%
+    cat()
+}
+
 #' A template for a social link HTML fragment
 #' @noRd
 social_link_block_template <- function() {
@@ -198,14 +242,16 @@ icon_for_social_service <- function(service,
     variant <- "bw"
   }
 
-  social_icons_stub <-
-    "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
-
   # Create the link to the hosted image asset
   glue::glue(
-    "https://{social_icons_stub}/{service}-{variant}.png"
+    "https://{social_icons_host_stub()}/{service}-{variant}.png"
   ) %>%
     as.character()
+}
+
+#' @noRd
+social_icons_host_stub <- function() {
+  "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
 }
 
 #' @noRd
