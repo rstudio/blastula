@@ -28,24 +28,6 @@ library(blastula)
 
 The **blastula** package makes it easy to produce and send HTML email from **R**. The message body can be highly customized with **Markdown** text, the results of **R** expressions, and even raw HTML. The underlying HTML/CSS is meant to display properly across a wide range of email clients and webmail services.
 
-### Composing an Email Message Object
-
-Here's an example that shows a basic workflow for composing the message, creating optional on-disk credentials for email, and sending out the message.
-
-These functions can help us do just that:
-
-- `compose_email()`: generates the email message content inside the `email_message`-class object
-- `create_email_creds_file()`: generates an optional on-disk file with email credentials
-- `smtp_send()`: sends the HTML-based email to one or more recipients
-
-A few other functions allow us to easily insert HTML fragments into the message body. These are:
-
-- `add_image()`: for embedding a local image file into the message body
-- `add_ggplot()`: converts a ggplot plot object to an image for embedding
-- `add_imgur_image()`: simultaneously deploys an image to the **Imgur** service and provides an `<img>` tag pointing to the external image
-- `add_readable_time()`: get the current time as a nicely readable string
-- `add_cta_button()`: add a call-to-action (CTA) button with button text and a link
-
 ## An Example
 
 ### Composing an Email Message
@@ -60,9 +42,9 @@ current_date_time <- add_readable_time()
 img_link <- "https://i.imgur.com/p1KvgYj.png"
 ```
 
-Now we use the `compose_email()` function to compose the email. There are three main arguments here, `body`, `header`, and `footer`. You can supply **Markdown** text to any of these. All other valid **Markdown** conventions should render to valid HTML.
+Now we use the `compose_email()` function to compose the email. There are three main arguments here: `body`, `header`, and `footer`. You can supply **Markdown** text to any of these content areas to get rendered HTML.
 
-The insertion of HTML fragments or text can be performed by enclosing valid R code inside of curly braces (`{...}`). Below the image URL (as part of the `![...](...)` **Markdown** link construction) is referenced to the `img_link` object from the global workspace. Note also that `{current_date_time}` references the `current_date_time` character object generated earlier via the `add_readable_time()` function. The end result is the insertion of the date/time string into the footer of the email. (Alternatively, `add_readable_time()` could have been called directly.)
+The insertion of text can be performed by enclosing valid **R** code inside of curly braces (`{...}`). In the example code below, the image URL (as part of the `![...](...)` **Markdown** link construction) is referenced to the `img_link` object from the global workspace. Note also that `{current_date_time}` references the `current_date_time` character object. The end result is the insertion of the date/time string into the footer of the email. (Alternatively, `add_readable_time()` could have been called directly.)
 
 ```{r compose_email}
 # Generate the body text for the email message
@@ -86,7 +68,7 @@ email_object <-
   )
 ```
 
-After creating the email message, we can look at it to ensure that the formatting is as expected. Simply call the object itself and it will be displayed in the Viewer pane.
+After creating the email message, we can look at it to ensure that the formatting is as expected. Simply call the object itself and it will be displayed in the Viewer.
 
 ```{r preview_email, eval=FALSE}
 # Preview the email
