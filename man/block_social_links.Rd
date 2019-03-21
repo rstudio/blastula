@@ -2,7 +2,7 @@
 % Please edit documentation in R/block_social_links.R
 \name{block_social_links}
 \alias{block_social_links}
-\title{A block of one, two, or three articles with a multicolumn layout}
+\title{A block of social sharing icons with links}
 \usage{
 block_social_links(...)
 }
@@ -10,8 +10,8 @@ block_social_links(...)
 \item{...}{One or more calls to \code{social_link()}.}
 }
 \description{
-With \code{block_social_links()}, we can create a block of social media links and
-links to websites, email, or RSS feeds. The function can accept as many
+With \code{block_social_links()}, we can create a block of social sharing links
+and links to websites, email, or RSS feeds. The function can accept as many
 \code{social_link()} calls as seen fit to email. Like all \code{block_*()} functions,
 \code{block_social_links()} must be placed inside of \code{blocks()} and the resultant
 \code{blocks} object can be provided to the \code{body}, \code{header}, or \code{footer}

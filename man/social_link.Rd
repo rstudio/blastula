@@ -7,7 +7,7 @@
 social_link(service, link, icon = NULL, variant = NULL, alt = NULL)
 }
 \arguments{
-\item{service}{Either the name of a social media service or either of
+\item{service}{Either the name of a social sharing service or either of
 \code{website}, \code{email}, or \code{rss}.}
 
 \item{link}{The relevant link to content on the \code{service}.}
@@ -25,13 +25,13 @@ used as alt text.}
 }
 \description{
 The \code{social_link()} function is used exclusively within
-\code{block_social_links()} with as many calls as the number of social media links
-required.
+\code{block_social_links()} with as many calls as the number of social sharing
+links required.
 }
 \examples{
 # Create an email message with some
 # articles in the `body`; in the footer,
-# add some social media icons linking
+# add some social sharing icons linking
 # to web content
 compose_email(
   body =
