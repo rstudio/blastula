@@ -4,16 +4,13 @@
 \alias{social_link}
 \title{Specify the components of a social link}
 \usage{
-social_link(service, link, icon = NULL, variant = NULL, alt = NULL)
+social_link(service, link, variant = NULL, alt = NULL)
 }
 \arguments{
 \item{service}{Either the name of a social sharing service or either of
 \code{website}, \code{email}, or \code{rss}.}
 
 \item{link}{The relevant link to content on the \code{service}.}
-
-\item{icon}{A link to an image representing the service. If not supplied,
-then a link to a suitable image asset will be automatically created.}
 
 \item{variant}{The variant of the icon to use. Options include \code{bw} (black
 and white, the default), \code{color}, \code{dark_gray}, \code{gray}, and \code{light_gray}.}
@@ -26,7 +23,41 @@ used as alt text.}
 \description{
 The \code{social_link()} function is used exclusively within
 \code{block_social_links()} with as many calls as the number of social sharing
-links required.
+icons/links required. By providing a supported \code{service} name, a hosted icon
+image can be used. A \code{link} must be provided; it will be part of social
+sharing icon. All icons are rounded, transparent, and consist of a single
+color, or level of gray.
+}
+\details{
+The following social sharing services have hosted icons available:
+\itemize{
+\item Twitter -- Micro-blogging internet service.
+\item GitHub -- Web-based hosting service for software development projects using Git.
+\item Facebook -- Global online social networking service.
+\item Instagram -- Online photo-sharing and social networking service.
+\item LinkedIn -- Social networking service for people in professional occupations.
+\item YouTube -- Video-sharing service owned by Google.
+\item Vimeo -- An ad-free open video platform.
+\item Behance -- A site for self-promotion of design projects.
+\item Dribbble -- Online community for showcasing user-made artwork.
+\item Pinterest -- Photo-sharing and publishing website for discovering interesting things.
+\item 500px -- Online platform for photographers to gain global exposure.
+\item Yelp -- Local-search service powered by crowd-sourced reviews.
+\item TripAdvisor -- Travel and restaurant website with reviews and accommodation bookings.
+\item WordPress -- Blogging platform and content management system.
+\item Blogger -- A blog-publishing service hosted by Google.
+\item Tumblr -- Micro-blogging and social networking website.
+\item Deezer -- Web-based music streaming service.
+\item SoundCloud -- A music sharing website and publishing tool for music distribution.
+\item Meetup -- A service used to organize online groups that host in-person events.
+\item Etsy -- An e-commerce website focused on handmade or vintage items and supplies.
+\item Reddit -- A social news aggregation, web content rating, and discussion website.
+\item Stack Overflow -- Question and answer site for professional and enthusiast programmers.
+\item Youku -- A video hosting service for user-made and professionally produced videos.
+\item Sina Weibo -- Micro-blogging website and one of the biggest social media platforms in China.
+\item QQ -- Instant messaging software service developed by Tencent.
+\item Douban -- A Chinese social networking service with a reputation for high-quality content.
+}
 }
 \examples{
 # Create an email message with some
