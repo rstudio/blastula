@@ -1,10 +1,10 @@
 #' Specify the components of a social link
 #'
 #' The `social_link()` function is used exclusively within
-#' `block_social_links()` with as many calls as the number of social media links
-#' required.
+#' `block_social_links()` with as many calls as the number of social sharing
+#' links required.
 #'
-#' @param service Either the name of a social media service or either of
+#' @param service Either the name of a social sharing service or either of
 #'   `website`, `email`, or `rss`.
 #' @param link The relevant link to content on the `service`.
 #' @param icon A link to an image representing the service. If not supplied,
@@ -18,7 +18,7 @@
 #' @examples
 #' # Create an email message with some
 #' # articles in the `body`; in the footer,
-#' # add some social media icons linking
+#' # add some social sharing icons linking
 #' # to web content
 #' compose_email(
 #'   body =
@@ -98,10 +98,10 @@ social_link <- function(service,
   social_link_item_list
 }
 
-#' A block of one, two, or three articles with a multicolumn layout
+#' A block of social sharing icons with links
 #'
-#' With `block_social_links()`, we can create a block of social media links and
-#' links to websites, email, or RSS feeds. The function can accept as many
+#' With `block_social_links()`, we can create a block of social sharing links
+#' and links to websites, email, or RSS feeds. The function can accept as many
 #' `social_link()` calls as seen fit to email. Like all `block_*()` functions,
 #' `block_social_links()` must be placed inside of `blocks()` and the resultant
 #' `blocks` object can be provided to the `body`, `header`, or `footer`
