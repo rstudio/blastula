@@ -1,5 +1,8 @@
-#' An enclosure for all HTML block constructors
+#' An enclosure for all HTML block functions
 #'
+#' To contain all of the block-based HTML `block_*()` calls, we should use
+#' the `blocks()` function. We can pass the resulting `blocks` object to either
+#' of the `body`, `header`, and `footer` arguments of `compose_email()`.
 #' @param ... One or more `block_*()` calls.
 #' @export
 blocks <- function(...) {
