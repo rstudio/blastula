@@ -31,32 +31,32 @@ color, or level of gray.
 \details{
 The following social sharing services have hosted icons available:
 \itemize{
-\item Twitter -- Micro-blogging internet service.
-\item GitHub -- Web-based hosting service for software development projects using Git.
-\item Facebook -- Global online social networking service.
-\item Instagram -- Online photo-sharing and social networking service.
-\item LinkedIn -- Social networking service for people in professional occupations.
-\item YouTube -- Video-sharing service owned by Google.
-\item Vimeo -- An ad-free open video platform.
-\item Behance -- A site for self-promotion of design projects.
-\item Dribbble -- Online community for showcasing user-made artwork.
-\item Pinterest -- Photo-sharing and publishing website for discovering interesting things.
-\item 500px -- Online platform for photographers to gain global exposure.
-\item Yelp -- Local-search service powered by crowd-sourced reviews.
-\item TripAdvisor -- Travel and restaurant website with reviews and accommodation bookings.
-\item WordPress -- Blogging platform and content management system.
-\item Blogger -- A blog-publishing service hosted by Google.
-\item Tumblr -- Micro-blogging and social networking website.
-\item Deezer -- Web-based music streaming service.
-\item SoundCloud -- A music sharing website and publishing tool for music distribution.
-\item Meetup -- A service used to organize online groups that host in-person events.
-\item Etsy -- An e-commerce website focused on handmade or vintage items and supplies.
-\item Reddit -- A social news aggregation, web content rating, and discussion website.
-\item Stack Overflow -- Question and answer site for professional and enthusiast programmers.
-\item Youku -- A video hosting service for user-made and professionally produced videos.
-\item Sina Weibo -- Micro-blogging website and one of the biggest social media platforms in China.
-\item QQ -- Instant messaging software service developed by Tencent.
-\item Douban -- A Chinese social networking service with a reputation for high-quality content.
+\item Twitter - Micro-blogging internet service.
+\item GitHub - Web-based hosting service for software development projects using Git.
+\item Facebook - Global online social networking service.
+\item Instagram - Online photo-sharing and social networking service.
+\item LinkedIn - Social networking service for people in professional occupations.
+\item YouTube - Video-sharing service owned by Google.
+\item Vimeo - An ad-free open video platform.
+\item Behance - A site for self-promotion of design projects.
+\item Dribbble - Online community for showcasing user-made artwork.
+\item Pinterest - Photo-sharing and publishing website for discovering interesting things.
+\item 500px - Online platform for photographers to gain global exposure.
+\item Yelp - Local-search service powered by crowd-sourced reviews.
+\item TripAdvisor - Travel and restaurant website with reviews and accommodation bookings.
+\item WordPress - Blogging platform and content management system.
+\item Blogger - A blog-publishing service hosted by Google.
+\item Tumblr - Micro-blogging and social networking website.
+\item Deezer - Web-based music streaming service.
+\item SoundCloud - A music sharing website and publishing tool for music distribution.
+\item Meetup - A service used to organize online groups that host in-person events.
+\item Etsy - An e-commerce website focused on handmade or vintage items and supplies.
+\item Reddit - A social news aggregation, web content rating, and discussion website.
+\item Stack Overflow - Question and answer site for professional and enthusiast programmers.
+\item Youku - A video hosting service for user-made and professionally produced videos.
+\item Sina Weibo - Micro-blogging website and one of the biggest social media platforms in China.
+\item QQ - Instant messaging software service developed by Tencent.
+\item Douban - A Chinese social networking service with a reputation for high-quality content.
 }
 }
 \examples{
