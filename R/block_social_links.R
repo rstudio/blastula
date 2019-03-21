@@ -220,13 +220,27 @@ social_link_block_template <- function() {
 }
 
 #' @importFrom glue glue
+#' @importFrom dplyr pull
 #' @noRd
 icon_for_social_service <- function(service,
                                     variant = NULL) {
 
+  # Normalize the provided `service` name
+  service <-
+    service %>%
+    tolower() %>%
+    tidy_gsub(" ", "")
+
+  # Get a vector of names for all social services
+  ss_names <-
+    social_service_icons() %>%
+    dplyr::pull(name) %>%
+    tolower() %>%
+    tidy_gsub(" ", "")
+
   # If a hosted icon isn't availble for the
   # `service`, stop the function
-  if (!(service %in% social_service_icons())) {
+  if (!(service %in% ss_names)) {
     stop("An icon for the given `service` is not available\n",
          " * look inside the article at `?social_link` to see which are available\n",
          call. = FALSE)
