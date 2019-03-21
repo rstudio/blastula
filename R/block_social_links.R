@@ -7,8 +7,6 @@
 #' @param service Either the name of a social sharing service or either of
 #'   `website`, `email`, or `rss`.
 #' @param link The relevant link to content on the `service`.
-#' @param icon A link to an image representing the service. If not supplied,
-#'   then a link to a suitable image asset will be automatically created.
 #' @param variant The variant of the icon to use. Options include `bw` (black
 #'   and white, the default), `color`, `dark_gray`, `gray`, and `light_gray`.
 #' @param alt Text description of image passed to the `alt` attribute inside of
@@ -65,7 +63,6 @@
 #' @export
 social_link <- function(service,
                         link,
-                        icon = NULL,
                         variant = NULL,
                         alt = NULL) {
 
@@ -73,9 +70,11 @@ social_link <- function(service,
   service <- tolower(service)
 
   # Generate a link to an image for the service
-  if (is.null(icon)) {
-    icon <- icon_for_social_service(service = service, variant = variant)
-  }
+  icon <-
+    icon_for_social_service(
+      service = service,
+      variant = variant
+    )
 
   # Set default alt text if not provided
   if (is.null(alt)) {
