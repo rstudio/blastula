@@ -37,6 +37,7 @@ reference:
     - blocks
     - block_title
     - block_text
+    - block_spacer
     - block_articles
     - block_social_links
     - article
