@@ -2,7 +2,7 @@
 % Please edit documentation in R/blocks.R
 \name{blocks}
 \alias{blocks}
-\title{An enclosure for all HTML block constructors}
+\title{An enclosure for all HTML block functions}
 \usage{
 blocks(...)
 }
@@ -10,5 +10,7 @@ blocks(...)
 \item{...}{One or more \code{block_*()} calls.}
 }
 \description{
-An enclosure for all HTML block constructors
+To contain all of the block-based HTML \code{block_*()} calls, we should use
+the \code{blocks()} function. We can pass the resulting \code{blocks} object to either
+of the \code{body}, \code{header}, and \code{footer} arguments of \code{compose_email()}.
 }
