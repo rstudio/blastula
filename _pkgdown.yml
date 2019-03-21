@@ -34,6 +34,7 @@ reference:
       the blocks. With these responsive, higher-level components, we can create
       sophisticated email messages with minimal effort.
     contents:
+    - blocks
     - block_title
     - block_text
     - block_articles
