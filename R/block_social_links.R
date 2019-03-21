@@ -254,40 +254,41 @@ social_icons_host_stub <- function() {
   "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
 }
 
+#' @importFrom dplyr tribble
 #' @noRd
 social_service_icons <- function() {
 
-  c(
-    "website",
-    "email",
-    "rss",
-    "twitter",
-    "github",
-    "facebook",
-    "instagram",
-    "linkedin",
-    "youtube",
-    "vimeo",
-    "behance",
-    "dribbble",
-    "pinterest",
-    "500px",
-    "yelp",
-    "tripadvisor",
-    "wordpress",
-    "blogger",
-    "tumblr",
-    "deezer",
-    "soundcloud",
-    "meetup",
-    "etsy",
-    "reddit",
-    "stackoverflow",
-    "youku",
-    "baidu",
-    "sinaweibo",
-    "qq",
-    "douban"
+  dplyr::tribble(
+    ~name,            ~description,
+    "website",        "A link a website.",
+    "email",          "An email address.",
+    "RSS",            "An RSS feed.",
+    "Twitter",        "Micro-blogging internet service.",
+    "GitHub",         "Web-based hosting service for software development projects using Git.",
+    "Facebook",       "Global online social networking service.",
+    "Instagram",      "Online photo-sharing and social networking service.",
+    "LinkedIn",       "Social networking service for people in professional occupations.",
+    "YouTube",        "Video-sharing service owned by Google.",
+    "Vimeo",          "An ad-free open video platform.",
+    "Behance",        "A site for self-promotion of design projects.",
+    "Dribbble",       "Online community for showcasing user-made artwork.",
+    "Pinterest",      "Photo-sharing and publishing website for discovering interesting things.",
+    "500px",          "Online platform for photographers to gain global exposure.",
+    "Yelp",           "Local-search service powered by crowd-sourced reviews.",
+    "TripAdvisor",    "Travel and restaurant website with reviews and accommodation bookings.",
+    "WordPress",      "Blogging platform and content management system.",
+    "Blogger",        "A blog-publishing service hosted by Google.",
+    "Tumblr",         "Micro-blogging and social networking website.",
+    "Deezer",         "Web-based music streaming service.",
+    "SoundCloud",     "A music sharing website and publishing tool for music distribution.",
+    "Meetup",         "A service used to organize online groups that host in-person events.",
+    "Etsy",           "An e-commerce website focused on handmade or vintage items and supplies.",
+    "Reddit",         "A social news aggregation, web content rating, and discussion website.",
+    "Stack Overflow", "Question and answer site for professional and enthusiast programmers.",
+    "Youku",          "A video hosting service for user-made and professionally produced videos.",
+    "Sina Weibo",     "Micro-blogging website and one of the biggest social media platforms in China.",
+    "QQ",             "Instant messaging software service developed by Tencent.",
+    "Douban",         "A Chinese social networking service with a reputation for high-quality content.",
   )
 }
 
