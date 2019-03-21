@@ -11,6 +11,10 @@ render_blocks <- function(blocks,
       blocks[[i]] <- render_block_text(blocks[[i]], context = context)
     }
 
+    if (inherits(blocks[[i]], "block_spacer")) {
+      blocks[[i]] <- render_block_spacer(blocks[[i]], context = context)
+    }
+
     if (inherits(blocks[[i]], "block_articles")) {
       blocks[[i]] <- render_block_articles(blocks[[i]])
     }
