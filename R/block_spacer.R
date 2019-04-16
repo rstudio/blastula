@@ -60,16 +60,14 @@ block_spacer <- function() {
 render_block_spacer <- function(x, context = "body") {
 
   if (context == "body") {
-    margin_bottom <- 6
-    padding <- 6
+    padding <- 4
   } else if (context %in% c("header", "footer")) {
-    margin_bottom <- 2
-    padding <- 2
+    padding <- 0
   }
 
   paragraph <-
     glue::glue(
-      "<p class=\"align-center\" style=\"margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">"
+      "<p class=\"align-center\" style=\"margin: 0; margin-bottom: 0; text-align: center;\">"
     ) %>%
     as.character()
 
