@@ -83,6 +83,27 @@ render_block_title <- function(x, context = "body") {
   glue::glue(title_block_template()) %>% as.character()
 }
 
+#' A template for a title text HTML fragment
+#' @noRd
+title_block_template <- function() {
+
+"<tr>
+<td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
+<tbody>
+<tr>
+<td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+{text}
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>"
+}
+
+# nocov start
+
 #' Print a title block
 #'
 #' This facilitates printing of the title block to the Viewer.
@@ -98,21 +119,4 @@ print.block_title <- function(x, ...) {
     htmltools::html_print()
 }
 
-#' A template for a title text HTML fragment
-#' @noRd
-title_block_template <- function() {
-
-"              <tr>
-                <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
-                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-                    <tbody>
-                      <tr>
-                        <td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-                          {text}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>"
-}
+# nocov end

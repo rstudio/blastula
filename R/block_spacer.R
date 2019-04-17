@@ -79,6 +79,27 @@ render_block_spacer <- function(x, context = "body") {
   glue::glue(spacer_block_template()) %>% as.character()
 }
 
+#' A template for a spacer HTML fragment
+#' @noRd
+spacer_block_template <- function() {
+
+"<tr>
+<td class=\"wrapper\" style=\"vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
+<tbody>
+<tr>
+<td style=\"vertical-align: top;\" valign=\"top\">
+{text}
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>"
+}
+
+# nocov start
+
 #' Print a spacer
 #'
 #' This facilitates printing of the spacer to the Viewer.
@@ -94,21 +115,4 @@ print.block_spacer <- function(x, ...) {
     htmltools::html_print()
 }
 
-#' A template for a spacer HTML fragment
-#' @noRd
-spacer_block_template <- function() {
-
-  "              <tr>
-                <td class=\"wrapper\" style=\"vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
-                  <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-                    <tbody>
-                      <tr>
-                        <td style=\"vertical-align: top;\" valign=\"top\">
-                          {text}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-              </tr>"
-}
+# nocov end

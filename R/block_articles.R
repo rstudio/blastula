@@ -166,26 +166,6 @@ print.block_articles <- function(x, ...) {
     htmltools::html_print()
 }
 
-#' Print an article component in the console
-#'
-#' This facilitates printing of an article object to the console.
-#' @param x an object of class \code{article}.
-#' @keywords internal
-#' @importFrom glue glue
-#' @export
-print.article <- function(x, ...) {
-
-  glue::glue("
-image: {x$image}
-title: {x$title}
-content: {x$content}
-link: {x$link}
-"
-  ) %>%
-    as.character() %>%
-    cat()
-}
-
 #' Obtain an inlined HTML fragment for three side-by-side articles
 #' @importFrom glue glue
 #' @noRd
@@ -265,58 +245,57 @@ block_article_3 <- function(items) {
 
   block <-
     glue::glue(
-      "<tr>
-    <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-      <!--[if (gte mso 9)|(IE)]>
-        <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-          <tr>
-            <td align=\"left\" valign=\"top\" width=\"33.333%\">
-      <![endif]-->
-      <div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
-        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
-          <tbody>
-            {x1_image}
-            {x1_title}
-            {x1_content}
-          </tbody>
-        </table>
-      </div>
-      <!--[if (gte mso 9)|(IE)]>
-        <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-          <tr>
-            <td align=\"left\" valign=\"top\" width=\"33.333%\">
-      <![endif]-->
-      <div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
-        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
-          <tbody>
-            {x2_image}
-            {x2_title}
-            {x2_content}
-          </tbody>
-        </table>
-      </div>
-      <!--[if (gte mso 9)|(IE)]>
-        <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-          <tr>
-            <td align=\"left\" valign=\"top\" width=\"33.333%\">
-      <![endif]-->
-      <div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
-        <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
-          <tbody>
-            {x3_image}
-            {x3_title}
-            {x3_content}
-          </tbody>
-        </table>
-      </div>
-      <!--[if (gte mso 9)|(IE)]>
-            </td>
-          </tr>
-        </table>
-      <![endif]-->
-    </td>
-  </tr>"
-    ) %>% as.character()
+"<tr>
+<td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+<!--[if (gte mso 9)|(IE)]>
+<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+<tr>
+<td align=\"left\" valign=\"top\" width=\"33.333%\">
+<![endif]-->
+<div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
+<tbody>
+{x1_image}
+{x1_title}
+{x1_content}
+</tbody>
+</table>
+</div>
+<!--[if (gte mso 9)|(IE)]>
+<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+<tr>
+<td align=\"left\" valign=\"top\" width=\"33.333%\">
+<![endif]-->
+<div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
+<tbody>
+{x2_image}
+{x2_title}
+{x2_content}
+</tbody>
+</table>
+</div>
+<!--[if (gte mso 9)|(IE)]>
+<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+<tr>
+<td align=\"left\" valign=\"top\" width=\"33.333%\">
+<![endif]-->
+<div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
+<tbody>
+{x3_image}
+{x3_title}
+{x3_content}
+</tbody>
+</table>
+</div>
+<!--[if (gte mso 9)|(IE)]>
+</td>
+</tr>
+</table>
+<![endif]-->
+</td>
+</tr>") %>% as.character()
 
   class(block) <- "block_articles"
 
@@ -378,43 +357,42 @@ block_article_2 <- function(items) {
 
   block <-
     glue::glue(
-      "<tr>
-  <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-    <!--[if (gte mso 9)|(IE)]>
-    <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-      <tr>
-        <td align=\"left\" valign=\"top\" width=\"50%\">
-          <![endif]-->
-          <div class=\"span-3\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 298px;\">
-            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 298px;\" width=\"100%\">
-              <tbody>
-                {x1_image}
-                {x1_title}
-                {x1_content}
-              </tbody>
-            </table>
-          </div>
-          <!--[if (gte mso 9)|(IE)]>
-        </td>
-        <td align=\"left\" valign=\"top\" width=\"50%\">
-          <![endif]-->
-          <div class=\"span-3\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 298px;\">
-            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 298px;\" width=\"100%\">
-              <tbody>
-                {x2_image}
-                {x2_title}
-                {x2_content}
-              </tbody>
-            </table>
-          </div>
-          <!--[if (gte mso 9)|(IE)]>
-        </td>
-      </tr>
-    </table>
-    <![endif]-->
-  </td>
-</tr>"
-    ) %>% as.character()
+"<tr>
+<td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+<!--[if (gte mso 9)|(IE)]>
+<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
+<tr>
+<td align=\"left\" valign=\"top\" width=\"50%\">
+<![endif]-->
+<div class=\"span-3\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 298px;\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 298px;\" width=\"100%\">
+<tbody>
+{x1_image}
+{x1_title}
+{x1_content}
+</tbody>
+</table>
+</div>
+<!--[if (gte mso 9)|(IE)]>
+</td>
+<td align=\"left\" valign=\"top\" width=\"50%\">
+<![endif]-->
+<div class=\"span-3\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 298px;\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 298px;\" width=\"100%\">
+<tbody>
+{x2_image}
+{x2_title}
+{x2_content}
+</tbody>
+</table>
+</div>
+<!--[if (gte mso 9)|(IE)]>
+</td>
+</tr>
+</table>
+<![endif]-->
+</td>
+</tr>") %>% as.character()
 
   class(block) <- "block_articles"
 
@@ -444,19 +422,19 @@ block_article_1 <- function(items) {
 
   block <-
     glue::glue(
-      "<tr>
-  <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
-    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-      <tbody>
-        <tr>
-          <td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-            {x1_image}
-            {x1_content}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </td>
+"<tr>
+<td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
+<tbody>
+<tr>
+<td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+{x1_image}
+{x1_content}
+</td>
+</tr>
+</tbody>
+</table>
+</td>
 </tr>") %>% as.character()
 
   class(block) <- "block_articles"
@@ -469,46 +447,46 @@ block_article_1 <- function(items) {
 #' @noRd
 article_image_template_3 <- function() {
 
-"                <tr>
-                  <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-                    <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-                  </td>
-                </tr>
-  "
+"<tr>
+<td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
+<a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
+</td>
+</tr>
+"
 }
 
 #' A template for an article image HTML fragment (two across)
 #' @noRd
 article_image_template_2 <- function() {
 
-"                <tr>
-                  <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-                    <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-                  </td>
-                </tr>
-  "
+"<tr>
+<td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
+<a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
+</td>
+</tr>
+"
 }
 
 #' A template for an article image HTML fragment (one across)
 #' @noRd
 article_image_template_1 <- function() {
 
-"            <p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-              <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-            </p>
-  "
+"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
+<a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
+</p>
+"
 }
 
 #' A template for an article title HTML fragment
 #' @noRd
 article_title_template <- function() {
 
-"                <tr>
-                  <td class=\"article-title\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; font-size: 14px; font-weight: 800; line-height: 1.4em; padding-bottom: 8px;\" valign=\"top\">
-                    <a href=\"{link}\" target=\"_blank\" style=\"color: #222222; text-decoration: none; font-size: 14px; font-weight: 800; line-height: 1.4em;\">{title}</a>
-                  </td>
-                </tr>
-  "
+"<tr>
+<td class=\"article-title\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; font-size: 14px; font-weight: 800; line-height: 1.4em; padding-bottom: 8px;\" valign=\"top\">
+<a href=\"{link}\" target=\"_blank\" style=\"color: #222222; text-decoration: none; font-size: 14px; font-weight: 800; line-height: 1.4em;\">{title}</a>
+</td>
+</tr>
+"
 }
 
 #' A template for an article content HTML fragment (one across)
@@ -525,10 +503,34 @@ article_content_template_1 <- function() {
 #' @noRd
 article_content_template_2 <- function() {
 
-"                <tr>
-                  <td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">
-                    {content}
-                  </td>
-                </tr>
-  "
+"<tr>
+<td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">
+{content}
+</td>
+</tr>
+"
 }
+
+# nocov start
+
+#' Print an article component in the console
+#'
+#' This facilitates printing of an article object to the console.
+#' @param x an object of class \code{article}.
+#' @keywords internal
+#' @importFrom glue glue
+#' @export
+print.article <- function(x, ...) {
+
+  glue::glue("
+image: {x$image}
+title: {x$title}
+content: {x$content}
+link: {x$link}
+"
+  ) %>%
+    as.character() %>%
+    cat()
+}
+
+# nocov end
