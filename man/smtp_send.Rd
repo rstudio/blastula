@@ -8,7 +8,7 @@ smtp_send(email, from, to, subject = NULL, cc = NULL, bcc = NULL,
   creds_file = NULL, sender = NULL, host = NULL, port = NULL,
   user = NULL, password = NULL, use_ssl = TRUE,
   authenticate = TRUE, binary_loc = NULL, echo = FALSE,
-  echo_cmd = FALSE)
+  echo_cmd = FALSE, debug = FALSE)
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{compose_email()}
@@ -60,6 +60,10 @@ directory.}
 
 \item{echo_cmd}{A logical value indicating whether the system command should
 be printed to the console during the sending of email.}
+
+\item{debug}{Setting \code{debug} to \code{TRUE} will provide information on all of the
+SMTP sending options, and, the email message won't actually be sent. A
+tibble of information will be returned. By default, this is set to \code{FALSE}.}
 }
 \description{
 Send an email message to one or more recipients via an SMTP server.
