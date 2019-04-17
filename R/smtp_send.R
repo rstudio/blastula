@@ -35,6 +35,9 @@
 #' @param echo An option to print the standard output and error to the screen.
 #' @param echo_cmd A logical value indicating whether the system command should
 #'   be printed to the console during the sending of email.
+#' @param debug Setting `debug` to `TRUE` will provide information on all of the
+#'   SMTP sending options, and, the email message won't actually be sent. A
+#'   tibble of information will be returned. By default, this is set to `FALSE`.
 #' @examples
 #' \dontrun{
 #' # Prepare a test message and send
@@ -65,7 +68,8 @@ smtp_send <- function(email,
                       authenticate = TRUE,
                       binary_loc = NULL,
                       echo = FALSE,
-                      echo_cmd = FALSE) {
+                      echo_cmd = FALSE,
+                      debug = FALSE) {
 
   # Verify that the `message` object
   # is of the class `email_message`
@@ -176,19 +180,24 @@ smtp_send <- function(email,
       attachment_args_vec = attachment_args_vec
     )
 
-  # Send out email via `processx::run()` and
-  # assign the result
-  send_result <-
-    processx::run(
-      command = binary_loc,
-      args = run_args,
-      echo = echo,
-      echo_cmd = echo_cmd
-    )
+  if (!debug) {
 
-  if (send_result$status == 0) {
-    message("The email message was sent successfully.\n")
-  } else {
-    message("The email message was NOT successfully sent.\n")
+    # Send out email via `processx::run()` and
+    # assign the result
+    send_result <-
+      processx::run(
+        command = binary_loc,
+        args = run_args,
+        echo = echo,
+        echo_cmd = echo_cmd
+      )
+
+    if (send_result$status == 0) {
+      message("The email message was sent successfully.\n")
+    } else {
+      message("The email message was NOT successfully sent.\n")
+    }
+
   }
+
 }
