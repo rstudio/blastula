@@ -8,15 +8,25 @@ test_that("creating a base64-encoded image is possible", {
     system.file(
       "img",
       "test_image.png",
-      package = "blastula")
+      package = "blastula"
+    )
 
-  img_file_html <-
-    add_image(
-      file = img_file_path)
+  # Create an image as an <img> tag
+  img_file_html <- add_image(file = img_file_path)
 
   # Expect a base64 PNG within `img` tags
   expect_true(
-    grepl("<img cid=\".*?__test_image.png\" src=\"data:image/png;base64,.*\" .*?/>", img_file_html))
+    grepl("<img cid=\".*?__test_image.png\" src=\"data:image/png;base64,.*\" .*?/>", img_file_html)
+  )
+
+  # Create an image as an <img> tag, with alt text
+  img_file_html <- add_image(file = img_file_path, alt = "A test image")
+
+  # Expect a base64 PNG within `img` tags
+  # and the specified alt text
+  expect_true(
+    grepl("<img cid=\".*?__test_image.png\" src=\"data:image/png;base64,.*\" .*? alt=\"A test image\"/>", img_file_html)
+  )
 })
 
 test_that("creating a base64-encoded ggplot is possible", {
