@@ -31,6 +31,7 @@ jobs:
       if: branch IN (master)
       r_binary_packages:
         - pkgdown
+        - devtools
       script:
         - Rscript -e "devtools::install()"
         - Rscript -e "pkgdown::build_site()"
