@@ -151,21 +151,6 @@ render_block_articles <- function(x) {
   }
 }
 
-#' Print a block of articles
-#'
-#' This facilitates printing of a block of articles to the Viewer.
-#' @param x an object of class \code{block_articles}.
-#' @keywords internal
-#' @importFrom htmltools HTML html_print
-#' @export
-print.block_articles <- function(x, ...) {
-
-  x %>%
-    render_block_articles() %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
 #' Obtain an inlined HTML fragment for three side-by-side articles
 #' @importFrom glue glue
 #' @noRd
@@ -442,7 +427,6 @@ block_article_1 <- function(items) {
   block
 }
 
-
 #' A template for an article image HTML fragment (three across)
 #' @noRd
 article_image_template_3 <- function() {
@@ -493,10 +477,10 @@ article_title_template <- function() {
 #' @noRd
 article_content_template_1 <- function() {
 
-"            <p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-              {content}
-            </p>
-  "
+"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
+{content}
+</p>
+"
 }
 
 #' A template for an article content HTML fragment (two across)
@@ -512,6 +496,21 @@ article_content_template_2 <- function() {
 }
 
 # nocov start
+
+#' Print a block of articles
+#'
+#' This facilitates printing of a block of articles to the Viewer.
+#' @param x an object of class \code{block_articles}.
+#' @keywords internal
+#' @importFrom htmltools HTML html_print
+#' @export
+print.block_articles <- function(x, ...) {
+
+  x %>%
+    render_block_articles() %>%
+    htmltools::HTML() %>%
+    htmltools::html_print()
+}
 
 #' Print an article component in the console
 #'
