@@ -37,6 +37,7 @@ jobs:
         - Rscript -e "remove.packages(devtools::as.package('.')$package)"
       deploy:
         provider: pages
+        script: Rscript -e 'devtools::install()'
         local-dir: docs
         skip-cleanup: true
         keep-history: false
