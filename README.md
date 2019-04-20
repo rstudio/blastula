@@ -14,10 +14,12 @@ status](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.sv
 ## Overview
 
 The **blastula** package makes it easy to produce and send HTML email
-from **R**. The message body can be highly customized with **Markdown**
-text, the results of **R** expressions, and even raw HTML. The
+from **R**. The message can have three content areas (the body, the
+header, and the footer) and we can insert **Markdown** text, **R**
+expressions, block-based components, and even some raw HTML. The
 underlying HTML/CSS is meant to display properly across a wide range of
-email clients and webmail services.
+email clients and webmail services. The resulting email message is
+responsive so it’ll look great on computers and mobile devices.
 
 ## An Example
 
