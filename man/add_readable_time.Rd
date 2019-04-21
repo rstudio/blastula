@@ -4,9 +4,13 @@
 \alias{add_readable_time}
 \title{Create an HTML fragment for a humanized date/time}
 \usage{
-add_readable_time(use_date = TRUE, use_time = TRUE, use_tz = TRUE)
+add_readable_time(time = NULL, use_date = TRUE, use_time = TRUE,
+  use_tz = TRUE)
 }
 \arguments{
+\item{time}{The POSIXct time to use, and to make more readable for email
+recipients. If this is not provided, the current system time will be used.}
+
 \item{use_date}{A logical value that indicates whether the current date
 should be included.}
 
