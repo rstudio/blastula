@@ -1,9 +1,10 @@
 #' Create an HTML fragment for a humanized date/time
 #'
 #' Add a nicely-formatted date/time string inside the body of the email with
-#' this helper function. This will insert the current date/time/tz based on the
-#' caller's locale information at the time of the call. There are options to
-#' specify whether the date, time, and time zone parts are to be included.
+#' this helper function. We can provide a POSIXct date-time object or use the
+#' current date/time/tz (based on the caller's locale information at the time of
+#' the call). There are options to specify whether the date, time, and time zone
+#' parts are to be included.
 #' @param time The POSIXct time to use, and to make more readable for email
 #'   recipients. If this is not provided, the current system time will be used.
 #' @param use_date A logical value that indicates whether the current date
