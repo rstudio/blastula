@@ -6,7 +6,8 @@
 #' the call). There are options to specify whether the date, time, and time zone
 #' parts are to be included.
 #' @param time The POSIXct time to use, and to make more readable for email
-#'   recipients. If this is not provided, the current system time will be used.
+#'   recipients. If a `time` is not provided, the current system time will be
+#'   used.
 #' @param use_date A logical value that indicates whether the current date
 #'   should be included.
 #' @param use_time A logical value that indicates whether the current time
