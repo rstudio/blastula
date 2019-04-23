@@ -9,7 +9,8 @@ add_readable_time(time = NULL, use_date = TRUE, use_time = TRUE,
 }
 \arguments{
 \item{time}{The POSIXct time to use, and to make more readable for email
-recipients. If this is not provided, the current system time will be used.}
+recipients. If a \code{time} is not provided, the current system time will be
+used.}
 
 \item{use_date}{A logical value that indicates whether the current date
 should be included.}
