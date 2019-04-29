@@ -167,7 +167,7 @@ smtp_send(
     to = "personal@email.net",
   subject = "Testing the `smtp_send()` function",
   creds_file = ".email_creds",
-  binary_loc = "/path/to/mailsend" 
+  binary_loc = "/path/to/mailsend-go" 
 )
 ```
 
