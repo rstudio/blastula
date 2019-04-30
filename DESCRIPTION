@@ -21,6 +21,7 @@ Imports:
     commonmark (>= 1.7),
     downloader (>= 0.4),
     dplyr (>= 0.8.0.1),
+    getPass (>= 0.2-2),
     glue (>= 1.2.0),
     htmltools (>= 0.3.6),
     httr (>= 1.4.0),
