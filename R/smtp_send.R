@@ -124,6 +124,10 @@ smtp_send <- function(email,
 
   } else {
 
+    if (is.null(password)) {
+      password <- getPass::getPass("Enter the SMTP server password: ")
+    }
+
     credentials <-
       list(
         sender = sender,
@@ -132,7 +136,6 @@ smtp_send <- function(email,
         user = user,
         password = password,
         use_ssl = use_ssl,
-        use_tls = use_tls,
         authenticate = authenticate
       )
   }
