@@ -7,15 +7,16 @@
 #' variables can be specified in the function call (using named arguments with
 #' `...`) and any variables not found in `...` will be searched for in the
 #' global environment.
-#' @param header,body,footer The three layout sections for HTML email, from top
-#'   to bottom. Markdown text can be supplied to each of these. String
-#'   interpolation is enabled via curly braces and named arguments in `...`.
-#'   Alternatively, we can supply a set of `block_*()` calls enclosed within the
-#'   `blocks()` function to take advantage of precomposed HTML blocks.
+#' @param header,body,footer The three layout sections for an email message
+#'   (ordered from top to bottom). Markdown text can be supplied to each of
+#'   these. String interpolation is enabled via curly braces and named
+#'   arguments in `...`. Alternatively, we can supply a set of `block_*()` calls
+#'   enclosed within the [blocks()] function to take advantage of precomposed
+#'   HTML blocks.
 #' @param .title The title of the email message. This is not the subject but the
 #'   HTML title text which may appear in limited circumstances.
 #' @param .envir An opportunity to specify the environment. By default, this is
-#'   the `parent.frame()`.
+#'   the [parent.frame()].
 #' @param ... Expression strings for string interpolation within the `header`,
 #'   `body` and `footer`.
 #' @return An `email_message` object.
