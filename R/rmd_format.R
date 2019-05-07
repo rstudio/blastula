@@ -18,13 +18,27 @@ render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
 #' Attach a Blastula email message object to the current render
 #'
 #' @export
-attach_email <- function(message, warn = TRUE) {
+attach_email <- function(message, preview = TRUE) {
   if (!inherits(message, "email_message")) {
     stop("blastula::attach_email() requires a blastula email message object")
   }
 
-  if (warn && is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
-    warning("attach_email has no effect outside of RStudio Connect")
+  if (is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
+    # warning("attach_email has no effect outside of RStudio Connect")
+    if (preview) {
+      html_file <- tempfile(fileext = ".html")
+      html <- message$html_html
+
+      # TODO: Clean up this message, provide instructions for attach_email(preview=FALSE) to stop
+      msg <- "<h2 style=\"text-align: center;\">This is an email preview</h2>"
+      html <- sub("(<body(?!\\w)[^>]*>)", paste0("\\1", msg), html, perl = TRUE, ignore.case = TRUE)
+
+      writeLines(html, html_file)
+      browseURL(html_file)
+      # This sleep is necessary because knitting usually happens in a separate
+      # process, and when that process terminates the temp file will be deleted
+      Sys.sleep(5)
+    }
   }
 
   rmarkdown::output_metadata$set(rsc_email_body_html = message$html_str)
