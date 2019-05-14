@@ -24,14 +24,32 @@ attach_email <- function(message, preview = TRUE) {
   }
 
   if (is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
+
     # warning("attach_email has no effect outside of RStudio Connect")
+
     if (preview) {
+
       html_file <- tempfile(fileext = ".html")
       html <- message$html_html
 
-      # TODO: Clean up this message, provide instructions for attach_email(preview=FALSE) to stop
-      msg <- "<h2 style=\"text-align: center;\">This is an email preview</h2>"
-      html <- sub("(<body(?!\\w)[^>]*>)", paste0("\\1", msg), html, perl = TRUE, ignore.case = TRUE)
+      msg <-
+        paste0(
+          "<div style=\"text-align: center; background:#fcfcfc\">\n",
+          "<h2 style=\"margin-bottom: 0; padding-bottom: 0;\">",
+          "This is an email preview</h2>\n",
+          "<p style=\"text-align: center; background:#fcfcfc; ",
+          "padding-top: 0; margin-top: 0;\">",
+          "Use <code>attach_email(preview = FALSE)</code> ",
+          "to attach without this preview.</p>\n",
+          "</div>\n",
+          "<hr>\n"
+        )
+
+      html <-
+        sub(
+          "(<body(?!\\w)[^>]*>)", paste0("\\1", msg),
+          html, perl = TRUE, ignore.case = TRUE
+        )
 
       writeLines(html, html_file)
       browseURL(html_file)
