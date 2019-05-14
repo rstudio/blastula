@@ -1,5 +1,6 @@
 #' @export
 render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
+
   outfile <- tempfile(pattern = "email", fileext = ".html")
   on.exit(unlink(outfile))
 
@@ -53,6 +54,7 @@ attach_email <- function(message, preview = TRUE) {
 
       writeLines(html, html_file)
       browseURL(html_file)
+
       # This sleep is necessary because knitting usually happens in a separate
       # process, and when that process terminates the temp file will be deleted
       Sys.sleep(5)
