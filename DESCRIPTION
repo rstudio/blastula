@@ -25,6 +25,7 @@ Imports:
     glue (>= 1.2.0),
     htmltools (>= 0.3.6),
     httr (>= 1.4.0),
+    keyring (>= 1.1.0),
     magrittr (>= 1.5),
     processx (>= 3.2.1),
     stringr (>= 1.4.0),
