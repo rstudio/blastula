@@ -244,7 +244,7 @@ compose_email <- function(body = NULL,
     }
   }
 
-  # Apply the `email_message` class
+  # Apply the `email_message` and `blastula_message` classes
   attr(email_message, "class") <- c("blastula_message", "email_message")
 
   email_message
