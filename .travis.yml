@@ -5,6 +5,14 @@ sudo: false
 cache: packages
 warnings_are_errors: false
 
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:chris-lea/libsodium'
+    packages:
+      - libsecret-1-dev
+      - libsodium-dev
+
 notifications:
   email:
     on_success: change
