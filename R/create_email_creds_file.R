@@ -141,7 +141,6 @@ create_email_creds_file <- function(user,
 #' @import keyring
 #' @import glue
 #' @importFrom dplyr pull filter
-#' @export
 set_smtp_credentials <- function(key_name = NULL,
                                  provider = NULL,
                                  user = NULL,
