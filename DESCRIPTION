@@ -34,8 +34,6 @@ Imports:
     xml2 (>= 1.2.0),
     mime (>= 0.6),
     base64enc (>= 0.1-3)
-Enhances:
-    knitr
 Suggests: 
     covr,
     ggplot2,
