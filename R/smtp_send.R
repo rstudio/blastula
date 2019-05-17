@@ -86,6 +86,58 @@ smtp_send <- function(email,
     }
   }
 
+  # If the user provides a path to a creds file in the `creds_file`
+  # argument, upgrade that through the `creds_file()` helper function
+  # and provide a warning about soft deprecation
+  if (!missing(creds_file)) {
+    credentials <- creds_file(creds_file)
+    warning("The `creds_file` argument is undergoing soft deprecation:\n",
+            " * please consider using `credentials = creds_file(\"", creds_file,
+            "\")` argument instead")
+  }
+
+  # If nothing is provided in `credentials`, stop the function
+  # and include a message about which credential helpers could
+  # be used
+  if (is.null(credentials)) {
+    stop("SMTP credentials must be supplied to the `credentials` argument.\n",
+         "We can use either of these three helper functions for this:\n",
+         " * `creds_key()`: uses information stored in the system's key-value ",
+         "store (have a look at `?creds_key`)\n",
+         " * `creds_file()`: takes credentials stored in an on-disk file ",
+         "(use `?creds_file` for further info)\n",
+         " * `creds()`: allows for manual specification of SMTP credentials",
+         call. = FALSE)
+  }
+
+  # If whatever is provided to `credentials` does not have a
+  # `blastula_creds` class, determine whether that value is a
+  # single-length character vector (which is upgraded through
+  # the `creds_file()` function); if it's anything else, stop
+  # the function with a message
+  if (!inherits(credentials, "blastula_creds")) {
+    if (is.character(credentials) && length(credentials) == 1) {
+
+      credentials <- creds_file(credentials)
+
+    } else {
+      stop("The value for `credentials` must be a `blastula_creds` object\n",
+           "* see the article in `?creds` for information on this",
+           call. = FALSE)
+    }
+  }
+
+  # Create the `creds_list` object by processing whichever
+  # credentials type (key, file, or manual) was specified
+  # in `credentials`
+  if (inherits(credentials, "creds_key")) {
+    creds_list <- get_smtp_keyring_creds(key_name = credentials$key_name)
+  } else if (inherits(credentials, "creds_file")) {
+    creds_list <- readRDS(file = credentials$file)
+  } else if (inherits(credentials, "creds")) {
+    creds_list <- credentials %>% unclass()
+  }
+
   # Write the inlined HTML message out to a file
   email$html_str %>%
     writeLines(con = "message_inlined.html")
