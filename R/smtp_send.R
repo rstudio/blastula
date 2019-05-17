@@ -161,6 +161,9 @@ smtp_send <- function(email,
     ssl_opt <- no_arg()
   }
 
+  # Set the `sender_name` to `no_arg()` if not provided
+  sender_name_opt <- creds_list$sender_name %||% no_arg()
+
   # Collect arguments and options for for `processx::run()`
   # as a list
   run_args <-
