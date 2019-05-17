@@ -5,10 +5,8 @@
 \title{Send an email message through SMTP}
 \usage{
 smtp_send(email, from, to, subject = NULL, cc = NULL, bcc = NULL,
-  creds_file = NULL, sender = NULL, host = NULL, port = NULL,
-  user = NULL, password = NULL, use_ssl = TRUE,
-  authenticate = TRUE, binary_loc = NULL, echo = FALSE,
-  echo_cmd = FALSE, debug = FALSE)
+  credentials = NULL, binary_loc = NULL, echo = FALSE,
+  echo_cmd = FALSE, ..., dry_run = FALSE, creds_file = "deprecated")
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{compose_email()}
@@ -34,23 +32,14 @@ carbon copies. Any email addresses provided here will receive the message
 and these email addresses will be concealed from other recipients
 (including others on the BCC list).}
 
-\item{creds_file}{An optional path to an email credentials file. This file
-must be created by the \code{create_email_creds_file()} function.}
-
-\item{sender}{The sender name.}
-
-\item{host}{The email host.}
-
-\item{port}{The port associated with the email account.}
-
-\item{user}{The username associated with the email account.}
-
-\item{password}{The password associated with the email account.}
-
-\item{use_ssl}{A logical value to indicate whether to use SSL.}
-
-\item{authenticate}{A logical value to indicate whether to use
-authentication.}
+\item{credentials}{One of three credential helper functions must be used
+here: (1) \code{\link[=creds_file]{creds_file()}}, (2) \code{\link[=creds_key]{creds_key()}}, or (3) \code{\link[=creds]{creds()}}. The first,
+\code{\link[=creds_file]{creds_file()}}, relies on a credentials file stored on disk. Such a file is
+created using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function. The \code{\link[=creds_key]{creds_key()}} is
+used if credentials are stored in the system-wide key-value store, thorugh
+use of the \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}} function. Using \code{\link[=creds]{creds()}} allows for
+manual specification of SMTP configuration and credentials within that
+helper function.}
 
 \item{binary_loc}{An option to supply the location of the \code{mailsend-go}
 binary file should it not be on the system path or in the working
@@ -61,9 +50,12 @@ directory.}
 \item{echo_cmd}{A logical value indicating whether the system command should
 be printed to the console during the sending of email.}
 
-\item{debug}{Setting \code{debug} to \code{TRUE} will provide information on all of the
-SMTP sending options, and, the email message won't actually be sent. A
-tibble of information will be returned. By default, this is set to \code{FALSE}.}
+\item{...}{The \code{...} is unused and only serves to force the naming of
+subsequent argument (\code{dry_run}) and avoid an unintended use.}
+
+\item{dry_run}{Setting \code{dry_run} to \code{TRUE} will return information on the
+SMTP sending options. Furthermore, the function will stop short of actually
+sending the email message out. By default, however, this is set to \code{FALSE}.}
 }
 \description{
 Send an email message to one or more recipients via an SMTP server.
@@ -77,7 +69,7 @@ prepare_test_message() \%>\%
     from = "sender@mail.com",
     to = "recipient@mail.com",
     subject = "Mail Subject",
-    creds_file = ".mail_creds"
+    credentials = creds_file("mail_creds")
   )
 }
 }

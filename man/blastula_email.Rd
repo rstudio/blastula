@@ -2,7 +2,7 @@
 % Please edit documentation in R/rmd_format.R
 \name{blastula_email}
 \alias{blastula_email}
-\title{R Markdown output format for Blastula emails}
+\title{R Markdown output format for Blastula email messages}
 \usage{
 blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
   number_sections = FALSE, section_divs = TRUE, fig_width = 7,
@@ -15,5 +15,5 @@ blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
   md_extensions = NULL, pandoc_args = NULL, ...)
 }
 \description{
-R Markdown output format for Blastula emails
+R Markdown output format for Blastula email messages
 }

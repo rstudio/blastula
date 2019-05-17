@@ -4,7 +4,7 @@
 \alias{attach_email}
 \title{Attach a Blastula email message object to the current render}
 \usage{
-attach_email(message, preview = TRUE)
+attach_email(email, preview = TRUE)
 }
 \description{
 Attach a Blastula email message object to the current render
