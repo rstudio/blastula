@@ -38,6 +38,10 @@ tidy_gsub <- function(x, pattern, replacement) {
   gsub(pattern, replacement, x)
 }
 
+`%||%` <- function(x, y) {
+  if (is.null(x)) y else x
+}
+
 #' Make a single-length character vector with addresses
 #' @param addresses a vector of addresses
 #' @noRd
