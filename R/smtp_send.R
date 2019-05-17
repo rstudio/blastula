@@ -139,19 +139,14 @@ smtp_send <- function(email,
   }
 
   # Write the inlined HTML message out to a file
-  email$html_str %>%
-    writeLines(con = "message_inlined.html")
+  email$html_str %>% writeLines(con = "message_inlined.html")
 
   # Remove the file after the function exits
   on.exit(file.remove("message_inlined.html"))
 
   # Handle a subject line that's not provided and use
   # `glue::glue()` for customizing a given `subject`
-  if (is.null(subject)) {
-    subject <- "<no subject>"
-  } else {
-    subject <- glue::glue(subject) %>% as.character()
-  }
+  subject <- glue::glue(subject) %>% as.character() %||% "<no subject>"
 
   # Create comma-separated addresses for
   # `to`, `cc`, and `bcc`
