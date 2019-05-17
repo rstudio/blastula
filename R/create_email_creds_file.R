@@ -31,6 +31,7 @@
 #'   provider = "gmail"
 #'   )
 #' }
+#' @noRd
 create_email_creds_file <- function(user,
                                     password,
                                     provider = NULL,
