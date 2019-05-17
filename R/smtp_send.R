@@ -186,21 +186,26 @@ smtp_send <- function(email,
       `-inline` = no_options()
     )
 
-  # Create the vector of arguments related
-  # to file attachments
+  # Create the vector of arguments related to file attachments
   attachment_args_vec <- create_attachment_args_vec(email = email)
 
-  # Clean up arguments and options; create the
-  # vector that's needed for `processx::run()`
+  # Clean up arguments and options; create the vector that's
+  # needed for `processx::run()`
   run_args <-
     run_args %>%
     prune_args() %>%
     create_args_opts_vec() %>%
-    append_attachment_args_vec(
-      attachment_args_vec = attachment_args_vec
-    )
+    append_attachment_args_vec(attachment_args_vec = attachment_args_vec)
 
-  if (!debug) {
+  if (dry_run) {
+
+    if ("-pass" %in% run_args) {
+      run_args[which(run_args == "-pass")[1] + 1] <- "*****"
+    }
+
+    return(paste(binary_loc, paste0(run_args, collapse = " ")))
+
+  } else {
 
     # Send out email via `processx::run()` and
     # assign the result
@@ -217,7 +222,5 @@ smtp_send <- function(email,
     } else {
       message("The email message was NOT successfully sent.\n")
     }
-
   }
-
 }
