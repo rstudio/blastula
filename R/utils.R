@@ -281,6 +281,34 @@ prepend_list <- function(x,
   }
 }
 
+#' An upgraded version of `Sys.which()` that returns a better Windows path
+#'
+#' @param name A single-length character vector with the executable name.
+#' @noRd
+sys_which <- function(name) {
+
+  # Only accept a vector of length 1
+  stopifnot(length(name) == 1)
+
+  # Get the
+  if (is_windows_os()) {
+
+    suppressWarnings({
+      pathname <-
+        system(sprintf("where %s 2> NUL", name), intern = TRUE)[1]
+    })
+
+    if (!is.na(pathname)) {
+
+      pathname <- pathname %>% tidy_gsub("\\\\", "/")
+
+      return(setNames(pathname, name))
+    }
+  }
+
+  Sys.which(name) %>% tidy_gsub("\\\\", "/")
+}
+
 # nocov start
 
 #' Find a binary on the system path or working directory
