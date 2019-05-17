@@ -318,8 +318,8 @@ sys_which <- function(name) {
 #' @noRd
 find_binary <- function(bin_name) {
 
-  # Find binary on path with `Sys.which()`
-  which_result <- Sys.which(bin_name) %>% unname()
+  # Find binary on path with `sys_which()`
+  which_result <- sys_which(name = bin_name) %>% unname()
 
   if (which_result != "") {
     return(which_result)
