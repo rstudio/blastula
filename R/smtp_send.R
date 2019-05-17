@@ -19,25 +19,25 @@
 #'   carbon copies. Any email addresses provided here will receive the message
 #'   and these email addresses will be concealed from other recipients
 #'   (including others on the BCC list).
-#' @param creds_file An optional path to an email credentials file. This file
-#'   must be created by the `create_email_creds_file()` function.
-#' @param sender The sender name.
-#' @param host The email host.
-#' @param port The port associated with the email account.
-#' @param user The username associated with the email account.
-#' @param password The password associated with the email account.
-#' @param use_ssl A logical value to indicate whether to use SSL.
-#' @param authenticate A logical value to indicate whether to use
-#'   authentication.
+#' @param credentials One of three credential helper functions must be used
+#'   here: (1) [creds_file()], (2) [creds_key()], or (3) [creds()]. The first,
+#'   [creds_file()], relies on a credentials file stored on disk. Such a file is
+#'   created using the [create_smtp_creds_file()] function. The [creds_key()] is
+#'   used if credentials are stored in the system-wide key-value store, thorugh
+#'   use of the [create_smtp_creds_key()] function. Using [creds()] allows for
+#'   manual specification of SMTP configuration and credentials within that
+#'   helper function.
 #' @param binary_loc An option to supply the location of the `mailsend-go`
 #'   binary file should it not be on the system path or in the working
 #'   directory.
 #' @param echo An option to print the standard output and error to the screen.
 #' @param echo_cmd A logical value indicating whether the system command should
 #'   be printed to the console during the sending of email.
-#' @param debug Setting `debug` to `TRUE` will provide information on all of the
-#'   SMTP sending options, and, the email message won't actually be sent. A
-#'   tibble of information will be returned. By default, this is set to `FALSE`.
+#' @param ... The `...` is unused and only serves to force the naming of
+#'   subsequent argument (`dry_run`) and avoid an unintended use.
+#' @param dry_run Setting `dry_run` to `TRUE` will return information on the
+#'   SMTP sending options. Furthermore, the function will stop short of actually
+#'   sending the email message out. By default, however, this is set to `FALSE`.
 #' @examples
 #' \dontrun{
 #' # Prepare a test message and send
@@ -47,10 +47,9 @@
 #'     from = "sender@mail.com",
 #'     to = "recipient@mail.com",
 #'     subject = "Mail Subject",
-#'     creds_file = ".mail_creds"
+#'     credentials = creds_file("mail_creds")
 #'   )
 #' }
-#' @importFrom glue glue
 #' @export
 smtp_send <- function(email,
                       from,
