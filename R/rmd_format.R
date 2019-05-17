@@ -19,8 +19,9 @@ render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
 #' Attach a Blastula email message object to the current render
 #'
 #' @export
-attach_email <- function(message, preview = TRUE) {
-  if (!inherits(message, "email_message")) {
+attach_email <- function(email, preview = TRUE) {
+
+  if (!inherits(email, "email_message")) {
     stop("blastula::attach_email() requires a blastula email message object")
   }
 
@@ -31,7 +32,7 @@ attach_email <- function(message, preview = TRUE) {
     if (preview) {
 
       html_file <- tempfile(fileext = ".html")
-      html <- message$html_html
+      html <- email$html_html
 
       msg <-
         paste0(
@@ -53,7 +54,7 @@ attach_email <- function(message, preview = TRUE) {
         )
 
       writeLines(html, html_file)
-      browseURL(html_file)
+      utils::browseURL(html_file)
 
       # This sleep is necessary because knitting usually happens in a separate
       # process, and when that process terminates the temp file will be deleted
@@ -61,8 +62,8 @@ attach_email <- function(message, preview = TRUE) {
     }
   }
 
-  rmarkdown::output_metadata$set(rsc_email_body_html = message$html_str)
-  rmarkdown::output_metadata$set(rsc_email_images = message$images)
+  rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
+  rmarkdown::output_metadata$set(rsc_email_images = email$images)
 
   invisible()
 }
