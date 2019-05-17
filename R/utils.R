@@ -29,6 +29,7 @@ smtp_settings <- function() {
 }
 
 #' A slighly more sensible version of `gsub()`
+#'
 #' @param x The text to be transformed.
 #' @param pattern The regex pattern.
 #' @param replacement A replacement for the matched pattern.
@@ -43,7 +44,8 @@ tidy_gsub <- function(x, pattern, replacement) {
 }
 
 #' Make a single-length character vector with addresses
-#' @param addresses a vector of addresses
+#'
+#' @param addresses A vector of email addresses.
 #' @noRd
 make_address_list <- function(addresses) {
   if (!is.null(addresses)) {
@@ -54,6 +56,7 @@ make_address_list <- function(addresses) {
 }
 
 #' Get a text string identifying the system's OS
+#'
 #' @noRd
 get_os_type <- function() {
 
@@ -77,36 +80,42 @@ get_os_type <- function() {
 }
 
 #' Is this system using Windows?
+#'
 #' @noRd
 is_windows_os <- function() {
   get_os_type() == "windows"
 }
 
 #' Is this system using macOS?
+#'
 #' @noRd
 is_mac_os <- function() {
   get_os_type() == "mac_os"
 }
 
 #' Is this system using Linux?
+#'
 #' @noRd
 is_linux_os <- function() {
   get_os_type() == "linux"
 }
 
-#' Is this system using Unix (not macOS nor Linux)?
+#' Is this system using Unix (neither macOS nor Linux)?
+#'
 #' @noRd
 is_unix_os <- function() {
   get_os_type() == "unix"
 }
 
 #' Is this system using an unknown OS?
+#'
 #' @noRd
 is_unknown_os <- function() {
   get_os_type() == "unknown"
 }
 
 #' Create a character object that signals `no_options`
+#'
 #' @noRd
 no_options <- function() {
   no_opts <- "no_options"
@@ -115,6 +124,7 @@ no_options <- function() {
 }
 
 #' Create a character object that signals `no_arg`
+#'
 #' @noRd
 no_arg <- function() {
   no_arg_ <- "no_arg"
@@ -123,7 +133,8 @@ no_arg <- function() {
 }
 
 #' Create vectors of args and vals for a list element
-#' @param x an element of the `run_args` list
+#'
+#' @param x An element of the `run_args` list.
 #' @noRd
 get_arg_opts <- function(x) {
 
@@ -137,7 +148,8 @@ get_arg_opts <- function(x) {
 }
 
 #' Take a list of args/vals and prune unnecessary arguments
-#' @param run_args a list of arguments and associated options
+#'
+#' @param run_args A list of arguments and associated options.
 #' @noRd
 prune_args <- function(run_args) {
 
@@ -149,7 +161,8 @@ prune_args <- function(run_args) {
 }
 
 #' Create a vector of command arguments and any associated options
-#' @param run_args a list of arguments and associated options
+#'
+#' @param run_args A list of arguments and associated options.
 #' @noRd
 create_args_opts_vec <- function(run_args) {
 
@@ -167,6 +180,7 @@ create_args_opts_vec <- function(run_args) {
 }
 
 #' Create a file attachment list
+#'
 #' @param file_path The path for the file to be attached.
 #' @param disposition The attachment's disposition, which is either set as
 #'   `attachment` (the default) or `inline`.
@@ -180,6 +194,7 @@ create_attachment_list <- function(file_path,
 }
 
 #' Add an attachment list to `email$attachments`
+#'
 #' @noRd
 add_attachment_list <- function(email,
                                 attachment_list) {
@@ -192,8 +207,9 @@ add_attachment_list <- function(email,
 
 #' Create a vector of command arguments and any associated options for any file
 #' attachments
+#'
 #' @param email The email message object, as created by the `compose_email()`
-#'   function. The object's class is `email_message`
+#'   function.
 #' @noRd
 create_attachment_args_vec <- function(email) {
 
@@ -229,6 +245,7 @@ create_attachment_args_vec <- function(email) {
 
 #' Append the vector of arguments and options for file attachments to the
 #' `args_opts_vec` vector of arguments and options
+#'
 #' @param args_opts_vec The vector created by the `create_args_opts_vec()`
 #'   function.
 #' @param attachment_args_vec The vector created by the
@@ -241,6 +258,7 @@ append_attachment_args_vec <- function(args_opts_vec,
 }
 
 #' Prepend a element to a list at a given position
+#'
 #' @param x The list object.
 #' @param values The values to prepend to the list.
 #' @param before The index position for the prepending operation.
@@ -266,7 +284,8 @@ prepend_list <- function(x,
 # nocov start
 
 #' Find a binary on the system path or working directory
-#' @param bin_name The name of the binary to search for
+#'
+#' @param bin_name The name of the binary to search for.
 #' @importFrom processx run
 #' @noRd
 find_binary <- function(bin_name) {
@@ -298,6 +317,7 @@ find_binary <- function(bin_name) {
 }
 
 #' Upload an image to Imgur and return the response
+#'
 #' @importFrom httr POST add_headers upload_file stop_for_status content
 #' @importFrom xml2 as_list read_xml
 #' @noRd
