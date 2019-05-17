@@ -159,33 +159,6 @@ smtp_send <- function(email,
   cc <- make_address_list(cc)
   bcc <- make_address_list(bcc)
 
-  # If a path to a credentials file is provided,
-  # read in the values
-  if (!is.null(creds_file)) {
-
-    credentials <- readRDS(creds_file) %>% as.list()
-
-    # Overwrite sender name if one is provided
-    if (!is.null(sender)) credentials$sender <- sender
-
-  } else {
-
-    if (is.null(password)) {
-      password <- getPass::getPass("Enter the SMTP server password: ")
-    }
-
-    credentials <-
-      list(
-        sender = sender,
-        host = host,
-        port = port,
-        user = user,
-        password = password,
-        use_ssl = use_ssl,
-        authenticate = authenticate
-      )
-  }
-
   # Set the `ssl` flag depending on the options provided
   if (credentials$use_ssl) {
     ssl_opt <- no_options()
