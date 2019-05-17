@@ -57,18 +57,13 @@ smtp_send <- function(email,
                       subject = NULL,
                       cc = NULL,
                       bcc = NULL,
-                      creds_file = NULL,
-                      sender = NULL,
-                      host = NULL,
-                      port = NULL,
-                      user = NULL,
-                      password = NULL,
-                      use_ssl = TRUE,
-                      authenticate = TRUE,
+                      credentials = NULL,
                       binary_loc = NULL,
                       echo = FALSE,
                       echo_cmd = FALSE,
-                      debug = FALSE) {
+                      ...,
+                      dry_run = FALSE,
+                      creds_file = "deprecated") {
 
   # Verify that the `message` object
   # is of the class `email_message`
