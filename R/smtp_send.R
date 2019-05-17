@@ -155,7 +155,7 @@ smtp_send <- function(email,
   bcc <- make_address_list(bcc)
 
   # Set the `ssl` flag depending on the options provided
-  if (credentials$use_ssl) {
+  if (creds_list$use_ssl) {
     ssl_opt <- no_options()
   } else {
     ssl_opt <- no_arg()
@@ -169,13 +169,13 @@ smtp_send <- function(email,
   run_args <-
     list(
       `-sub` = subject,
-      `-smtp` = credentials$host,
-      `-port` = credentials$port,
+      `-smtp` = creds_list$host,
+      `-port` = creds_list$port %>% as.character(),
       `-ssl` = ssl_opt,
       `auth` = no_options(),
-      `-user` = credentials$user,
-      `-pass` = credentials$password,
-      `-fname` = credentials$sender,
+      `-user` = creds_list$user,
+      `-pass` = creds_list$password,
+      `-fname` = sender_name_opt,
       `-from` = from,
       `-to` = to,
       `-cc` = cc,
