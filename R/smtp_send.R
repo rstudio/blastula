@@ -22,11 +22,11 @@
 #' @param credentials One of three credential helper functions must be used
 #'   here: (1) [creds_file()], (2) [creds_key()], or (3) [creds()]. The first,
 #'   [creds_file()], relies on a credentials file stored on disk. Such a file is
-#'   created using the [create_smtp_creds_file()] function. The [creds_key()] is
-#'   used if credentials are stored in the system-wide key-value store, thorugh
-#'   use of the [create_smtp_creds_key()] function. Using [creds()] allows for
-#'   manual specification of SMTP configuration and credentials within that
-#'   helper function.
+#'   created using the [create_smtp_creds_file()] function. The [creds_key()]
+#'   function is used if credentials are stored in the system-wide key-value
+#'   store, through use of the [create_smtp_creds_key()] function. Using
+#'   [creds()] allows for a manual specification of SMTP configuration and
+#'   credentials within that helper function.
 #' @param binary_loc An option to supply the location of the `mailsend-go`
 #'   binary file should it not be on the system path or in the working
 #'   directory.
