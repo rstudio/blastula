@@ -265,12 +265,12 @@ get_smtp_keyring_creds <- function(key_name = NULL) {
 #'
 #' These helper functions, the credential helpers, are used to supply SMTP
 #' configuration and authorization information for the [smtp_send()] function.
-#' These helpers ([creds_file()], [creds_key()], and [creds()]) are to be
-#' used expressly with the `credentials` argument of [smtp_send()]. The
+#' These helpers ([creds_file()], [creds_key()], and [creds()]) are to be used
+#' expressly with the `credentials` argument of [smtp_send()]. The
 #' [creds_file()] credential helper is used to point at a credentials file
 #' stored on disk. We can create that file using the [create_smtp_creds_file()]
-#' function. The [creds_key()] credential helper is truly somthing special.
-#' It actually helps one obtain credentials that are stored in the system-wide
+#' function. The [creds_key()] credential helper is truly somthing special. It
+#' actually helps one obtain credentials that are stored in the system-wide
 #' key-value store. The equally magical [create_smtp_creds_key()] function sets
 #' that key. Using [creds()] allows for manual specification of SMTP
 #' configuration and authentication within that helper function.
