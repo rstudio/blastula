@@ -35,11 +35,11 @@ and these email addresses will be concealed from other recipients
 \item{credentials}{One of three credential helper functions must be used
 here: (1) \code{\link[=creds_file]{creds_file()}}, (2) \code{\link[=creds_key]{creds_key()}}, or (3) \code{\link[=creds]{creds()}}. The first,
 \code{\link[=creds_file]{creds_file()}}, relies on a credentials file stored on disk. Such a file is
-created using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function. The \code{\link[=creds_key]{creds_key()}} is
-used if credentials are stored in the system-wide key-value store, thorugh
-use of the \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}} function. Using \code{\link[=creds]{creds()}} allows for
-manual specification of SMTP configuration and credentials within that
-helper function.}
+created using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function. The \code{\link[=creds_key]{creds_key()}}
+function is used if credentials are stored in the system-wide key-value
+store, through use of the \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}} function. Using
+\code{\link[=creds]{creds()}} allows for a manual specification of SMTP configuration and
+credentials within that helper function.}
 
 \item{binary_loc}{An option to supply the location of the \code{mailsend-go}
 binary file should it not be on the system path or in the working

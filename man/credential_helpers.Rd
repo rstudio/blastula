@@ -57,12 +57,12 @@ a list object of class \code{location_cells}.
 \description{
 These helper functions, the credential helpers, are used to supply SMTP
 configuration and authorization information for the \code{\link[=smtp_send]{smtp_send()}} function.
-These helpers (\code{\link[=creds_file]{creds_file()}}, \code{\link[=creds_key]{creds_key()}}, and \code{\link[=creds]{creds()}}) are to be
-used expressly with the \code{credentials} argument of \code{\link[=smtp_send]{smtp_send()}}. The
+These helpers (\code{\link[=creds_file]{creds_file()}}, \code{\link[=creds_key]{creds_key()}}, and \code{\link[=creds]{creds()}}) are to be used
+expressly with the \code{credentials} argument of \code{\link[=smtp_send]{smtp_send()}}. The
 \code{\link[=creds_file]{creds_file()}} credential helper is used to point at a credentials file
 stored on disk. We can create that file using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}}
-function. The \code{\link[=creds_key]{creds_key()}} credential helper is truly somthing special.
-It actually helps one obtain credentials that are stored in the system-wide
+function. The \code{\link[=creds_key]{creds_key()}} credential helper is truly somthing special. It
+actually helps one obtain credentials that are stored in the system-wide
 key-value store. The equally magical \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}} function sets
 that key. Using \code{\link[=creds]{creds()}} allows for manual specification of SMTP
 configuration and authentication within that helper function.
