@@ -300,6 +300,7 @@ create_credentials_list <- function(provider,
     stop("The value supplied to `use_ssl` must be TRUE or FALSE.")
   }
 
+  # Prompt for the password using `getPass::getPass()`
   password <- getPass::getPass("Enter the SMTP server password: ")
 
   # If a `provider` name is given, extract values for `host`,
@@ -318,6 +319,7 @@ create_credentials_list <- function(provider,
     if (is.null(use_ssl)) use_ssl <- settings_record$use_ssl
   }
 
+  # Generate the credentials list
   list(
     version = schema_version,
     sender_name = sender_name,
