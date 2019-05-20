@@ -345,6 +345,16 @@ creds <- function(provider = NULL,
       user = user,
       password = password %||% getPass::getPass("Enter the SMTP server password: ")
     )
+#' Is keyring able to store keys?
+#'
+#' @noRd
+is_keyring_capable <- function() {
+
+  if (!keyring::has_keyring_support()) {
+    stop("To store SMTP via *keyring*, the system needs to have",
+         "*keyring* support", call. = FALSE)
+  }
+}
 
   structure(
     class = c("creds", "blastula_creds"),
