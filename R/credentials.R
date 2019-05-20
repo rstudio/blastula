@@ -61,6 +61,7 @@ create_smtp_creds_file <- function(file_name = NULL,
   # Save the credential values as an plaintext file
   # containing JSON
   writeLines(serialized, file)
+  Sys.chmod(paths = file, mode = "0600")
 
   # Issue a message stating that the file has been created
   message("The SMTP credentials file (`", file, "`) has been generated")
