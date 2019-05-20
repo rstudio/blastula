@@ -9,8 +9,8 @@
 #'   following way: `blastula-<host_name>`.
 #' @param provider An optional provider email provider with which an STMP
 #'   account is available. Options currently include `gmail`, `outlook`, and
-#'   `office365`. If nothing is provided then values for `host`, `port`,
-#'   `sender`, `use_ssl`, `use_tls`, and `authenticate` are expected.
+#'   `office365`. If nothing is provided then values for `host`, `port`, and
+#'   `use_ssl` are expected.
 #' @param user The username for the email account.
 #' @param sender_name The sender name.
 #' @param host The `host` name.
