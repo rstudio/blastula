@@ -19,8 +19,9 @@
 #'   value (`TRUE` is the default value).
 #' @examples
 #' \dontrun{
-#' # Create a credentials file to facilitate
-#' # the sending of email messages
+#' # Create a credentials file to make it
+#' # much easier to send email out with
+#' # `smtp_send()`
 #' create_smtp_creds_file(
 #'   provider = "gmail"
 #'   user = "user_name@gmail.com",
@@ -78,8 +79,10 @@ get_smtp_file_creds <- function(file_name = NULL) {
 #' @inheritParams create_smtp_creds_file
 #' @examples
 #' \dontrun{
-#' # Store SMTP crendentials using the system's
-#' # secure key-value store
+#' # Store SMTP crendentials using the
+#' # system's secure key-value store to
+#' # make it much easier to send email out
+#' # with `smtp_send()`
 #' create_smtp_creds_key(
 #'   provider = "gmail",
 #'   user = "user_name@gmail.com",
