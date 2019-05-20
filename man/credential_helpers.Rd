@@ -12,7 +12,7 @@ creds_file(file)
 creds_key(key_name)
 
 creds(provider = NULL, user, sender_name = NULL, host = NULL,
-  port = NULL, use_ssl = TRUE, ..., password = NULL)
+  port = NULL, use_ssl = TRUE)
 }
 \arguments{
 \item{file}{When using the \code{\link[=creds_file]{creds_file()}} credential helper, we need to
@@ -41,15 +41,6 @@ account is available. Options currently include \code{gmail}, \code{outlook}, an
 
 \item{use_ssl}{An option as to whether to use SSL; supply a \code{TRUE} or \code{FALSE}
 value (\code{TRUE} is the default value).}
-
-\item{...}{The \code{...} is unused and only serves to force the naming of
-subsequent argument (\code{password}) and avoid an unintended use.}
-
-\item{password}{The password for the SMTP server. Normally, in interactive
-use, this doesn't need to be provided here. Rather, a dialog box will
-appear asking for the password (which is masked and never enters the
-\code{.Rhistory} file). This argument is provided here just in case the function
-needs to be used non-interactively.}
 }
 \value{
 a list object of class \code{location_cells}.
