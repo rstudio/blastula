@@ -381,4 +381,4 @@ normalize_key_to_service_name <- function(key_name,
 
 # Globally set the schema version for the storage
 # of SMTP settings and authentication via keyring
-keyring_schema_version <- 1L
+schema_version <- 1L
