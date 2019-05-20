@@ -130,7 +130,7 @@ smtp_send <- function(email,
   if (inherits(credentials, "creds_key")) {
     creds_list <- get_smtp_keyring_creds(key_name = credentials$key_name)
   } else if (inherits(credentials, "creds_file")) {
-    creds_list <- readRDS(file = credentials$file)
+    creds_list <- get_smtp_file_creds(file_name = credentials$file)
   } else if (inherits(credentials, "creds")) {
     creds_list <- credentials %>% unclass()
   }
