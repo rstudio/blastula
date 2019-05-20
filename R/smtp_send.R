@@ -33,8 +33,6 @@
 #' @param echo An option to print the standard output and error to the screen.
 #' @param echo_cmd A logical value indicating whether the system command should
 #'   be printed to the console during the sending of email.
-#' @param ... The `...` is unused and only serves to force the naming of
-#'   subsequent argument (`dry_run`) and avoid an unintended use.
 #' @param dry_run Setting `dry_run` to `TRUE` will return information on the
 #'   SMTP sending options. Furthermore, the function will stop short of actually
 #'   sending the email message out. By default, however, this is set to `FALSE`.
@@ -61,7 +59,6 @@ smtp_send <- function(email,
                       binary_loc = NULL,
                       echo = FALSE,
                       echo_cmd = FALSE,
-                      ...,
                       dry_run = FALSE,
                       creds_file = "deprecated") {
 
