@@ -33,39 +33,17 @@ create_smtp_creds_file <- function(file_name = NULL,
                                    sender_name = NULL,
                                    host = NULL,
                                    port = NULL,
-                                   use_ssl = TRUE,
+                                   use_ssl = TRUE) {
 
-  # Ensure that `use_ssl` is either TRUE or FALSE
-  if (!(use_ssl %in% c(TRUE, FALSE))) {
-    stop("The value supplied to `use_ssl` must be TRUE or FALSE.")
-  }
-
-  # If a `provider` name is given, extract values for `host`,
-  # `port`, `use_ssl`, `use_tls`, and `authenticate`
-  if (!is.null(provider) &&
-      provider %in% (smtp_settings() %>% dplyr::pull(short_name))) {
-
-    # Extract the record for the SMTP provider
-    settings_record <-
-      smtp_settings() %>%
-      dplyr::filter(short_name == provider)
-
-    # TODO: only set these if the incoming values are not NULL
-    # Extract settings for the provider
-    host <- settings_record$server
-    port <- settings_record$port
-    use_ssl <- settings_record$use_ssl
-  }
-
+  # Create a credentials list from the function inputs
   credentials_list <-
-    list(
-      version = NA_integer_,
+    create_credentials_list(
+      provider = provider,
+      user = user,
       sender_name = sender_name,
       host = host,
       port = port,
-      use_ssl = use_ssl,
-      user = user,
-      password = password %||% getPass::getPass("Enter the SMTP server password: ")
+      use_ssl = use_ssl
     )
 
   if (is.null(file_name)) {
@@ -78,11 +56,25 @@ create_smtp_creds_file <- function(file_name = NULL,
     file <- as.character(file_name)
   }
 
-  # Save the credential values as an RDS file
-  saveRDS(credentials_list, file = file)
+  serialized <- JSONify_credentials(credentials_list)
+
+  # Save the credential values as an plaintext file
+  # containing JSON
+  writeLines(serialized, file)
 
   # Issue a message stating that the file has been created
   message("The SMTP credentials file (`", file, "`) has been generated")
+}
+
+#' Retrieve metadata and authentication values from an on-disk credentials file
+#'
+#' @noRd
+get_smtp_file_creds <- function(file_name = NULL) {
+
+  # For the given `file_name`, read in the JSON
+  # data and convert it into a list object
+  readLines(file_name) %>%
+    jsonlite::unserializeJSON()
 }
 
 #' Store SMTP credentials in the system's key-value store
@@ -105,63 +97,27 @@ create_smtp_creds_key <- function(key_name = NULL,
                                   sender_name = NULL,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = TRUE,
+                                  use_ssl = TRUE) {
 
-  if (!keyring::has_keyring_support()) {
-    stop("To store SMTP via *keyring*, the system needs to have",
-         "*keyring* support", call. = FALSE)
-  }
+  # Determine whether {keyring} can be used
+  is_keyring_capable()
 
-  # Ensure that `use_ssl` is either TRUE or FALSE
-  if (!(use_ssl %in% c(TRUE, FALSE))) {
-    stop("The value supplied to `use_ssl` must be TRUE or FALSE.")
-  }
-
-  if (!is.null(provider) &&
-      provider %in% (smtp_settings() %>% dplyr::pull(short_name))) {
-
-    # Extract the record for the SMTP provider
-    settings_record <-
-      smtp_settings() %>%
-      dplyr::filter(short_name == provider)
-
-    # TODO: only set these if the incoming values are not NULL
-    # Extract settings for the provider
-    host <- settings_record$server
-    port <- settings_record$port
-    use_ssl <- settings_record$use_ssl
-  }
-
-  # If the `sender_name` isn't provided, use
-  # an empty string
-  if (is.null(sender_name)) sender_name <- ""
-
-  # Use the provider name if it's given as the
-  # `key_name` (if that's not given)
-  if (is.null(key_name) && !is.null(provider)) {
-    key_name <- provider
-  } else if (is.null(key_name)) {
-    key_name <- ""
-  }
-
-  # Create the `service_name` for `keyring`
-  service_name <- paste0("blastula-v", keyring_schema_version, "-", key_name)
-
+  # Create a credentials list from the function inputs
   credentials_list <-
-    list(
-      version = keyring_schema_version,
+    create_credentials_list(
+      provider = provider,
+      user = user,
       sender_name = sender_name,
       host = host,
       port = port,
-      use_ssl = use_ssl,
-      user = user,
-      password = password %||% getPass::getPass("Enter the SMTP server password: ")
+      use_ssl = use_ssl
     )
 
-  serialized <-
-    credentials_list %>%
-    jsonlite::serializeJSON() %>%
-    as.character()
+  # Create the `service_name` value for `keyring`
+  service_name <- normalize_key_to_service_name(key_name, provider)
+
+  # Create a plaintext JSON string for the credentials
+  serialized <- JSONify_credentials(credentials_list)
 
   # Set the key in the system's default keyring
   keyring::key_set_with_value(
@@ -180,7 +136,7 @@ create_smtp_creds_key <- function(key_name = NULL,
 #' @importFrom dplyr as_tibble filter mutate
 #' @importFrom tidyr separate
 #' @noRd
-get_keyring_creds_table <- function(version = keyring_schema_version) {
+get_keyring_creds_table <- function(version = schema_version) {
 
   creds_tbl <-
     keyring::key_list() %>%
@@ -230,7 +186,7 @@ get_smtp_keyring_creds <- function(key_name = NULL) {
     get_keyring_creds_table() %>%
     dplyr::filter(
       key_name == key_name,
-      version == keyring_schema_version
+      version == schema_version
     )
 
   # If the given `key_name` doesn't correspond to an
@@ -315,7 +271,25 @@ creds <- function(provider = NULL,
                   sender_name = NULL,
                   host = NULL,
                   port = NULL,
-                  use_ssl = TRUE,
+                  use_ssl = TRUE) {
+
+  # Create a credentials list from the function inputs
+  credentials_list <-
+    create_credentials_list(
+      provider = provider,
+      user = user,
+      sender_name = sender_name,
+      host = host,
+      port = port,
+      use_ssl = use_ssl
+    )
+
+  structure(
+    class = c("creds", "blastula_creds"),
+    credentials_list
+  )
+}
+
 #' Create a credentials list object
 #'
 #' @noRd
