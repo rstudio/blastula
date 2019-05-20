@@ -46,15 +46,8 @@ create_smtp_creds_file <- function(file_name = NULL,
       use_ssl = use_ssl
     )
 
-  if (is.null(file_name)) {
-
-    # Construct a file name based on the `host` name
-    file <- paste0("blastula-", host %>% tidy_gsub("\\.", "_"))
-
-  } else {
-
-    file <- as.character(file_name)
-  }
+  # Generate a file name
+  file <- normalize_filename(file_name, host)
 
   serialized <- JSONify_credentials(credentials_list)
 
