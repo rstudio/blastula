@@ -28,8 +28,8 @@ automatically generated based on the SMTP host name.}
 
 \item{provider}{An optional provider email provider with which an STMP
 account is available. Options currently include \code{gmail}, \code{outlook}, and
-\code{office365}. If nothing is provided then values for \code{host}, \code{port},
-\code{sender}, \code{use_ssl}, \code{use_tls}, and \code{authenticate} are expected.}
+\code{office365}. If nothing is provided then values for \code{host}, \code{port}, and
+\code{use_ssl} are expected.}
 
 \item{user}{The username for the email account.}
 
