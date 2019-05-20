@@ -316,7 +316,25 @@ creds <- function(provider = NULL,
                   host = NULL,
                   port = NULL,
                   use_ssl = TRUE,
+#' Create a credentials list object
+#'
+#' @noRd
+create_credentials_list <- function(provider,
+                                    user,
+                                    sender_name,
+                                    host,
+                                    port,
+                                    use_ssl) {
 
+  # Ensure that `use_ssl` is either TRUE or FALSE
+  if (!(use_ssl %in% c(TRUE, FALSE))) {
+    stop("The value supplied to `use_ssl` must be TRUE or FALSE.")
+  }
+
+  password <- getPass::getPass("Enter the SMTP server password: ")
+
+  # If a `provider` name is given, extract values for `host`,
+  # `port`, `use_ssl`, `use_tls`, and `authenticate`
   if (!is.null(provider) &&
       provider %in% (smtp_settings() %>% dplyr::pull(short_name))) {
 
@@ -325,26 +343,23 @@ creds <- function(provider = NULL,
       smtp_settings() %>%
       dplyr::filter(short_name == provider)
 
-    # TODO: only set these if the incoming values are not NULL
     # Extract settings for the provider
-    host <- settings_record$server
-    port <- settings_record$port
-    use_ssl <- settings_record$use_ssl
+    if (is.null(host)) host <- settings_record$server
+    if (is.null(port)) port <- settings_record$port
+    if (is.null(use_ssl)) use_ssl <- settings_record$use_ssl
   }
 
-  # If the `sender_name` isn't provided, use an empty string
-  if (is.null(sender_name)) sender_name <- ""
+  list(
+    version = schema_version,
+    sender_name = sender_name,
+    host = host,
+    port = port,
+    use_ssl = use_ssl,
+    user = user,
+    password = password
+  )
+}
 
-  credentials_list <-
-    list(
-      version = NA_integer_,
-      sender_name = sender_name,
-      host = host,
-      port = port,
-      use_ssl = use_ssl,
-      user = user,
-      password = password %||% getPass::getPass("Enter the SMTP server password: ")
-    )
 #' Is keyring able to store keys?
 #'
 #' @noRd
@@ -356,10 +371,6 @@ is_keyring_capable <- function() {
   }
 }
 
-  structure(
-    class = c("creds", "blastula_creds"),
-    credentials_list
-  )
 #' Convert a `credentials_list` to a JSON string
 #'
 #' @noRd
