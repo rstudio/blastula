@@ -350,6 +350,17 @@ creds <- function(provider = NULL,
     class = c("creds", "blastula_creds"),
     credentials_list
   )
+#' Convert a `credentials_list` to a JSON string
+#'
+#' @noRd
+JSONify_credentials <- function(credentials_list) {
+
+  # Create a plaintext JSON string for the credentials
+  credentials_list %>%
+    jsonlite::serializeJSON() %>%
+    as.character()
+}
+
 }
 
 # Globally set the schema version for the storage
