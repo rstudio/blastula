@@ -375,6 +375,25 @@ normalize_key_to_service_name <- function(key_name,
   service_name <- paste0("blastula-v", schema_version, "-", key_name)
 }
 
+#' Construct a filename provided one or from a hostname
+#'
+#' @noRd
+normalize_filename <- function(file_name,
+                               host) {
+
+  if (is.null(file_name)) {
+
+    # Construct a file name based on the `host` name
+    file <- paste0("blastula-", host %>% tidy_gsub("\\.", "_"))
+
+  } else {
+
+    file <- as.character(file_name)
+  }
+
+  file
+}
+
 # Globally set the schema version for the storage
 # of SMTP settings and authentication via keyring
 schema_version <- 1L
