@@ -361,6 +361,22 @@ JSONify_credentials <- function(credentials_list) {
     as.character()
 }
 
+#' Construct a service name from a key_name and possibly a provider name
+#'
+#' @noRd
+normalize_key_to_service_name <- function(key_name,
+                                          provider) {
+
+  # Use the provider name if it's given as the
+  # `key_name` (if that's not given)
+  if (is.null(key_name) && !is.null(provider)) {
+    key_name <- provider
+  } else if (is.null(key_name)) {
+    key_name <- ""
+  }
+
+  # Create the `service_name` for `keyring`
+  service_name <- paste0("blastula-v", schema_version, "-", key_name)
 }
 
 # Globally set the schema version for the storage
