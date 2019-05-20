@@ -38,14 +38,42 @@
 #'   sending the email message out. By default, however, this is set to `FALSE`.
 #' @examples
 #' \dontrun{
-#' # Prepare a test message and send
-#' # the email out with `smtp_send()`
-#' prepare_test_message() %>%
+#' # Before sending out an email through
+#' # SMTP, we need an `email_message`
+#' # object; for the purpose of a simple
+#' # example, we can use the function
+#' # `prepare_test_message()` to create
+#' # a test version of an email
+#' email <- prepare_test_message()
+#'
+#' # A message can be sent in one of
+#' # three ways:
+#'
+#' # (1) with a credentials file
+#' email %>%
 #'   smtp_send(
-#'     from = "sender@mail.com",
-#'     to = "recipient@mail.com",
-#'     subject = "Mail Subject",
-#'     credentials = creds_file("mail_creds")
+#'     from = "sender@email.com",
+#'     to = "recipient@email.com",
+#'     credentials = creds_file("gmail")
+#'   )
+#'
+#' # (2) with a credentials key
+#' email %>%
+#'   smtp_send(
+#'     from = "sender@email.com",
+#'     to = "recipient@email.com",
+#'     credentials = creds_key("gmail")
+#'   )
+#'
+#' # (3) by providing the credentials
+#' # info when using `smtp_send()`
+#' email %>%
+#'   smtp_send(
+#'     from = "sender@email.com",
+#'     to = "recipient@email.com",
+#'     credentials = creds(
+#'       provider = "gmail",
+#'       user = "sender@email.com")
 #'   )
 #' }
 #' @export
