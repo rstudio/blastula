@@ -17,13 +17,6 @@
 #' @param port The port number.
 #' @param use_ssl An option as to whether to use SSL; supply a `TRUE` or `FALSE`
 #'   value (`TRUE` is the default value).
-#' @param ... The `...` is unused and only serves to force the naming of
-#'   subsequent argument (`password`) and avoid an unintended use.
-#' @param password The password for the SMTP server. Normally, in interactive
-#'   use, this doesn't need to be provided here. Rather, a dialog box will
-#'   appear asking for the password (which is masked and never enters the
-#'   `.Rhistory` file). This argument is provided here just in case the function
-#'   needs to be used non-interactively.
 #' @examples
 #' \dontrun{
 #' # Create a credentials file to facilitate
@@ -41,8 +34,6 @@ create_smtp_creds_file <- function(file_name = NULL,
                                    host = NULL,
                                    port = NULL,
                                    use_ssl = TRUE,
-                                   ...,
-                                   password = NULL) {
 
   # Ensure that `use_ssl` is either TRUE or FALSE
   if (!(use_ssl %in% c(TRUE, FALSE))) {
@@ -115,8 +106,6 @@ create_smtp_creds_key <- function(key_name = NULL,
                                   host = NULL,
                                   port = NULL,
                                   use_ssl = TRUE,
-                                  ...,
-                                  password = NULL) {
 
   if (!keyring::has_keyring_support()) {
     stop("To store SMTP via *keyring*, the system needs to have",
@@ -327,8 +316,6 @@ creds <- function(provider = NULL,
                   host = NULL,
                   port = NULL,
                   use_ssl = TRUE,
-                  ...,
-                  password = NULL) {
 
   if (!is.null(provider) &&
       provider %in% (smtp_settings() %>% dplyr::pull(short_name))) {
