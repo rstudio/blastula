@@ -202,17 +202,16 @@ JSONify_credentials <- function(credentials_list) {
 normalize_name <- function(name = NULL,
                            host) {
 
+  # If a name isn't provided, create one
+  # based on the `host` name
   if (is.null(name)) {
-
-    # Construct a name based on the `host` name
-    name <-
-      paste0("blastula-v", schema_version, "-", host %>% tidy_gsub("\\.", "_"))
-
-  } else {
-    name <- as.character(name)
+    name <- host %>% tidy_gsub("\\.", "_")
   }
 
-  name
+  # Construct the final name, using a prefix
+  # that includes the schema version
+  paste0("blastula-v", schema_version, "-", name)
+
 }
 
 # Globally set the schema version for the storage
