@@ -28,7 +28,7 @@
 #'   )
 #' }
 #' @export
-create_smtp_creds_file <- function(file_name = NULL,
+create_smtp_creds_file <- function(filename = NULL,
                                    provider = NULL,
                                    user,
                                    sender_name = NULL,
@@ -89,7 +89,7 @@ get_smtp_file_creds <- function(file_name = NULL) {
 #'   )
 #' }
 #' @export
-create_smtp_creds_key <- function(key_name = NULL,
+create_smtp_creds_key <- function(keyname = NULL,
                                   provider = NULL,
                                   user,
                                   sender_name = NULL,
