@@ -51,12 +51,8 @@ get_smtp_keyring_creds <- function(key_name = NULL) {
     jsonlite::unserializeJSON()
 }
 
-
 #' Utility function for obtaining keyring entries related to blastula creds
 #'
-#' @import keyring
-#' @importFrom dplyr as_tibble filter mutate
-#' @importFrom tidyr separate
 #' @noRd
 get_keyring_creds_table <- function(version = schema_version) {
 
@@ -95,4 +91,3 @@ get_keyring_creds_table <- function(version = schema_version) {
 
   creds_tbl
 }
-
