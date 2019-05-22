@@ -345,7 +345,7 @@ create_credentials_list <- function(provider,
   )
 }
 
-#' Is keyring able to store keys?
+#' Is keyring able to store keys on the system?
 #'
 #' @noRd
 is_keyring_capable <- function() {
