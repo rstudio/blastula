@@ -356,41 +356,23 @@ JSONify_credentials <- function(credentials_list) {
     as.character()
 }
 
-#' Construct a service name from a `key_name` and possibly a `provider` name
+#' Construct a name from a provided one or from a hostname
 #'
 #' @noRd
-normalize_key_to_service_name <- function(key_name,
-                                          provider) {
+normalize_name <- function(name = NULL,
+                           host) {
 
-  # Use the provider name if it's given as the
-  # `key_name` (if that's not given)
-  if (is.null(key_name) && !is.null(provider)) {
-    key_name <- provider
-  } else if (is.null(key_name)) {
-    key_name <- ""
-  }
+  if (is.null(name)) {
 
-  # Create the `service_name` for `keyring`
-  service_name <- paste0("blastula-v", schema_version, "-", key_name)
-}
-
-#' Construct a filename provided one or from a hostname
-#'
-#' @noRd
-normalize_filename <- function(file_name,
-                               host) {
-
-  if (is.null(file_name)) {
-
-    # Construct a file name based on the `host` name
-    file <- paste0("blastula-", host %>% tidy_gsub("\\.", "_"))
+    # Construct a name based on the `host` name
+    name <- paste0("blastula-v", schema_version, "-", host %>% tidy_gsub("\\.", "_"))
 
   } else {
 
-    file <- as.character(file_name)
+    name <- as.character(name)
   }
 
-  file
+  name
 }
 
 # Globally set the schema version for the storage
