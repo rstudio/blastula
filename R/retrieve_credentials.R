@@ -1,3 +1,13 @@
+#' View available credentials keys in the system key-value store
+#'
+#' @export
+view_credential_keys <- function() {
+
+  get_keyring_creds_table() %>%
+    dplyr::select(-key_name) %>%
+    dplyr::rename(keyname = service)
+}
+
 #' Retrieve metadata and authentication values from an on-disk credentials file
 #'
 #' @noRd
