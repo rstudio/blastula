@@ -48,7 +48,7 @@ create_smtp_creds_file <- function(file_name = NULL,
     )
 
   # Generate a file name
-  file <- normalize_filename(file_name, host)
+  file <- normalize_name(name = filename, host = credentials_list$host)
 
   # Create a plaintext JSON string for the credentials
   serialized <- JSONify_credentials(credentials_list)
@@ -112,7 +112,7 @@ create_smtp_creds_key <- function(key_name = NULL,
     )
 
   # Create the `service_name` value for `keyring`
-  service_name <- normalize_key_to_service_name(key_name, provider)
+  service_name <- normalize_name(name = keyname, host = credentials_list$host)
 
   # Create a plaintext JSON string for the credentials
   serialized <- JSONify_credentials(credentials_list)
