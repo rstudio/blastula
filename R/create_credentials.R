@@ -30,7 +30,7 @@
 #'   )
 #' }
 #' @export
-create_smtp_creds_file <- function(filename = NULL,
+create_smtp_creds_file <- function(id = NULL,
                                    provider = NULL,
                                    user,
                                    sender_name = NULL,
