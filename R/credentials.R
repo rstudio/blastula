@@ -54,8 +54,8 @@ create_smtp_creds_file <- function(filename = NULL,
   # Create a plaintext JSON string for the credentials
   serialized <- JSONify_credentials(credentials_list)
 
-  # Save the credential values as an plaintext file
-  # containing JSON
+  # Write the credential values into a plaintext file
+  # that contains JSON
   writeLines(serialized, file)
   Sys.chmod(file, mode = "0600")
 
