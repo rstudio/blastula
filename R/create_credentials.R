@@ -11,11 +11,11 @@
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.
 #' @param user The username for the email account.
-#' @param sender_name The sender name.
 #' @param host The `host` name.
 #' @param port The port number.
 #' @param use_ssl An option as to whether to use SSL; supply a `TRUE` or `FALSE`
 #'   value (`TRUE` is the default value).
+#' @param sender_name The sender name.
 #' @examples
 #' \dontrun{
 #' # Create a credentials file to make it
@@ -32,10 +32,10 @@
 create_smtp_creds_file <- function(id = NULL,
                                    provider = NULL,
                                    user,
-                                   sender_name = NULL,
                                    host = NULL,
                                    port = NULL,
-                                   use_ssl = TRUE) {
+                                   use_ssl = TRUE,
+                                   sender_name = NULL) {
 
   # Create a credentials list from the function inputs
   credentials_list <-
@@ -91,10 +91,10 @@ create_smtp_creds_file <- function(id = NULL,
 create_smtp_creds_key <- function(id = NULL,
                                   provider = NULL,
                                   user,
-                                  sender_name = NULL,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = TRUE) {
+                                  use_ssl = TRUE,
+                                  sender_name = NULL) {
 
   # Determine whether {keyring} can be used
   is_keyring_capable()
