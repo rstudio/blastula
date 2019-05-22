@@ -50,7 +50,7 @@ create_smtp_creds_file <- function(id = NULL,
     )
 
   # Generate a file name
-  file <- normalize_name(name = filename, host = credentials_list$host)
+  file <- normalize_name(name = id, host = credentials_list$host)
 
   # Create a plaintext JSON string for the credentials
   serialized <- JSONify_credentials(credentials_list)
