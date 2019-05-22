@@ -205,10 +205,10 @@ normalize_name <- function(name = NULL,
   if (is.null(name)) {
 
     # Construct a name based on the `host` name
-    name <- paste0("blastula-v", schema_version, "-", host %>% tidy_gsub("\\.", "_"))
+    name <-
+      paste0("blastula-v", schema_version, "-", host %>% tidy_gsub("\\.", "_"))
 
   } else {
-
     name <- as.character(name)
   }
 
