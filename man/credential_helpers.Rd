@@ -40,17 +40,17 @@ visible to the recipient, however, as some SMTP servers will suppress this.}
 \item{host}{Configuration info for the SMTP server. The \code{host}
 and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value (\code{TRUE} is the default value).}
+value.}
 
 \item{port}{Configuration info for the SMTP server. The \code{host}
 and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value (\code{TRUE} is the default value).}
+value.}
 
 \item{use_ssl}{Configuration info for the SMTP server. The \code{host}
 and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value (\code{TRUE} is the default value).}
+value.}
 }
 \value{
 a list object of class \code{location_cells}.

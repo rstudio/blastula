@@ -8,7 +8,7 @@ add_attachment(email, file_path, error_on_missing = TRUE)
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
-function. The object's class is \code{email_message}}
+function. The object's class is \code{email_message}.}
 
 \item{file_path}{The path for the file to be attached.}
 

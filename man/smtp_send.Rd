@@ -4,20 +4,20 @@
 \alias{smtp_send}
 \title{Send an email message through SMTP}
 \usage{
-smtp_send(email, from, to, subject = NULL, cc = NULL, bcc = NULL,
-  credentials = NULL, binary_loc = NULL, echo = FALSE,
-  echo_cmd = FALSE, dry_run = FALSE, creds_file = "deprecated")
+smtp_send(email, to, from, subject = NULL, cc = NULL, bcc = NULL,
+  credentials = NULL, binary_loc = NULL, dry_run = FALSE,
+  creds_file = "deprecated")
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
-function. The object's class is \code{email_message}}
-
-\item{from}{The email address of the sender. This does not have to be the
-same email that is associated with the account actually sending the
-message.}
+function. The object's class is \code{email_message}.}
 
 \item{to}{A vector of email addresses serving as primary recipients for the
 message. For secondary recipients, use the \code{cc} and \code{bcc} arguments.}
+
+\item{from}{The email address of the sender. Often this needs to be the same
+email address that is associated with the account actually sending the
+message.}
 
 \item{subject}{The subject of the message, which is usually a brief summary
 of the topic of the message.}
@@ -44,11 +44,6 @@ credentials within that helper function.}
 \item{binary_loc}{An option to supply the location of the \code{mailsend-go}
 binary file should it not be on the system path or in the working
 directory.}
-
-\item{echo}{An option to print the standard output and error to the screen.}
-
-\item{echo_cmd}{A logical value indicating whether the system command should
-be printed to the console during the sending of email.}
 
 \item{dry_run}{Setting \code{dry_run} to \code{TRUE} will return information on the
 SMTP sending options. Furthermore, the function will stop short of actually
