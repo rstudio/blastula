@@ -184,7 +184,10 @@ smtp_send <- function(email,
 
   # Handle a subject line that's not provided and use
   # `glue::glue()` for customizing a given `subject`
-  subject <- glue::glue(subject) %>% as.character() %||% "<no subject>"
+  subject <-
+    glue::glue(subject) %>%
+    as.character() %||%
+    "<no subject>"
 
   # Create comma-separated addresses for
   # `to`, `cc`, and `bcc`
