@@ -91,8 +91,8 @@
 #' }
 #' @export
 smtp_send <- function(email,
-                      from,
                       to,
+                      from,
                       subject = NULL,
                       cc = NULL,
                       bcc = NULL,
