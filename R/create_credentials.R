@@ -36,7 +36,7 @@ create_smtp_creds_file <- function(id = NULL,
                                    user,
                                    host = NULL,
                                    port = NULL,
-                                   use_ssl = TRUE,
+                                   use_ssl = NULL,
                                    sender_name = NULL) {
 
   # Create a credentials list from the function inputs
@@ -95,7 +95,7 @@ create_smtp_creds_key <- function(id = NULL,
                                   user,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = TRUE,
+                                  use_ssl = NULL,
                                   sender_name = NULL) {
 
   # Determine whether {keyring} can be used
