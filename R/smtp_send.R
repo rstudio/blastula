@@ -16,12 +16,12 @@
 #' [https://github.com/muquit/mailsend-go#downloading-and-installing].
 #'
 #' @param email The email message object, as created by the [compose_email()]
-#'   function. The object's class is `email_message`
-#' @param from The email address of the sender. This does not have to be the
-#'   same email that is associated with the account actually sending the
-#'   message.
+#'   function. The object's class is `email_message`.
 #' @param to A vector of email addresses serving as primary recipients for the
 #'   message. For secondary recipients, use the `cc` and `bcc` arguments.
+#' @param from The email address of the sender. Often this needs to be the same
+#'   email address that is associated with the account actually sending the
+#'   message.
 #' @param subject The subject of the message, which is usually a brief summary
 #'   of the topic of the message.
 #' @param cc A vector of email addresses for sending the message as a carbon
@@ -43,9 +43,6 @@
 #' @param binary_loc An option to supply the location of the `mailsend-go`
 #'   binary file should it not be on the system path or in the working
 #'   directory.
-#' @param echo An option to print the standard output and error to the screen.
-#' @param echo_cmd A logical value indicating whether the system command should
-#'   be printed to the console during the sending of email.
 #' @param dry_run Setting `dry_run` to `TRUE` will return information on the
 #'   SMTP sending options. Furthermore, the function will stop short of actually
 #'   sending the email message out. By default, however, this is set to `FALSE`.
