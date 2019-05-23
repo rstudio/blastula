@@ -139,11 +139,6 @@ create_credentials_list <- function(provider,
                                     port,
                                     use_ssl) {
 
-  # Ensure that `use_ssl` is either TRUE or FALSE
-  if (!(use_ssl %in% c(TRUE, FALSE))) {
-    stop("The value supplied to `use_ssl` must be TRUE or FALSE.")
-  }
-
   # Prompt for the password using `getPass::getPass()`
   password <- getPass::getPass("Enter the SMTP server password: ")
 
