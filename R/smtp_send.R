@@ -251,9 +251,7 @@ smtp_send <- function(email,
     send_result <-
       processx::run(
         command = binary_loc,
-        args = run_args,
-        echo = echo,
-        echo_cmd = echo_cmd
+        args = run_args
       )
 
     if (send_result$status == 0) {
