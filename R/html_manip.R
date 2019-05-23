@@ -186,6 +186,28 @@ replace_attr <- function(html, tag_name, attr_name, func) {
 #   func = toupper
 # )
 
+#' Convert HTML decoded, but not URI escaped, file URI to a filepath
+#' @noRd
+file_uri_to_filepath <- function(src) {
+
+  m <- stringr::str_match(src, "^[Ff][Ii][Ll][Ee]://(([A-Za-z]:)?/.*)$")
+  if (is.na(m[1,1])) {
+    stop("Invalid file URI")
+  }
+
+  path <- m[1,2]
+  utils::URLdecode(path)
+}
+
+#' Convert HTML decoded, but not URI escaped, file URI to an absolute path,
+#' possibly by resolving the path relative to basedir.
+#' @noRd
+src_to_filepath <- function(src, basedir) {
+  src <- utils::URLdecode(src)
+  # Thanks jimhester!
+  fs::path_abs(src, basedir)
+}
+
 src_to_datauri <- function(src, basedir) {
   if (grepl("^https?:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
