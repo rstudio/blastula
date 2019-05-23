@@ -211,21 +211,14 @@ src_to_filepath <- function(src, basedir) {
 src_to_datauri <- function(src, basedir) {
   if (grepl("^https?:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
-  }
-  if (grepl("^data:", src, ignore.case = TRUE, perl = TRUE)) {
+  } else if (grepl("^data:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
-  }
-  if (grepl("^file:", src, ignore.case = TRUE, perl = TRUE)) {
-    # TODO: implement
-    # TODO: URI unescape
-    warning("TODO: implement file URLs")
+  } else if (grepl("^file:", src, ignore.case = TRUE, perl = TRUE)) {
+    full_path <- file_uri_to_filepath(src)
+  } else {
+    full_path <- src_to_filepath(src, basedir)
   }
 
-  # TODO: Test if src is a file path
-  # TODO: Test if src is an absolute file path
-  # TODO: URI unescape
-
-  full_path <- file.path(basedir, src)
   if (file.exists(full_path)) {
     type <- mime::guess_type(full_path, unknown = NA, empty = NA)
     if (is.na(type)) {
