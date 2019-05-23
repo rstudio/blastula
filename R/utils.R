@@ -5,7 +5,7 @@ smtp_settings <- function() {
   dplyr::tribble(
     ~short_name,   ~server,                    ~port, ~use_ssl, ~use_tls, ~authenticate, ~user,   ~long_name,
     "gmail",       "smtp.gmail.com",           465,   TRUE,     FALSE,    TRUE,          "email", "Gmail",
-    "outlook",     "smtp-mail.outlook.com",    587,   TRUE,     TRUE,     TRUE,          "email", "Outlook.com",
+    "outlook",     "smtp-mail.outlook.com",    587,   FALSE,    TRUE,     TRUE,          "email", "Outlook.com",
     "office365",   "smtp.office365.com",       587,   FALSE,    TRUE,     TRUE,          "email", "Office365.com",
     "yahoo",       "smtp.mail.yahoo.com",      465,   TRUE,     FALSE,    TRUE,          "email", "Yahoo",
     "yahoo_uk",    "smtp.mail.yahoo.co.uk",    465,   TRUE,     FALSE,    TRUE,          "email", "Yahoo UK",
