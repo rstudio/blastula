@@ -10,12 +10,14 @@
 #'   configuration details (the `host`, `port`, `use_ssl` options). Options
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.
-#' @param user The username for the email account.
-#' @param host The `host` name.
-#' @param port The port number.
-#' @param use_ssl An option as to whether to use SSL; supply a `TRUE` or `FALSE`
+#' @param user The username for the email account. Typically, this is the email
+#'   address associated with the account.
+#' @param host,port,use_ssl Configuration info for the SMTP server. The `host`
+#'   and `port` parameters are the address and port for the SMTP server;
+#'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
 #'   value (`TRUE` is the default value).
-#' @param sender_name The sender name.
+#' @param sender_name An option to specify a sender name. This isn't always
+#'   visible to the recipient, however, as some SMTP servers will suppress this.
 #' @examples
 #' \dontrun{
 #' # Create a credentials file to make it
