@@ -98,8 +98,6 @@ smtp_send <- function(email,
                       bcc = NULL,
                       credentials = NULL,
                       binary_loc = NULL,
-                      echo = FALSE,
-                      echo_cmd = FALSE,
                       dry_run = FALSE,
                       creds_file = "deprecated") {
 
