@@ -31,15 +31,25 @@ configuration details (the \code{host}, \code{port}, \code{use_ssl} options). Op
 currently include \code{gmail}, \code{outlook}, and \code{office365}. If nothing is
 provided then values for \code{host}, \code{port}, and \code{use_ssl} are expected.}
 
-\item{user}{The username for the email account.}
+\item{user}{The username for the email account. Typically, this is the email
+address associated with the account.}
 
-\item{sender_name}{The sender name.}
+\item{sender_name}{An option to specify a sender name. This isn't always
+visible to the recipient, however, as some SMTP servers will suppress this.}
 
-\item{host}{The \code{host} name.}
+\item{host}{Configuration info for the SMTP server. The \code{host}
+and \code{port} parameters are the address and port for the SMTP server;
+\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
+value (\code{TRUE} is the default value).}
 
-\item{port}{The port number.}
+\item{port}{Configuration info for the SMTP server. The \code{host}
+and \code{port} parameters are the address and port for the SMTP server;
+\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
+value (\code{TRUE} is the default value).}
 
-\item{use_ssl}{An option as to whether to use SSL; supply a \code{TRUE} or \code{FALSE}
+\item{use_ssl}{Configuration info for the SMTP server. The \code{host}
+and \code{port} parameters are the address and port for the SMTP server;
+\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
 value (\code{TRUE} is the default value).}
 }
 \value{
