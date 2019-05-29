@@ -37,6 +37,7 @@ Imports:
 Suggests: 
     covr,
     ggplot2,
+    keyring,
     testthat,
     knitr,
     rmarkdown
