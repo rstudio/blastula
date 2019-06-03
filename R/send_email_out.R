@@ -234,7 +234,7 @@ send_email_out <- function(message,
   # Send the message
   command <-
     glue::glue(
-"{paste0(getwd(), \"/mailsend\")} \\
+"{shQuote(paste0(getwd(), \"/mailsend\"))} \\
 -from \"{from}\" \\
 -name \"{sender}\" \\
 -t \"{to}\" \\
