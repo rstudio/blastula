@@ -254,10 +254,11 @@ cid_counter <- function(prefix, initial_value = 1L) {
 # Reads in the specified HTML file, and replaces any images found
 # (either data URI or relative file references) with cid references.
 cid_images <- function(html_file, next_cid = cid_counter("img")) {
+
   idx <- 0L
-  next_cid <- function() {
+  next_cid <- function(content_type) {
     idx <<- idx + 1L
-    paste0("img", idx)
+    paste0("img", idx, ".", content_type)
   }
 
   basedir <- dirname(html_file)
@@ -276,7 +277,7 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
     if (is.na(data)) {
       src
     } else {
-      cid <- next_cid()
+      cid <- next_cid(content_type = content_type)
       images[[cid]] <- structure(
         data,
         "content_type" = paste0("image/", content_type)
