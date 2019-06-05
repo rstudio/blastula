@@ -272,11 +272,15 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
   html_cid <- replace_attr(html_data_uri, tag_name = "img", attr_name = "src", function(src) {
     m <- stringr::str_match(src, "^data:image/(\\w+);(base64,)(.+)")
     data <- m[1,4]
+    content_type <- m[1,2]
     if (is.na(data)) {
       src
     } else {
       cid <- next_cid()
-      images[[cid]] <- data
+      images[[cid]] <- structure(
+        data,
+        "content_type" = paste0("image/", content_type)
+      )
       paste0("cid:", cid)
     }
   })

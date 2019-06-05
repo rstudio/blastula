@@ -23,10 +23,16 @@ test_that("Newlines between attributes are OK", {
   expect_identical(output, "<h1\n\tclass=''>")
 })
 
-# test_that("URL encoding is correctly decoded", {
-#   output <- inline_images("url_encoding.html")
-#   expect_true(grepl("data:image/png", output))
-# })
+test_that("URL encoding is correctly decoded", {
+  output <- inline_images("url_encoding.html")
+  expect_true(grepl("data:image/png", output))
+
+  cid_output <- cid_images("url_encoding.html")
+  expect_identical(
+    attr(cid_output$images$img1, "content_type", exact = TRUE),
+    "image/png"
+  )
+})
 
 # TODO: Test for proper handling of file:// URLs
 
@@ -66,7 +72,8 @@ test_that("src resolution works correctly", {
   expect_equal(src_to_filepath("../a/b", "/c/d"), "/c/a/b")
 
   expect_equal(src_to_filepath("C:\\foo\\bar", "/baz"), "C:/foo/bar")
-  expect_equal(src_to_filepath("foo/bar", "c:\\baz"), "c:/baz/foo/bar")
-  expect_equal(src_to_filepath("", "c:\\baz"), "c:/baz")
+  # Newer versions of fs capitalize drive letters
+  expect_true(src_to_filepath("foo/bar", "c:\\baz") %in% c("c:/baz/foo/bar", "C:/baz/foo/bar"))
+  expect_true(src_to_filepath("", "c:\\baz") %in% c("c:/baz", "C:/baz"))
   expect_equal(src_to_filepath("foo", ""), file.path(getwd(), "foo"))
 })
