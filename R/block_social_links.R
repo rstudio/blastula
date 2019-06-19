@@ -174,7 +174,7 @@ render_block_social_links <- function(x) {
     alt <- x[[i]]$alt
 
     x[[i]] <-
-      glue(
+      glue::glue(
         "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
       ) %>%
       as.character()
