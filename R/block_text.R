@@ -52,8 +52,6 @@ block_text <- function(...) {
   x
 }
 
-#' @importFrom commonmark markdown_html
-#' @importFrom glue glue
 #' @noRd
 render_block_text <- function(x, context = "body") {
 
@@ -109,7 +107,6 @@ text_block_template <- function() {
 #' This facilitates printing of the text block to the Viewer.
 #' @param x an object of class \code{block_text}.
 #' @keywords internal
-#' @importFrom htmltools HTML html_print
 #' @export
 print.block_text <- function(x, ...) {
 

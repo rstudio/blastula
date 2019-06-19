@@ -152,7 +152,7 @@ render_block_articles <- function(x) {
 }
 
 #' Obtain an inlined HTML fragment for three side-by-side articles
-#' @importFrom glue glue
+#'
 #' @noRd
 block_article_3 <- function(items) {
 
@@ -288,7 +288,7 @@ block_article_3 <- function(items) {
 }
 
 #' Obtain an inlined HTML fragment for two side-by-side articles
-#' @importFrom glue glue
+#'
 #' @noRd
 block_article_2 <- function(items) {
 
@@ -385,7 +385,7 @@ block_article_2 <- function(items) {
 }
 
 #' Obtain an inlined HTML fragment for a single, full-width article
-#' @importFrom glue glue
+#'
 #' @noRd
 block_article_1 <- function(items) {
 
@@ -502,7 +502,6 @@ article_content_template_2 <- function() {
 #' This facilitates printing of a block of articles to the Viewer.
 #' @param x an object of class \code{block_articles}.
 #' @keywords internal
-#' @importFrom htmltools HTML html_print
 #' @export
 print.block_articles <- function(x, ...) {
 
@@ -517,7 +516,6 @@ print.block_articles <- function(x, ...) {
 #' This facilitates printing of an article object to the console.
 #' @param x an object of class \code{article}.
 #' @keywords internal
-#' @importFrom glue glue
 #' @export
 print.article <- function(x, ...) {
 

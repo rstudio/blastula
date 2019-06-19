@@ -54,8 +54,6 @@ block_spacer <- function() {
   x
 }
 
-#' @importFrom commonmark markdown_html
-#' @importFrom glue glue
 #' @noRd
 render_block_spacer <- function(x, context = "body") {
 
@@ -105,7 +103,6 @@ spacer_block_template <- function() {
 #' This facilitates printing of the spacer to the Viewer.
 #' @param x an object of class \code{block_spacer}.
 #' @keywords internal
-#' @importFrom htmltools HTML html_print
 #' @export
 print.block_spacer <- function(x, ...) {
 

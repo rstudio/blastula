@@ -1,8 +1,10 @@
 #' Setup function to get SMTP mail working effectively
 #'
-#' Run this function first to obtain SMTP mailing functionality, which is
-#' important for sending out email.
-#' @importFrom downloader download
+#' Run this function first to obtain SMTP mailing functionality for the
+#' [send_mail_out()] function. That function is deprecated and relies on a
+#' different binary for sending. Therefore, we shouldn't need to use this setup
+#' function.
+#'
 #' @export
 blast_first <- function() {
 

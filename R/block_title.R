@@ -51,8 +51,6 @@ block_title <- function(...) {
   x
 }
 
-#' @importFrom commonmark markdown_html
-#' @importFrom glue glue
 #' @noRd
 render_block_title <- function(x, context = "body") {
 
@@ -107,9 +105,9 @@ title_block_template <- function() {
 #' Print a title block
 #'
 #' This facilitates printing of the title block to the Viewer.
+#'
 #' @param x an object of class \code{block_title}.
 #' @keywords internal
-#' @importFrom htmltools HTML html_print
 #' @export
 print.block_title <- function(x, ...) {
 

@@ -164,7 +164,6 @@ block_social_links <- function(...) {
   x
 }
 
-#' @importFrom glue glue
 #' @noRd
 render_block_social_links <- function(x) {
 
@@ -191,7 +190,6 @@ render_block_social_links <- function(x) {
 #' This facilitates printing of a block of social links to the Viewer.
 #' @param x an object of class \code{block_social_links}.
 #' @keywords internal
-#' @importFrom htmltools HTML html_print
 #' @export
 print.block_social_links <- function(x, ...) {
 
@@ -206,7 +204,6 @@ print.block_social_links <- function(x, ...) {
 #' This facilitates printing of a social link object to the console.
 #' @param x an object of class \code{social_link}.
 #' @keywords internal
-#' @importFrom glue glue
 #' @export
 print.social_link <- function(x, ...) {
 
@@ -249,8 +246,6 @@ social_link_block_template <- function() {
 </tr>"
 }
 
-#' @importFrom glue glue
-#' @importFrom dplyr pull
 #' @noRd
 icon_for_social_service <- function(service,
                                     variant = NULL) {
@@ -298,7 +293,6 @@ social_icons_host_stub <- function() {
   "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
 }
 
-#' @importFrom dplyr tribble
 #' @noRd
 social_service_icons <- function() {
 

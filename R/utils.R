@@ -1,5 +1,5 @@
 #' Get a tibble of SMTP providers with settings
-#' @importFrom dplyr tribble
+#'
 #' @noRd
 smtp_settings <- function() {
   dplyr::tribble(
@@ -313,7 +313,6 @@ sys_which <- function(name) {
 #' Find a binary on the system path or working directory
 #'
 #' @param bin_name The name of the binary to search for.
-#' @importFrom processx run
 #' @noRd
 find_binary <- function(bin_name) {
 
@@ -345,8 +344,6 @@ find_binary <- function(bin_name) {
 
 #' Upload an image to Imgur and return the response
 #'
-#' @importFrom httr POST add_headers upload_file stop_for_status content
-#' @importFrom xml2 as_list read_xml
 #' @noRd
 imgur_upload <- function(file, client_id) {
 

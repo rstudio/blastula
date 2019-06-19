@@ -31,7 +31,7 @@
 #'
 #'     Cheers
 #'     ")
-#' @importFrom glue glue
+#'
 #' @export
 add_cta_button <- function(url,
                            text,

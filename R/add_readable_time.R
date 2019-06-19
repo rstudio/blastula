@@ -5,6 +5,7 @@
 #' current date/time/tz (based on the caller's locale information at the time of
 #' the call). There are options to specify whether the date, time, and time zone
 #' parts are to be included.
+#'
 #' @param time The POSIXct time to use, and to make more readable for email
 #'   recipients. If a `time` is not provided, the current system time will be
 #'   used.
@@ -16,7 +17,6 @@
 #'   should be included.
 #' @return A character object that can be placed inside any message component
 #'   message wherever the function is called.
-#' @importFrom glue glue
 #' @export
 add_readable_time <- function(time = NULL,
                               use_date = TRUE,
