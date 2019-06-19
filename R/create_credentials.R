@@ -1,4 +1,4 @@
-#' Create a file with email access credentials
+#' Store SMTP credentials in a file
 #'
 #' We can create a file with SMTP configuration and access credentials for the
 #' purpose of more easily sending email messages through [smtp_send()]. With

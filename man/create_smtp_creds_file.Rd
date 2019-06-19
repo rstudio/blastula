@@ -2,7 +2,7 @@
 % Please edit documentation in R/create_credentials.R
 \name{create_smtp_creds_file}
 \alias{create_smtp_creds_file}
-\title{Create a file with email access credentials}
+\title{Store SMTP credentials in a file}
 \usage{
 create_smtp_creds_file(file, user = NULL, provider = NULL,
   host = NULL, port = NULL, use_ssl = NULL, sender_name = NULL)
