@@ -8,7 +8,7 @@ blast_first()
 }
 \description{
 Run this function first to obtain SMTP mailing functionality for the
-\code{\link[=send_mail_out]{send_mail_out()}} function. That function is deprecated and relies on a
+\code{\link[=send_email_out]{send_email_out()}} function. That function is deprecated and relies on a
 different binary for sending. Therefore, we shouldn't need to use this setup
 function.
 }
