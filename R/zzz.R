@@ -1,11 +1,12 @@
 #nocov start
 
-#' @importFrom utils globalVariables
-globalVariables(
+utils::globalVariables(
   c(
+    ".",
     "authenticate",
     "email",
     "host",
+    "id",
     "key_name",
     "name",
     "port",

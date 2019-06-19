@@ -1,37 +1,39 @@
 #' Prepare a email test message object
 #'
 #' Create an email test message object, which is helpful for sending a test
-#' message with the `send_email_out()` function.
+#' message with the `smtp_send()` function.
+#'
 #' @param incl_ggplot An option to include a ggplot plot within the body of the
-#'   test message. This requires that the `ggplot2`` package is installed. By
+#'   test message. This requires that the \pkg{ggplot2} package is installed. By
 #'   default, this is `FALSE`.
 #' @param incl_image An option to include a test image within the body of the
-#'   test message. By default, this is FALSE.
+#'   test message. By default, this is `FALSE`.
 #' @return An `email_message` object.
 #' @examples
 #' \dontrun{
-#' # Create a credentials file to
-#' # send via Gmail (this will be named
-#' # `.bls_smtp_gmail_com`)
-#' create_email_creds_file(
-#'   user = "username@gmail.com",
-#'   password = "*************",
-#'   provider = "gmail",
-#'   sender = "Sender Name")
+#' # Create a credentials file to send
+#' # a test message via Gmail's SMTP
+#' # (this file is named "gmail_secret")
+#' create_smtp_creds_file(
+#'   file = "gmail_secret",
+#'   user = "sender@email.com",
+#'   provider = "gmail"
+#' )
 #'
 #' # Send oneself a test message to
-#' # test these new SMTP settings and also
+#' # test these new SMTP settings and
 #' # to ensure that the message appears
 #' # correctly in the email client
-#' send_email_out(
-#'   message = prepare_test_message(),
-#'   sender = "Sender Name",
-#'   subject = "test 2",
-#'   from = "username@gmail.com",
-#'   to = "username@gmail.com",
-#'   creds_file = ".bls_smtp_gmail_com")
+#' prepare_test_message() %>%
+#'   smtp_send(
+#'     from = "sender@email.com",
+#'     to = "sender@email.com",
+#'     subject = "Test Message",
+#'     credentials = creds_file(
+#'       file = "gmail_secret"
+#'       )
+#'     )
 #' }
-#' @importFrom stats rnorm
 #' @export
 prepare_test_message <- function(incl_ggplot = FALSE,
                                  incl_image = FALSE) {
@@ -62,7 +64,8 @@ prepare_test_message <- function(incl_ggplot = FALSE,
 
     } else {
 
-      stop("Please ensure that the `ggplot2` package is installed before using `add_ggplot()`.",
+      stop("Please ensure that the `ggplot2` package is installed before ",
+           "using `add_ggplot()`.",
            call. = FALSE)
     }
   }

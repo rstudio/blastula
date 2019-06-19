@@ -1,4 +1,5 @@
 #' Encode a raw string to a Base64 string
+#'
 #' @param raw The raw string to encode.
 #' @noRd
 encode_base64 <- function(raw) {
@@ -39,8 +40,8 @@ encode_base64 <- function(raw) {
 }
 
 #' Helper function that sets the MIME type
+#'
 #' @param file A file name with an extension.
-#' @importFrom tools file_ext
 #' @noRd
 get_mime_type <- function(file) {
 
@@ -57,6 +58,7 @@ get_mime_type <- function(file) {
 }
 
 #' Get an Base64 image URI from an on-disk graphics file
+#'
 #' @param file The graphics file.
 #' @noRd
 get_image_uri <- function(file) {

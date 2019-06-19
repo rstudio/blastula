@@ -5,8 +5,8 @@
 \title{Send an email message through SMTP}
 \usage{
 smtp_send(email, to, from, subject = NULL, cc = NULL, bcc = NULL,
-  credentials = NULL, binary_loc = NULL, dry_run = FALSE,
-  creds_file = "deprecated")
+  credentials = NULL, binary_loc = NULL, echo = FALSE,
+  dry_run = FALSE, creds_file = "deprecated")
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
@@ -33,21 +33,29 @@ and these email addresses will be concealed from other recipients
 (including others on the BCC list).}
 
 \item{credentials}{One of three credential helper functions must be used
-here: (1) \code{\link[=creds_file]{creds_file()}}, (2) \code{\link[=creds_key]{creds_key()}}, or (3) \code{\link[=creds]{creds()}}. The first,
-\code{\link[=creds_file]{creds_file()}}, relies on a credentials file stored on disk. Such a file is
-created using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function. The \code{\link[=creds_key]{creds_key()}}
+here: (1) \code{\link[=creds]{creds()}}, (2) \code{\link[=creds_key]{creds_key()}}, or (3) \code{\link[=creds_file]{creds_file()}}. The first,
+\code{\link[=creds]{creds()}}, allows for a manual specification of SMTP configuration and
+credentials within that helper function. This is the most secure method for
+supplying credentials as they aren't written to disk. The \code{\link[=creds_key]{creds_key()}}
 function is used if credentials are stored in the system-wide key-value
-store, through use of the \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}} function. Using
-\code{\link[=creds]{creds()}} allows for a manual specification of SMTP configuration and
-credentials within that helper function.}
+store, through use of the \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}} function. The
+\code{\link[=creds_file]{creds_file()}} helper function relies on a credentials file stored on disk.
+Such a file is created using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function.}
 
 \item{binary_loc}{An option to supply the location of the \code{mailsend-go}
 binary file should it not be on the system path or in the working
 directory.}
 
+\item{echo}{If set to \code{TRUE}, the command for sending the message via
+\code{mailsend-go} will be printed to the console. By default, this is \code{FALSE}.}
+
 \item{dry_run}{Setting \code{dry_run} to \code{TRUE} will return information on the
 SMTP sending options. Furthermore, the function will stop short of actually
 sending the email message out. By default, however, this is set to \code{FALSE}.}
+
+\item{creds_file}{An option to specify a credentials file. As this argument
+is deprecated, please consider using \code{credentials = creds_file(<file>)}
+instead.}
 }
 \description{
 Send an email message to one or more recipients via an SMTP server. The email
@@ -73,30 +81,24 @@ and RPM packages). Instructions for installation can be found at
 # object; for the purpose of a simple
 # example, we can use the function
 # `prepare_test_message()` to create
-# a test version of an email
+# a test version of an email (although
+# we'd normally use `compose_email()`)
 email <- prepare_test_message()
 
-# A message can be sent in one of
-# three ways:
+# The `email` message can be sent
+# through the `smtp_send()` function
+# so long as we supply the appropriate
+# credentials; The following three
+# examples provide scenarios for both
+# the creation of credentials and their
+# retrieval within the `credentials`
+# argument of `smtp_send()`
 
-# (1) with a credentials file
-email \%>\%
-  smtp_send(
-    from = "sender@email.com",
-    to = "recipient@email.com",
-    credentials = creds_file("gmail")
-  )
+# (1) Providing the credentials info
+# directly via the `creds()` helper
+# (the most secure means of supplying
+# credentials information)
 
-# (2) with a credentials key
-email \%>\%
-  smtp_send(
-    from = "sender@email.com",
-    to = "recipient@email.com",
-    credentials = creds_key("gmail")
-  )
-
-# (3) by providing the credentials
-# info when using `smtp_send()`
 email \%>\%
   smtp_send(
     from = "sender@email.com",
@@ -104,6 +106,43 @@ email \%>\%
     credentials = creds(
       provider = "gmail",
       user = "sender@email.com")
+  )
+
+# (2) Using a credentials key (with
+# the `create_smtp_creds_key()` and
+# `creds_key()` functions)
+
+create_smtp_creds_key(
+ id = "gmail",
+ user = "sender@email.com",
+ provider = "gmail"
+ )
+
+email \%>\%
+  smtp_send(
+    from = "sender@email.com",
+    to = "recipient@email.com",
+    credentials = creds_key(
+      "gmail"
+      )
+  )
+
+# (3) Using a credentials file (with
+# the `create_smtp_creds_file()` and
+# `creds_file()` functions)
+
+create_smtp_creds_file(
+ file = "gmail_secret",
+ user = "sender@email.com",
+ provider = "gmail"
+ )
+
+email \%>\%
+  smtp_send(
+    from = "sender@email.com",
+    to = "recipient@email.com",
+    credentials = creds_file(
+      "gmail_secret")
   )
 }
 }

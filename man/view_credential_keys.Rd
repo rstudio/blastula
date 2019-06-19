@@ -2,10 +2,10 @@
 % Please edit documentation in R/retrieve_credentials.R
 \name{view_credential_keys}
 \alias{view_credential_keys}
-\title{View available credentials keys in the system key-value store}
+\title{View available credentials keys}
 \usage{
 view_credential_keys()
 }
 \description{
-View available credentials keys in the system key-value store
+View available credentials keys
 }

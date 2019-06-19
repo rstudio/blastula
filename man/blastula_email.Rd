@@ -5,8 +5,10 @@
 \title{R Markdown output format for Blastula email messages}
 \usage{
 blastula_email(section_divs = TRUE, number_sections = FALSE,
-  fig_caption = TRUE, smart = TRUE, dev = "png",
-  template = "blastula", ...)
+  toc = FALSE, toc_depth = 3, toc_float = FALSE, fig_width = 5.35,
+  fig_height = 5, fig_retina = 2, fig_caption = TRUE, smart = TRUE,
+  dev = "png", self_contained = TRUE, template = "blastula",
+  includes = NULL, keep_md = FALSE, md_extensions = NULL, ...)
 }
 \description{
 R Markdown output format for Blastula email messages

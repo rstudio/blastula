@@ -2,23 +2,23 @@
 #'
 #' The `compose_email()` function allows us to easily create an email message.
 #' We can use `glue`'s string interpolation semantics to incorporate external
-#' objects or evaluate R code within the message body, the footer, and the
-#' preheader text (using curly braces to enclose such R expressions). Local
-#' variables can be specified in the function call (using named arguments with
-#' `...`) and any variables not found in `...` will be searched for in the
-#' global environment.
+#' objects or evaluate R code within the message body, the header, or the footer
+#' (using curly braces to enclose such R expressions). Local variables can be
+#' specified in the function call (using named arguments with `...`) and any
+#' variables not found in `...` will be searched for in the global environment.
+#'
 #' @param header,body,footer The three layout sections for an email message
 #'   (ordered from top to bottom). Markdown text can be supplied to each of
-#'   these. String interpolation is enabled via curly braces and named
-#'   arguments in `...`. Alternatively, we can supply a set of `block_*()` calls
-#'   enclosed within the [blocks()] function to take advantage of precomposed
-#'   HTML blocks.
+#'   these. String interpolation is enabled via curly braces and named arguments
+#'   in `...`. Alternatively, we can supply a set of `block_*()` calls enclosed
+#'   within the [blocks()] function to take advantage of precomposed HTML
+#'   blocks.
 #' @param .title The title of the email message. This is not the subject but the
 #'   HTML title text which may appear in limited circumstances.
 #' @param .envir An opportunity to specify the environment. By default, this is
 #'   the [parent.frame()].
 #' @param ... Expression strings for string interpolation within the `header`,
-#'   `body` and `footer`.
+#'   `body`, and `footer`.
 #' @return An `email_message` object.
 #' @examples
 #' # Create a simple email message using
@@ -64,11 +64,6 @@
 #' {sender_name}",
 #'   thing = "report"
 #'   )
-#' @importFrom glue glue
-#' @importFrom commonmark markdown_html
-#' @importFrom stringr str_replace str_replace_all str_detect
-#' @importFrom stringr str_extract str_extract_all
-#' @importFrom htmltools HTML
 #' @export
 compose_email <- function(body = NULL,
                           header = NULL,

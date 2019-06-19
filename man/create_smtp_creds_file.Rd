@@ -4,8 +4,8 @@
 \alias{create_smtp_creds_file}
 \title{Create a file with email access credentials}
 \usage{
-create_smtp_creds_file(file, user, provider = NULL, host = NULL,
-  port = NULL, use_ssl = NULL, sender_name = NULL)
+create_smtp_creds_file(file, user = NULL, provider = NULL,
+  host = NULL, port = NULL, use_ssl = NULL, sender_name = NULL)
 }
 \arguments{
 \item{file}{The output filename for the credentials file.}
@@ -36,8 +36,8 @@ this file produced, the credentials helper \code{\link[=creds_file]{creds_file()
 \dontrun{
 # Create a credentials file to make it
 # much easier to send email out through
-# Gmail with `smtp_send()`; provide the
-# `id` of "gmail_creds"
+# Gmail with `smtp_send()`; name the
+# file "gmail_creds"
 create_smtp_creds_file(
   file = "gmail_creds",
   user = "user_name@gmail.com",

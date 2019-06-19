@@ -33,19 +33,25 @@
 #'   and these email addresses will be concealed from other recipients
 #'   (including others on the BCC list).
 #' @param credentials One of three credential helper functions must be used
-#'   here: (1) [creds_file()], (2) [creds_key()], or (3) [creds()]. The first,
-#'   [creds_file()], relies on a credentials file stored on disk. Such a file is
-#'   created using the [create_smtp_creds_file()] function. The [creds_key()]
+#'   here: (1) [creds()], (2) [creds_key()], or (3) [creds_file()]. The first,
+#'   [creds()], allows for a manual specification of SMTP configuration and
+#'   credentials within that helper function. This is the most secure method for
+#'   supplying credentials as they aren't written to disk. The [creds_key()]
 #'   function is used if credentials are stored in the system-wide key-value
-#'   store, through use of the [create_smtp_creds_key()] function. Using
-#'   [creds()] allows for a manual specification of SMTP configuration and
-#'   credentials within that helper function.
+#'   store, through use of the [create_smtp_creds_key()] function. The
+#'   [creds_file()] helper function relies on a credentials file stored on disk.
+#'   Such a file is created using the [create_smtp_creds_file()] function.
 #' @param binary_loc An option to supply the location of the `mailsend-go`
 #'   binary file should it not be on the system path or in the working
 #'   directory.
+#' @param echo If set to `TRUE`, the command for sending the message via
+#'   `mailsend-go` will be printed to the console. By default, this is `FALSE`.
 #' @param dry_run Setting `dry_run` to `TRUE` will return information on the
 #'   SMTP sending options. Furthermore, the function will stop short of actually
 #'   sending the email message out. By default, however, this is set to `FALSE`.
+#' @param creds_file An option to specify a credentials file. As this argument
+#'   is deprecated, please consider using `credentials = creds_file(<file>)`
+#'   instead.
 #' @examples
 #' \dontrun{
 #' # Before sending out an email through
@@ -53,30 +59,24 @@
 #' # object; for the purpose of a simple
 #' # example, we can use the function
 #' # `prepare_test_message()` to create
-#' # a test version of an email
+#' # a test version of an email (although
+#' # we'd normally use `compose_email()`)
 #' email <- prepare_test_message()
 #'
-#' # A message can be sent in one of
-#' # three ways:
+#' # The `email` message can be sent
+#' # through the `smtp_send()` function
+#' # so long as we supply the appropriate
+#' # credentials; The following three
+#' # examples provide scenarios for both
+#' # the creation of credentials and their
+#' # retrieval within the `credentials`
+#' # argument of `smtp_send()`
 #'
-#' # (1) with a credentials file
-#' email %>%
-#'   smtp_send(
-#'     from = "sender@email.com",
-#'     to = "recipient@email.com",
-#'     credentials = creds_file("gmail")
-#'   )
+#' # (1) Providing the credentials info
+#' # directly via the `creds()` helper
+#' # (the most secure means of supplying
+#' # credentials information)
 #'
-#' # (2) with a credentials key
-#' email %>%
-#'   smtp_send(
-#'     from = "sender@email.com",
-#'     to = "recipient@email.com",
-#'     credentials = creds_key("gmail")
-#'   )
-#'
-#' # (3) by providing the credentials
-#' # info when using `smtp_send()`
 #' email %>%
 #'   smtp_send(
 #'     from = "sender@email.com",
@@ -84,6 +84,43 @@
 #'     credentials = creds(
 #'       provider = "gmail",
 #'       user = "sender@email.com")
+#'   )
+#'
+#' # (2) Using a credentials key (with
+#' # the `create_smtp_creds_key()` and
+#' # `creds_key()` functions)
+#'
+#' create_smtp_creds_key(
+#'  id = "gmail",
+#'  user = "sender@email.com",
+#'  provider = "gmail"
+#'  )
+#'
+#' email %>%
+#'   smtp_send(
+#'     from = "sender@email.com",
+#'     to = "recipient@email.com",
+#'     credentials = creds_key(
+#'       "gmail"
+#'       )
+#'   )
+#'
+#' # (3) Using a credentials file (with
+#' # the `create_smtp_creds_file()` and
+#' # `creds_file()` functions)
+#'
+#' create_smtp_creds_file(
+#'  file = "gmail_secret",
+#'  user = "sender@email.com",
+#'  provider = "gmail"
+#'  )
+#'
+#' email %>%
+#'   smtp_send(
+#'     from = "sender@email.com",
+#'     to = "recipient@email.com",
+#'     credentials = creds_file(
+#'       "gmail_secret")
 #'   )
 #' }
 #' @export
@@ -95,6 +132,7 @@ smtp_send <- function(email,
                       bcc = NULL,
                       credentials = NULL,
                       binary_loc = NULL,
+                      echo = FALSE,
                       dry_run = FALSE,
                       creds_file = "deprecated") {
 
@@ -124,9 +162,9 @@ smtp_send <- function(email,
   # and provide a warning about soft deprecation
   if (!missing(creds_file)) {
     credentials <- creds_file(creds_file)
-    warning("The `creds_file` argument is undergoing soft deprecation:\n",
+    warning("The `creds_file` argument is deprecated:\n",
             " * please consider using `credentials = creds_file(\"", creds_file,
-            "\")` argument instead")
+            "\")` instead")
   }
 
   # If nothing is provided in `credentials`, stop the function
@@ -151,7 +189,7 @@ smtp_send <- function(email,
   if (!inherits(credentials, "blastula_creds")) {
     if (is.character(credentials) && length(credentials) == 1) {
 
-      credentials <- creds_file(credentials)
+      credentials <- creds_file(file = credentials)
 
     } else {
       stop("The value for `credentials` must be a `blastula_creds` object\n",
@@ -160,29 +198,22 @@ smtp_send <- function(email,
     }
   }
 
-  # Create the `creds_list` object by processing whichever
-  # credentials type (key, file, or manual) was specified
-  # in `credentials`
-  if (inherits(credentials, "creds_key")) {
-    creds_list <- get_smtp_keyring_creds(key_name = credentials$key_name)
-  } else if (inherits(credentials, "creds_file")) {
-    creds_list <- get_smtp_file_creds(file_name = credentials$file)
-  } else if (inherits(credentials, "creds")) {
-    creds_list <- credentials %>% unclass()
-  }
+  # Create a temporary file with the `html` extension
+  tempfile_ <- tempfile(fileext = ".html")
+
+  # Reverse slashes on Windows filesystems
+  tempfile_ <-
+    tempfile_ %>%
+    tidy_gsub("\\\\", "/")
 
   # Write the inlined HTML message out to a file
-  email$html_str %>% writeLines(con = "message_inlined.html")
+  email$html_str %>% writeLines(con = tempfile_)
 
   # Remove the file after the function exits
-  on.exit(file.remove("message_inlined.html"))
+  on.exit(file.remove(tempfile_))
 
-  # Handle a subject line that's not provided and use
-  # `glue::glue()` for customizing a given `subject`
-  subject <-
-    glue::glue(subject) %>%
-    as.character() %||%
-    "<no subject>"
+  # Normalize `subject` so that a `NULL` value becomes an empty string
+  subject <- subject %||% ""
 
   # Create comma-separated addresses for
   # `to`, `cc`, and `bcc`
@@ -191,33 +222,33 @@ smtp_send <- function(email,
   bcc <- make_address_list(bcc)
 
   # Set the `ssl` flag depending on the options provided
-  if (creds_list$use_ssl) {
+  if (credentials$use_ssl) {
     ssl_opt <- no_options()
   } else {
     ssl_opt <- no_arg()
   }
 
   # Set the `sender_name` to `no_arg()` if not provided
-  sender_name_opt <- creds_list$sender_name %||% no_arg()
+  sender_name_opt <- credentials$sender_name %||% no_arg()
 
   # Collect arguments and options for for `processx::run()`
   # as a list
   run_args <-
     list(
       `-sub` = subject,
-      `-smtp` = creds_list$host,
-      `-port` = creds_list$port %>% as.character(),
+      `-smtp` = credentials$host,
+      `-port` = credentials$port %>% as.character(),
       `-ssl` = ssl_opt,
       `auth` = no_options(),
-      `-user` = creds_list$user,
-      `-pass` = creds_list$password,
+      `-user` = credentials$user,
+      `-pass` = credentials$password,
       `-fname` = sender_name_opt,
       `-from` = from,
       `-to` = to,
       `-cc` = cc,
       `-bcc` = bcc,
       `attach` = no_options(),
-      `-file` = "message_inlined.html",
+      `-file` = tempfile_,
       `-mime-type` = "text/html",
       `-inline` = no_options()
     )
@@ -233,13 +264,23 @@ smtp_send <- function(email,
     create_args_opts_vec() %>%
     append_attachment_args_vec(attachment_args_vec = attachment_args_vec)
 
+  if (echo) {
+
+    cmd_str <- run_args
+    cmd_str[which(run_args == "-pass")[1] + 1] <- "*****"
+    cmd_str <- paste(binary_loc, paste0(cmd_str, collapse = " "))
+
+    message(
+      "The command for sending the email message is:\n\n",
+      cmd_str, "\n"
+    )
+  }
+
   if (dry_run) {
 
-    if ("-pass" %in% run_args) {
-      run_args[which(run_args == "-pass")[1] + 1] <- "*****"
-    }
+    message("This was a dry run, the email message was NOT sent.")
 
-    return(paste(binary_loc, paste0(run_args, collapse = " ")))
+    return(invisible())
 
   } else {
 

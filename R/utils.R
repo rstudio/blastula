@@ -10,6 +10,23 @@ smtp_settings <- function() {
   )
 }
 
+#' Get a vector of SMTP provider short names
+#'
+#' @noRd
+get_provider_list <- function() {
+  smtp_settings()$short_name
+}
+
+#' Get a named vector of settings for an SMTP provider
+#'
+#' @noRd
+get_smtp_provider_values <- function(provider) {
+
+  smtp_settings() %>%
+    dplyr::filter(short_name == provider) %>%
+    as.list()
+}
+
 #' A slighly more sensible version of `gsub()`
 #'
 #' @param x The text to be transformed.
@@ -284,7 +301,7 @@ sys_which <- function(name) {
 
       pathname <- pathname %>% tidy_gsub("\\\\", "/")
 
-      return(setNames(pathname, name))
+      return(stats::setNames(pathname, name))
     }
   }
 
