@@ -288,7 +288,7 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
 
   structure(class = c("blastula_message", "email_message"), list(
     html_str = html_cid,
-    html_html = HTML(html_data_uri),
+    html_html = htmltools::HTML(html_data_uri),
     images = as.list(images)
   ))
 }
@@ -298,8 +298,8 @@ decode_hex <- function(hex) {
     hex <- paste0("0", hex)
   }
   chars <- strsplit(hex, "")[[1]]
-  left <- chars[c(TRUE,FALSE)]
-  right <- chars[c(FALSE,TRUE)]
+  left <- chars[c(TRUE, FALSE)]
+  right <- chars[c(FALSE, TRUE)]
   values <- strtoi(paste0(left, right), 16)
   str <- rawToChar(as.raw(values))
   Encoding(str) <- "UTF-8"
@@ -307,6 +307,7 @@ decode_hex <- function(hex) {
 }
 
 html_unescape <- function(html) {
+
   gfsub(html, "&#x([0-9a-f]+);|&#([0-9]+);|&([a-z0-9]+);", ignore_case = TRUE,
     function(entity, hex, dec, named) {
       if (!is.na(hex)) {
