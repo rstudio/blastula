@@ -72,7 +72,7 @@ While we can provide SMTP login and configuration information directly whenever 
 1. Storing credentials in the system's key-value store
 2. Storing credentials in a file
 
-The first method is more secure since access to the system-wide key-value store requires authenication. The second is less secure since it is the user's responsibility to manage the resulting human-readable JSON file. We'll provide examples on how to use the both options effectively.
+The first method is more secure since access to the system-wide key-value store requires authentication. The second is less secure since it is the user's responsibility to manage the resulting human-readable JSON file. We'll provide examples on how to use the both options effectively.
 
 We can store email credentials in the system key-value store with the `create_email_creds_key()` function. Here is an example showing how to create an entry with an `id` of `"gmail_creds"`.
 
