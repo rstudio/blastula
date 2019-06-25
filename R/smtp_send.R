@@ -207,7 +207,7 @@ smtp_send <- function(email,
     tidy_gsub("\\\\", "/")
 
   # Write the inlined HTML message out to a file
-  email$html_str %>% writeLines(con = tempfile_)
+  email$html_str %>% writeLines(con = tempfile_, useBytes = TRUE)
 
   # Remove the file after the function exits
   on.exit(file.remove(tempfile_))
