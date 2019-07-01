@@ -40,11 +40,15 @@ get_smtp_keyring_creds <- function(id = NULL) {
          call. = FALSE)
   }
 
+  # Get the `key_name`
+  key_name <- (blastula_keys_tbl %>% dplyr::pull(key_name))[1]
+
+  # Get the `username`
+  username <- (blastula_keys_tbl %>% dplyr::pull(username))[1]
+
   # For the given `key_name` get the key's stored value and
   # transform the JSON data to a list object
-  blastula_keys_tbl %>%
-    dplyr::pull(key_name) %>%
-    keyring::key_get() %>%
+  keyring::key_get(service = key_name, username = username) %>%
     jsonlite::unserializeJSON()
 }
 
