@@ -21,14 +21,14 @@ library(blastula)
 After we create the an `email_message` object with `compose_email()`, we can choose to send it through an SMTP server using **blastula**'s `smtp_send()` function. There is some system setup required before sending a **blastula** email message via SMTP. The main considerations are:
 
 - installation of the cross-platform `mailsend-go` binary
-- modifying an account-level setting on Gmail if using that for sending email
-- optionally storing SMTP server and auth settings and as a credentials file or as environment variables
+- modifying an account-level setting on Gmail (if using that for sending email)
+- optionally storing SMTP server and auth settings on disk
 
 We'll go through each of these setup steps before getting into several sending examples with `smtp_send()`.
 
 ## Installation of `mailsend-go`
 
-The **blastula** package is moving toward using a new binary for `smtp` mailing, provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew**), and **Linux** (**Debian** and **RPM** packages).
+The **blastula** package is moving toward using a new binary for `smtp` mailing that's provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew**), and **Linux** (**Debian** and **RPM** packages are available).
 
 ### Windows
 
@@ -65,38 +65,74 @@ $ rpm -Uvh mailsend-go_linux_64-bit.rpm
 
 Before using **Gmail** to send out email through **blastula**, there is a key **Gmail** account setting that must changed from the default value. We have to allow *Less Secure Apps* to use your the **Gmail** account. Details on how to make this account-level change can be found in [this support document](https://support.google.com/accounts/answer/6010255).
 
-## Creating a Credentials File
+## Storing Credentials and SMTP Configuration Data for Later Use
 
-We can store email credentials in a file using the `create_email_creds_file()` function. Here is an example showing how to create a credentials file as a hidden file (named `.email_creds`) in the working directory.
+While we can provide SMTP login and configuration information directly whenever we send email, it can be convenient to store this data for easy retrieval. It should be noted that the manually specifying credentials is more secure since no sensitive information is ever stored on disk (and password entry is obscured). Should you want to store credentials on-disk, however, there are two methods available for this:
 
-```{r credentials_1, eval=FALSE}
-# Create a credentials file to facilitate
-# the sending of email messages
-create_email_creds_file(
-  user = "personal@email.net",
-  password = "<user_password>",
-  host = "smtp.youremailserver.org",
+1. Storing credentials in the system's key-value store
+2. Storing credentials in a file
+
+The first method is more secure since access to the system-wide key-value store requires authentication. The second is less secure since it is the user's responsibility to manage the resulting human-readable JSON file. We'll provide examples on how to use the both options effectively.
+
+We can store email credentials in the system key-value store with the `create_email_creds_key()` function. Here is an example showing how to create an entry with an `id` of `"gmail_creds"`.
+
+```{r creds_key_1, eval=FALSE}
+# Store SMTP credentials using the
+# system's secure key-value store;
+# provide the `id` of "gmail"
+create_smtp_creds_key(
+  id = "gmail",
+  user = "user_name@gmail.com",
+  host = "smtp.gmail.com",
   port = 465,
-  use_ssl = TRUE,
-  sender = "The User's Name",
-  creds_file_name = ".email_creds"
-)
+  use_ssl = TRUE
+  )
 ```
+
+When executing this function, there will always be a prompt for the password (i.e., there is no `password` argument in this function).
 
 We can also use preset SMTP settings. For example, if we would like to send email through **Gmail**, we can supply `provider = gmail` to not have to worry about the SMTP server details.
 
-```{r credentials_2, eval=FALSE}
-# Create a credentials file for sending
-# email through Gmail
-create_email_creds_file(
+```{r creds_key_2, eval=FALSE}
+# Store SMTP credentials in the
+# system's key-value store with
+# `provider = "gmail"`
+create_smtp_creds_key(
+  id = "gmail",
   user = "user_name@gmail.com",
-  password = "<user_password>",
-  provider = "gmail",
-  sender = "Sender Name"
+  provider = "gmail"
+  )
+```
+
+The credentials data can be later retrieved during email sending with the `creds_key()` credentials helper. Should you need to know which keys are set in the key-value store, we can use the `view_credential_keys()` function (which shows all keys by `id`, `key_name`, and `username`).
+
+We can store email credentials in a file using the `create_email_creds_file()` function. Here is an example showing how to create a credentials file with the name `"gmail_creds"` in the working directory.
+
+```{r creds_file_1, eval=FALSE}
+# Store SMTP credentials as a file
+# with the filename "gmail_creds"
+create_email_creds_file(
+  file = "gmail_creds",
+  user = "user_name@gmail.com",
+  host = "smtp.gmail.com",
+  port = 465,
+  use_ssl = TRUE
 )
 ```
 
-This will create a hidden credentials file in the working directory, the name of which is based on the provider (you can optionally specify the name with the `creds_file_name` argument, as in the first example).
+We can also use preset SMTP settings as with the `create_smtp_creds_key()` function. To send email through **Gmail** we can supply `provider = gmail` to avoid supplying `host`, `port`, and `use_ssl`.
+
+```{r creds_file_2, eval=FALSE}
+# Create a credentials file for sending
+# email through Gmail
+create_email_creds_file(
+  file = "gmail_creds",
+  user = "user_name@gmail.com",
+  provider = "gmail"
+)
+```
+
+The credentials data from this file can later retrieved during email sending with the `creds_file()` credentials helper.
 
 ## Sending Email 
 
@@ -119,18 +155,49 @@ test_message
 
 <p align="center">The test message</p>
 
-Now that this test message is available, we can experiment with the sending of it to a personal email account.
+Now that this test message is available, we can experiment with the sending of it to a personal email account. Here are three examples, each use a different method for supplying SMTP credentials.
 
-```{r smtp_send_creds, eval=FALSE}
+
+```{r smtp_send_creds_manual, eval=FALSE}
 # Sending email to a personal account
-# using the credentials file
-smtp_send(
-  email = email_object,
-  from = "personal@email.net",
+# through manual specification of SMTP
+# credentials
+test_message %>%
+  smtp_send(
+    from = "personal@email.net",
     to = "personal@email.net",
-  subject = "Testing the `smtp_send()` function",
-  creds_file = ".email_creds"
-)
+    subject = "Testing the `smtp_send()` function",
+    credentials = creds(
+      user = "user_name@gmail.com",
+      provider = "gmail"
+    )
+  )
+```
+
+
+```{r smtp_send_creds_key, eval=FALSE}
+# Sending email to a personal account
+# using the credentials key
+test_message %>%
+  smtp_send(
+    from = "personal@email.net",
+    to = "personal@email.net",
+    subject = "Testing the `smtp_send()` function",
+    credentials = creds_key(id = "gmail")
+  )
+```
+
+
+```{r smtp_send_creds_file, eval=FALSE}
+# Sending email to a personal account
+# using the on-disk credentials file
+test_message %>%
+  smtp_send(
+    from = "personal@email.net",
+    to = "personal@email.net",
+    subject = "Testing the `smtp_send()` function",
+    credentials = creds_file(file = "gmail_creds")
+  )
 ```
 
 If the SMTP credentials are correctly set, we will get the following message in the console:
@@ -139,62 +206,49 @@ If the SMTP credentials are correctly set, we will get the following message in 
 The email message was sent successfully.
 ```
 
-We can alternatively use environment variables or even plaintext to send the email message through `smtp_send()`. Here is an example where environment variables contain the key pieces of information for the `sender`, `host`, `port`, `user`, and `password` arguments.
-
-```{r smtp_send_2, eval=FALSE}
-# Sending email using environment variables
-smtp_send(
-  email = email_object,
-  from = "personal@email.net",
-    to = "personal@email.net",
-  subject = "Testing the `smtp_send()` function",
-  sender = Sys.getenv("BLS_SENDER"),
-  host = Sys.getenv("BLS_HOST"),
-  port = Sys.getenv("BLS_PORT"),
-  user = Sys.getenv("BLS_USER_NAME"),
-  password = Sys.getenv("BLS_PASSWORD")
-)
-```
-
 Should you have the `mailsend-go` executable in a location that is not in the system path or in the working directory, we can specify its exact location using the `binary_loc` argument.
 
 ```{r smtp_binary_loc, eval=FALSE}
-# Sending email to a personal account
-# using the credentials file
-smtp_send(
-  email = email_object,
-  from = "personal@email.net",
+# Use the `binary_loc` to provide the
+# location of the `mailsend-go` binary
+test_message %>%
+  smtp_send(
+    from = "personal@email.net",
     to = "personal@email.net",
-  subject = "Testing the `smtp_send()` function",
-  creds_file = ".email_creds",
-  binary_loc = "/path/to/mailsend-go" 
-)
+    subject = "Testing the `smtp_send()` function",
+    credentials = creds(
+      user = "user_name@gmail.com",
+      provider = "gmail"
+    ),
+    binary_loc = "/path/to/mailsend-go" 
+  )
 ```
 
-Want to debug the usage of the `mailsend-go` command during sending? We can use the `echo` and `echo_cmd` arguments. Setting `echo` to `TRUE` will print the standard output and error to the console during sending. If `echo_cmd` is set to `TRUE`, we will get the system command printed to the console during the send. Here's an example where both options are enabled:
+Want to debug the usage of the `mailsend-go` command during sending? We can use the `echo` and `dry_run` arguments. Setting `echo` to `TRUE` will be print the system command for mailing via `mailsend-go` to the console. Setting `dry_run` to `TRUE` will return information on the SMTP sending options. Furthermore, the function will stop short of actually sending the email message out.
 
-```{r smtp_send_echo, eval=FALSE}
-# Sending email and echoing the system
-# command, the stdout, and the stderr
-smtp_send(
-  email = email_object,
-  from = "personal@email.net",
+```{r smtp_send_echo_dry_run, eval=FALSE}
+# Perform a dry run of sending email and
+# echo the system command
+test_message %>%
+  smtp_send(
+    from = "personal@email.net",
     to = "personal@email.net",
-  subject = "Testing the `smtp_send()` function",
-  creds_file = "gmail_creds",
-  echo = TRUE,
-  echo_cmd = TRUE
-)
+    subject = "Testing the `smtp_send()` function",
+    credentials = creds(
+      user = "user_name@gmail.com",
+      provider = "gmail"
+    ),
+    echo = TRUE,
+    dry_run = TRUE
+  )
 ```
 
 ```
-Running /usr/local/bin/mailsend-go -sub 'Testing the `smtp_send()` function' \
-  -smtp smtp.youremailserver.org -port 465 -ssl auth -user 'personal@email.net' -pass \
-  <user_password> -fname 'Full Name' -from 'personal@email.net' -to \
-  'personal@email.net' attach -file message_inlined.html -mime-type text/html \
-  -inline
-Mail Sent Successfully
-The email message was sent successfully.
+The command for sending the email message is:
+
+/usr/local/bin/mailsend-go -sub Testing the `smtp_send()` function -smtp smtp.gmail.com -port 465 -ssl auth -user user_name@gmail.com -pass ***** -from personal@email.net -to personal@email.net attach -file /var/folders/qz/mfwzxz914n16nj4__bnsbccr0000gn/T//RtmpKNmbDG/file583527f125f9.html -mime-type text/html -inline
+
+This was a dry run, the email message was NOT sent.
 ```
 
 ## Concluding

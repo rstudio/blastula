@@ -10,10 +10,10 @@ compose_email(body = NULL, header = NULL, footer = NULL,
 \arguments{
 \item{header, body, footer}{The three layout sections for an email message
 (ordered from top to bottom). Markdown text can be supplied to each of
-these. String interpolation is enabled via curly braces and named
-arguments in \code{...}. Alternatively, we can supply a set of \code{block_*()} calls
-enclosed within the \code{\link[=blocks]{blocks()}} function to take advantage of precomposed
-HTML blocks.}
+these. String interpolation is enabled via curly braces and named arguments
+in \code{...}. Alternatively, we can supply a set of \code{block_*()} calls enclosed
+within the \code{\link[=blocks]{blocks()}} function to take advantage of precomposed HTML
+blocks.}
 
 \item{.title}{The title of the email message. This is not the subject but the
 HTML title text which may appear in limited circumstances.}
@@ -22,7 +22,7 @@ HTML title text which may appear in limited circumstances.}
 the \code{\link[=parent.frame]{parent.frame()}}.}
 
 \item{...}{Expression strings for string interpolation within the \code{header},
-\code{body} and \code{footer}.}
+\code{body}, and \code{footer}.}
 }
 \value{
 An \code{email_message} object.
@@ -30,11 +30,10 @@ An \code{email_message} object.
 \description{
 The \code{compose_email()} function allows us to easily create an email message.
 We can use \code{glue}'s string interpolation semantics to incorporate external
-objects or evaluate R code within the message body, the footer, and the
-preheader text (using curly braces to enclose such R expressions). Local
-variables can be specified in the function call (using named arguments with
-\code{...}) and any variables not found in \code{...} will be searched for in the
-global environment.
+objects or evaluate R code within the message body, the header, or the footer
+(using curly braces to enclose such R expressions). Local variables can be
+specified in the function call (using named arguments with \code{...}) and any
+variables not found in \code{...} will be searched for in the global environment.
 }
 \examples{
 # Create a simple email message using

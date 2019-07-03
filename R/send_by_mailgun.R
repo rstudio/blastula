@@ -44,7 +44,6 @@
 #'     url = "<..mailgun_sending_domain..>",
 #'     api = "<..mailgun_api_key..>")
 #' }
-#' @importFrom glue glue
 #' @export
 send_by_mailgun <- function(message,
                             subject = NULL,
@@ -57,7 +56,7 @@ send_by_mailgun <- function(message,
 
   # Verify that the `message` object
   # is of the class `email_message`
-  if (!inherits(x = message, what = "email_message")) {
+  if (!inherits(message, "email_message")) {
     stop("The object provided in `message` must be created by the `compose_email()` function.")
   }
 

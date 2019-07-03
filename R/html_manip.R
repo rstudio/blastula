@@ -186,24 +186,39 @@ replace_attr <- function(html, tag_name, attr_name, func) {
 #   func = toupper
 # )
 
+#' Convert HTML decoded, but not URI escaped, file URI to a filepath
+#' @noRd
+file_uri_to_filepath <- function(src) {
+
+  m <- stringr::str_match(src, "^[Ff][Ii][Ll][Ee]://(([A-Za-z]:)?/.*)$")
+  if (is.na(m[1,1])) {
+    stop("Invalid file URI")
+  }
+
+  path <- m[1,2]
+  utils::URLdecode(path)
+}
+
+#' Convert HTML decoded, but not URI escaped, file URI to an absolute path,
+#' possibly by resolving the path relative to basedir.
+#' @noRd
+src_to_filepath <- function(src, basedir) {
+  src <- utils::URLdecode(src)
+  # Thanks jimhester!
+  fs::path_abs(src, basedir)
+}
+
 src_to_datauri <- function(src, basedir) {
   if (grepl("^https?:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
-  }
-  if (grepl("^data:", src, ignore.case = TRUE, perl = TRUE)) {
+  } else if (grepl("^data:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
-  }
-  if (grepl("^file:", src, ignore.case = TRUE, perl = TRUE)) {
-    # TODO: implement
-    # TODO: URI unescape
-    warning("TODO: implement file URLs")
+  } else if (grepl("^file:", src, ignore.case = TRUE, perl = TRUE)) {
+    full_path <- file_uri_to_filepath(src)
+  } else {
+    full_path <- src_to_filepath(src, basedir)
   }
 
-  # TODO: Test if src is a file path
-  # TODO: Test if src is an absolute file path
-  # TODO: URI unescape
-
-  full_path <- file.path(basedir, src)
   if (file.exists(full_path)) {
     type <- mime::guess_type(full_path, unknown = NA, empty = NA)
     if (is.na(type)) {
@@ -239,10 +254,11 @@ cid_counter <- function(prefix, initial_value = 1L) {
 # Reads in the specified HTML file, and replaces any images found
 # (either data URI or relative file references) with cid references.
 cid_images <- function(html_file, next_cid = cid_counter("img")) {
+
   idx <- 0L
-  next_cid <- function() {
+  next_cid <- function(content_type) {
     idx <<- idx + 1L
-    paste0("img", idx)
+    paste0("img", idx, ".", content_type)
   }
 
   basedir <- dirname(html_file)
@@ -257,18 +273,22 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
   html_cid <- replace_attr(html_data_uri, tag_name = "img", attr_name = "src", function(src) {
     m <- stringr::str_match(src, "^data:image/(\\w+);(base64,)(.+)")
     data <- m[1,4]
+    content_type <- m[1,2]
     if (is.na(data)) {
       src
     } else {
-      cid <- next_cid()
-      images[[cid]] <- data
+      cid <- next_cid(content_type = content_type)
+      images[[cid]] <- structure(
+        data,
+        "content_type" = paste0("image/", content_type)
+      )
       paste0("cid:", cid)
     }
   })
 
   structure(class = c("blastula_message", "email_message"), list(
     html_str = html_cid,
-    html_html = HTML(html_data_uri),
+    html_html = htmltools::HTML(html_data_uri),
     images = as.list(images)
   ))
 }
@@ -278,8 +298,8 @@ decode_hex <- function(hex) {
     hex <- paste0("0", hex)
   }
   chars <- strsplit(hex, "")[[1]]
-  left <- chars[c(TRUE,FALSE)]
-  right <- chars[c(FALSE,TRUE)]
+  left <- chars[c(TRUE, FALSE)]
+  right <- chars[c(FALSE, TRUE)]
   values <- strtoi(paste0(left, right), 16)
   str <- rawToChar(as.raw(values))
   Encoding(str) <- "UTF-8"
@@ -287,6 +307,7 @@ decode_hex <- function(hex) {
 }
 
 html_unescape <- function(html) {
+
   gfsub(html, "&#x([0-9a-f]+);|&#([0-9]+);|&([a-z0-9]+);", ignore_case = TRUE,
     function(entity, hex, dec, named) {
       if (!is.na(hex)) {

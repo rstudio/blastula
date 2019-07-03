@@ -19,8 +19,9 @@ render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
 #' Attach a Blastula email message object to the current render
 #'
 #' @export
-attach_email <- function(message, preview = TRUE) {
-  if (!inherits(message, "email_message")) {
+attach_email <- function(email, preview = TRUE) {
+
+  if (!inherits(email, "email_message")) {
     stop("blastula::attach_email() requires a blastula email message object")
   }
 
@@ -31,7 +32,7 @@ attach_email <- function(message, preview = TRUE) {
     if (preview) {
 
       html_file <- tempfile(fileext = ".html")
-      html <- message$html_html
+      html <- email$html_html
 
       msg <-
         paste0(
@@ -53,7 +54,7 @@ attach_email <- function(message, preview = TRUE) {
         )
 
       writeLines(html, html_file)
-      browseURL(html_file)
+      utils::browseURL(html_file)
 
       # This sleep is necessary because knitting usually happens in a separate
       # process, and when that process terminates the temp file will be deleted
@@ -61,24 +62,32 @@ attach_email <- function(message, preview = TRUE) {
     }
   }
 
-  rmarkdown::output_metadata$set(rsc_email_body_html = message$html_str)
-  rmarkdown::output_metadata$set(rsc_email_images = message$images)
+  rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
+  rmarkdown::output_metadata$set(rsc_email_images = email$images)
 
   invisible()
 }
 
-#' R Markdown output format for Blastula emails
+#' R Markdown output format for Blastula email messages
 #'
 #' @export
-blastula_email <- function(toc = FALSE, toc_depth = 3, toc_float = FALSE,
-  number_sections = FALSE, section_divs = TRUE, fig_width = 7,
-  fig_height = 5, fig_retina = 2, fig_caption = TRUE, dev = "png",
-  df_print = "default", code_folding = c("none", "show", "hide"),
-  code_download = FALSE, smart = TRUE, self_contained = TRUE,
-  theme = "default", highlight = "default", mathjax = NULL,
-  template = "blastula", extra_dependencies = NULL, css = NULL,
-  includes = NULL, keep_md = FALSE, lib_dir = NULL,
-  md_extensions = NULL, pandoc_args = NULL, ...) {
+blastula_email <- function(section_divs = TRUE,
+                           number_sections = FALSE,
+                           toc = FALSE,
+                           toc_depth = 3,
+                           toc_float = FALSE,
+                           fig_width = 5.35,
+                           fig_height = 5,
+                           fig_retina = 2,
+                           fig_caption = TRUE,
+                           smart = TRUE,
+                           dev = "png",
+                           self_contained = TRUE,
+                           template = "blastula",
+                           includes = NULL,
+                           keep_md = FALSE,
+                           md_extensions = NULL,
+                           ...) {
 
   if (template == "blastula") {
     template <- system.file("rmd", "template.html", package = "blastula")
@@ -95,22 +104,22 @@ blastula_email <- function(toc = FALSE, toc_depth = 3, toc_float = FALSE,
     fig_retina = fig_retina,
     fig_caption = fig_caption,
     dev = dev,
-    df_print = df_print,
-    code_folding = code_folding,
-    code_download = code_download,
+    df_print = "default",
+    code_folding = "none",
+    code_download = FALSE,
     smart = smart,
     self_contained = self_contained,
-    theme = theme,
-    highlight = highlight,
-    mathjax = mathjax,
+    theme = "default",
+    highlight = "default",
+    mathjax = NULL,
     template = template,
-    extra_dependencies = extra_dependencies,
-    css = css,
+    extra_dependencies = NULL,
+    css = NULL,
     includes = includes,
     keep_md = keep_md,
-    lib_dir = lib_dir,
+    lib_dir = NULL,
     md_extensions = md_extensions,
-    pandoc_args = pandoc_args,
+    pandoc_args = NULL,
     ...
   )
 }

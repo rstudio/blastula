@@ -2,18 +2,14 @@
 % Please edit documentation in R/rmd_format.R
 \name{blastula_email}
 \alias{blastula_email}
-\title{R Markdown output format for Blastula emails}
+\title{R Markdown output format for Blastula email messages}
 \usage{
-blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
-  number_sections = FALSE, section_divs = TRUE, fig_width = 7,
-  fig_height = 5, fig_retina = 2, fig_caption = TRUE, dev = "png",
-  df_print = "default", code_folding = c("none", "show", "hide"),
-  code_download = FALSE, smart = TRUE, self_contained = TRUE,
-  theme = "default", highlight = "default", mathjax = NULL,
-  template = "blastula", extra_dependencies = NULL, css = NULL,
-  includes = NULL, keep_md = FALSE, lib_dir = NULL,
-  md_extensions = NULL, pandoc_args = NULL, ...)
+blastula_email(section_divs = TRUE, number_sections = FALSE,
+  toc = FALSE, toc_depth = 3, toc_float = FALSE, fig_width = 5.35,
+  fig_height = 5, fig_retina = 2, fig_caption = TRUE, smart = TRUE,
+  dev = "png", self_contained = TRUE, template = "blastula",
+  includes = NULL, keep_md = FALSE, md_extensions = NULL, ...)
 }
 \description{
-R Markdown output format for Blastula emails
+R Markdown output format for Blastula email messages
 }
