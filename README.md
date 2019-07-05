@@ -69,8 +69,7 @@ You *should go* if you get the chance.
 email_object <-
   compose_email(
     body = email_text,
-    footer = 
-      "Email sent on {current_date_time}."
+    footer = "Email sent on {current_date_time}."
   )
 ```
 
@@ -88,30 +87,33 @@ email_object
 ### Sending an Email Message via SMTP
 
 We can store SMTP email credentials in a file using the
-`create_email_creds_file()` function. This will create a hidden
-credentials file in the working directory. Having generated the
-credentials file, we can use the `smtp_send()` function to send the
-email.
+`create_smtp_creds_file()` function. This will create a hidden
+credentials file in the working directory. We can also set SMTP access
+credentials in the system-wide key-value store through the
+`create_smpt_creds_key()` function.
+
+Having generated a credentials file, we can use the `smtp_send()`
+function (along with the `creds_file()` credentials helper function) to
+send the email through an SMTP server.
 
 ``` r
 # Sending email by SMTP using a credentials file
-smtp_send(
-  email = email_object,
-  from = "personal@email.net",
-  to = "another_user@web.net",
-  subject = "Testing the `smtp_send()` function",
-  creds_file = ".email_creds"
-)
+email_object %>%
+  smtp_send(
+    to = "a_user@web.net",
+    from = "personal@email.net",
+    subject = "Testing the `smtp_send()` function",
+    credentials = creds_file("email_creds")
+  )
 ```
 
 ## Installation
 
-The **blastula** package is moving toward using a new binary for `smtp`
-mailing, provided by the **mailsend-go** project. This binary is
-cross-platform and works on **Windows**, **macOS** (via **Homebrew)**,
-and **Linux** (**Debian** and **RPM** packages). Information on
-installation and other important considerations for SMTP sending can be
-found in [this
+The **blastula** package is using a new binary for `smtp` mailing,
+provided by the **mailsend-go** project. This binary is cross-platform
+and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux**
+(**Debian** and **RPM** packages). Information on installation and other
+important considerations for SMTP sending can be found in [this
 article](https://rich-iannone.github.io/blastula/articles/sending_using_smtp.html).
 
 You can install the in-development version of **blastula** from
