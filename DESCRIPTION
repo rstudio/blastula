@@ -27,7 +27,6 @@ Imports:
     htmltools (>= 0.3.6),
     httr (>= 1.4.0),
     jsonlite (>= 1.6),
-    keyring (>= 1.1.0),
     magrittr (>= 1.5),
     processx (>= 3.3.0),
     stringr (>= 1.4.0),
@@ -39,6 +38,7 @@ Suggests:
     covr,
     ggplot2,
     testthat,
+    keyring,
     knitr,
     rmarkdown
 Encoding: UTF-8
