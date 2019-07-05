@@ -90,7 +90,7 @@ We can store SMTP email credentials in a file using the
 `create_smtp_creds_file()` function. This will create a hidden
 credentials file in the working directory. We can also set SMTP access
 credentials in the system-wide key-value store through the
-`create_smpt_creds_key()` function.
+`create_smtp_creds_key()` function.
 
 Having generated a credentials file, we can use the `smtp_send()`
 function (along with the `creds_file()` credentials helper function) to
