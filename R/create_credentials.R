@@ -113,44 +113,43 @@ create_smtp_creds_key <- function(id,
          "`create_smtp_creds_key()` function",
          call. = FALSE)
 
-  } else {
+  }
 
-    # Determine whether the keyring package can be used
-    validate_keyring_capable()
+  # Determine whether the keyring package can be used
+  validate_keyring_capable()
 
-    # Create a credentials list from the function inputs
-    credentials_list <-
-      create_credentials_list(
-        provider = provider,
-        user = user,
-        sender_name = sender_name,
-        host = host,
-        port = port,
-        use_ssl = use_ssl
-      )
-
-    # Construct the final key name, using a prefix
-    # that includes the schema version
-    service_name <- paste0("blastula-v", schema_version, "-", id)
-
-    # Create a plaintext JSON string for the credentials
-    serialized <- JSONify_credentials(credentials_list)
-
-    # Set the key in the system's default keyring
-    keyring::key_set_with_value(
-      service = service_name,
+  # Create a credentials list from the function inputs
+  credentials_list <-
+    create_credentials_list(
+      provider = provider,
       user = user,
-      password = serialized
+      sender_name = sender_name,
+      host = host,
+      port = port,
+      use_ssl = use_ssl
     )
 
-    # Issue a message stating that the file has been created
-    message(
-      "The system key store has been updated with the (`", service_name,
-      "`) key.\n",
-      " * You can use this key within `smtp_send()` with ",
-      "`credentials = creds_key(\"", id, "\")`"
-      )
-  }
+  # Construct the final key name, using a prefix
+  # that includes the schema version
+  service_name <- paste0("blastula-v", schema_version, "-", id)
+
+  # Create a plaintext JSON string for the credentials
+  serialized <- JSONify_credentials(credentials_list)
+
+  # Set the key in the system's default keyring
+  keyring::key_set_with_value(
+    service = service_name,
+    user = user,
+    password = serialized
+  )
+
+  # Issue a message stating that the file has been created
+  message(
+    "The system key store has been updated with the (`", service_name,
+    "`) key.\n",
+    " * You can use this key within `smtp_send()` with ",
+    "`credentials = creds_key(\"", id, "\")`"
+  )
 }
 
 #' Create a credentials list object
