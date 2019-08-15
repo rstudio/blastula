@@ -1,0 +1,21 @@
+---
+title: "Email Document"
+output: blastula::blastula_email
+---
+
+# An Email Document Sent Through RStudio Connect (by way of R Markdown)
+
+We can include artifacts from the `connect-example-main.Rmd` document by adding an empty R Markdown code chunk with a matching name (in this case `cars`).
+
+```{r cars}
+```
+
+
+## Including Plots
+
+Plots can be included in an email sent via RStudio Connect. The plot in the `connect-example-main.Rmd` document is in the code chunk called `pressure`. Just as above, an empty code chunk here with the same name will includw that already-generated plot in the email message body:
+
+```{r pressure}
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
