@@ -13,6 +13,7 @@ blastula-*
 # Docs folder from `pkgdown::build_site()`
 docs/
 inst/doc
+inst/img
 
 # Example code in package build process
 *-Ex.R
@@ -44,3 +45,4 @@ vignettes/*.pdf
 
 # Other files
 .DS_Store
+API
