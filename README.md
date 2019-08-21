@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href="https://rich-iannone.github.io/blastula/"><img src="man/figures/logo.svg" align="right" height="139px" /></a>
+# blastula <a href="https://rich-iannone.github.io/blastula/"><img src="man/figures/logo.svg" align="right" height="250px" /></a>
 
 <!-- badges: start -->
 
