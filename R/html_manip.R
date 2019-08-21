@@ -56,7 +56,11 @@ find_all <- function(string, pattern, ignore_case = FALSE) {
 # given dynamically by a function. `func` should take a single
 # string as an argument, and either return a single string or
 # NULL.
-gfsub <- function(string, pattern, func, ignore_case = FALSE) {
+gfsub <- function(string,
+                  pattern,
+                  func,
+                  ignore_case = FALSE) {
+
   matches <- find_all(string, pattern, ignore_case = ignore_case)
 
   f <- file(open = "w+b", encoding = "UTF-8")
