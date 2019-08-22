@@ -37,13 +37,11 @@ jobs:
       name: pkgdown
       r: release
       if: branch IN (master)
-      r_binary_packages:
-        - pkgdown
-        - devtools
       script:
-        - Rscript -e "devtools::install()"
-        - Rscript -e "pkgdown::build_site()"
-        - Rscript -e "remove.packages(devtools::as.package('.')$package)"
+      - Rscript -e "remotes::install_cran(c('pkgdown', 'devtools'))"
+      - Rscript -e "devtools::install()"
+      - Rscript -e "Sys.setenv(FULLNAME = 'Richard Iannone'); pkgdown::build_site()"
+      - Rscript -e "remove.packages(devtools::as.package('.')$package)"
       deploy:
         provider: pages
         script: Rscript -e 'devtools::install()'
