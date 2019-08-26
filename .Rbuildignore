@@ -15,6 +15,7 @@
 ^inst/linux$
 ^inst/social_icons$
 ^inst/img$
+inst/examples/rsconnect
 tests/manual_tests
 ^README\.Rmd$
 ^\.httr-oauth$
