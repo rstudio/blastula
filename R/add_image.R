@@ -8,6 +8,7 @@
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
 #' @examples
+#' \dontrun{
 #' # Create an HTML fragment that
 #' # contains an image
 #' img_file_path <-
@@ -35,6 +36,7 @@
 #'
 #' {img_file_html}
 #' ")
+#' }
 #' @export
 add_image <- function(file, alt = NULL) {
 

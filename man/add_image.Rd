@@ -21,6 +21,7 @@ the message body wherever the image should appear.
 Add a local image inside the body of the email with this helper function.
 }
 \examples{
+\dontrun{
 # Create an HTML fragment that
 # contains an image
 img_file_path <-
@@ -48,4 +49,5 @@ Here is an image:
 
 {img_file_html}
 ")
+}
 }
