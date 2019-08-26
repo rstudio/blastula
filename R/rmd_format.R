@@ -25,7 +25,7 @@ render_email <- function(input,
     quiet = quiet
   )
 
-  email_obj <- cid_images(outfile)
+  email_obj <- cid_images(output_file)
   email_obj
 }
 
