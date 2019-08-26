@@ -29,7 +29,7 @@ render_email <- function(input,
   email_obj
 }
 
-#' Attach a Blastula email message object for use in RStudio Connect
+#' Include a email message when publishing R Markdown documents in Connect
 #'
 #' @param email A rendered blastula email. Normally, we'd want to use an
 #'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
@@ -40,17 +40,18 @@ render_email <- function(input,
 #'   `TRUE` (the default), the rendered email message will be shown.
 #'
 #' @export
-attach_email <- function(email,
-                         subject = NULL,
-                         preview = TRUE) {
+connect_email <- function(email,
+                          subject = NULL,
+                          preview = TRUE,
+                          file_attachments) {
 
   if (!inherits(email, "email_message")) {
-    stop("blastula::attach_email() requires a blastula email message object")
+    stop("blastula::connect_email() requires a blastula email message object")
   }
 
   if (is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
 
-    # warning("attach_email has no effect outside of RStudio Connect")
+    # warning("connect_email() has no effect outside of RStudio Connect")
 
     if (preview) {
 
@@ -203,7 +204,7 @@ create_rmd_preview_message <- function(subject = NULL) {
       "This is an email preview for RStudio Connect</h2>",
       "<p style=\"text-align: center; background:#fcfcfc; ",
       "padding-top: 0; margin-top: 0;\">",
-      "Use <code>attach_email(preview = FALSE)</code> ",
+      "Use <code>connect_email(preview = FALSE)</code> ",
       "to attach without this preview.",
       subject_ln,
       "</p><hr></div>"
