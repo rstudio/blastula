@@ -1,7 +1,5 @@
 ---
 title: "Main Document"
-rmd_output_metadata:
-  rsc_email_subject: RStudio Connect Example Email
 output: html_document
 ---
 
@@ -30,6 +28,9 @@ plot(pressure)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 ```{r include=FALSE}
-blastula::attach_email(blastula::render_email("connect-example-email.Rmd"))
+blastula::attach_email(
+  email = blastula::render_email(input_file = "connect-example-email.Rmd"),
+  subject = "RStudio Connect Example Email"
+  )
 ```
 
