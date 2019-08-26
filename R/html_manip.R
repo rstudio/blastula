@@ -20,7 +20,10 @@
 # start 5 5
 # end   7 6
 #
-find_all <- function(string, pattern, ignore_case = FALSE) {
+find_all <- function(string,
+                     pattern,
+                     ignore_case = FALSE) {
+
   match <- gregexpr(pattern, string, perl = TRUE, ignore.case = ignore_case)[[1]]
   match_start <- as.integer(match)
   match_start <- ifelse(match_start <= 0, NA, match_start)
@@ -30,6 +33,7 @@ find_all <- function(string, pattern, ignore_case = FALSE) {
 
   capture_start <- attrs[["capture.start"]]
   capture_length <- attrs[["capture.length"]]
+
   # If there are no capturing groups, these attributes don't exist
   if (is.null(capture_start)) {
     capture_start <- matrix(integer(0), nrow = length(match_start), ncol = 0)
@@ -90,7 +94,10 @@ gfsub <- function(string,
 
 # Like substr, but the end position is exclusive (i.e. it points
 # to the position just beyond the end of the substring).
-substr2 <- function(x, start, end) {
+substr2 <- function(x,
+                    start,
+                    end) {
+
   if (missing(end) && length(start) == 2) {
     end <- start[[2]]
     start <- start[[1]]
@@ -103,25 +110,30 @@ substr2 <- function(x, start, end) {
 }
 
 parse_attr <- function(attr = "src='data'  alt    =  \"whatever\"  id = foo") {
-  match_list <- find_all(attr, "(\\w+)\\s*=(?>\\s*)(?:\"([^\"]*)\"|'([^']*)'|([^\\s]*))")
-  transformed_matches <- lapply(match_list, function(match) {
-    name <- match[,2]
-    value <- ifelse(
-      !is.na(match[,3]), match[,3],
-      ifelse(
-        !is.na(match[,4]), match[,4],
+
+  match_list <-
+    find_all(attr, "(\\w+)\\s*=(?>\\s*)(?:\"([^\"]*)\"|'([^']*)'|([^\\s]*))")
+
+  transformed_matches <-
+    lapply(match_list, function(match) {
+      name <- match[,2]
+      value <- ifelse(
+        !is.na(match[,3]), match[,3],
         ifelse(
-          !is.na(match[,5]), match[,5],
-          NA
+          !is.na(match[,4]), match[,4],
+          ifelse(
+            !is.na(match[,5]), match[,5],
+            NA
+          )
         )
       )
-    )
 
-    # Return a named list with a single element
-    value_list <- list(value)
-    names(value_list) <- tolower(substr2(attr, name[[1]], name[[2]]))
-    value_list
-  })
+      # Return a named list with a single element
+      value_list <- list(value)
+      names(value_list) <- tolower(substr2(attr, name[[1]], name[[2]]))
+      value_list
+    })
+
   # Turn a list of named lists, into a single named list
   do.call("c", transformed_matches)
 }
@@ -134,6 +146,7 @@ parse_attr <- function(attr = "src='data'  alt    =  \"whatever\"  id = foo") {
 #'   that attribute's body.
 #' @noRd
 parse_tag <- function(tag) {
+
   match <- find_all(tag, "^<(?>(\\w+))([^>]*?)(/?)>$")
   if (is.null(match)) {
     return(NULL)
@@ -141,14 +154,14 @@ parse_tag <- function(tag) {
 
   match <- match[[1]]
 
-  tag_attr <- lapply(parse_attr(substr2(tag, match[,3])), function(attr_loc) {
+  tag_attr <-
+    lapply(parse_attr(substr2(tag, match[,3])), function(attr_loc) {
+
     # Adjust attr offset to be relative to `tag`, not substr2(tag, match[,3])
     attr_loc + (match[1,3] - 1)
   })
 
-  list(
-    attributes = tag_attr
-  )
+  list(attributes = tag_attr)
 }
 
 #' @param html An HTML string, possibly containing some tags.
@@ -161,15 +174,22 @@ parse_tag <- function(tag) {
 #'   returns an (HTML escaped) attribute string. Please be especially careful
 #'   not to returned unescaped single or double quotes.
 #' @noRd
-replace_attr <- function(html, tag_name, attr_name, func) {
+replace_attr <- function(html,
+                         tag_name,
+                         attr_name,
+                         func) {
+
   stopifnot(grepl("^[a-zA-Z]\\w*$", tag_name))
+
   pattern <- paste0("<", tag_name, "(?!\\w)[^>]*>")
 
   gfsub(html, pattern, ignore_case = TRUE, function(tag_html) {
+
     tag <- parse_tag(tag_html)
     attr_loc <- tag$attributes[[attr_name]]
+
     if (is.null(attr_loc)) {
-      # No change.
+      # No change
       return(tag_html)
     }
 
@@ -177,9 +197,11 @@ replace_attr <- function(html, tag_name, attr_name, func) {
     attr_val <- substr2(tag_html, attr_loc)
     post <- substr2(tag_html, attr_loc[["end"]], nchar(tag_html) + 1L)
 
-    paste0(pre,
+    paste0(
+      pre,
       htmltools::htmlEscape(func(html_unescape(attr_val)), attribute = TRUE),
-      post)
+      post
+    )
   })
 }
 
@@ -195,6 +217,7 @@ replace_attr <- function(html, tag_name, attr_name, func) {
 file_uri_to_filepath <- function(src) {
 
   m <- stringr::str_match(src, "^[Ff][Ii][Ll][Ee]://(([A-Za-z]:)?/.*)$")
+
   if (is.na(m[1,1])) {
     stop("Invalid file URI")
   }
@@ -206,13 +229,16 @@ file_uri_to_filepath <- function(src) {
 #' Convert HTML decoded, but not URI escaped, file URI to an absolute path,
 #' possibly by resolving the path relative to basedir.
 #' @noRd
-src_to_filepath <- function(src, basedir) {
+src_to_filepath <- function(src,
+                            basedir) {
+
   src <- utils::URLdecode(src)
-  # Thanks jimhester!
   fs::path_abs(src, basedir)
 }
 
-src_to_datauri <- function(src, basedir) {
+src_to_datauri <- function(src,
+                           basedir) {
+
   if (grepl("^https?:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
   } else if (grepl("^data:", src, ignore.case = TRUE, perl = TRUE)) {
@@ -224,6 +250,7 @@ src_to_datauri <- function(src, basedir) {
   }
 
   if (file.exists(full_path)) {
+
     type <- mime::guess_type(full_path, unknown = NA, empty = NA)
     if (is.na(type)) {
       return(src)
@@ -233,22 +260,28 @@ src_to_datauri <- function(src, basedir) {
     on.exit(close(f))
     b64 <- base64enc::base64encode(f, 0)
     paste0("data:", type, ";base64,", b64)
+
   } else {
     src
   }
 }
 
 inline_images <- function(html_file) {
+
   basedir <- dirname(html_file)
   html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
+
   replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
     src <- src_to_datauri(src, basedir)
     src
   })
 }
 
-cid_counter <- function(prefix, initial_value = 1L) {
+cid_counter <- function(prefix,
+                        initial_value = 1L) {
+
   idx <- initial_value - 1L
+
   function() {
     idx <<- idx + 1L
     paste0(prefix, idx)
@@ -257,9 +290,11 @@ cid_counter <- function(prefix, initial_value = 1L) {
 
 # Reads in the specified HTML file, and replaces any images found
 # (either data URI or relative file references) with cid references.
-cid_images <- function(html_file, next_cid = cid_counter("img")) {
+cid_images <- function(html_file,
+                       next_cid = cid_counter("img")) {
 
   idx <- 0L
+
   next_cid <- function(content_type) {
     idx <<- idx + 1L
     paste0("img", idx, ".", content_type)
@@ -268,13 +303,15 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
   basedir <- dirname(html_file)
   html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
 
-  html_data_uri <- replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
-    src_to_datauri(src, basedir)
-  })
+  html_data_uri <-
+    replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
+      src_to_datauri(src, basedir)
+    })
 
   images <- new.env(parent = emptyenv())
 
-  html_cid <- replace_attr(html_data_uri, tag_name = "img", attr_name = "src", function(src) {
+  html_cid <-
+    replace_attr(html_data_uri, tag_name = "img", attr_name = "src", function(src) {
     m <- stringr::str_match(src, "^data:image/(\\w+);(base64,)(.+)")
     data <- m[1,4]
     content_type <- m[1,2]
@@ -290,14 +327,18 @@ cid_images <- function(html_file, next_cid = cid_counter("img")) {
     }
   })
 
-  structure(class = c("blastula_message", "email_message"), list(
-    html_str = html_cid,
-    html_html = htmltools::HTML(html_data_uri),
-    images = as.list(images)
-  ))
+  structure(
+    class = c("blastula_message", "email_message"),
+    list(
+      html_str = html_cid,
+      html_html = htmltools::HTML(html_data_uri),
+      images = as.list(images)
+    )
+  )
 }
 
 decode_hex <- function(hex) {
+
   if (nchar(hex) %% 2 == 1) {
     hex <- paste0("0", hex)
   }
