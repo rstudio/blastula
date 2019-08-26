@@ -4,7 +4,8 @@
 \alias{connect_email}
 \title{Include a email message when publishing R Markdown documents in Connect}
 \usage{
-connect_email(email, subject = NULL, preview = TRUE, file_attachments)
+connect_email(email, subject = NULL, preview = TRUE,
+  attachments = report_rmd())
 }
 \arguments{
 \item{email}{A rendered blastula email. Normally, we'd want to use an
@@ -16,6 +17,8 @@ email object.}
 
 \item{preview}{Should the email message display it's own preview window? If
 \code{TRUE} (the default), the rendered email message will be shown.}
+
+\item{attachments}{A list of attachments for the Connect email.}
 }
 \description{
 Include a email message when publishing R Markdown documents in Connect
