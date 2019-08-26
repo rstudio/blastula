@@ -34,6 +34,9 @@ is \code{2}, which is the preferred choice for most retina displays. This can be
 set to \code{NULL} to prevent retina scaling. Note that this will always be
 \code{NULL} if \code{keep_md} is set to \code{TRUE}.}
 
+\item{fig_caption}{An option to render figures with captions. By default,
+this is set to \code{TRUE}.}
+
 \item{dev}{The R graphics device for figures. By default, this is the \code{png}
 device.}
 
