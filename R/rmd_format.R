@@ -34,8 +34,8 @@ render_email <- function(input,
 #' @param email A rendered blastula email. Normally, we'd want to use an
 #'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
 #'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
-#' @param subject An option to specify the the email subject during inclusion of
-#'   the email object in the main .Rmd file.
+#' @param subject An option to specify the the email subject while attaching the
+#'   email object.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown.
 #'
@@ -57,18 +57,7 @@ attach_email <- function(email,
       html_file <- tempfile(fileext = ".html")
       html <- email$html_html
 
-      msg <-
-        paste0(
-          "<div style=\"text-align: center; background:#fcfcfc\">\n",
-          "<h2 style=\"margin-bottom: 0; padding-bottom: 0;\">",
-          "This is an email preview</h2>\n",
-          "<p style=\"text-align: center; background:#fcfcfc; ",
-          "padding-top: 0; margin-top: 0;\">",
-          "Use <code>attach_email(preview = FALSE)</code> ",
-          "to attach without this preview.</p>\n",
-          "</div>\n",
-          "<hr>\n"
-        )
+      msg <- create_rmd_preview_message(preview = preview)
 
       html <-
         sub(
@@ -192,4 +181,34 @@ blastula_email <- function(toc = FALSE,
     pandoc_args = NULL,
     ...
   )
+}
+
+create_rmd_preview_message <- function(subject = NULL) {
+
+  if (!is.null(subject)) {
+    subject_ln <-
+      paste0(
+        "<br><br><strong><span style=\"font-variant: small-caps;\">",
+        "email subject: </span></strong>", subject, "<br>"
+      )
+
+  } else {
+    subject_ln <- NULL
+  }
+
+  preview_msg <-
+    paste0(
+      "<div style=\"text-align: center; background:#fcfcfc\">",
+      "<h2 style=\"margin-bottom: 0; padding-bottom: 0;\">",
+      "This is an email preview for RStudio Connect</h2>",
+      "<p style=\"text-align: center; background:#fcfcfc; ",
+      "padding-top: 0; margin-top: 0;\">",
+      "Use <code>attach_email(preview = FALSE)</code> ",
+      "to attach without this preview.",
+      subject_ln,
+      "</p>\n",
+      "<hr>\n"
+    )
+
+  preview_msg
 }
