@@ -19,7 +19,9 @@ render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
 #' Attach a Blastula email message object to the current render
 #'
 #' @export
-attach_email <- function(email, preview = TRUE) {
+attach_email <- function(email,
+                         subject = NULL,
+                         preview = TRUE) {
 
   if (!inherits(email, "email_message")) {
     stop("blastula::attach_email() requires a blastula email message object")
@@ -64,6 +66,15 @@ attach_email <- function(email, preview = TRUE) {
 
   rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
   rmarkdown::output_metadata$set(rsc_email_images = email$images)
+
+  # Set the email subject string if this is provided; this
+  # option eliminates the need to use
+  # rmd_output_metadata:
+  #   rsc_email_subject: <subject>
+  # in the YAML front matter
+  if (is.null(subject)) {
+    rmarkdown::output_metadata$set(rsc_email_subject = subject)
+  }
 
   invisible()
 }
