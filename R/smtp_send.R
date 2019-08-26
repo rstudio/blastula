@@ -12,8 +12,8 @@
 #'
 #' To send messages, we need access to the **mailsend-go** binary, which is
 #' cross-platform and works on Windows, macOS (via Homebrew), and Linux (Debian
-#' and RPM packages). Instructions for installation can be found at
-#' [https://github.com/muquit/mailsend-go#downloading-and-installing].
+#' and RPM packages). Instructions for installation can be found at the
+#' [blastula website](https://rich-iannone.github.io/blastula/).
 #'
 #' @param email The email message object, as created by the [compose_email()]
 #'   function. The object's class is `email_message`.
