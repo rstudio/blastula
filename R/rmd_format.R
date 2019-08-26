@@ -93,7 +93,7 @@ attach_email <- function(email,
   # rmd_output_metadata:
   #   rsc_email_subject: <subject>
   # in the YAML front matter
-  if (is.null(subject)) {
+  if (!is.null(subject)) {
     rmarkdown::output_metadata$set(rsc_email_subject = subject)
   }
 
