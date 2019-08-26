@@ -28,7 +28,7 @@ plot(pressure)
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
 ```{r include=FALSE}
-blastula::attach_email(
+blastula::connect_email(
   email = blastula::render_email(input = "connect-example-email.Rmd"),
   subject = "RStudio Connect Example Email"
   )
