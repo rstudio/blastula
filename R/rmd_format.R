@@ -212,3 +212,37 @@ create_rmd_preview_message <- function(subject = NULL) {
 
   preview_msg
 }
+
+#' @export
+report_rmd <- function() {
+
+  structure(
+    class = c("connect_report"),
+    list(
+      attachments = "connect_report_rmd"
+    )
+  )
+}
+
+#' @export
+generated_files <- function(files = NULL) {
+
+  structure(
+    class = c("generated_files"),
+    list(
+      attachments = files
+    )
+  )
+}
+
+#' @export
+connect_files <- function(files = NULL) {
+
+  structure(
+    class = c("connect_files"),
+    list(
+      attachments = files
+    )
+  )
+}
+
