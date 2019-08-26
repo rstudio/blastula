@@ -15,6 +15,7 @@ docs/
 inst/doc
 inst/img
 inst/examples/*.html
+inst/examples/rsconnect
 
 # Example code in package build process
 *-Ex.R
