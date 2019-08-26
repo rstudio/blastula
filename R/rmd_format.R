@@ -206,8 +206,7 @@ create_rmd_preview_message <- function(subject = NULL) {
       "Use <code>attach_email(preview = FALSE)</code> ",
       "to attach without this preview.",
       subject_ln,
-      "</p>\n",
-      "<hr>\n"
+      "</p><hr></div>"
     )
 
   preview_msg
