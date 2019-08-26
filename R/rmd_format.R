@@ -1,12 +1,25 @@
+#' R Markdown render function for the `blastula_email` output format
+#'
+#' @param input The input file to be rendered. This should be an R Markdown
+#'   document (.rmd) with the output specified as `output:
+#'   blastula::blastula_email`.
+#' @param envir The environment in which the code chunks are to be evaluated
+#'   during knitting (we can use `new.env()` to guarantee an empty, new
+#'   environment).
+#' @param quiet An option to suppress printing of the pandoc command line. By
+#'   default, this is set to `TRUE`.
+#'
 #' @export
-render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
+render_email <- function(input,
+                         envir = parent.frame(),
+                         quiet = TRUE) {
 
-  outfile <- tempfile(pattern = "email", fileext = ".html")
-  on.exit(unlink(outfile))
+  output_file <- tempfile(pattern = "email", fileext = ".html")
+  on.exit(unlink(output_file))
 
   rmarkdown::render(
-    input_file,
-    output_file = outfile,
+    input = input,
+    output_file = output_file,
     envir = envir,
     output_options = list(self_contained = TRUE),
     quiet = quiet
@@ -16,7 +29,15 @@ render_email <- function(input_file, envir = parent.frame(), quiet = TRUE) {
   email_obj
 }
 
-#' Attach a Blastula email message object to the current render
+#' Attach a Blastula email message object for use in RStudio Connect
+#'
+#' @param email A rendered blastula email. Normally, we'd want to use an
+#'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
+#'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
+#' @param subject An option to specify the the email subject during inclusion of
+#'   the email object in the main .Rmd file.
+#' @param preview Should the email message display it's own preview window? If
+#'   `TRUE` (the default), the rendered email message will be shown.
 #'
 #' @export
 attach_email <- function(email,
@@ -79,20 +100,56 @@ attach_email <- function(email,
   invisible()
 }
 
-#' R Markdown output format for Blastula email messages
+#' The R Markdown `blastula_email` output format
+#'
+#' @param toc If you would like an automatically-generated table of contents in
+#'   the output email, choose `TRUE`. By default, this is `FALSE` where no table
+#'   of contents will be generated.
+#' @param toc_depth The depth of headers to include in the table of contents (
+#'   should `toc` be set to `TRUE`).
+#' @param toc_float An option to float the table of contents to the left of the
+#'   main document content. By default, this is `FALSE`.
+#' @param number_sections Sections can be sequentially numbered if this is set
+#'   to `TRUE`. By default, this is `FALSE`.
+#' @param section_divs This wraps sections in `<section>` tags and attaches
+#'   identifiers to the enclosing `<section>`s. This is set to `TRUE`.
+#' @param fig_width,fig_height The figure width and height in units of inches.
+#' @param fig_retina The scaling factor for retina displays. The default value
+#'   is `2`, which is the preferred choice for most retina displays. This can be
+#'   set to `NULL` to prevent retina scaling. Note that this will always be
+#'   `NULL` if `keep_md` is set to `TRUE`.
+#' @param dev The R graphics device for figures. By default, this is the `png`
+#'   device.
+#' @param smart An option to produce typographically correct output. This will
+#'   convert straight quotes to curly quotes, `---` to em dashes, `--` to en
+#'   dashes, and instances of `...` to ellipses. By default, this is `TRUE`.
+#' @param self_contained Should a self-contained output file be generated. By
+#'   default, this is `TRUE`. The standalone HTML file will have no external
+#'   dependencies, it will use URIs to incorporate the contents of linked
+#'   scripts, stylesheets, images, and videos.
+#' @param template The Pandoc template to use for rendering. This is the
+#'   `"blastula"` template by default.
+#' @param includes A named list of additional content to include within the
+#'   document. This is typically created using the [rmarkdown::includes()]
+#'   function. By default, this is set to `NULL`.
+#' @param keep_md Should you need the keep the intermediate Markdown (.md) file,
+#'   set this to `TRUE`. By default, the .md file is not kept.
+#' @param md_extensions Markdown extensions to be added or removed from the
+#'   default definition or R Markdown.
+#' @param ... Specify other options in [rmarkdown::html_document()].
 #'
 #' @export
-blastula_email <- function(section_divs = TRUE,
-                           number_sections = FALSE,
-                           toc = FALSE,
+blastula_email <- function(toc = FALSE,
                            toc_depth = 3,
                            toc_float = FALSE,
+                           number_sections = FALSE,
+                           section_divs = TRUE,
                            fig_width = 5.35,
                            fig_height = 5,
                            fig_retina = 2,
                            fig_caption = TRUE,
-                           smart = TRUE,
                            dev = "png",
+                           smart = TRUE,
                            self_contained = TRUE,
                            template = "blastula",
                            includes = NULL,
