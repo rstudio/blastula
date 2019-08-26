@@ -38,12 +38,13 @@ render_email <- function(input,
 #'   email object.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown.
+#' @param attachments A list of attachments for the Connect email.
 #'
 #' @export
 connect_email <- function(email,
                           subject = NULL,
                           preview = TRUE,
-                          file_attachments) {
+                          attachments = report_rmd()) {
 
   if (!inherits(email, "email_message")) {
     stop("blastula::connect_email() requires a blastula email message object")
