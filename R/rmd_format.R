@@ -57,7 +57,7 @@ attach_email <- function(email,
       html_file <- tempfile(fileext = ".html")
       html <- email$html_html
 
-      msg <- create_rmd_preview_message(preview = preview)
+      msg <- create_rmd_preview_message(subject = subject)
 
       html <-
         sub(
