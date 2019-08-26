@@ -11,8 +11,8 @@ attach_email(email, subject = NULL, preview = TRUE)
 associated .Rmd file with the \code{blastula::blastula_email} R Markdown output
 format in the following call: \code{blastula::render_email(input = <email_document>.Rmd)}.}
 
-\item{subject}{An option to specify the the email subject during inclusion of
-the email object in the main .Rmd file.}
+\item{subject}{An option to specify the the email subject while attaching the
+email object.}
 
 \item{preview}{Should the email message display it's own preview window? If
 \code{TRUE} (the default), the rendered email message will be shown.}
