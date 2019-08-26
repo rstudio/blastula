@@ -2,14 +2,65 @@
 % Please edit documentation in R/rmd_format.R
 \name{blastula_email}
 \alias{blastula_email}
-\title{R Markdown output format for Blastula email messages}
+\title{The R Markdown \code{blastula_email} output format}
 \usage{
-blastula_email(section_divs = TRUE, number_sections = FALSE,
-  toc = FALSE, toc_depth = 3, toc_float = FALSE, fig_width = 5.35,
-  fig_height = 5, fig_retina = 2, fig_caption = TRUE, smart = TRUE,
-  dev = "png", self_contained = TRUE, template = "blastula",
+blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
+  number_sections = FALSE, section_divs = TRUE, fig_width = 5.35,
+  fig_height = 5, fig_retina = 2, fig_caption = TRUE, dev = "png",
+  smart = TRUE, self_contained = TRUE, template = "blastula",
   includes = NULL, keep_md = FALSE, md_extensions = NULL, ...)
 }
+\arguments{
+\item{toc}{If you would like an automatically-generated table of contents in
+the output email, choose \code{TRUE}. By default, this is \code{FALSE} where no table
+of contents will be generated.}
+
+\item{toc_depth}{The depth of headers to include in the table of contents (
+should \code{toc} be set to \code{TRUE}).}
+
+\item{toc_float}{An option to float the table of contents to the left of the
+main document content. By default, this is \code{FALSE}.}
+
+\item{number_sections}{Sections can be sequentially numbered if this is set
+to \code{TRUE}. By default, this is \code{FALSE}.}
+
+\item{section_divs}{This wraps sections in \code{<section>} tags and attaches
+identifiers to the enclosing \code{<section>}s. This is set to \code{TRUE}.}
+
+\item{fig_width, fig_height}{The figure width and height in units of inches.}
+
+\item{fig_retina}{The scaling factor for retina displays. The default value
+is \code{2}, which is the preferred choice for most retina displays. This can be
+set to \code{NULL} to prevent retina scaling. Note that this will always be
+\code{NULL} if \code{keep_md} is set to \code{TRUE}.}
+
+\item{dev}{The R graphics device for figures. By default, this is the \code{png}
+device.}
+
+\item{smart}{An option to produce typographically correct output. This will
+convert straight quotes to curly quotes, \code{---} to em dashes, \code{--} to en
+dashes, and instances of \code{...} to ellipses. By default, this is \code{TRUE}.}
+
+\item{self_contained}{Should a self-contained output file be generated. By
+default, this is \code{TRUE}. The standalone HTML file will have no external
+dependencies, it will use URIs to incorporate the contents of linked
+scripts, stylesheets, images, and videos.}
+
+\item{template}{The Pandoc template to use for rendering. This is the
+\code{"blastula"} template by default.}
+
+\item{includes}{A named list of additional content to include within the
+document. This is typically created using the \code{\link[rmarkdown:includes]{rmarkdown::includes()}}
+function. By default, this is set to \code{NULL}.}
+
+\item{keep_md}{Should you need the keep the intermediate Markdown (.md) file,
+set this to \code{TRUE}. By default, the .md file is not kept.}
+
+\item{md_extensions}{Markdown extensions to be added or removed from the
+default definition or R Markdown.}
+
+\item{...}{Specify other options in \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}.}
+}
 \description{
-R Markdown output format for Blastula email messages
+The R Markdown \code{blastula_email} output format
 }

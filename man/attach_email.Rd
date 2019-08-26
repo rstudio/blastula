@@ -2,10 +2,21 @@
 % Please edit documentation in R/rmd_format.R
 \name{attach_email}
 \alias{attach_email}
-\title{Attach a Blastula email message object to the current render}
+\title{Attach a Blastula email message object for use in RStudio Connect}
 \usage{
 attach_email(email, subject = NULL, preview = TRUE)
 }
+\arguments{
+\item{email}{A rendered blastula email. Normally, we'd want to use an
+associated .Rmd file with the \code{blastula::blastula_email} R Markdown output
+format in the following call: \code{blastula::render_email(input = <email_document>.Rmd)}.}
+
+\item{subject}{An option to specify the the email subject during inclusion of
+the email object in the main .Rmd file.}
+
+\item{preview}{Should the email message display it's own preview window? If
+\code{TRUE} (the default), the rendered email message will be shown.}
+}
 \description{
-Attach a Blastula email message object to the current render
+Attach a Blastula email message object for use in RStudio Connect
 }
