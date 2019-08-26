@@ -76,6 +76,12 @@ connect_email <- function(email,
     }
   }
 
+  rsc_report_name <- Sys.getenv("RSC_REPORT_NAME")
+  rsc_report_url <- Sys.getenv("RSC_REPORT_URL")
+
+  print(rsc_report_name)
+  print(rsc_report_url)
+
   rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
   rmarkdown::output_metadata$set(rsc_email_images = email$images)
 
