@@ -118,6 +118,8 @@ attach_email <- function(email,
 #'   is `2`, which is the preferred choice for most retina displays. This can be
 #'   set to `NULL` to prevent retina scaling. Note that this will always be
 #'   `NULL` if `keep_md` is set to `TRUE`.
+#' @param fig_caption An option to render figures with captions. By default,
+#'   this is set to `TRUE`.
 #' @param dev The R graphics device for figures. By default, this is the `png`
 #'   device.
 #' @param smart An option to produce typographically correct output. This will
