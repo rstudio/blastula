@@ -5,32 +5,67 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
 ```
 
-# R Markdown Text and Code
+# An R Markdown Document
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+This is an **R Markdown** document. *Markdown* is a simple formatting syntax for writing on the web. **R Markdown** takes this a step further by combining *Markdown* prose and **R** code into reproducible documents that can be output as HTML, PDF, Word, and many more output formats. For more details on using **R Markdown**, have a look through [its documentation site](https://rmarkdown.rstudio.com/docs/).
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Here is some **R** code, which is contained within a code chunk:
 
-```{r cars}
-summary(cars)
+```{r diamonds_plot}
+
+diamonds %>%
+  group_by(carat, cut) %>%
+  summarize(mean_price = mean(price)) %>%
+  filter(cut != "Fair", carat < 3) %>%
+  ggplot() +
+  geom_point(aes(x = carat, y = mean_price)) +
+  stat_smooth(
+    aes(x = carat, y = mean_price),
+    method = "gam"
+  ) +
+  facet_wrap(facets = vars(cut)) +
+  labs(
+    title = "Diamond Prices",
+    subtitle = "Faceted by Diamond Cut",
+    caption = "Source: The [diamonds] dataset in {ggplot2}.",
+    x = "Carats", y = "Mean Price, US Dollars"
+  ) +
+  scale_y_continuous(labels = scales::dollar)
 ```
 
-# Plots
+Let's get some summarized data about yearly home sales in Dallas, TX and also write that data to a CSV file:
 
-You can also embed plots, for example:
+```{r dallas_home_sales}
 
-```{r pressure, out.width = "100%", echo=FALSE}
-plot(pressure)
+dallas_home_sales <- 
+  txhousing %>%
+  filter(city == "Dallas") %>%
+  group_by(year) %>%
+  summarize(total_sales = sum(sales, na.rm = TRUE))
+
+dallas_home_sales
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_sales)) %>% pull(year)` had the greatest number of sales. What interesting findings! Let's create a CSV for distribution (this code chunk that generates the CSV is ultimately not shown because we used `include=FALSE` as a chunk option).
+
+```{r write_csv, include=FALSE}
+dallas_home_sales %>% write_csv("dallas_home_sales.csv")
+```
+
+We can create an email using RStudio Connect, one that aligns with the content from this report. We do this with the `connect_email()` function from the **blastula** package. We can use a subdocument (included here as `connect-example-email.Rmd`) to craft the contents of the email, drawing upon results available in this document.
 
 ```{r include=FALSE}
+blastula::render_email(input = "connect-example-email.Rmd") %>%
 blastula::connect_email(
-  email = blastula::render_email(input = "connect-example-email.Rmd"),
-  subject = "RStudio Connect Example Email"
-  )
+  subject = "RStudio Connect Example Email",
+  # attachments = list(
+  #   generated_files("dallas_home_sales.csv"),
+  #   report_rmd()
+  # )
+)
 ```
 
