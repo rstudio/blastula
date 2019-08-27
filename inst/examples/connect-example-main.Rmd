@@ -56,7 +56,7 @@ It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_
 dallas_home_sales %>% write_csv("dallas_home_sales.csv")
 ```
 
-We can create an email using RStudio Connect, one that aligns with the content from this report. We do this with the `connect_email()` function from the **blastula** package. We can use a subdocument (included here as `connect-example-email.Rmd`) to craft the contents of the email, drawing upon results available in this document.
+We can create an email using **RStudio Connect**, one that aligns with the content from this report. We do this with the `connect_email()` function from the **blastula** package. We can use a subdocument (included here as `connect-example-email.Rmd`) to craft the contents of the email, drawing upon results available in this document.
 
 ```{r include=FALSE}
 blastula::render_email(input = "connect-example-email.Rmd") %>%

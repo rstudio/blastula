@@ -3,19 +3,26 @@ title: "Email Document"
 output: blastula::blastula_email
 ---
 
-# An Email Document Sent Through RStudio Connect (by way of R Markdown)
-
-We can include artifacts from the `connect-example-main.Rmd` document by adding an empty R Markdown code chunk with a matching name (in this case `cars`).
-
-```{r cars}
+```{r packages, include=FALSE}
+library(tidyverse)
 ```
 
+# Diamonds and Real Estate in Dallas
 
-## Including Plots
+We can include parts from the `connect-example-main.Rmd` document by adding an empty R Markdown code chunk with a matching name (in this case `diamonds_plot`). This is great because we can reuse parts from the main report document.
 
-Plots can be included in an email sent via RStudio Connect. The plot in the `connect-example-main.Rmd` document is in the code chunk called `pressure`. Just as above, an empty code chunk here with the same name will includw that already-generated plot in the email message body:
-
-```{r pressure}
+```{r diamonds_plot, echo=FALSE}
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+The real estate table can be included in the same way:
+
+```{r dallas_home_sales, echo=FALSE}
+```
+
+Note that the `echo = FALSE` parameter was added to each of the the code chunks to prevent printing of the **R** code that generated the plot.
+
+The `dallas_home_sales` object (from the namesake **R** code chunk) is also available and can be further processed to generate different output just for the email document.
+
+```{r last_5_years, echo=FALSE}
+dallas_home_sales %>% filter(year %in% 2011:2015)
+```
