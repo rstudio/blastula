@@ -226,7 +226,7 @@ report_rmd <- function() {
   structure(
     class = c("connect_report"),
     list(
-      attachments = "connect_report_rmd"
+      name = "connect_report"
     )
   )
 }
@@ -237,7 +237,7 @@ generated_files <- function(files = NULL) {
   structure(
     class = c("generated_files"),
     list(
-      attachments = files
+      name = files
     )
   )
 }
@@ -248,7 +248,7 @@ connect_files <- function(files = NULL) {
   structure(
     class = c("connect_files"),
     list(
-      attachments = files
+      name = files
     )
   )
 }
