@@ -7,6 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 
 library(tidyverse)
+library(blastula)
 ```
 
 # An R Markdown Document
@@ -62,10 +63,9 @@ We can create an email using **RStudio Connect**, one that aligns with the conte
 blastula::render_email(input = "connect-example-email.Rmd") %>%
 blastula::connect_email(
   subject = "RStudio Connect Example Email",
-  # attachments = list(
-  #   generated_files("dallas_home_sales.csv"),
-  #   report_rmd()
-  # )
+  attachments = list(
+    generated_files("dallas_home_sales.csv")
+  )
 )
 ```
 
