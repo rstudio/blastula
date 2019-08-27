@@ -44,7 +44,7 @@ render_email <- function(input,
 connect_email <- function(email,
                           subject = NULL,
                           preview = TRUE,
-                          attachments = report_rmd()) {
+                          attachments = NULL) {
 
   # Create a list of names for any attachments that are either
   # generated from any rendered R Markdown documents or already
