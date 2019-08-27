@@ -253,3 +253,39 @@ connect_files <- function(files = NULL) {
   )
 }
 
+inherits_attachment_type <- function(attachments_list) {
+
+  lapply(
+    attachments_list, function(x) {
+      inherits(x, "connect_report") ||
+        inherits(x, "generated_files") ||
+        inherits(x, "connect_files")
+    }) %>%
+    unlist() %>%
+    all()
+}
+
+any_of_attachment_type <- function(attachments_list,
+                                   attachment_type) {
+
+  vapply(
+    attachments_list,
+    function(x) inherits(x, attachment_type),
+    FUN.VALUE = logical(1)
+  ) %>% any()
+}
+
+names_of_attachment_type <- function(attachments_list,
+                                     attachment_type) {
+
+  which_elements <-
+    vapply(
+      attachments_list,
+      function(x) inherits(x, attachment_type),
+      FUN.VALUE = logical(1)
+    ) %>% which()
+
+  attachments_list[which_elements] %>%
+    unlist() %>%
+    unname()
+}
