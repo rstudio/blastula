@@ -282,39 +282,6 @@ create_rmd_preview_message <- function(subject = NULL) {
   preview_msg
 }
 
-#' @export
-report_rmd <- function() {
-
-  structure(
-    class = c("connect_report"),
-    list(
-      name = "connect_report"
-    )
-  )
-}
-
-#' @export
-generated_files <- function(files = NULL) {
-
-  structure(
-    class = c("generated_files"),
-    list(
-      name = files
-    )
-  )
-}
-
-#' @export
-connect_files <- function(files = NULL) {
-
-  structure(
-    class = c("connect_files"),
-    list(
-      name = files
-    )
-  )
-}
-
 inherits_attachment_type <- function(attachments_list) {
 
   lapply(
