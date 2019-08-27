@@ -5,7 +5,7 @@
 \title{Include a email message when publishing R Markdown documents in Connect}
 \usage{
 connect_email(email, subject = NULL, preview = TRUE,
-  attachments = report_rmd())
+  attachments = NULL)
 }
 \arguments{
 \item{email}{A rendered blastula email. Normally, we'd want to use an
