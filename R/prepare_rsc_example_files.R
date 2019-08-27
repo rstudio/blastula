@@ -21,7 +21,7 @@
 #' `"connect-example_main.Rmd"` and pressing the Publish button at the top-right
 #' of the Editor pane (please ensure beforehand that you are set up work with
 #' RStudio Connect). If asked `"What do you want to publish?"`, choose the first
-#' option where only the `"connect-example_main"` document is published. All
+#' option where only the `"connect-example-main"` document is published. All
 #' three files should be checked in the final dialog box, press the `Publish`
 #' button to publish to RStudio Connect.
 #'

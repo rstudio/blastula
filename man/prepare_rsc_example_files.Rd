@@ -34,7 +34,7 @@ The main report and associated email can be published by opening
 \code{"connect-example_main.Rmd"} and pressing the Publish button at the top-right
 of the Editor pane (please ensure beforehand that you are set up work with
 RStudio Connect). If asked \code{"What do you want to publish?"}, choose the first
-option where only the \code{"connect-example_main"} document is published. All
+option where only the \code{"connect-example-main"} document is published. All
 three files should be checked in the final dialog box, press the \code{Publish}
 button to publish to RStudio Connect.
 }
