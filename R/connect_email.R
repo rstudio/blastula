@@ -5,15 +5,19 @@
 #'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
+#' @param attach_report Should the rendered output of the main R Markdown
+#'   document be included as an email attachment. By default, this is `FALSE`.
+#' @param attachments A vector of attachments for the Connect email.
 #' @param preview Should the email message display it's own preview window? If
-#'   `TRUE` (the default), the rendered email message will be shown.
-#' @param attachments A list of attachments for the Connect email.
+#'   `TRUE` (the default), the rendered email message will be shown in the
+#'   default browser.
 #'
 #' @export
 connect_email <- function(email,
                           subject = NULL,
-                          preview = TRUE,
-                          attachments = NULL) {
+                          attach_report = FALSE,
+                          attachments = NULL,
+                          preview = TRUE) {
 
   # Create a list of names for any attachments that are either
   # generated from any rendered R Markdown documents or already
