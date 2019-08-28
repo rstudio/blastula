@@ -85,7 +85,7 @@ send_email_out <- function(message,
 
   # Verify that the `message` object is of the
   # class `email_message`
-  if (!inherits(email, "email_message")) {
+  if (!inherits(message, "email_message")) {
     stop("The object provided in `email` must be an ",
          "`email_message` object.\n",
          " * This can be created with the `compose_email()` function.",
