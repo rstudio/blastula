@@ -19,50 +19,6 @@ connect_email <- function(email,
                           attachments = NULL,
                           preview = TRUE) {
 
-  # Create a list of names for any attachments that are either
-  # generated from any rendered R Markdown documents or already
-  # available in Connect; also supply a logical value for
-  # whether the default attachment (the main .Rmd render)
-  # should be suppressed
-  attachment_namelist <-
-    list(
-      suppress_report_attachment = TRUE,
-      generated_files = character(0),
-      connect_files = character(0)
-    )
-
-  # If `report_rmd()` is by itself, set the `FALSE` value
-  # in `attachment_namelist`
-  if (length(attachments) == 1 &&
-      inherits(attachments, "connect_report")) {
-    attachment_namelist$suppress_report_attachment <- FALSE
-  }
-
-  # Get a vector of attachments for `rsc_email_attachments` and a logical
-  # value for `rsc_email_suppress_report_attachment`
-  if (is.list(attachments) &&
-      all((lapply(attachments, FUN = length) %>% unlist()) == 1) &&
-      inherits_attachment_type(attachments_list = attachments)) {
-
-    if (attachments %>% any_of_attachment_type("connect_report")) {
-      attachment_namelist$suppress_report_attachment <- FALSE
-    } else {
-      attachment_namelist$suppress_report_attachment <- TRUE
-    }
-
-    if (attachments %>% any_of_attachment_type("generated_files")) {
-
-      attachment_namelist$generated_files <-
-        attachments %>% names_of_attachment_type("generated_files")
-    }
-
-    if (attachments %>% any_of_attachment_type("connect_files")) {
-
-      attachment_namelist$connect_files <-
-        attachments %>% names_of_attachment_type("connect_files")
-    }
-  }
-
   if (!inherits(email, "email_message")) {
     stop("blastula::connect_email() requires a blastula email message object")
   }
@@ -112,21 +68,15 @@ connect_email <- function(email,
   # Set the `rsc_email_suppress_report_attachment` parameter to
   # `TRUE` if we elect to exclude the default Connect attachment
   # of the rendered .Rmd
-  if (attachment_namelist$suppress_report_attachment) {
+  if (isTRUE(attach_report)) {
+    rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = FALSE)
+  } else {
     rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = TRUE)
   }
 
   # Attach files via the `rsc_email_attachments` parameter
-  if (length(attachment_namelist$generated_files) > 0 |
-      length(attachment_namelist$connect_files) > 0) {
-
-    attached_files <-
-      c(
-        attachment_namelist$generated_files %>% unlist(),
-        attachment_namelist$connect_files %>% unlist()
-      )
-
-    rmarkdown::output_metadata$set(rsc_email_attachments = attached_files)
+  if (!is.null(attachments)) {
+    rmarkdown::output_metadata$set(rsc_email_attachments = attachments)
   }
 
   invisible()
