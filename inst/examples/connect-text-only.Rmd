@@ -1,20 +1,29 @@
 ---
-title: "Main Document"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
-library(tidyverse)
 library(blastula)
 ```
 
+# An R Markdown Document for Sending an Email
+
+We can create a text-only email using **RStudio Connect**. None of the content from this R Markdown file will be included in the email message body, but, we can elect to attach the output file.
+
+Only one function is required, it's from the **blastula** package and it's called `connect_email()`.
 
 ```{r connect_email, echo=FALSE}
-connect_email(
+connect_email(  
   subject = "RStudio Connect Example Email",
-  text = "This is a test email"
+  attach_output = TRUE,
+  text = "
+
+Hello,
+
+This is a test email. It contains only text and it's a great option if you only want to send a simple email.
+"
 )
 ```
 
