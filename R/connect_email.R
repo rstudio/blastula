@@ -7,7 +7,7 @@
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
 #' @param attachments A vector of attachments for the Connect email.
-#' @param attach_report Should the rendered output of the main R Markdown
+#' @param attach_output Should the rendered output of the main R Markdown
 #'   document be included as an email attachment. By default, this is `FALSE`.
 #' @param send_via_schedule Should the email be sent via the Connect scheduler?
 #'   By default, this is `FALSE`.
@@ -20,7 +20,7 @@ connect_email <- function(email = NULL,
                           text = NULL,
                           subject = NULL,
                           attachments = NULL,
-                          attach_report = FALSE,
+                          attach_output = FALSE,
                           send_via_schedule = FALSE,
                           preview = TRUE) {
 
@@ -72,7 +72,6 @@ connect_email <- function(email = NULL,
     # body and for the images therein
     rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
     rmarkdown::output_metadata$set(rsc_email_images = email$images)
-
   }
 
   if (!is.null(text)) {
@@ -92,7 +91,7 @@ connect_email <- function(email = NULL,
   # Set the `rsc_email_suppress_report_attachment` parameter to
   # `TRUE` if we elect to exclude the default Connect attachment
   # of the rendered .Rmd
-  if (isTRUE(attach_report)) {
+  if (isTRUE(attach_output)) {
     rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = FALSE)
   } else {
     rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = TRUE)
