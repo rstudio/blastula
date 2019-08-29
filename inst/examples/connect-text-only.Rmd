@@ -1,0 +1,20 @@
+---
+title: "Main Document"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(blastula)
+```
+
+
+```{r connect_email, echo=FALSE}
+connect_email(
+  subject = "RStudio Connect Example Email",
+  text = "This is a test email"
+)
+```
+
