@@ -12,12 +12,12 @@ library(blastula)
 
 We can create a text-only email using **RStudio Connect**. None of the content from this R Markdown file will be included in the email message body, but, we can elect to attach the output file.
 
-Only one function is required, it's from the **blastula** package and it's called `connect_email()`.
+Only one function is required, it's from the **blastula** package and it's called `connect_email()`. Files can be attached using the `attachments` argument
 
 ```{r connect_email, echo=FALSE}
 connect_email(  
   subject = "RStudio Connect Example Email",
-  attach_output = TRUE,
+  attachments = "austin_home_sales.csv",
   text = "
 
 Hello,
