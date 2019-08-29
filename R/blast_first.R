@@ -5,7 +5,7 @@
 #' different binary for sending. Therefore, we shouldn't need to use this setup
 #' function.
 #'
-#' @export
+#' @noRd
 blast_first <- function() {
 
   # Get the system OS type
