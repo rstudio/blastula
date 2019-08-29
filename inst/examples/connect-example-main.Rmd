@@ -63,7 +63,7 @@ We can create an email using **RStudio Connect**, one that aligns with the conte
 render_email(input = "connect-example-email.Rmd") %>%
   connect_email(
     subject = "RStudio Connect HTML Email",
-    attach_report = TRUE,
+    attach_output = TRUE,
     attachments = c("dallas_home_sales.csv", "austin_home_sales.csv")
   )
 ```
