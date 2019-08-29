@@ -1,13 +1,15 @@
 #' Prepare example files for RStudio Connect emailing with R Markdown
 #'
 #' A set of example files relevant to emailing with R Markdown in RStudio
-#' Connect can be spawned in a specified location. The three files are:
+#' Connect can be spawned in a specified location. There is a set of three files
+#' that work together to provide a full report, an emailable version of that
+#' report, and a file attachment; these files are:
 #'
 #' \itemize{
-#' \item `"connect-example_main.Rmd"`: The main R Markdown document. Contains
+#' \item `"connect-example-main.Rmd"`: The main R Markdown document. Contains
 #' a report template culminating in a final R code chunk that has calls to
 #' [render_email()] and [connect_email()].
-#' \item `"connect-example_email.Rmd"`: An R Markdown document that contains
+#' \item `"connect-example-email.Rmd"`: An R Markdown document that contains
 #' the email message. It is associated with the main R Markdown document by
 #' incorporating some of its content (i.e., by reusing chunk names and extending
 #' assigned values). It uses the `blastula::blastula_email` output type in the
@@ -18,12 +20,17 @@
 #' }
 #'
 #' The main report and associated email can be published by opening
-#' `"connect-example_main.Rmd"` and pressing the Publish button at the top-right
+#' `"connect-example-main.Rmd"` and pressing the Publish button at the top-right
 #' of the Editor pane (please ensure beforehand that you are set up work with
 #' RStudio Connect). If asked `"What do you want to publish?"`, choose the first
 #' option where only the `"connect-example-main"` document is published. All
 #' three files should be checked in the final dialog box, press the `Publish`
 #' button to publish to RStudio Connect.
+#'
+#' There is also the single `"connect-example-text-only.Rmd"` file that, when
+#' published, serves as a mechanism to send a text-only email. The content
+#' of the email is specified directly in the single [connect_email()] function
+#' call and all other text in the R Markdown file is disregarded.
 #'
 #' @param path The location to which the files (in a subdirectory named
 #'   `"connect_examples"`) will be written. The path needs to exist but the
@@ -39,6 +46,7 @@ prepare_rsc_example_files <- function(path = NULL) {
     c(
       "connect-example-main.Rmd",
       "connect-example-email.Rmd",
+      "connect-example-text-only.Rmd",
       "austin_home_sales.csv"
     )
 
