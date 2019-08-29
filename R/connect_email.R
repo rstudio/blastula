@@ -9,8 +9,6 @@
 #' @param attachments A vector of attachments for the Connect email.
 #' @param attach_output Should the rendered output of the main R Markdown
 #'   document be included as an email attachment. By default, this is `FALSE`.
-#' @param send_via_schedule Should the email be sent via the Connect scheduler?
-#'   By default, this is `FALSE`.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown in the
 #'   default browser.
@@ -21,7 +19,6 @@ connect_email <- function(email = NULL,
                           subject = NULL,
                           attachments = NULL,
                           attach_output = FALSE,
-                          send_via_schedule = FALSE,
                           preview = TRUE) {
 
   if (!is.null(email) && !inherits(email, "email_message")) {
@@ -95,12 +92,6 @@ connect_email <- function(email = NULL,
     rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = FALSE)
   } else {
     rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = TRUE)
-  }
-
-  if (isTRUE(send_via_schedule)) {
-    rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = FALSE)
-  } else {
-    rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = TRUE)
   }
 
   invisible()
