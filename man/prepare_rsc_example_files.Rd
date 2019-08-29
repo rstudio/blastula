@@ -13,14 +13,16 @@ aforementioned subdirectory is not required to be present.}
 }
 \description{
 A set of example files relevant to emailing with R Markdown in RStudio
-Connect can be spawned in a specified location. The three files are:
+Connect can be spawned in a specified location. There is a set of three files
+that work together to provide a full report, an emailable version of that
+report, and a file attachment; these files are:
 }
 \details{
 \itemize{
-\item \code{"connect-example_main.Rmd"}: The main R Markdown document. Contains
+\item \code{"connect-example-main.Rmd"}: The main R Markdown document. Contains
 a report template culminating in a final R code chunk that has calls to
 \code{\link[=render_email]{render_email()}} and \code{\link[=connect_email]{connect_email()}}.
-\item \code{"connect-example_email.Rmd"}: An R Markdown document that contains
+\item \code{"connect-example-email.Rmd"}: An R Markdown document that contains
 the email message. It is associated with the main R Markdown document by
 incorporating some of its content (i.e., by reusing chunk names and extending
 assigned values). It uses the \code{blastula::blastula_email} output type in the
@@ -31,10 +33,15 @@ attachment by way of the \code{\link[=connect_files]{connect_files()}} attachmen
 }
 
 The main report and associated email can be published by opening
-\code{"connect-example_main.Rmd"} and pressing the Publish button at the top-right
+\code{"connect-example-main.Rmd"} and pressing the Publish button at the top-right
 of the Editor pane (please ensure beforehand that you are set up work with
 RStudio Connect). If asked \code{"What do you want to publish?"}, choose the first
 option where only the \code{"connect-example-main"} document is published. All
 three files should be checked in the final dialog box, press the \code{Publish}
 button to publish to RStudio Connect.
+
+There is also the single \code{"connect-example-text-only.Rmd"} file that, when
+published, serves as a mechanism to send a text-only email. The content
+of the email is specified directly in the single \code{\link[=connect_email]{connect_email()}} function
+call and all other text in the R Markdown file is disregarded.
 }
