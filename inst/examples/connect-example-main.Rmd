@@ -51,7 +51,7 @@ dallas_home_sales <-
 dallas_home_sales
 ```
 
-It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_sales)) %>% pull(year)` had the greatest number of sales. What interesting findings! Let's create a CSV for distribution (this code chunk that generates the CSV is ultimately not shown because we used `include=FALSE` as a chunk option).
+It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_sales)) %>% pull(year)` had the greatest number of sales. What interesting findings! Let's create a CSV for distribution (this code chunk that generates the CSV is ultimately not shown because we used `echo=FALSE` as a chunk option).
 
 ```{r write_csv, echo=FALSE}
 dallas_home_sales %>% write_csv("dallas_home_sales.csv")
