@@ -5,7 +5,7 @@
 \title{Include a email message when publishing R Markdown documents in Connect}
 \usage{
 connect_email(email = NULL, text = NULL, subject = NULL,
-  attachments = NULL, attach_report = FALSE,
+  attachments = NULL, attach_output = FALSE,
   send_via_schedule = FALSE, preview = TRUE)
 }
 \arguments{
@@ -20,7 +20,7 @@ email object.}
 
 \item{attachments}{A vector of attachments for the Connect email.}
 
-\item{attach_report}{Should the rendered output of the main R Markdown
+\item{attach_output}{Should the rendered output of the main R Markdown
 document be included as an email attachment. By default, this is \code{FALSE}.}
 
 \item{send_via_schedule}{Should the email be sent via the Connect scheduler?
