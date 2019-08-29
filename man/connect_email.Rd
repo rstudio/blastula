@@ -4,8 +4,8 @@
 \alias{connect_email}
 \title{Include a email message when publishing R Markdown documents in Connect}
 \usage{
-connect_email(email, subject = NULL, preview = TRUE,
-  attachments = NULL)
+connect_email(email, subject = NULL, attach_report = FALSE,
+  attachments = NULL, preview = TRUE)
 }
 \arguments{
 \item{email}{A rendered blastula email. Normally, we'd want to use an
@@ -15,10 +15,14 @@ format in the following call: \code{blastula::render_email(input = <email_docume
 \item{subject}{An option to specify the the email subject while attaching the
 email object.}
 
-\item{preview}{Should the email message display it's own preview window? If
-\code{TRUE} (the default), the rendered email message will be shown.}
+\item{attach_report}{Should the rendered output of the main R Markdown
+document be included as an email attachment. By default, this is \code{FALSE}.}
 
-\item{attachments}{A list of attachments for the Connect email.}
+\item{attachments}{A vector of attachments for the Connect email.}
+
+\item{preview}{Should the email message display it's own preview window? If
+\code{TRUE} (the default), the rendered email message will be shown in the
+default browser.}
 }
 \description{
 Include a email message when publishing R Markdown documents in Connect
