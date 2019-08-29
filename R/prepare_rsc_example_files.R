@@ -15,8 +15,8 @@
 #' assigned values). It uses the `blastula::blastula_email` output type in the
 #' YAML front matter.
 #' \item `"austin_home_sales.csv"`: A CSV file that will be included as an
-#' attachment by way of the [connect_files()] attachment helper function in the
-#' [connect_email()] function call in the main R Markdown document
+#' attachment by way of the `attachments` argument in the [connect_email()]
+#' function call within the main R Markdown document
 #' }
 #'
 #' The main report and associated email can be published by opening
