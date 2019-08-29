@@ -5,8 +5,7 @@
 \title{Include a email message when publishing R Markdown documents in Connect}
 \usage{
 connect_email(email = NULL, text = NULL, subject = NULL,
-  attachments = NULL, attach_output = FALSE,
-  send_via_schedule = FALSE, preview = TRUE)
+  attachments = NULL, attach_output = FALSE, preview = TRUE)
 }
 \arguments{
 \item{email}{A rendered blastula email. Normally, we'd want to use an
@@ -22,9 +21,6 @@ email object.}
 
 \item{attach_output}{Should the rendered output of the main R Markdown
 document be included as an email attachment. By default, this is \code{FALSE}.}
-
-\item{send_via_schedule}{Should the email be sent via the Connect scheduler?
-By default, this is \code{FALSE}.}
 
 \item{preview}{Should the email message display it's own preview window? If
 \code{TRUE} (the default), the rendered email message will be shown in the
