@@ -16,13 +16,16 @@ Only one function is required, it's from the **blastula** package and it's calle
 
 ```{r connect_email, echo=FALSE}
 connect_email(  
-  subject = "RStudio Connect Example Email",
+  subject = "RStudio Connect Text Email",
   attachments = "austin_home_sales.csv",
   text = "
 
 Hello,
 
 This is a test email. It contains only text and it's a great option if you only want to send a simple email.
+
+We can still include attachments. Here, a CSV file is attached to this email (`austin_home_sales.csv`).
+
 "
 )
 ```
