@@ -5,9 +5,11 @@
 #'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
+#' @param attachments A vector of attachments for the Connect email.
 #' @param attach_report Should the rendered output of the main R Markdown
 #'   document be included as an email attachment. By default, this is `FALSE`.
-#' @param attachments A vector of attachments for the Connect email.
+#' @param send_via_schedule Should the email be sent via the Connect scheduler?
+#'   By default, this is `FALSE`.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown in the
 #'   default browser.
@@ -15,8 +17,9 @@
 #' @export
 connect_email <- function(email,
                           subject = NULL,
-                          attach_report = FALSE,
                           attachments = NULL,
+                          attach_report = FALSE,
+                          send_via_schedule = FALSE,
                           preview = TRUE) {
 
   if (!inherits(email, "email_message")) {
@@ -65,6 +68,11 @@ connect_email <- function(email,
     rmarkdown::output_metadata$set(rsc_email_subject = subject)
   }
 
+  # Attach files via the `rsc_email_attachments` parameter
+  if (!is.null(attachments)) {
+    rmarkdown::output_metadata$set(rsc_email_attachments = attachments)
+  }
+
   # Set the `rsc_email_suppress_report_attachment` parameter to
   # `TRUE` if we elect to exclude the default Connect attachment
   # of the rendered .Rmd
@@ -74,9 +82,10 @@ connect_email <- function(email,
     rmarkdown::output_metadata$set(rsc_email_suppress_report_attachment = TRUE)
   }
 
-  # Attach files via the `rsc_email_attachments` parameter
-  if (!is.null(attachments)) {
-    rmarkdown::output_metadata$set(rsc_email_attachments = attachments)
+  if (isTRUE(send_via_schedule)) {
+    rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = FALSE)
+  } else {
+    rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = TRUE)
   }
 
   invisible()
