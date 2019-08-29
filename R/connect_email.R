@@ -97,6 +97,12 @@ connect_email <- function(email = NULL,
   invisible()
 }
 
+#' @export
+suppress_scheduled_email <- function(suppress = TRUE) {
+
+  rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = suppress)
+}
+
 create_rmd_preview_message <- function(subject = NULL) {
 
   if (!is.null(subject)) {
