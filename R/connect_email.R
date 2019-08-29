@@ -54,8 +54,10 @@ connect_email <- function(email,
 
   # Set the RStudio Connect output metadata options for the email message
   # body and for the images therein
-  rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
-  rmarkdown::output_metadata$set(rsc_email_images = email$images)
+  # rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
+  # rmarkdown::output_metadata$set(rsc_email_images = email$images)
+
+  rmarkdown::output_metadata$set(rsc_email_body_text = "text test")
 
   # Set the email subject string if this is provided; this
   # option eliminates the need to use
