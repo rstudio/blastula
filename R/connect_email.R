@@ -3,6 +3,7 @@
 #' @param email A rendered blastula email. Normally, we'd want to use an
 #'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
 #'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
+#' @param text Text for the message body.
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
 #' @param attachments A vector of attachments for the Connect email.
@@ -15,57 +16,70 @@
 #'   default browser.
 #'
 #' @export
-connect_email <- function(email,
+connect_email <- function(email = NULL,
+                          text = NULL,
                           subject = NULL,
                           attachments = NULL,
                           attach_report = FALSE,
                           send_via_schedule = FALSE,
                           preview = TRUE) {
 
-  if (!inherits(email, "email_message")) {
-    stop("blastula::connect_email() requires a blastula email message object")
+  if (!is.null(email) && !inherits(email, "email_message")) {
+    stop("A blastula email message object must be supplied.",
+         call. = FALSE)
   }
 
-  if (is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
+  if (is.null(email) && is.null(text)) {
+    stop("Either a blastula email message object or `text` must be provided",
+         call. = FALSE)
+  }
 
-    # warning("connect_email() has no effect outside of RStudio Connect")
+  # If both an `email` object and `text` are provided, nullify
+  # the `text` and give preference to the HTML email
+  if (!is.null(email) && !is.null(text)) {
+    text <- NULL
+  }
 
-    if (preview) {
+  if (!is.null(email)) {
 
-      html_file <- tempfile(fileext = ".html")
-      html <- email$html_html
+    if (is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
 
-      msg <- create_rmd_preview_message(subject = subject)
+      # warning("connect_email() has no effect outside of RStudio Connect")
 
-      html <-
-        sub(
-          "(<body(?!\\w)[^>]*>)", paste0("\\1", msg),
-          html, perl = TRUE, ignore.case = TRUE
-        )
+      if (preview) {
 
-      writeLines(html, html_file)
-      utils::browseURL(html_file)
+        html_file <- tempfile(fileext = ".html")
+        html <- email$html_html
 
-      # This sleep is necessary because knitting usually happens in a separate
-      # process, and when that process terminates the temp file will be deleted
-      Sys.sleep(5)
+        msg <- create_rmd_preview_message(subject = subject)
+
+        html <-
+          sub(
+            "(<body(?!\\w)[^>]*>)", paste0("\\1", msg),
+            html, perl = TRUE, ignore.case = TRUE
+          )
+
+        writeLines(html, html_file)
+        utils::browseURL(html_file)
+
+        # This sleep is necessary because knitting usually happens in a separate
+        # process, and when that process terminates the temp file will be deleted
+        Sys.sleep(5)
+      }
     }
+
+    # Set the RStudio Connect output metadata options for the email message
+    # body and for the images therein
+    rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
+    rmarkdown::output_metadata$set(rsc_email_images = email$images)
+
   }
 
-  # Set the RStudio Connect output metadata options for the email message
-  # body and for the images therein
-  # rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
-  # rmarkdown::output_metadata$set(rsc_email_images = email$images)
+  if (!is.null(text)) {
+    rmarkdown::output_metadata$set(rsc_email_body_text = text)
+  }
 
-  rmarkdown::output_metadata$set(rsc_email_body_text = "text test")
-
-  # Set the email subject string if this is provided; this
-  # option eliminates the need to use
-  # ---
-  # rmd_output_metadata:
-  #   rsc_email_subject: <subject>
-  # ---
-  # in the YAML front matter
+  # Set the email subject string if this is provided
   if (!is.null(subject)) {
     rmarkdown::output_metadata$set(rsc_email_subject = subject)
   }
