@@ -1,24 +1,27 @@
+# TODO: Add documentation and clearly explain that there are two modes for input;
+# email is preferred over text if both provided
+
 #' Include a email message when publishing R Markdown documents in Connect
 #'
 #' @param email A rendered blastula email. Normally, we'd want to use an
 #'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
 #'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
-#' @param text Text for the message body.
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
 #' @param attachments A vector of attachments for the Connect email.
 #' @param attach_output Should the rendered output of the main R Markdown
 #'   document be included as an email attachment. By default, this is `FALSE`.
+#' @param text Text for the message body.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown in the
 #'   default browser.
 #'
 #' @export
 connect_email <- function(email = NULL,
-                          text = NULL,
                           subject = NULL,
                           attachments = NULL,
                           attach_output = FALSE,
+                          text = NULL,
                           preview = TRUE) {
 
   if (!is.null(email) && !inherits(email, "email_message")) {
@@ -72,6 +75,9 @@ connect_email <- function(email = NULL,
   }
 
   if (!is.null(text)) {
+
+    text <- paste(text, collapse = "\n")
+
     rmarkdown::output_metadata$set(rsc_email_body_text = text)
   }
 
@@ -97,6 +103,7 @@ connect_email <- function(email = NULL,
   invisible()
 }
 
+# TODO: Add documentation
 #' @export
 suppress_scheduled_email <- function(suppress = TRUE) {
 
