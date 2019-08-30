@@ -4,15 +4,13 @@
 \alias{connect_email}
 \title{Include a email message when publishing R Markdown documents in Connect}
 \usage{
-connect_email(email = NULL, text = NULL, subject = NULL,
-  attachments = NULL, attach_output = FALSE, preview = TRUE)
+connect_email(email = NULL, subject = NULL, attachments = NULL,
+  attach_output = FALSE, text = NULL, preview = TRUE)
 }
 \arguments{
 \item{email}{A rendered blastula email. Normally, we'd want to use an
 associated .Rmd file with the \code{blastula::blastula_email} R Markdown output
 format in the following call: \code{blastula::render_email(input = <email_document>.Rmd)}.}
-
-\item{text}{Text for the message body.}
 
 \item{subject}{An option to specify the the email subject while attaching the
 email object.}
@@ -21,6 +19,8 @@ email object.}
 
 \item{attach_output}{Should the rendered output of the main R Markdown
 document be included as an email attachment. By default, this is \code{FALSE}.}
+
+\item{text}{Text for the message body.}
 
 \item{preview}{Should the email message display it's own preview window? If
 \code{TRUE} (the default), the rendered email message will be shown in the

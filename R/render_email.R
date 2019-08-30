@@ -11,6 +11,7 @@
 #'
 #' @export
 render_email <- function(input,
+                         connect_footer = TRUE,
                          envir = parent.frame(),
                          quiet = TRUE) {
 
@@ -21,7 +22,9 @@ render_email <- function(input,
     input = input,
     output_file = output_file,
     envir = envir,
-    output_options = list(self_contained = TRUE),
+    output_options = list(
+      self_contained = TRUE, connect_footer = connect_footer
+    ),
     quiet = quiet
   )
 

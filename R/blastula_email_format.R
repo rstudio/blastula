@@ -55,10 +55,25 @@ blastula_email <- function(toc = FALSE,
                            includes = NULL,
                            keep_md = FALSE,
                            md_extensions = NULL,
+                           connect_footer = FALSE,
                            ...) {
 
   if (template == "blastula") {
     template <- system.file("rmd", "template.html", package = "blastula")
+  }
+
+  pandoc_args <- NULL
+  if (connect_footer) {
+    pandoc_args <- c(
+      pandoc_args,
+      "--variable=rsc-footer:1",
+      # Note bash escaping is handled by R Markdown (via shQuote())
+      paste0("--variable=rsc-date-time:", add_readable_time(time = Sys.time())),
+      paste0("--variable=rsc-report-url:", Sys.getenv("RSC_REPORT_URL")),
+      paste0("--variable=rsc-report-rendering-url:", Sys.getenv("RSC_REPORT_RENDERING_URL")),
+      paste0("--variable=rsc-report-subscription-url:",Sys.getenv("RSC_REPORT_SUBSCRIPTION_URL")),
+      paste0("--variable=rsc-report-name:", Sys.getenv("RSC_REPORT_NAME"))
+    )
   }
 
   rmarkdown::html_document(
@@ -87,7 +102,11 @@ blastula_email <- function(toc = FALSE,
     keep_md = keep_md,
     lib_dir = NULL,
     md_extensions = md_extensions,
-    pandoc_args = NULL,
+    pandoc_args = pandoc_args,
     ...
   )
+}
+
+bash_escape <- function(x) {
+  gsub("([\" \\;])", "\\\\\\1", x)
 }
