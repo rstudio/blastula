@@ -1,17 +1,21 @@
-# TODO: Add documentation and clearly explain that there are two modes for input;
-# email is preferred over text if both provided
-
-#' Include a email message when publishing R Markdown documents in Connect
+#' Associate an email when publishing an R Markdown document to RStudio Connect
 #'
-#' @param email A rendered blastula email. Normally, we'd want to use an
+#' @param email A rendered email message. Normally, we'd want to use an
 #'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
-#'   format in the following call: `blastula::render_email(input = <email_document>.Rmd)`.
+#'   format in [render_connect_email()] call (where its `input` is the email
+#'   .Rmd file).
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
-#' @param attachments A vector of attachments for the Connect email.
+#' @param attachments A vector of attachments for the Connect email. These files
+#'   can be any of those deployed when publishing to RStudio Connect, and, any
+#'   generated files (via R Markdown rendering).
 #' @param attach_output Should the rendered output of the main R Markdown
-#'   document be included as an email attachment. By default, this is `FALSE`.
-#' @param text Text for the message body.
+#'   document be included as an email attachment? By default, this is `FALSE`.
+#'   If `TRUE` the main R Markdown document will be attached first (before any
+#'   files specified in `attachments`) and the filename will be preserved.
+#' @param text Instead of using a rendered email document through the `email`
+#'   option, we can use plain text here. If any text is provided here, input to
+#'   `email` is ignored.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown in the
 #'   default browser.
@@ -103,13 +107,19 @@ attach_connect_email <- function(email = NULL,
   invisible()
 }
 
-# TODO: Add documentation
+#' A command to suppress any scheduled emailing in RStudio Connect
+#'
+#' @param suppress A logical value for whether email suppression should occur
+#'   after publication.
 #' @export
 suppress_scheduled_email <- function(suppress = TRUE) {
 
   rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = suppress)
 }
 
+#' Utility function to generate the preview message for a Connect Email
+#'
+#' @noRd
 create_rmd_preview_message <- function(subject = NULL) {
 
   if (!is.null(subject)) {
