@@ -9,12 +9,12 @@ library(tidyverse)
 
 # Diamonds and Real Estate in Dallas
 
-We can include parts from the `connect-example-main.Rmd` document by adding an empty R Markdown code chunk with a matching name (in this case `diamonds_plot`). This is great because we can reuse parts from the main report document.
+We can include parts from the parent `"connect-example-main.Rmd"` document by adding an empty R Markdown code chunk with a matching name (in this case `diamonds_plot`). This is great because we can reuse parts from the main report document.
 
 ```{r diamonds_plot, echo=FALSE}
 ```
 
-The real estate table can be included in the same way:
+The real estate table (in the parent document's `dallas_home_sales` chunk) can be included in the same way:
 
 ```{r dallas_home_sales, echo=FALSE}
 ```
