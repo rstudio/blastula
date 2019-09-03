@@ -11,23 +11,41 @@
 #'
 #' @export
 render_email <- function(input,
-                         connect_footer = TRUE,
                          envir = parent.frame(),
-                         quiet = TRUE) {
+                         quiet = TRUE,
+                         output_options = list(),
+                         render_options = list()) {
 
   output_file <- tempfile(pattern = "email", fileext = ".html")
   on.exit(unlink(output_file))
 
-  rmarkdown::render(
-    input = input,
-    output_file = output_file,
-    envir = envir,
-    output_options = list(
-      self_contained = TRUE, connect_footer = connect_footer
+  output_options$self_contained <- TRUE
+
+  do.call(rmarkdown::render, c(
+    list(
+      input = input,
+      output_file = output_file,
+      envir = envir,
+      output_options = output_options,
+      quiet = quiet
     ),
-    quiet = quiet
-  )
+    render_options
+  ))
 
   email_obj <- cid_images(output_file)
   email_obj
+}
+
+#' @export
+render_connect_email <- function(input,
+                                 connect_footer = TRUE,
+                                 envir = parent.frame(),
+                                 quiet = TRUE,
+                                 output_options = list(),
+                                 render_options = list()) {
+
+  if (is.null(output_options$connect_footer)) {
+    output_options$connect_footer <- connect_footer
+  }
+  render_email(input, envir, quiet, output_options, render_options)
 }

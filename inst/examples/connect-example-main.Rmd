@@ -60,11 +60,10 @@ dallas_home_sales %>% write_csv("dallas_home_sales.csv")
 We can create an email using **RStudio Connect**, one that aligns with the content from this report. We do this with the `render_email()` and `connect_email()` functions from the **blastula** package. We can use a subdocument (included here as `connect-example-email.Rmd`) to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the `attachments` (for any output files or included files) and `attach_report` (which attaches the rendered report) arguments.
 
 ```{r echo=FALSE}
-render_email(input = "connect-example-email.Rmd") %>%
-  connect_email(
+render_connect_email(input = "connect-example-email.Rmd") %>%
+  attach_connect_email(
     subject = "RStudio Connect HTML Email",
     attach_output = TRUE,
     attachments = c("dallas_home_sales.csv", "austin_home_sales.csv")
   )
 ```
-

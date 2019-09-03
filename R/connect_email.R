@@ -17,12 +17,12 @@
 #'   default browser.
 #'
 #' @export
-connect_email <- function(email = NULL,
-                          subject = NULL,
-                          attachments = NULL,
-                          attach_output = FALSE,
-                          text = NULL,
-                          preview = TRUE) {
+attach_connect_email <- function(email = NULL,
+                                 subject = NULL,
+                                 attachments = NULL,
+                                 attach_output = FALSE,
+                                 text = NULL,
+                                 preview = TRUE) {
 
   if (!is.null(email) && !inherits(email, "email_message")) {
     stop("A blastula email message object must be supplied.",
