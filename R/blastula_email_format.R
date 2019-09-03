@@ -68,11 +68,20 @@ blastula_email <- function(toc = FALSE,
       pandoc_args,
       "--variable=rsc-footer:1",
       # Note bash escaping is handled by R Markdown (via shQuote())
-      paste0("--variable=rsc-date-time:", add_readable_time(time = Sys.time())),
-      paste0("--variable=rsc-report-url:", "https://connect.example.com/content/1234/"),
-      paste0("--variable=rsc-report-rendering-url:", "https://connect.example.com/content/1234/_rev5678"),
-      paste0("--variable=rsc-report-subscription-url:", "https://connect.example.com/connect/#/apps/1234/subscriptions"),
-      paste0("--variable=rsc-report-name:", Sys.getenv("RSC_REPORT_NAME"))
+      paste0(
+        "--variable=rsc-date-time:", add_readable_time(time = Sys.time())),
+      paste0(
+        "--variable=rsc-report-url:",
+        Sys.getenv("RSC_REPORT_URL", unset = "https://connect.example.com/content/1234/")),
+      paste0(
+        "--variable=rsc-report-rendering-url:",
+        Sys.getenv("RSC_REPORT_RENDERING_URL", unset = "https://connect.example.com/content/1234/_rev5678")),
+      paste0(
+        "--variable=rsc-report-subscription-url:",
+        Sys.getenv("RSC_REPORT_SUBSCRIPTION_URL", unset = "")),
+      paste0(
+        "--variable=rsc-report-name:",
+        Sys.getenv("RSC_REPORT_NAME", unset = ""))
     )
   }
 
