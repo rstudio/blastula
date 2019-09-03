@@ -2,31 +2,38 @@
 % Please edit documentation in R/connect_email.R
 \name{attach_connect_email}
 \alias{attach_connect_email}
-\title{Include a email message when publishing R Markdown documents in Connect}
+\title{Associate an email when publishing an R Markdown document to RStudio Connect}
 \usage{
 attach_connect_email(email = NULL, subject = NULL,
   attachments = NULL, attach_output = FALSE, text = NULL,
   preview = TRUE)
 }
 \arguments{
-\item{email}{A rendered blastula email. Normally, we'd want to use an
+\item{email}{A rendered email message. Normally, we'd want to use an
 associated .Rmd file with the \code{blastula::blastula_email} R Markdown output
-format in the following call: \code{blastula::render_email(input = <email_document>.Rmd)}.}
+format in \code{\link[=render_connect_email]{render_connect_email()}} call (where its \code{input} is the email
+.Rmd file).}
 
 \item{subject}{An option to specify the the email subject while attaching the
 email object.}
 
-\item{attachments}{A vector of attachments for the Connect email.}
+\item{attachments}{A vector of attachments for the Connect email. These files
+can be any of those deployed when publishing to RStudio Connect, and, any
+generated files (via R Markdown rendering).}
 
 \item{attach_output}{Should the rendered output of the main R Markdown
-document be included as an email attachment. By default, this is \code{FALSE}.}
+document be included as an email attachment? By default, this is \code{FALSE}.
+If \code{TRUE} the main R Markdown document will be attached first (before any
+files specified in \code{attachments}) and the filename will be preserved.}
 
-\item{text}{Text for the message body.}
+\item{text}{Instead of using a rendered email document through the \code{email}
+option, we can use plain text here. If any text is provided here, input to
+\code{email} is ignored.}
 
 \item{preview}{Should the email message display it's own preview window? If
 \code{TRUE} (the default), the rendered email message will be shown in the
 default browser.}
 }
 \description{
-Include a email message when publishing R Markdown documents in Connect
+Associate an email when publishing an R Markdown document to RStudio Connect
 }
