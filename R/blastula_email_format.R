@@ -63,7 +63,7 @@ blastula_email <- function(toc = FALSE,
   }
 
   pandoc_args <- NULL
-  if (connect_footer) {
+  if (isTRUE(connect_footer)) {
     pandoc_args <- c(
       pandoc_args,
       "--variable=rsc-footer:1",
@@ -78,10 +78,8 @@ blastula_email <- function(toc = FALSE,
         Sys.getenv("RSC_REPORT_RENDERING_URL", unset = "https://connect.example.com/content/1234/_rev5678")),
       paste0(
         "--variable=rsc-report-subscription-url:",
-        Sys.getenv("RSC_REPORT_SUBSCRIPTION_URL", unset = "")),
-      paste0(
-        "--variable=rsc-report-name:",
-        Sys.getenv("RSC_REPORT_NAME", unset = ""))
+        Sys.getenv("RSC_REPORT_SUBSCRIPTION_URL", unset = "https://connect.example.com/connect/#/apps/1234/subscriptions")),
+      paste0("--variable=rsc-report-name:", Sys.getenv("RSC_REPORT_NAME"))
     )
   }
 
