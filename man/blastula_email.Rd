@@ -8,7 +8,8 @@ blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
   number_sections = FALSE, section_divs = TRUE, fig_width = 5.35,
   fig_height = 5, fig_retina = 2, fig_caption = TRUE, dev = "png",
   smart = TRUE, self_contained = TRUE, template = "blastula",
-  includes = NULL, keep_md = FALSE, md_extensions = NULL, ...)
+  includes = NULL, keep_md = FALSE, md_extensions = NULL,
+  connect_footer = FALSE, ...)
 }
 \arguments{
 \item{toc}{If you would like an automatically-generated table of contents in

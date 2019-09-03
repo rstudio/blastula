@@ -4,7 +4,8 @@
 \alias{render_email}
 \title{R Markdown render function for the \code{blastula_email} output format}
 \usage{
-render_email(input, envir = parent.frame(), quiet = TRUE)
+render_email(input, connect_footer = TRUE, envir = parent.frame(),
+  quiet = TRUE)
 }
 \arguments{
 \item{input}{The input file to be rendered. This should be an R Markdown
