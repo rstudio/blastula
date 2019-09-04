@@ -6,5 +6,6 @@
 #' @export
 print.blastula_message <- function(x, ...) {
 
-  preview_email(x)
+  email[["html_html"]] %>%
+    htmltools::html_print()
 }
