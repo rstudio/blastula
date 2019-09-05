@@ -15,8 +15,8 @@
 #' assigned values). It uses the `blastula::blastula_email` output type in the
 #' YAML front matter.
 #' \item `"austin_home_sales.csv"`: A CSV file that will be included as an
-#' attachment by way of the `attachments` argument in the [connect_email()]
-#' function call within the main R Markdown document
+#' attachment by way of the `attachments` argument in the
+#' [attach_connect_email()] function call within the main R Markdown document.
 #' }
 #'
 #' The main report and associated email can be published by opening
@@ -28,9 +28,9 @@
 #' button to publish to RStudio Connect.
 #'
 #' There is also the single `"connect-example-text-only.Rmd"` file that, when
-#' published, serves as a mechanism to send a text-only email. The content
-#' of the email is specified directly in the single [connect_email()] function
-#' call and all other text in the R Markdown file is disregarded.
+#' published, serves as a mechanism to send a text-only email. The content of
+#' the email is specified directly in the single [attach_connect_email()]
+#' function call and all other text in the R Markdown file is disregarded.
 #'
 #' @param path The location to which the files (in a subdirectory named
 #'   `"connect_examples"`) will be written. The path needs to exist but the
