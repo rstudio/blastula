@@ -21,7 +21,7 @@ report, and a file attachment; these files are:
 \itemize{
 \item \code{"connect-example-main.Rmd"}: The main R Markdown document. Contains
 a report template culminating in a final R code chunk that has calls to
-\code{\link[=render_email]{render_email()}} and \code{\link[=connect_email]{connect_email()}}.
+\code{\link[=render_connect_email]{render_connect_email()}} and \code{\link[=attach_connect_email]{attach_connect_email()}}.
 \item \code{"connect-example-email.Rmd"}: An R Markdown document that contains
 the email message. It is associated with the main R Markdown document by
 incorporating some of its content (i.e., by reusing chunk names and extending

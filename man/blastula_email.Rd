@@ -63,6 +63,9 @@ set this to \code{TRUE}. By default, the .md file is not kept.}
 \item{md_extensions}{Markdown extensions to be added or removed from the
 default definition or R Markdown.}
 
+\item{connect_footer}{Should a prepared footer message with links be included
+in the rendered email?}
+
 \item{...}{Specify other options in \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}.}
 }
 \description{
