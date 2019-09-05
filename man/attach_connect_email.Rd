@@ -35,5 +35,16 @@ option, we can use plain text here. If any text is provided here, input to
 default browser.}
 }
 \description{
-Associate an email when publishing an R Markdown document to RStudio Connect
+This function can be used within an R Markdown published to the RStudio
+Connect service to indicate that an email message should be bound to the
+main R Markdown document. The main input is a rendered email message, which
+can be provided by either the \code{\link[=render_email]{render_email()}} or \code{\link[=render_connect_email]{render_connect_email()}}
+function.
+}
+\details{
+Since this function needs to be invoked within an R Markdown document, the
+chunk option \code{echo=FALSE} is useful here (so that viewers of the rendered
+document don't have to unnecessarily read code related to email inclusion).
+While the output is invisible, any errors related to rendering will be
+visible to the author.
 }

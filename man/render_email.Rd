@@ -2,22 +2,46 @@
 % Please edit documentation in R/render_email.R
 \name{render_email}
 \alias{render_email}
-\title{R Markdown render function for the \code{blastula_email} output format}
+\alias{render_connect_email}
+\title{R Markdown render functions for the \code{blastula_email} output format}
 \usage{
 render_email(input, envir = parent.frame(), quiet = TRUE,
   output_options = list(), render_options = list())
+
+render_connect_email(input, connect_footer = TRUE,
+  envir = parent.frame(), quiet = TRUE, output_options = list(),
+  render_options = list())
 }
 \arguments{
 \item{input}{The input file to be rendered. This should be an R Markdown
-document (.rmd) with the output specified as \code{output: blastula::blastula_email}.}
+document (.Rmd) with the output specified as \code{output: blastula::blastula_email}.}
 
 \item{envir}{The environment in which the code chunks are to be evaluated
 during knitting (we can use \code{new.env()} to guarantee an empty, new
 environment).}
 
-\item{quiet}{An option to suppress printing of the pandoc command line. By
-default, this is set to \code{TRUE}.}
+\item{quiet}{An option to suppress printing of the Pandoc command line
+statement that performs the rendering. By default, this is set to \code{TRUE}.}
+
+\item{output_options, render_options}{Lists of options can be used to augment
+the rendering of the email message. The \code{output_options} list relates to
+specifically to those options passed to the \code{output_options} argument of
+\code{rmarkdown::render()}. The \code{render_options} list is for providing additonal
+render options for  \code{rmarkdown::render()}. By default, both lists are
+empty.}
+
+\item{connect_footer}{Should a prepared footer message with links be included
+in the rendered email? This argument is only available in the
+\code{render_connect_email()} function and is set to \code{TRUE} by default.}
 }
 \description{
-R Markdown render function for the \code{blastula_email} output format
+The \code{render_email()} and \code{render_connect_email()} functions both allow for
+rendering an an email message. We can supply an R Markdown document (.Rmd)
+with the output specified as \code{output:blastula::blastula_email}.
+}
+\details{
+While the \code{render_email()} and \code{render_connect_email()} functions have
+similar arguments, the \code{render_connect_email()} is preferred when publishing
+to the RStudio Connect service. It allows for the inclusion of a predefined
+footer that contains useful links for email recipients.
 }
