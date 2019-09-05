@@ -50,7 +50,7 @@ attach_connect_email <- function(email = NULL,
 
       # warning("connect_email() has no effect outside of RStudio Connect")
 
-      if (preview) {
+      if (isTRUE(preview)) {
 
         html_file <- tempfile(fileext = ".html")
         html <- email$html_html
