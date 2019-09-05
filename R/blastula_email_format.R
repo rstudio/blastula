@@ -36,6 +36,8 @@
 #'   set this to `TRUE`. By default, the .md file is not kept.
 #' @param md_extensions Markdown extensions to be added or removed from the
 #'   default definition or R Markdown.
+#' @param connect_footer Should a prepared footer message with links be included
+#'   in the rendered email?
 #' @param ... Specify other options in [rmarkdown::html_document()].
 #'
 #' @export

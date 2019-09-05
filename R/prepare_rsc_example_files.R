@@ -8,7 +8,7 @@
 #' \itemize{
 #' \item `"connect-example-main.Rmd"`: The main R Markdown document. Contains
 #' a report template culminating in a final R code chunk that has calls to
-#' [render_email()] and [connect_email()].
+#' [render_connect_email()] and [attach_connect_email()].
 #' \item `"connect-example-email.Rmd"`: An R Markdown document that contains
 #' the email message. It is associated with the main R Markdown document by
 #' incorporating some of its content (i.e., by reusing chunk names and extending
