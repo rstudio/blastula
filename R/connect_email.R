@@ -1,5 +1,17 @@
 #' Associate an email when publishing an R Markdown document to RStudio Connect
 #'
+#' This function can be used within an R Markdown published to the RStudio
+#' Connect service to indicate that an email message should be bound to the
+#' main R Markdown document. The main input is a rendered email message, which
+#' can be provided by either the [render_email()] or [render_connect_email()]
+#' function.
+#'
+#' Since this function needs to be invoked within an R Markdown document, the
+#' chunk option `echo=FALSE` is useful here (so that viewers of the rendered
+#' document don't have to unnecessarily read code related to email inclusion).
+#' While the output is invisible, any errors related to rendering will be
+#' visible to the author.
+#'
 #' @param email A rendered email message. Normally, we'd want to use an
 #'   associated .Rmd file with the `blastula::blastula_email` R Markdown output
 #'   format in [render_connect_email()] call (where its `input` is the email
@@ -107,10 +119,21 @@ attach_connect_email <- function(email = NULL,
   invisible()
 }
 
-#' A command to suppress any scheduled emailing in RStudio Connect
+#' Suppress any scheduled emailing in RStudio Connect
+#'
+#' This function is useful for suppressing the scheduled emailing of a published
+#' R Markdown document. It can be invoked anywhere in the R Markdown document
+#' and is useful in a conditional statement, where the result of the condition
+#' determines whether or not email suppression should occur.
+#'
+#' Since this function needs to be invoked within an R Markdown document, the
+#' chunk option `echo=FALSE` is useful here (so that viewers of the rendered
+#' document don't have to unnecessarily read code related to email suppression).
+#' While the output is invisible, any errors related to the use of this function
+#' will be visible to the author.
 #'
 #' @param suppress A logical value for whether email suppression should occur
-#'   after publication.
+#'   after publication. By default, this is `TRUE`.
 #' @export
 suppress_scheduled_email <- function(suppress = TRUE) {
 
