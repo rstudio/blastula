@@ -28,8 +28,8 @@ incorporating some of its content (i.e., by reusing chunk names and extending
 assigned values). It uses the \code{blastula::blastula_email} output type in the
 YAML front matter.
 \item \code{"austin_home_sales.csv"}: A CSV file that will be included as an
-attachment by way of the \code{attachments} argument in the \code{\link[=connect_email]{connect_email()}}
-function call within the main R Markdown document
+attachment by way of the \code{attachments} argument in the
+\code{\link[=attach_connect_email]{attach_connect_email()}} function call within the main R Markdown document.
 }
 
 The main report and associated email can be published by opening
@@ -41,7 +41,7 @@ three files should be checked in the final dialog box, press the \code{Publish}
 button to publish to RStudio Connect.
 
 There is also the single \code{"connect-example-text-only.Rmd"} file that, when
-published, serves as a mechanism to send a text-only email. The content
-of the email is specified directly in the single \code{\link[=connect_email]{connect_email()}} function
-call and all other text in the R Markdown file is disregarded.
+published, serves as a mechanism to send a text-only email. The content of
+the email is specified directly in the single \code{\link[=attach_connect_email]{attach_connect_email()}}
+function call and all other text in the R Markdown file is disregarded.
 }
