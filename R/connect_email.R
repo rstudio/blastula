@@ -1,10 +1,10 @@
 #' Associate an email when publishing an R Markdown document to RStudio Connect
 #'
-#' This function can be used within an R Markdown published to the RStudio
-#' Connect service to indicate that an email message should be bound to the
-#' main R Markdown document. The main input is a rendered email message, which
-#' can be provided by either the [render_email()] or [render_connect_email()]
-#' function.
+#' This function is used to customize emails sent by RStudio Connect in
+#' conjunction with publishing an R Markdown document. It associates a custom
+#' email message with the main R Markdown document, which Connect can send to
+#' selected recipients. The main input is a rendered email message, which can be
+#' produced by either the [render_email()] or [render_connect_email()] function.
 #'
 #' Since this function needs to be invoked within an R Markdown document, the
 #' chunk option `echo=FALSE` is useful here (so that viewers of the rendered

@@ -2,12 +2,11 @@
 #'
 #' The `render_email()` and `render_connect_email()` functions both allow for
 #' rendering an an email message. We can supply an R Markdown document (.Rmd)
-#' with the output specified as `output:blastula::blastula_email`.
-#'
-#' While the `render_email()` and `render_connect_email()` functions have
-#' similar arguments, the `render_connect_email()` is preferred when publishing
-#' to the RStudio Connect service. It allows for the inclusion of a predefined
-#' footer that contains useful links for email recipients.
+#' with the output specified as `output: blastula::blastula_email`. While the
+#' `render_email()` and `render_connect_email()` functions have similar
+#' arguments, the `render_connect_email()` is preferred when publishing to the
+#' RStudio Connect service. It allows for the inclusion of a predefined footer
+#' that contains useful links for email recipients.
 #'
 #' @param input The input file to be rendered. This should be an R Markdown
 #'   document (.Rmd) with the output specified as `output:
@@ -16,13 +15,12 @@
 #'   during knitting (we can use `new.env()` to guarantee an empty, new
 #'   environment).
 #' @param quiet An option to suppress printing of the Pandoc command line
-#'   statement that performs the rendering. By default, this is set to `TRUE`.
+#' statement that performs the rendering. By default, this is set to `TRUE`.
 #' @param output_options,render_options Lists of options can be used to augment
-#'   the rendering of the email message. The `output_options` list relates to
-#'   specifically to those options passed to the `output_options` argument of
-#'   `rmarkdown::render()`. The `render_options` list is for providing additonal
-#'   render options for  `rmarkdown::render()`. By default, both lists are
-#'   empty.
+#'   the rendering of the email message. The `output_options` list will be
+#'   passed as the `output_options` argument of `rmarkdown::render()`. The
+#'   `render_options` list is for providing additional arguments to
+#'   `rmarkdown::render()`. By default, both lists are empty.
 #' @param connect_footer Should a prepared footer message with links be included
 #'   in the rendered email? This argument is only available in the
 #'   `render_connect_email()` function and is set to `TRUE` by default.

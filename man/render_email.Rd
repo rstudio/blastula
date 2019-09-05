@@ -24,11 +24,10 @@ environment).}
 statement that performs the rendering. By default, this is set to \code{TRUE}.}
 
 \item{output_options, render_options}{Lists of options can be used to augment
-the rendering of the email message. The \code{output_options} list relates to
-specifically to those options passed to the \code{output_options} argument of
-\code{rmarkdown::render()}. The \code{render_options} list is for providing additonal
-render options for  \code{rmarkdown::render()}. By default, both lists are
-empty.}
+the rendering of the email message. The \code{output_options} list will be
+passed as the \code{output_options} argument of \code{rmarkdown::render()}. The
+\code{render_options} list is for providing additional arguments to
+\code{rmarkdown::render()}. By default, both lists are empty.}
 
 \item{connect_footer}{Should a prepared footer message with links be included
 in the rendered email? This argument is only available in the
@@ -37,11 +36,9 @@ in the rendered email? This argument is only available in the
 \description{
 The \code{render_email()} and \code{render_connect_email()} functions both allow for
 rendering an an email message. We can supply an R Markdown document (.Rmd)
-with the output specified as \code{output:blastula::blastula_email}.
-}
-\details{
-While the \code{render_email()} and \code{render_connect_email()} functions have
-similar arguments, the \code{render_connect_email()} is preferred when publishing
-to the RStudio Connect service. It allows for the inclusion of a predefined
-footer that contains useful links for email recipients.
+with the output specified as \code{output: blastula::blastula_email}. While the
+\code{render_email()} and \code{render_connect_email()} functions have similar
+arguments, the \code{render_connect_email()} is preferred when publishing to the
+RStudio Connect service. It allows for the inclusion of a predefined footer
+that contains useful links for email recipients.
 }
