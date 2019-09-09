@@ -70,3 +70,4 @@ render_connect_email(input = "connect-example-email.Rmd") %>%
     attachments = c("dallas_home_sales.csv", "austin_home_sales.csv")
   )
 ```
+
