@@ -115,7 +115,3 @@ blastula_email <- function(toc = FALSE,
     ...
   )
 }
-
-bash_escape <- function(x) {
-  gsub("([\" \\;])", "\\\\\\1", x)
-}
