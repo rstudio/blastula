@@ -64,7 +64,7 @@ attach_connect_email <- function(email = NULL,
 
       if (isTRUE(preview)) {
 
-        html_file <- tempfile(fileext = ".html")
+        html_file <- ".rsc_email.html"
         html <- email$html_html
 
         msg <- create_rmd_preview_message(subject = subject)
@@ -75,12 +75,12 @@ attach_connect_email <- function(email = NULL,
             html, perl = TRUE, ignore.case = TRUE
           )
 
-        writeLines(html, html_file)
-        utils::browseURL(html_file)
+        writeLines(text = html, con = html_file)
+        utils::browseURL(url = html_file)
 
         # This sleep is necessary because knitting usually happens in a separate
         # process, and when that process terminates the temp file will be deleted
-        Sys.sleep(5)
+        #Sys.sleep(5)
       }
     }
 
