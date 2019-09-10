@@ -1,14 +1,13 @@
 #' Create an HTML fragment for an embedded image
 #'
 #' Add a local image inside the body of the email with this helper function.
+#'
 #' @param file A path to an image file.
 #' @param alt Text description of image passed to the `alt` attribute inside of
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. `NULL` default produces blank (`""`) alt text.
-#' @return A character object with an HTML fragment that can be placed inside
-#'   the message body wherever the image should appear.
+#'
 #' @examples
-#' \dontrun{
 #' # Create an HTML fragment that
 #' # contains an image
 #' img_file_path <-
@@ -36,7 +35,9 @@
 #'
 #' {img_file_html}
 #' ")
-#' }
+#'
+#' @return A character object with an HTML fragment that can be placed inside
+#'   the message body wherever the image should appear.
 #' @export
 add_image <- function(file, alt = NULL) {
 
