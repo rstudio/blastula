@@ -64,7 +64,11 @@ attach_connect_email <- function(email = NULL,
 
       if (isTRUE(preview)) {
 
-        html_file <- ".rsc_email.html"
+        html_file <- paste0(
+          knitr_sidecar_prefix(default = "blastula"),
+          "_email.html"
+        )
+
         html <- email$html_html
 
         msg <- create_rmd_preview_message(subject = subject)
