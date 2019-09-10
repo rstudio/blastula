@@ -308,6 +308,52 @@ sys_which <- function(name) {
   Sys.which(name) %>% tidy_gsub("\\\\", "/")
 }
 
+#' Helper for creating paths for sidecar output files
+#'
+#' A sidecar file is a file that contains additional info related to some
+#' (primary) file--in this case, the primary file is the output file of the
+#' current rmarkdown::render. This function provides a path prefix that can be
+#' used to create sidecar files that are in the same directory as the output,
+#' with a sensible name.
+#'
+#' For example, if the render's output is going to myreport.html, then the
+#' fig_path would default to something like "myreport_files/figure-html/". This
+#' function would return "myreport_", which you can then paste0 with the rest of
+#' your path, like "errors.log", to get "myreport_errors.log".
+#'
+#' This procedure is inherently brittle, because it relies on R Markdown's
+#' current behavior of indirectly using the output file path to set fig.path.
+#' https://github.com/rstudio/rmarkdown/blob/ff285a071d5457d37a227a7526610c297a898fd4/R/render.R#L603-L606
+#'
+#' Because of this brittleness, the `default` argument is required, so some
+#' reasonable behavior can be expected even if a future version of R Markdown
+#' causes this mechanism to fail.
+#'
+#' (The `condition` and `fig_path` arguments are exposed to make unit testing
+#' easier.)
+#'
+#' @noRd
+knitr_sidecar_prefix <- function(default,
+  condition = !is.null(knitr::opts_knit$get("rmarkdown.version")),
+  fig_path = knitr::opts_chunk$get("fig.path")) {
+
+  if (missing(default)) {
+    # Fail fast if default is missing.
+    # But, don't eagerly evaluate otherwise, because it might be a stop().
+    force(default)
+  }
+
+  if (condition && !is.null(fig_path)) {
+    m <- regexec("^(.+)_files/figure-[\\w_]+/?$", fig_path, perl = TRUE)
+    prefix <- regmatches(fig_path, m)[[1]][2]
+    if (!is.na(prefix)) {
+      return(prefix)
+    }
+  }
+
+  return(default)
+}
+
 # nocov start
 
 #' Find a binary on the system path or working directory

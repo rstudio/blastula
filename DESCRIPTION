@@ -30,6 +30,7 @@ Imports:
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
     processx (>= 3.3.0),
+    rmarkdown,
     stringr (>= 1.4.0),
     tidyr (>= 0.8.2),
     xml2 (>= 1.2.0),
@@ -38,10 +39,9 @@ Imports:
 Suggests: 
     covr,
     ggplot2,
-    testthat,
+    testthat (>= 2.1.0),
     keyring,
     knitr,
-    rmarkdown,
     spelling
 Encoding: UTF-8
 LazyData: true

@@ -1,0 +1,14 @@
+---
+title: test-utils.R test
+output: html_document
+---
+
+```{r}
+# This test verifies that our expectation for the relationship between the
+# R Markdown output file and the fig.path. The idea is to fail if the rmarkdown
+# package's algorithm for setting the default fig.path ever changes.
+figpath <- knitr::opts_current$get("fig.path")
+testthat::expect_equal(figpath, "test-utils_files/figure-html/")
+
+testthat::expect_equal(knitr_sidecar_prefix(default = stop("boom")), "test-utils")
+```
