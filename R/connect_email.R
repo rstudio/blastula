@@ -60,8 +60,6 @@ attach_connect_email <- function(email = NULL,
 
     if (is.na(Sys.getenv("RSC_REPORT_NAME", unset = NA))) {
 
-      # warning("connect_email() has no effect outside of RStudio Connect")
-
       if (isTRUE(preview)) {
 
         html_file <- paste0(
@@ -81,10 +79,6 @@ attach_connect_email <- function(email = NULL,
 
         writeLines(text = html, con = html_file)
         utils::browseURL(url = html_file)
-
-        # This sleep is necessary because knitting usually happens in a separate
-        # process, and when that process terminates the temp file will be deleted
-        #Sys.sleep(5)
       }
     }
 
