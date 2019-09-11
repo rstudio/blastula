@@ -26,8 +26,8 @@
 #'   If `TRUE` the main R Markdown document will be attached first (before any
 #'   files specified in `attachments`) and the filename will be preserved.
 #' @param text Instead of using a rendered email document through the `email`
-#'   option, we can use plain text here. If any text is provided here, input to
-#'   `email` is ignored.
+#'   option, we can use plain text here. However, if any `email` object is
+#'   supplied then input to `text` is ignored.
 #' @param preview Should the email message display it's own preview window? If
 #'   `TRUE` (the default), the rendered email message will be shown in the
 #'   default browser.
