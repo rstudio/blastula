@@ -19,8 +19,8 @@ document (.Rmd) with the output specified as \code{output: blastula::blastula_em
 \item{envir}{The environment in which the code chunks are to be evaluated
 during knitting.}
 
-\item{quiet}{An option to suppress printing of the Pandoc command line
-statement that performs the rendering. By default, this is set to \code{TRUE}.}
+\item{quiet}{An option to suppress printing of the command line output from
+Pandoc during rendering. By default, this is set to \code{TRUE}.}
 
 \item{output_options, render_options}{Lists of options can be used to augment
 the rendering of the email message. The \code{output_options} list will be
