@@ -63,8 +63,6 @@ get_mime_type <- function(file) {
 #' @noRd
 get_image_uri <- function(file) {
 
-  # TODO: fix usage of `readBin` since this results in an error during R CMD
-  # check: `can only read from a binary connection`
   image_raw <-
     readBin(
       con = file,
