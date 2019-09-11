@@ -58,4 +58,7 @@ email <-
 
   Thanks.
   ")
+
+if (interactive()) email
+
 }

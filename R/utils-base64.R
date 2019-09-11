@@ -67,7 +67,8 @@ get_image_uri <- function(file) {
     readBin(
       con = file,
       what = "raw",
-      n = file.info(file)$size)
+      n = file.info(file)$size
+    )
 
   paste0("data:", get_mime_type(file), ";base64,", encode_base64(image_raw))
 }

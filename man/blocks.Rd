@@ -18,21 +18,25 @@ of the \code{body}, \code{header}, and \code{footer} arguments of \code{compose_
 # This is an example of how a
 # title and text looks in each of
 # the three content areas
-compose_email(
-  header =
-    blocks(
-      block_title("This is a Title in the **Header**"),
-      block_text("This is text in the **Header**.")
-    ),
-  body =
-    blocks(
-      block_title("This is a Title in the **Body**"),
-      block_text("This is text in the **Body**.")
-    ),
-  footer =
-    blocks(
-      block_title("This is a Title in the **Footer**"),
-      block_text("This is text in the **Footer**.")
-    )
-)
+email <-
+  compose_email(
+    header =
+      blocks(
+        block_title("This is a Title in the **Header**"),
+        block_text("This is text in the **Header**.")
+      ),
+    body =
+      blocks(
+        block_title("This is a Title in the **Body**"),
+        block_text("This is text in the **Body**.")
+      ),
+    footer =
+      blocks(
+        block_title("This is a Title in the **Footer**"),
+        block_text("This is text in the **Footer**.")
+      )
+  )
+
+if (interactive()) email
+
 }

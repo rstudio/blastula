@@ -79,4 +79,7 @@ Cheers,
 {sender_name}",
   thing = "report"
   )
+
+if (interactive()) email
+
 }

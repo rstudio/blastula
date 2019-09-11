@@ -64,46 +64,49 @@ The following social sharing services have hosted icons available:
 # articles in the `body`; in the footer,
 # add some social sharing icons linking
 # to web content
-compose_email(
-  body =
-    blocks(
-      block_title("Exciting Travel Destinations"),
-      block_articles(
-        article(
-          image = "https://i.imgur.com/dxSXzGb.jpg",
-          title = "Hong Kong",
-          content =
-            "Once home to fishermen and farmers, \\\\
-            modern Hong Kong is a teeming, \\\\
-            commercially-vibrant metropolis where \\\\
-            Chinese and Western influences fuse."
-        ),
-        article(
-          image = "https://i.imgur.com/bJzVIrG.jpg",
-          title = "Australia",
-          content =
-            "Australia ranks as one of the best \\\\
-            places to live in the world by all \\\\
-            indices of income, human development, \\\\
-            healthcare, and civil rights."
+email <-
+  compose_email(
+    body =
+      blocks(
+        block_title("Exciting Travel Destinations"),
+        block_articles(
+          article(
+            image = "https://i.imgur.com/dxSXzGb.jpg",
+            title = "Hong Kong",
+            content =
+              "Once home to fishermen and farmers, \\\\
+              modern Hong Kong is a teeming, \\\\
+              commercially-vibrant metropolis where \\\\
+              Chinese and Western influences fuse."
+          ),
+          article(
+            image = "https://i.imgur.com/bJzVIrG.jpg",
+            title = "Australia",
+            content =
+              "Australia ranks as one of the best \\\\
+              places to live in the world by all \\\\
+              indices of income, human development, \\\\
+              healthcare, and civil rights."
+          )
+        )
+      ),
+    footer =
+      blocks(
+        block_text("Thanks for reading! Find us here:"),
+        block_social_links(
+          social_link(
+            service = "pinterest",
+            link = "https://www.pinterest.ca/TravelLeisure/",
+            variant = "color"
+          ),
+          social_link(
+            service = "tripadvisor",
+            link = "https://www.tripadvisor.ca/TravelersChoice",
+            variant = "color"
+          )
         )
       )
-    ),
-  footer =
-    blocks(
-      block_text("Thanks for reading! Find us here:"),
-      block_social_links(
-        social_link(
-          service = "pinterest",
-          link = "https://www.pinterest.ca/TravelLeisure/",
-          variant = "color"
-        ),
-        social_link(
-          service = "tripadvisor",
-          link = "https://www.tripadvisor.ca/TravelersChoice",
-          variant = "color"
-        )
-      )
-    )
-)
+  )
+
+if (interactive()) email
 }
