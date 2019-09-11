@@ -26,19 +26,15 @@
 #' email <-
 #'   compose_email(
 #'   body = "
-#'   Hello!
+#' Hello!
 #'
-#'   ## This a section heading
+#' ## This a section heading
 #'
-#'   We can use Markdown formatting \\
-#'   to **embolden** text or to add \\
-#'   *emphasis*.
+#' We can use Markdown formatting \\
+#' to **embolden** text or to add \\
+#' *emphasis*.
 #'
-#'   Cheers")
-#'
-#' # The email message can always be
-#' # previewed by calling the object
-#' email
+#' Cheers")
 #'
 #' # We can use string interpolation to
 #' # add in R code or strings assigned
@@ -65,6 +61,8 @@
 #'   thing = "report"
 #'   )
 #'
+#' # The email message can always be
+#' # previewed by calling the object
 #' if (interactive()) email
 #'
 #' @return An `email_message` object.
