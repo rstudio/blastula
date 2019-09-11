@@ -147,7 +147,9 @@ create_rmd_preview_message <- function(subject = NULL) {
     subject_ln <-
       paste0(
         "<br><br><strong><span style=\"font-variant: small-caps;\">",
-        "email subject: </span></strong>", subject, "<br>"
+        "email subject: </span></strong>",
+        htmltools::htmlEscape(subject),
+        "<br>"
       )
 
   } else {
