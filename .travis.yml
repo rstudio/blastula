@@ -37,9 +37,6 @@ jobs:
       name: pkgdown
       r: release
       if: branch IN (master, travis) AND repo = rich-iannone/blastula AND type = push
-      r_binary_packages:
-        - pkgdown
-        - devtools
       script:
       - Rscript -e "remotes::install_cran(c('pkgdown', 'devtools'))"
       - Rscript -e "devtools::install()"
