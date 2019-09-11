@@ -32,6 +32,7 @@
 #'     Cheers
 #'     ")
 #'
+#' if (interactive()) email
 #' @export
 add_cta_button <- function(url,
                            text,

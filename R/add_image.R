@@ -12,7 +12,7 @@
 #' # contains an image
 #' img_file_path <-
 #'   system.file(
-#'     "img",
+#'     "example_files",
 #'     "test_image.png",
 #'     package = "blastula"
 #'   )
@@ -35,6 +35,8 @@
 #'
 #' {img_file_html}
 #' ")
+#'
+#' if (interactive()) email
 #'
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.

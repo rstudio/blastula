@@ -52,6 +52,7 @@
 #' @param creds_file An option to specify a credentials file. As this argument
 #'   is deprecated, please consider using `credentials = creds_file(<file>)`
 #'   instead.
+#'
 #' @examples
 #' \dontrun{
 #' # Before sending out an email through
@@ -123,6 +124,7 @@
 #'       "gmail_secret")
 #'   )
 #' }
+#'
 #' @export
 smtp_send <- function(email,
                       to,

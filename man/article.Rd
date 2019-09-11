@@ -24,14 +24,17 @@ a column of articles at lower screen widths).
 # We can define an article with a link
 # to an image, title text, some content,
 # and a link to relevant content
-article(
-  image = "https://i.imgur.com/dxSXzGb.jpg",
-  title = "Hong Kong",
-  content =
-    "Once home to fishermen and farmers, \\\\
-    modern Hong Kong is a teeming, \\\\
-    commercially-vibrant metropolis where \\\\
-    Chinese and Western influences fuse.",
-  link = "http://www.discoverhongkong.com"
-)
+article <-
+  article(
+    image = "https://i.imgur.com/dxSXzGb.jpg",
+    title = "Hong Kong",
+    content =
+      "Once home to fishermen and farmers, \\\\
+      modern Hong Kong is a teeming, \\\\
+      commercially-vibrant metropolis where \\\\
+      Chinese and Western influences fuse.",
+    link = "http://www.discoverhongkong.com"
+  )
+
+if (interactive()) article
 }

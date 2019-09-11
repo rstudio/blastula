@@ -23,32 +23,36 @@ resultant \code{blocks} object can be provided to the \code{body}, \code{header}
 # inside of `block_articles()`, itself
 # placed in `blocks()`; also, include some
 # text at the top with `block_text()`
-compose_email(
-  body =
-    blocks(
-      block_text(
-        "These are two of the cities I visited this year. \\\\
-        I liked them a lot, so, I'll visit them again!"),
-      block_articles(
-        article(
-          image = "https://i.imgur.com/dig0HQ2.jpg",
-          title = "Los Angeles",
-          content =
-            "I want to live in Los Angeles. \\\\
-            Not the one in Los Angeles. \\\\
-            No, not the one in South California. \\\\
-            They got one in South Patagonia."
-        ),
-        article(
-          image = "https://i.imgur.com/RUvqHV8.jpg",
-          title = "New York",
-          content =
-            "Start spreading the news. \\\\
-            I'm leaving today. \\\\
-            I want to be a part of it. \\\\
-            New York, New York."
+email <-
+  compose_email(
+    body =
+      blocks(
+        block_text(
+          "These are two of the cities I visited this year. \\\\
+          I liked them a lot, so, I'll visit them again!"),
+        block_articles(
+          article(
+            image = "https://i.imgur.com/dig0HQ2.jpg",
+            title = "Los Angeles",
+            content =
+              "I want to live in Los Angeles. \\\\
+              Not the one in Los Angeles. \\\\
+              No, not the one in South California. \\\\
+              They got one in South Patagonia."
+          ),
+          article(
+            image = "https://i.imgur.com/RUvqHV8.jpg",
+            title = "New York",
+            content =
+              "Start spreading the news. \\\\
+              I'm leaving today. \\\\
+              I want to be a part of it. \\\\
+              New York, New York."
+          )
         )
       )
     )
-  )
+
+if (interactive()) email
+
 }
