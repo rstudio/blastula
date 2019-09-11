@@ -13,8 +13,8 @@
 #'   blastula::blastula_email`.
 #' @param envir The environment in which the code chunks are to be evaluated
 #'   during knitting.
-#' @param quiet An option to suppress printing of the Pandoc command line
-#' statement that performs the rendering. By default, this is set to `TRUE`.
+#' @param quiet An option to suppress printing of the command line output from
+#'   Pandoc during rendering. By default, this is set to `TRUE`.
 #' @param output_options,render_options Lists of options can be used to augment
 #'   the rendering of the email message. The `output_options` list will be
 #'   passed as the `output_options` argument of `rmarkdown::render()`. The
