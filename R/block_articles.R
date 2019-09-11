@@ -8,20 +8,24 @@
 #' @param title An optional title for the article.
 #' @param content An optional paragraph of text for the article.
 #' @param link An optional link to apply to the content elements.
+#'
 #' @examples
 #' # We can define an article with a link
 #' # to an image, title text, some content,
 #' # and a link to relevant content
-#' article(
-#'   image = "https://i.imgur.com/dxSXzGb.jpg",
-#'   title = "Hong Kong",
-#'   content =
-#'     "Once home to fishermen and farmers, \\
-#'     modern Hong Kong is a teeming, \\
-#'     commercially-vibrant metropolis where \\
-#'     Chinese and Western influences fuse.",
-#'   link = "http://www.discoverhongkong.com"
-#' )
+#' article <-
+#'   article(
+#'     image = "https://i.imgur.com/dxSXzGb.jpg",
+#'     title = "Hong Kong",
+#'     content =
+#'       "Once home to fishermen and farmers, \\
+#'       modern Hong Kong is a teeming, \\
+#'       commercially-vibrant metropolis where \\
+#'       Chinese and Western influences fuse.",
+#'     link = "http://www.discoverhongkong.com"
+#'   )
+#'
+#' if (interactive()) article
 #' @export
 article <- function(image = NULL,
                     title = NULL,
@@ -75,42 +79,47 @@ article <- function(image = NULL,
 #' arguments of `compose_email()`.
 #'
 #' @param ... One, two, or three calls to `article()`.
+#'
 #' @examples
 #' # Create a block of three, side-by-side
 #' # articles with three `article()`
 #' # calls inside of `block_articles()`,
 #' # itself placed in `blocks()`
-#' compose_email(
-#'   body =
-#'     blocks(
-#'       block_articles(
-#'         article(
-#'           image = "https://i.imgur.com/XMU8yJa.jpg",
-#'           title = "Taiwan",
-#'           content =
-#'             "It is a thriving mosaic of tradition, \\
-#'             culture, and high-tech development, \\
-#'             merging Eastern and Western influences."
-#'         ),
-#'         article(
-#'           image = "https://i.imgur.com/aYOm3Tk.jpg",
-#'           title = "Japan",
-#'           content =
-#'             "Japan is an archipelago consisting \\
-#'             of 6,852 islands along East Asia's \\
-#'             Pacific Coast."
-#'         ),
-#'         article(
-#'            image = "https://i.imgur.com/ekjFVOL.jpg",
-#'            title = "Singapore",
-#'            content =
-#'              "Singapore is an island city-state \\
-#'              in Southeast Asia. It's lies at the \\
-#'              southern tip of the Malay Peninsula."
+#' email <-
+#'   compose_email(
+#'     body =
+#'       blocks(
+#'         block_articles(
+#'           article(
+#'             image = "https://i.imgur.com/XMU8yJa.jpg",
+#'             title = "Taiwan",
+#'             content =
+#'               "It is a thriving mosaic of tradition, \\
+#'               culture, and high-tech development, \\
+#'               merging Eastern and Western influences."
+#'           ),
+#'           article(
+#'             image = "https://i.imgur.com/aYOm3Tk.jpg",
+#'             title = "Japan",
+#'             content =
+#'               "Japan is an archipelago consisting \\
+#'               of 6,852 islands along East Asia's \\
+#'               Pacific Coast."
+#'           ),
+#'           article(
+#'              image = "https://i.imgur.com/ekjFVOL.jpg",
+#'              title = "Singapore",
+#'              content =
+#'                "Singapore is an island city-state \\
+#'                in Southeast Asia. It's lies at the \\
+#'                southern tip of the Malay Peninsula."
+#'           )
 #'         )
 #'       )
 #'     )
-#'   )
+#'
+#' if (interactive()) email
+#'
 #' @export
 block_articles <- function(...) {
 

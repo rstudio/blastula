@@ -8,39 +8,44 @@
 #' `footer` arguments of `compose_email()`.
 #'
 #' @param ... Paragraphs of title text.
+#'
 #' @examples
 #' # Create a block of two, side-by-side
 #' # articles with two `article()` calls
 #' # inside of `block_articles()`, itself
 #' # placed in `blocks()`; also, include a
 #' # title at the top with `block_title()`
-#' compose_email(
-#'   body =
-#'     blocks(
-#'       block_title(
-#'         "Two Cities I Visited Recently"),
-#'       block_articles(
-#'         article(
-#'           image = "https://i.imgur.com/dig0HQ2.jpg",
-#'           title = "Los Angeles",
-#'           content =
-#'             "I want to live in Los Angeles. \\
-#'             Not the one in Los Angeles. \\
-#'             No, not the one in South California. \\
-#'             They got one in South Patagonia."
-#'         ),
-#'         article(
-#'           image = "https://i.imgur.com/RUvqHV8.jpg",
-#'           title = "New York",
-#'           content =
-#'             "Start spreading the news. \\
-#'             I'm leaving today. \\
-#'             I want to be a part of it. \\
-#'             New York, New York."
+#' email <-
+#'   compose_email(
+#'     body =
+#'       blocks(
+#'         block_title(
+#'           "Two Cities I Visited Recently"),
+#'         block_articles(
+#'           article(
+#'             image = "https://i.imgur.com/dig0HQ2.jpg",
+#'             title = "Los Angeles",
+#'             content =
+#'               "I want to live in Los Angeles. \\
+#'               Not the one in Los Angeles. \\
+#'               No, not the one in South California. \\
+#'               They got one in South Patagonia."
+#'           ),
+#'           article(
+#'             image = "https://i.imgur.com/RUvqHV8.jpg",
+#'             title = "New York",
+#'             content =
+#'               "Start spreading the news. \\
+#'               I'm leaving today. \\
+#'               I want to be a part of it. \\
+#'               New York, New York."
+#'           )
 #'         )
 #'       )
 #'     )
-#'   )
+#'
+#' if (interactive()) email
+#'
 #' @export
 block_title <- function(...) {
 

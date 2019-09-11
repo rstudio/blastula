@@ -14,6 +14,9 @@
 ^inst/win$
 ^inst/linux$
 ^inst/social_icons$
-tests/manual_tests
+^inst/img$
+^inst/examples/rsconnect
+^tests/manual_tests
 ^README\.Rmd$
 ^\.httr-oauth$
+^gmail_

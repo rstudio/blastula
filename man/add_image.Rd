@@ -25,7 +25,7 @@ Add a local image inside the body of the email with this helper function.
 # contains an image
 img_file_path <-
   system.file(
-    "img",
+    "example_files",
     "test_image.png",
     package = "blastula"
   )
@@ -48,4 +48,7 @@ Here is an image:
 
 {img_file_html}
 ")
+
+if (interactive()) email
+
 }

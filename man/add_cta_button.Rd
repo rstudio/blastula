@@ -46,4 +46,5 @@ email <-
     Cheers
     ")
 
+if (interactive()) email
 }

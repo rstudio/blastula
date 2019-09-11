@@ -19,7 +19,7 @@
 #'   the [parent.frame()].
 #' @param ... Expression strings for string interpolation within the `header`,
 #'   `body`, and `footer`.
-#' @return An `email_message` object.
+#'
 #' @examples
 #' # Create a simple email message using
 #' # Markdown-formatted text in `body`
@@ -64,6 +64,10 @@
 #' {sender_name}",
 #'   thing = "report"
 #'   )
+#'
+#' if (interactive()) email
+#'
+#' @return An `email_message` object.
 #' @export
 compose_email <- function(body = NULL,
                           header = NULL,

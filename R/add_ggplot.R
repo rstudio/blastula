@@ -1,14 +1,14 @@
 #' Create an HTML fragment for an embedded ggplot image
 #'
 #' Add an ggplot plot inside the body of the email with this helper function.
+#'
 #' @param plot_object The `ggplot2` plot object.
 #' @param height The height of the output plot in inches.
 #' @param width The width of the output plot in inches.
 #' @param alt Text description of image passed to the `alt` attribute inside of the image (`<img>`) tag
 #'     for use when image loading is disabled and on screen readers. Defaults to the `ggplot2` plot object's
 #'     title, if exists. Override by passing a custom character string or `""` for no text.
-#' @return A character object with an HTML fragment that can be placed inside
-#'   the message body wherever the plot image should appear.
+#'
 #' @examples
 #' library(ggplot2)
 #'
@@ -43,6 +43,11 @@
 #'
 #'   Thanks.
 #'   ")
+#'
+#' if (interactive()) email
+#'
+#' @return A character object with an HTML fragment that can be placed inside
+#'   the message body wherever the plot image should appear.
 #' @export
 add_ggplot <- function(plot_object,
                        width = 5,
