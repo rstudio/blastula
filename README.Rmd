@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 library(blastula)
 ```
 
-# blastula <a href="https://rich-iannone.github.io/blastula/"><img src="man/figures/logo.svg" align="right" height="139px" /></a>
+# blastula <a href="https://rich-iannone.github.io/blastula/"><img src="man/figures/logo.svg" align="right" height="250px" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
