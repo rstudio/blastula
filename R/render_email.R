@@ -12,8 +12,7 @@
 #'   document (.Rmd) with the output specified as `output:
 #'   blastula::blastula_email`.
 #' @param envir The environment in which the code chunks are to be evaluated
-#'   during knitting (we can use `new.env()` to guarantee an empty, new
-#'   environment).
+#'   during knitting.
 #' @param quiet An option to suppress printing of the Pandoc command line
 #' statement that performs the rendering. By default, this is set to `TRUE`.
 #' @param output_options,render_options Lists of options can be used to augment
