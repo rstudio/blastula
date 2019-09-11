@@ -17,8 +17,7 @@ render_connect_email(input, connect_footer = TRUE,
 document (.Rmd) with the output specified as \code{output: blastula::blastula_email}.}
 
 \item{envir}{The environment in which the code chunks are to be evaluated
-during knitting (we can use \code{new.env()} to guarantee an empty, new
-environment).}
+during knitting.}
 
 \item{quiet}{An option to suppress printing of the Pandoc command line
 statement that performs the rendering. By default, this is set to \code{TRUE}.}
