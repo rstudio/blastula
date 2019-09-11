@@ -27,8 +27,8 @@ If \code{TRUE} the main R Markdown document will be attached first (before any
 files specified in \code{attachments}) and the filename will be preserved.}
 
 \item{text}{Instead of using a rendered email document through the \code{email}
-option, we can use plain text here. If any text is provided here, input to
-\code{email} is ignored.}
+option, we can use plain text here. However, if any \code{email} object is
+supplied then input to \code{text} is ignored.}
 
 \item{preview}{Should the email message display it's own preview window? If
 \code{TRUE} (the default), the rendered email message will be shown in the
