@@ -20,3 +20,4 @@
 ^README\.Rmd$
 ^\.httr-oauth$
 ^gmail_
+^LICENSE\.md$
