@@ -116,7 +116,7 @@ important considerations for SMTP sending can be found in [this
 article](https://rich-iannone.github.io/blastula/articles/sending_using_smtp.html).
 
 You can install the in-development version of **blastula** from
-**GitHub** using the **remotes** package.
+**GitHub** using the **devtools** package.
 
 ``` r
 install.packages("devtools")

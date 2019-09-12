@@ -95,7 +95,7 @@ email_object %>%
 
 The **blastula** package uses a binary for SMTP mailing which is provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux** (**Debian** and **RPM** packages). Information on installation and other important considerations for SMTP sending can be found in [this article](https://rich-iannone.github.io/blastula/articles/sending_using_smtp.html).
 
-You can install the in-development version of **blastula** from **GitHub** using the **remotes** package.
+You can install the in-development version of **blastula** from **GitHub** using the **devtools** package.
 
 ```{r install_github, eval=FALSE}
 install.packages("devtools")
