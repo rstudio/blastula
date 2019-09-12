@@ -1,9 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href="https://rich-iannone.github.io/blastula/"><img src="man/figures/logo.svg" align="right" height="250px" /></a>
-
-<!-- badges: start -->
+# blastula <a href='http://rich-iannone.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="139px" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
@@ -11,9 +9,8 @@ status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.o
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/rich-iannone/blastula?branch=master&svg=true)](https://ci.appveyor.com/project/rich-iannone/blastula)
-[![Coverage
-status](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/github/rich-iannone/blastula?branch=master)
-<!-- badges: end -->
+[![Codecov test
+coverage](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rich-iannone/blastula?branch=master)
 
 ## Overview
 
@@ -24,8 +21,6 @@ expressions, block-based components, and even some raw HTML. The
 underlying HTML/CSS is meant to display properly across a wide range of
 email clients and webmail services. The resulting email message is
 responsive so it’ll look great on computers and mobile devices.
-
-## An Example
 
 ### Composing an Email Message
 
@@ -113,7 +108,7 @@ email_object %>%
 
 ## Installation
 
-The **blastula** package is using a new binary for `smtp` mailing,
+The **blastula** package uses a binary for SMTP mailing which is
 provided by the **mailsend-go** project. This binary is cross-platform
 and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux**
 (**Debian** and **RPM** packages). Information on installation and other
@@ -125,7 +120,7 @@ You can install the in-development version of **blastula** from
 
 ``` r
 install.packages("devtools")
-remotes::install_github("rich-iannone/blastula")
+devtools::install_github("rich-iannone/blastula")
 ```
 
 If you encounter a bug, have usage questions, or want to share ideas to
@@ -134,9 +129,9 @@ make this package better, feel free to file an
 
 ## Code of Conduct
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+Please note that the **blastula** project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
+this project, you agree to abide by its terms.
 
 ## License
 
