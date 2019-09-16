@@ -15,7 +15,7 @@ We can create a text-only email using **RStudio Connect**. Only one function is 
 None of the content from this R Markdown file will be included in the email message body, but, if we wanted to, we could elect to attach the output file using `attach_output = TRUE`.
 
 ```{r connect_email, echo=FALSE}
-connect_email(  
+attach_connect_email(  
   subject = "RStudio Connect Text Email",
   attachments = "austin_home_sales.csv",
   text = "
