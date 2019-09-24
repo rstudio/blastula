@@ -157,11 +157,14 @@ create_smtp_creds_key <- function(id,
 #' @noRd
 create_credentials_list <- function(provider,
                                     user,
-                                    password = getPass::getPass("Enter the SMTP server password: "),
+                                    password,
                                     sender_name,
                                     host,
                                     port,
                                     use_ssl) {
+  if (missing(password) || is.null(password)) {
+    password <- getPass::getPass("Enter the SMTP server password: ")
+  }
 
   creds_internal(
     user = user,
