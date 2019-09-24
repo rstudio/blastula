@@ -291,13 +291,15 @@ smtp_send <- function(email,
     send_result <-
       processx::run(
         command = binary_loc,
-        args = run_args
+        args = run_args,
+        error_on_status = FALSE
       )
 
     if (send_result$status == 0) {
       message("The email message was sent successfully.\n")
     } else {
       message("The email message was NOT successfully sent.\n")
+      message(send_result$stderr)
     }
   }
 }
