@@ -62,7 +62,7 @@ creds <- function(user = NULL,
 
   # Create a credentials list from the function inputs
   creds_list <-
-    create_credentials_list(
+    create_credentials_list_with_prompt(
       user = user,
       password = password,
       provider = provider,

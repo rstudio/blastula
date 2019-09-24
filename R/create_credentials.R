@@ -44,7 +44,7 @@ create_smtp_creds_file <- function(file,
 
   # Create a credentials list from the function inputs
   credentials_list <-
-    create_credentials_list(
+    create_credentials_list_with_prompt(
       provider = provider,
       user = user,
       sender_name = sender_name,
@@ -120,7 +120,7 @@ create_smtp_creds_key <- function(id,
 
   # Create a credentials list from the function inputs
   credentials_list <-
-    create_credentials_list(
+    create_credentials_list_with_prompt(
       provider = provider,
       user = user,
       sender_name = sender_name,
@@ -152,16 +152,16 @@ create_smtp_creds_key <- function(id,
   )
 }
 
-#' Create a credentials list object
+#' Create a credentials list object; prompt for a password if missing
 #'
 #' @noRd
-create_credentials_list <- function(provider,
-                                    user,
-                                    password,
-                                    sender_name,
-                                    host,
-                                    port,
-                                    use_ssl) {
+create_credentials_list_with_prompt <- function(provider,
+                                                user,
+                                                password,
+                                                sender_name,
+                                                host,
+                                                port,
+                                                use_ssl) {
   if (missing(password) || is.null(password)) {
     password <- getPass::getPass("Enter the SMTP server password: ")
   }
