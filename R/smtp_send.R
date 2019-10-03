@@ -249,10 +249,8 @@ smtp_send <- function(email,
       `-to` = to,
       `-cc` = cc,
       `-bcc` = bcc,
-      `attach` = no_options(),
-      `-file` = tempfile_,
-      `-mime-type` = "text/html",
-      `-inline` = no_options()
+      `body` = no_options(),
+      `-file` = tempfile_
     )
 
   # Create the vector of arguments related to file attachments
