@@ -80,7 +80,7 @@ add_imgur_image <- function(image,
 
   glue::glue(
     "<a href=\"#\"><img src=\"{response_list$link}\" alt=\"{alt_text}\" \\
-     style=\"max-width:512px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
+     style=\"max-width:512px;width:100%!important;display:block;padding:0;border:0!important;\" border=\"0\"></a>"
   ) %>%
     as.character()
 }
