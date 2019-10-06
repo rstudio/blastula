@@ -40,7 +40,7 @@ blocks <- function(...) {
   # block of text to serve as a spacer
   if (inherits(x[[1]], "block_articles")) {
 
-    x <- prepend_list(x, block_text(" "))
+    x <- prepend_list(x, list(block_text(" ")))
   }
 
   # Apply the `blocks` and `list` classes

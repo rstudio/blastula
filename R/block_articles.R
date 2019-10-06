@@ -5,8 +5,9 @@
 #' a column of articles at lower screen widths).
 #'
 #' @param image An optional URL pointing to an image resource.
-#' @param title An optional title for the article.
-#' @param content An optional paragraph of text for the article.
+#' @param title An optional title for the article. Markdown is supported.
+#' @param content An optional paragraph of text for the article. Markdown is
+#'   supported.
 #' @param link An optional link to apply to the content elements.
 #'
 #' @examples
@@ -19,7 +20,7 @@
 #'     title = "Hong Kong",
 #'     content =
 #'       "Once home to fishermen and farmers, \\
-#'       modern Hong Kong is a teeming, \\
+#'       modern _Hong Kong_ is a teeming, \\
 #'       commercially-vibrant metropolis where \\
 #'       Chinese and Western influences fuse.",
 #'     link = "http://www.discoverhongkong.com"
@@ -198,43 +199,63 @@ block_article_3 <- function(items) {
       )
   }
 
+  paragraph <- "<p style=\"margin: 0\">"
+
   x1_title <-
     glue::glue(
       article_title_template(),
-      title = items[[1]]$title,
+      title =
+        items[[1]]$title %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph),
       link = items[[1]]$link
     )
 
   x2_title <-
     glue::glue(
       article_title_template(),
-      title = items[[2]]$title,
+      title =
+        items[[2]]$title %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph),
       link = items[[2]]$link
     )
 
   x3_title <-
     glue::glue(
       article_title_template(),
-      title = items[[3]]$title,
+      title =
+        items[[3]]$title %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph),
       link = items[[3]]$link
     )
 
   x1_content <-
     glue::glue(
-      article_content_template_2(),
-      content = items[[1]]$content
+      article_content_template(),
+      content =
+        items[[1]]$content %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph)
     )
 
   x2_content <-
     glue::glue(
-      article_content_template_2(),
-      content = items[[2]]$content
+      article_content_template(),
+      content =
+        items[[2]]$content %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph)
     )
 
   x3_content <-
     glue::glue(
-      article_content_template_2(),
-      content = items[[3]]$content
+      article_content_template(),
+      content =
+        items[[3]]$content %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph)
     )
 
   block <-
@@ -323,30 +344,44 @@ block_article_2 <- function(items) {
       )
   }
 
+  paragraph <- "<p style=\"margin: 0\">"
+
   x1_title <-
     glue::glue(
       article_title_template(),
-      title = items[[1]]$title,
+      title =
+        items[[1]]$title %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph),
       link = items[[1]]$link
     )
 
   x2_title <-
     glue::glue(
       article_title_template(),
-      title = items[[2]]$title,
+      title =
+        items[[2]]$title %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph),
       link = items[[2]]$link
     )
 
   x1_content <-
     glue::glue(
-      article_content_template_2(),
-      content = items[[1]]$content
+      article_content_template(),
+      content =
+        items[[1]]$content %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph)
     )
 
   x2_content <-
     glue::glue(
-      article_content_template_2(),
-      content = items[[2]]$content
+      article_content_template(),
+      content =
+        items[[2]]$content %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph)
     )
 
   block <-
@@ -408,24 +443,36 @@ block_article_1 <- function(items) {
         link = items[[1]]$link)
   }
 
+  paragraph <- "<p style=\"margin: 0;\">"
+
+  x1_title <-
+    glue::glue(
+      article_title_template(),
+      title =
+        items[[1]]$title %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph),
+      link = items[[1]]$link
+    )
+
   x1_content <-
     glue::glue(
-      article_content_template_1(),
-      content = items[[1]]$content
+      article_content_template(),
+      content =
+        items[[1]]$content %>%
+        commonmark::markdown_html() %>%
+        tidy_gsub("<p>", paragraph)
     )
 
   block <-
     glue::glue(
 "<tr>
-<td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
+<td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
+<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px;\" width=\"100%\">
 <tbody>
-<tr>
-<td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
 {x1_image}
+{x1_title}
 {x1_content}
-</td>
-</tr>
 </tbody>
 </table>
 </td>
@@ -464,9 +511,11 @@ article_image_template_2 <- function() {
 #' @noRd
 article_image_template_1 <- function() {
 
-"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
+"<tr>
+<td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-</p>
+</td>
+</tr>
 "
 }
 
@@ -482,19 +531,9 @@ article_title_template <- function() {
 "
 }
 
-#' A template for an article content HTML fragment (one across)
+#' A template for an article content HTML fragment
 #' @noRd
-article_content_template_1 <- function() {
-
-"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-{content}
-</p>
-"
-}
-
-#' A template for an article content HTML fragment (two across)
-#' @noRd
-article_content_template_2 <- function() {
+article_content_template <- function() {
 
 "<tr>
 <td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">

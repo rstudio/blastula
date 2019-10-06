@@ -153,6 +153,7 @@ test_that("blocks have the correct internal contents", {
 
   # Expect that any `blocks()` object will automatically
   # insert empty text to serve as a small spacer
-  expect_equal(blocks(block_articles(an_article))[[1]], " ")
+  expect_equal(blocks(block_articles(an_article))[[1]][[1]], " ")
+  expect_is(blocks(block_articles(an_article))[[1]], "block_text")
   expect_is(blocks(block_articles(an_article))[[2]], "block_articles")
 })
