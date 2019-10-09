@@ -5,7 +5,8 @@
 \title{Create the email message body}
 \usage{
 compose_email(body = NULL, header = NULL, footer = NULL,
-  .title = NULL, .envir = parent.frame(), ...)
+  background_color = "#f6f6f6", .title = NULL,
+  .envir = parent.frame(), ...)
 }
 \arguments{
 \item{header, body, footer}{The three layout sections for an email message
@@ -14,6 +15,10 @@ these. String interpolation is enabled via curly braces and named arguments
 in \code{...}. Alternatively, we can supply a set of \code{block_*()} calls enclosed
 within the \code{\link[=blocks]{blocks()}} function to take advantage of precomposed HTML
 blocks.}
+
+\item{background_color}{The color to use for the e-mail's background. You
+can provide any valid color specification supported by the
+\href{https://developer.mozilla.org/docs/Web/CSS/background-color}{background-color CSS property}.}
 
 \item{.title}{The title of the email message. This is not the subject but the
 HTML title text which may appear in limited circumstances.}

@@ -13,6 +13,9 @@
 #'   in `...`. Alternatively, we can supply a set of `block_*()` calls enclosed
 #'   within the [blocks()] function to take advantage of precomposed HTML
 #'   blocks.
+#' @param background_color The color to use for the e-mail's background. You
+#'   can provide any valid color specification supported by the
+#'   [`background-color` CSS property](https://developer.mozilla.org/docs/Web/CSS/background-color).
 #' @param .title The title of the email message. This is not the subject but the
 #'   HTML title text which may appear in limited circumstances.
 #' @param .envir An opportunity to specify the environment. By default, this is
@@ -70,6 +73,7 @@
 compose_email <- function(body = NULL,
                           header = NULL,
                           footer = NULL,
+                          background_color = "#f6f6f6",
                           .title = NULL,
                           .envir = parent.frame(),
                           ...) {
