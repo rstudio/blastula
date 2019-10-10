@@ -397,9 +397,13 @@ process_text <- function(text) {
 
   if (!inherits(text, "character")) {
 
+
+
     stop("The input text must be of class `\"character\"`.",
          call. = FALSE)
   }
 
-  text %>% htmltools::htmlEscape()
+  text %>%
+    htmltools::htmlEscape() %>%
+    tidy_gsub(pattern = "\n\n", replacement = "<br /><br />")
 }
