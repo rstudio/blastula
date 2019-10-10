@@ -73,10 +73,12 @@ test_that("article items have the correct internal contents", {
     article(
       image = "https://i.imgur.com/aYOm3Tk.jpg",
       title = "Japan",
-      content =
-        "Japan is an archipelago consisting \\
-             of 6,852 islands along East Asia's \\
-             Pacific Coast.",
+      content = glue::glue(
+"
+Japan is an archipelago consisting \\
+of 6,852 islands along East Asia's \\
+Pacific Coast."
+        ),
       link = "https://en.wikipedia.org/wiki/Japan"
     )
 
@@ -124,10 +126,12 @@ test_that("blocks have the correct internal contents", {
     article(
       image = "https://i.imgur.com/aYOm3Tk.jpg",
       title = "Japan",
-      content =
-        "Japan is an archipelago consisting \\
-        of 6,852 islands along East Asia's \\
-        Pacific Coast.",
+      content = glue::glue(
+        "
+Japan is an archipelago consisting \\
+of 6,852 islands along East Asia's \\
+Pacific Coast."
+      ),
       link = "https://en.wikipedia.org/wiki/Japan"
     )
 
