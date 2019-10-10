@@ -88,10 +88,8 @@ prepare_test_message <- function(incl_ggplot = FALSE,
       image_include, "\n", collapse = "")
   }
 
-  # Compose the email test message
-  message <-
-    compose_email(
-      body = "
+  body_text <- glue::glue(
+    "
   ## This a Test Message
 
   This message was prepared using the *blastula* R package, where \\
@@ -100,11 +98,13 @@ prepare_test_message <- function(incl_ggplot = FALSE,
 
   {ifelse(incl_image, image_block, '')}
   {ifelse(incl_ggplot, ggplot_block, '')}
-  ",
-      footer = "
-  Brought to you by the *blastula* R package
-      ")
+  "
+  ) %>% md()
 
+  footer_text <- "Brought to you by the *blastula* R package" %>% md()
+
+  # Compose the email test message
+  message <- compose_email(body = body_text, footer = footer_text)
   message
 
   # nocov end
