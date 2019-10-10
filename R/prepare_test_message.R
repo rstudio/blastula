@@ -9,31 +9,33 @@
 #' @param incl_image An option to include a test image within the body of the
 #'   test message. By default, this is `FALSE`.
 #' @return An `email_message` object.
+#'
 #' @examples
-#' \dontrun{
 #' # Create a credentials file to send
 #' # a test message via Gmail's SMTP
 #' # (this file is named "gmail_secret")
-#' create_smtp_creds_file(
-#'   file = "gmail_secret",
-#'   user = "sender@email.com",
-#'   provider = "gmail"
-#' )
+#'
+#' # create_smtp_creds_file(
+#' #   file = "gmail_secret",
+#' #   user = "sender@email.com",
+#' #   provider = "gmail"
+#' # )
 #'
 #' # Send oneself a test message to
 #' # test these new SMTP settings and
 #' # to ensure that the message appears
 #' # correctly in the email client
-#' prepare_test_message() %>%
-#'   smtp_send(
-#'     from = "sender@email.com",
-#'     to = "sender@email.com",
-#'     subject = "Test Message",
-#'     credentials = creds_file(
-#'       file = "gmail_secret"
-#'       )
-#'     )
-#' }
+#'
+#' # prepare_test_message() %>%
+#' #   smtp_send(
+#' #     from = "sender@email.com",
+#' #     to = "sender@email.com",
+#' #     subject = "Test Message",
+#' #     credentials = creds_file(
+#' #       file = "gmail_secret"
+#' #       )
+#' #     )
+#'
 #' @export
 prepare_test_message <- function(incl_ggplot = FALSE,
                                  incl_image = FALSE) {

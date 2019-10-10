@@ -18,18 +18,19 @@
 #'   value.
 #' @param sender_name An option to specify a sender name. This isn't always
 #'   visible to the recipient, however, as some SMTP servers will suppress this.
+#'
 #' @examples
-#' \dontrun{
 #' # Create a credentials file to make it
 #' # much easier to send email out through
 #' # Gmail with `smtp_send()`; name the
 #' # file "gmail_creds"
-#' create_smtp_creds_file(
-#'   file = "gmail_creds",
-#'   user = "user_name@gmail.com",
-#'   provider = "gmail"
-#'   )
-#' }
+#'
+#' # create_smtp_creds_file(
+#' #   file = "gmail_creds",
+#' #   user = "user_name@gmail.com",
+#' #   provider = "gmail"
+#' #   )
+#'
 #' @export
 create_smtp_creds_file <- function(file,
                                    user = NULL,
@@ -80,19 +81,20 @@ create_smtp_creds_file <- function(file,
 #' @param id An identifying label for the keyname. The full key name is
 #'   constructed in the following way: `blastula-v1-<id>`.
 #' @inheritParams create_smtp_creds_file
+#'
 #' @examples
-#' \dontrun{
 #' # Store SMTP crendentials using the
 #' # system's secure key-value store to
 #' # make it much easier to send email
 #' # out through Gmail with `smtp_send()`;
 #' # provide the `id` of "gmail_creds"
-#' create_smtp_creds_key(
-#'   id = "gmail_creds",
-#'   provider = "gmail",
-#'   user = "user_name@gmail.com",
-#'   )
-#' }
+#'
+#' # create_smtp_creds_key(
+#' #   id = "gmail_creds",
+#' #   provider = "gmail",
+#' #   user = "user_name@gmail.com",
+#' #   )
+#'
 #' @export
 create_smtp_creds_key <- function(id,
                                   user = NULL,

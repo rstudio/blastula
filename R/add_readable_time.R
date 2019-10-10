@@ -17,6 +17,7 @@
 #'   should be included.
 #' @return A character object that can be placed inside any message component
 #'   message wherever the function is called.
+#'
 #' @export
 add_readable_time <- function(time = NULL,
                               use_date = TRUE,

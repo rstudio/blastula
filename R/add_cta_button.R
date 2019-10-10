@@ -7,8 +7,9 @@
 #' @param text The text that is placed atop the CTA button.
 #' @param align The alignment of the button inside the main content area.
 #'   Options are `center` (the default), `left`, and `right`.
-#' @return a character object with an HTML fragment that can be placed inside
+#' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the CTA button should appear.
+#'
 #' @examples
 #' # Create the button as an HTML fragment
 #' cta_button <-
@@ -33,6 +34,7 @@
 #'     ")
 #'
 #' if (interactive()) email
+#'
 #' @export
 add_cta_button <- function(url,
                            text,

@@ -95,6 +95,7 @@
 #'   )
 #'
 #' if (interactive()) email
+#'
 #' @export
 social_link <- function(service,
                         link,

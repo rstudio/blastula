@@ -5,9 +5,10 @@
 #' @param plot_object The `ggplot2` plot object.
 #' @param height The height of the output plot in inches.
 #' @param width The width of the output plot in inches.
-#' @param alt Text description of image passed to the `alt` attribute inside of the image (`<img>`) tag
-#'     for use when image loading is disabled and on screen readers. Defaults to the `ggplot2` plot object's
-#'     title, if exists. Override by passing a custom character string or `""` for no text.
+#' @param alt Text description of image passed to the `alt` attribute inside of
+#'   the image (`<img>`) tag for use when image loading is disabled and on
+#'   screen readers. Defaults to the `ggplot2` plot object's title, if exists.
+#'   Override by passing a custom character string or `""` for no text.
 #'
 #' @examples
 #' library(ggplot2)
