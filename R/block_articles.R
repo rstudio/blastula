@@ -32,25 +32,11 @@ article <- function(image = NULL,
                     content = NULL,
                     link = NULL) {
 
-  if (is.null(image)) {
-    image <- ""
-  }
-
-  if (is.null(title)) {
-    title <- ""
-  } else {
-    title <- glue::glue(title) %>% as.character()
-  }
-
-  if (is.null(content)) {
-    content <- ""
-  } else {
-    content <- glue::glue(content) %>% as.character()
-  }
-
-  if (is.null(link)) {
-    link <- ""
-  }
+  # Normalize inputs to empty strings if any are `NULL`
+  image <- image %||% ""
+  title <- title %||% ""
+  content <- content %||% ""
+  link <- link %||% ""
 
   # Add the article components to the
   # `article_item_list` object
@@ -93,26 +79,29 @@ article <- function(image = NULL,
 #'           article(
 #'             image = "https://i.imgur.com/XMU8yJa.jpg",
 #'             title = "Taiwan",
-#'             content =
+#'             content = glue::glue(
 #'               "It is a thriving mosaic of tradition, \\
 #'               culture, and high-tech development, \\
 #'               merging Eastern and Western influences."
+#'               )
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/aYOm3Tk.jpg",
 #'             title = "Japan",
-#'             content =
+#'             content = glue::glue(
 #'               "Japan is an archipelago consisting \\
 #'               of 6,852 islands along East Asia's \\
 #'               Pacific Coast."
+#'               )
 #'           ),
 #'           article(
 #'              image = "https://i.imgur.com/ekjFVOL.jpg",
 #'              title = "Singapore",
-#'              content =
+#'              content = glue::glue(
 #'                "Singapore is an island city-state \\
 #'                in Southeast Asia. It's lies at the \\
 #'                southern tip of the Malay Peninsula."
+#'                )
 #'           )
 #'         )
 #'       )
