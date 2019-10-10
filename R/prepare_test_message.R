@@ -57,8 +57,11 @@ prepare_test_message <- function(incl_ggplot = FALSE,
           x = stats::rnorm(1000, 150, 6.6),
           geom = "histogram",
           breaks = seq(130, 170, 2),
-          colour = I("black"), fill = I("white"),
-          xlab = "x", ylab = "y")
+          colour = I("black"),
+          fill = I("white"),
+          xlab = "x",
+          ylab = "y"
+        )
 
       ggplot_block <- paste0(
         "We can add a ggplot plot with `add_ggplot()`:\n\n",
