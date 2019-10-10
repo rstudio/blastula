@@ -378,3 +378,28 @@ html_unescape <- function(html) {
     }
   )
 }
+
+process_text <- function(text) {
+
+  if (inherits(text, "from_markdown")) {
+
+    text <-
+      text %>%
+      as.character() %>%
+      vapply(
+        FUN.VALUE = character(1),
+        USE.NAMES = FALSE,
+        commonmark::markdown_html
+      )
+
+    return(text)
+  }
+
+  if (!inherits(text, "character")) {
+
+    stop("The input text must be of class `\"character\"`.",
+         call. = FALSE)
+  }
+
+  text %>% htmltools::htmlEscape()
+}
