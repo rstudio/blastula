@@ -73,20 +73,22 @@ email <-
           article(
             image = "https://i.imgur.com/dxSXzGb.jpg",
             title = "Hong Kong",
-            content =
+            content = glue::glue(
               "Once home to fishermen and farmers, \\\\
               modern Hong Kong is a teeming, \\\\
               commercially-vibrant metropolis where \\\\
               Chinese and Western influences fuse."
+              )
           ),
           article(
             image = "https://i.imgur.com/bJzVIrG.jpg",
             title = "Australia",
-            content =
+            content = glue::glue(
               "Australia ranks as one of the best \\\\
               places to live in the world by all \\\\
               indices of income, human development, \\\\
               healthcare, and civil rights."
+              )
           )
         )
       ),

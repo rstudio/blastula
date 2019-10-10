@@ -32,26 +32,29 @@ email <-
           article(
             image = "https://i.imgur.com/XMU8yJa.jpg",
             title = "Taiwan",
-            content =
+            content = glue::glue(
               "It is a thriving mosaic of tradition, \\\\
               culture, and high-tech development, \\\\
               merging Eastern and Western influences."
+              )
           ),
           article(
             image = "https://i.imgur.com/aYOm3Tk.jpg",
             title = "Japan",
-            content =
+            content = glue::glue(
               "Japan is an archipelago consisting \\\\
               of 6,852 islands along East Asia's \\\\
               Pacific Coast."
+              )
           ),
           article(
              image = "https://i.imgur.com/ekjFVOL.jpg",
              title = "Singapore",
-             content =
+             content = glue::glue(
                "Singapore is an island city-state \\\\
                in Southeast Asia. It's lies at the \\\\
                southern tip of the Malay Peninsula."
+               )
           )
         )
       )

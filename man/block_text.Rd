@@ -34,20 +34,22 @@ email <-
           article(
             image = "https://i.imgur.com/dig0HQ2.jpg",
             title = "Los Angeles",
-            content =
+            content = glue::glue(
               "I want to live in Los Angeles. \\\\
               Not the one in Los Angeles. \\\\
               No, not the one in South California. \\\\
               They got one in South Patagonia."
+              )
           ),
           article(
             image = "https://i.imgur.com/RUvqHV8.jpg",
             title = "New York",
-            content =
+            content = glue::glue(
               "Start spreading the news. \\\\
               I'm leaving today. \\\\
               I want to be a part of it. \\\\
               New York, New York."
+              )
           )
         )
       )
