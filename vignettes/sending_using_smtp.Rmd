@@ -28,7 +28,7 @@ We'll go through each of these setup steps before getting into several sending e
 
 ## Installation of `mailsend-go`
 
-The **blastula** package is moving toward using a new binary for `smtp` mailing that's provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew**), and **Linux** (**Debian** and **RPM** packages are available).
+The **blastula** package uses a binary for `smtp` mailing that's provided by the **mailsend-go** project. This binary is cross-platform and works on **Windows**, **macOS** (via **Homebrew**), and **Linux** (**Debian** and **RPM** packages are available). Here are some basic instructions for getting the `mailsend-go` binary installed on your system.
 
 ### Windows
 
@@ -74,7 +74,7 @@ While we can provide SMTP login and configuration information directly whenever 
 
 The first method is more secure since access to the system-wide key-value store requires authentication. The second is less secure since it is the user's responsibility to manage the resulting human-readable JSON file. We'll provide examples on how to use the both options effectively.
 
-We can store email credentials in the system key-value store with the `create_email_creds_key()` function. Here is an example showing how to create an entry with an `id` of `"gmail_creds"`.
+We can store email credentials in the system key-value store with the `create_smtp_creds_key()` function. Here is an example showing how to create an entry with an `id` of `"gmail_creds"`.
 
 ```{r creds_key_1, eval=FALSE}
 # Store SMTP credentials using the
@@ -86,7 +86,7 @@ create_smtp_creds_key(
   host = "smtp.gmail.com",
   port = 465,
   use_ssl = TRUE
-  )
+)
 ```
 
 When executing this function, there will always be a prompt for the password (i.e., there is no `password` argument in this function).
@@ -101,17 +101,17 @@ create_smtp_creds_key(
   id = "gmail",
   user = "user_name@gmail.com",
   provider = "gmail"
-  )
+)
 ```
 
 The credentials data can be later retrieved during email sending with the `creds_key()` credentials helper. Should you need to know which keys are set in the key-value store, we can use the `view_credential_keys()` function (which shows all keys by `id`, `key_name`, and `username`).
 
-We can store email credentials in a file using the `create_email_creds_file()` function. Here is an example showing how to create a credentials file with the name `"gmail_creds"` in the working directory.
+We can store email credentials in a file using the `create_smtp_creds_file()` function. Here is an example showing how to create a credentials file with the name `"gmail_creds"` in the working directory.
 
 ```{r creds_file_1, eval=FALSE}
 # Store SMTP credentials as a file
 # with the filename "gmail_creds"
-create_email_creds_file(
+create_smtp_creds_file(
   file = "gmail_creds",
   user = "user_name@gmail.com",
   host = "smtp.gmail.com",
@@ -125,7 +125,7 @@ We can also use preset SMTP settings as with the `create_smtp_creds_key()` funct
 ```{r creds_file_2, eval=FALSE}
 # Create a credentials file for sending
 # email through Gmail
-create_email_creds_file(
+create_smtp_creds_file(
   file = "gmail_creds",
   user = "user_name@gmail.com",
   provider = "gmail"
