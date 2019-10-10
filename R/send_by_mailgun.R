@@ -64,11 +64,8 @@ send_by_mailgun <- function(message,
     stop("The object provided in `message` must be created by the `compose_email()` function.")
   }
 
-  if (is.null(subject)) {
-    subject_text <- "<no subject>"
-  } else {
-    subject_text <- glue::glue(subject)
-  }
+  # Normalize `subject` so that a `NULL` value becomes an empty string
+  subject <- subject %||% ""
 
   # Collapse vector of recipients to a single string
   recipients <- paste(recipients, collapse = ", ")
