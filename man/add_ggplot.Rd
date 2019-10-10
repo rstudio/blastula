@@ -13,9 +13,10 @@ add_ggplot(plot_object, width = 5, height = 5, alt = NULL)
 
 \item{height}{The height of the output plot in inches.}
 
-\item{alt}{Text description of image passed to the \code{alt} attribute inside of the image (\code{<img>}) tag
-for use when image loading is disabled and on screen readers. Defaults to the \code{ggplot2} plot object's
-title, if exists. Override by passing a custom character string or \code{""} for no text.}
+\item{alt}{Text description of image passed to the \code{alt} attribute inside of
+the image (\code{<img>}) tag for use when image loading is disabled and on
+screen readers. Defaults to the \code{ggplot2} plot object's title, if exists.
+Override by passing a custom character string or \code{""} for no text.}
 }
 \value{
 A character object with an HTML fragment that can be placed inside

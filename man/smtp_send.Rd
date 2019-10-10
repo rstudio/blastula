@@ -75,7 +75,6 @@ and RPM packages). Instructions for installation can be found at the
 \href{https://rich-iannone.github.io/blastula/}{blastula website}.
 }
 \examples{
-\dontrun{
 # Before sending out an email through
 # SMTP, we need an `email_message`
 # object; for the purpose of a simple
@@ -99,51 +98,50 @@ email <- prepare_test_message()
 # (the most secure means of supplying
 # credentials information)
 
-email \%>\%
-  smtp_send(
-    from = "sender@email.com",
-    to = "recipient@email.com",
-    credentials = creds(
-      provider = "gmail",
-      user = "sender@email.com")
-  )
+# email \%>\%
+#   smtp_send(
+#     from = "sender@email.com",
+#     to = "recipient@email.com",
+#     credentials = creds(
+#       provider = "gmail",
+#       user = "sender@email.com")
+#   )
 
 # (2) Using a credentials key (with
 # the `create_smtp_creds_key()` and
 # `creds_key()` functions)
 
-create_smtp_creds_key(
- id = "gmail",
- user = "sender@email.com",
- provider = "gmail"
- )
+# create_smtp_creds_key(
+#  id = "gmail",
+#  user = "sender@email.com",
+#  provider = "gmail"
+#  )
 
-email \%>\%
-  smtp_send(
-    from = "sender@email.com",
-    to = "recipient@email.com",
-    credentials = creds_key(
-      "gmail"
-      )
-  )
+# email \%>\%
+#   smtp_send(
+#     from = "sender@email.com",
+#     to = "recipient@email.com",
+#     credentials = creds_key(
+#       "gmail"
+#       )
+#   )
 
 # (3) Using a credentials file (with
 # the `create_smtp_creds_file()` and
 # `creds_file()` functions)
 
-create_smtp_creds_file(
- file = "gmail_secret",
- user = "sender@email.com",
- provider = "gmail"
- )
+# create_smtp_creds_file(
+#  file = "gmail_secret",
+#  user = "sender@email.com",
+#  provider = "gmail"
+#  )
 
-email \%>\%
-  smtp_send(
-    from = "sender@email.com",
-    to = "recipient@email.com",
-    credentials = creds_file(
-      "gmail_secret")
-  )
-}
+# email \%>\%
+#   smtp_send(
+#     from = "sender@email.com",
+#     to = "recipient@email.com",
+#     credentials = creds_file(
+#       "gmail_secret")
+#   )
 
 }

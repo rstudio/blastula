@@ -15,7 +15,7 @@ add_cta_button(url, text, align = "center")
 Options are \code{center} (the default), \code{left}, and \code{right}.}
 }
 \value{
-a character object with an HTML fragment that can be placed inside
+A character object with an HTML fragment that can be placed inside
 the message body wherever the CTA button should appear.
 }
 \description{
@@ -47,4 +47,5 @@ email <-
     ")
 
 if (interactive()) email
+
 }

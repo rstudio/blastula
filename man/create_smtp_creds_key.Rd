@@ -50,16 +50,16 @@ package first being available on the system. We can use
 \code{install.packages("keyring")} to install
 }
 \examples{
-\dontrun{
 # Store SMTP crendentials using the
 # system's secure key-value store to
 # make it much easier to send email
 # out through Gmail with `smtp_send()`;
 # provide the `id` of "gmail_creds"
-create_smtp_creds_key(
-  id = "gmail_creds",
-  provider = "gmail",
-  user = "user_name@gmail.com",
-  )
-}
+
+# create_smtp_creds_key(
+#   id = "gmail_creds",
+#   provider = "gmail",
+#   user = "user_name@gmail.com",
+#   )
+
 }
