@@ -381,29 +381,31 @@ html_unescape <- function(html) {
 
 process_text <- function(text) {
 
+  # If text has been passed in with `md()`, collapse
+  # that vector with "\n" and convert to HTML with
+  # `commonmark::markdown_html()`
   if (inherits(text, "from_markdown")) {
 
     text <-
       text %>%
       as.character() %>%
-      vapply(
-        FUN.VALUE = character(1),
-        USE.NAMES = FALSE,
-        commonmark::markdown_html
-      )
+      paste(collapse = "\n") %>%
+      commonmark::markdown_html()
 
     return(text)
   }
 
+  # If text isn't `from_markdown`, it should inherit
+  # from `character`; if not, stop the function
   if (!inherits(text, "character")) {
-
-
 
     stop("The input text must be of class `\"character\"`.",
          call. = FALSE)
   }
 
+  # Plain text fashioned into HTML
   text %>%
+    paste(collapse = "\n") %>%
     htmltools::htmlEscape() %>%
-    tidy_gsub(pattern = "\n\n", replacement = "<br /><br />")
+    tidy_gsub("\n\n", "<br /><br />")
 }
