@@ -2,7 +2,7 @@
 #'
 #' The `compose_email()` function allows us to easily create an email message.
 #' We can incorporate character vectors into the message body, the header, or
-#' the footer
+#' the footer.
 #'
 #' @param header,body,footer The three layout sections for an email message
 #'   (ordered from top to bottom). Markdown text can be supplied to each of
