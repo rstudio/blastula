@@ -51,9 +51,7 @@ compose_email <- function(body = NULL,
 
   # Define the title text for the email;
   # use an empty string if not supplied
-  if (is.null(title)) {
-    title <- ""
-  }
+  title <- title %||% ""
 
   # Define the email body section
   if (!is.null(body)) {
