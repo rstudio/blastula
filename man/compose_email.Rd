@@ -23,7 +23,7 @@ An \code{email_message} object.
 \description{
 The \code{compose_email()} function allows us to easily create an email message.
 We can incorporate character vectors into the message body, the header, or
-the footer
+the footer.
 }
 \examples{
 # Create a simple email message using
