@@ -403,9 +403,9 @@ process_text <- function(text) {
          call. = FALSE)
   }
 
-  # Plain text fashioned into HTML
+  # Fashion plain text into HTML
   text %>%
     paste(collapse = "\n") %>%
     htmltools::htmlEscape() %>%
-    tidy_gsub("\n\n", "<br /><br />")
+    tidy_gsub("\n\n", "<br />\n")
 }
