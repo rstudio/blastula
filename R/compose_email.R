@@ -27,16 +27,14 @@
 #'
 #' We can use **Markdown** formatting with the `md()` function.
 #'
-#' Cheers,
-#'
+#' Cheers,<br>
 #' The blastula team
 #' "),
 #'   footer = md(
-#'     "
-#' sent via the [blastula](https://rich-iannone.github.io/blastula) R package
 #' "
-#'     )
-#'   )
+#' sent via the [blastula](https://rich-iannone.github.io/blastula) R package
+#' ")
+#' )
 #'
 #' # The email message can always be
 #' # previewed by calling the object
