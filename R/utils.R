@@ -38,16 +38,6 @@ tidy_gsub <- function(x, pattern, replacement) {
   gsub(pattern, replacement, x)
 }
 
-#' An explicit incantation of `glue::glue()`
-#'
-#' @param ... Expression strings; typically this is the string with `{ }` and
-#' the named arguments corresponding to names inside the `{ }`.
-#' @noRd
-glue_explicit <- function(...) {
-
-  glue::glue(..., .envir = emptyenv()) %>% as.character()
-}
-
 `%||%` <- function(x, y) {
   if (is.null(x)) y else x
 }
