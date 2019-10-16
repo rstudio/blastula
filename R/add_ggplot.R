@@ -25,25 +25,25 @@
 #' # contains an the ggplot as an
 #' # embedded plot
 #' plot_html <-
-#'   add_ggplot(
-#'     plot_object = plot)
+#'   add_ggplot(plot_object = plot)
 #'
 #' # Include the plot in the email
 #' # message body by simply referencing
 #' # the `plot_html` object
 #' email <-
 #'   compose_email(
-#'   body = "
-#'   Hello!
+#'     body = md(
+#'       c(
+#' "Hello!
 #'
-#'   Here is a very important plot \\
-#'   that will change the way you \\
-#'   look at cars forever.
-#'
-#'   {plot_html}
-#'
-#'   Thanks.
-#'   ")
+#' Here is a plot that will change
+#' the way you look at cars forever.\n",
+#' plot_html,
+#' "Let me know what you think
+#' about it!"
+#'       )
+#'     )
+#'   )
 #'
 #' if (interactive()) email
 #'
