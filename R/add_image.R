@@ -47,11 +47,15 @@ add_image <- function(file, alt = NULL) {
   # with a random string prepended to it
   cid <-
     paste0(
-      sample(letters, 12) %>% paste(collapse = ""), "__",
-      basename(file))
+      sample(letters, 12) %>% paste(collapse = ""),
+      "__",
+      basename(file)
+    )
 
   # Create the image URI
   uri <- get_image_uri(file = file)
+
+  browser()
 
   # Determine alt text
   alt_text <-
@@ -63,5 +67,9 @@ add_image <- function(file, alt = NULL) {
 
   # Generate the Base64-encoded image and place it
   # within <img> tags
-  glue::glue("<img cid=\"{cid}\" src=\"{uri}\" width=\"520\" alt=\"{alt_text}\"/>\n")
+  paste0(
+    "<img cid=\"", cid,
+    "\" src=\"", uri,
+    "\" width=\"520\" alt=\"", alt_text, "\"/>\n"
+  )
 }
