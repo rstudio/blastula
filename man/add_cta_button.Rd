@@ -38,9 +38,9 @@ cta_button <-
 compose_email(
   body = md(
     c(
-      "Pressing the button will take
-      you to an example website",
-      cta_button
+"Pressing the button will take
+you to an example website",
+cta_button
     )
   )
 )
