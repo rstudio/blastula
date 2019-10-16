@@ -5,6 +5,15 @@ test_that("HTML unescaping is properly performed", {
     expect_identical(src, "foo'\u27F5&BadEntity;bar.png")
     src
   })
+
+  # Tests that native encoding is parsed correctly as well
+  times_called <- 0L
+  replace_attr(enc2native("<img src='Á.png'/><img src='&Aacute;.png'/>"), "img", "src", function(src) {
+    expect_identical(Encoding(src), "UTF-8")
+    expect_identical(src, "Á.png")
+    times_called <<- times_called + 1L
+  })
+  expect_identical(times_called, 2L)
 })
 
 test_that("HTML escaping is properly performed", {
