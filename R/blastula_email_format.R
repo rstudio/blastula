@@ -38,6 +38,9 @@
 #'   default definition or R Markdown.
 #' @param connect_footer Should a prepared footer message with links be included
 #'   in the rendered email?
+#' @param background_color The color to use for the e-mail's background. You
+#'   can provide any valid color specification supported by the
+#'   [`background-color` CSS property](https://developer.mozilla.org/docs/Web/CSS/background-color).
 #' @param ... Specify other options in [rmarkdown::html_document()].
 #'
 #' @export
@@ -58,13 +61,15 @@ blastula_email <- function(toc = FALSE,
                            keep_md = FALSE,
                            md_extensions = NULL,
                            connect_footer = FALSE,
+                           background_color = "#f6f6f6",
                            ...) {
 
   if (template == "blastula") {
     template <- system.file("rmd", "template.html", package = "blastula")
   }
 
-  pandoc_args <- NULL
+  pandoc_args <- paste0("--variable=background-color:", background_color)
+
   if (isTRUE(connect_footer)) {
     pandoc_args <- c(
       pandoc_args,

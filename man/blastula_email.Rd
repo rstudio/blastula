@@ -9,7 +9,7 @@ blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
   fig_height = 5, fig_retina = 2, fig_caption = TRUE, dev = "png",
   smart = TRUE, self_contained = TRUE, template = "blastula",
   includes = NULL, keep_md = FALSE, md_extensions = NULL,
-  connect_footer = FALSE, ...)
+  connect_footer = FALSE, background_color = "#f6f6f6", ...)
 }
 \arguments{
 \item{toc}{If you would like an automatically-generated table of contents in
@@ -65,6 +65,10 @@ default definition or R Markdown.}
 
 \item{connect_footer}{Should a prepared footer message with links be included
 in the rendered email?}
+
+\item{background_color}{The color to use for the e-mail's background. You
+can provide any valid color specification supported by the
+\href{https://developer.mozilla.org/docs/Web/CSS/background-color}{background-color CSS property}.}
 
 \item{...}{Specify other options in \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}.}
 }
