@@ -2,9 +2,11 @@ Type: Package
 Package: blastula
 Title: Easily Send HTML Email Messages
 Version: 0.2.99.9000
-Authors@R: 
+Authors@R: c(
     person("Richard", "Iannone", , "riannone@me.com", c("aut", "cre"),
-           comment = c(ORCID = "0000-0003-3925-190X"))
+           comment = c(ORCID = "0000-0003-3925-190X")),
+    person("Salim", "Brüggemann", role = "aut", email = "salim-b@pm.me")
+    )
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Messages are
     composed using 'Markdown' and a text interpolation system that allows for
