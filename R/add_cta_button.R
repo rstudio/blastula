@@ -9,6 +9,7 @@
 #' @param text The text that is placed atop the CTA button.
 #' @param align The alignment of the button inside the main content area.
 #'   Options are `"center"` (the default), `"left"`, and `"right"`.
+#'
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the CTA button should appear.
 #'
@@ -26,9 +27,9 @@
 #' compose_email(
 #'   body = md(
 #'     c(
-#'       "Pressing the button will take
-#'       you to an example website",
-#'       cta_button
+#' "Pressing the button will take
+#' you to an example website",
+#' cta_button
 #'     )
 #'   )
 #' )

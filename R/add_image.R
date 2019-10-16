@@ -7,6 +7,9 @@
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. `NULL` default produces blank (`""`) alt text.
 #'
+#' @return A character object with an HTML fragment that can be placed inside
+#'   the message body wherever the image should appear.
+#'
 #' @examples
 #' # Create an HTML fragment that
 #' # contains an image
@@ -18,28 +21,25 @@
 #'   )
 #'
 #' img_file_html <-
-#'   add_image(
-#'     file = img_file_path
-#'   )
+#'   add_image(file = img_file_path)
 #'
 #' # Include the image in the email
 #' # message body by simply referencing
 #' # the `img_file_html` object
 #' email <-
 #'   compose_email(
-#'     body =
-#' "
-#' Hello,
+#'     body = md(
+#'       c(
+#' "Hello,
 #'
-#' Here is an image:
-#'
-#' {img_file_html}
-#' ")
+#' Here is an image:\n",
+#' img_file_html
+#'       )
+#'     )
+#'   )
 #'
 #' if (interactive()) email
 #'
-#' @return A character object with an HTML fragment that can be placed inside
-#'   the message body wherever the image should appear.
 #' @export
 add_image <- function(file, alt = NULL) {
 
@@ -54,8 +54,6 @@ add_image <- function(file, alt = NULL) {
 
   # Create the image URI
   uri <- get_image_uri(file = file)
-
-  browser()
 
   # Determine alt text
   alt_text <-
