@@ -89,7 +89,7 @@ gfsub <- function(string,
   }
 
   out(substr2(string, pos, nchar(string) + 1L))
-  paste(collapse = "\n", readLines(f, warn = FALSE))
+  paste(collapse = "\n", readLines(f, warn = FALSE, encoding = "UTF-8"))
 }
 
 # Like substr, but the end position is exclusive (i.e. it points
