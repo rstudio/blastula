@@ -9,9 +9,10 @@ article(image = NULL, title = NULL, content = NULL, link = NULL)
 \arguments{
 \item{image}{An optional URL pointing to an image resource.}
 
-\item{title}{An optional title for the article.}
+\item{title}{An optional title for the article. Markdown is supported.}
 
-\item{content}{An optional paragraph of text for the article.}
+\item{content}{An optional paragraph of text for the article. Markdown is
+supported.}
 
 \item{link}{An optional link to apply to the content elements.}
 }
@@ -30,7 +31,7 @@ article <-
     title = "Hong Kong",
     content =
       "Once home to fishermen and farmers, \\\\
-      modern Hong Kong is a teeming, \\\\
+      modern _Hong Kong_ is a teeming, \\\\
       commercially-vibrant metropolis where \\\\
       Chinese and Western influences fuse.",
     link = "http://www.discoverhongkong.com"
