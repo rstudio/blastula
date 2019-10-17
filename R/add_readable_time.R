@@ -30,8 +30,7 @@ add_readable_time <- function(time = NULL,
     stop("The `time` value must be a POSIXct date-time value.")
   }
 
-
-  if (use_date) {
+  if (isTRUE(use_date)) {
     current_date <-
       paste0(
         format(time, "%A, %B "),
@@ -42,13 +41,13 @@ add_readable_time <- function(time = NULL,
     current_date <- ""
   }
 
-  if (use_time) {
+  if (isTRUE(use_time)) {
     current_time <-
       paste0(
         gsub(" ", "", format(time, "%l:%M")),
         toupper(format(time, " %p")))
 
-    if (use_date) {
+    if (isTRUE(use_date)) {
       current_time <- paste0(" at ", current_time)
     }
 
@@ -56,9 +55,9 @@ add_readable_time <- function(time = NULL,
     current_time <- ""
   }
 
-  if (use_tz & (use_date | use_time)) {
+  if (isTRUE(use_tz) & (isTRUE(use_date) | isTRUE(use_time))) {
     current_tz <- format(time, " (%Z)")
-  } else if (use_tz & (use_date == FALSE & use_time == FALSE)) {
+  } else if (isTRUE(use_tz) & (use_date == FALSE & use_time == FALSE)) {
     current_tz <- format(time, "%Z")
   } else {
     current_tz <- ""
