@@ -63,6 +63,5 @@ add_readable_time <- function(time = NULL,
     current_tz <- ""
   }
 
-  glue::glue("{current_date}{current_time}{current_tz}") %>%
-    as.character()
+  paste0(current_date, current_time, current_tz)
 }
