@@ -42,7 +42,31 @@ prepare_test_message <- function(incl_ggplot = FALSE,
 
   # nocov start
 
-  if (incl_ggplot) {
+  test_message_text <-
+c(
+"## This a Test Message", "",
+"This message was prepared using the blastula R package, where
+you can use Markdown formatting to **embolden** text or to add *emphasis*."
+)
+
+  # Include an image if requested
+  if (isTRUE(incl_image)) {
+
+    image_include <-
+      system.file("img", "pexels-photo-267151.jpeg", package = "blastula") %>%
+      add_image()
+
+    test_message_text <-
+      c(
+        test_message_text,
+        "",
+        "There are helpers to add things like images:",
+        "", image_include, ""
+      )
+  }
+
+  # Include a ggplot if requested
+  if (isTRUE(incl_ggplot)) {
 
     # If the `ggplot2` package is available, then
     # use the `ggplot2::ggsave()` function
@@ -63,9 +87,12 @@ prepare_test_message <- function(incl_ggplot = FALSE,
           ylab = "y"
         )
 
-      ggplot_block <- paste0(
-        "We can add a ggplot plot with `add_ggplot()`:\n\n",
-        add_ggplot(ggplot_object), "\n", collapse = "")
+      test_message_text <-
+        c(
+          test_message_text,
+          "We can add a ggplot plot with `add_ggplot()`:",
+          "", add_ggplot(ggplot_object), ""
+        )
 
     } else {
 
@@ -75,37 +102,13 @@ prepare_test_message <- function(incl_ggplot = FALSE,
     }
   }
 
-  if (incl_image) {
-
-    image_include <-
-      add_image(
-        system.file(
-          'img', 'pexels-photo-267151.jpeg',
-          package = 'blastula'))
-
-    image_block <- paste0(
-      "There are helpers to add things like images:\n\n",
-      image_include, "\n", collapse = "")
-  }
-
-  body_text <- glue::glue(
-    "
-  ## This a Test Message
-
-  This message was prepared using the *blastula* R package, where \\
-  you can use Markdown formatting to **embolden** text or to add \\
-  *emphasis*.
-
-  {ifelse(incl_image, image_block, '')}
-  {ifelse(incl_ggplot, ggplot_block, '')}
-  "
-  ) %>% md()
-
-  footer_text <- "Brought to you by the *blastula* R package" %>% md()
+  footer_text <- "Brought to you by the *blastula* R package"
 
   # Compose the email test message
-  message <- compose_email(body = body_text, footer = footer_text)
-  message
+  compose_email(
+    body = md(test_message_text),
+    footer = md(footer_text)
+  )
 
   # nocov end
 }
