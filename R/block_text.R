@@ -20,28 +20,26 @@
 #'     body =
 #'       blocks(
 #'         block_text(
-#'           "These are two of the cities I visited this year. \\
+#'           "These are two of the cities I visited this year.
 #'           I liked them a lot, so, I'll visit them again!"),
 #'         block_articles(
 #'           article(
 #'             image = "https://i.imgur.com/dig0HQ2.jpg",
 #'             title = "Los Angeles",
-#'             content = glue::glue(
-#'               "I want to live in Los Angeles. \\
-#'               Not the one in Los Angeles. \\
-#'               No, not the one in South California. \\
+#'             content =
+#'               "I want to live in Los Angeles.
+#'               Not the one in Los Angeles.
+#'               No, not the one in South California.
 #'               They got one in South Patagonia."
-#'               )
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/RUvqHV8.jpg",
 #'             title = "New York",
-#'             content = glue::glue(
-#'               "Start spreading the news. \\
-#'               I'm leaving today. \\
-#'               I want to be a part of it. \\
+#'             content =
+#'               "Start spreading the news.
+#'               I'm leaving today.
+#'               I want to be a part of it.
 #'               New York, New York."
-#'               )
 #'           )
 #'         )
 #'       )
@@ -63,29 +61,40 @@ block_text <- function(...) {
 render_block_text <- function(x, context = "body") {
 
   if (context == "body") {
-    font_size <- 14
+
     font_color <- "#000000"
+    font_size <- 14
     margin_bottom <- 12
     padding <- 12
+
   } else if (context %in% c("header", "footer")) {
-    font_size <- 12
+
     font_color <- "#999999"
+    font_size <- 12
     margin_bottom <- 12
     padding <- 10
   }
 
   paragraph <-
-    glue::glue(
-      "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; color: {font_color};font-size: {font_size}px; font-weight: normal; margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">"
-    ) %>%
-    as.character()
+    text_line_template() %>%
+    tidy_gsub("\\{font_color\\}", font_color %>% process_text()) %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text())
 
   text <-
     paste(x %>% unlist(), collapse = "\n") %>%
     commonmark::markdown_html() %>%
     tidy_gsub("<p>", paragraph)
 
-  glue::glue(text_block_template()) %>% as.character()
+  text_block_template() %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{text\\}", text)
+}
+
+text_line_template <- function() {
+  "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; color: {font_color};font-size: {font_size}px; font-weight: normal; margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">"
 }
 
 #' A template for a text HTML fragment

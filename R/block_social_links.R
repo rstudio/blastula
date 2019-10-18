@@ -59,22 +59,20 @@
 #'           article(
 #'             image = "https://i.imgur.com/dxSXzGb.jpg",
 #'             title = "Hong Kong",
-#'             content = glue::glue(
-#'               "Once home to fishermen and farmers, \\
-#'               modern Hong Kong is a teeming, \\
-#'               commercially-vibrant metropolis where \\
+#'             content =
+#'               "Once home to fishermen and farmers,
+#'               modern Hong Kong is a teeming,
+#'               commercially-vibrant metropolis where
 #'               Chinese and Western influences fuse."
-#'               )
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/bJzVIrG.jpg",
 #'             title = "Australia",
-#'             content = glue::glue(
-#'               "Australia ranks as one of the best \\
-#'               places to live in the world by all \\
-#'               indices of income, human development, \\
+#'             content =
+#'               "Australia ranks as one of the best
+#'               places to live in the world by all
+#'               indices of income, human development,
 #'               healthcare, and civil rights."
-#'               )
 #'           )
 #'         )
 #'       ),
@@ -127,7 +125,8 @@ social_link <- function(service,
       link = link,
       icon = icon,
       variant = variant,
-      alt = alt)
+      alt = alt
+    )
 
   # Apply the `social_link` class
   class(social_link_item_list) <- "social_link"
@@ -160,22 +159,20 @@ social_link <- function(service,
 #'           article(
 #'             image = "https://i.imgur.com/dxSXzGb.jpg",
 #'             title = "Hong Kong",
-#'             content = glue::glue(
-#'               "Once home to fishermen and farmers, \\
-#'               modern Hong Kong is a teeming, \\
-#'               commercially-vibrant metropolis where \\
+#'             content =
+#'               "Once home to fishermen and farmers,
+#'               modern Hong Kong is a teeming,
+#'               commercially-vibrant metropolis where
 #'               Chinese and Western influences fuse."
-#'               )
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/bJzVIrG.jpg",
 #'             title = "Australia",
-#'             content = glue::glue(
-#'               "Australia ranks as one of the best \\
-#'               places to live in the world by all \\
-#'               indices of income, human development, \\
+#'             content =
+#'               "Australia ranks as one of the best
+#'               places to live in the world by all
+#'               indices of income, human development,
 #'               healthcare, and civil rights."
-#'               )
 #'           )
 #'         )
 #'       ),
@@ -235,57 +232,20 @@ render_block_social_links <- function(x) {
     alt <- x[[i]]$alt
 
     x[[i]] <-
-      glue::glue(
-        "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
-      ) %>%
-      as.character()
+      social_link_line_template() %>%
+      tidy_gsub("\\{link\\}", link %>% process_text()) %>%
+      tidy_gsub("\\{icon\\}", icon %>% process_text()) %>%
+      tidy_gsub("\\{alt\\}", alt %>% process_text())
   }
 
   social_links <- x %>% unlist() %>% paste(collapse = "\n")
 
-  glue::glue(social_link_block_template()) %>% as.character()
+  social_link_block_template() %>%
+    tidy_gsub("\\{social_links\\}", social_links)
 }
 
-#' Print a block of social links
-#'
-#' This facilitates printing of a block of social links to the Viewer.
-#' @param x an object of class \code{block_social_links}.
-#' @keywords internal
-#' @export
-print.block_social_links <- function(x, ...) {
-
-  x %>%
-    render_block_social_links() %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-#' Print a social link component in the console
-#'
-#' This facilitates printing of a social link object to the console.
-#' @param x an object of class \code{social_link}.
-#' @keywords internal
-#' @export
-print.social_link <- function(x, ...) {
-
-  # Modify the URL for an icon that's hosted on GitHub
-  icon <-
-    x$icon %>%
-    tidy_gsub(
-      paste0("https://", social_icons_host_stub()),
-      "<blastula_hosted>"
-    )
-
-  glue::glue("
-service: {x$service}
-link: {x$link}
-icon: {icon}
-variant: {x$variant}
-alt text: {x$alt}
-"
-  ) %>%
-    as.character() %>%
-    cat()
+social_link_line_template <- function() {
+  "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
 }
 
 #' A template for a social link HTML fragment
@@ -342,11 +302,11 @@ icon_for_social_service <- function(service,
     variant <- "bw"
   }
 
-  # Create the link to the hosted image asset
-  glue::glue(
-    "https://{social_icons_host_stub()}/{service}-{variant}.png"
-  ) %>%
-    as.character()
+  # Construct the link to the hosted image asset
+  paste0(
+    "https://", social_icons_host_stub(),
+    "/", service, "-", variant, ".png"
+  )
 }
 
 #' @noRd

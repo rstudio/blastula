@@ -19,28 +19,25 @@
 #'   compose_email(
 #'     body =
 #'       blocks(
-#'         block_title(
-#'           "Two Cities I Visited Recently"),
+#'         block_title("Two Cities I Visited Recently"),
 #'         block_articles(
 #'           article(
 #'             image = "https://i.imgur.com/dig0HQ2.jpg",
 #'             title = "Los Angeles",
-#'             content = glue::glue(
-#'               "I want to live in Los Angeles. \\
-#'               Not the one in Los Angeles. \\
-#'               No, not the one in South California. \\
+#'             content =
+#'               "I want to live in Los Angeles.
+#'               Not the one in Los Angeles.
+#'               No, not the one in South California.
 #'               They got one in South Patagonia."
-#'               )
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/RUvqHV8.jpg",
 #'             title = "New York",
-#'             content = glue::glue(
-#'               "Start spreading the news. \\
-#'               I'm leaving today. \\
-#'               I want to be a part of it. \\
+#'             content =
+#'               "Start spreading the news.
+#'               I'm leaving today.
+#'               I want to be a part of it.
 #'               New York, New York."
-#'               )
 #'           )
 #'         )
 #'       )
@@ -62,11 +59,14 @@ block_title <- function(...) {
 render_block_title <- function(x, context = "body") {
 
   if (context == "body") {
+
     font_size <- 36
     font_color <- "#222222"
     margin_bottom <- 4
     padding <- 12
+
   } else if (context %in% c("header", "footer")) {
+
     font_size <- 20
     font_color <- "#999999"
     margin_bottom <- 0
@@ -74,18 +74,24 @@ render_block_title <- function(x, context = "body") {
   }
 
   paragraph <-
-    glue::glue(
-      "<h1 class=\"align-center\" style=\"color: {font_color}; font-family: Helvetica, sans-serif; font-weight: 300; line-height: 1.4; margin: 0; font-size: {font_size}px; margin-bottom: {margin_bottom}px; text-transform: capitalize; text-align: center;\">"
-    ) %>%
-    as.character()
+    title_line_template() %>%
+    tidy_gsub("\\{font_color\\}", font_color %>% process_text()) %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text())
 
   text <-
     paste(x %>% unlist(), collapse = "\n") %>%
     commonmark::markdown_html() %>%
-    tidy_gsub("<p>", paragraph) %>%
-    tidy_gsub("</p>\n", "</h1>")
+    tidy_gsub("<p>", paragraph)
 
-  glue::glue(title_block_template()) %>% as.character()
+  title_block_template() %>%
+    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{text\\}", text)
+}
+
+title_line_template <- function() {
+  "<h1 class=\"align-center\" style=\"color: {font_color}; font-family: Helvetica, sans-serif; font-weight: 300; line-height: 1.4; margin: 0; font-size: {font_size}px; margin-bottom: {margin_bottom}px; text-transform: capitalize; text-align: center;\">"
 }
 
 #' A template for a title text HTML fragment

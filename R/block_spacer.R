@@ -20,29 +20,27 @@
 #'       blocks(
 #'         block_spacer(),
 #'         block_text(
-#'           "These are two of the cities I visited this year. \\
+#'           "These are two of the cities I visited this year.
 #'           I liked them a lot, so, I'll visit them again!"),
 #'         block_spacer(),
 #'         block_articles(
 #'           article(
 #'             image = "https://i.imgur.com/dig0HQ2.jpg",
 #'             title = "Los Angeles",
-#'             content = glue::glue(
-#'               "I want to live in Los Angeles. \\
-#'               Not the one in Los Angeles. \\
-#'               No, not the one in South California. \\
+#'             content =
+#'               "I want to live in Los Angeles.
+#'               Not the one in Los Angeles.
+#'               No, not the one in South California.
 #'               They got one in South Patagonia."
-#'               )
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/RUvqHV8.jpg",
 #'             title = "New York",
-#'             content = glue::glue(
-#'               "Start spreading the news. \\
-#'               I'm leaving today. \\
-#'               I want to be a part of it. \\
+#'             content =
+#'               "Start spreading the news.
+#'               I'm leaving today.
+#'               I want to be a part of it.
 #'               New York, New York."
-#'               )
 #'           )
 #'         )
 #'       )
@@ -64,23 +62,25 @@ block_spacer <- function() {
 render_block_spacer <- function(x, context = "body") {
 
   if (context == "body") {
+
     padding <- 4
+
   } else if (context %in% c("header", "footer")) {
+
     padding <- 0
   }
 
-  paragraph <-
-    glue::glue(
-      "<p class=\"align-center\" style=\"margin: 0; margin-bottom: 0; text-align: center;\">"
-    ) %>%
-    as.character()
+  paragraph <- spacer_line_template
 
-  text <-
-    paste(x %>% unlist(), collapse = "\n") %>%
-    commonmark::markdown_html() %>%
-    tidy_gsub("<p>", paragraph)
+  text <- "&nbsp;"
 
-  glue::glue(spacer_block_template()) %>% as.character()
+  spacer_block_template() %>%
+    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text()) %>%
+    tidy_gsub("\\{text\\}", text)
+}
+
+spacer_line_template <- function() {
+  "<p class=\"align-center\" style=\"margin: 0; margin-bottom: 0; text-align: center;\">"
 }
 
 #' A template for a spacer HTML fragment
