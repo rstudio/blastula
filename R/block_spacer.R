@@ -101,21 +101,3 @@ spacer_block_template <- function() {
 </td>
 </tr>"
 }
-
-# nocov start
-
-#' Print a spacer
-#'
-#' This facilitates printing of the spacer to the Viewer.
-#' @param x an object of class \code{block_spacer}.
-#' @keywords internal
-#' @export
-print.block_spacer <- function(x, ...) {
-
-  x %>%
-    render_block_spacer(context = "body") %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-# nocov end

@@ -115,21 +115,3 @@ text_block_template <- function() {
 </td>
 </tr>"
 }
-
-# nocov start
-
-#' Print a text block
-#'
-#' This facilitates printing of the text block to the Viewer.
-#' @param x an object of class \code{block_text}.
-#' @keywords internal
-#' @export
-print.block_text <- function(x, ...) {
-
-  x %>%
-    render_block_text(context = "body") %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-# nocov end

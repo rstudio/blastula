@@ -112,22 +112,3 @@ title_block_template <- function() {
 </td>
 </tr>"
 }
-
-# nocov start
-
-#' Print a title block
-#'
-#' This facilitates printing of the title block to the Viewer.
-#'
-#' @param x an object of class \code{block_title}.
-#' @keywords internal
-#' @export
-print.block_title <- function(x, ...) {
-
-  x %>%
-    render_block_title() %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-# nocov end
