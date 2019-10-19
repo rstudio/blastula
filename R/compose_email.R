@@ -27,7 +27,8 @@
 #'
 #' We can use **Markdown** formatting with the `md()` function.
 #'
-#' Cheers,<br>
+#' Cheers,
+#'
 #' The blastula team
 #' "),
 #'   footer = md(
