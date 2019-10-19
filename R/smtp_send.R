@@ -139,6 +139,7 @@ smtp_send <- function(email,
   # Verify that the `message` object
   # is of the class `email_message`
   if (!inherits(email, "email_message")) {
+
     stop("The object provided in `email` must be an ",
          "`email_message` object.\n",
          " * This can be created with the `compose_email()` function.",
@@ -147,7 +148,9 @@ smtp_send <- function(email,
 
   # Establish the location of the `mailsend-go` binary
   if (is.null(binary_loc)) {
+
     binary_loc <- find_binary("mailsend-go")
+
     if (is.null(binary_loc)) {
       stop("The binary file `mailsend-go` is not in the system path or \n",
            "in the working directory:\n",
@@ -161,7 +164,9 @@ smtp_send <- function(email,
   # argument, upgrade that through the `creds_file()` helper function
   # and provide a warning about soft deprecation
   if (!missing(creds_file)) {
+
     credentials <- creds_file(creds_file)
+
     warning("The `creds_file` argument is deprecated:\n",
             " * please consider using `credentials = creds_file(\"", creds_file,
             "\")` instead")
@@ -171,6 +176,7 @@ smtp_send <- function(email,
   # and include a message about which credential helpers could
   # be used
   if (is.null(credentials)) {
+
     stop("SMTP credentials must be supplied to the `credentials` argument.\n",
          "We can use either of these three helper functions for this:\n",
          " * `creds_key()`: uses information stored in the system's key-value ",
@@ -187,11 +193,13 @@ smtp_send <- function(email,
   # the `creds_file()` function); if it's anything else, stop
   # the function with a message
   if (!inherits(credentials, "blastula_creds")) {
+
     if (is.character(credentials) && length(credentials) == 1) {
 
       credentials <- creds_file(file = credentials)
 
     } else {
+
       stop("The value for `credentials` must be a `blastula_creds` object\n",
            "* see the article in `?creds` for information on this",
            call. = FALSE)
