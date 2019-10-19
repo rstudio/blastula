@@ -288,7 +288,6 @@ smtp_send <- function(email,
     # If option taken to make this a 'dry run' (no sending, merely
     # checking that there are no errors before actually sending),
     # issue a message to that effect
-
     message("This was a dry run, the email message was NOT sent.")
 
     return(invisible())
