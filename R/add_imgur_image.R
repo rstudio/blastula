@@ -82,7 +82,11 @@ add_imgur_image <- function(image,
     }
 
   paste0(
-    "<a href=\"#\"><img src=\"", response_list$link, "\" alt=\"", alt_text, "\"",
-    "style=\"max-width:512px;width:100%!important;display:block;padding:0;border:0!important;\" border=\"0\"></a>"
+    "<a href=\"#\"><img src=\"",
+    response_list$link %>% htmltools::htmlEscape(attribute = TRUE),
+    "\" alt=\"",
+    alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"",
+    "style=\"max-width: 512px;width: 100% !important;display: block;padding: 0;",
+    "border: 0 !important;\" border=\"0\"></a>"
   )
 }
