@@ -295,15 +295,15 @@ smtp_send <- function(email,
 
   } else {
 
-    # Send out email via `processx::run()` and
-    # assign the result
-    send_result <-
-      processx::run(
-        command = binary_loc,
-        args = run_args
-      )
+    # The alternative is sending the message; the command is
+    # constructed and `system` executes on the user's system
+    command <- paste(binary_loc, paste0(run_args, collapse = " "))
 
-    if (send_result$status == 0) {
+    # Send out email via `system()` and assign the stderr result
+    send_result <- system(command, ignore.stdout = TRUE)
+
+    # Transmit a message depending on the stderr value
+    if (send_result == 0) {
       message("The email message was sent successfully.\n")
     } else {
       message("The email message was NOT successfully sent.\n")
