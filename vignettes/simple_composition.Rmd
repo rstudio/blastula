@@ -57,9 +57,9 @@ Cheers
 
 A preview of the HTML email message should appear in the Viewer. Try resizing the Viewer to see how it responds to the different width thresholds.
 
-## Using the `glue()` Function for more Sophisticated Email Text
+## More Sophisticated Email Text
 
-A good strategy for longer and more complicated text inputs is to use the [**glue**](https://glue.tidyverse.org) package. We can continue lines with the `\\` line continuation marker, which is great for keeping long paragraphs of text at a reasonable width. Also, **glue** allows us to use string interpolation (and avoid the use of `paste()`). Variables in the global workspace can be included in the curly braces of a `glue()` string expression, and, any **R** expressions in `{ }` will be evaluated.
+A good strategy for longer and more complicated text inputs is to use the [**glue**](https://glue.tidyverse.org) package. That package allows us to use string interpolation (and avoid the use of `paste()` or `paste0()`). Variables in the global workspace can be included in the curly braces of a `glue()` string expression, and, any **R** expressions in `{ }` will be evaluated.
 
 We can include longer **R** statements inside of the curly braces (like `{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %>% as.numeric(), ", ", format(Sys.time(), "%Y"))}`), however, that would be unwieldy. It's better to generate local variables with **R** statements and just use those variables inside the `{ }`. 
 
@@ -74,8 +74,8 @@ body_text <-
     "
 Hello,
 
-I just wanted to let you know that the {what} \\
-that you asked me for is ready to pick up. So, \\
+I just wanted to let you know that the {what}
+that you asked me for is ready to pick up. So,
 come over and do that.
 
 {salutation}
@@ -89,9 +89,9 @@ Any literal quotation marks inside the braces should be escaped using a single `
 
 ## Using Markdown Text via the `md()` Function
 
-Markdown text can be used as input for the `body`, `header`, and `footer` arguments. To opt into using Markdown formatting, call the `md()` text helper function on any of these text elements. We can use the usual Markdown-formatting you know and you'll get italicized text, bold text, lists, links, etc. Have a look at [this reference page](https://commonmark.org/help/) to quickly understand how to use Markdown. The **blastula** package is internally using the **commonmark** **R** package to perform the conversion from Markdown to HTML.
+Markdown text can be used as input for the `body`, `header`, and `footer` arguments. To opt into using Markdown formatting, call the `md()` text helper function on any of these text elements. We can use the usual Markdown-formatting you know and you'll get italicized text, bold text, lists, links, etc. Have a look at [this reference page](https://commonmark.org/help/) to quickly understand how to use Markdown. The **blastula** package internally uses the **commonmark** **R** package to perform the conversion from Markdown to HTML.
 
-A few notes on code style and options. It's good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a linebreak, which will result in `text like this` when using Markdown formatting through `md()`. 
+A few notes on code style and options. It's good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a line break, which will result in `text like this` when using Markdown formatting through `md()`. 
 
 In the next example, let's first store the result of that statement in a local variable (`sending_date`). Then, the variable will be placed in the **footer** of the message (using the `footer` argument) along with leading text.
 
@@ -115,9 +115,9 @@ body_text <-
     "
 Hello,
 
-I just wanted to let you know that the thing that you \\
-asked me for is ready to pick up. So, come over and \\
-do that.
+I just wanted to let you know that the *thing* that
+you asked me for is ready to pick up. So, come over
+and do that.
 
 Cheers,
 
@@ -175,7 +175,7 @@ body_text <-
     "
 Hello,
 
-I just wanted to let you know that the **1972 Rickenbacker \\
+I just wanted to let you know that the **1972 Rickenbacker
 4001** is here to pick up. Here is a picture of it:
 
 {imgur_image}
@@ -203,7 +203,7 @@ Wait, there's more! Since this is **R** and we care a great deal about **ggplot2
 ```{r imgur_return_value_2, include=FALSE}
 
 imgur_image <- 
-  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width:600px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
+  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width:600px; width:100% !important; display:block; padding:0; border:0 !important;\" border=\"0\"></a>"
 ```
 
 ```{r compose_imgur_ggplot, eval=FALSE}
