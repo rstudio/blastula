@@ -290,14 +290,18 @@ sys_which <- function(name) {
   # Get the
   if (is_windows_os()) {
 
-    suppressWarnings({
+    suppressWarnings(
+      path_status <-
+        system(sprintf("where %s 2> NUL", name), intern = TRUE) %>%
+        attributes() %>%
+        .$status
+    )
+
+    if (path_status == 0) {
+
       pathname <-
-        system(sprintf("where %s 2> NUL", name), intern = TRUE)[1]
-    })
-
-    if (!is.na(pathname)) {
-
-      pathname <- pathname %>% tidy_gsub("\\\\", "/")
+        system(sprintf("where %s 2> NUL", name), intern = TRUE)[[1]] %>%
+        tidy_gsub("\\\\", "/")
 
       return(stats::setNames(pathname, name))
     }
