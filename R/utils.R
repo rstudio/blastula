@@ -367,22 +367,15 @@ find_binary <- function(bin_name) {
     return(which_result)
   }
 
-  # Try to locate the binary in working directory
-  which_result <-
-    tryCatch(
-      {
-        processx::run(command = "ls", args = bin_name)
-        file.path(getwd(), bin_name)
-      },
-      error = function(cond) ""
-    )
+  # Attempt to locate the binary in the working directory
+  list_files_result <-
+    list.files(path = getwd(), pattern = paste0("^", bin_name, "$"))
 
-  if (which_result != "") {
+  if (length(list_files_result) > 0) {
     return(which_result)
   }
 
-  # If the binary isn't found in these locations,
-  # return `NULL`
+  # If the binary isn't found in these locations, return `NULL`
   NULL
 }
 
