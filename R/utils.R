@@ -287,20 +287,22 @@ sys_which <- function(name) {
   # Only accept a vector of length 1
   stopifnot(length(name) == 1)
 
-  # Get the
+  # Get the binary path on Windows
   if (is_windows_os()) {
 
     suppressWarnings(
-      path_status <-
-        system(sprintf("where %s 2> NUL", name), intern = TRUE) %>%
-        attributes() %>%
-        .$status
+      system_call <- system(sprintf("where %s", name), intern = TRUE)
     )
 
-    if (path_status == 0) {
+    path_status <- (system_call %>% attributes())$status
+    binary_path <- system_call[1]
+
+    browser()
+
+    if (!is.null(path_status) && path_status == 0) {
 
       pathname <-
-        system(sprintf("where %s 2> NUL", name), intern = TRUE)[[1]] %>%
+        binary_path %>%
         tidy_gsub("\\\\", "/")
 
       return(stats::setNames(pathname, name))
