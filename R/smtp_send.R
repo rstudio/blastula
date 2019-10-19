@@ -275,7 +275,7 @@ smtp_send <- function(email,
 
     cmd_str <- run_args
     cmd_str[which(run_args == "-pass")[1] + 1] <- "*****"
-    cmd_str <- paste(binary_loc, paste0(cmd_str, collapse = " "))
+    cmd_str <- paste(binary_loc %>% shQuote(), paste0(cmd_str, collapse = " "))
 
     message(
       "The command for sending the email message is:\n\n",
@@ -296,7 +296,9 @@ smtp_send <- function(email,
 
     # The alternative is sending the message; the command is
     # constructed and `system` executes on the user's system
-    command <- paste(binary_loc, paste0(run_args, collapse = " "))
+    command <- paste(binary_loc %>% shQuote(), paste0(run_args, collapse = " "))
+
+    browser()
 
     # Send out email via `system()` and assign the stderr result
     send_result <- system(command, ignore.stdout = TRUE)
