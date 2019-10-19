@@ -220,8 +220,7 @@ create_attachment_args_vec <- function(email) {
 
   for (i in seq(email$attachments)) {
 
-    # Collect arguments and options for for `processx::run()`
-    # as a list
+    # Collect arguments and options as a list
     attach_args <-
       list(
         `attach` = no_options(),
@@ -229,8 +228,7 @@ create_attachment_args_vec <- function(email) {
         `-inline` = no_options()
       )
 
-    # Clean up arguments and options; create the
-    # vector that's needed for `processx::run()`
+    # Clean up arguments and options
     attachment_args_vec <-
       c(attachment_args_vec,
         attach_args %>%
