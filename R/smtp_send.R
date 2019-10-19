@@ -206,19 +206,19 @@ smtp_send <- function(email,
     }
   }
 
-  # Create a temporary file with the `html` extension
-  tempfile_ <- tempfile(fileext = ".html")
+  # Create a temporary HTML file
+  tempfile_path <- tempfile(fileext = ".html")
 
-  # Reverse slashes on Windows filesystems
-  tempfile_ <-
-    tempfile_ %>%
+  # Replace backslashes on Windows file systems
+  tempfile_path <-
+    tempfile_path %>%
     tidy_gsub("\\\\", "/")
 
   # Write the inlined HTML message out to a file
-  email$html_str %>% writeLines(con = tempfile_, useBytes = TRUE)
+  email$html_str %>% writeLines(con = tempfile_path, useBytes = TRUE)
 
-  # Remove the file after the function exits
-  on.exit(file.remove(tempfile_))
+  # Remove the tempfile after the function exits
+  on.exit(file.remove(tempfile_path))
 
   # Normalize `subject` so that a `NULL` value becomes an empty string
   subject <- subject %||% ""
@@ -239,11 +239,10 @@ smtp_send <- function(email,
   # Set the `sender_name` to `no_arg()` if not provided
   sender_name_opt <- credentials$sender_name %||% no_arg()
 
-  # Collect arguments and options for for `processx::run()`
-  # as a list
+  # Collect arguments and options as a list
   run_args <-
     list(
-      `-sub` = subject,
+      `-sub` = subject %>% shQuote(),
       `-smtp` = credentials$host,
       `-port` = credentials$port %>% as.character(),
       `-ssl` = ssl_opt,
@@ -255,24 +254,24 @@ smtp_send <- function(email,
       `-to` = to,
       `-cc` = cc,
       `-bcc` = bcc,
-      `attach` = no_options(),
-      `-file` = tempfile_,
-      `-mime-type` = "text/html",
-      `-inline` = no_options()
+      `body` = no_options(),
+      `-file` = tempfile_path,
+      `-mime-type` = "text/html"
     )
 
   # Create the vector of arguments related to file attachments
   attachment_args_vec <- create_attachment_args_vec(email = email)
 
-  # Clean up arguments and options; create the vector that's
-  # needed for `processx::run()`
+  # Clean up arguments and options
   run_args <-
     run_args %>%
     prune_args() %>%
     create_args_opts_vec() %>%
     append_attachment_args_vec(attachment_args_vec = attachment_args_vec)
 
-  if (echo) {
+  # If option taken to echo the mail-sending command, construct
+  # it in a safe way (obscuring the password) and transmit as a message
+  if (isTRUE(echo)) {
 
     cmd_str <- run_args
     cmd_str[which(run_args == "-pass")[1] + 1] <- "*****"
@@ -284,7 +283,11 @@ smtp_send <- function(email,
     )
   }
 
-  if (dry_run) {
+  if (isTRUE(dry_run)) {
+
+    # If option taken to make this a 'dry run' (no sending, merely
+    # checking that there are no errors before actually sending),
+    # issue a message to that effect
 
     message("This was a dry run, the email message was NOT sent.")
 
