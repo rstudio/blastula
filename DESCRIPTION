@@ -19,20 +19,16 @@ BugReports: https://github.com/rich-iannone/blastula/issues
 Depends: R (>= 3.2.1)
 Imports:
     commonmark (>= 1.7),
-    downloader (>= 0.4),
     dplyr (>= 0.8.0.1),
     fs (>= 1.2.6),
     getPass (>= 0.2-2),
-    glue (>= 1.3.1),
     here (>= 0.1),
     htmltools (>= 0.3.6),
     httr (>= 1.4.0),
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
-    processx (>= 3.3.0),
     rmarkdown,
     stringr (>= 1.4.0),
-    tidyr (>= 0.8.2),
     xml2 (>= 1.2.0),
     mime (>= 0.6),
     base64enc (>= 0.1-3)
