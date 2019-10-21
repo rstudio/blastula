@@ -295,7 +295,7 @@ smtp_send <- function(email,
 
     # The alternative is sending the message; the command is
     # constructed and `system` executes on the user's system
-    command <- paste(binary_loc %>% shQuote(), paste0(run_args, collapse = " "))
+    command <- paste(binary_loc %>% shQuote(), run_args)
 
     # Send out email via `system()` and assign the stderr result
     send_result <- system(command, ignore.stdout = TRUE)
