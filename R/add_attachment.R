@@ -32,11 +32,7 @@ add_attachment <- function(email,
     )
 
   # Add the attachment list to `email$attachments`
-  email <-
-    email %>%
-    add_attachment_list(
-      attachment_list = attachment_list
-    )
+  email <- email %>% add_attachment_list(attachment_list = attachment_list)
 
   email
 }

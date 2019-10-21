@@ -157,9 +157,7 @@ create_args_opts_vec <- function(run_args) {
 create_attachment_list <- function(file_path,
                                    disposition) {
 
-  list(
-    file_path = file_path,
-    disposition = disposition)
+  list(file_path = file_path, disposition = disposition)
 }
 
 #' Add an attachment list to `email$attachments`
@@ -168,8 +166,7 @@ create_attachment_list <- function(file_path,
 add_attachment_list <- function(email,
                                 attachment_list) {
 
-  email$attachments <-
-    c(email$attachments, list(attachment_list))
+  email$attachments <- c(email$attachments, list(attachment_list))
 
   email
 }
