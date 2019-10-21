@@ -117,33 +117,14 @@ is_unknown_os <- function() {
 #'
 #' @noRd
 no_options <- function() {
-  no_opts <- "no_options"
-  class(no_opts) <- "no_options"
-  no_opts
+  NA_character_
 }
 
 #' Create a character object that signals `no_arg`
 #'
 #' @noRd
 no_arg <- function() {
-  no_arg_ <- "no_arg"
-  class(no_arg_) <- "no_arg"
-  no_arg_
-}
-
-#' Create vectors of args and vals for a list element
-#'
-#' @param x An element of the `run_args` list.
-#' @noRd
-get_arg_opts <- function(x) {
-
-  if (!inherits(x[[1]], "no_options")) {
-    arg_opts <- c(names(x), x[[1]])
-    } else {
-    arg_opts <- names(x)
-    }
-
-  arg_opts
+  NULL
 }
 
 #' Take a list of args/vals and prune unnecessary arguments
