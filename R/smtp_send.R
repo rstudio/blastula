@@ -242,20 +242,20 @@ smtp_send <- function(email,
   # Collect arguments and options as a list
   run_args <-
     list(
-      `-sub` = subject %>% shQuote(),
+      `-sub` = subject,
       `-smtp` = credentials$host,
       `-port` = credentials$port %>% as.character(),
       `-ssl` = ssl_opt,
       `auth` = no_options(),
       `-user` = credentials$user,
       `-pass` = credentials$password,
-      `-fname` = sender_name_opt %>% shQuote(),
-      `-from` = from %>% shQuote(),
-      `-to` = to %>% shQuote(),
-      `-cc` = cc %>% shQuote(),
-      `-bcc` = bcc %>% shQuote(),
+      `-fname` = sender_name_opt,
+      `-from` = from,
+      `-to` = to,
+      `-cc` = cc,
+      `-bcc` = bcc,
       `body` = no_options(),
-      `-file` = tempfile_path %>% shQuote(),
+      `-file` = tempfile_path,
       `-mime-type` = "text/html"
     )
 
