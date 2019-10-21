@@ -32,6 +32,7 @@ Imports:
 Suggests: 
     covr,
     ggplot2,
+    glue,
     testthat (>= 2.1.0),
     keyring,
     knitr,
