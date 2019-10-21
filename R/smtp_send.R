@@ -298,8 +298,6 @@ smtp_send <- function(email,
     # constructed and `system` executes on the user's system
     command <- paste(binary_loc %>% shQuote(), paste0(run_args, collapse = " "))
 
-    browser()
-
     # Send out email via `system()` and assign the stderr result
     send_result <- system(command, ignore.stdout = TRUE)
 

@@ -297,8 +297,6 @@ sys_which <- function(name) {
     path_status <- (system_call %>% attributes())$status
     binary_path <- system_call[1]
 
-    browser()
-
     if (!is.null(path_status) && path_status == 0) {
 
       pathname <-
