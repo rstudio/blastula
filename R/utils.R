@@ -127,36 +127,25 @@ no_arg <- function() {
   NULL
 }
 
-#' Take a list of args/vals and prune unnecessary arguments
-#'
-#' @param run_args A list of arguments and associated options.
-#' @noRd
-prune_args <- function(run_args) {
-
-  run_args[
-    !vapply(
-      run_args, function(x) inherits(x, "no_arg"),
-      FUN.VALUE = logical(1),
-      USE.NAMES = FALSE)]
-}
-
 #' Create a vector of command arguments and any associated options
 #'
 #' @param run_args A list of arguments and associated options.
 #' @noRd
 create_args_opts_vec <- function(run_args) {
 
-  run_args_vec <- c()
+  run_args <- run_args[
+    !vapply(
+      run_args, is.null,
+      FUN.VALUE = logical(1),
+      USE.NAMES = FALSE)]
 
-  for (i in seq(run_args)) {
-    run_args_vec <-
-      c(
-        run_args_vec,
-        run_args[i] %>% get_arg_opts()
-      )
-  }
+  nm <- names(run_args) # names get dropped below
 
-  run_args_vec
+  run_args <- run_args %>% as.character()
+
+  run_args <- ifelse(is.na(run_args), "", shQuote(run_args))
+
+  paste(nm, run_args, collapse = " ")
 }
 
 #' Create a file attachment list
@@ -197,28 +186,15 @@ create_attachment_args_vec <- function(email) {
     return(character(0))
   }
 
-  attachment_args_vec <- c()
-
-  for (i in seq(email$attachments)) {
-
-    # Collect arguments and options as a list
-    attach_args <-
-      list(
-        `attach` = no_options(),
-        `-file` = email$attachments[[i]]$file_path,
-        `-inline` = no_options()
-      )
-
-    # Clean up arguments and options
-    attachment_args_vec <-
-      c(attachment_args_vec,
-        attach_args %>%
-          prune_args() %>%
-          create_args_opts_vec()
-      )
-  }
-
-  attachment_args_vec
+  lapply(email$attachments, function(attachment) {
+    list(
+      `attach` = no_options(),
+      `-file` = attachment$file_path,
+      `-inline` = no_options()
+    )
+  }) %>%
+    unlist(recursive = FALSE) %>%
+    create_args_opts_vec()
 }
 
 #' Append the vector of arguments and options for file attachments to the
@@ -232,7 +208,7 @@ create_attachment_args_vec <- function(email) {
 append_attachment_args_vec <- function(args_opts_vec,
                                        attachment_args_vec) {
 
-  c(args_opts_vec, attachment_args_vec)
+  paste(args_opts_vec, attachment_args_vec)
 }
 
 #' Prepend a element to a list at a given position
