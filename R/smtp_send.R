@@ -265,7 +265,6 @@ smtp_send <- function(email,
   # Clean up arguments and options
   run_args <-
     run_args %>%
-    prune_args() %>%
     create_args_opts_vec() %>%
     append_attachment_args_vec(attachment_args_vec = attachment_args_vec)
 
