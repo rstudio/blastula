@@ -55,9 +55,9 @@ add_readable_time <- function(time = NULL,
     current_time <- ""
   }
 
-  if (isTRUE(use_tz) & (isTRUE(use_date) | isTRUE(use_time))) {
+  if (isTRUE(use_tz) && (isTRUE(use_date) || isTRUE(use_time))) {
     current_tz <- format(time, " (%Z)")
-  } else if (isTRUE(use_tz) & (use_date == FALSE & use_time == FALSE)) {
+  } else if (isTRUE(use_tz) && (use_date == FALSE && use_time == FALSE)) {
     current_tz <- format(time, "%Z")
   } else {
     current_tz <- ""
