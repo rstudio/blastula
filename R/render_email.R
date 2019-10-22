@@ -27,6 +27,8 @@
 #' @name render_email
 NULL
 
+# nocov start
+
 #' @rdname render_email
 #' @export
 render_email <- function(input,
@@ -69,3 +71,6 @@ render_connect_email <- function(input,
   }
   render_email(input, envir, quiet, output_options, render_options)
 }
+
+# nocov end
+
