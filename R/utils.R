@@ -38,6 +38,18 @@ tidy_gsub <- function(x, pattern, replacement) {
   gsub(pattern, replacement, x)
 }
 
+#' A slightly more sensible version of `grepl()`
+#'
+#' @param x The text to be transformed.
+#' @param pattern The regex pattern.
+#' @param fixed If `TRUE`, pattern is a string to be matched as is. Overrides
+#'   all conflicting arguments.
+#' @noRd
+tidy_grepl <- function(x, pattern, fixed = FALSE) {
+
+  grepl(pattern, x, fixed = fixed)
+}
+
 `%||%` <- function(x, y) {
   if (is.null(x)) y else x
 }
