@@ -333,3 +333,55 @@ test_that("the `render_block_articles()` function returns the expected output", 
       )
     )
 })
+
+test_that("the social link functions work correctly", {
+
+  social_link_1 <-
+    social_link(service = "Dribbble", link = "https://dribbble.com")
+
+  # Expect that `social_link_1` is a list
+  social_link_1 %>% expect_type("list")
+
+  # Expect certain names in the list object
+  social_link_1 %>%
+    names() %>%
+    expect_equal(
+      c("service", "link", "icon", "variant", "alt")
+    )
+
+  # Expect that the `service` name is in lowercase
+  social_link_1$service %>% expect_equal("dribbble")
+
+  # Expect that the `link` has been written
+  social_link_1$link %>% expect_equal("https://dribbble.com")
+
+  # Expect that the link to the `icon` is available
+  social_link_1$icon %>% expect_match("^https:.*?social_icons/dribbble-bw.png")
+
+  # Expect that the variant is `NULL` (since it wasn't specified)
+  social_link_1$variant %>% expect_null()
+
+  # Expect that the `alt` text is the same as the lowercase
+  # service name
+  social_link_1$alt %>% expect_equal(social_link_1$service)
+
+  # Expect that the `social_link_1` object has the
+  # class `social_link`
+  social_link_1 %>% expect_s3_class("social_link")
+
+  # Expect that the `social_service_icons()` function
+  # returns a tibble
+  social_service_icons() %>%
+    expect_s3_class("tbl_df")
+
+  social_service_icons() %>%
+    ncol() %>%
+    expect_equal(2)
+
+  social_service_icons() %>%
+    nrow() %>%
+    expect_equal(29)
+
+  social_service_icon_variants() %>%
+    expect_equal(c("color", "bw", "dark_gray", "gray", "light_gray"))
+})
