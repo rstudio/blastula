@@ -149,6 +149,8 @@ smtp_send <- function(email,
   # Establish the location of the `mailsend-go` binary
   if (is.null(binary_loc)) {
 
+    # nocov start
+
     binary_loc <- find_binary("mailsend-go")
 
     if (is.null(binary_loc)) {
@@ -158,6 +160,8 @@ smtp_send <- function(email,
            "https://github.com/muquit/mailsend-go#downloading-and-installing",
            call. = FALSE)
     }
+
+    # nocov end
   }
 
   # If the user provides a path to a creds file in the `creds_file`
@@ -293,6 +297,8 @@ smtp_send <- function(email,
 
   } else {
 
+    # nocov start
+
     # The alternative is sending the message; the command is
     # constructed and `system` executes on the user's system
     command <- paste(binary_loc %>% shQuote(), run_args)
@@ -306,5 +312,7 @@ smtp_send <- function(email,
     } else {
       message("The email message was NOT successfully sent.\n")
     }
+
+    # nocov end
   }
 }

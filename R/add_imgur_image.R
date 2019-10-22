@@ -29,6 +29,8 @@ add_imgur_image <- function(image,
                             client_id = NULL,
                             alt = NULL) {
 
+  # nocov start
+
   if (inherits(image, "ggplot")) {
 
     # If the `ggplot2` package is available, then
@@ -89,4 +91,6 @@ add_imgur_image <- function(image,
     "style=\"max-width: 512px;width: 100% !important;display: block;padding: 0;",
     "border: 0 !important;\" border=\"0\"></a>"
   )
+
+  # nocov end
 }
