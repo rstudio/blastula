@@ -66,6 +66,8 @@ make_address_list <- function(addresses) {
   }
 }
 
+# nocov start
+
 #' Get a text string identifying the system's OS
 #'
 #' @noRd
@@ -124,6 +126,110 @@ is_unix_os <- function() {
 is_unknown_os <- function() {
   get_os_type() == "unknown"
 }
+
+#' An upgraded version of `Sys.which()` that returns a better Windows path
+#'
+#' @param name A single-length character vector with the executable name.
+#' @noRd
+sys_which <- function(name) {
+
+  # Only accept a vector of length 1
+  stopifnot(length(name) == 1)
+
+  # Get the binary path on Windows
+  if (is_windows_os()) {
+
+    suppressWarnings(
+      system_call <- system(sprintf("where %s", name), intern = TRUE)
+    )
+
+    path_status <- (system_call %>% attributes())$status
+    binary_path <- system_call[1]
+
+    if (!is.null(path_status) && path_status == 0) {
+
+      pathname <-
+        binary_path %>%
+        tidy_gsub("\\\\", "/")
+
+      return(stats::setNames(pathname, name))
+    }
+  }
+
+  Sys.which(name) %>% tidy_gsub("\\\\", "/")
+}
+
+#' Find a binary on the system path or working directory
+#'
+#' @param bin_name The name of the binary to search for.
+#' @noRd
+find_binary <- function(bin_name) {
+
+  # Find binary on path with `sys_which()`
+  which_result <- sys_which(name = bin_name) %>% unname()
+
+  if (which_result != "") {
+    return(which_result)
+  }
+
+  # Attempt to locate the binary in the working directory
+  list_files_result <-
+    list.files(path = getwd(), pattern = paste0("^", bin_name, "$"))
+
+  if (length(list_files_result) > 0) {
+    return(which_result)
+  }
+
+  # If the binary isn't found in these locations, return `NULL`
+  NULL
+}
+
+#' Upload an image to Imgur and return the response
+#'
+#' @noRd
+imgur_upload <- function(file, client_id) {
+
+  response <-
+    httr::POST(
+      "https://api.imgur.com/3/image.xml",
+      config = httr::add_headers(
+        Authorization = paste("Client-ID", client_id)),
+      body = list(image = httr::upload_file(file))
+    )
+
+  # Convert HTTP error to a `stop()` message if return
+  # status isn't favorable
+  httr::stop_for_status(response, "upload to Imgur.")
+
+  # Get response content as raw bytes
+  result <-
+    (httr::content(response, as = "raw") %>%
+       xml2::read_xml() %>%
+       xml2::as_list()
+    )[[1]]
+
+  # If we get a `NULL` in the `link` field, then
+  # the image didn't get uploaded to Imgur
+  if (is.null(result$link[[1]])) {
+
+    stop(paste0("The image (", file ,") has failed to upload."),
+         call. = FALSE)
+  }
+
+  # Create a simplified list object from
+  # the result
+  list(
+    id = result$id[[1]],
+    link = result$link[[1]],
+    type = result$type[[1]],
+    anim = ifelse(result$animated[[1]] == "true", TRUE, FALSE),
+    width = result$width[[1]] %>% as.numeric(),
+    height = result$height[[1]] %>% as.numeric(),
+    size = result$size[[1]] %>% as.numeric()
+  )
+}
+
+# nocov end
 
 #' Create a character object that signals `no_options`
 #'
@@ -244,38 +350,6 @@ prepend_list <- function(x,
   }
 }
 
-#' An upgraded version of `Sys.which()` that returns a better Windows path
-#'
-#' @param name A single-length character vector with the executable name.
-#' @noRd
-sys_which <- function(name) {
-
-  # Only accept a vector of length 1
-  stopifnot(length(name) == 1)
-
-  # Get the binary path on Windows
-  if (is_windows_os()) {
-
-    suppressWarnings(
-      system_call <- system(sprintf("where %s", name), intern = TRUE)
-    )
-
-    path_status <- (system_call %>% attributes())$status
-    binary_path <- system_call[1]
-
-    if (!is.null(path_status) && path_status == 0) {
-
-      pathname <-
-        binary_path %>%
-        tidy_gsub("\\\\", "/")
-
-      return(stats::setNames(pathname, name))
-    }
-  }
-
-  Sys.which(name) %>% tidy_gsub("\\\\", "/")
-}
-
 #' Helper for creating paths for sidecar output files
 #'
 #' A sidecar file is a file that contains additional info related to some
@@ -321,77 +395,3 @@ knitr_sidecar_prefix <- function(default,
 
   return(default)
 }
-
-# nocov start
-
-#' Find a binary on the system path or working directory
-#'
-#' @param bin_name The name of the binary to search for.
-#' @noRd
-find_binary <- function(bin_name) {
-
-  # Find binary on path with `sys_which()`
-  which_result <- sys_which(name = bin_name) %>% unname()
-
-  if (which_result != "") {
-    return(which_result)
-  }
-
-  # Attempt to locate the binary in the working directory
-  list_files_result <-
-    list.files(path = getwd(), pattern = paste0("^", bin_name, "$"))
-
-  if (length(list_files_result) > 0) {
-    return(which_result)
-  }
-
-  # If the binary isn't found in these locations, return `NULL`
-  NULL
-}
-
-#' Upload an image to Imgur and return the response
-#'
-#' @noRd
-imgur_upload <- function(file, client_id) {
-
-  response <-
-    httr::POST(
-      "https://api.imgur.com/3/image.xml",
-      config = httr::add_headers(
-        Authorization = paste("Client-ID", client_id)),
-      body = list(image = httr::upload_file(file))
-    )
-
-  # Convert HTTP error to a `stop()` message if return
-  # status isn't favorable
-  httr::stop_for_status(response, "upload to Imgur.")
-
-  # Get response content as raw bytes
-  result <-
-    (httr::content(response, as = "raw") %>%
-       xml2::read_xml() %>%
-       xml2::as_list()
-    )[[1]]
-
-  # If we get a `NULL` in the `link` field, then
-  # the image didn't get uploaded to Imgur
-  if (is.null(result$link[[1]])) {
-
-    stop(paste0("The image (", file ,") has failed to upload."),
-         call. = FALSE)
-  }
-
-  # Create a simplified list object from
-  # the result
-  list(
-    id = result$id[[1]],
-    link = result$link[[1]],
-    type = result$type[[1]],
-    anim = ifelse(result$animated[[1]] == "true", TRUE, FALSE),
-    width = result$width[[1]] %>% as.numeric(),
-    height = result$height[[1]] %>% as.numeric(),
-    size = result$size[[1]] %>% as.numeric()
-  )
-}
-
-# nocov end
