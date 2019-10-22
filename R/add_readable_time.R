@@ -21,9 +21,12 @@ add_readable_time <- function(time = NULL,
                               use_tz = TRUE) {
 
   if (is.null(time)) {
+
     time <- Sys.time()
+
   } else if (!inherits(time, "POSIXct")) {
-    stop("The `time` value must be a POSIXct date-time value.")
+
+    stop("The `time` value must be a POSIXct date-time value.", call. = FALSE)
   }
 
   if (isTRUE(use_date)) {
