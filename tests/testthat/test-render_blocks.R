@@ -8,7 +8,7 @@ test_that("the `render_block_title()` function returns the expected output", {
   # Expect that the extracted HTML block
   # conforms to a regex pattern when the
   # context is `body`
-  block_title %>%
+  block_title[[1]] %>%
     render_block_title(context = "body") %>%
     expect_match(
       paste0(
@@ -17,14 +17,14 @@ test_that("the `render_block_title()` function returns the expected output", {
       "font-family: Helvetica, sans-serif; font-weight: 300; ",
       "line-height: 1.4; margin: 0; font-size: 36px; ",
       "margin-bottom: 4px; text-transform: capitalize; ",
-      "text-align: center;\">Test Title</p>.*"
+      "text-align: center;\">Test Title</h1>.*"
       )
     )
 
   # Expect that the extracted HTML block
   # conforms to a regex pattern when the
   # context is `header`
-  block_title %>%
+  block_title[[1]] %>%
     render_block_title(context = "header") %>%
     expect_match(
       paste0(
@@ -33,14 +33,14 @@ test_that("the `render_block_title()` function returns the expected output", {
         "font-family: Helvetica, sans-serif; font-weight: 300; ",
         "line-height: 1.4; margin: 0; font-size: 20px; ",
         "margin-bottom: 0px; text-transform: capitalize; ",
-        "text-align: center;\">Test Title</p>.*"
+        "text-align: center;\">Test Title</h1>.*"
       )
     )
 
   # Expect that the extracted HTML block
   # conforms to a regex pattern when the
   # context is `footer`
-  block_title %>%
+  block_title[[1]] %>%
     render_block_title(context = "footer") %>%
     expect_match(
       paste0(
@@ -49,7 +49,7 @@ test_that("the `render_block_title()` function returns the expected output", {
         "font-family: Helvetica, sans-serif; font-weight: 300; ",
         "line-height: 1.4; margin: 0; font-size: 20px; ",
         "margin-bottom: 0px; text-transform: capitalize; ",
-        "text-align: center;\">Test Title</p>.*"
+        "text-align: center;\">Test Title</h1>.*"
       )
     )
 })
@@ -62,7 +62,7 @@ test_that("the `render_block_text()` function returns the expected output", {
   # Expect that the extracted HTML block
   # conforms to a regex pattern when the
   # context is `body`
-  block_text %>%
+  block_text[[1]] %>%
     render_block_text(context = "body") %>%
     expect_match(
       paste0(
@@ -76,7 +76,7 @@ test_that("the `render_block_text()` function returns the expected output", {
   # Expect that the extracted HTML block
   # conforms to a regex pattern when the
   # context is `header`
-  block_text %>%
+  block_text[[1]] %>%
     render_block_text(context = "header") %>%
     expect_match(
       paste0(
@@ -90,7 +90,7 @@ test_that("the `render_block_text()` function returns the expected output", {
   # Expect that the extracted HTML block
   # conforms to a regex pattern when the
   # context is `footer`
-  block_text %>%
+  block_text[[1]] %>%
     render_block_text(context = "footer") %>%
     expect_match(
       paste0(
@@ -104,14 +104,9 @@ test_that("the `render_block_text()` function returns the expected output", {
 
 test_that("the `render_block_spacer()` function returns the expected output", {
 
-  # Create a spacer block
-  block_spacer <- blocks(block_spacer())
-
-  # Expect that the extracted HTML block
-  # conforms to a regex pattern when the
-  # context is `body`
-  block_spacer %>%
-    render_block_spacer(context = "body") %>%
+  # Expect that the spacer block conforms to a
+  # regex pattern when the context is `body`
+  render_block_spacer(context = "body") %>%
     expect_match(
       paste0(
         "<tr>\n<td class=\"wrapper\" style=\"vertical-align: top; ",
@@ -124,11 +119,9 @@ test_that("the `render_block_spacer()` function returns the expected output", {
       )
     )
 
-  # Expect that the extracted HTML block
-  # conforms to a regex pattern when the
-  # context is `header`
-  block_spacer %>%
-    render_block_spacer(context = "header") %>%
+  # Expect that the spacer block conforms to a
+  # regex pattern when the context is `header`
+  render_block_spacer(context = "header") %>%
     expect_match(
       paste0(
         "<tr>\n<td class=\"wrapper\" style=\"vertical-align: top; ",
@@ -141,11 +134,9 @@ test_that("the `render_block_spacer()` function returns the expected output", {
       )
     )
 
-  # Expect that the extracted HTML block
-  # conforms to a regex pattern when the
-  # context is `footer`
-  block_spacer %>%
-    render_block_spacer(context = "footer") %>%
+  # Expect that the spacer block conforms to a
+  # regex pattern when the context is `footer`
+  render_block_spacer(context = "footer") %>%
     expect_match(
       paste0(
         "<tr>\n<td class=\"wrapper\" style=\"vertical-align: top; ",
@@ -157,10 +148,6 @@ test_that("the `render_block_spacer()` function returns the expected output", {
         "\n&nbsp;\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>"
       )
     )
-
-  # Expect that the spacer line template has a specific value
-  spacer_line_template() %>%
-    expect_equal("<p class=\"align-center\" style=\"margin: 0; margin-bottom: 0; text-align: center;\">")
 })
 
 test_that("the `render_block_articles()` function returns the expected output", {
