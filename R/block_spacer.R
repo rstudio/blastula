@@ -59,7 +59,7 @@ block_spacer <- function() {
 }
 
 #' @noRd
-render_block_spacer <- function(x, context = "body") {
+render_block_spacer <- function(context = "body") {
 
   if (context == "body") {
 
@@ -70,17 +70,11 @@ render_block_spacer <- function(x, context = "body") {
     padding <- 0
   }
 
-  paragraph <- spacer_line_template
-
-  text <- "&nbsp;"
-
   spacer_block_template() %>%
-    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text()) %>%
-    tidy_gsub("\\{text\\}", text)
-}
-
-spacer_line_template <- function() {
-  "<p class=\"align-center\" style=\"margin: 0; margin-bottom: 0; text-align: center;\">"
+    tidy_gsub(
+      "\\{padding\\}",
+      padding %>% htmltools::htmlEscape(attribute = TRUE)
+    )
 }
 
 #' A template for a spacer HTML fragment
@@ -93,7 +87,7 @@ spacer_block_template <- function() {
 <tbody>
 <tr>
 <td style=\"vertical-align: top;\" valign=\"top\">
-{text}
+&nbsp;
 </td>
 </tr>
 </tbody>
