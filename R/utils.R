@@ -159,7 +159,7 @@ sys_which <- function(name) {
     }
   }
 
-  Sys.which(name) %>% tidy_gsub("\\\\", "/")
+  Sys.which(name) %>% unname() %>% tidy_gsub("\\\\", "/")
 }
 
 #' Find a binary on the system path or working directory
@@ -169,7 +169,7 @@ sys_which <- function(name) {
 find_binary <- function(bin_name) {
 
   # Find binary on path with `sys_which()`
-  which_result <- sys_which(name = bin_name) %>% unname()
+  which_result <- sys_which(name = bin_name)
 
   if (which_result != "") {
     return(which_result)
