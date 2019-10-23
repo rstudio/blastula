@@ -4,10 +4,10 @@
 \alias{block_text}
 \title{A block of text}
 \usage{
-block_text(...)
+block_text(text)
 }
 \arguments{
-\item{...}{Paragraphs of text.}
+\item{text}{Plain text or Markdown text (via \code{\link[=md]{md()}}).}
 }
 \description{
 With \code{block_text()} we can define a text area and this can be easily combined

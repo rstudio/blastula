@@ -4,10 +4,10 @@
 \alias{block_title}
 \title{A block with large title text}
 \usage{
-block_title(...)
+block_title(title)
 }
 \arguments{
-\item{...}{Paragraphs of title text.}
+\item{title}{Plain text or Markdown text (via \code{\link[=md]{md()}}) for the title.}
 }
 \description{
 With \code{block_title()} we can define a title text area and this can be easily
