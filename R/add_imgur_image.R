@@ -68,7 +68,7 @@ add_imgur_image <- function(image,
       # Upon exiting the function (either
       # through success or error, we remove
       # the on-disk image file)
-      on.exit(file.remove(file_name))
+      on.exit(file.remove(file_name), add = TRUE)
     }
   }
 

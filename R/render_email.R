@@ -38,7 +38,7 @@ render_email <- function(input,
                          render_options = list()) {
 
   output_file <- tempfile(pattern = "email", fileext = ".html")
-  on.exit(unlink(output_file))
+  on.exit(unlink(output_file), add = TRUE)
 
   output_options$self_contained <- TRUE
 

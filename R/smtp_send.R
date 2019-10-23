@@ -222,7 +222,7 @@ smtp_send <- function(email,
   email$html_str %>% writeLines(con = tempfile_path, useBytes = TRUE)
 
   # Remove the tempfile after the function exits
-  on.exit(file.remove(tempfile_path))
+  on.exit(file.remove(tempfile_path), add = TRUE)
 
   # Normalize `subject` so that a `NULL` value becomes an empty string
   subject <- subject %||% ""
