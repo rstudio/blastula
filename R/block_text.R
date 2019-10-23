@@ -7,7 +7,7 @@
 #' resultant `blocks` object can be provided to the `body`, `header`, or
 #' `footer` arguments of `compose_email()`.
 #'
-#' @param ... Paragraphs of text.
+#' @param text Plain text or Markdown text (via [md()]).
 #'
 #' @examples
 #' # Create a block of two, side-by-side
@@ -48,13 +48,11 @@
 #' if (interactive()) email
 #'
 #' @export
-block_text <- function(...) {
+block_text <- function(text) {
 
-  x <- list(...)
+  class(text) <- c("block_text", class(text))
 
-  class(x) <- "block_text"
-
-  x
+  text
 }
 
 #' @noRd
@@ -83,8 +81,8 @@ render_block_text <- function(x, context = "body") {
     tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text())
 
   text <-
-    paste(x %>% unlist(), collapse = "\n") %>%
-    commonmark::markdown_html() %>%
+    x %>%
+    process_text() %>%
     tidy_gsub("<p>", paragraph)
 
   text_block_template() %>%
