@@ -7,7 +7,7 @@
 #' and the resultant `blocks` object can be provided to the `body`, `header`, or
 #' `footer` arguments of `compose_email()`.
 #'
-#' @param ... Paragraphs of title text.
+#' @param title Plain text or Markdown text (via [md()]) for the title.
 #'
 #' @examples
 #' # Create a block of two, side-by-side
@@ -46,13 +46,11 @@
 #' if (interactive()) email
 #'
 #' @export
-block_title <- function(...) {
+block_title <- function(title) {
 
-  x <- list(...)
+  class(title) <- c("block_title", class(title))
 
-  class(x) <- "block_title"
-
-  x
+  title
 }
 
 #' @noRd
