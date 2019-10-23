@@ -71,25 +71,22 @@ render_block_title <- function(x, context = "body") {
     padding <- 10
   }
 
-  paragraph <-
+  title_line_rendered <-
     title_line_template() %>%
-    tidy_gsub("\\{font_color\\}", font_color %>% process_text()) %>%
-    tidy_gsub("\\{font_size\\}", font_size %>% as.character() %>% process_text()) %>%
-    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% as.character() %>% process_text()) %>%
-    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text())
-
-  text <-
-    paste(x %>% unlist(), collapse = "\n") %>%
-    commonmark::markdown_html() %>%
-    tidy_gsub("<p>", paragraph)
+    tidy_gsub("\\{font_color\\}", font_color %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{title\\}", x %>% process_text())
 
   title_block_template() %>%
-    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text()) %>%
-    tidy_gsub("\\{text\\}", text)
+    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{text\\}", title_line_rendered)
+
 }
 
 title_line_template <- function() {
-  "<h1 class=\"align-center\" style=\"color: {font_color}; font-family: Helvetica, sans-serif; font-weight: 300; line-height: 1.4; margin: 0; font-size: {font_size}px; margin-bottom: {margin_bottom}px; text-transform: capitalize; text-align: center;\">"
+  "<h1 class=\"align-center\" style=\"color: {font_color}; font-family: Helvetica, sans-serif; font-weight: 300; line-height: 1.4; margin: 0; font-size: {font_size}px; margin-bottom: {margin_bottom}px; text-transform: capitalize; text-align: center;\">{title}</h1>"
 }
 
 #' A template for a title text HTML fragment
