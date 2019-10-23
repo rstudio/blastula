@@ -175,15 +175,7 @@ find_binary <- function(bin_name) {
     return(which_result)
   }
 
-  # Attempt to locate the binary in the working directory
-  list_files_result <-
-    list.files(path = getwd(), pattern = paste0("^", bin_name, "$"))
-
-  if (length(list_files_result) > 0) {
-    return(which_result)
-  }
-
-  # If the binary isn't found in these locations, return `NULL`
+  # If the binary isn't found return `NULL`
   NULL
 }
 
