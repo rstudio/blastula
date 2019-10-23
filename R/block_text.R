@@ -75,10 +75,10 @@ render_block_text <- function(x, context = "body") {
 
   paragraph <-
     text_line_template() %>%
-    tidy_gsub("\\{font_color\\}", font_color %>% process_text()) %>%
-    tidy_gsub("\\{font_size\\}", font_size %>% as.character() %>% process_text()) %>%
-    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% as.character() %>% process_text()) %>%
-    tidy_gsub("\\{padding\\}", padding %>% as.character() %>% process_text())
+    tidy_gsub("\\{font_color\\}", font_color %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE))
 
   text <-
     x %>%
