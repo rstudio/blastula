@@ -40,8 +40,6 @@ attach_connect_email <- function(email = NULL,
                                  text = NULL,
                                  preview = TRUE) {
 
-  # nocov start
-
   if (!is.null(email) && !inherits(email, "email_message")) {
     stop("A blastula email message object must be supplied.",
          call. = FALSE)
@@ -117,8 +115,6 @@ attach_connect_email <- function(email = NULL,
   }
 
   invisible()
-
-  # nocov end
 }
 
 #' Suppress any scheduled emailing in RStudio Connect
@@ -139,11 +135,7 @@ attach_connect_email <- function(email = NULL,
 #' @export
 suppress_scheduled_email <- function(suppress = TRUE) {
 
-  # nocov start
-
   rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = suppress)
-
-  # nocov end
 }
 
 #' Utility function to generate the preview message for a Connect Email
