@@ -133,9 +133,6 @@ is_unknown_os <- function() {
 #' @noRd
 sys_which <- function(name) {
 
-  # `shQuote()` name
-  name <- shQuote(name)
-
   # Only accept a vector of length 1
   stopifnot(length(name) == 1)
 
@@ -158,6 +155,8 @@ sys_which <- function(name) {
       return(stats::setNames(pathname, name))
     }
   }
+
+  browser()
 
   Sys.which(name) %>% unname() %>% tidy_gsub("\\\\", "/")
 }
