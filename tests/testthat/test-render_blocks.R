@@ -290,7 +290,7 @@ test_that("the `render_block_articles()` function returns the expected output", 
 
   # Expect that the article image template (1 article) has
   # a specific value
-  article_image_template_1() %>%
+  article_image_template_1 %>%
     expect_match(
       paste0(
         "^<p style=\"font-family: Helvetica, sans-serif; font-size: 14px;.*?",
@@ -300,7 +300,7 @@ test_that("the `render_block_articles()` function returns the expected output", 
 
   # Expect that the article image template (2 articles) has
   # a specific value
-  article_image_template_2() %>%
+  article_image_template_2 %>%
     expect_match(
       paste0(
         "<tr>\n<td class=\"article-thumbnail\" style=\"font-family: ",
@@ -311,7 +311,7 @@ test_that("the `render_block_articles()` function returns the expected output", 
 
   # Expect that the article image template (3 articles) has
   # a specific value
-  article_image_template_3() %>%
+  article_image_template_3 %>%
     expect_match(
       paste0(
         "<tr>\n<td class=\"article-thumbnail\" style=\"font-family: ",
@@ -369,6 +369,6 @@ test_that("the social link functions work correctly", {
     nrow() %>%
     expect_equal(29)
 
-  social_service_icon_variants() %>%
+  social_service_icon_variants %>%
     expect_equal(c("color", "bw", "dark_gray", "gray", "light_gray"))
 })

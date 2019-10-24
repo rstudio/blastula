@@ -1,7 +1,4 @@
-#' The standard HTML email template
-#' @noRd
-bls_standard_template <- function() {
-
+bls_standard_template <-
 "<!doctype html>
 <html>
   <head>
@@ -191,4 +188,3 @@ bls_standard_template <- function() {
       </table>
     </body>
   </html>"
-}

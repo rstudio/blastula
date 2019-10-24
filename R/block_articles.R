@@ -153,7 +153,7 @@ render_block_articles <- function(x) {
 block_article_3 <- function(items) {
 
   block <-
-    "<tr>
+"<tr>
 <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
 <!--[if (gte mso 9)|(IE)]>
 <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
@@ -211,18 +211,18 @@ block_article_3 <- function(items) {
       image <- ""
     } else {
       image <-
-        article_image_template_3() %>%
+        article_image_template_3 %>%
         tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
         tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
     }
 
     title <-
-      article_title_template() %>%
+      article_title_template %>%
       tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
       tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
 
     content <-
-      article_content_template_2() %>%
+      article_content_template_2 %>%
       tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
 
     block <-
@@ -243,7 +243,7 @@ block_article_3 <- function(items) {
 block_article_2 <- function(items) {
 
   block <-
-    "<tr>
+"<tr>
 <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
 <!--[if (gte mso 9)|(IE)]>
 <table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
@@ -286,18 +286,18 @@ block_article_2 <- function(items) {
       image <- ""
     } else {
       image <-
-        article_image_template_2() %>%
+        article_image_template_2 %>%
         tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
         tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
     }
 
     title <-
-      article_title_template() %>%
+      article_title_template %>%
       tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
       tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
 
     content <-
-      article_content_template_2() %>%
+      article_content_template_2 %>%
       tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
 
     block <-
@@ -318,7 +318,7 @@ block_article_2 <- function(items) {
 block_article_1 <- function(items) {
 
   block <-
-    "<tr>
+"<tr>
 <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
 <tbody>
@@ -340,18 +340,18 @@ block_article_1 <- function(items) {
       image <- ""
     } else {
       image <-
-        article_image_template_1() %>%
+        article_image_template_1 %>%
         tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
         tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
     }
 
     title <-
-      article_title_template() %>%
+      article_title_template %>%
       tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
       tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
 
     content <-
-      article_content_template_1() %>%
+      article_content_template_1 %>%
       tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
 
     block <-
@@ -366,70 +366,46 @@ block_article_1 <- function(items) {
   block
 }
 
-#' A template for an article image HTML fragment (three across)
-#' @noRd
-article_image_template_3 <- function() {
-
-  "<tr>
+article_image_template_3 <-
+"<tr>
 <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
 </td>
 </tr>
 "
-}
 
-#' A template for an article image HTML fragment (two across)
-#' @noRd
-article_image_template_2 <- function() {
-
-  "<tr>
+article_image_template_2 <-
+"<tr>
 <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
 </td>
 </tr>
 "
-}
 
-#' A template for an article image HTML fragment (one across)
-#' @noRd
-article_image_template_1 <- function() {
-
-  "<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
+article_image_template_1 <-
+"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
 </p>
 "
-}
 
-#' A template for an article title HTML fragment
-#' @noRd
-article_title_template <- function() {
-
-  "<tr>
+article_title_template <-
+"<tr>
 <td class=\"article-title\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; font-size: 14px; font-weight: 800; line-height: 1.4em; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\" style=\"color: #222222; text-decoration: none; font-size: 14px; font-weight: 800; line-height: 1.4em;\">{title}</a>
 </td>
 </tr>
 "
-}
 
-#' A template for an article content HTML fragment (one across)
-#' @noRd
-article_content_template_1 <- function() {
-
-  "<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
+article_content_template_1 <-
+"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
 {content}
 </p>
 "
-}
 
-#' A template for an article content HTML fragment (two across)
-#' @noRd
-article_content_template_2 <- function() {
-
-  "<tr>
+article_content_template_2 <-
+"<tr>
 <td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">
 {content}
 </td>
 </tr>
 "
-}

@@ -63,7 +63,7 @@ compose_email <- function(body = NULL,
     } else {
 
       html_body_text <-
-        simple_body_block() %>%
+        simple_body_block %>%
         tidy_gsub("\\{html_paragraphs\\}", body %>% process_text())
     }
 
@@ -119,7 +119,7 @@ compose_email <- function(body = NULL,
 
   # Generate the email message body
   body <-
-    bls_standard_template() %>%
+    bls_standard_template %>%
     tidy_gsub("\\{title\\}", title) %>%
     tidy_gsub("\\{html_header\\}", html_header) %>%
     tidy_gsub("\\{html_body_text\\}", html_body_text) %>%
@@ -195,11 +195,8 @@ compose_email <- function(body = NULL,
   email_message
 }
 
-#' Template for a simple block of HTML in the body
-#' @noRd
-simple_body_block <- function() {
-
-  "<tr>
+simple_body_block <-
+"<tr>
 <td class=\"wrapper\" style=\"font-family: sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 20px;\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\">
 <tbody>
@@ -212,4 +209,3 @@ simple_body_block <- function() {
 </table>
 </td>
 </tr>"
-}

@@ -70,17 +70,14 @@ render_block_spacer <- function(context = "body") {
     padding <- 0
   }
 
-  spacer_block_template() %>%
+  spacer_block_template %>%
     tidy_gsub(
       "\\{padding\\}",
       padding %>% htmltools::htmlEscape(attribute = TRUE)
     )
 }
 
-#' A template for a spacer HTML fragment
-#' @noRd
-spacer_block_template <- function() {
-
+spacer_block_template <-
 "<tr>
 <td class=\"wrapper\" style=\"vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
@@ -94,4 +91,3 @@ spacer_block_template <- function() {
 </table>
 </td>
 </tr>"
-}

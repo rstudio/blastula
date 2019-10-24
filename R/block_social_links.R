@@ -232,7 +232,7 @@ render_block_social_links <- function(x) {
     alt <- x[[i]]$alt
 
     x[[i]] <-
-      social_link_line_template() %>%
+      social_link_line_template %>%
       tidy_gsub("\\{link\\}", link %>% process_text()) %>%
       tidy_gsub("\\{icon\\}", icon %>% process_text()) %>%
       tidy_gsub("\\{alt\\}", alt %>% process_text())
@@ -244,14 +244,10 @@ render_block_social_links <- function(x) {
     tidy_gsub("\\{social_links\\}", social_links)
 }
 
-social_link_line_template <- function() {
+social_link_line_template <-
   "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
-}
 
-#' A template for a social link HTML fragment
-#' @noRd
-social_link_block_template <- function() {
-
+social_link_block_template <-
 "<tr>
 <td class=\"content-block\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; padding-top: 0; padding-bottom: 24px; font-size: 12px; color: #999999; text-align: center;\" valign=\"top\" align=\"center\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"social-sharing\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto; margin: 0 auto; text-align: center;\" align=\"center\">
@@ -265,7 +261,6 @@ social_link_block_template <- function() {
 </table>
 </td>
 </tr>"
-}
 
 #' @noRd
 icon_for_social_service <- function(service,
@@ -294,7 +289,7 @@ icon_for_social_service <- function(service,
 
   # Ensure that the icon variant is valid; if
   # nothing is provided for variant, default to `bw`
-  if (!is.null(variant) && !(variant %in% social_service_icon_variants())) {
+  if (!is.null(variant) && !(variant %in% social_service_icon_variants)) {
     stop("The given `variant` is not available for the social icons\n",
          " * look inside the article at `?social_link` to see which are available\n",
          call. = FALSE)
@@ -303,16 +298,11 @@ icon_for_social_service <- function(service,
   }
 
   # Construct the link to the hosted image asset
-  paste0(
-    "https://", social_icons_host_stub(),
-    "/", service, "-", variant, ".png"
-  )
+  paste0("https://", social_icons_host_stub, "/", service, "-", variant, ".png")
 }
 
-#' @noRd
-social_icons_host_stub <- function() {
+social_icons_host_stub <-
   "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
-}
 
 #' @noRd
 social_service_icons <- function() {
@@ -351,9 +341,7 @@ social_service_icons <- function() {
   )
 }
 
-#' @noRd
-social_service_icon_variants <- function() {
-
+social_service_icon_variants <-
   c(
     "color",
     "bw",
@@ -361,4 +349,3 @@ social_service_icon_variants <- function() {
     "gray",
     "light_gray"
   )
-}

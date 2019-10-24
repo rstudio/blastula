@@ -72,27 +72,23 @@ render_block_title <- function(x, context = "body") {
   }
 
   title_line_rendered <-
-    title_line_template() %>%
+    title_line_template %>%
     tidy_gsub("\\{font_color\\}", font_color %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{title\\}", x %>% process_text())
 
-  title_block_template() %>%
+  title_block_template %>%
     tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{text\\}", title_line_rendered)
 
 }
 
-title_line_template <- function() {
+title_line_template <-
   "<h1 class=\"align-center\" style=\"color: {font_color}; font-family: Helvetica, sans-serif; font-weight: 300; line-height: 1.4; margin: 0; font-size: {font_size}px; margin-bottom: {margin_bottom}px; text-transform: capitalize; text-align: center;\">{title}</h1>"
-}
 
-#' A template for a title text HTML fragment
-#' @noRd
-title_block_template <- function() {
-
+title_block_template <-
 "<tr>
 <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
@@ -106,4 +102,3 @@ title_block_template <- function() {
 </table>
 </td>
 </tr>"
-}

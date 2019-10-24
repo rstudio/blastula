@@ -18,7 +18,7 @@ test_that("text blocks have the correct internal contents", {
   # Expect that the `text_block_template()` function
   # produces an HTML template as a table row fragment
   expect_true(
-    grepl("^<tr>.*?</tr>$", text_block_template())
+    grepl("^<tr>.*?</tr>$", text_block_template)
   )
 })
 
@@ -40,7 +40,7 @@ test_that("title blocks have the correct internal contents", {
   # Expect that the `title_block_template()` function
   # produces an HTML template as a table row fragment
   expect_true(
-    grepl("^<tr>.*?</tr>$", title_block_template())
+    grepl("^<tr>.*?</tr>$", title_block_template)
   )
 })
 
@@ -62,7 +62,7 @@ test_that("spacer blocks have the correct internal contents", {
   # Expect that the `spacer_block_template()` function
   # produces an HTML template as a table row fragment
   expect_true(
-    grepl("^<tr>.*?</tr>$", spacer_block_template())
+    grepl("^<tr>.*?</tr>$", spacer_block_template)
   )
 })
 

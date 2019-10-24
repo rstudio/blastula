@@ -74,27 +74,23 @@ render_block_text <- function(x, context = "body") {
   }
 
   text_line_rendered <-
-    text_line_template() %>%
+    text_line_template %>%
     tidy_gsub("\\{font_color\\}", font_color %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{text\\}", x %>% process_text())
 
-  text_block_template() %>%
+  text_block_template %>%
     tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
     tidy_gsub("\\{text\\}", text_line_rendered)
 }
 
-text_line_template <- function() {
+text_line_template <-
   "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; color: {font_color};font-size: {font_size}px; font-weight: normal; margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">{text}</p>"
-}
 
-#' A template for a text HTML fragment
-#' @noRd
-text_block_template <- function() {
-
+text_block_template <-
 "<tr>
 <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: {font_size}px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
@@ -108,4 +104,3 @@ text_block_template <- function() {
 </table>
 </td>
 </tr>"
-}
