@@ -240,7 +240,7 @@ render_block_social_links <- function(x) {
 
   social_links <- x %>% unlist() %>% paste(collapse = "\n")
 
-  social_link_block_template() %>%
+  social_link_block_template %>%
     tidy_gsub("\\{social_links\\}", social_links)
 }
 
