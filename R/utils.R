@@ -156,8 +156,6 @@ sys_which <- function(name) {
     }
   }
 
-  browser()
-
   Sys.which(name) %>% unname() %>% tidy_gsub("\\\\", "/")
 }
 
