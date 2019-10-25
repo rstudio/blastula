@@ -12,7 +12,7 @@ generate_rfc2822 <- function(eml, date = Sys.time(), subject = NULL,
     "MIME-Version" = "1.0",
     "Date" = format_rfc2822_date(date),
     "Message-ID" = paste0("<", uuid::UUIDgenerate(), "@blastula.local>"),
-    "Subject" = header_unstructured(subject, "Subject"),
+    "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
     "From" = format_rfc2822_addr(from, "From"),
     "To" = format_rfc2822_addr_list(to, "To"),
     "Cc" = format_rfc2822_addr_list(cc, "Cc")
@@ -252,13 +252,18 @@ format_rfc2822_addr_list <- function(addrs, fieldname) {
   }
 
   paste0(
-    ifelse(nzchar(names(addrs)), paste0(header_quoted(names(addrs), fieldname), " "), ""),
+    ifelse(
+      nzchar(names(addrs)),
+      paste0(header_quoted(names(addrs), fieldname, encode_unicode = TRUE), " "),
+      ""
+    ),
     "<", addrs, ">",
     collapse = ", "
   )
 }
 
-header_quoted <- function(str, fieldname) {
+# NOTE: str can be length > 1
+header_quoted <- function(str, fieldname, encode_unicode = FALSE) {
   force(fieldname)
   if (!is.character(str)) {
     stop("The '", fieldname, "' field must be a character vector")
@@ -267,10 +272,26 @@ header_quoted <- function(str, fieldname) {
     stop("The '", fieldname, "' field must not contain newlines")
   }
 
-  paste0("\"", gsub("([\"\\])", "\\\\\\1", str), "\"")
+  str <- enc2utf8(str)
+
+  needs_encoding <- grepl("[^\x01-\x7F]", str)
+
+  if (any(needs_encoding)) {
+    if (encode_unicode) {
+      str[needs_encoding] <- vapply(str[needs_encoding], function(x) {
+        encode_base64(charToRaw(x))
+      }, character(1)) %>% sprintf("=?utf-8?B?%s?=", .)
+      return(str)
+    } else {
+      warning("The '", fieldname, "' field contains impermissible characters, ",
+        "please use 7-bit ASCII only")
+    }
+  } else {
+    return(paste0("\"", gsub("([\"\\])", "\\\\\\1", str), "\""))
+  }
 }
 
-header_unstructured <- function(str, fieldname) {
+header_unstructured <- function(str, fieldname, encode_unicode = FALSE) {
   force(fieldname)
 
   if (is.null(str)) {
@@ -285,6 +306,15 @@ header_unstructured <- function(str, fieldname) {
   }
   if (any(grepl("[\r\n]", str))) {
     stop("The '", fieldname, "' field must not contain newlines")
+  }
+
+  if (grepl("[^\x01-\x7F]", str)) {
+    if (encode_unicode) {
+      str <- sprintf("=?utf-8?B?%s?=", encode_base64(charToRaw(str)))
+    } else {
+      warning("The '", fieldname, "' field contains impermissible characters, ",
+        "please use 7-bit ASCII only")
+    }
   }
 
   str
