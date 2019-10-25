@@ -1,4 +1,3 @@
-# TODO: UTF-8 encoding in headers
 # TODO: Tests
 # TODO: Currently outputs 8-bit quoted-printable, verify this is OK (Apple Mail seems to do it)
 
