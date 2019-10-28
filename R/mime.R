@@ -7,8 +7,7 @@ generate_rfc2822 <- function(eml,
                              subject = NULL,
                              from = NULL,
                              to = NULL,
-                             cc = NULL,
-                             bcc = NULL) {
+                             cc = NULL) {
 
   stopifnot(inherits(eml, "blastula_message"))
 
@@ -19,8 +18,7 @@ generate_rfc2822 <- function(eml,
     "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
     "From" = format_rfc2822_addr(from, "From"),
     "To" = format_rfc2822_addr_list(to, "To"),
-    "Cc" = format_rfc2822_addr_list(cc, "Cc"),
-    "Bcc" = format_rfc2822_addr_list(bcc, "Bcc")
+    "Cc" = format_rfc2822_addr_list(cc, "Cc")
   )
 
   images <- mapply(names(eml$images), eml$images, FUN = function(filename, data) {
@@ -34,6 +32,32 @@ generate_rfc2822 <- function(eml,
     )
   }, SIMPLIFY = FALSE)
 
+  attachments <- lapply(eml$attachments, function(attachment) {
+    # $file_path
+    # $content_type
+    # $disposition
+    # $filename
+
+    # Content-Type: audio/mpeg; name="grasshopper_+13033051704_10_21_2019_195989404.mp3"
+    # Content-Disposition: attachment; filename="grasshopper_+13033051704_10_21_2019_195989404.mp3"
+    # Content-Transfer-Encoding: base64
+    # Content-ID: <16defefef12b222fecc1>
+    # X-Attachment-Id: 16defefef12b222fecc1
+
+    raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
+
+
+    mime_part(
+      attachment$content_type,
+      headers = list(
+        "Content-Disposition" = sprintf("attachment; filename=%s",
+          header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)),
+        "Content-ID" = paste0("<", tidy_gsub(uuid::UUIDgenerate(), "-", ""), ">")
+      ),
+      content = raw_bytes
+    )
+  })
+
   msg <- mime_multipart(
     "multipart/related",
     headers = headers,
@@ -41,7 +65,8 @@ generate_rfc2822 <- function(eml,
       mime_part("text/html; charset=utf-8",
         content = eml$html_str
       ),
-      !!!images
+      !!!images,
+      !!!attachments
     )
   )
 

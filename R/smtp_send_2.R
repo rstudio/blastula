@@ -182,11 +182,6 @@ smtp_send_2 <- function(email,
   # Normalize `subject` so that a `NULL` value becomes an empty string
   subject <- subject %||% ""
 
-  # Create comma-separated addresses for `to`, `cc`, and `bcc`
-  to <- make_address_list(to)
-  cc <- make_address_list(cc)
-  bcc <- make_address_list(bcc)
-
   # Generate an email conforming to the RFC-2822 standard
   email_qp <-
     email %>%
@@ -203,8 +198,8 @@ smtp_send_2 <- function(email,
   # Send message using `curl::send_mail()`
   result <-
     curl::send_mail(
-      mail_from = from,
-      mail_rcpt = to,
+      mail_from = unname(from),
+      mail_rcpt = unname(c(to, cc, bcc)),
       message = email_qp,
       smtp_server = credentials$host,
       use_ssl = credentials$use_ssl,
@@ -214,9 +209,9 @@ smtp_send_2 <- function(email,
 
   # Transmit a message about send success depending on the status code
   if (result$status_code == 250) {
-    message("The email message was sent successfully.\n")
+    message("The email message was sent successfully.")
   } else {
-    message("The email message was NOT sent.\n")
+    stop("The email message was NOT sent; the error code was ", result$status_code)
   }
 
   # nocov end

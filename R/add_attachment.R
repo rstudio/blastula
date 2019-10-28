@@ -12,27 +12,25 @@
 #' @export
 add_attachment <- function(email,
                            file_path,
-                           error_on_missing = TRUE) {
+                           content_type = mime::guess_type(file_path),
+                           disposition = "attachment",
+                           filename = basename(file_path)) {
 
   # Get the expanded path for the file
-  expanded_path <- file_path %>% path.expand() %>% file.path()
-
-  # Stop function if the file can't be
-  # found on disk
-  if (!file.exists(expanded_path) && error_on_missing) {
-    stop("The file given in `file_path` cannot be found.",
-         call. = FALSE)
-  }
+  expanded_path <- file_path %>% path.expand() %>%
+    normalizePath(mustWork = TRUE)
 
   # Create the attachment list
   attachment_list <-
-    create_attachment_list(
+    list(
       file_path = expanded_path,
-      disposition = no_options()
+      content_type = content_type,
+      disposition = disposition,
+      filename = filename
     )
 
   # Add the attachment list to `email$attachments`
-  email <- email %>% add_attachment_list(attachment_list = attachment_list)
+  email$attachments <- c(email$attachments, list(attachment_list))
 
   email
 }
