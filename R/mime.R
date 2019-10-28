@@ -2,8 +2,13 @@
 # TODO: Currently outputs 8-bit quoted-printable, verify this is OK (Apple Mail seems to do it)
 
 # Turns a blastula email object into an RFC2822 message
-generate_rfc2822 <- function(eml, date = Sys.time(), subject = NULL,
-  from = NULL, to = NULL, cc = NULL) {
+generate_rfc2822 <- function(eml,
+                             date = Sys.time(),
+                             subject = NULL,
+                             from = NULL,
+                             to = NULL,
+                             cc = NULL,
+                             bcc = NULL) {
 
   stopifnot(inherits(eml, "blastula_message"))
 
@@ -14,7 +19,8 @@ generate_rfc2822 <- function(eml, date = Sys.time(), subject = NULL,
     "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
     "From" = format_rfc2822_addr(from, "From"),
     "To" = format_rfc2822_addr_list(to, "To"),
-    "Cc" = format_rfc2822_addr_list(cc, "Cc")
+    "Cc" = format_rfc2822_addr_list(cc, "Cc"),
+    "Bcc" = format_rfc2822_addr_list(bcc, "Bcc")
   )
 
   images <- mapply(names(eml$images), eml$images, FUN = function(filename, data) {
