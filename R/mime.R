@@ -210,7 +210,8 @@ encode_qp <- function(str) {
   bytes <- charToRaw(str)
 
   # Section 6.7.1-6.7.4
-  needs_encode <- !(bytes %in% as.raw(c(0x09, 0x20, 0x21:0x3C, 0x3E:0x7E)))
+  # Also encoding 0x2E ('.') to guard against dot stuffing issues
+  needs_encode <- !(bytes %in% as.raw(c(0x09, 0x0A, 0x0D, 0x20, 0x21:0x2D, 0x2F:0x3C, 0x3E:0x7E)))
   enc_chars <- character(length(bytes))
   enc_chars[needs_encode] <- sprintf("=%02X", as.integer(bytes[needs_encode]))
   enc_chars[!needs_encode] <- strsplit(rawToChar(bytes[!needs_encode]), "")[[1]]
@@ -222,7 +223,9 @@ encode_qp <- function(str) {
   cur_line_len <- 0L
   for (chunk in enc_chars) {
     # See if soft line break is required (Section 6.7.5)
-    if (cur_line_len + nchar(chunk) >= 76) {
+    if (identical(chunk, "\n")) {
+      cur_line_len <- -1L
+    } else if (cur_line_len + nchar(chunk) >= 76) {
       out("=\r\n")
       cur_line_len <- 0L
     }
