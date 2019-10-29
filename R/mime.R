@@ -36,29 +36,47 @@ generate_rfc2822 <- function(eml,
 
     raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
 
+    quoted_filename <- header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)
 
     mime_part(
-      attachment$content_type,
+      sprintf("%s; name=%s", attachment$content_type, quoted_filename),
       headers = list(
-        "Content-Disposition" = sprintf("attachment; filename=%s",
-          header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)),
+        "Content-Disposition" = sprintf(
+          "%s; filename=%s",
+          attachment$disposition,
+          quoted_filename
+        ),
         "Content-ID" = paste0("<", tidy_gsub(uuid::UUIDgenerate(), "-", ""), ">")
       ),
       content = raw_bytes
     )
   })
 
+
   msg <- mime_multipart(
     "multipart/related",
-    headers = headers,
+    headers = if (length(attachments) == 0) headers else list(),
     body_parts = rlang::list2(
       mime_part("text/html; charset=utf-8",
         content = eml$html_str
       ),
-      !!!images,
-      !!!attachments
+      !!!images
     )
   )
+
+  # This is necessary for attachments to display correctly on
+  # iOS Mail in particular (other clients are more relaxed
+  # about showing attachments whenever available)
+  if (length(attachments) > 0) {
+    msg <- mime_multipart(
+      "multipart/mixed",
+      headers = headers,
+      body_parts = rlang::list2(
+        msg,
+        !!!attachments
+      )
+    )
+  }
 
   f <- file(open = "w+b")
   on.exit(close(f), add = TRUE)
