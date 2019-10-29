@@ -4,20 +4,38 @@
 \alias{add_attachment}
 \title{Add a file attachment to an email message}
 \usage{
-add_attachment(email, file_path, error_on_missing = TRUE)
+add_attachment(email, file, content_type = mime::guess_type(file),
+  disposition = "attachment", filename = basename(file))
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
 function. The object's class is \code{email_message}.}
 
-\item{file_path}{The path for the file to be attached.}
+\item{file}{The filename for the file to be attached.}
 
-\item{error_on_missing}{An option to stop with an error if the file cannot be
-located on disk. By default this is set to \code{TRUE}.}
+\item{content_type}{The MIME type for the attachment. By default, this is
+guessed by the \code{mime::guess_type()} function on the basis of the \code{file}'s
+extension. The available MIME types that can be guessed are available in
+the \code{mime::mimemap} named character vector.}
+
+\item{disposition}{The disposition for the file attachment. By default this
+is \code{"attachment"} where attachments are typically separated from the
+message content and presented in an interface for downloading individual
+attachments in email clients. The other option is \code{"inline"}, where the
+attachment may be rendered along with the message content (appearing below
+the message).}
+
+\item{filename}{the filename for the attachment. This can be different than
+the basename provided to \code{file} for the purpose of customization. By
+default, the basename of \code{file} is taken to be the attachment's filename.}
 }
 \description{
 This gives us a simple interface for attaching a file to the email object.
-When it comes time to send the email through \code{smtp_send()}, all attachments
+When it comes time to send the email through \code{\link[=smtp_send]{smtp_send()}}, all attachments
 (specified by individual calls to \code{add_attachment()}) will be faithfully
 transmitted along with the message.
+}
+\details{
+There are options available to specify the attachment's MIME type, its
+disposition, and customize the attachment's recipient-facing filename.
 }
