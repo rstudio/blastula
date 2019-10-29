@@ -11,13 +11,15 @@
 #'   located on disk. By default this is set to `TRUE`.
 #' @export
 add_attachment <- function(email,
-                           file_path,
-                           content_type = mime::guess_type(file_path),
+                           file,
+                           content_type = mime::guess_type(file),
                            disposition = "attachment",
-                           filename = basename(file_path)) {
+                           filename = basename(file)) {
 
   # Get the expanded path for the file
-  expanded_path <- file_path %>% path.expand() %>%
+  expanded_path <-
+    file %>%
+    path.expand() %>%
     normalizePath(mustWork = TRUE)
 
   # Create the attachment list
