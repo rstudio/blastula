@@ -85,7 +85,7 @@ compose_email <- function(body = NULL,
         render_blocks(
           blocks =
             blocks(
-              block_text(footer %>% process_text())),
+              block_text(footer)),
           context = "footer"
         )[[1]]
     }
@@ -108,7 +108,7 @@ compose_email <- function(body = NULL,
         render_blocks(
           blocks =
             blocks(
-              block_text(header %>% process_text())),
+              block_text(header)),
           context = "header"
         )[[1]]
     }
