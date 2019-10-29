@@ -33,16 +33,6 @@ generate_rfc2822 <- function(eml,
   }, SIMPLIFY = FALSE)
 
   attachments <- lapply(eml$attachments, function(attachment) {
-    # $file_path
-    # $content_type
-    # $disposition
-    # $filename
-
-    # Content-Type: audio/mpeg; name="grasshopper_+13033051704_10_21_2019_195989404.mp3"
-    # Content-Disposition: attachment; filename="grasshopper_+13033051704_10_21_2019_195989404.mp3"
-    # Content-Transfer-Encoding: base64
-    # Content-ID: <16defefef12b222fecc1>
-    # X-Attachment-Id: 16defefef12b222fecc1
 
     raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
 
