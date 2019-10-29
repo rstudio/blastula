@@ -1,14 +1,29 @@
 #' Add a file attachment to an email message
 #'
 #' This gives us a simple interface for attaching a file to the email object.
-#' When it comes time to send the email through `smtp_send()`, all attachments
+#' When it comes time to send the email through [smtp_send()], all attachments
 #' (specified by individual calls to `add_attachment()`) will be faithfully
 #' transmitted along with the message.
 #'
+#' There are options available to specify the attachment's MIME type, its
+#' disposition, and customize the attachment's recipient-facing filename.
+#'
 #' @inheritParams smtp_send
-#' @param file_path The path for the file to be attached.
-#' @param error_on_missing An option to stop with an error if the file cannot be
-#'   located on disk. By default this is set to `TRUE`.
+#' @param file The filename for the file to be attached.
+#' @param content_type The MIME type for the attachment. By default, this is
+#'   guessed by the `mime::guess_type()` function on the basis of the `file`'s
+#'   extension. The available MIME types that can be guessed are available in
+#'   the `mime::mimemap` named character vector.
+#' @param disposition The disposition for the file attachment. By default this
+#'   is `"attachment"` where attachments are typically separated from the
+#'   message content and presented in an interface for downloading individual
+#'   attachments in email clients. The other option is `"inline"`, where the
+#'   attachment may be rendered along with the message content (appearing below
+#'   the message).
+#' @param filename the filename for the attachment. This can be different than
+#'   the basename provided to `file` for the purpose of customization. By
+#'   default, the basename of `file` is taken to be the attachment's filename.
+#'
 #' @export
 add_attachment <- function(email,
                            file,
