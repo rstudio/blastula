@@ -68,7 +68,7 @@ gfsub <- function(string,
   matches <- find_all(string, pattern, ignore_case = ignore_case)
 
   f <- file(open = "w+b", encoding = "UTF-8")
-  on.exit(close(f))
+  on.exit(close(f), add = TRUE)
 
   out <- function(str) {
     bytes <- charToRaw(enc2utf8(str))
@@ -257,7 +257,7 @@ src_to_datauri <- function(src,
     }
 
     f <- file(full_path, open = "rb")
-    on.exit(close(f))
+    on.exit(close(f), add = TRUE)
     b64 <- base64enc::base64encode(f, 0)
     paste0("data:", type, ";base64,", b64)
 

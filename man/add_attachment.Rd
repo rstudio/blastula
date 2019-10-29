@@ -5,7 +5,7 @@
 \title{Add a file attachment to an email message}
 \usage{
 add_attachment(email, file, content_type = mime::guess_type(file),
-  disposition = "attachment", filename = basename(file))
+  filename = basename(file))
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
@@ -17,13 +17,6 @@ function. The object's class is \code{email_message}.}
 guessed by the \code{mime::guess_type()} function on the basis of the \code{file}'s
 extension. The available MIME types that can be guessed are available in
 the \code{mime::mimemap} named character vector.}
-
-\item{disposition}{The disposition for the file attachment. By default this
-is \code{"attachment"} where attachments are typically separated from the
-message content and presented in an interface for downloading individual
-attachments in email clients. The other option is \code{"inline"}, where the
-attachment may be rendered along with the message content (appearing below
-the message).}
 
 \item{filename}{the filename for the attachment. This can be different than
 the basename provided to \code{file} for the purpose of customization. By

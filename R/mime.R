@@ -1,5 +1,39 @@
-# TODO: Tests
-# TODO: Currently outputs 8-bit quoted-printable, verify this is OK (Apple Mail seems to do it)
+# Integration tests (compare vs reference values)
+#
+# (required)
+# Named vs. unnamed recipients (or some named and some unnamed)
+#   Recipients with Unicode characters and double-quotes in their display names
+# Single vs. multi recipients
+# Subject line with unicode characters, double-quotes
+# Inline images and file attachments with weird filenames
+#   Filenames with spaces
+#   Filenames with unicode characters (on both Windows and POSIX)
+#   Filenames with angle brackets < >
+#   With various extensions
+
+# Unit tests
+#
+# (required)
+# format_rfc2822_date
+#   With various timezones
+#     +0000
+#     Positive offset
+#     Negative offset
+#   Day values <10 (should NOT have leading 0)
+#   Month values <10 (should NOT have leading 0)
+#   Works with Date, POSIXct, and POSIXlt values
+# (optional)
+# header_quoted
+#   Unicode characters (should encode if encode_unicode, else error)
+#   Newlines, non-character should all throw errors
+# header_unstructured
+#   Unicode characters (should encode if encode_unicode, else error)
+#   Newlines, >1 element, non-character should all throw errors
+# encode_qp
+#   Long lines should be wrapped at <=76 characters
+#   Compare to a reference value
+
+
 
 # Turns a blastula email object into an RFC2822 message
 generate_rfc2822 <- function(eml,
@@ -305,6 +339,10 @@ format_rfc2822_addr_list <- function(addrs, fieldname) {
 
 # NOTE: str can be length > 1
 header_quoted <- function(str, fieldname, encode_unicode = FALSE) {
+  if (length(str) == 0) {
+    return(str)
+  }
+
   force(fieldname)
   if (!is.character(str)) {
     stop("The '", fieldname, "' field must be a character vector")

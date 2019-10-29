@@ -14,12 +14,6 @@
 #'   guessed by the `mime::guess_type()` function on the basis of the `file`'s
 #'   extension. The available MIME types that can be guessed are available in
 #'   the `mime::mimemap` named character vector.
-#' @param disposition The disposition for the file attachment. By default this
-#'   is `"attachment"` where attachments are typically separated from the
-#'   message content and presented in an interface for downloading individual
-#'   attachments in email clients. The other option is `"inline"`, where the
-#'   attachment may be rendered along with the message content (appearing below
-#'   the message).
 #' @param filename the filename for the attachment. This can be different than
 #'   the basename provided to `file` for the purpose of customization. By
 #'   default, the basename of `file` is taken to be the attachment's filename.
@@ -28,7 +22,6 @@
 add_attachment <- function(email,
                            file,
                            content_type = mime::guess_type(file),
-                           disposition = "attachment",
                            filename = basename(file)) {
 
   # Get the expanded path for the file
@@ -42,7 +35,7 @@ add_attachment <- function(email,
     list(
       file_path = expanded_path,
       content_type = content_type,
-      disposition = disposition,
+      disposition = "attachment",
       filename = filename
     )
 

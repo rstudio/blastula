@@ -1,0 +1,21 @@
+---
+title: "It's an email"
+output: blastula::blastula_email
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Hello
+
+```{r}
+plot(cars)
+```
+
+R is **cool**
+
+```{r}
+library(ggplot2)
+ggplot(diamonds, aes(carat, price, color = cut)) + geom_point()
+```
