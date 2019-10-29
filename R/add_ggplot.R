@@ -65,7 +65,7 @@ add_ggplot <- function(plot_object,
       device = "png",
       plot = plot_object,
       filename = "temp_ggplot.png",
-      dpi = 100,
+      dpi = 200,
       width = width,
       height = height)
 
