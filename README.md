@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href='http://rich-iannone.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="139px" /></a>
+# blastula <a href='http://rich-iannone.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="250px" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
@@ -107,13 +107,6 @@ email_object %>%
 ```
 
 ## Installation
-
-The **blastula** package uses a binary for SMTP mailing which is
-provided by the **mailsend-go** project. This binary is cross-platform
-and works on **Windows**, **macOS** (via **Homebrew)**, and **Linux**
-(**Debian** and **RPM** packages). Information on installation and other
-important considerations for SMTP sending can be found in [this
-article](https://rich-iannone.github.io/blastula/articles/sending_using_smtp.html).
 
 You can install the in-development version of **blastula** from
 **GitHub** using the **devtools** package.
