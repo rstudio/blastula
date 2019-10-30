@@ -10,12 +10,6 @@
 ^\.Rproj\.user$
 ^cran-comments\.md$
 ^CODE_OF_CONDUCT\.md$
-^inst/mac_os$
-^inst/win$
-^inst/linux$
-^inst/social_icons$
-^inst/img$
-^inst/examples/rsconnect
 ^tests/manual_tests
 ^README\.Rmd$
 ^\.httr-oauth$
