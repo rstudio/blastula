@@ -64,7 +64,7 @@ compose_email <- function(body = NULL,
 
       html_body_text <-
         simple_body_block %>%
-        tidy_gsub("\\{html_paragraphs\\}", body %>% process_text())
+        tidy_gsub("{html_paragraphs}", body %>% process_text(), fixed = TRUE)
     }
 
   } else {
@@ -120,10 +120,10 @@ compose_email <- function(body = NULL,
   # Generate the email message body
   body <-
     bls_standard_template %>%
-    tidy_gsub("\\{title\\}", title) %>%
-    tidy_gsub("\\{html_header\\}", html_header) %>%
-    tidy_gsub("\\{html_body_text\\}", html_body_text) %>%
-    tidy_gsub("\\{html_footer\\}", html_footer)
+    tidy_gsub("{title}", title, fixed = TRUE) %>%
+    tidy_gsub("{html_header}", html_header, fixed = TRUE) %>%
+    tidy_gsub("{html_body_text}", html_body_text, fixed = TRUE) %>%
+    tidy_gsub("{html_footer}", html_footer, fixed = TRUE)
 
   # Add the HTML bodies (two variants) to the
   # `email_message` object
