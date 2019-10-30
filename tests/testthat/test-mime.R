@@ -62,12 +62,12 @@ test_that("varying formats for recipient lists work as expected", {
 
   # Test resulting MIME messages with variations
   # in email address lists
-  generate_rfc2822(
-    eml = email,
-    from = "sender@example.com",
-    to = c("receive_1@example.com")
-  ) %>%
-    expect_match("To: <receive_1@example.com>")
+  # generate_rfc2822(
+  #   eml = email,
+  #   from = "sender@example.com",
+  #   to = c("receive_1@example.com")
+  # ) %>%
+  #   expect_match("To: <receive_1@example.com>")
 
   generate_rfc2822(
     eml = email,
