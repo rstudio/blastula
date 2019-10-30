@@ -60,18 +60,22 @@ test_that("varying formats for recipient lists work as expected", {
   # Create an empty email message
   email <- compose_email()
 
+  email_date <- ISOdatetime(2015, 6, 2, 20, 18, 00, tz = "America/Los_Angeles")
+
   # Test resulting MIME messages with variations
   # in email address lists
-  # generate_rfc2822(
-  #   eml = email,
-  #   from = "sender@example.com",
-  #   to = c("receive_1@example.com")
-  # ) %>%
-  #   expect_match("To: <receive_1@example.com>")
+  generate_rfc2822(
+    eml = email,
+    date = email_date,
+    subject = "test",
+    from = "sender@example.com",
+    to = c("receive_1@example.com")
+  ) %>%
+    expect_match("To: <receive_1@example.com>")
 
   generate_rfc2822(
     eml = email,
-    date = ISOdatetime(2015, 6, 2, 20, 18, 00, tz = "America/Los_Angeles"),
+    date = email_date,
     subject = "test",
     from = "sender@example.com",
     to = c("Receiver" = "receive_1@example.com")
@@ -80,6 +84,8 @@ test_that("varying formats for recipient lists work as expected", {
 
   generate_rfc2822(
     eml = email,
+    date = email_date,
+    subject = "test",
     from = "sender@example.com",
     to = c("receive_1@example.com", "receive_2@example.com")
   ) %>%
@@ -87,6 +93,8 @@ test_that("varying formats for recipient lists work as expected", {
 
   generate_rfc2822(
     eml = email,
+    date = email_date,
+    subject = "test",
     from = "sender@example.com",
     to = c("receive_1@example.com", "Receiver" = "receive_2@example.com")
   ) %>%
@@ -94,6 +102,8 @@ test_that("varying formats for recipient lists work as expected", {
 
   generate_rfc2822(
     eml = email,
+    date = email_date,
+    subject = "test",
     from = "sender@example.com",
     to = c("Receiv\U00E8r" = "receive_1@example.com")
   ) %>%
@@ -101,6 +111,8 @@ test_that("varying formats for recipient lists work as expected", {
 
   generate_rfc2822(
     eml = email,
+    date = email_date,
+    subject = "test",
     from = "sender@example.com",
     to = c("The \"Real\" Receiver" = "receive_1@example.com")
   ) %>%
@@ -110,6 +122,8 @@ test_that("varying formats for recipient lists work as expected", {
   # (Unicode characters, double-quotes)
   generate_rfc2822(
     eml = email,
+    date = email_date,
+    subject = "test",
     from = "sender@example.com",
     to = "receive_1@example.com",
     subject = "Don't sw\U00E8at it"
@@ -118,6 +132,8 @@ test_that("varying formats for recipient lists work as expected", {
 
   generate_rfc2822(
     eml = email,
+    date = email_date,
+    subject = "test",
     from = "sender@example.com",
     to = "receive_1@example.com",
     subject = "Don't \"sweat it\", okay?"
