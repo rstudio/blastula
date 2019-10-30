@@ -123,20 +123,18 @@ test_that("varying formats for recipient lists work as expected", {
   generate_rfc2822(
     eml = email,
     date = email_date,
-    subject = "test",
+    subject = "Don't sw\U00E8at it",
     from = "sender@example.com",
-    to = "receive_1@example.com",
-    subject = "Don't sw\U00E8at it"
+    to = "receive_1@example.com"
   ) %>%
     expect_match("Subject: =\\?utf-8\\?B\\?RG9uJ3Qgc3fguop0IGl0\\?=")
 
   generate_rfc2822(
     eml = email,
     date = email_date,
-    subject = "test",
+    subject = "Don't \"sweat it\", okay?",
     from = "sender@example.com",
-    to = "receive_1@example.com",
-    subject = "Don't \"sweat it\", okay?"
+    to = "receive_1@example.com"
   ) %>%
     expect_match("Subject: Don't \"sweat it\", okay?")
 
