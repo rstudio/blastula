@@ -33,9 +33,9 @@ get_smtp_provider_values <- function(provider) {
 #' @param pattern The regex pattern.
 #' @param replacement A replacement for the matched pattern.
 #' @noRd
-tidy_gsub <- function(x, pattern, replacement) {
+tidy_gsub <- function(x, pattern, replacement, fixed = FALSE) {
 
-  gsub(pattern, replacement, x)
+  gsub(pattern, replacement, x, fixed = fixed)
 }
 
 #' A slightly more sensible version of `grepl()`
