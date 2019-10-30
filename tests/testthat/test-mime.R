@@ -71,6 +71,8 @@ test_that("varying formats for recipient lists work as expected", {
 
   generate_rfc2822(
     eml = email,
+    date = ISOdatetime(2015, 6, 2, 20, 18, 00, tz = "America/Los_Angeles"),
+    subject = "test",
     from = "sender@example.com",
     to = c("Receiver" = "receive_1@example.com")
   ) %>%
