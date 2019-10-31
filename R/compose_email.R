@@ -51,6 +51,7 @@ compose_email <- function(body = NULL,
   # Define the title text for the email;
   # use an empty string if not supplied
   title <- title %||% ""
+  title <- process_text(title)
 
   # Define the email body section
   if (!is.null(body)) {
@@ -120,10 +121,15 @@ compose_email <- function(body = NULL,
   # Generate the email message body
   body <-
     bls_standard_template %>%
-    tidy_gsub("{title}", title, fixed = TRUE) %>%
-    tidy_gsub("{html_header}", html_header, fixed = TRUE) %>%
-    tidy_gsub("{html_body_text}", html_body_text, fixed = TRUE) %>%
-    tidy_gsub("{html_footer}", html_footer, fixed = TRUE)
+    gfsub("\\{([a-zA-Z_]+)\\}", function(m, name) {
+      switch(name,
+        title = title,
+        html_header = html_header,
+        html_body_text = html_body_text,
+        html_footer = html_footer,
+        stop("Unexpected replacement token ", name)
+      )
+    })
 
   # Add the HTML bodies (two variants) to the
   # `email_message` object
