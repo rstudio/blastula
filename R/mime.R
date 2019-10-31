@@ -290,7 +290,7 @@ format_rfc2822_date <- function(date) {
 
   time <- sprintf("%02d:%02d:%02d", dc$hour, dc$min, floor(dc$sec))
 
-  tz <- if (dc$gmtoff == 0) {
+  tz <- if (is.null(dc$gmtoff) || dc$gmtoff == 0) {
     "+0000"
   } else if (dc$gmtoff < 0) {
     sprintf("%05d", dc$gmtoff / 3600 * 100)

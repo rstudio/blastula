@@ -12,9 +12,9 @@ test_that("`format_rfc2822_date()` produces valid dates", {
     ISOdatetime(2019, 6, 15, 20, 18, 00, tz = "America/Toronto")) %>%
     expect_equal("Sat, 15 Jun 2019 20:18:00 -0400")
 
-  # format_rfc2822_date(
-  #   ISOdatetime(2019, 6, 15, 20, 18, 00, tz = "GMT")) %>%
-  #   expect_equal("Sat, 15 Jun 2019 20:18:00 +0000") # doesn't work with "GMT" (no storage of `.$gmtoff`!)
+  format_rfc2822_date(
+    ISOdatetime(2019, 6, 15, 20, 18, 00, tz = "GMT")) %>%
+    expect_equal("Sat, 15 Jun 2019 20:18:00 +0000")
 
   format_rfc2822_date(
     ISOdatetime(2019, 6, 15, 20, 18, 00, tz = "GMT0")) %>%
