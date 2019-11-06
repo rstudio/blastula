@@ -38,8 +38,8 @@ For those times where we'd only want to send a simple HTML email message, we can
 
 ```{r compose_simple, eval=FALSE}
 compose_email(
-  body = "
-Hello,
+  body = 
+"Hello,
 
 I just wanted to let you know that the thing that you asked me for is ready to pick up. So, come over and do that.
 
@@ -142,18 +142,16 @@ compose_email(
 
 Content in the **footer** and **header** sections is styled differently than **body** content (**footer** text will be somewhat smaller for one thing). The main message typically goes into the **body** whereas supplementary information works better in the **footer**.
 
-## Adding an Image to an HTML Email
+## Adding an External Image to an HTML Email
 
-Adding images to an email message is either (1) a dicey proposition, (2) a questionable plan, (3) or an iffy proposal. Why? Who knows what the recipient will actually see. Will it be a wall of random text? A massive, misaligned image? Anything at all? The mere suggestion of adding imagery is enough to give one heart palpitations.
-
-Although the rules for images in HTML email have changed often, the method that seems to be working reasonably well these days is to use external images. There is a bit of upfront work in getting the image hosted somewhere but the payoff is that most (maybe all?) email services/clients will show the image. The **blastula** package has a function which takes some of the pain out of getting images to a hosting service, it is the `add_imgur_image()` function. **Imgur** is a fun site for sure (gifs galore!) but did you know that they have an API to make image uploading easy? They do, and this function takes advantage of that.
+Although the rules for images in HTML email have changed often, the method that seems to work reasonably well these days is to use external images. There is a bit of upfront work in getting the image hosted somewhere but the payoff is fast page loads in email clients. The **blastula** package has a function which takes some of the pain out of getting images to a hosting service, it is the `add_imgur_image()` function. **Imgur** is a fun site for sure (gifs galore!) but did you know that they have an API to make image uploading easy? They do, and this function takes advantage of that.
 
 Here's an example of an email that includes a local image that is deployed to **Imgur** (available at https://i.imgur.com/8uTB2Py.jpg) for indefinite hosting.
 
 ```{r imgur_return_value_1, include=FALSE}
 
 imgur_image <- 
-  "<a href=\"#\"><img src=\"https://i.imgur.com/8uTB2Py.jpg\" style=\"max-width:600px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
+  "<a href=\"#\"><img src=\"https://i.imgur.com/8uTB2Py.jpg\" style=\"max-width: 600px; width: 100% !important; display: block; padding: 0; border: 0 !important;\" border=\"0\"></a>"
 ```
 
 ```{r compose_imgur_local_image, eval=FALSE}
@@ -198,12 +196,12 @@ compose_email(body = body_text)
 This is how you get the all-important Client ID from **Imgur**. First, [get an account with **Imgur**](https://help.imgur.com/hc/en-us/articles/210076633-Create-an-Account)! Once that's a thing accomplished, we can get the `Client-ID` key for the **Imgur API**. This can be easily done by
 going visiting [the API registration page](https://api.imgur.com/oauth2/addclient) while signed-in to register an application. Give it a name---any name you can think of---and be sure to select the `OAuth 2 authorization type without a callback URL` radio button (the second in the list). After filling in the other necessary information bits and proving that you're not a robot, you'll receive the Client ID key! You'll then have unfettered access to use any images, including animated gifs, in an HTML email message.
 
-Wait, there's more! Since this is **R** and we care a great deal about **ggplot2**, we can directly pass in a ggplot object to `add_imgur_image()` and expect a nice ggplot image to appear in the email message. Here's an example of how that works:
+Wait, there's more! Since this is **R** and we care about **ggplot2**, we can directly pass in a ggplot object to `add_imgur_image()` and expect a nice ggplot image to appear in the email message. Here's an example of how that works:
 
 ```{r imgur_return_value_2, include=FALSE}
 
 imgur_image <- 
-  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width:600px; width:100% !important; display:block; padding:0; border:0 !important;\" border=\"0\"></a>"
+  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width: 600px; width:100% !important; display: block; padding: 0; border: 0 !important;\" border=\"0\"></a>"
 ```
 
 ```{r compose_imgur_ggplot, eval=FALSE}
