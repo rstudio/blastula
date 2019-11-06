@@ -31,6 +31,14 @@ add_imgur_image <- function(image,
 
   # nocov start
 
+  # Using this function requires the `xml2` package
+  if (!requireNamespace("xml2", quietly = TRUE)) {
+
+    stop("The `xml2` package is required for using the ",
+         "`add_imgur_image()` function",
+         call. = FALSE)
+  }
+
   if (inherits(image, "ggplot")) {
 
     # If the `ggplot2` package is available, then
@@ -88,7 +96,7 @@ add_imgur_image <- function(image,
     response_list$link %>% htmltools::htmlEscape(attribute = TRUE),
     "\" alt=\"",
     alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"",
-    "style=\"max-width: 512px;width: 100% !important;display: block;padding: 0;",
+    "style=\"max-width: 512px; width: 100% !important; display: block; padding: 0;",
     "border: 0 !important;\" border=\"0\"></a>"
   )
 
