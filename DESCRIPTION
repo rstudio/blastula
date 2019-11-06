@@ -34,8 +34,7 @@ Imports:
     rlang (>= 0.4.1),
     rmarkdown,
     stringr (>= 1.4.0),
-    uuid (>= 0.1-2),
-    xml2 (>= 1.2.0)
+    uuid (>= 0.1-2)
 Suggests: 
     covr,
     ggplot2,
@@ -43,7 +42,8 @@ Suggests:
     testthat (>= 2.1.0),
     keyring,
     knitr,
-    spelling
+    spelling,
+    xml2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
