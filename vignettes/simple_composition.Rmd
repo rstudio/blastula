@@ -22,9 +22,13 @@ library(glue)
 
 Before we get to the process of creating an HTML email message, it's a good idea to learn about the model of such a message in **blastula**. Here is a diagram, and it doesn't contain too many layout components (because simplicity in HTML email is a good thing).
 
-<br>
-<p align="center"><img src="../man/figures/html_email_model.svg" width="600px"></p>
-<br>
+<br />
+
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("html_email_model.svg", dpi = 300)
+```
+
+<br />
 
 The main components (from top to bottom) are the **header**, the **body**, and the **footer**. The **body** content is inside of a wrapper that functions to differentiate the main content from whatever is in the **header** and **footer** (above and below the **body**).
 
@@ -47,13 +51,17 @@ Cheers
 ")
 ```
 
-<p align="center"><img src="compose_simple-wide.png" width="600px"></p>
 
-<p align="center"><img src="compose_simple-narrow.png" width="380px"></p>
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("compose_simple-wide.png", dpi = 300)
+```
+
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("compose_simple-narrow.png", dpi = 300)
+```
 
 <p align="center">This is how it looks, depending on the display width (wide at top, narrow below that).</p>
-
-<br>
+<br />
 
 A preview of the HTML email message should appear in the Viewer. Try resizing the Viewer to see how it responds to the different width thresholds.
 
@@ -134,10 +142,11 @@ compose_email(
 )
 ```
 
-<p align="center"><img src="compose_interpolation_stmt-wide.png" width="600px"></p>
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("compose_interpolation_stmt-wide.png", dpi = 300)
+```
 
 <p align="center">Complicated string formatting goes into variables, the variables go into the email components</p>
-
 <br>
 
 Content in the **footer** and **header** sections is styled differently than **body** content (**footer** text will be somewhat smaller for one thing). The main message typically goes into the **body** whereas supplementary information works better in the **footer**.
@@ -187,10 +196,11 @@ Cheers,
 compose_email(body = body_text)
 ```
 
-<p align="center"><img src="compose_imgur_local_image-wide.png" width="600px"></p>
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("compose_imgur_local_image-wide.png", dpi = 300)
+```
 
 <p align="center">Once you get that Imgur Client ID, this is really easy</p>
-
 <br>
 
 This is how you get the all-important Client ID from **Imgur**. First, [get an account with **Imgur**](https://help.imgur.com/hc/en-us/articles/210076633-Create-an-Account)! Once that's a thing accomplished, we can get the `Client-ID` key for the **Imgur API**. This can be easily done by
@@ -248,10 +258,11 @@ Cheers,
 compose_email(body = body_text)
 ```
 
-<p align="center"><img src="compose_imgur_ggplot-wide.png" width="600px"></p>
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("compose_imgur_ggplot-wide.png", dpi = 300)
+```
 
 <p align="center">A ggplot in your email message</p>
-
 <br>
 
 I don't know about you but I'd love to get a ggplot in *my* email.

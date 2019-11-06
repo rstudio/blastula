@@ -107,6 +107,13 @@ test_message <- prepare_test_message()
 test_message
 ```
 
+```{r echo = FALSE, out.width = "100%"}
+knitr::include_graphics("prepare_test_message.png", dpi = 300)
+```
+
+<p align="center">The test message</p>
+<br />
+
 Now that this test message is available, we can experiment with the sending of it to a personal email account. Here are three examples, each use a different method for supplying SMTP credentials.
 
 ```{r smtp_send_creds_manual, eval=FALSE}
