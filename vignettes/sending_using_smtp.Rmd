@@ -14,10 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r library, include=FALSE}
-library(blastula)
-```
-
 After we create the an `email_message` object with `compose_email()`, we can choose to send it through an SMTP server using **blastula**'s `smtp_send()` function. There is some system setup required before sending a **blastula** email message via SMTP. The main considerations are:
 
 - modifying an account-level setting on Gmail (if using that for sending email)
