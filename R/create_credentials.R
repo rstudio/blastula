@@ -113,7 +113,7 @@ create_smtp_creds_key <- function(id,
   # Use an empty string for `user` if NULL
   if (is.null(user)) user <- ""
 
-  # Creating credential on the system-wide key-value
+  # Creating credentials on the system-wide key-value
   # store requires the installation of the keyring package
   if (!requireNamespace("keyring", quietly = TRUE)) {
 
