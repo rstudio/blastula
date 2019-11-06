@@ -12,15 +12,16 @@ add_cta_button(url, text, align = "center")
 \item{text}{The text that is placed atop the CTA button.}
 
 \item{align}{The alignment of the button inside the main content area.
-Options are \code{center} (the default), \code{left}, and \code{right}.}
+Options are \code{"center"} (the default), \code{"left"}, and \code{"right"}.}
 }
 \value{
-a character object with an HTML fragment that can be placed inside
+A character object with an HTML fragment that can be placed inside
 the message body wherever the CTA button should appear.
 }
 \description{
-Add a call to action button inside the body of the email with this helper
-function. There are options to specify the button text, the URL, and the
+Create the HTML fragment for a call to action button. This can be used as
+part of the email body but, since this HTML, it must be contained within
+\code{\link[=md]{md()}}. There are options to specify the button text, the URL, and the
 button's alignment.
 }
 \examples{
@@ -28,23 +29,22 @@ button's alignment.
 cta_button <-
   add_cta_button(
     url = "http://www.website.net",
-    text = "Press This Button")
+    text = "Press This Button"
+  )
 
 # Include the button in the email
-# message body by simply referencing
-# the `cta_button` object
-email <-
-  compose_email(
-    body = "
-    Hello!
-
-    Below is a call. It's a call \\\\
-    to action. Press it!
-
-    {cta_button}
-
-    Cheers
-    ")
+# message body by using it as part of
+# a vector inside of `md()`
+compose_email(
+  body = md(
+    c(
+"Pressing the button will take
+you to an example website",
+cta_button
+    )
+  )
+)
 
 if (interactive()) email
+
 }

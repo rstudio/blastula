@@ -7,7 +7,7 @@
 #' resultant `blocks` object can be provided to the `body`, `header`, or
 #' `footer` arguments of `compose_email()`.
 #'
-#' @param ... Paragraphs of text.
+#' @param text Plain text or Markdown text (via [md()]).
 #'
 #' @examples
 #' # Create a block of two, side-by-side
@@ -20,25 +20,25 @@
 #'     body =
 #'       blocks(
 #'         block_text(
-#'           "These are two of the cities I visited this year. \\
+#'           "These are two of the cities I visited this year.
 #'           I liked them a lot, so, I'll visit them again!"),
 #'         block_articles(
 #'           article(
 #'             image = "https://i.imgur.com/dig0HQ2.jpg",
 #'             title = "Los Angeles",
 #'             content =
-#'               "I want to live in Los Angeles. \\
-#'               Not the one in Los Angeles. \\
-#'               No, not the one in South California. \\
+#'               "I want to live in Los Angeles.
+#'               Not the one in Los Angeles.
+#'               No, not the one in South California.
 #'               They got one in South Patagonia."
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/RUvqHV8.jpg",
 #'             title = "New York",
 #'             content =
-#'               "Start spreading the news. \\
-#'               I'm leaving today. \\
-#'               I want to be a part of it. \\
+#'               "Start spreading the news.
+#'               I'm leaving today.
+#'               I want to be a part of it.
 #'               New York, New York."
 #'           )
 #'         )
@@ -48,48 +48,49 @@
 #' if (interactive()) email
 #'
 #' @export
-block_text <- function(...) {
+block_text <- function(text) {
 
-  x <- list(...)
+  class(text) <- c("block_text", class(text))
 
-  class(x) <- "block_text"
-
-  x
+  text
 }
 
 #' @noRd
 render_block_text <- function(x, context = "body") {
 
   if (context == "body") {
-    font_size <- 14
+
     font_color <- "#000000"
+    font_size <- 14
     margin_bottom <- 12
     padding <- 12
+
   } else if (context %in% c("header", "footer")) {
-    font_size <- 12
+
     font_color <- "#999999"
+    font_size <- 12
     margin_bottom <- 12
     padding <- 10
   }
 
-  paragraph <-
-    glue::glue(
-      "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; color: {font_color};font-size: {font_size}px; font-weight: normal; margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">"
-    ) %>%
-    as.character()
+  text_line_rendered <-
+    text_line_template %>%
+    tidy_gsub("\\{font_color\\}", font_color %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{text\\}", x %>% process_text())
 
-  text <-
-    paste(x %>% unlist(), collapse = "\n") %>%
-    commonmark::markdown_html() %>%
-    tidy_gsub("<p>", paragraph)
-
-  glue::glue(text_block_template()) %>% as.character()
+  text_block_template %>%
+    tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
+    tidy_gsub("\\{text\\}", text_line_rendered)
 }
 
-#' A template for a text HTML fragment
-#' @noRd
-text_block_template <- function() {
+text_line_template <-
+  "<p class=\"align-center\" style=\"font-family: Helvetica, sans-serif; color: {font_color};font-size: {font_size}px; font-weight: normal; margin: 0; margin-bottom: {margin_bottom}px; text-align: center;\">{text}</p>"
 
+text_block_template <-
 "<tr>
 <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: {font_size}px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
@@ -103,22 +104,3 @@ text_block_template <- function() {
 </table>
 </td>
 </tr>"
-}
-
-# nocov start
-
-#' Print a text block
-#'
-#' This facilitates printing of the text block to the Viewer.
-#' @param x an object of class \code{block_text}.
-#' @keywords internal
-#' @export
-print.block_text <- function(x, ...) {
-
-  x %>%
-    render_block_text(context = "body") %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-# nocov end

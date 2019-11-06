@@ -27,6 +27,8 @@
 #' @name render_email
 NULL
 
+# nocov start
+
 #' @rdname render_email
 #' @export
 render_email <- function(input,
@@ -36,7 +38,7 @@ render_email <- function(input,
                          render_options = list()) {
 
   output_file <- tempfile(pattern = "email", fileext = ".html")
-  on.exit(unlink(output_file))
+  on.exit(unlink(output_file), add = TRUE)
 
   output_options$self_contained <- TRUE
 
@@ -69,3 +71,6 @@ render_connect_email <- function(input,
   }
   render_email(input, envir, quiet, output_options, render_options)
 }
+
+# nocov end
+

@@ -17,9 +17,10 @@ knitr::opts_chunk$set(
 ```{r library, include=FALSE}
 library(blastula)
 library(ggplot2)
+library(glue)
 ```
 
-Before we get to the process of creating an HTML email message, it's a good idea to learn about the model of such a message in **blastula**. Here is a diagram, and it doesn't contain too many components (because simplicity in HTML email is a good thing).
+Before we get to the process of creating an HTML email message, it's a good idea to learn about the model of such a message in **blastula**. Here is a diagram, and it doesn't contain too many layout components (because simplicity in HTML email is a good thing).
 
 <br>
 <p align="center"><img src="../man/figures/html_email_model.svg" width="600px"></p>
@@ -40,9 +41,7 @@ compose_email(
   body = "
 Hello,
 
-I just wanted to let you know that the thing that you \\
-asked me for is ready to pick up. So, come over and \\
-do that.
+I just wanted to let you know that the thing that you asked me for is ready to pick up. So, come over and do that.
 
 Cheers
 ")
@@ -56,48 +55,53 @@ Cheers
 
 <br>
 
-Markdown text can be used as input for the `body`, `header`, and `footer` arguments. So, use the usual Markdown-formatting you know and you'll get italicized text, bold text, lists, links, etc. The **commonmark** package is doing the conversion from Markdown to HTML, in case you were wondering.
+A preview of the HTML email message should appear in the Viewer. Try resizing the Viewer to see how it responds to the different width thresholds.
 
-A few notes on code style and options. It's good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a linebreak, which will result in `text like this`. We can continue lines with the `\\` line continuation marker, which is great for keeping long paragraphs of text at a reasonable width. Any literal quotation marks should be escaped using a single `\`. Blank lines separating blocks of text result in new paragraphs.
+## More Sophisticated Email Text
 
-If we assign this to an object (like `email`), we can always preview the email message by calling the object itself (it automatically prints its HTML to the Viewer).
+A good strategy for longer and more complicated text inputs is to use the [**glue**](https://glue.tidyverse.org) package. That package allows us to use string interpolation (and avoid the use of `paste()` or `paste0()`). Variables in the global workspace can be included in the curly braces of a `glue()` string expression, and, any **R** expressions in `{ }` will be evaluated.
 
-We can use string interpolation to add in **R** code or strings assigned to variables. These variables can be obtained from the global workspace. Let's look at an example of that. Some text to interpolate will be assigned to `sender_name` (it'll be the name of the email sender).
+We can include longer **R** statements inside of the curly braces (like `{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %>% as.numeric(), ", ", format(Sys.time(), "%Y"))}`), however, that would be unwieldy. It's better to generate local variables with **R** statements and just use those variables inside the `{ }`. 
 
-```{r sender_name_variable}
-sender_name <- "Shelly"
-```
+Here is an example of the same email message body as in the last example, but using **glue** to preprocess our text:
 
-Now we can refer to the object in the global workspace inside of curly braces. Here's the revised `compose_email()` call and the wide version of the HTML email output. 
+```{r compose_simple_glue, eval=FALSE}
+what <- "thing"
+salutation <- "Cheers"
 
-```{r compose_interpolation_local, eval=FALSE}
-compose_email(
-  body = "
+body_text <-
+  glue(
+    "
 Hello,
 
-I just wanted to let you know that the thing that you \\
-asked me for is ready to pick up. So, come over and \\
-do that.
+I just wanted to let you know that the {what}
+that you asked me for is ready to pick up. So,
+come over and do that.
 
-Cheers,
+{salutation}
+"   
+  )
 
-{sender_name}"
-)
+compose_email(body = body_text)
 ```
 
-<p align="center"><img src="compose_interpolation_local-wide.png" width="600px"></p>
+Any literal quotation marks inside the braces should be escaped using a single `\`. Blank lines separating blocks of text result in new paragraphs.
 
-<p align="center">Now we have the output of a variable spliced in. Nice.</p>
+## Using Markdown Text via the `md()` Function
 
-<br>
+Markdown text can be used as input for the `body`, `header`, and `footer` arguments. To opt into using Markdown formatting, call the `md()` text helper function on any of these text elements. We can use the usual Markdown-formatting you know and you'll get italicized text, bold text, lists, links, etc. Have a look at [this reference page](https://commonmark.org/help/) to quickly understand how to use Markdown. The **blastula** package internally uses the **commonmark** **R** package to perform the conversion from Markdown to HTML.
 
-We can include longer **R** statements inside of the curly braces (like `{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %>% as.numeric(), ", ", format(Sys.time(), "%Y"))}`), however, that would be unwieldy. It's better to generate local variables with **R** statements and just introduce those variables to the email. 
+A few notes on code style and options. It's good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a line break, which will result in `text like this` when using Markdown formatting through `md()`. 
 
 In the next example, let's first store the result of that statement in a local variable (`sending_date`). Then, the variable will be placed in the **footer** of the message (using the `footer` argument) along with leading text.
 
 ```{r compose_interpolation_stmt, eval=FALSE}
-# Create a string with a nicely-formatted date;
-# we can format the statement in a tidy manner 
+#
+# Prepare the text inputs
+#
+
+sender_name <- "Shelly"
+
 sending_date <-
   paste0(
     format(Sys.time(), "%A, %B "),
@@ -106,23 +110,27 @@ sending_date <-
     format(Sys.time(), "%Y")
   )
 
-# Compose the email message, passing in the
-# `sending_date` value to the `footer`
-compose_email(
-  body = "
+body_text <-
+  glue(
+    "
 Hello,
 
-I just wanted to let you know that the thing that you \\
-asked me for is ready to pick up. So, come over and \\
-do that.
+I just wanted to let you know that the *thing* that
+you asked me for is ready to pick up. So, come over
+and do that.
 
 Cheers,
 
 {sender_name}
-",
-  footer = "
-Sent on {sending_date}.
-"
+"    
+  ) %>% md()
+
+footer_text <- glue("Sent on {sending_date}.")
+
+# Compose the email message
+compose_email(
+  body = body_text,
+  footer = footer_text
 )
 ```
 
@@ -157,21 +165,28 @@ imgur_image <-
 #     client_id = "<YOUR CLIENT ID>"
 #   )
 
-# Compose the email message, passing in the
-# `imgur_image` value and whatever else
-compose_email(
-  body = "
+#
+# Create the `body_text` and then the
+# email message with `compose_email()`
+#
+
+body_text <-
+  glue(
+    "
 Hello,
 
-I just wanted to let you know that the **1972 Rickenbacker \\
+I just wanted to let you know that the **1972 Rickenbacker
 4001** is here to pick up. Here is a picture of it:
 
 {imgur_image}
 
 Cheers,
 
-{sender_name}"
-)
+{sender_name}
+"
+  ) %>% md()
+
+compose_email(body = body_text)
 ```
 
 <p align="center"><img src="compose_imgur_local_image-wide.png" width="600px"></p>
@@ -188,7 +203,7 @@ Wait, there's more! Since this is **R** and we care a great deal about **ggplot2
 ```{r imgur_return_value_2, include=FALSE}
 
 imgur_image <- 
-  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width:600px;width:100%!important;display:block;padding=0;border=0!important;\" border=\"0\"></a>"
+  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width:600px; width:100% !important; display:block; padding:0; border:0 !important;\" border=\"0\"></a>"
 ```
 
 ```{r compose_imgur_ggplot, eval=FALSE}
@@ -211,10 +226,14 @@ the_plot <-
 #     client_id = "<YOUR CLIENT ID>"
 #   )
 
-# Compose the email message, passing in the
-# `imgur_image` value and whatever else
-compose_email(
-  body = "
+#
+# Create the `body_text` and then the
+# email message with `compose_email()`
+#
+
+body_text <-
+  glue(
+    "
 Hello,
 
 I just wanted to let you know that the *ggplot* you \\
@@ -224,8 +243,11 @@ wanted to see is right here, in this email:
 
 Cheers,
 
-{sender_name}"
-)
+{sender_name}
+"
+  ) %>% md()
+
+compose_email(body = body_text)
 ```
 
 <p align="center"><img src="compose_imgur_ggplot-wide.png" width="600px"></p>
@@ -238,4 +260,4 @@ I don't know about you but I'd love to get a ggplot in *my* email.
 
 ## Wrapping Up
 
-We now know how to send really simple email messages with just some text, and, slightly more complex messages with images inside. **Imgur** really saves the day when it comes to hosting images as their API service is very permissive and getting access is not at all difficult.
+We now know how to send really simple email messages with just some text, and, slightly more complex messages including those with images inside. **Imgur** really saves the day when it comes to hosting images as their API service is very permissive and getting access is not at all difficult!

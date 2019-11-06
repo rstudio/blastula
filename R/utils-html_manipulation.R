@@ -68,7 +68,7 @@ gfsub <- function(string,
   matches <- find_all(string, pattern, ignore_case = ignore_case)
 
   f <- file(open = "w+b", encoding = "UTF-8")
-  on.exit(close(f))
+  on.exit(close(f), add = TRUE)
 
   out <- function(str) {
     bytes <- charToRaw(enc2utf8(str))
@@ -257,7 +257,7 @@ src_to_datauri <- function(src,
     }
 
     f <- file(full_path, open = "rb")
-    on.exit(close(f))
+    on.exit(close(f), add = TRUE)
     b64 <- base64enc::base64encode(f, 0)
     paste0("data:", type, ";base64,", b64)
 
@@ -377,4 +377,35 @@ html_unescape <- function(html) {
       }
     }
   )
+}
+
+process_text <- function(text) {
+
+  # If text has been passed in with `md()`, collapse
+  # that vector with "\n" and convert to HTML with
+  # `commonmark::markdown_html()`
+  if (inherits(text, "from_markdown")) {
+
+    text <-
+      text %>%
+      as.character() %>%
+      paste(collapse = "\n") %>%
+      commonmark::markdown_html()
+
+    return(text)
+  }
+
+  # If text isn't `from_markdown`, it should inherit
+  # from `character`; if not, stop the function
+  if (!inherits(text, "character")) {
+
+    stop("The input text must be of class `\"character\"`.",
+         call. = FALSE)
+  }
+
+  # Fashion plain text into HTML
+  text %>%
+    paste(collapse = "\n") %>%
+    htmltools::htmlEscape() %>%
+    tidy_gsub("\n\n", "<br />\n")
 }

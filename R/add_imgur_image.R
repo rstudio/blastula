@@ -13,18 +13,23 @@
 #' going to `https://api.imgur.com/oauth2/addclient` and registering an
 #' application. Be sure to select the OAuth 2 authorization type without a
 #' callback URL.
+#'
 #' @param image The path to the local image we would like to deploy to Imgur and
 #'   for which we'd like an image tag.
 #' @param client_id The Imgur Client ID value.
-#' @param alt Text description of image passed to the `alt` attribute inside of the image (`<img>`) tag
-#'     for use when image loading is disabled and on screen readers. `NULL` default produces blank
-#'     (`""`) alt text.
+#' @param alt Text description of image passed to the `alt` attribute inside of
+#'   the image (`<img>`) tag for use when image loading is disabled and on
+#'   screen readers. `NULL` default produces blank (`""`) alt text.
+#'
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
+#'
 #' @export
 add_imgur_image <- function(image,
                             client_id = NULL,
                             alt = NULL) {
+
+  # nocov start
 
   if (inherits(image, "ggplot")) {
 
@@ -32,43 +37,43 @@ add_imgur_image <- function(image,
     # use the `ggplot2::ggsave()` function
     if (requireNamespace("ggplot2", quietly = TRUE)) {
 
-    # Generate a unique filename for the temporary,
-    # on-disk image
-    file_name <-
-      paste0(
-        paste(
-          sample(c(LETTERS, 0:9), 4),
-          collapse = ""
-        ),
-        "_", Sys.time() %>% as.integer(),
-        "_", "ggplot.png"
+      # Generate a unique filename for the temporary,
+      # on-disk image
+      file_name <-
+        paste0(
+          paste(
+            sample(c(LETTERS, 0:9), 4),
+            collapse = ""
+          ),
+          "_", Sys.time() %>% as.integer(),
+          "_", "ggplot.png"
+        )
+
+      # Create SVG from ggplot
+      ggplot2::ggsave(
+        filename = file_name,
+        plot = image,
+        device = "png",
+        dpi = 300,
+        width = 5,
+        height = 5
       )
 
-    # Create SVG from ggplot
-    ggplot2::ggsave(
-      filename = file_name,
-      plot = image,
-      device = "png",
-      dpi = 300,
-      width = 5,
-      height = 5)
+      # Because the file is saved on disk,
+      # We replace `image` with the path
+      # (since `imgur_upload` only works with
+      # file paths)
+      image <- file_name
 
-    # Because the file is saved on disk,
-    # We replace `image` with the path
-    # (since `imgur_upload` only works with
-    # file paths)
-    image <- file_name
-
-    # Upon exiting the function (either
-    # through success or error, we remove
-    # the on-disk image file)
-    on.exit(file.remove(file_name))
+      # Upon exiting the function (either
+      # through success or error, we remove
+      # the on-disk image file)
+      on.exit(file.remove(file_name), add = TRUE)
     }
   }
 
   # Upload the image to Imgur
-  response_list <-
-    imgur_upload(image, client_id)
+  response_list <- imgur_upload(image, client_id)
 
   # Determine alt text
   alt_text <-
@@ -78,9 +83,14 @@ add_imgur_image <- function(image,
       alt
     }
 
-  glue::glue(
-    "<a href=\"#\"><img src=\"{response_list$link}\" alt=\"{alt_text}\" \\
-     style=\"max-width:512px;width:100%!important;display:block;padding:0;border:0!important;\" border=\"0\"></a>"
-  ) %>%
-    as.character()
+  paste0(
+    "<a href=\"#\"><img src=\"",
+    response_list$link %>% htmltools::htmlEscape(attribute = TRUE),
+    "\" alt=\"",
+    alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"",
+    "style=\"max-width: 512px;width: 100% !important;display: block;padding: 0;",
+    "border: 0 !important;\" border=\"0\"></a>"
+  )
+
+  # nocov end
 }

@@ -27,7 +27,7 @@ email <-
       blocks(
         block_spacer(),
         block_text(
-          "These are two of the cities I visited this year. \\\\
+          "These are two of the cities I visited this year.
           I liked them a lot, so, I'll visit them again!"),
         block_spacer(),
         block_articles(
@@ -35,18 +35,18 @@ email <-
             image = "https://i.imgur.com/dig0HQ2.jpg",
             title = "Los Angeles",
             content =
-              "I want to live in Los Angeles. \\\\
-              Not the one in Los Angeles. \\\\
-              No, not the one in South California. \\\\
+              "I want to live in Los Angeles.
+              Not the one in Los Angeles.
+              No, not the one in South California.
               They got one in South Patagonia."
           ),
           article(
             image = "https://i.imgur.com/RUvqHV8.jpg",
             title = "New York",
             content =
-              "Start spreading the news. \\\\
-              I'm leaving today. \\\\
-              I want to be a part of it. \\\\
+              "Start spreading the news.
+              I'm leaving today.
+              I want to be a part of it.
               New York, New York."
           )
         )

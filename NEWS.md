@@ -1,6 +1,6 @@
 # blastula 0.3.0 (Unreleased)
 
-The blastula package has transitioned to using a new binary for SMTP mailing, and it's provided by the *mailsend-go* project (https://github.com/muquit/mailsend-go). Binaries are cross-platform, available on Windows, macOS (via Homebrew), and Linux (Debian and RPM packages are available).
+The blastula package has transitioned to using the **curl** package for SMTP mailing.
 
 There are new functions for integrating **blastula** with R Markdown publishing on the RStudio Connect service. And sophisticated email bodies can be generated with *HTML Blocks*.
 

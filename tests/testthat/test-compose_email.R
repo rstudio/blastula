@@ -97,7 +97,7 @@ test_that("email components appear in the HTML message", {
   email <-
     compose_email(
       body = "test_text_in_body",
-      .title = "email_title"
+      title = "email_title"
     )
 
   # Expect that the title string appears within <title>
@@ -143,13 +143,17 @@ test_that("composing a message with local inline images is possible", {
       height = 5, width = 7
     )
 
-  # Create a simple email message with no text
-  email <-
-    compose_email(body = "
-  Here is a plot:
+  body_input <-
+    glue::glue(
+"
+Here is a plot:
 
-  {plot_html}
-  ")
+{plot_html}
+"
+) %>% as.character()
+
+  # Create a simple email message with no text
+  email <- compose_email(body = md(body_input))
 
   # Expect an object of class `email_message`
   expect_is(

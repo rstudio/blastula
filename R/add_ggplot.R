@@ -5,9 +5,10 @@
 #' @param plot_object The `ggplot2` plot object.
 #' @param height The height of the output plot in inches.
 #' @param width The width of the output plot in inches.
-#' @param alt Text description of image passed to the `alt` attribute inside of the image (`<img>`) tag
-#'     for use when image loading is disabled and on screen readers. Defaults to the `ggplot2` plot object's
-#'     title, if exists. Override by passing a custom character string or `""` for no text.
+#' @param alt Text description of image passed to the `alt` attribute inside of
+#'   the image (`<img>`) tag for use when image loading is disabled and on
+#'   screen readers. Defaults to the `ggplot2` plot object's title, if exists.
+#'   Override by passing a custom character string or `""` for no text.
 #'
 #' @examples
 #' library(ggplot2)
@@ -24,25 +25,25 @@
 #' # contains an the ggplot as an
 #' # embedded plot
 #' plot_html <-
-#'   add_ggplot(
-#'     plot_object = plot)
+#'   add_ggplot(plot_object = plot)
 #'
 #' # Include the plot in the email
 #' # message body by simply referencing
 #' # the `plot_html` object
 #' email <-
 #'   compose_email(
-#'   body = "
-#'   Hello!
+#'     body = md(
+#'       c(
+#' "Hello!
 #'
-#'   Here is a very important plot \\
-#'   that will change the way you \\
-#'   look at cars forever.
-#'
-#'   {plot_html}
-#'
-#'   Thanks.
-#'   ")
+#' Here is a plot that will change
+#' the way you look at cars forever.\n",
+#' plot_html,
+#' "Let me know what you think
+#' about it!"
+#'       )
+#'     )
+#'   )
 #'
 #' if (interactive()) email
 #'
@@ -64,7 +65,7 @@ add_ggplot <- function(plot_object,
       device = "png",
       plot = plot_object,
       filename = "temp_ggplot.png",
-      dpi = 100,
+      dpi = 200,
       width = width,
       height = height)
 

@@ -12,7 +12,7 @@ render_blocks <- function(blocks,
     }
 
     if (inherits(blocks[[i]], "block_spacer")) {
-      blocks[[i]] <- render_block_spacer(blocks[[i]], context = context)
+      blocks[[i]] <- render_block_spacer(context = context)
     }
 
     if (inherits(blocks[[i]], "block_articles")) {

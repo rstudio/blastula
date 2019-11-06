@@ -33,15 +33,15 @@ this file produced, the credentials helper \code{\link[=creds_file]{creds_file()
 \code{credentials} argument of \code{\link[=smtp_send]{smtp_send()}}.
 }
 \examples{
-\dontrun{
 # Create a credentials file to make it
 # much easier to send email out through
 # Gmail with `smtp_send()`; name the
 # file "gmail_creds"
-create_smtp_creds_file(
-  file = "gmail_creds",
-  user = "user_name@gmail.com",
-  provider = "gmail"
-  )
-}
+
+# create_smtp_creds_file(
+#   file = "gmail_creds",
+#   user = "user_name@gmail.com",
+#   provider = "gmail"
+#   )
+
 }

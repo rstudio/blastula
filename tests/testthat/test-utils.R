@@ -1,3 +1,5 @@
+context("Utility functions work as expected")
+
 test_that("knitr_sidecar_prefix preconditions hold", {
 
   # Ensure that rmarkdown assumptions still hold
@@ -41,4 +43,63 @@ test_that("knitr_sidecar_prefix behavior", {
       fig_path = "a12 !_-x_files/b_files/figure-github_flavored_markdown/")
   )
 
+})
+
+test_that("the `smtp_settings()` function returns the expected output", {
+
+  # Expect that the table is a `tbl_df`
+  smtp_settings() %>% expect_s3_class("tbl_df")
+
+  # Expect 3 rows in the table
+  smtp_settings() %>% nrow() %>% expect_equal(3)
+
+  # Expect 8 columns in the table
+  smtp_settings() %>% ncol() %>% expect_equal(8)
+})
+
+test_that("the `get_provider_list()` function returns the expected output", {
+
+  # Expect that the provider list vector contains
+  # three items
+  get_provider_list() %>%
+    expect_equal(c("gmail", "outlook", "office365"))
+})
+
+
+test_that("the `get_smtp_provider_values()` function returns the expected output", {
+
+  # Expect that the `get_smtp_provider_values()` function
+  # returns a list of values for a provider
+  get_smtp_provider_values(provider = "gmail") %>%
+    expect_type("list")
+
+  # Expect the same set of names for each provider
+
+  get_smtp_provider_values(provider = "gmail") %>%
+    names() %>%
+    expect_equal(
+      c("short_name", "server", "port", "use_ssl",
+        "use_tls", "authenticate", "user", "long_name")
+    )
+
+  get_smtp_provider_values(provider = "outlook") %>%
+    names() %>%
+    expect_equal(
+      c("short_name", "server", "port", "use_ssl",
+        "use_tls", "authenticate", "user", "long_name")
+    )
+
+  get_smtp_provider_values(provider = "office365") %>%
+    names() %>%
+    expect_equal(
+      c("short_name", "server", "port", "use_ssl",
+        "use_tls", "authenticate", "user", "long_name")
+    )
+})
+
+
+test_that("the `no_options()`/`no_arg()` util fcns return the right values", {
+
+  no_options() %>% expect_equal(NA_character_)
+  no_arg() %>% expect_null()
 })

@@ -13,9 +13,10 @@ add_ggplot(plot_object, width = 5, height = 5, alt = NULL)
 
 \item{height}{The height of the output plot in inches.}
 
-\item{alt}{Text description of image passed to the \code{alt} attribute inside of the image (\code{<img>}) tag
-for use when image loading is disabled and on screen readers. Defaults to the \code{ggplot2} plot object's
-title, if exists. Override by passing a custom character string or \code{""} for no text.}
+\item{alt}{Text description of image passed to the \code{alt} attribute inside of
+the image (\code{<img>}) tag for use when image loading is disabled and on
+screen readers. Defaults to the \code{ggplot2} plot object's title, if exists.
+Override by passing a custom character string or \code{""} for no text.}
 }
 \value{
 A character object with an HTML fragment that can be placed inside
@@ -39,25 +40,25 @@ plot <-
 # contains an the ggplot as an
 # embedded plot
 plot_html <-
-  add_ggplot(
-    plot_object = plot)
+  add_ggplot(plot_object = plot)
 
 # Include the plot in the email
 # message body by simply referencing
 # the `plot_html` object
 email <-
   compose_email(
-  body = "
-  Hello!
+    body = md(
+      c(
+"Hello!
 
-  Here is a very important plot \\\\
-  that will change the way you \\\\
-  look at cars forever.
-
-  {plot_html}
-
-  Thanks.
-  ")
+Here is a plot that will change
+the way you look at cars forever.\\n",
+plot_html,
+"Let me know what you think
+about it!"
+      )
+    )
+  )
 
 if (interactive()) email
 

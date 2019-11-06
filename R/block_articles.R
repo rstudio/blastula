@@ -32,25 +32,11 @@ article <- function(image = NULL,
                     content = NULL,
                     link = NULL) {
 
-  if (is.null(image)) {
-    image <- ""
-  }
-
-  if (is.null(title)) {
-    title <- ""
-  } else {
-    title <- glue::glue(title) %>% as.character()
-  }
-
-  if (is.null(content)) {
-    content <- ""
-  } else {
-    content <- glue::glue(content) %>% as.character()
-  }
-
-  if (is.null(link)) {
-    link <- ""
-  }
+  # Normalize inputs to empty strings if any are `NULL`
+  image <- image %||% ""
+  title <- title %||% ""
+  content <- content %||% ""
+  link <- link %||% ""
 
   # Add the article components to the
   # `article_item_list` object
@@ -59,7 +45,8 @@ article <- function(image = NULL,
       image = image,
       title = title,
       content = content,
-      link = link)
+      link = link
+    )
 
   # Apply the `article` class
   class(article_item_list) <- "article"
@@ -94,24 +81,24 @@ article <- function(image = NULL,
 #'             image = "https://i.imgur.com/XMU8yJa.jpg",
 #'             title = "Taiwan",
 #'             content =
-#'               "It is a thriving mosaic of tradition, \\
-#'               culture, and high-tech development, \\
+#'               "It is a thriving mosaic of tradition,
+#'               culture, and high-tech development,
 #'               merging Eastern and Western influences."
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/aYOm3Tk.jpg",
 #'             title = "Japan",
 #'             content =
-#'               "Japan is an archipelago consisting \\
-#'               of 6,852 islands along East Asia's \\
+#'               "Japan is an archipelago consisting
+#'               of 6,852 islands along East Asia's
 #'               Pacific Coast."
 #'           ),
 #'           article(
 #'              image = "https://i.imgur.com/ekjFVOL.jpg",
 #'              title = "Singapore",
 #'              content =
-#'                "Singapore is an island city-state \\
-#'                in Southeast Asia. It's lies at the \\
+#'                "Singapore is an island city-state
+#'                in Southeast Asia. It's lies at the
 #'                southern tip of the Malay Peninsula."
 #'           )
 #'         )
@@ -165,80 +152,7 @@ render_block_articles <- function(x) {
 #' @noRd
 block_article_3 <- function(items) {
 
-  if (items[[1]]$image == "") {
-    x1_image <- ""
-  } else {
-    x1_image <-
-      glue::glue(
-        article_image_template_3(),
-        image = items[[1]]$image,
-        link = items[[1]]$link
-      )
-  }
-
-  if (items[[2]]$image == "") {
-    x2_image <- ""
-  } else {
-    x2_image <-
-      glue::glue(
-        article_image_template_3(),
-        image = items[[2]]$image,
-        link = items[[2]]$link
-      )
-  }
-
-  if (items[[3]]$image == "") {
-    x3_image <- ""
-  } else {
-    x3_image <-
-      glue::glue(
-        article_image_template_3(),
-        image = items[[3]]$image,
-        link = items[[3]]$link
-      )
-  }
-
-  x1_title <-
-    glue::glue(
-      article_title_template(),
-      title = items[[1]]$title,
-      link = items[[1]]$link
-    )
-
-  x2_title <-
-    glue::glue(
-      article_title_template(),
-      title = items[[2]]$title,
-      link = items[[2]]$link
-    )
-
-  x3_title <-
-    glue::glue(
-      article_title_template(),
-      title = items[[3]]$title,
-      link = items[[3]]$link
-    )
-
-  x1_content <-
-    glue::glue(
-      article_content_template_2(),
-      content = items[[1]]$content
-    )
-
-  x2_content <-
-    glue::glue(
-      article_content_template_2(),
-      content = items[[2]]$content
-    )
-
-  x3_content <-
-    glue::glue(
-      article_content_template_2(),
-      content = items[[3]]$content
-    )
-
   block <-
-    glue::glue(
 "<tr>
 <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
 <!--[if (gte mso 9)|(IE)]>
@@ -289,7 +203,34 @@ block_article_3 <- function(items) {
 </table>
 <![endif]-->
 </td>
-</tr>") %>% as.character()
+</tr>"
+
+  for (i in seq(items)) {
+
+    if (items[[i]]$image == "") {
+      image <- ""
+    } else {
+      image <-
+        article_image_template_3 %>%
+        tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
+        tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
+    }
+
+    title <-
+      article_title_template %>%
+      tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
+      tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
+
+    content <-
+      article_content_template_2 %>%
+      tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
+
+    block <-
+      block %>%
+      tidy_gsub(paste0("\\{x", i, "_image\\}"), image) %>%
+      tidy_gsub(paste0("\\{x", i, "_title\\}"), title) %>%
+      tidy_gsub(paste0("\\{x", i, "_content\\}"), content)
+  }
 
   class(block) <- "block_articles"
 
@@ -301,56 +242,7 @@ block_article_3 <- function(items) {
 #' @noRd
 block_article_2 <- function(items) {
 
-  if (items[[1]]$image == "") {
-    x1_image <- ""
-  } else {
-    x1_image <-
-      glue::glue(
-        article_image_template_2(),
-        image = items[[1]]$image,
-        link = items[[1]]$link
-      )
-  }
-
-  if (items[[2]]$image == "") {
-    x2_image <- ""
-  } else {
-    x2_image <-
-      glue::glue(
-        article_image_template_2(),
-        image = items[[2]]$image,
-        link = items[[2]]$link
-      )
-  }
-
-  x1_title <-
-    glue::glue(
-      article_title_template(),
-      title = items[[1]]$title,
-      link = items[[1]]$link
-    )
-
-  x2_title <-
-    glue::glue(
-      article_title_template(),
-      title = items[[2]]$title,
-      link = items[[2]]$link
-    )
-
-  x1_content <-
-    glue::glue(
-      article_content_template_2(),
-      content = items[[1]]$content
-    )
-
-  x2_content <-
-    glue::glue(
-      article_content_template_2(),
-      content = items[[2]]$content
-    )
-
   block <-
-    glue::glue(
 "<tr>
 <td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
 <!--[if (gte mso 9)|(IE)]>
@@ -386,7 +278,34 @@ block_article_2 <- function(items) {
 </table>
 <![endif]-->
 </td>
-</tr>") %>% as.character()
+</tr>"
+
+  for (i in seq(items)) {
+
+    if (items[[i]]$image == "") {
+      image <- ""
+    } else {
+      image <-
+        article_image_template_2 %>%
+        tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
+        tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
+    }
+
+    title <-
+      article_title_template %>%
+      tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
+      tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
+
+    content <-
+      article_content_template_2 %>%
+      tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
+
+    block <-
+      block %>%
+      tidy_gsub(paste0("\\{x", i, "_image\\}"), image) %>%
+      tidy_gsub(paste0("\\{x", i, "_title\\}"), title) %>%
+      tidy_gsub(paste0("\\{x", i, "_content\\}"), content)
+  }
 
   class(block) <- "block_articles"
 
@@ -398,24 +317,7 @@ block_article_2 <- function(items) {
 #' @noRd
 block_article_1 <- function(items) {
 
-  if (items[[1]]$image == "") {
-    x1_image <- ""
-  } else {
-    x1_image <-
-      glue::glue(
-        article_image_template_1(),
-        image = items[[1]]$image,
-        link = items[[1]]$link)
-  }
-
-  x1_content <-
-    glue::glue(
-      article_content_template_1(),
-      content = items[[1]]$content
-    )
-
   block <-
-    glue::glue(
 "<tr>
 <td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
@@ -423,120 +325,87 @@ block_article_1 <- function(items) {
 <tr>
 <td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
 {x1_image}
+{x1_title}
 {x1_content}
 </td>
 </tr>
 </tbody>
 </table>
 </td>
-</tr>") %>% as.character()
+</tr>"
+
+  for (i in seq(items)) {
+
+    if (items[[i]]$image == "") {
+      image <- ""
+    } else {
+      image <-
+        article_image_template_1 %>%
+        tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
+        tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
+    }
+
+    title <-
+      article_title_template %>%
+      tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
+      tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
+
+    content <-
+      article_content_template_1 %>%
+      tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
+
+    block <-
+      block %>%
+      tidy_gsub(paste0("\\{x", i, "_image\\}"), image) %>%
+      tidy_gsub(paste0("\\{x", i, "_title\\}"), title) %>%
+      tidy_gsub(paste0("\\{x", i, "_content\\}"), content)
+  }
 
   class(block) <- "block_articles"
 
   block
 }
 
-#' A template for an article image HTML fragment (three across)
-#' @noRd
-article_image_template_3 <- function() {
-
+article_image_template_3 <-
 "<tr>
 <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
 </td>
 </tr>
 "
-}
 
-#' A template for an article image HTML fragment (two across)
-#' @noRd
-article_image_template_2 <- function() {
-
+article_image_template_2 <-
 "<tr>
 <td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
 </td>
 </tr>
 "
-}
 
-#' A template for an article image HTML fragment (one across)
-#' @noRd
-article_image_template_1 <- function() {
-
+article_image_template_1 <-
 "<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
 <a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
 </p>
 "
-}
 
-#' A template for an article title HTML fragment
-#' @noRd
-article_title_template <- function() {
-
+article_title_template <-
 "<tr>
 <td class=\"article-title\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; font-size: 14px; font-weight: 800; line-height: 1.4em; padding-bottom: 8px;\" valign=\"top\">
 <a href=\"{link}\" target=\"_blank\" style=\"color: #222222; text-decoration: none; font-size: 14px; font-weight: 800; line-height: 1.4em;\">{title}</a>
 </td>
 </tr>
 "
-}
 
-#' A template for an article content HTML fragment (one across)
-#' @noRd
-article_content_template_1 <- function() {
-
+article_content_template_1 <-
 "<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
 {content}
 </p>
 "
-}
 
-#' A template for an article content HTML fragment (two across)
-#' @noRd
-article_content_template_2 <- function() {
-
+article_content_template_2 <-
 "<tr>
 <td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">
 {content}
 </td>
 </tr>
 "
-}
-
-# nocov start
-
-#' Print a block of articles
-#'
-#' This facilitates printing of a block of articles to the Viewer.
-#' @param x an object of class \code{block_articles}.
-#' @keywords internal
-#' @export
-print.block_articles <- function(x, ...) {
-
-  x %>%
-    render_block_articles() %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-#' Print an article component in the console
-#'
-#' This facilitates printing of an article object to the console.
-#' @param x an object of class \code{article}.
-#' @keywords internal
-#' @export
-print.article <- function(x, ...) {
-
-  glue::glue("
-image: {x$image}
-title: {x$title}
-content: {x$content}
-link: {x$link}
-"
-  ) %>%
-    as.character() %>%
-    cat()
-}
-
-# nocov end
