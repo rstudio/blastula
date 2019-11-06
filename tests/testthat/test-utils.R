@@ -96,10 +96,3 @@ test_that("the `get_smtp_provider_values()` function returns the expected output
         "use_tls", "authenticate", "user", "long_name")
     )
 })
-
-
-test_that("the `no_options()`/`no_arg()` util fcns return the right values", {
-
-  no_options() %>% expect_equal(NA_character_)
-  no_arg() %>% expect_null()
-})
