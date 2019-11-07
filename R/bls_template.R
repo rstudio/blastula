@@ -31,6 +31,11 @@ bls_standard_template <-
     }
 
     @media all {
+      img {
+        height: auto !important;
+        max-width: 100% !important;
+        width: auto !important;
+      }
       .btn-secondary a:hover {
         border-color: #34495e !important;
         color: #34495e !important;
