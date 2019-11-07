@@ -68,6 +68,6 @@ add_image <- function(file, alt = NULL) {
   paste0(
     "<img cid=\"", cid,
     "\" src=\"", uri,
-    "\" width=\"520\" alt=\"", alt_text, "\"/>\n"
+    "\" width=\"520\" alt=\"", alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"/>\n"
   )
 }
