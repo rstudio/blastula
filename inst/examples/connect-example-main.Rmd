@@ -57,11 +57,17 @@ It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_
 dallas_home_sales %>% write_csv("dallas_home_sales.csv")
 ```
 
-![](pexels-photo-267151.jpeg)
-
 We can create an email using **RStudio Connect**, one that aligns with the content from this report. We do this with the `render_connect_email()` and `attach_connect_email()` functions from the **blastula** package. The email subdocument (`"connect-example-email.Rmd"`) is used to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the arguments:
 
 - `attachments` (for any output files or included files), and
 - `attach_report` (which attaches the rendered report) arguments.
 
+```{r connect_email, echo=FALSE}
+render_connect_email(input = "connect-example-email.Rmd") %>%
+  attach_connect_email(
+    subject = "RStudio Connect HTML Email",
+    attach_output = TRUE,
+    attachments = c("dallas_home_sales.csv", "austin_home_sales.csv")
+  )
+```
 
