@@ -163,7 +163,7 @@ create_rmd_preview_message <- function(subject = NULL) {
       "This is an email preview for RStudio Connect</h2>",
       "<p style=\"text-align: center; background:#fcfcfc; ",
       "padding-top: 0; margin-top: 0;\">",
-      "Use <code>connect_email(preview = FALSE)</code> ",
+      "Use <code>attach_connect_email(preview = FALSE)</code> ",
       "to attach without this preview.",
       subject_ln,
       "</p><hr></div>"
