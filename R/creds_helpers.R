@@ -30,8 +30,6 @@
 #'   configuration details (the `host`, `port`, `use_ssl` options). Options
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.
-#' @param sender_name An option to specify a sender name. This isn't always
-#'   visible to the recipient, however, as some SMTP servers will suppress this.
 #' @param host,port,use_ssl Configuration info for the SMTP server. The `host`
 #'   and `port` parameters are the address and port for the SMTP server;
 #'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
@@ -54,7 +52,6 @@ NULL
 #' @export
 creds <- function(user = NULL,
                   provider = NULL,
-                  sender_name = NULL,
                   host = NULL,
                   port = NULL,
                   use_ssl = TRUE) {
@@ -64,7 +61,6 @@ creds <- function(user = NULL,
     create_credentials_list(
       provider = provider,
       user = user,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl

@@ -16,8 +16,6 @@
 #'   and `port` parameters are the address and port for the SMTP server;
 #'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
 #'   value.
-#' @param sender_name An option to specify a sender name. This isn't always
-#'   visible to the recipient, however, as some SMTP servers will suppress this.
 #'
 #' @examples
 #' # Create a credentials file to make it
@@ -37,8 +35,7 @@ create_smtp_creds_file <- function(file,
                                    provider = NULL,
                                    host = NULL,
                                    port = NULL,
-                                   use_ssl = NULL,
-                                   sender_name = NULL) {
+                                   use_ssl = NULL) {
 
   # nocov start
 
@@ -50,7 +47,6 @@ create_smtp_creds_file <- function(file,
     create_credentials_list(
       provider = provider,
       user = user,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl
@@ -105,8 +101,7 @@ create_smtp_creds_key <- function(id,
                                   provider = NULL,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = NULL,
-                                  sender_name = NULL) {
+                                  use_ssl = NULL) {
 
   # nocov start
 
@@ -130,7 +125,6 @@ create_smtp_creds_key <- function(id,
     create_credentials_list(
       provider = provider,
       user = user,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl
@@ -167,7 +161,6 @@ create_smtp_creds_key <- function(id,
 create_credentials_list <- function(provider,
                                     user,
                                     password = getPass::getPass("Enter the SMTP server password: "),
-                                    sender_name,
                                     host,
                                     port,
                                     use_ssl) {
@@ -176,7 +169,6 @@ create_credentials_list <- function(provider,
     user = user,
     password = password,
     provider = provider,
-    sender_name = sender_name,
     host = host,
     port = port,
     use_ssl = use_ssl
@@ -189,7 +181,6 @@ create_credentials_list <- function(provider,
 creds_internal <- function(user = NULL,
                            password = NULL,
                            provider = NULL,
-                           sender_name = NULL,
                            host = NULL,
                            port = NULL,
                            use_ssl = NULL) {
@@ -217,7 +208,6 @@ creds_internal <- function(user = NULL,
   # Generate the credentials list
   list(
     version = schema_version,
-    sender_name = sender_name,
     host = host,
     port = port,
     use_ssl = use_ssl,

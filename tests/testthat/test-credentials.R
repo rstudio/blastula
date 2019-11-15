@@ -8,7 +8,6 @@ test_that("utility functions for credentials work properly", {
       provider = NULL,
       user = "testuser@example.com",
       password = "testpass",
-      sender_name = "testsender",
       host = "smtp.example.com",
       port = 465,
       use_ssl = TRUE
@@ -21,7 +20,7 @@ test_that("utility functions for credentials work properly", {
   credentials_list_1 %>%
     names() %>%
     expect_equal(
-      c("version", "sender_name", "host", "port", "use_ssl", "user", "password")
+      c("version", "host", "port", "use_ssl", "user", "password")
     )
 
   # Expect a specific value for `credentials_list_1$version`
@@ -34,7 +33,6 @@ test_that("utility functions for credentials work properly", {
       provider = "gmail",
       user = "testuser@example.com",
       password = "testpass",
-      sender_name = "testsender",
       host = NULL,
       port = NULL,
       use_ssl = NULL
@@ -44,7 +42,7 @@ test_that("utility functions for credentials work properly", {
   credentials_list_2 %>%
     names() %>%
     expect_equal(
-      c("version", "sender_name", "host", "port", "use_ssl", "user", "password")
+      c("version", "host", "port", "use_ssl", "user", "password")
     )
 
   # Expect that the `host`, `port`, and `use_ssl` elements
@@ -60,7 +58,6 @@ test_that("utility functions for credentials work properly", {
       provider = NULL,
       user = "testuser@example.com",
       password = "testpass",
-      sender_name = "testsender",
       host = NULL,
       port = NULL,
       use_ssl = NULL
