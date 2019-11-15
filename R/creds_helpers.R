@@ -76,20 +76,16 @@ creds <- function(user = NULL,
 
 #' @rdname credential_helpers
 #' @export
-creds_anonymous <- function(user = "anonymous",
-                            password = NULL,
-                            provider = NULL,
-                            sender_name = NULL,
+creds_anonymous <- function(provider = NULL,
                             host = NULL,
                             port = NULL,
                             use_ssl = TRUE) {
 
   creds_list <-
     creds_internal(
-      user = user,
-      password = password,
+      user = NULL,
+      password = NULL,
       provider = provider,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl
