@@ -24,7 +24,7 @@
 #'   email address that is associated with the account actually sending the
 #'   message. As with `to`, `cc`, and `bcc`, we can either supply a single email
 #'   address or use a named character vector with the sender name and email
-#'   address (e.g., `c("The Sender", "sender@example.com")`).
+#'   address (e.g., `c("The Sender" = "sender@example.com")`).
 #' @param subject The subject of the message, which is usually a brief summary
 #'   of the topic of the message. If not provided, an empty string will be used
 #'   (which is handled differently by email clients).

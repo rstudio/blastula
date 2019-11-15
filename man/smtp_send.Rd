@@ -20,7 +20,7 @@ with the their email address (e.g., \code{c("The Recipient", "recipient@example.
 email address that is associated with the account actually sending the
 message. As with \code{to}, \code{cc}, and \code{bcc}, we can either supply a single email
 address or use a named character vector with the sender name and email
-address (e.g., \code{c("The Sender", "sender@example.com")}).}
+address (e.g., \code{c("The Sender" = "sender@example.com")}).}
 
 \item{subject}{The subject of the message, which is usually a brief summary
 of the topic of the message. If not provided, an empty string will be used
