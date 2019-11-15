@@ -14,7 +14,7 @@ function. The object's class is \code{email_message}.}
 \item{to}{A vector of email addresses serving as primary recipients for the
 message. For secondary recipients, use the \code{cc} and \code{bcc} arguments. A
 named character vector can be used to specify the recipient names along
-with the their email address (e.g., \code{c("The Recipient", "recipient@example.com")}).}
+with the their email address (e.g., \code{c("The Recipient" = "recipient@example.com")}).}
 
 \item{from}{The email address of the sender. Often this needs to be the same
 email address that is associated with the account actually sending the
@@ -33,7 +33,7 @@ listing of recipients is visible to all other recipients of the message.
 The BCC list differs in that those recipients will be concealed from all
 other recipients (including those on the BCC list). A named character
 vector can be used to specify the recipient names along with the their
-email address (e.g., \code{c("The Recipient", "recipient@example.com")}).}
+email address (e.g., \code{c("The Recipient" = "recipient@example.com")}).}
 
 \item{credentials}{One of three credential helper functions must be used
 here: (1) \code{\link[=creds]{creds()}}, (2) \code{\link[=creds_key]{creds_key()}}, or (3) \code{\link[=creds_file]{creds_file()}}. The first,
