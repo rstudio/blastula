@@ -18,12 +18,12 @@
 #' @param to A vector of email addresses serving as primary recipients for the
 #'   message. For secondary recipients, use the `cc` and `bcc` arguments. A
 #'   named character vector can be used to specify the recipient names along
-#'   with the their email address (e.g., `c("The Recipient" = "recipient@example.com")`).
+#'   with the their email address (e.g., `c("Jane Doe" = "jane_doe@example.com")`).
 #' @param from The email address of the sender. Often this needs to be the same
 #'   email address that is associated with the account actually sending the
 #'   message. As with `to`, `cc`, and `bcc`, we can either supply a single email
 #'   address or use a named character vector with the sender name and email
-#'   address (e.g., `c("The Sender" = "sender@example.com")`).
+#'   address (e.g., `c("John Doe" = "john_doe@example.com")`).
 #' @param subject The subject of the message, which is usually a brief summary
 #'   of the topic of the message. If not provided, an empty string will be used
 #'   (which is handled differently by email clients).
@@ -34,7 +34,7 @@
 #'   The BCC list differs in that those recipients will be concealed from all
 #'   other recipients (including those on the BCC list). A named character
 #'   vector can be used to specify the recipient names along with the their
-#'   email address (e.g., `c("The Recipient" = "recipient@example.com")`).
+#'   email address (e.g., `c("Joe Public" = "joe_public@example.com")`).
 #' @param credentials One of three credential helper functions must be used
 #'   here: (1) [creds()], (2) [creds_key()], or (3) [creds_file()]. The first,
 #'   [creds()], allows for a manual specification of SMTP configuration and
