@@ -9,7 +9,7 @@
 #' The [creds()] credential helper allows for manual specification of SMTP
 #' configuration and authentication.
 #'
-#' The [creds_anonymous()] credential helper is similiar to [creds()] but
+#' The [creds_anonymous()] credential helper is similar to [creds()] but
 #' provides convenient defaults for authenticating anonymously with an SMTP
 #' server.
 #'
@@ -23,9 +23,6 @@
 #'
 #' @param user The username for the email account. Typically, this is the email
 #'   address associated with the account.
-#' @param password This argument is available in the [creds_anonymous()] and
-#'   isn't typically used unless an 'anonymous' password requires a specific
-#'   value (e.g., "anonymous" as the password itself).
 #' @param provider An optional email provider shortname for autocompleting STMP
 #'   configuration details (the `host`, `port`, `use_ssl` options). Options
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
