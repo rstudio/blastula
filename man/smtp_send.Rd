@@ -5,7 +5,7 @@
 \title{Send an email message through SMTP}
 \usage{
 smtp_send(email, to, from, subject = NULL, cc = NULL, bcc = NULL,
-  credentials = NULL, creds_file = "deprecated")
+  credentials = NULL, creds_file = "deprecated", verbose = FALSE)
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
@@ -48,6 +48,11 @@ Such a file is created using the \code{\link[=create_smtp_creds_file]{create_smt
 \item{creds_file}{An option to specify a credentials file. As this argument
 is deprecated, please consider using \code{credentials = creds_file(<file>)}
 instead.}
+
+\item{verbose}{Should verbose output from the internal curl \code{send_mail()}
+call be printed? While the username and password will likely be echoed
+during the exchange, such information is encoded and won't be stored on
+the user's system.}
 }
 \description{
 Send an email message to one or more recipients via an SMTP server. The email

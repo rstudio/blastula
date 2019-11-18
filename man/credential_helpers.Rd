@@ -8,11 +8,11 @@
 \alias{creds_file}
 \title{Helpers for supplying SMTP credentials}
 \usage{
-creds(user = NULL, provider = NULL, sender_name = NULL,
-  host = NULL, port = NULL, use_ssl = TRUE)
+creds(user = NULL, provider = NULL, host = NULL, port = NULL,
+  use_ssl = TRUE)
 
-creds_anonymous(user = "anonymous", password = NULL, provider = NULL,
-  sender_name = NULL, host = NULL, port = NULL, use_ssl = TRUE)
+creds_anonymous(provider = NULL, host = NULL, port = NULL,
+  use_ssl = TRUE)
 
 creds_key(id)
 
@@ -27,17 +27,10 @@ configuration details (the \code{host}, \code{port}, \code{use_ssl} options). Op
 currently include \code{gmail}, \code{outlook}, and \code{office365}. If nothing is
 provided then values for \code{host}, \code{port}, and \code{use_ssl} are expected.}
 
-\item{sender_name}{An option to specify a sender name. This isn't always
-visible to the recipient, however, as some SMTP servers will suppress this.}
-
 \item{host, port, use_ssl}{Configuration info for the SMTP server. The \code{host}
 and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
 value.}
-
-\item{password}{This argument is available in the \code{\link[=creds_anonymous]{creds_anonymous()}} and
-isn't typically used unless an 'anonymous' password requires a specific
-value (e.g., "anonymous" as the password itself).}
 
 \item{id}{When using the \code{\link[=creds_key]{creds_key()}} credential helper, the ID value of the
 key (in the system key-value store) needs to be given here. This was
@@ -65,7 +58,7 @@ functions are to be used expressly with the \code{credentials} argument of
 The \code{\link[=creds]{creds()}} credential helper allows for manual specification of SMTP
 configuration and authentication.
 
-The \code{\link[=creds_anonymous]{creds_anonymous()}} credential helper is similiar to \code{\link[=creds]{creds()}} but
+The \code{\link[=creds_anonymous]{creds_anonymous()}} credential helper is similar to \code{\link[=creds]{creds()}} but
 provides convenient defaults for authenticating anonymously with an SMTP
 server.
 

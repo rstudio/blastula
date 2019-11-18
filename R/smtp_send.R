@@ -47,6 +47,10 @@
 #' @param creds_file An option to specify a credentials file. As this argument
 #'   is deprecated, please consider using `credentials = creds_file(<file>)`
 #'   instead.
+#' @param verbose Should verbose output from the internal curl `send_mail()`
+#'   call be printed? While the username and password will likely be echoed
+#'   during the exchange, such information is encoded and won't be stored on
+#'   the user's system.
 #'
 #' @examples
 #' # Before sending out an email through
@@ -126,7 +130,8 @@ smtp_send <- function(email,
                       cc = NULL,
                       bcc = NULL,
                       credentials = NULL,
-                      creds_file = "deprecated") {
+                      creds_file = "deprecated",
+                      verbose = FALSE) {
 
   # Verify that the `message` object
   # is of the class `email_message`
@@ -208,7 +213,7 @@ smtp_send <- function(email,
       message = email_qp,
       smtp_server = paste0(credentials$host, ":", credentials$port),
       use_ssl = credentials$use_ssl,
-      verbose = FALSE,
+      verbose = verbose,
       username = credentials$user,
       password = credentials$password
     )

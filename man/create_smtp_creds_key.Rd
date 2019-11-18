@@ -5,7 +5,7 @@
 \title{Store SMTP credentials in the system's key-value store}
 \usage{
 create_smtp_creds_key(id, user = NULL, provider = NULL, host = NULL,
-  port = NULL, use_ssl = NULL, sender_name = NULL)
+  port = NULL, use_ssl = NULL)
 }
 \arguments{
 \item{id}{An identifying label for the keyname. The full key name is
@@ -33,9 +33,6 @@ value.}
 and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
 value.}
-
-\item{sender_name}{An option to specify a sender name. This isn't always
-visible to the recipient, however, as some SMTP servers will suppress this.}
 }
 \description{
 We can set SMTP access credentials in the system-wide key-value store for the
