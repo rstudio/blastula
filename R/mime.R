@@ -210,8 +210,13 @@ write_mime.mime_part <- function(out, x) {
   encoder <- switch(x$encoding,
     "quoted-printable" = encode_qp,
     "base64" = function(x) {
+
       # Wrap at 76 chars
-      gsub("(.{76})", "\\1\r\n", encode_base64(x))
+      stringr::str_replace_all(
+        string = base64enc::base64encode(x, 0),
+        pattern = "(.{76})",
+        replacement = "\\1\r\n"
+      )
     }
   )
 
@@ -358,7 +363,7 @@ header_quoted <- function(str, fieldname, encode_unicode = FALSE) {
   if (any(needs_encoding)) {
     if (encode_unicode) {
       str[needs_encoding] <- vapply(str[needs_encoding], function(x) {
-        encode_base64(charToRaw(x))
+        base64enc::base64encode(charToRaw(x), 0)
       }, character(1)) %>% sprintf("=?utf-8?B?%s?=", .)
       return(str)
     } else {
@@ -389,7 +394,7 @@ header_unstructured <- function(str, fieldname, encode_unicode = FALSE) {
 
   if (grepl("[^\x01-\x7F]", str)) {
     if (encode_unicode) {
-      str <- sprintf("=?utf-8?B?%s?=", encode_base64(charToRaw(str)))
+      str <- sprintf("=?utf-8?B?%s?=", base64enc::base64encode(charToRaw(str)), 0)
     } else {
       warning("The '", fieldname, "' field contains impermissible characters, ",
         "please use 7-bit ASCII only")
