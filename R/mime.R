@@ -210,13 +210,8 @@ write_mime.mime_part <- function(out, x) {
   encoder <- switch(x$encoding,
     "quoted-printable" = encode_qp,
     "base64" = function(x) {
-
       # Wrap at 76 chars
-      stringr::str_replace_all(
-        string = base64enc::base64encode(x, 0),
-        pattern = "(.{76})",
-        replacement = "\\1\r\n"
-      )
+      base64enc::base64encode(x, linewidth = 76, newline = "\r\n")
     }
   )
 
