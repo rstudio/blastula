@@ -1,4 +1,4 @@
-# blastula 0.3.0 (Unreleased)
+# blastula 0.3.0
 
 The **blastula** package has transitioned to using the **curl** package for SMTP mailing.
 
