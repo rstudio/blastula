@@ -7,8 +7,6 @@
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/rich-iannone/blastula?branch=master&svg=true)](https://ci.appveyor.com/project/rich-iannone/blastula)
 [![Codecov test
 coverage](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rich-iannone/blastula?branch=master)
 
@@ -80,7 +78,7 @@ displayed in the Viewer.
 
 ``` r
 # Preview the email
-email_object
+email
 ```
 
 <img src="man/figures/rstudio_preview_email.png">
@@ -99,7 +97,7 @@ send the email through an SMTP server.
 
 ``` r
 # Sending email by SMTP using a credentials file
-email_object %>%
+email %>%
   smtp_send(
     to = "jane_doe@example.com",
     from = "joe_public@example.net",
