@@ -24,15 +24,16 @@
 #' # Include the button in the email
 #' # message body by using it as part of
 #' # a vector inside of `md()`
-#' compose_email(
-#'   body = md(
-#'     c(
-#' "Pressing the button will take
-#' you to an example website",
-#' cta_button
+#' email <-
+#'   compose_email(
+#'     body = md(
+#'       c(
+#'   "Pressing the button will take
+#'   you to an example website",
+#'   cta_button
+#'       )
 #'     )
 #'   )
-#' )
 #'
 #' if (interactive()) email
 #'
