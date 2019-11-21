@@ -91,14 +91,20 @@ Having generated a credentials file, we can use the `smtp_send()` function (alon
 # Sending email by SMTP using a credentials file
 email_object %>%
   smtp_send(
-    to = "a_user@web.net",
-    from = "personal@email.net",
+    to = "jane_doe@example.com",
+    from = "joe_public@example.net",
     subject = "Testing the `smtp_send()` function",
     credentials = creds_file("email_creds")
   )
 ```
 
 ## Installation
+
+The **blastula** package can be installed from CRAN with `install.packages()`.
+
+```{r install_cran, eval=FALSE}
+install.packages("blastula")
+```
 
 You can install the in-development version of **blastula** from **GitHub** using the **devtools** package.
 
@@ -111,7 +117,7 @@ If you encounter a bug, have usage questions, or want to share ideas to make thi
 
 ## Code of Conduct
 
-Please note that the **blastula** project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+Please note that the **blastula** project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/1/0/0). By contributing to this project, you agree to abide by its terms.
 
 ## License
 

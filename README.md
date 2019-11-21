@@ -101,14 +101,21 @@ send the email through an SMTP server.
 # Sending email by SMTP using a credentials file
 email_object %>%
   smtp_send(
-    to = "a_user@web.net",
-    from = "personal@email.net",
+    to = "jane_doe@example.com",
+    from = "joe_public@example.net",
     subject = "Testing the `smtp_send()` function",
     credentials = creds_file("email_creds")
   )
 ```
 
 ## Installation
+
+The **blastula** package can be installed from CRAN with
+`install.packages()`.
+
+``` r
+install.packages("blastula")
+```
 
 You can install the in-development version of **blastula** from
 **GitHub** using the **devtools** package.
@@ -125,8 +132,9 @@ make this package better, feel free to file an
 ## Code of Conduct
 
 Please note that the **blastula** project is released with a
-[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
-this project, you agree to abide by its terms.
+[Contributor Code of
+Conduct](https://contributor-covenant.org/version/1/0/0). By
+contributing to this project, you agree to abide by its terms.
 
 ## License
 
