@@ -7,8 +7,6 @@
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/rich-iannone/blastula?branch=master&svg=true)](https://ci.appveyor.com/project/rich-iannone/blastula)
 [![Codecov test
 coverage](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rich-iannone/blastula?branch=master)
 
@@ -80,7 +78,7 @@ displayed in the Viewer.
 
 ``` r
 # Preview the email
-email_object
+email
 ```
 
 <img src="man/figures/rstudio_preview_email.png">
@@ -99,16 +97,23 @@ send the email through an SMTP server.
 
 ``` r
 # Sending email by SMTP using a credentials file
-email_object %>%
+email %>%
   smtp_send(
-    to = "a_user@web.net",
-    from = "personal@email.net",
+    to = "jane_doe@example.com",
+    from = "joe_public@example.net",
     subject = "Testing the `smtp_send()` function",
     credentials = creds_file("email_creds")
   )
 ```
 
 ## Installation
+
+The **blastula** package can be installed from CRAN with
+`install.packages()`.
+
+``` r
+install.packages("blastula")
+```
 
 You can install the in-development version of **blastula** from
 **GitHub** using the **devtools** package.
@@ -125,8 +130,9 @@ make this package better, feel free to file an
 ## Code of Conduct
 
 Please note that the **blastula** project is released with a
-[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
-this project, you agree to abide by its terms.
+[Contributor Code of
+Conduct](https://contributor-covenant.org/version/1/0/0). By
+contributing to this project, you agree to abide by its terms.
 
 ## License
 
