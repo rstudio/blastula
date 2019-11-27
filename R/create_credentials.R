@@ -155,12 +155,24 @@ create_smtp_creds_key <- function(id,
   # nocov end
 }
 
+#' Ask for a password
+#'
+#' @noRd
+get_password <- function(msg = "Enter the SMTP server password: ") {
+
+  # nocov start
+
+  getPass::getPass(msg = msg)
+
+  # nocov end
+}
+
 #' Create a credentials list object
 #'
 #' @noRd
 create_credentials_list <- function(provider,
                                     user,
-                                    password = getPass::getPass("Enter the SMTP server password: "),
+                                    password = get_password(),
                                     host,
                                     port,
                                     use_ssl) {
