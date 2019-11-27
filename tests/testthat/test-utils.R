@@ -2,7 +2,7 @@ context("Utility functions work as expected")
 
 test_that("knitr_sidecar_prefix preconditions hold", {
 
-  if (rmarkdown:::pandoc2.0()) {
+  if (rmarkdown::pandoc_available()) {
 
     # Ensure that rmarkdown assumptions still hold
     rmd_path <- file.path(tempdir(), "test-utils.Rmd")
@@ -15,7 +15,7 @@ test_that("knitr_sidecar_prefix preconditions hold", {
 
 test_that("knitr_sidecar_prefix behavior", {
 
-  if (rmarkdown:::pandoc2.0()) {
+  if (rmarkdown::pandoc_available()) {
 
     # fig.path isn't set
     expect_null(knitr_sidecar_prefix(NULL))
