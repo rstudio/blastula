@@ -162,7 +162,7 @@ get_password <- function(msg = "Enter the SMTP server password: ") {
 
   # nocov start
 
-  getPass::getPass(msg = msg)
+  askpass::askpass(msg)
 
   # nocov end
 }
