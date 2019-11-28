@@ -90,11 +90,8 @@ get_keyring_creds_table <- function() {
 
     creds_tbl <-
       creds_tbl %>%
-      dplyr::mutate(package = (strsplit(service, "-") %>% unlist())[1]) %>%
-      dplyr::mutate(version = (strsplit(service, "-") %>% unlist())[2]) %>%
-      dplyr::mutate(key_name = (strsplit(service, "-") %>% unlist())[3]) %>%
-      dplyr::rename(id = key_name, key_name = service) %>%
-      dplyr::select(id, key_name, username)
+      dplyr::mutate(id = sapply(strsplit(service,"-"), `[`, 3)) %>%
+      dplyr::select(id, key_name = service, username)
   }
 
   creds_tbl
