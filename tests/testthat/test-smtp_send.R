@@ -9,10 +9,9 @@ test_that("Creds File Deprecation", {
 
   email <- compose_email("email")
 
-  cf <- creds_file(create_smtp_creds_file(
-    file = "test_creds_file",
-    user = "sender@email.com",
-    provider = "gmail"))
+  cf <- creds_file(
+    file = "test_creds_file"
+  )
 
   expect_error(smtp_send(email=email, from = "sender@email.com",to = "recipient@email.com",
                          creds_file = cf))
