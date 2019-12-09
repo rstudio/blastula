@@ -71,3 +71,18 @@ add_image <- function(file, alt = NULL) {
     "\" width=\"520\" alt=\"", alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"/>\n"
   )
 }
+
+get_image_uri <- function(file) {
+
+  image_raw <-
+    readBin(
+      con = file,
+      what = "raw",
+      n = file.info(file)$size
+    )
+
+  paste0(
+    "data:", mime::guess_type(file = file), ";base64,",
+    base64enc::base64encode(image_raw, 0)
+  )
+}
