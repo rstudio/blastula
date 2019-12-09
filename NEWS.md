@@ -1,3 +1,5 @@
+# blastula (development version)
+
 # blastula 0.3.1
 
 This release contains fixes for R CMD check problems on CRAN test machines. 
