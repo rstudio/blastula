@@ -338,17 +338,26 @@ cid_images <- function(html_file,
 }
 
 decode_hex <- function(hex) {
-
-  if (nchar(hex) %% 2 == 1) {
-    hex <- paste0("0", hex)
+  if (length(hex) != 1) {
+    stop("decode_hex requires a single element character vector")
   }
+  if (!grepl("^[0-9a-f]{1,8}$", hex, ignore.case = TRUE)) {
+    stop("Invalid character code '", hex, "'; expected between 1 and 8 hex digits")
+  }
+
+  # Leading 0's inserted as necessary, so hex value is 8 UTF-32 bytes.
+  hex <- paste(collapse = "", c(rep_len("0", 8 - nchar(hex)), hex))
+
+  # This ugly chunk of code just splits the string by groups of 2 characters,
+  # and converts each pair to a byte.
   chars <- strsplit(hex, "")[[1]]
   left <- chars[c(TRUE, FALSE)]
   right <- chars[c(FALSE, TRUE)]
-  values <- strtoi(paste0(left, right), 16)
-  str <- rawToChar(as.raw(values))
-  Encoding(str) <- "UTF-8"
-  str
+  values <- as.raw(strtoi(paste0(left, right), 16))
+
+  # iconv wants its raw input wrapped in a list :shrug:
+  iconvInput <- list(values)
+  iconv(iconvInput, from = "UTF-32BE", to = "UTF-8")
 }
 
 html_unescape <- function(html) {

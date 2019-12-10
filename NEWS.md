@@ -1,5 +1,7 @@
 # blastula (development version)
 
+* Fixed buggy internal logic for decoding numeric HTML entities that represent non-ASCII characters.
+
 # blastula 0.3.1
 
 This release contains fixes for R CMD check problems on CRAN test machines. 
