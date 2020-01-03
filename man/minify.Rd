@@ -21,8 +21,9 @@ is supported, listed with their default values:
 \itemize{
 \item \code{`html-keep-conditional-comments` = FALSE}: Preserve all IE conditional comments
 \item \code{`html-keep-default-attrvals` = FALSE}: Preserve default attribute values
-\item \code{`html-keep-document-tags` = FALSE}: Preserve \code{<html>}, \code{<head>} and \code{<body>} tags
+\item \code{`html-keep-document-tags` = FALSE}: Preserve \verb{<html>}, \verb{<head>} and \verb{<body>} tags
 \item \code{`html-keep-end-tags` = FALSE}: Preserve all end tags
+\item \code{`html-keep-quotes` = FALSE}: Preserve quotes around attribute values
 \item \code{`html-keep-whitespace` = FALSE}: Preserve whitespace characters but still collapse multiple into one
 \item \code{`css-decimals` = -1L}: Number of decimals to preserve in CSS numbers,
 \code{-1L} means all
@@ -44,7 +45,7 @@ Minify a blastula \code{email_message} object.
 \details{
 The \href{https://en.wikipedia.org/wiki/Minification_(programming)}{minification}
 relies on the binary
-\href{https://github.com/tdewolff/minify/tree/master/cmd/minify}{minify}
+\href{https://github.com/tdewolff/minify/tree/master/cmd/minify}{\strong{minify}}
 which is cross-platform and works on Windows, macOS, Linux and BSD.
 Pre-built binaries can be downloaded from
 \href{https://github.com/tdewolff/minify/releases}{here}. Alternatively,

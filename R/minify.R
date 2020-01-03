@@ -24,6 +24,7 @@
 #'   - \code{`html-keep-default-attrvals` = FALSE}: Preserve default attribute values
 #'   - \code{`html-keep-document-tags` = FALSE}: Preserve `<html>`, `<head>` and `<body>` tags
 #'   - \code{`html-keep-end-tags` = FALSE}: Preserve all end tags
+#'   - \code{`html-keep-quotes` = FALSE}: Preserve quotes around attribute values
 #'   - \code{`html-keep-whitespace` = FALSE}: Preserve whitespace characters but still collapse multiple into one
 #'   - \code{`css-decimals` = -1L}: Number of decimals to preserve in CSS numbers,
 #'     `-1L` means all
@@ -82,7 +83,7 @@ minify <- function(email,
     }
   }
 
-  # Check provided minify options are valid
+  # Ensure provided minify options are valid
   # and collect arguments and options for for `processx::run()` as a list
   run_args <- character(0)
 
@@ -92,6 +93,7 @@ minify <- function(email,
         "html-keep-default-attrvals",
         "html-keep-document-tags",
         "html-keep-end-tags",
+        "html-keep-quotes",
         "html-keep-whitespace",
         "verbose") %>%
       intersect(y = names(minify_opts))
