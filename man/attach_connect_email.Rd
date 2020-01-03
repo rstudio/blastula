@@ -4,9 +4,14 @@
 \alias{attach_connect_email}
 \title{Associate an email when publishing an R Markdown document to RStudio Connect}
 \usage{
-attach_connect_email(email = NULL, subject = NULL,
-  attachments = NULL, attach_output = FALSE, text = NULL,
-  preview = TRUE)
+attach_connect_email(
+  email = NULL,
+  subject = NULL,
+  attachments = NULL,
+  attach_output = FALSE,
+  text = NULL,
+  preview = TRUE
+)
 }
 \arguments{
 \item{email}{A rendered email message. Normally, we'd want to use an

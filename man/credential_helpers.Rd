@@ -8,11 +8,9 @@
 \alias{creds_file}
 \title{Helpers for supplying SMTP credentials}
 \usage{
-creds(user = NULL, provider = NULL, host = NULL, port = NULL,
-  use_ssl = TRUE)
+creds(user = NULL, provider = NULL, host = NULL, port = NULL, use_ssl = TRUE)
 
-creds_anonymous(provider = NULL, host = NULL, port = NULL,
-  use_ssl = TRUE)
+creds_anonymous(provider = NULL, host = NULL, port = NULL, use_ssl = TRUE)
 
 creds_key(id)
 

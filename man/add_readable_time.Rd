@@ -4,8 +4,7 @@
 \alias{add_readable_time}
 \title{Create a string with a more readable date/time}
 \usage{
-add_readable_time(time = NULL, use_date = TRUE, use_time = TRUE,
-  use_tz = TRUE)
+add_readable_time(time = NULL, use_date = TRUE, use_time = TRUE, use_tz = TRUE)
 }
 \arguments{
 \item{time}{The \code{POSIXct} time to use, and to make more readable for email

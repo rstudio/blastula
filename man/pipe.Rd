@@ -4,6 +4,6 @@
 \alias{\%>\%}
 \title{The magrittr pipe}
 \description{
-The \code{blastula} package uses the pipe function, \code{\\\%>\\\%}, to turn function
+The \code{blastula} package uses the pipe function, \verb{\\\%>\\\%}, to turn function
 composition into a series of imperative statements.
 }

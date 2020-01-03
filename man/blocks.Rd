@@ -7,10 +7,10 @@
 blocks(...)
 }
 \arguments{
-\item{...}{One or more \code{block_*()} calls.}
+\item{...}{One or more \verb{block_*()} calls.}
 }
 \description{
-To contain all of the block-based HTML \code{block_*()} calls, we should use
+To contain all of the block-based HTML \verb{block_*()} calls, we should use
 the \code{blocks()} function. We can pass the resulting \code{blocks} object to either
 of the \code{body}, \code{header}, and \code{footer} arguments of \code{compose_email()}.
 }

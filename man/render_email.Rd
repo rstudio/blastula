@@ -5,12 +5,22 @@
 \alias{render_connect_email}
 \title{R Markdown render functions for the \code{blastula_email} output format}
 \usage{
-render_email(input, envir = parent.frame(), quiet = TRUE,
-  output_options = list(), render_options = list())
+render_email(
+  input,
+  envir = parent.frame(),
+  quiet = TRUE,
+  output_options = list(),
+  render_options = list()
+)
 
-render_connect_email(input, connect_footer = TRUE,
-  envir = parent.frame(), quiet = TRUE, output_options = list(),
-  render_options = list())
+render_connect_email(
+  input,
+  connect_footer = TRUE,
+  envir = parent.frame(),
+  quiet = TRUE,
+  output_options = list(),
+  render_options = list()
+)
 }
 \arguments{
 \item{input}{The input file to be rendered. This should be an R Markdown

@@ -9,7 +9,7 @@ block_spacer()
 \description{
 With \code{block_spacer()} we can more easily define an area of whitespace in a
 block-based layout. This function is meant to be easily combined with other
-\code{block_*()} functions. Like all \code{block_*()} functions, \code{block_spacer()} must
+\verb{block_*()} functions. Like all \verb{block_*()} functions, \code{block_spacer()} must
 be placed inside of \code{blocks()} and the resultant \code{blocks} object can be
 provided to the \code{body}, \code{header}, or \code{footer} arguments of \code{compose_email()}.
 }

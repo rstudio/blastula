@@ -4,8 +4,17 @@
 \alias{smtp_send}
 \title{Send an email message through SMTP}
 \usage{
-smtp_send(email, to, from, subject = NULL, cc = NULL, bcc = NULL,
-  credentials = NULL, creds_file = "deprecated", verbose = FALSE)
+smtp_send(
+  email,
+  to,
+  from,
+  subject = NULL,
+  cc = NULL,
+  bcc = NULL,
+  credentials = NULL,
+  creds_file = "deprecated",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}
@@ -46,7 +55,7 @@ store, through use of the \code{\link[=create_smtp_creds_key]{create_smtp_creds_
 Such a file is created using the \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function.}
 
 \item{creds_file}{An option to specify a credentials file. As this argument
-is deprecated, please consider using \code{credentials = creds_file(<file>)}
+is deprecated, please consider using \verb{credentials = creds_file(<file>)}
 instead.}
 
 \item{verbose}{Should verbose output from the internal curl \code{send_mail()}

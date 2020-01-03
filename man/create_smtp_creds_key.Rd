@@ -4,12 +4,18 @@
 \alias{create_smtp_creds_key}
 \title{Store SMTP credentials in the system's key-value store}
 \usage{
-create_smtp_creds_key(id, user = NULL, provider = NULL, host = NULL,
-  port = NULL, use_ssl = NULL)
+create_smtp_creds_key(
+  id,
+  user = NULL,
+  provider = NULL,
+  host = NULL,
+  port = NULL,
+  use_ssl = NULL
+)
 }
 \arguments{
 \item{id}{An identifying label for the keyname. The full key name is
-constructed in the following way: \code{blastula-v1-<id>}.}
+constructed in the following way: \verb{blastula-v1-<id>}.}
 
 \item{user}{The username for the email account. Typically, this is the email
 address associated with the account.}
