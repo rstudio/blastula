@@ -22,28 +22,29 @@ Create an email test message object, which is helpful for sending a test
 message with the \code{smtp_send()} function.
 }
 \examples{
-\dontrun{
 # Create a credentials file to send
 # a test message via Gmail's SMTP
 # (this file is named "gmail_secret")
-create_smtp_creds_file(
-  file = "gmail_secret",
-  user = "sender@email.com",
-  provider = "gmail"
-)
+
+# create_smtp_creds_file(
+#   file = "gmail_secret",
+#   user = "sender@email.com",
+#   provider = "gmail"
+# )
 
 # Send oneself a test message to
 # test these new SMTP settings and
 # to ensure that the message appears
 # correctly in the email client
-prepare_test_message() \%>\%
-  smtp_send(
-    from = "sender@email.com",
-    to = "sender@email.com",
-    subject = "Test Message",
-    credentials = creds_file(
-      file = "gmail_secret"
-      )
-    )
-}
+
+# prepare_test_message() \%>\%
+#   smtp_send(
+#     from = "sender@email.com",
+#     to = "sender@email.com",
+#     subject = "Test Message",
+#     credentials = creds_file(
+#       file = "gmail_secret"
+#       )
+#     )
+
 }

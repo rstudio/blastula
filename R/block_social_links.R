@@ -60,18 +60,18 @@
 #'             image = "https://i.imgur.com/dxSXzGb.jpg",
 #'             title = "Hong Kong",
 #'             content =
-#'               "Once home to fishermen and farmers, \\
-#'               modern Hong Kong is a teeming, \\
-#'               commercially-vibrant metropolis where \\
+#'               "Once home to fishermen and farmers,
+#'               modern Hong Kong is a teeming,
+#'               commercially-vibrant metropolis where
 #'               Chinese and Western influences fuse."
 #'           ),
 #'           article(
 #'             image = "https://i.imgur.com/bJzVIrG.jpg",
 #'             title = "Australia",
 #'             content =
-#'               "Australia ranks as one of the best \\
-#'               places to live in the world by all \\
-#'               indices of income, human development, \\
+#'               "Australia ranks as one of the best
+#'               places to live in the world by all
+#'               indices of income, human development,
 #'               healthcare, and civil rights."
 #'           )
 #'         )
@@ -95,6 +95,7 @@
 #'   )
 #'
 #' if (interactive()) email
+#'
 #' @export
 social_link <- function(service,
                         link,
@@ -124,7 +125,8 @@ social_link <- function(service,
       link = link,
       icon = icon,
       variant = variant,
-      alt = alt)
+      alt = alt
+    )
 
   # Apply the `social_link` class
   class(social_link_item_list) <- "social_link"
@@ -142,6 +144,58 @@ social_link <- function(service,
 #' arguments of `compose_email()`.
 #'
 #' @param ... One or more calls to `social_link()`.
+#'
+#' @examples
+#' # Create an email message with some
+#' # articles in the `body`; in the footer,
+#' # add some social sharing icons linking
+#' # to web content using `block_social_links()`
+#' email <-
+#'   compose_email(
+#'     body =
+#'       blocks(
+#'         block_title("Exciting Travel Destinations"),
+#'         block_articles(
+#'           article(
+#'             image = "https://i.imgur.com/dxSXzGb.jpg",
+#'             title = "Hong Kong",
+#'             content =
+#'               "Once home to fishermen and farmers,
+#'               modern Hong Kong is a teeming,
+#'               commercially-vibrant metropolis where
+#'               Chinese and Western influences fuse."
+#'           ),
+#'           article(
+#'             image = "https://i.imgur.com/bJzVIrG.jpg",
+#'             title = "Australia",
+#'             content =
+#'               "Australia ranks as one of the best
+#'               places to live in the world by all
+#'               indices of income, human development,
+#'               healthcare, and civil rights."
+#'           )
+#'         )
+#'       ),
+#'     footer =
+#'       blocks(
+#'         block_text("Thanks for reading! Find us here:"),
+#'         block_social_links(
+#'           social_link(
+#'             service = "pinterest",
+#'             link = "https://www.pinterest.ca/TravelLeisure/",
+#'             variant = "color"
+#'           ),
+#'           social_link(
+#'             service = "tripadvisor",
+#'             link = "https://www.tripadvisor.ca/TravelersChoice",
+#'             variant = "color"
+#'           )
+#'         )
+#'       )
+#'   )
+#'
+#' if (interactive()) email
+#'
 #' @export
 block_social_links <- function(...) {
 
@@ -178,63 +232,22 @@ render_block_social_links <- function(x) {
     alt <- x[[i]]$alt
 
     x[[i]] <-
-      glue::glue(
-        "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
-      ) %>%
-      as.character()
+      social_link_line_template %>%
+      tidy_gsub("\\{link\\}", link %>% process_text()) %>%
+      tidy_gsub("\\{icon\\}", icon %>% process_text()) %>%
+      tidy_gsub("\\{alt\\}", alt %>% process_text())
   }
 
   social_links <- x %>% unlist() %>% paste(collapse = "\n")
 
-  glue::glue(social_link_block_template()) %>% as.character()
+  social_link_block_template %>%
+    tidy_gsub("\\{social_links\\}", social_links)
 }
 
-#' Print a block of social links
-#'
-#' This facilitates printing of a block of social links to the Viewer.
-#' @param x an object of class \code{block_social_links}.
-#' @keywords internal
-#' @export
-print.block_social_links <- function(x, ...) {
+social_link_line_template <-
+  "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
 
-  x %>%
-    render_block_social_links() %>%
-    htmltools::HTML() %>%
-    htmltools::html_print()
-}
-
-#' Print a social link component in the console
-#'
-#' This facilitates printing of a social link object to the console.
-#' @param x an object of class \code{social_link}.
-#' @keywords internal
-#' @export
-print.social_link <- function(x, ...) {
-
-  # Modify the URL for an icon that's hosted on GitHub
-  icon <-
-    x$icon %>%
-    tidy_gsub(
-      paste0("https://", social_icons_host_stub()),
-      "<blastula_hosted>"
-    )
-
-  glue::glue("
-service: {x$service}
-link: {x$link}
-icon: {icon}
-variant: {x$variant}
-alt text: {x$alt}
-"
-  ) %>%
-    as.character() %>%
-    cat()
-}
-
-#' A template for a social link HTML fragment
-#' @noRd
-social_link_block_template <- function() {
-
+social_link_block_template <-
 "<tr>
 <td class=\"content-block\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; padding-top: 0; padding-bottom: 24px; font-size: 12px; color: #999999; text-align: center;\" valign=\"top\" align=\"center\">
 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"social-sharing\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto; margin: 0 auto; text-align: center;\" align=\"center\">
@@ -248,7 +261,6 @@ social_link_block_template <- function() {
 </table>
 </td>
 </tr>"
-}
 
 #' @noRd
 icon_for_social_service <- function(service,
@@ -277,7 +289,7 @@ icon_for_social_service <- function(service,
 
   # Ensure that the icon variant is valid; if
   # nothing is provided for variant, default to `bw`
-  if (!is.null(variant) && !(variant %in% social_service_icon_variants())) {
+  if (!is.null(variant) && !(variant %in% social_service_icon_variants)) {
     stop("The given `variant` is not available for the social icons\n",
          " * look inside the article at `?social_link` to see which are available\n",
          call. = FALSE)
@@ -285,17 +297,12 @@ icon_for_social_service <- function(service,
     variant <- "bw"
   }
 
-  # Create the link to the hosted image asset
-  glue::glue(
-    "https://{social_icons_host_stub()}/{service}-{variant}.png"
-  ) %>%
-    as.character()
+  # Construct the link to the hosted image asset
+  paste0("https://", social_icons_host_stub, "/", service, "-", variant, ".png")
 }
 
-#' @noRd
-social_icons_host_stub <- function() {
+social_icons_host_stub <-
   "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
-}
 
 #' @noRd
 social_service_icons <- function() {
@@ -334,9 +341,7 @@ social_service_icons <- function() {
   )
 }
 
-#' @noRd
-social_service_icon_variants <- function() {
-
+social_service_icon_variants <-
   c(
     "color",
     "bw",
@@ -344,4 +349,3 @@ social_service_icon_variants <- function() {
     "gray",
     "light_gray"
   )
-}

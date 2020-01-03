@@ -27,36 +27,38 @@ Send an email message via the Mailgun API. This requires an account with
 Mailgun.
 }
 \examples{
-\dontrun{
 # Create a simple email message using
 # Markdown formatting
-email <-
-  compose_email(
-  body = "
-  Hello!
 
-  ## This a section heading
-
-  We can use Markdown formatting \\\\
-  to **embolden** text or to add \\\\
-  *emphasis*. This is exciting, \\\\
-  right?
-
-  Cheers")
+# email <-
+#   compose_email(
+#   body = "
+#   Hello!
+#
+#   ## This a section heading
+#
+#   We can use Markdown formatting \\\\
+#   to **embolden** text or to add \\\\
+#   *emphasis*. This is exciting, \\\\
+#   right?
+#
+#   Cheers")
 
 # Generate a vector of recipients
-recipient_list <-
-  c("person_1@site.net",
-    "person_2@site.net")
+
+# recipient_list <-
+#   c("person_1@site.net",
+#     "person_2@site.net")
 
 # Send it to multiple people through
 # the Mailgun API
-email \%>\%
-  send_by_mailgun(
-    subject = "Sent through Mailgun",
-    from = "The Sender <sender@send.org>",
-    recipients = recipient_list,
-    url = "<..mailgun_sending_domain..>",
-    api = "<..mailgun_api_key..>")
-}
+
+# email \%>\%
+#   send_by_mailgun(
+#     subject = "Sent through Mailgun",
+#     from = "The Sender <sender@send.org>",
+#     recipients = recipient_list,
+#     url = "<..mailgun_sending_domain..>",
+#     api = "<..mailgun_api_key..>")
+
 }

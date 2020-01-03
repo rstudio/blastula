@@ -4,10 +4,10 @@
 \alias{block_title}
 \title{A block with large title text}
 \usage{
-block_title(...)
+block_title(title)
 }
 \arguments{
-\item{...}{Paragraphs of title text.}
+\item{title}{Plain text or Markdown text (via \code{\link[=md]{md()}}) for the title.}
 }
 \description{
 With \code{block_title()} we can define a title text area and this can be easily
@@ -27,25 +27,24 @@ email <-
   compose_email(
     body =
       blocks(
-        block_title(
-          "Two Cities I Visited Recently"),
+        block_title("Two Cities I Visited Recently"),
         block_articles(
           article(
             image = "https://i.imgur.com/dig0HQ2.jpg",
             title = "Los Angeles",
             content =
-              "I want to live in Los Angeles. \\\\
-              Not the one in Los Angeles. \\\\
-              No, not the one in South California. \\\\
+              "I want to live in Los Angeles.
+              Not the one in Los Angeles.
+              No, not the one in South California.
               They got one in South Patagonia."
           ),
           article(
             image = "https://i.imgur.com/RUvqHV8.jpg",
             title = "New York",
             content =
-              "Start spreading the news. \\\\
-              I'm leaving today. \\\\
-              I want to be a part of it. \\\\
+              "Start spreading the news.
+              I'm leaving today.
+              I want to be a part of it.
               New York, New York."
           )
         )

@@ -1,3 +1,5 @@
+# nocov start
+
 #' View available credentials keys
 #'
 #' @export
@@ -5,6 +7,8 @@ view_credential_keys <- function() {
 
   get_keyring_creds_table()
 }
+
+# nocov end
 
 #' Retrieve metadata and authentication values from an on-disk credentials file
 #'
@@ -16,6 +20,8 @@ get_smtp_file_creds <- function(file_name = NULL) {
   readLines(file_name, encoding = "UTF-8") %>%
     jsonlite::unserializeJSON()
 }
+
+# nocov start
 
 #' Retrieve metadata and authentication values from keyring data
 #'
@@ -84,15 +90,15 @@ get_keyring_creds_table <- function() {
 
     creds_tbl <-
       creds_tbl %>%
-      tidyr::separate(
-        col = service,
-        into = c("package", "version", "key_name"),
-        sep = "-",
-        remove = FALSE
-      ) %>%
+      dplyr::mutate(package = (strsplit(service, "-") %>% unlist())[1]) %>%
+      dplyr::mutate(version = (strsplit(service, "-") %>% unlist())[2]) %>%
+      dplyr::mutate(key_name = (strsplit(service, "-") %>% unlist())[3]) %>%
       dplyr::rename(id = key_name, key_name = service) %>%
       dplyr::select(id, key_name, username)
   }
 
   creds_tbl
 }
+
+# nocov end
+

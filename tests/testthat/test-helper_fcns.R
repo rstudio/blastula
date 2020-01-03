@@ -6,7 +6,7 @@ test_that("creating a base64-encoded image is possible", {
   # contains an image
   img_file_path <-
     system.file(
-      "img",
+      "example_files",
       "test_image.png",
       package = "blastula"
     )

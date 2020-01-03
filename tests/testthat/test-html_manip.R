@@ -77,12 +77,28 @@ test_that("src resolution works correctly", {
   expect_equal(src_to_filepath("/foo%20bar", "/baz"), "/foo bar")
   expect_equal(src_to_filepath("/foo%20bar", "/baz"), "/foo bar")
   expect_equal(src_to_filepath("/foo%20bar", "."), "/foo bar")
-  expect_equal(src_to_filepath("foo%20bar", "."), file.path(getwd(), "foo bar"))
-  expect_equal(src_to_filepath("../a/b", "/c/d"), "/c/a/b")
 
+  # Because of the potential for drive letters to be of
+  # different cases, we transform the whole string to lower case
+  expect_equal(tolower(src_to_filepath("foo%20bar", ".")), tolower(file.path(getwd(), "foo bar")))
+  expect_equal(tolower(src_to_filepath("foo", "")), tolower(file.path(getwd(), "foo")))
+
+  expect_equal(src_to_filepath("../a/b", "/c/d"), "/c/a/b")
   expect_equal(src_to_filepath("C:\\foo\\bar", "/baz"), "C:/foo/bar")
   # Newer versions of fs capitalize drive letters
   expect_true(src_to_filepath("foo/bar", "c:\\baz") %in% c("c:/baz/foo/bar", "C:/baz/foo/bar"))
   expect_true(src_to_filepath("", "c:\\baz") %in% c("c:/baz", "C:/baz"))
-  expect_equal(src_to_filepath("foo", ""), file.path(getwd(), "foo"))
+})
+
+test_that("decode_hex works correctly including for Unicode chars", {
+  expect_identical(html_unescape("&#x51;"), "Q")
+  expect_identical(html_unescape("&#81;"), "Q")
+  expect_identical(html_unescape("&#x2661;"), "\u2661")
+  expect_identical(html_unescape("&#9825;"), "\u2661")
+  expect_identical(html_unescape("&#x0010FFFF;"), "\U0010FFFF")
+  expect_identical(html_unescape("&#1114111;"), "\U0010FFFF")
+
+  # Error: Too many hex digits
+  expect_error(html_unescape("&#x0010FFFFF;"))
+  expect_error(html_unescape("&#x0010FFFFF;"))
 })

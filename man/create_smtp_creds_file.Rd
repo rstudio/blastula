@@ -5,7 +5,7 @@
 \title{Store SMTP credentials in a file}
 \usage{
 create_smtp_creds_file(file, user = NULL, provider = NULL,
-  host = NULL, port = NULL, use_ssl = NULL, sender_name = NULL)
+  host = NULL, port = NULL, use_ssl = NULL)
 }
 \arguments{
 \item{file}{The output filename for the credentials file.}
@@ -22,9 +22,6 @@ provided then values for \code{host}, \code{port}, and \code{use_ssl} are expect
 and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
 value.}
-
-\item{sender_name}{An option to specify a sender name. This isn't always
-visible to the recipient, however, as some SMTP servers will suppress this.}
 }
 \description{
 We can create a file with SMTP configuration and access credentials for the
@@ -33,15 +30,15 @@ this file produced, the credentials helper \code{\link[=creds_file]{creds_file()
 \code{credentials} argument of \code{\link[=smtp_send]{smtp_send()}}.
 }
 \examples{
-\dontrun{
 # Create a credentials file to make it
 # much easier to send email out through
 # Gmail with `smtp_send()`; name the
 # file "gmail_creds"
-create_smtp_creds_file(
-  file = "gmail_creds",
-  user = "user_name@gmail.com",
-  provider = "gmail"
-  )
-}
+
+# create_smtp_creds_file(
+#   file = "gmail_creds",
+#   user = "user_name@gmail.com",
+#   provider = "gmail"
+#   )
+
 }

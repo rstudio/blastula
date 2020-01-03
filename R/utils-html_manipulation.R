@@ -68,7 +68,7 @@ gfsub <- function(string,
   matches <- find_all(string, pattern, ignore_case = ignore_case)
 
   f <- file(open = "w+b", encoding = "UTF-8")
-  on.exit(close(f))
+  on.exit(close(f), add = TRUE)
 
   out <- function(str) {
     bytes <- charToRaw(enc2utf8(str))
@@ -257,7 +257,7 @@ src_to_datauri <- function(src,
     }
 
     f <- file(full_path, open = "rb")
-    on.exit(close(f))
+    on.exit(close(f), add = TRUE)
     b64 <- base64enc::base64encode(f, 0)
     paste0("data:", type, ";base64,", b64)
 
@@ -338,17 +338,26 @@ cid_images <- function(html_file,
 }
 
 decode_hex <- function(hex) {
-
-  if (nchar(hex) %% 2 == 1) {
-    hex <- paste0("0", hex)
+  if (length(hex) != 1) {
+    stop("decode_hex requires a single element character vector")
   }
+  if (!grepl("^[0-9a-f]{1,8}$", hex, ignore.case = TRUE)) {
+    stop("Invalid character code '", hex, "'; expected between 1 and 8 hex digits")
+  }
+
+  # Leading 0's inserted as necessary, so hex value is 8 UTF-32 bytes.
+  hex <- paste(collapse = "", c(rep_len("0", 8 - nchar(hex)), hex))
+
+  # This ugly chunk of code just splits the string by groups of 2 characters,
+  # and converts each pair to a byte.
   chars <- strsplit(hex, "")[[1]]
   left <- chars[c(TRUE, FALSE)]
   right <- chars[c(FALSE, TRUE)]
-  values <- strtoi(paste0(left, right), 16)
-  str <- rawToChar(as.raw(values))
-  Encoding(str) <- "UTF-8"
-  str
+  values <- as.raw(strtoi(paste0(left, right), 16))
+
+  # iconv wants its raw input wrapped in a list :shrug:
+  iconvInput <- list(values)
+  iconv(iconvInput, from = "UTF-32BE", to = "UTF-8")
 }
 
 html_unescape <- function(html) {
@@ -377,4 +386,35 @@ html_unescape <- function(html) {
       }
     }
   )
+}
+
+process_text <- function(text) {
+
+  # If text has been passed in with `md()`, collapse
+  # that vector with "\n" and convert to HTML with
+  # `commonmark::markdown_html()`
+  if (inherits(text, "from_markdown")) {
+
+    text <-
+      text %>%
+      as.character() %>%
+      paste(collapse = "\n") %>%
+      commonmark::markdown_html()
+
+    return(text)
+  }
+
+  # If text isn't `from_markdown`, it should inherit
+  # from `character`; if not, stop the function
+  if (!inherits(text, "character")) {
+
+    stop("The input text must be of class `\"character\"`.",
+         call. = FALSE)
+  }
+
+  # Fashion plain text into HTML
+  text %>%
+    paste(collapse = "\n") %>%
+    htmltools::htmlEscape() %>%
+    tidy_gsub("\n\n", "<br />\n")
 }

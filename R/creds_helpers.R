@@ -9,7 +9,7 @@
 #' The [creds()] credential helper allows for manual specification of SMTP
 #' configuration and authentication.
 #'
-#' The [creds_anonymous()] credential helper is similiar to [creds()] but
+#' The [creds_anonymous()] credential helper is similar to [creds()] but
 #' provides convenient defaults for authenticating anonymously with an SMTP
 #' server.
 #'
@@ -23,15 +23,10 @@
 #'
 #' @param user The username for the email account. Typically, this is the email
 #'   address associated with the account.
-#' @param password This argument is available in the [creds_anonymous()] and
-#'   isn't typically used unless an 'anonymous' password requires a specific
-#'   value (e.g., "anonymous" as the password itself).
 #' @param provider An optional email provider shortname for autocompleting STMP
 #'   configuration details (the `host`, `port`, `use_ssl` options). Options
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.
-#' @param sender_name An option to specify a sender name. This isn't always
-#'   visible to the recipient, however, as some SMTP servers will suppress this.
 #' @param host,port,use_ssl Configuration info for the SMTP server. The `host`
 #'   and `port` parameters are the address and port for the SMTP server;
 #'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
@@ -54,7 +49,6 @@ NULL
 #' @export
 creds <- function(user = NULL,
                   provider = NULL,
-                  sender_name = NULL,
                   host = NULL,
                   port = NULL,
                   use_ssl = TRUE) {
@@ -64,7 +58,6 @@ creds <- function(user = NULL,
     create_credentials_list(
       provider = provider,
       user = user,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl
@@ -76,20 +69,16 @@ creds <- function(user = NULL,
 
 #' @rdname credential_helpers
 #' @export
-creds_anonymous <- function(user = "anonymous",
-                            password = NULL,
-                            provider = NULL,
-                            sender_name = NULL,
+creds_anonymous <- function(provider = NULL,
                             host = NULL,
                             port = NULL,
                             use_ssl = TRUE) {
 
   creds_list <-
     creds_internal(
-      user = user,
-      password = password,
+      user = NULL,
+      password = NULL,
       provider = provider,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl

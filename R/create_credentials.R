@@ -16,28 +16,28 @@
 #'   and `port` parameters are the address and port for the SMTP server;
 #'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
 #'   value.
-#' @param sender_name An option to specify a sender name. This isn't always
-#'   visible to the recipient, however, as some SMTP servers will suppress this.
+#'
 #' @examples
-#' \dontrun{
 #' # Create a credentials file to make it
 #' # much easier to send email out through
 #' # Gmail with `smtp_send()`; name the
 #' # file "gmail_creds"
-#' create_smtp_creds_file(
-#'   file = "gmail_creds",
-#'   user = "user_name@gmail.com",
-#'   provider = "gmail"
-#'   )
-#' }
+#'
+#' # create_smtp_creds_file(
+#' #   file = "gmail_creds",
+#' #   user = "user_name@gmail.com",
+#' #   provider = "gmail"
+#' #   )
+#'
 #' @export
 create_smtp_creds_file <- function(file,
                                    user = NULL,
                                    provider = NULL,
                                    host = NULL,
                                    port = NULL,
-                                   use_ssl = NULL,
-                                   sender_name = NULL) {
+                                   use_ssl = NULL) {
+
+  # nocov start
 
   # Use an empty string for `user` if NULL
   if (is.null(user)) user <- ""
@@ -47,7 +47,6 @@ create_smtp_creds_file <- function(file,
     create_credentials_list(
       provider = provider,
       user = user,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl
@@ -63,6 +62,8 @@ create_smtp_creds_file <- function(file,
 
   # Issue a message stating that the file has been created
   message("The SMTP credentials file (`", file, "`) has been generated")
+
+  # nocov end
 }
 
 #' Store SMTP credentials in the system's key-value store
@@ -80,39 +81,40 @@ create_smtp_creds_file <- function(file,
 #' @param id An identifying label for the keyname. The full key name is
 #'   constructed in the following way: `blastula-v1-<id>`.
 #' @inheritParams create_smtp_creds_file
+#'
 #' @examples
-#' \dontrun{
 #' # Store SMTP crendentials using the
 #' # system's secure key-value store to
 #' # make it much easier to send email
 #' # out through Gmail with `smtp_send()`;
 #' # provide the `id` of "gmail_creds"
-#' create_smtp_creds_key(
-#'   id = "gmail_creds",
-#'   provider = "gmail",
-#'   user = "user_name@gmail.com",
-#'   )
-#' }
+#'
+#' # create_smtp_creds_key(
+#' #   id = "gmail_creds",
+#' #   provider = "gmail",
+#' #   user = "user_name@gmail.com",
+#' #   )
+#'
 #' @export
 create_smtp_creds_key <- function(id,
                                   user = NULL,
                                   provider = NULL,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = NULL,
-                                  sender_name = NULL) {
+                                  use_ssl = NULL) {
+
+  # nocov start
 
   # Use an empty string for `user` if NULL
   if (is.null(user)) user <- ""
 
-  # Creating credential on the system-wide key-value
+  # Creating credentials on the system-wide key-value
   # store requires the installation of the keyring package
   if (!requireNamespace("keyring", quietly = TRUE)) {
 
     stop("The `keyring` package is required for using the ",
          "`create_smtp_creds_key()` function",
          call. = FALSE)
-
   }
 
   # Determine whether the keyring package can be used
@@ -123,7 +125,6 @@ create_smtp_creds_key <- function(id,
     create_credentials_list(
       provider = provider,
       user = user,
-      sender_name = sender_name,
       host = host,
       port = port,
       use_ssl = use_ssl
@@ -150,6 +151,20 @@ create_smtp_creds_key <- function(id,
     " * You can use this key within `smtp_send()` with ",
     "`credentials = creds_key(\"", id, "\")`"
   )
+
+  # nocov end
+}
+
+#' Ask for a password
+#'
+#' @noRd
+get_password <- function(msg = "Enter the SMTP server password: ") {
+
+  # nocov start
+
+  getPass::getPass(msg = msg)
+
+  # nocov end
 }
 
 #' Create a credentials list object
@@ -157,8 +172,7 @@ create_smtp_creds_key <- function(id,
 #' @noRd
 create_credentials_list <- function(provider,
                                     user,
-                                    password = getPass::getPass("Enter the SMTP server password: "),
-                                    sender_name,
+                                    password = get_password(),
                                     host,
                                     port,
                                     use_ssl) {
@@ -167,7 +181,6 @@ create_credentials_list <- function(provider,
     user = user,
     password = password,
     provider = provider,
-    sender_name = sender_name,
     host = host,
     port = port,
     use_ssl = use_ssl
@@ -180,7 +193,6 @@ create_credentials_list <- function(provider,
 creds_internal <- function(user = NULL,
                            password = NULL,
                            provider = NULL,
-                           sender_name = NULL,
                            host = NULL,
                            port = NULL,
                            use_ssl = NULL) {
@@ -208,7 +220,6 @@ creds_internal <- function(user = NULL,
   # Generate the credentials list
   list(
     version = schema_version,
-    sender_name = sender_name,
     host = host,
     port = port,
     use_ssl = use_ssl,
@@ -222,10 +233,14 @@ creds_internal <- function(user = NULL,
 #' @noRd
 validate_keyring_capable <- function() {
 
+  # nocov start
+
   if (!keyring::has_keyring_support()) {
     stop("To store SMTP via *keyring*, the system needs to have",
          "*keyring* support", call. = FALSE)
   }
+
+  # nocov end
 }
 
 #' Stops function if a given `provider` is not supported

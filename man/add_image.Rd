@@ -31,23 +31,22 @@ img_file_path <-
   )
 
 img_file_html <-
-  add_image(
-    file = img_file_path
-  )
+  add_image(file = img_file_path)
 
 # Include the image in the email
 # message body by simply referencing
 # the `img_file_html` object
 email <-
   compose_email(
-    body =
-"
-Hello,
+    body = md(
+      c(
+"Hello,
 
-Here is an image:
-
-{img_file_html}
-")
+Here is an image:\\n",
+img_file_html
+      )
+    )
+  )
 
 if (interactive()) email
 

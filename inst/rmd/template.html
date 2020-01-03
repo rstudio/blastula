@@ -50,6 +50,11 @@ width: auto !important;
 PRESERVE THESE STYLES IN THE HEAD
 ------------------------------------- */
 @media all {
+
+img {
+max-width: 100% !important;
+}
+
 .ExternalClass {
 width: 100%;
 }
@@ -82,7 +87,7 @@ border-color: #34495e !important;
 <body class="" style="background-color: #f6f6f6; font-family: sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; margin: 0; padding: 0; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;">
 <table border="0" cellpadding="0" cellspacing="0" class="body" style="border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;">
 <tr>
-<td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+<td style="font-family: sans-serif; font-size: 14px; vertical-align: top;"><br /></td>
 <td class="container" style="font-family: sans-serif; font-size: 14px; vertical-align: top; display: block; Margin: 0 auto; max-width: 580px; padding: 10px; width: 580px;">
 <div class="content" style="box-sizing: border-box; display: block; Margin: 0 auto; max-width: 580px; padding: 10px;">
 
@@ -116,7 +121,7 @@ $include-after$
 $endfor$
 $if(rsc-footer)$
 $if(include-after)$<hr/>$endif$
-<p>The connect-example-main document was generated at $rsc-date-time$ by scheduled execution.</p>
+<p>This message was generated at $rsc-date-time$.</p>
 
 <p>This Version: <a href="$rsc-report-rendering-url$">$rsc-report-rendering-url$</a><br/>
 Latest Version: <a href="$rsc-report-url$">$rsc-report-url$</a></p>
@@ -134,7 +139,7 @@ $endif$
 <!-- END CENTERED WHITE CONTAINER -->
 </div>
 </td>
-<td style="font-family: sans-serif; font-size: 14px; vertical-align: top;">&nbsp;</td>
+<td style="font-family: sans-serif; font-size: 14px; vertical-align: top;"><br /></td>
 </tr>
 </table>
 </body>
