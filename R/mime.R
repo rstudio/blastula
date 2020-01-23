@@ -260,14 +260,14 @@ encode_qp <- function(str) {
     if (identical(chunk, "\n")) {
       cur_line_len <- -1L
     } else if (cur_line_len + nchar(chunk) >= 76) {
-      out("=\r\n")
+      out("\r\n")
       cur_line_len <- 0L
     }
     out(chunk)
     cur_line_len <- cur_line_len + nchar(chunk)
   }
   # Ensure that trailing spaces are not ignored
-  out("=\r\n\r\n")
+  out("\r\n\r\n")
 
   paste(collapse = "\n", readLines(f, warn = FALSE, encoding = "UTF-8"))
 }
