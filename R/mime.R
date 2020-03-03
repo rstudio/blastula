@@ -41,7 +41,8 @@ generate_rfc2822 <- function(eml,
                              subject = NULL,
                              from = NULL,
                              to = NULL,
-                             cc = NULL) {
+                             cc = NULL,
+                             con = NULL) {
 
   stopifnot(inherits(eml, "blastula_message"))
 
@@ -112,10 +113,19 @@ generate_rfc2822 <- function(eml,
     )
   }
 
-  f <- file(open = "w+b")
-  on.exit(close(f), add = TRUE)
-  write_mime(create_output_sink(f), msg)
-  readChar(f, seek(f), useBytes = TRUE)
+  if (is.null(con)) {
+    f <- file(open = "w+b")
+    on.exit(close(f), add = TRUE)
+    write_mime(create_output_sink(f), msg)
+    readChar(f, seek(f), useBytes = TRUE)
+  } else {
+    if (is.character(con)) {
+      con <- file(con, open = "w+b")
+      on.exit(close(con), add = TRUE)
+    }
+    write_mime(create_output_sink(con), msg)
+    invisible()
+  }
 }
 
 # Constant representing canonical CRLF
