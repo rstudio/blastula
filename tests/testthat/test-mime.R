@@ -145,4 +145,8 @@ test_that("varying formats for recipient lists work as expected", {
 #   Filenames with angle brackets < >
 #   With various extensions
 
+  # TODO: A test email with text lines > 80 characters, and some small binary
+  # attachment (image is fine). After calling generate_rfc2822 on it, ensure
+  # that grepl("(?<!\\r)\n", str, perl = TRUE) is FALSE
+
 })

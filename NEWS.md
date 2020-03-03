@@ -2,6 +2,8 @@
 
 * Fixed buggy internal logic for decoding numeric HTML entities that represent non-ASCII characters.
 
+* Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding.
+
 # blastula 0.3.1
 
 This release contains fixes for R CMD check problems on CRAN test machines. 

@@ -269,7 +269,7 @@ encode_qp <- function(str) {
   # Ensure that trailing spaces are not ignored
   out("=\r\n\r\n")
 
-  paste(collapse = "\n", readLines(f, warn = FALSE, encoding = "UTF-8"))
+  paste(collapse = "\r\n", readLines(f, warn = FALSE, encoding = "UTF-8"))
 }
 
 format_rfc2822_date <- function(date) {
