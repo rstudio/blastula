@@ -152,7 +152,7 @@ test_that("varying formats for recipient lists work as expected", {
   blastula::prepare_test_message(
     incl_ggplot = FALSE, incl_image = FALSE
   ) %>%
-    add_attachment(file = file.path(path.package("blastula"), "tests/testthat/rstudio_logo.png")) %>%
+    add_attachment(file = system.file("img", "pexels-photo-267151.jpeg", package = "blastula")) %>%
     generate_rfc2822() %>%
     grepl("(?<!\\r)\n", ., perl = TRUE) %>%
     expect_false()
