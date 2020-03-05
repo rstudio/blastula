@@ -138,15 +138,22 @@ test_that("varying formats for recipient lists work as expected", {
   ) %>%
     expect_match("Subject: Don't \"sweat it\", okay?")
 
-# TODO:
-# Inline images and file attachments with weird filenames
-#   Filenames with spaces
-#   Filenames with unicode characters (on both Windows and POSIX)
-#   Filenames with angle brackets < >
-#   With various extensions
+  # TODO:
+  # Inline images and file attachments with weird filenames
+  #   Filenames with spaces
+  #   Filenames with unicode characters (on both Windows and POSIX)
+  #   Filenames with angle brackets < >
+  #   With various extensions
 
-  # TODO: A test email with text lines > 80 characters, and some small binary
-  # attachment (image is fine). After calling generate_rfc2822 on it, ensure
-  # that grepl("(?<!\\r)\n", str, perl = TRUE) is FALSE
-
+  # Create a test email with text lines > 80 characters and a
+  # small binary attachment (an image); after calling
+  # `generate_rfc2822()` on it, expect that `grepl("(?<!\\r)\n", str, perl = TRUE)`
+  # returns FALSE
+  blastula::prepare_test_message(
+    incl_ggplot = FALSE, incl_image = FALSE
+  ) %>%
+    add_attachment(file = "tests/testthat/rstudio_logo.png") %>%
+    generate_rfc2822() %>%
+    grepl("(?<!\\r)\n", ., perl = TRUE) %>%
+    expect_false()
 })
