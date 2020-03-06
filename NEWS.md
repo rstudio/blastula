@@ -2,7 +2,7 @@
 
 * Fixed buggy internal logic for decoding numeric HTML entities that represent non-ASCII characters.
 
-* Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding.
+* Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding. Thanks @jdbarillas for identifying the source of the issue! [#153](https://github.com/rich-iannone/blastula/pull/153)
 
 # blastula 0.3.1
 
