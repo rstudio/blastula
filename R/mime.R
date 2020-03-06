@@ -117,7 +117,9 @@ generate_rfc2822 <- function(eml,
     f <- file(open = "w+b")
     on.exit(close(f), add = TRUE)
     write_mime(create_output_sink(f), msg)
-    readChar(f, seek(f), useBytes = TRUE)
+    str <- readChar(f, seek(f), useBytes = TRUE)
+    Encoding(str) <- "UTF-8"
+    str
   } else {
     if (is.character(con)) {
       con <- file(con, open = "w+b")

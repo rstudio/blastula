@@ -102,3 +102,10 @@ test_that("decode_hex works correctly including for Unicode chars", {
   expect_error(html_unescape("&#x0010FFFFF;"))
   expect_error(html_unescape("&#x0010FFFFF;"))
 })
+
+test_that("gfsub doesn't butcher line endings", {
+  expect_identical(
+    gfsub("a\nb\r\nc", "[\\w]", toupper),
+    toupper("a\nb\r\nc")
+  )
+})
