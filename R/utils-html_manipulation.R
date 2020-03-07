@@ -89,7 +89,10 @@ gfsub <- function(string,
   }
 
   out(substr2(string, pos, nchar(string) + 1L))
-  paste(collapse = "\n", readLines(f, warn = FALSE, encoding = "UTF-8"))
+
+  str <- readChar(f, seek(f), useBytes = TRUE)
+  Encoding(str) <- "UTF-8"
+  str
 }
 
 # Like substr, but the end position is exclusive (i.e. it points
@@ -301,7 +304,7 @@ cid_images <- function(html_file,
   }
 
   basedir <- dirname(html_file)
-  html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
+  html <- paste(collapse = "\r\n", readLines(html_file, warn = FALSE, encoding = "UTF-8"))
 
   html_data_uri <-
     replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
