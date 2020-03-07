@@ -1,8 +1,10 @@
 # blastula (development version)
 
-* Fixed buggy internal logic for decoding numeric HTML entities that represent non-ASCII characters.
-
 * Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding. Thanks @jdbarillas for identifying the source of the issue! [#153](https://github.com/rich-iannone/blastula/pull/153)
+
+* Fixed Unicode issues on Windows. [#154](https://github.com/rich-iannone/blastula/pull/154)
+
+* Fixed buggy internal logic for decoding numeric HTML entities that represent non-ASCII characters.
 
 # blastula 0.3.1
 
