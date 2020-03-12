@@ -107,9 +107,7 @@ test_message <- prepare_test_message()
 test_message
 ```
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("prepare_test_message.png", dpi = 300)
-```
+<img src="images/prepare_test_message.png" width=100%>
 
 <p align="center">The test message</p>
 <br />
