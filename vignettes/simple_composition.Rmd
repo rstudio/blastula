@@ -24,9 +24,7 @@ Before we get to the process of creating an HTML email message, it's a good idea
 
 <br />
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("html_email_model.svg", dpi = 300)
-```
+<img src="images/html_email_model.png" width=100%>
 
 <br />
 
@@ -52,13 +50,9 @@ Cheers
 ```
 
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("compose_simple-wide.png", dpi = 300)
-```
+<img src="images/compose_simple-wide.png" width=100%>
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("compose_simple-narrow.png", dpi = 300)
-```
+<img src="images/compose_simple-narrow.png" width=100%>
 
 <p align="center">This is how it looks, depending on the display width (wide at top, narrow below that).</p>
 <br />
@@ -142,9 +136,7 @@ compose_email(
 )
 ```
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("compose_interpolation_stmt-wide.png", dpi = 300)
-```
+<img src="images/compose_interpolation_stmt-wide.png" width=100%>
 
 <p align="center">Complicated string formatting goes into variables, the variables go into the email components</p>
 <br>
@@ -196,9 +188,7 @@ Cheers,
 compose_email(body = body_text)
 ```
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("compose_imgur_local_image-wide.png", dpi = 300)
-```
+<img src="images/compose_imgur_local_image-wide.png" width=100%>
 
 <p align="center">Once you get that Imgur Client ID, this is really easy</p>
 <br>
@@ -258,9 +248,7 @@ Cheers,
 compose_email(body = body_text)
 ```
 
-```{r echo = FALSE, out.width = "100%"}
-knitr::include_graphics("compose_imgur_ggplot-wide.png", dpi = 300)
-```
+<img src="images/compose_imgur_ggplot-wide.png" width=100%>
 
 <p align="center">A ggplot in your email message</p>
 <br>
