@@ -10,7 +10,7 @@ add_image(file, alt = NULL)
 \item{file}{A path to an image file.}
 
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
-the image (\code{<img>}) tag for use when image loading is disabled and on
+the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
 }
 \value{
@@ -42,7 +42,7 @@ email <-
       c(
 "Hello,
 
-Here is an image:\\n",
+Here is an image:\n",
 img_file_html
       )
     )

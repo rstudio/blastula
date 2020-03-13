@@ -4,8 +4,14 @@
 \alias{create_smtp_creds_file}
 \title{Store SMTP credentials in a file}
 \usage{
-create_smtp_creds_file(file, user = NULL, provider = NULL,
-  host = NULL, port = NULL, use_ssl = NULL)
+create_smtp_creds_file(
+  file,
+  user = NULL,
+  provider = NULL,
+  host = NULL,
+  port = NULL,
+  use_ssl = NULL
+)
 }
 \arguments{
 \item{file}{The output filename for the credentials file.}

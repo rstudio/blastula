@@ -37,9 +37,9 @@ Mailgun.
 #
 #   ## This a section heading
 #
-#   We can use Markdown formatting \\\\
-#   to **embolden** text or to add \\\\
-#   *emphasis*. This is exciting, \\\\
+#   We can use Markdown formatting \\
+#   to **embolden** text or to add \\
+#   *emphasis*. This is exciting, \\
 #   right?
 #
 #   Cheers")

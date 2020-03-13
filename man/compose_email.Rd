@@ -4,14 +4,13 @@
 \alias{compose_email}
 \title{Create the email message body}
 \usage{
-compose_email(body = NULL, header = NULL, footer = NULL,
-  title = NULL)
+compose_email(body = NULL, header = NULL, footer = NULL, title = NULL)
 }
 \arguments{
 \item{header, body, footer}{The three layout sections for an email message
 (ordered from top to bottom). Markdown text can be supplied to each of
 these by using the \code{\link[=md]{md()}} text helper function. Alternatively, we can
-supply a set of \code{block_*()} calls enclosed within the \code{\link[=blocks]{blocks()}} function
+supply a set of \verb{block_*()} calls enclosed within the \code{\link[=blocks]{blocks()}} function
 to take advantage of precomposed HTML blocks.}
 
 \item{title}{The title of the email message. This is not the subject but the

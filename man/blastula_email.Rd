@@ -4,12 +4,26 @@
 \alias{blastula_email}
 \title{The R Markdown \code{blastula_email} output format}
 \usage{
-blastula_email(toc = FALSE, toc_depth = 3, toc_float = FALSE,
-  number_sections = FALSE, section_divs = TRUE, fig_width = 5.35,
-  fig_height = 5, fig_retina = 2, fig_caption = TRUE, dev = "png",
-  smart = TRUE, self_contained = TRUE, template = "blastula",
-  includes = NULL, keep_md = FALSE, md_extensions = NULL,
-  connect_footer = FALSE, ...)
+blastula_email(
+  toc = FALSE,
+  toc_depth = 3,
+  toc_float = FALSE,
+  number_sections = FALSE,
+  section_divs = TRUE,
+  fig_width = 5.35,
+  fig_height = 5,
+  fig_retina = 2,
+  fig_caption = TRUE,
+  dev = "png",
+  smart = TRUE,
+  self_contained = TRUE,
+  template = "blastula",
+  includes = NULL,
+  keep_md = FALSE,
+  md_extensions = NULL,
+  connect_footer = FALSE,
+  ...
+)
 }
 \arguments{
 \item{toc}{If you would like an automatically-generated table of contents in
@@ -25,8 +39,8 @@ main document content. By default, this is \code{FALSE}.}
 \item{number_sections}{Sections can be sequentially numbered if this is set
 to \code{TRUE}. By default, this is \code{FALSE}.}
 
-\item{section_divs}{This wraps sections in \code{<section>} tags and attaches
-identifiers to the enclosing \code{<section>}s. This is set to \code{TRUE}.}
+\item{section_divs}{This wraps sections in \verb{<section>} tags and attaches
+identifiers to the enclosing \verb{<section>}s. This is set to \code{TRUE}.}
 
 \item{fig_width, fig_height}{The figure width and height in units of inches.}
 
@@ -42,7 +56,7 @@ this is set to \code{TRUE}.}
 device.}
 
 \item{smart}{An option to produce typographically correct output. This will
-convert straight quotes to curly quotes, \code{---} to em dashes, \code{--} to en
+convert straight quotes to curly quotes, \verb{---} to em dashes, \verb{--} to en
 dashes, and instances of \code{...} to ellipses. By default, this is \code{TRUE}.}
 
 \item{self_contained}{Should a self-contained output file be generated. By
