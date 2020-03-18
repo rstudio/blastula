@@ -16,7 +16,7 @@ social_link(service, link, variant = NULL, alt = NULL)
 and white, the default), \code{color}, \code{dark_gray}, \code{gray}, and \code{light_gray}.}
 
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
-the image (\code{<img>}) tag for use when image loading is disabled and on
+the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. If not supplied, then the name of the \code{service} will be
 used as alt text.}
 }

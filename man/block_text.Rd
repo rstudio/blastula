@@ -11,8 +11,8 @@ block_text(text)
 }
 \description{
 With \code{block_text()} we can define a text area and this can be easily combined
-with other \code{block_*()} functions. The text will take the entire width of the
-block and will resize according to screen width. Like all \code{block_*()}
+with other \verb{block_*()} functions. The text will take the entire width of the
+block and will resize according to screen width. Like all \verb{block_*()}
 functions, \code{block_text()} must be placed inside of \code{blocks()} and the
 resultant \code{blocks} object can be provided to the \code{body}, \code{header}, or
 \code{footer} arguments of \code{compose_email()}.

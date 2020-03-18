@@ -11,9 +11,9 @@ block_title(title)
 }
 \description{
 With \code{block_title()} we can define a title text area and this can be easily
-combined with other \code{block_*()} functions. The title will take the entire
+combined with other \verb{block_*()} functions. The title will take the entire
 width of the block and will resize according to screen width. Like all
-\code{block_*()} functions, \code{block_title()} must be placed inside of \code{blocks()}
+\verb{block_*()} functions, \code{block_title()} must be placed inside of \code{blocks()}
 and the resultant \code{blocks} object can be provided to the \code{body}, \code{header}, or
 \code{footer} arguments of \code{compose_email()}.
 }

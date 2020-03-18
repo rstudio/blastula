@@ -4,8 +4,12 @@
 \alias{add_attachment}
 \title{Add a file attachment to an email message}
 \usage{
-add_attachment(email, file, content_type = mime::guess_type(file),
-  filename = basename(file))
+add_attachment(
+  email,
+  file,
+  content_type = mime::guess_type(file),
+  filename = basename(file)
+)
 }
 \arguments{
 \item{email}{The email message object, as created by the \code{\link[=compose_email]{compose_email()}}

@@ -13,7 +13,7 @@ for which we'd like an image tag.}
 \item{client_id}{The Imgur Client ID value.}
 
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
-the image (\code{<img>}) tag for use when image loading is disabled and on
+the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
 }
 \value{
@@ -26,13 +26,13 @@ the recipient) can be a harrowing experience. External images (i.e.,
 available at public URLs) work exceedingly well and most email clients will
 faithfully display these images. With the \code{imgur_image()} function, we can
 take a local image file or a \code{ggplot2} plot object and send it to the Imgur
-service, and finally receive an image (\code{<img>}) tag that can be directly
+service, and finally receive an image (\verb{<img>}) tag that can be directly
 inserted into an email message using \code{compose_email()}.
 }
 \details{
 To take advantage of this, we need to first have an account with Imgur and
 then obtain a \code{Client-ID} key for the Imgur API. This can be easily done by
-going to \code{https://api.imgur.com/oauth2/addclient} and registering an
+going to \verb{https://api.imgur.com/oauth2/addclient} and registering an
 application. Be sure to select the OAuth 2 authorization type without a
 callback URL.
 }
