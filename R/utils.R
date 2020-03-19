@@ -101,6 +101,66 @@ imgur_upload <- function(file, client_id) {
   )
 }
 
+#' An upgraded version of `Sys.which()` that returns a better Windows path
+#'
+#' @param name A single-length character vector with the executable name.
+#' @noRd
+sys_which <- function(name) {
+
+  # Only accept a vector of length 1
+  stopifnot(length(name) == 1)
+
+  # Get the
+  if (xfun::is_windows()) {
+
+    suppressWarnings({
+      pathname <-
+        system(sprintf("where %s 2> NUL", name), intern = TRUE)[1]
+    })
+
+    if (!is.na(pathname)) {
+
+      pathname <- pathname %>% tidy_gsub("\\\\", "/")
+
+      return(stats::setNames(pathname, name))
+    }
+  }
+
+  Sys.which(name) %>% tidy_gsub("\\\\", "/")
+}
+
+#' Find a binary on the system path or working directory
+#'
+#' @param bin_name The name of the binary to search for.
+#' @noRd
+find_binary <- function(bin_name) {
+
+  # Find binary on path with `sys_which()`
+  which_result <- sys_which(name = bin_name) %>% unname()
+
+  if (which_result != "") {
+    return(which_result)
+  }
+
+  # Try to locate the binary in working directory
+  which_result <-
+    tryCatch(
+      {
+        processx::run(command = "ls", args = bin_name)
+        file.path(getwd(), bin_name)
+      },
+      error = function(cond) ""
+    )
+
+  if (which_result != "") {
+    return(which_result)
+  }
+
+  # If the binary isn't found in these locations,
+  # return `NULL`
+  NULL
+}
+
 # nocov end
 
 #' Prepend a element to a list at a given position

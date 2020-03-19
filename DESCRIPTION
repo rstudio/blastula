@@ -7,7 +7,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-3925-190X")),
     person("Joe", "Cheng", role = "aut", email = "joe@rstudio.com"),
     person("Jeroen", "Ooms", role = "ctb", email = "jeroen@berkeley.edu",
-      comment = c(ORCID = "0000-0002-4035-0289"))
+      comment = c(ORCID = "0000-0002-4035-0289")),
+    person("Salim", "Brüggemann", role = "ctb", email = "salim-b@pm.me")
     )
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
@@ -32,10 +33,12 @@ Imports:
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
     mime (>= 0.6),
+    processx (>= 3.4.1),
     rlang (>= 0.4.1),
     rmarkdown,
     stringr (>= 1.4.0),
-    uuid (>= 0.1-2)
+    uuid (>= 0.1-2),
+    xfun (>= 0.11)
 Suggests: 
     covr,
     ggplot2,
