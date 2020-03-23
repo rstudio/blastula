@@ -21,6 +21,11 @@
 #' file stored on disk. We can create that file using the
 #' [create_smtp_creds_file()] function.
 #'
+#' The [creds_envvar()] credential helper reads the password from the
+#' `SMTP_PASSWORD` environment variable (or an environment variable name that
+#' you specify). If using environment variables for other parameters, call
+#' [Sys.getenv()] manually (e.g. `user = Sys.getenv("SMTP_USER")`).
+#'
 #' @param user The username for the email account. Typically, this is the email
 #'   address associated with the account.
 #' @param provider An optional email provider shortname for autocompleting STMP
@@ -31,6 +36,9 @@
 #'   and `port` parameters are the address and port for the SMTP server;
 #'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
 #'   value.
+#' @param pass_envvar The name of the environment variable that holds the value
+#'   for an email account password. This is only used in the [creds_envvar()]
+#'   credential helper function.
 #' @param id When using the [creds_key()] credential helper, the ID value of the
 #'   key (in the system key-value store) needs to be given here. This was
 #'   explicitly provided when using the [create_smtp_creds_key()] function (with
@@ -85,6 +93,40 @@ creds_anonymous <- function(provider = NULL,
     )
 
   class(creds_list) <- c("creds_anonymous", "blastula_creds")
+  creds_list
+}
+
+#' @rdname credential_helpers
+#' @export
+creds_envvar <- function(user = NULL,
+                         pass_envvar = "SMTP_PASSWORD",
+                         provider = NULL,
+                         host = NULL,
+                         port = NULL,
+                         use_ssl = TRUE) {
+
+  # Obtain the password from an environment variable
+  # using the `pass_envar` value
+  password <- Sys.getenv(pass_envvar, unset = NA)
+
+  # If `Sys.getenv()` returns NA, then stop
+  if (is.na(password)) {
+    stop("The environment variable defined by `pass_envvar` doesn't exist.",
+         call. = FALSE)
+  }
+
+  # Create a credentials list from the function inputs
+  creds_list <-
+    create_credentials_list(
+      provider = provider,
+      user = user,
+      password = password,
+      host = host,
+      port = port,
+      use_ssl = use_ssl
+    )
+
+  class(creds_list) <- c("creds", "blastula_creds")
   creds_list
 }
 
