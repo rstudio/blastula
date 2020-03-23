@@ -21,12 +21,10 @@
 #' file stored on disk. We can create that file using the
 #' [create_smtp_creds_file()] function.
 #'
-#' The [creds_envvar()] credential helper is a variation on [creds()] where
-#' manual specification of values is needed. The difference here is that the
-#' password can be specified in terms of an environment variable (internally,
-#' [Sys.getenv()] is used with `pass_envvar` to obtain the password). If using
-#' environment variables for all parameters, one can use [Sys.getenv()] directly
-#' for all relevant arguments except for `pass_envvar`.
+#' The [creds_envvar()] credential helper reads the password from the
+#' `SMTP_PASSWORD` environment variable (or an environment variable name that
+#' you specify). If using environment variables for other parameters, call
+#' [Sys.getenv()] manually (e.g. `user = Sys.getenv("SMTP_USER")`).
 #'
 #' @param user The username for the email account. Typically, this is the email
 #'   address associated with the account.
@@ -38,9 +36,9 @@
 #'   and `port` parameters are the address and port for the SMTP server;
 #'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
 #'   value.
-#' @param pass_envvar An environment variable that holds the value for an email
-#'   account password. This is only used in the [creds_envvar()] credential
-#'   helper function.
+#' @param pass_envvar The name of the environment variable that holds the value
+#'   for an email account password. This is only used in the [creds_envvar()]
+#'   credential helper function.
 #' @param id When using the [creds_key()] credential helper, the ID value of the
 #'   key (in the system key-value store) needs to be given here. This was
 #'   explicitly provided when using the [create_smtp_creds_key()] function (with

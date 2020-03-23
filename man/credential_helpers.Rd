@@ -14,8 +14,8 @@ creds(user = NULL, provider = NULL, host = NULL, port = NULL, use_ssl = TRUE)
 creds_anonymous(provider = NULL, host = NULL, port = NULL, use_ssl = TRUE)
 
 creds_envvar(
-  pass_envvar,
   user = NULL,
+  pass_envvar = "SMTP_PASSWORD",
   provider = NULL,
   host = NULL,
   port = NULL,
@@ -40,9 +40,9 @@ and \code{port} parameters are the address and port for the SMTP server;
 \code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
 value.}
 
-\item{pass_envvar}{An environment variable that holds the value for an email
-account password. This is only used in the \code{\link[=creds_envvar]{creds_envvar()}} credential
-helper function.}
+\item{pass_envvar}{The name of the environment variable that holds the value
+for an email account password. This is only used in the \code{\link[=creds_envvar]{creds_envvar()}}
+credential helper function.}
 
 \item{id}{When using the \code{\link[=creds_key]{creds_key()}} credential helper, the ID value of the
 key (in the system key-value store) needs to be given here. This was
@@ -82,10 +82,8 @@ The \code{\link[=creds_file]{creds_file()}} credential helper is used to obtain 
 file stored on disk. We can create that file using the
 \code{\link[=create_smtp_creds_file]{create_smtp_creds_file()}} function.
 
-The \code{\link[=creds_envvar]{creds_envvar()}} credential helper is a variation on \code{\link[=creds]{creds()}} where
-manual specification of values is needed. The difference here is that the
-password can be specified in terms of an environment variable (internally,
-\code{\link[=Sys.getenv]{Sys.getenv()}} is used with \code{pass_envvar} to obtain the password). If using
-environment variables for all parameters, one can use \code{\link[=Sys.getenv]{Sys.getenv()}} directly
-for all relevant arguments except for \code{pass_envvar}.
+The \code{\link[=creds_envvar]{creds_envvar()}} credential helper reads the password from the
+\code{SMTP_PASSWORD} environment variable (or an environment variable name that
+you specify). If using environment variables for other parameters, call
+\code{\link[=Sys.getenv]{Sys.getenv()}} manually (e.g. \code{user = Sys.getenv("SMTP_USER")}).
 }
