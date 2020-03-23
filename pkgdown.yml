@@ -1,0 +1,10 @@
+pandoc: '2.2'
+pkgdown: 1.4.1
+pkgdown_sha: ~
+articles:
+  sending_using_smtp: sending_using_smtp.html
+  simple_composition: simple_composition.html
+urls:
+  reference: https://rich-iannone.github.io/blastula/reference
+  article: https://rich-iannone.github.io/blastula/articles
+
