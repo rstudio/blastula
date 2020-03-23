@@ -100,8 +100,8 @@ creds_anonymous <- function(provider = NULL,
 
 #' @rdname credential_helpers
 #' @export
-creds_envvar <- function(pass_envvar,
-                         user = NULL,
+creds_envvar <- function(user = NULL,
+                         pass_envvar = "SMTP_PASSWORD",
                          provider = NULL,
                          host = NULL,
                          port = NULL,
@@ -110,6 +110,14 @@ creds_envvar <- function(pass_envvar,
   # Obtain the password from an environment variable
   # using the `pass_envar` value
   password <- Sys.getenv(pass_envvar)
+
+  # If `Sys.getenv()` returns `""`, this could either mean that the
+  # value is an empty string, or, more likely, that the environment variable
+  # doesn't exist; check here if the envvar exists in the latter case
+  if (password == "" && !(pass_envvar %in% names(Sys.getenv()))) {
+    stop("The environment variable defined by `pass_envvar` doesn't exist.",
+         call. = FALSE)
+  }
 
   # Create a credentials list from the function inputs
   creds_list <-
