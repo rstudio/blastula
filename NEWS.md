@@ -1,5 +1,7 @@
 # blastula (development version)
 
+* Added the `creds_envvar()` credential helper function, which allows for SMTP password input via an environment variable. [#159](https://github.com/rich-iannone/blastula/pull/159)
+
 * Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding. Thanks @jdbarillas for identifying the source of the issue! [#153](https://github.com/rich-iannone/blastula/pull/153)
 
 * Fixed Unicode issues on Windows. [#154](https://github.com/rich-iannone/blastula/pull/154)
