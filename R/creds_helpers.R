@@ -109,12 +109,10 @@ creds_envvar <- function(user = NULL,
 
   # Obtain the password from an environment variable
   # using the `pass_envar` value
-  password <- Sys.getenv(pass_envvar)
+  password <- Sys.getenv(pass_envvar, unset = NA)
 
-  # If `Sys.getenv()` returns `""`, this could either mean that the
-  # value is an empty string, or, more likely, that the environment variable
-  # doesn't exist; check here if the envvar exists in the latter case
-  if (password == "" && !(pass_envvar %in% names(Sys.getenv()))) {
+  # If `Sys.getenv()` returns NA, then stop
+  if (is.na(password)) {
     stop("The environment variable defined by `pass_envvar` doesn't exist.",
          call. = FALSE)
   }
