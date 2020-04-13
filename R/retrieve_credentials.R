@@ -1,12 +1,48 @@
 # nocov start
 
-#' View available credentials keys
+#' View available **blastula** credential keys
 #'
 #' @export
 view_credential_keys <- function() {
 
   get_keyring_creds_table()
 }
+
+
+
+#' Delete a single **blastula** credential key
+#'
+#' @export
+delete_credential_key <- function(id) {
+
+  creds_tbl <- get_keyring_creds_table()
+
+  # A zero-row `creds_tbl` means that there are no credential keys
+  # available in the system's key-value store
+  if (nrow(creds_tbl) == 0) {
+    stop("There are no credential keys available, so there is nothing to delete.",
+         call. = FALSE)
+  }
+
+  if (!(id %in% creds_tbl$id)) {
+    stop("The specified `id` doesn't correspond to a credential key:\n",
+         "* Use the `view_credential_keys()` function to examine which `id` values are valid",
+         call. = FALSE)
+  }
+
+}
+
+
+
+#' Delete all **blastula** credential keys
+#'
+#' @export
+delete_all_credential_keys <- function() {
+
+  get_keyring_creds_table()
+}
+
+
 
 # nocov end
 
@@ -98,4 +134,3 @@ get_keyring_creds_table <- function() {
 }
 
 # nocov end
-
