@@ -72,19 +72,25 @@ create_smtp_creds_file <- function(file,
 #' We can set SMTP access credentials in the system-wide key-value store for the
 #' purpose of more easily sending email messages through [smtp_send()]. With
 #' this key added, the credentials helper [creds_key()] can be used in the
-#' `credentials` argument of [smtp_send()].
+#' `credentials` argument of [smtp_send()] (the `id` value is used to
+#' unambiguously refer to each key).
 #'
 #' Support for setting keys through `create_smtp_creds_key()` is provided
-#' through the \pkg{keyring} package. This function cannot be used without that
-#' package first being available on the system. We can use
-#' `install.packages("keyring")` to install
+#' through the **keyring** package. This function cannot be used without that
+#' package being available on the system. We can use
+#' `install.packages("keyring")` to install **keyring**.
 #'
 #' @param id An identifying label for the keyname. The full key name is
-#'   constructed in the following way: `blastula-v1-<id>`.
+#'   constructed in the following way: `blastula-v1-<id>`. This `id` value is
+#'   what's needed later to either use the key with [creds_key()], or, delete
+#'   the key with [delete_credential_key()]. A single, non-`NA` character,
+#'   numeric, or integer value can be supplied here; the `id` will be coerced to
+#'   a character value. If the `id` is supplied as a single character value, it
+#'   cannot be an empty string and it cannot include hyphen characters.
 #' @inheritParams create_smtp_creds_file
 #'
 #' @examples
-#' # Store SMTP crendentials using the
+#' # Store SMTP credentials using the
 #' # system's secure key-value store to
 #' # make it much easier to send email
 #' # out through Gmail with `smtp_send()`;
@@ -121,6 +127,39 @@ create_smtp_creds_key <- function(id,
   # Determine whether the keyring package can be used
   validate_keyring_capable()
 
+  # Stop function if `id` provided is not of the right type
+  if (!(inherits(id, "character") | inherits(id, "numeric") | inherits(id, "integer"))) {
+    stop("The provided `id` value must be a single character or numeric value.",
+         call. = TRUE)
+  }
+
+  # Stop function if the `id` value isn't of length 1
+  if (length(id) != 1) {
+    stop("Only a vector of length 1 should be used for the `id` value.",
+         call. = FALSE)
+  }
+
+  # Stop function if the `id` is an empty string or NA
+  if (id == "" || is.na(id)) {
+    stop("The value for `id` should not be `NA` or an empty string.",
+         call. = FALSE)
+  }
+
+  if (is.character(id) & grepl("-", id)) {
+    stop("Hyphens are not allowed as characters for an `id` value",
+         call. = FALSE)
+  }
+
+  # Determine whether the key already exists, stop if it does
+  creds_tbl <- get_keyring_creds_table()
+
+  if (id %in% creds_tbl$id) {
+    stop("The specified `id` corresponds to a credential key already in the key-value store:\n",
+         "* Use a different `id` value with `create_smtp_creds_key()`, or\n",
+         "* Delete the existing key with `delete_credential_key(id = \"", id,"\") and try again",
+         call. = FALSE)
+  }
+
   # Create a credentials list from the function inputs
   credentials_list <-
     create_credentials_list(
@@ -147,9 +186,9 @@ create_smtp_creds_key <- function(id,
 
   # Issue a message stating that the file has been created
   message(
-    "The system key store has been updated with the (`", service_name,
-    "`) key.\n",
-    " * You can use this key within `smtp_send()` with ",
+    "The system key store has been updated with the \"", service_name,
+    "\" key with the `id` value \"", id ,"\".\n",
+    "* You can use this key within `smtp_send()` with ",
     "`credentials = creds_key(\"", id, "\")`"
   )
 
