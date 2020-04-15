@@ -89,7 +89,7 @@ delete_credential_key <- function(id) {
   # Obtain the matching service name that corresponds to the `id` value
   key_to_delete <-
     creds_tbl %>%
-    dplyr::filter(id == {{ id }}) %>%
+    dplyr::filter(id == !!id) %>%
     dplyr::pull(key_name)
 
   # Delete with `keyring::key_delete()`
