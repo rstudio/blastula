@@ -87,6 +87,9 @@ create_smtp_creds_file <- function(file,
 #'   numeric, or integer value can be supplied here; the `id` will be coerced to
 #'   a character value. If the `id` is supplied as a single character value, it
 #'   cannot be an empty string and it cannot include hyphen characters.
+#' @param overwrite An option that controls the overwriting of existing keys
+#'   with the same `id` value. By default, this is `FALSE` (where overwriting is
+#'   prohibited).
 #' @inheritParams create_smtp_creds_file
 #'
 #' @examples
@@ -108,7 +111,8 @@ create_smtp_creds_key <- function(id,
                                   provider = NULL,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = NULL) {
+                                  use_ssl = NULL,
+                                  overwrite = FALSE) {
 
   # nocov start
 
@@ -117,18 +121,13 @@ create_smtp_creds_key <- function(id,
 
   # Creating credentials on the system-wide key-value
   # store requires the installation of the keyring package
-  if (!requireNamespace("keyring", quietly = TRUE)) {
-
-    stop("The `keyring` package is required for using the ",
-         "`create_smtp_creds_key()` function",
-         call. = FALSE)
-  }
+  validate_keyring_available(fn_name = "create_smtp_creds_key")
 
   # Determine whether the keyring package can be used
   validate_keyring_capable()
 
   # Stop function if `id` provided is not of the right type
-  if (!(inherits(id, "character") | inherits(id, "numeric") | inherits(id, "integer"))) {
+  if (!(inherits(id, "character") || inherits(id, "numeric") || inherits(id, "integer"))) {
     stop("The provided `id` value must be a single character or numeric value.",
          call. = TRUE)
   }
@@ -140,24 +139,36 @@ create_smtp_creds_key <- function(id,
   }
 
   # Stop function if the `id` is an empty string or NA
-  if (id == "" || is.na(id)) {
+  if (is.na(id) || id == "") {
     stop("The value for `id` should not be `NA` or an empty string.",
          call. = FALSE)
   }
 
-  if (is.character(id) & grepl("-", id)) {
+  # Stop function if a hyphen is used within `id`
+  if (is.character(id) && grepl("-", id)) {
     stop("Hyphens are not allowed as characters for an `id` value",
          call. = FALSE)
   }
 
-  # Determine whether the key already exists, stop if it does
+  # Determine whether the key already exists
   creds_tbl <- get_keyring_creds_table()
+  existing_key <- id %in% creds_tbl$id
 
-  if (id %in% creds_tbl$id) {
+  # Stop the function if the `id` corresponds to an
+  # existing key and `overwrite = FALSE` (the default)
+  if (existing_key && !overwrite) {
     stop("The specified `id` corresponds to a credential key already in the key-value store:\n",
          "* Use a different `id` value with `create_smtp_creds_key()`, or\n",
-         "* Delete the existing key with `delete_credential_key(id = \"", id,"\") and try again",
+         "* If intentional, overwrite the existing key using the `overwrite = TRUE` option",
          call. = FALSE)
+  }
+
+  # Delete the existing key if `overwrite = TRUE`; the
+  # `keyring::key_set_with_value()` function doesn't support
+  # overwriting keys with the same `service_name` and we'd get
+  # a duplicate `key_name` otherwise
+  if (existing_key && overwrite) {
+    delete_credential_key(id = id)
   }
 
   # Create a credentials list from the function inputs
@@ -184,10 +195,11 @@ create_smtp_creds_key <- function(id,
     password = serialized
   )
 
-  # Issue a message stating that the file has been created
+  # Issue a message that provides identifiers and later usage
   message(
     "The system key store has been updated with the \"", service_name,
     "\" key with the `id` value \"", id ,"\".\n",
+    "* Use the `view_credential_keys()` function to see all available keys\n",
     "* You can use this key within `smtp_send()` with ",
     "`credentials = creds_key(\"", id, "\")`"
   )
@@ -268,7 +280,22 @@ creds_internal <- function(user = NULL,
   )
 }
 
-#' Stops function is the system is not capable of using \pkg{keyring}
+#' Stops function if the **keyring** package isn't installed
+#'
+#' @noRd
+validate_keyring_available <- function(fn_name) {
+
+  # nocov start
+
+  if (!requireNamespace("keyring", quietly = TRUE)) {
+    stop("The `keyring` package is required for using the ",
+         "`", fn_name, "()` function", call. = FALSE)
+  }
+
+  # nocov end
+}
+
+#' Stops function if the system is not capable of using **keyring**
 #'
 #' @noRd
 validate_keyring_capable <- function() {

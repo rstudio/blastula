@@ -28,12 +28,7 @@ view_credential_keys <- function() {
 
   # Viewing credentials that are on the system-wide key-value
   # store requires the installation of the keyring package
-  if (!requireNamespace("keyring", quietly = TRUE)) {
-
-    stop("The `keyring` package is required for using the ",
-         "`view_credential_keys()` function",
-         call. = FALSE)
-  }
+  validate_keyring_available(fn_name = "view_credential_keys")
 
   get_keyring_creds_table()
 }
@@ -61,12 +56,7 @@ delete_credential_key <- function(id) {
 
   # Deleting credentials that are on the system-wide key-value
   # store requires the installation of the keyring package
-  if (!requireNamespace("keyring", quietly = TRUE)) {
-
-    stop("The `keyring` package is required for using the ",
-         "`delete_credential_key()` function",
-         call. = FALSE)
-  }
+  validate_keyring_available(fn_name = "delete_credential_key")
 
   creds_tbl <- get_keyring_creds_table()
 
@@ -95,7 +85,7 @@ delete_credential_key <- function(id) {
   # Delete with `keyring::key_delete()`
   keyring::key_delete(service = key_to_delete)
 
-  message(paste0("The blastula credential key with the `id` of \"", id, "\" has been deleted."))
+  invisible()
 }
 
 #' Delete all **blastula** credential keys
@@ -123,12 +113,7 @@ delete_all_credential_keys <- function() {
 
   # Deleting credentials that are on the system-wide key-value
   # store requires the installation of the keyring package
-  if (!requireNamespace("keyring", quietly = TRUE)) {
-
-    stop("The `keyring` package is required for using the ",
-         "`delete_all_credential_keys()` function",
-         call. = FALSE)
-  }
+  validate_keyring_available(fn_name = "delete_all_credential_keys")
 
   creds_tbl <- get_keyring_creds_table()
 
@@ -145,7 +130,7 @@ delete_all_credential_keys <- function() {
     keyring::key_delete(service = key)
   }
 
-  message("All blastula credential keys have been deleted.")
+  invisible()
 }
 
 # nocov end
