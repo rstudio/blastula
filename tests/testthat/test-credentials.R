@@ -49,7 +49,7 @@ test_that("utility functions for credentials work properly", {
   # have values
   credentials_list_2$host %>% expect_equal("smtp.gmail.com")
   credentials_list_2$port %>% expect_equal(465)
-  credentials_list_2$use_ssl %>% expect_true()
+  credentials_list_2$use_ssl %>% expect_false()
 
   # Expect an error if `provider` is NULL and any of `host`,
   # `port`, or `use_ssl` are NULL
