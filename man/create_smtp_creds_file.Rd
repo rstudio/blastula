@@ -25,9 +25,10 @@ currently include \code{gmail}, \code{outlook}, and \code{office365}. If nothing
 provided then values for \code{host}, \code{port}, and \code{use_ssl} are expected.}
 
 \item{host, port, use_ssl}{Configuration info for the SMTP server. The \code{host}
-and \code{port} parameters are the address and port for the SMTP server;
-\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value.}
+and \code{port} parameters are the address and port for the SMTP server.
+\code{use_ssl} is an option as to whether to allow the use of STARTTLS, if
+available: it should be \code{TRUE} unless you have a specific reason to set it
+to \code{FALSE}.}
 }
 \description{
 We can create a file with SMTP configuration and access credentials for the
