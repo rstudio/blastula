@@ -207,12 +207,12 @@ smtp_send <- function(email,
   # Send message using `curl::send_mail()` and suppress all
   # SMTP messages since the SMTP account password in echoed
   result <-
-    send_mail(
+    curl::send_mail(
       mail_from = unname(from),
       mail_rcpt = unname(c(to, cc, bcc)),
       message = email_qp,
       smtp_server = paste0(credentials$host, ":", credentials$port),
-      use_ssl = credentials$use_ssl,
+      use_ssl = credentials$use_ssl %||% TRUE,
       verbose = verbose,
       username = credentials$user,
       password = credentials$password
@@ -230,63 +230,4 @@ smtp_send <- function(email,
   }
 
   # nocov end
-}
-
-# Note: the following code is a modification of the `send_mail()`
-# function from the from the curl package. A PR has been submitted
-# to the project repo to make these changes. Once the revised
-# `send_mail()` is available in a CRAN release of the curl package,
-# this will be removed and `smtp_send()` will call `curl::send_mail()`
-send_mail <- function(mail_from,
-                      mail_rcpt,
-                      message,
-                      smtp_server = 'localhost',
-                      use_ssl = NULL,
-                      verbose = TRUE, ...) {
-
-  if (grepl('://', smtp_server)) {
-    # protocol was provided
-    if (!grepl('^smtps?://', smtp_server)) {
-      stop('smtp_server used an invalid protocol; only smtp:// and smtps:// are supported')
-    }
-    url <- smtp_server
-  } else {
-    if (grepl(":465$", smtp_server)) {
-      url <- paste0('smtps://', smtp_server)
-    } else {
-      url <- paste0('smtp://', smtp_server)
-    }
-  }
-
-  if (is.null(use_ssl)) {
-    use_ssl <- grepl('^smtps://', url)
-  }
-
-  if(is.character(message))
-    message <- charToRaw(paste(message, collapse = '\r\n'))
-  con <- if(is.raw(message)){
-    rawConnection(message)
-  } else if(inherits(message, "connection")){
-    if(!isOpen(message))
-      open(message, 'rb')
-    message
-  } else {
-    stop("Body must be a string, raw vector, or connection object")
-  }
-  on.exit(close(con))
-  total_bytes <- 0
-  h <- curl::new_handle(upload = TRUE, readfunction = function(nbytes, ...) {
-    buf <- readBin(con, raw(), nbytes)
-    total_bytes <<- total_bytes + length(buf)
-    if(verbose){
-      if(length(buf)){
-        cat(sprintf("\rUploaded %d bytes...", total_bytes), file = stderr())
-      } else {
-        cat(sprintf("\rUploaded %d bytes... all done!\n", total_bytes), file = stderr())
-      }
-    }
-    return(buf)
-  }, mail_from = mail_from, mail_rcpt = mail_rcpt, use_ssl = use_ssl,
-  verbose = verbose, ...)
-  curl::curl_fetch_memory(url, handle = h)
 }

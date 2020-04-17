@@ -13,9 +13,10 @@
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.
 #' @param host,port,use_ssl Configuration info for the SMTP server. The `host`
-#'   and `port` parameters are the address and port for the SMTP server;
-#'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
-#'   value.
+#'   and `port` parameters are the address and port for the SMTP server.
+#'   `use_ssl` is an option as to whether to allow the use of STARTTLS, if
+#'   available: it should be `TRUE` unless you have a specific reason to set it
+#'   to `FALSE`.
 #'
 #' @examples
 #' # Create a credentials file to make it
