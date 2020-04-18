@@ -62,11 +62,13 @@ tidy_grepl <- function(x, pattern, fixed = FALSE) {
 imgur_upload <- function(file, client_id) {
 
   response <-
-    httr::POST(
-      "https://api.imgur.com/3/image.xml",
+    httr::RETRY(
+      verb = "POST",
+      url = "https://api.imgur.com/3/image.xml",
       config = httr::add_headers(
         Authorization = paste("Client-ID", client_id)),
-      body = list(image = httr::upload_file(file))
+      body = list(image = httr::upload_file(file)),
+      terminate_on = c(403, 404)
     )
 
   # Convert HTTP error to a `stop()` message if return
