@@ -42,14 +42,15 @@ generate_rfc2822 <- function(eml,
                              from = NULL,
                              to = NULL,
                              cc = NULL,
-                             con = NULL) {
+                             con = NULL,
+                             uuid_source = uuid::UUIDgenerate) {
 
   stopifnot(inherits(eml, "blastula_message"))
 
   headers <- list(
     "MIME-Version" = "1.0",
     "Date" = format_rfc2822_date(date),
-    "Message-ID" = paste0("<", uuid::UUIDgenerate(), "@blastula.local>"),
+    "Message-ID" = paste0("<", uuid_source(), "@blastula.local>"),
     "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
     "From" = format_rfc2822_addr(from, "From"),
     "To" = format_rfc2822_addr_list(to, "To"),
@@ -73,7 +74,7 @@ generate_rfc2822 <- function(eml,
     raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
 
     quoted_filename <- header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)
-    content_id <- tidy_gsub(uuid::UUIDgenerate(), "-", "")
+    content_id <- tidy_gsub(uuid_source(), "-", "")
 
     mime_part(
       sprintf("%s; name=%s", attachment$content_type, quoted_filename),
@@ -99,7 +100,8 @@ generate_rfc2822 <- function(eml,
         content = eml$html_str
       ),
       !!!images
-    )
+    ),
+    boundary = uuid_source()
   )
 
   # This is necessary for attachments to display correctly on
@@ -112,7 +114,8 @@ generate_rfc2822 <- function(eml,
       body_parts = rlang::list2(
         msg,
         !!!attachments
-      )
+      ),
+      boundary = uuid_source()
     )
   }
 
@@ -165,7 +168,7 @@ mime_part <- function(content_type, headers = list(), content) {
 mime_multipart <- function(content_type = c("multipart/alternative", "multipart/related", "multipart/mixed"),
   headers = list(),
   body_parts,
-  boundary = uuid::UUIDgenerate(), preamble = NULL, epilogue = NULL) {
+  boundary, preamble = NULL, epilogue = NULL) {
 
   structure(
     class = "mime_multipart",

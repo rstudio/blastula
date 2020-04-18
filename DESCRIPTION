@@ -7,7 +7,8 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-3925-190X")),
     person("Joe", "Cheng", role = "aut", email = "joe@rstudio.com"),
     person("Jeroen", "Ooms", role = "ctb", email = "jeroen@berkeley.edu",
-      comment = c(ORCID = "0000-0002-4035-0289"))
+      comment = c(ORCID = "0000-0002-4035-0289")),
+    person("Ted", "Goas", role = "cph", comment = "cerberus-meta.html")
     )
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
