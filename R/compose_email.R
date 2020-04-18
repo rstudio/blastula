@@ -46,96 +46,25 @@
 compose_email <- function(body = NULL,
                           header = NULL,
                           footer = NULL,
-                          title = NULL) {
+                          title = NULL,
+                          template = blastula_template) {
 
   # Define the title text for the email;
   # use an empty string if not supplied
   title <- title %||% ""
-  title <- process_text(title)
-
-  # Define the email body section
-  if (!is.null(body)) {
-
-    if (inherits(body, "blocks")) {
-
-      body <- render_blocks(blocks = body, context = "body")
-      html_body_text <- paste(unlist(body), collapse = "\n")
-
-    } else {
-
-      html_body_text <-
-        simple_body_block %>%
-        tidy_gsub("{html_paragraphs}", body %>% process_text(), fixed = TRUE)
-    }
-
-  } else {
-    html_body_text <- ""
-  }
-
-  # Define the email footer section
-  if (!is.null(footer)) {
-
-    if (inherits(footer, "blocks")) {
-
-      footer <- render_blocks(blocks = footer, context = "footer")
-      html_footer <- paste(unlist(footer), collapse = "\n")
-
-    } else {
-
-      html_footer <-
-        render_blocks(
-          blocks =
-            blocks(
-              block_text(footer)),
-          context = "footer"
-        )[[1]]
-    }
-
-  } else {
-    html_footer <- ""
-  }
-
-  # Define the email header section
-  if (!is.null(header)) {
-
-    if (inherits(header, "blocks")) {
-
-      header <- render_blocks(blocks = header, context = "header")
-      html_header <- paste(unlist(header), collapse = "\n")
-
-    } else {
-
-      html_header <-
-        render_blocks(
-          blocks =
-            blocks(
-              block_text(header)),
-          context = "header"
-        )[[1]]
-    }
-
-  } else {
-    html_header <- ""
-  }
 
   # Generate the email message body
   body <-
-    bls_standard_template %>%
-    gfsub("\\{([a-zA-Z_]+)\\}", function(m, name) {
-      switch(name,
-        title = title,
-        html_header = html_header,
-        html_body_text = html_body_text,
-        html_footer = html_footer,
-        stop("Unexpected replacement token ", name)
-      )
-    })
+    template(title = title,
+      html_header = header,
+      html_body = body,
+      html_footer = footer) %>% as.character()
 
   # Add the HTML bodies (two variants) to the
   # `email_message` object
   email_message <-
     list(
-      html_str = body %>% as.character(),
+      html_str = body,
       html_html = body %>% htmltools::HTML(),
       attachments = list()
     )

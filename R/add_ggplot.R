@@ -74,8 +74,6 @@ add_ggplot <- function(plot_object,
          call. = FALSE)
   }
 
-  Sys.sleep(2)
-
   # Determine alt text
   alt_text <-
     if (is.null(alt)) {

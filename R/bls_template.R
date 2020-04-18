@@ -1,3 +1,17 @@
+#' @export
+blastula_template <- function(title, html_header, html_body, html_footer) {
+  bls_standard_template %>%
+    gfsub("\\{([a-zA-Z_]+)\\}", function(m, name) {
+      switch(name,
+        title = title,
+        html_header = html_header,
+        html_body_text = html_body,
+        html_footer = html_footer,
+        stop("Unexpected replacement token ", name)
+      )
+    })
+}
+
 bls_standard_template <-
 "<!doctype html>
 <html>
