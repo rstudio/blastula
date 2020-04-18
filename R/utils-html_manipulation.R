@@ -269,10 +269,14 @@ src_to_datauri <- function(src,
   }
 }
 
-inline_images <- function(html_file) {
+inline_images <- function(html_file, html = NULL) {
 
-  basedir <- dirname(html_file)
-  html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
+  if (is.null(html)) {
+    basedir <- dirname(html_file)
+    html <- paste(collapse = "\n", readLines(html_file, warn = FALSE))
+  } else {
+    basedir <- getwd()
+  }
 
   replace_attr(html, tag_name = "img", attr_name = "src", function(src) {
     src <- src_to_datauri(src, basedir)
@@ -294,7 +298,8 @@ cid_counter <- function(prefix,
 # Reads in the specified HTML file, and replaces any images found
 # (either data URI or relative file references) with cid references.
 cid_images <- function(html_file,
-                       next_cid = cid_counter("img")) {
+                       next_cid = cid_counter("img"),
+                       html = NULL) {
 
   idx <- 0L
 
@@ -303,8 +308,12 @@ cid_images <- function(html_file,
     paste0("img", idx, ".", content_type)
   }
 
-  basedir <- dirname(html_file)
-  html <- paste(collapse = "\r\n", readLines(html_file, warn = FALSE, encoding = "UTF-8"))
+  if (is.null(html)) {
+    basedir <- dirname(html_file)
+    html <- paste(collapse = "\r\n", readLines(html_file, warn = FALSE, encoding = "UTF-8"))
+  } else {
+    basedir <- getwd()
+  }
 
   html_data_uri <-
     replace_attr(html, tag_name = "img", attr_name = "src", function(src) {

@@ -8,6 +8,9 @@
 #' @param title An optional title for the article.
 #' @param content An optional paragraph of text for the article.
 #' @param link An optional link to apply to the content elements.
+#' @param legacy_width A number indicating the width in pixels that the image
+#'   should be displayed at in legacy e-mail clients like Outlook. For modern
+#'   email clients, the image will expand to the available width.
 #'
 #' @examples
 #' # We can define an article with a link
@@ -27,31 +30,41 @@
 #'
 #' if (interactive()) article
 #' @export
-article <- function(image = NULL,
-                    title = NULL,
-                    content = NULL,
-                    link = NULL) {
+article <- function(image = NULL, title = NULL, content = NULL, link = NULL,
+  legacy_width = 250) {
+  maybe_link <- function(...) {
+    if (is.null(link)) {
+      tagList(...)
+    } else {
+      tags$a(.noWS = c("after-begin", "before-end"), href = link,
+        style = css(text_decoration = "none"),
+        ...
+      )
+    }
+  }
 
-  # Normalize inputs to empty strings if any are `NULL`
-  image <- image %||% ""
-  title <- title %||% ""
-  content <- content %||% ""
-  link <- link %||% ""
-
-  # Add the article components to the
-  # `article_item_list` object
-  article_item_list <-
-    list(
-      image = image,
-      title = title,
-      content = content,
-      link = link
-    )
-
-  # Apply the `article` class
-  class(article_item_list) <- "article"
-
-  article_item_list
+  tagList(
+    if (!is.null(image)) {
+      tags$div(style = css(margin_bottom = "8px"),
+        maybe_link(
+          tags$img(
+            src = image,
+            width = legacy_width,
+            style = css(
+              width = "100%",
+              border = "none"
+            )
+          )
+        )
+      )
+    },
+    if (!is.null(title)) {
+      tags$h3(style = css(margin = 0), maybe_link(title))
+    },
+    if (!is.null(content)) {
+      tags$div(content)
+    }
+  )
 }
 
 #' A block of one, two, or three articles with a multicolumn layout
@@ -112,300 +125,17 @@ block_articles <- function(...) {
 
   x <- list(...)
 
-  if (!all((lapply(x, class) %>% unlist()) %in% "article")) {
+  pct <- round(100 / length(x))
 
-    stop("All objects provided to `block_articles()` must be of the ",
-         "class `article`:\n",
-         " * These objects are created by the `article()` function.",
-         call. = FALSE)
-  }
-
-  if (length(x) > 3) {
-
-    stop("There cannot be more than three `article` objects ",
-         "provided to `block_articles()`.",
-         call. = FALSE)
-  }
-
-  class(x) <- "block_articles"
-
-  x
+  div(class = "message-block block_articles",
+    tags$table(class = "articles", cellspacing = "12",
+      tags$tr(
+        lapply(x, function(article) {
+          tags$td(class = "article", valign = "top", width = paste0(pct, "%"),
+            article
+          )
+        })
+      )
+    )
+  )
 }
-
-render_block_articles <- function(x) {
-
-  if (length(x) == 3) {
-    return(block_article_3(items = x))
-  }
-
-  if (length(x) == 2) {
-    return(block_article_2(items = x))
-  }
-
-  if (length(x) == 1) {
-    return(block_article_1(items = x))
-  }
-}
-
-#' Obtain an inlined HTML fragment for three side-by-side articles
-#'
-#' @noRd
-block_article_3 <- function(items) {
-
-  block <-
-"<tr>
-<td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-<!--[if (gte mso 9)|(IE)]>
-<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-<tr>
-<td align=\"left\" valign=\"top\" width=\"33.333%\">
-<![endif]-->
-<div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
-<tbody>
-{x1_image}
-{x1_title}
-{x1_content}
-</tbody>
-</table>
-</div>
-<!--[if (gte mso 9)|(IE)]>
-<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-<tr>
-<td align=\"left\" valign=\"top\" width=\"33.333%\">
-<![endif]-->
-<div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
-<tbody>
-{x2_image}
-{x2_title}
-{x2_content}
-</tbody>
-</table>
-</div>
-<!--[if (gte mso 9)|(IE)]>
-<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-<tr>
-<td align=\"left\" valign=\"top\" width=\"33.333%\">
-<![endif]-->
-<div class=\"span-2\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 197px;\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" align=\"left\" width=\"100%\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 197px;\">
-<tbody>
-{x3_image}
-{x3_title}
-{x3_content}
-</tbody>
-</table>
-</div>
-<!--[if (gte mso 9)|(IE)]>
-</td>
-</tr>
-</table>
-<![endif]-->
-</td>
-</tr>"
-
-  for (i in seq(items)) {
-
-    if (items[[i]]$image == "") {
-      image <- ""
-    } else {
-      image <-
-        article_image_template_3 %>%
-        tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
-        tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
-    }
-
-    title <-
-      article_title_template %>%
-      tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
-      tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
-
-    content <-
-      article_content_template_2 %>%
-      tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
-
-    block <-
-      block %>%
-      tidy_gsub(paste0("\\{x", i, "_image\\}"), image) %>%
-      tidy_gsub(paste0("\\{x", i, "_title\\}"), title) %>%
-      tidy_gsub(paste0("\\{x", i, "_content\\}"), content)
-  }
-
-  class(block) <- "block_articles"
-
-  block
-}
-
-#' Obtain an inlined HTML fragment for two side-by-side articles
-#'
-#' @noRd
-block_article_2 <- function(items) {
-
-  block <-
-"<tr>
-<td align=\"center\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-<!--[if (gte mso 9)|(IE)]>
-<table align=\"left\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" width=\"100%\">
-<tr>
-<td align=\"left\" valign=\"top\" width=\"50%\">
-<![endif]-->
-<div class=\"span-3\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 298px;\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 298px;\" width=\"100%\">
-<tbody>
-{x1_image}
-{x1_title}
-{x1_content}
-</tbody>
-</table>
-</div>
-<!--[if (gte mso 9)|(IE)]>
-</td>
-<td align=\"left\" valign=\"top\" width=\"50%\">
-<![endif]-->
-<div class=\"span-3\" style=\"display: inline-block; margin-bottom: 24px; vertical-align: top; width: 100%; max-width: 298px;\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"article\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; padding-left: 24px; padding-right: 24px; max-width: 298px;\" width=\"100%\">
-<tbody>
-{x2_image}
-{x2_title}
-{x2_content}
-</tbody>
-</table>
-</div>
-<!--[if (gte mso 9)|(IE)]>
-</td>
-</tr>
-</table>
-<![endif]-->
-</td>
-</tr>"
-
-  for (i in seq(items)) {
-
-    if (items[[i]]$image == "") {
-      image <- ""
-    } else {
-      image <-
-        article_image_template_2 %>%
-        tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
-        tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
-    }
-
-    title <-
-      article_title_template %>%
-      tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
-      tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
-
-    content <-
-      article_content_template_2 %>%
-      tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
-
-    block <-
-      block %>%
-      tidy_gsub(paste0("\\{x", i, "_image\\}"), image) %>%
-      tidy_gsub(paste0("\\{x", i, "_title\\}"), title) %>%
-      tidy_gsub(paste0("\\{x", i, "_content\\}"), content)
-  }
-
-  class(block) <- "block_articles"
-
-  block
-}
-
-#' Obtain an inlined HTML fragment for a single, full-width article
-#'
-#' @noRd
-block_article_1 <- function(items) {
-
-  block <-
-"<tr>
-<td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: 24px;\" valign=\"top\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-<tbody>
-<tr>
-<td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-{x1_image}
-{x1_title}
-{x1_content}
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>"
-
-  for (i in seq(items)) {
-
-    if (items[[i]]$image == "") {
-      image <- ""
-    } else {
-      image <-
-        article_image_template_1 %>%
-        tidy_gsub("\\{image\\}", items[[i]]$image %>% process_text()) %>%
-        tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
-    }
-
-    title <-
-      article_title_template %>%
-      tidy_gsub("\\{title\\}", items[[i]]$title %>% process_text()) %>%
-      tidy_gsub("\\{link\\}", items[[i]]$link %>% process_text())
-
-    content <-
-      article_content_template_1 %>%
-      tidy_gsub("\\{content\\}", items[[i]]$content %>% process_text())
-
-    block <-
-      block %>%
-      tidy_gsub(paste0("\\{x", i, "_image\\}"), image) %>%
-      tidy_gsub(paste0("\\{x", i, "_title\\}"), title) %>%
-      tidy_gsub(paste0("\\{x", i, "_content\\}"), content)
-  }
-
-  class(block) <- "block_articles"
-
-  block
-}
-
-article_image_template_3 <-
-"<tr>
-<td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-<a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"149\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-</td>
-</tr>
-"
-
-article_image_template_2 <-
-"<tr>
-<td class=\"article-thumbnail\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; padding-bottom: 8px;\" valign=\"top\">
-<a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"250\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-</td>
-</tr>
-"
-
-article_image_template_1 <-
-"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-<a href=\"{link}\" target=\"_blank\"><img src=\"{image}\" alt=\"image text\" width=\"552\" class=\"img-responsive img-block\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; display: block;\"></a>
-</p>
-"
-
-article_title_template <-
-"<tr>
-<td class=\"article-title\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; font-size: 14px; font-weight: 800; line-height: 1.4em; padding-bottom: 8px;\" valign=\"top\">
-<a href=\"{link}\" target=\"_blank\" style=\"color: #222222; text-decoration: none; font-size: 14px; font-weight: 800; line-height: 1.4em;\">{title}</a>
-</td>
-</tr>
-"
-
-article_content_template_1 <-
-"<p style=\"font-family: Helvetica, sans-serif; font-size: 14px; font-weight: normal; margin: 0; margin-bottom: 16px;\">
-{content}
-</p>
-"
-
-article_content_template_2 <-
-"<tr>
-<td class=\"article-content\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; font-weight: normal; padding-bottom: 8px;\" valign=\"top\">
-{content}
-</td>
-</tr>
-"

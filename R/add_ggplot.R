@@ -57,6 +57,8 @@ add_ggplot <- function(plot_object,
 
   # nocov start
 
+  tmpfile <- tempfile("ggplot", fileext = ".png")
+
   # If the `ggplot2` package is available, then
   # use the `ggplot2::ggsave()` function
   if (requireNamespace("ggplot2", quietly = TRUE)) {
@@ -64,7 +66,7 @@ add_ggplot <- function(plot_object,
     ggplot2::ggsave(
       device = "png",
       plot = plot_object,
-      filename = "temp_ggplot.png",
+      filename = tmpfile,
       dpi = 200,
       width = width,
       height = height)
@@ -73,6 +75,8 @@ add_ggplot <- function(plot_object,
     stop("Please ensure that the `ggplot2` package is installed before using `add_ggplot()`.",
          call. = FALSE)
   }
+
+  on.exit(file.remove(tmpfile), add = TRUE)
 
   # Determine alt text
   alt_text <-
@@ -83,9 +87,7 @@ add_ggplot <- function(plot_object,
     }
 
   image_html <-
-    add_image(file = "temp_ggplot.png", alt = alt_text)
-
-  file.remove("temp_ggplot.png")
+    add_image(file = tmpfile, alt = alt_text, width = width * 100)
 
   image_html
 

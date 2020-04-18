@@ -4,7 +4,14 @@
 \alias{compose_email}
 \title{Create the email message body}
 \usage{
-compose_email(body = NULL, header = NULL, footer = NULL, title = NULL)
+compose_email(
+  body = NULL,
+  header = NULL,
+  footer = NULL,
+  title = NULL,
+  ...,
+  template = blastula_template
+)
 }
 \arguments{
 \item{header, body, footer}{The three layout sections for an email message
@@ -15,6 +22,14 @@ to take advantage of precomposed HTML blocks.}
 
 \item{title}{The title of the email message. This is not the subject but the
 HTML title text which may appear in limited circumstances.}
+
+\item{...}{Additional arguments to pass to the \code{template} function. If you're
+using the default template, you can use \code{font_family} to control the base
+font, and \code{content_width} to control the width of the main content; see
+\code{\link[=blastula_template]{blastula_template()}}.}
+
+\item{template}{An email template function to use. The default is
+\code{\link[=blastula_template]{blastula_template()}}.}
 }
 \value{
 An \code{email_message} object.

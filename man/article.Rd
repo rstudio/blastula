@@ -4,7 +4,13 @@
 \alias{article}
 \title{Specify the components of an article}
 \usage{
-article(image = NULL, title = NULL, content = NULL, link = NULL)
+article(
+  image = NULL,
+  title = NULL,
+  content = NULL,
+  link = NULL,
+  legacy_width = 250
+)
 }
 \arguments{
 \item{image}{An optional URL pointing to an image resource.}
@@ -14,6 +20,10 @@ article(image = NULL, title = NULL, content = NULL, link = NULL)
 \item{content}{An optional paragraph of text for the article.}
 
 \item{link}{An optional link to apply to the content elements.}
+
+\item{legacy_width}{A number indicating the width in pixels that the image
+should be displayed at in legacy e-mail clients like Outlook. For modern
+email clients, the image will expand to the available width.}
 }
 \description{
 The \code{article()} function is used exclusively within \code{block_articles()},

@@ -4,10 +4,13 @@
 \alias{block_text}
 \title{A block of text}
 \usage{
-block_text(text)
+block_text(text, align = c("center", "left", "right", "justify"))
 }
 \arguments{
 \item{text}{Plain text or Markdown text (via \code{\link[=md]{md()}}).}
+
+\item{align}{The text alignment to be used for this block of text. The
+default is \code{"center"}.}
 }
 \description{
 With \code{block_text()} we can define a text area and this can be easily combined

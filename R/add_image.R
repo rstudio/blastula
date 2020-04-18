@@ -6,6 +6,7 @@
 #' @param alt Text description of image passed to the `alt` attribute inside of
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. `NULL` default produces blank (`""`) alt text.
+#' @param width The width to be used for the image, in pixels.
 #'
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
@@ -41,35 +42,14 @@
 #' if (interactive()) email
 #'
 #' @export
-add_image <- function(file, alt = NULL) {
-
-  # Construct a CID based on the filename
-  # with a random string prepended to it
-  cid <-
-    paste0(
-      sample(letters, 12) %>% paste(collapse = ""),
-      "__",
-      basename(file)
-    )
+add_image <- function(file, alt = "", width = 520) {
 
   # Create the image URI
   uri <- get_image_uri(file = file)
 
-  # Determine alt text
-  alt_text <-
-    if (is.null(alt)) {
-      ""
-    } else {
-      alt
-    }
-
-  # Generate the Base64-encoded image and place it
-  # within <img> tags
-  paste0(
-    "<img cid=\"", cid,
-    "\" src=\"", uri,
-    "\" width=\"520\" alt=\"", alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"/>\n"
-  )
+  # TODO: width of 520??
+  # Must return as HTML string since the result may be inlined into md()
+  HTML(as.character(tags$img(src = uri, alt = alt, width = width)))
 }
 
 get_image_uri <- function(file) {
