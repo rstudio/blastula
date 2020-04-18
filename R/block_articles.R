@@ -10,7 +10,9 @@
 #' @param link An optional link to apply to the content elements.
 #' @param legacy_width A number indicating the width in pixels that the image
 #'   should be displayed at in legacy e-mail clients like Outlook. For modern
-#'   email clients, the image will expand to the available width.
+#'   email clients, the image will expand to the available width. By default,
+#'   the legacy width will be 552, 250, or 149 depending on whether one, two, or
+#'   three articles are included in the `block_articles` call.
 #'
 #' @examples
 #' # We can define an article with a link
@@ -31,7 +33,7 @@
 #' if (interactive()) article
 #' @export
 article <- function(image = NULL, title = NULL, content = NULL, link = NULL,
-  legacy_width = 250) {
+  legacy_width = NULL) {
   maybe_link <- function(...) {
     if (is.null(link)) {
       tagList(...)
@@ -43,28 +45,44 @@ article <- function(image = NULL, title = NULL, content = NULL, link = NULL,
     }
   }
 
-  tagList(
-    if (!is.null(image)) {
-      tags$div(style = css(margin_bottom = "8px"),
-        maybe_link(
-          tags$img(
-            src = image,
-            width = legacy_width,
-            style = css(
-              width = "100%",
-              border = "none"
+  # This is a bit weird; we return a function instead of HTML. This is because
+  # we don't have enough information to finish the render just yet, it depends
+  # on how many other images we're going to be rendered next to.
+
+  article_render <- function(width) {
+    tagList(
+      if (!is.null(image)) {
+        tags$div(style = css(margin_bottom = "8px"),
+          maybe_link(
+            tags$img(
+              src = image,
+              width = legacy_width %||% width,
+              style = css(
+                width = "100%",
+                border = "none"
+              )
             )
           )
         )
-      )
-    },
-    if (!is.null(title)) {
-      tags$h3(style = css(margin = 0), maybe_link(title))
-    },
-    if (!is.null(content)) {
-      tags$div(content)
-    }
-  )
+      },
+      if (!is.null(title)) {
+        tags$h3(style = css(margin = 0), maybe_link(title))
+      },
+      if (!is.null(content)) {
+        tags$div(content)
+      }
+    )
+  }
+  # Run now to trigger errors
+  article_render(NULL)
+
+  class(article_render) <- c("article", class(article_render))
+  article_render
+}
+
+# To allow articles to be snapshot tested using testthat::verify_output
+print.article <- function(x, ...) {
+  print(x(NULL))
 }
 
 #' A block of one, two, or three articles with a multicolumn layout
@@ -124,6 +142,22 @@ article <- function(image = NULL, title = NULL, content = NULL, link = NULL,
 block_articles <- function(...) {
 
   x <- list(...)
+
+  is_article <- vapply(x, FUN.VALUE = logical(1), FUN = inherits, what = "article")
+  if (!all(is_article)) {
+    stop("block_articles requires arguments of class 'article'")
+  }
+
+  # If you change these numbers, please update the legacy_width docs for
+  # article()
+  legacy_width <- c(552, 250, 149)[length(x)]
+  if (length(legacy_width) == 0 || is.na(legacy_width)) {
+    stop("block_articles requires between one and three arguments")
+  }
+
+  x <- lapply(x, function(article) {
+    article(legacy_width)
+  })
 
   pct <- round(100 / length(x))
 

@@ -344,6 +344,7 @@ cid_images <- function(html_file,
     list(
       html_str = html_cid,
       html_html = htmltools::HTML(html_data_uri),
+      attachments = list(),
       images = as.list(images)
     )
   )
