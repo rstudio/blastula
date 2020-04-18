@@ -305,6 +305,8 @@ cid_images <- function(html_file,
 
   next_cid <- function(content_type) {
     idx <<- idx + 1L
+    # According to the spec there should be an @domain on this, but it makes
+    # attachment UI show up for Outlook.com (e.g. AT00001.bin)
     paste0("img", idx, ".", content_type)
   }
 

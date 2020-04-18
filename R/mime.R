@@ -61,7 +61,8 @@ generate_rfc2822 <- function(eml,
       mime::guess_type(filename),
       headers = list(
         # TODO: escape
-        "Content-ID" = paste0("<", filename, ">")
+        "Content-ID" = paste0("<", filename, ">"),
+        "X-Attachment-Id" = filename
       ),
       content = base64enc::base64decode(data)
     )
@@ -72,6 +73,7 @@ generate_rfc2822 <- function(eml,
     raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
 
     quoted_filename <- header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)
+    content_id <- tidy_gsub(uuid::UUIDgenerate(), "-", "")
 
     mime_part(
       sprintf("%s; name=%s", attachment$content_type, quoted_filename),
@@ -81,7 +83,8 @@ generate_rfc2822 <- function(eml,
           attachment$disposition,
           quoted_filename
         ),
-        "Content-ID" = paste0("<", tidy_gsub(uuid::UUIDgenerate(), "-", ""), ">")
+        "Content-ID" = paste0("<", content_id, ">"),
+        "X-Attachment-Id" = content_id
       ),
       content = raw_bytes
     )
