@@ -27,7 +27,7 @@ Imports:
     fs (>= 1.3.1),
     getPass (>= 0.2-2),
     here (>= 0.1),
-    htmltools (>= 0.3.6),
+    htmltools (>= 0.4.0),
     httr (>= 1.4.0),
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
