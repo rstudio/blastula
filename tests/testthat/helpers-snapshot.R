@@ -1,5 +1,5 @@
 pathify <- function(str) {
-  gsub(".", "_", make.names(str), fixed = TRUE)
+  tolower(gsub(".", "_", make.names(str), fixed = TRUE))
 }
 
 snapshot_path <- function(lbl) {
