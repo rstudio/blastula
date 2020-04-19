@@ -1,0 +1,14 @@
+> print(x)
+<div class="message-block block_articles">
+  <table class="articles" cellspacing="12">
+    <tr>
+      <td class="article" valign="top" width="100%">
+        <h3 style="margin:0;">
+          <a href="link_1" style="text-decoration:none;">title_1</a>
+        </h3>
+        <div>content_1</div>
+      </td>
+    </tr>
+  </table>
+</div>
+
