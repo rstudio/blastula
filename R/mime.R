@@ -43,7 +43,14 @@ generate_rfc2822 <- function(eml,
                              to = NULL,
                              cc = NULL,
                              con = NULL,
-                             uuid_source = uuid::UUIDgenerate) {
+                             uuid_source = NULL) {
+
+  if (is.null(uuid_source)) {
+    # Do this instead of (the more obvious) `uuid_source = uuid::UUIDgenerate`
+    # in the parameter declaration, to stop R CMD check complaining that uuid
+    # isn't used
+    uuid_source <- uuid::UUIDgenerate
+  }
 
   stopifnot(inherits(eml, "blastula_message"))
 
