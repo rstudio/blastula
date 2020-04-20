@@ -47,8 +47,8 @@
 #'
 #' if (interactive()) email
 #'
-#' @return A character object with an HTML fragment that can be placed inside
-#'   the message body wherever the plot image should appear.
+#' @return An HTML fragment that can be placed inside the message body wherever
+#'   the plot image should appear.
 #' @export
 add_ggplot <- function(plot_object,
                        width = 5,

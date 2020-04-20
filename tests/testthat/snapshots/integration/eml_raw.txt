@@ -39,7 +39,8 @@ orrect size=2E -->
   <title>The Main Title</title>
   <style>
 body {
-  font-family: Times, serif;
+  font-family: Roboto, 'Segoe UI', 'Lucida Grande', Verdana, 'Bitstream Ver=
+a Sans', sans-serif;
   font-size: 14px;
 }
 =2Econtent {
@@ -69,14 +70,16 @@ img {
 }
       </style>
   </head>
-<body style=3D"background-color:#f6f6f6;font-family:Times, serif;color:#222=
-;margin:0;padding:8px;">
+<body style=3D"background-color:#f6f6f6;font-family:Roboto, &#39;Segoe UI&#=
+39;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-=
+serif;color:#222;margin:0;padding:8px;">
   <table width=3D"600" align=3D"center" class=3D"container" style=3D"">
     <tr>
       <td style=3D"padding:8px;">
-        <div class=3D"header" style=3D"font-family:Times, serif;color:#9999=
-99;font-size:12px;font-weight:normal;margin:0 0 24px 0;text-align:center;">=
-Header</div>
+        <div class=3D"header" style=3D"font-family:Roboto, &#39;Segoe UI&#3=
+9;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-s=
+erif;color:#999999;font-size:12px;font-weight:normal;margin:0 0 24px 0;text=
+-align:center;">Header</div>
         <table width=3D"100%" class=3D"content" style=3D"background-color:w=
 hite;">
           <tr>
@@ -99,37 +102,18 @@ eft;"><p>This is an md() block, with <strong>some html</strong> and <em>mar=
 kdown</em></p>
 </div>
               <div class=3D"message-block block_text" style=3D"text-align:c=
-enter;"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" class=3D"bt=
-n btn-primary" style=3D"border-collapse: separate; mso-table-lspace: 0pt; m=
-so-table-rspace: 0pt; width: 100%; box-sizing: border-box;">
-<tbody>
-<tr>
-<td align=3D"center" style=3D"font-family: sans-serif; font-size: 14px; ver=
-tical-align: top; padding-bottom: 15px;">
-<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" style=3D"border-col=
-lapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto;=
-">
-<tbody>
-<tr>
-<td style=3D"font-family: sans-serif; font-size: 14px; vertical-align: top;=
- background-color: #3498db; border-radius: 5px; text-align: center;"> <a hr=
-ef=3D"http://www=2Ewebsite=2Enet" target=3D"_blank" style=3D"display: inlin=
-e-block; color: #ffffff; background-color: #3498db; border: solid 1px #3498=
-db; border-radius: 5px; box-sizing: border-box; cursor: pointer; text-decor=
-ation: none; font-size: 14px; font-weight: bold; margin: 0; padding: 12px 2=
-5px; text-transform: capitalize; border-color: #3498db;">Press This Button<=
-/a> </td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>
-</tbody>
-</table>
- <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500"/>
+enter;"><table align=3D"center">
+  <tr>
+    <td style=3D"background-color:#2288DD;border-radius:6px;padding:10px 20=
+px;">
+      <a style=3D"color:white;text-decoration:none;font-weight:bold;" href=
+=3D"http://www=2Ewebsite=2Enet">Press This Button</a>
+    </td>
+  </tr>
+</table> <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500"/>
 </div>
               <div class=3D"message-block block_text" style=3D"text-align:c=
-enter;"><img src=3D"cid:img2=2Ejpeg" alt=3D"" width=3D"520"/>
+enter;"><img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520"/>
 </div>
               <div class=3D"message-block block_articles">
                 <table class=3D"articles" cellspacing=3D"12">
@@ -170,9 +154,10 @@ width=3D"149" style=3D"width:100%;border:none;"/>
             </td>
           </tr>
         </table>
-        <div class=3D"footer" style=3D"font-family:Times, serif;color:#9999=
-99;font-size:12px;font-weight:normal;margin:24px 0 0 0;text-align:center;">=
-
+        <div class=3D"footer" style=3D"font-family:Roboto, &#39;Segoe UI&#3=
+9;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-s=
+erif;color:#999999;font-size:12px;font-weight:normal;margin:24px 0 0 0;text=
+-align:center;">
           <div class=3D"message-block block_text" style=3D"text-align:cente=
 r;">Thanks for reading! Find us here:</div>
           <table width=3D"100%" style=3D"">

@@ -18,7 +18,8 @@ test_that("Email that uses all compose features", {
       )
     )),
     block_text(md(
-      add_image(system.file(package="blastula", "img/pexels-photo-267151.jpeg"))
+      add_image(system.file(package="blastula", "img/pexels-photo-267151.jpeg"),
+        alt = "A nice sunset")
     )),
     block_articles(
       article(
@@ -67,7 +68,7 @@ test_that("Email that uses all compose features", {
 
 
   eml <- compose_email(body, "Header", footer, title = "The Main Title",
-    content_width = 600, font_family = "Times, serif")
+    content_width = 600, font_family = "Roboto, 'Segoe UI', 'Lucida Grande', Verdana, 'Bitstream Vera Sans', sans-serif")
 
   eml_raw <- generate_rfc2822(eml, subject = "Subject",
     date = as.POSIXct("2020-04-18 16:38:44 PDT"),

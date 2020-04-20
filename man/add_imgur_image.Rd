@@ -4,7 +4,7 @@
 \alias{add_imgur_image}
 \title{Deploy a local image to Imgur and create an image tag}
 \usage{
-add_imgur_image(image, client_id = NULL, alt = NULL)
+add_imgur_image(image, client_id = NULL, alt = NULL, width = 520)
 }
 \arguments{
 \item{image}{The path to the local image we would like to deploy to Imgur and
@@ -15,10 +15,12 @@ for which we'd like an image tag.}
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
 the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
+
+\item{width}{The width to be used for the image, in pixels.}
 }
 \value{
-A character object with an HTML fragment that can be placed inside
-the message body wherever the image should appear.
+An HTML fragment that can be placed inside the message body wherever
+the image should appear.
 }
 \description{
 Getting images into email message bodies (and expecting them to appear for

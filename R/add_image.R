@@ -53,6 +53,9 @@ add_image <- function(file, alt = "", width = 520) {
 }
 
 get_image_uri <- function(file) {
+  if (grepl("(https?:)?//", file, ignore.case = TRUE)) {
+    return(file)
+  }
 
   image_raw <-
     readBin(
