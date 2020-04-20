@@ -123,9 +123,6 @@ create_smtp_creds_key <- function(id,
   # store requires the installation of the keyring package
   validate_keyring_available(fn_name = "create_smtp_creds_key")
 
-  # Determine whether the keyring package can be used
-  validate_keyring_capable()
-
   # Stop function if `id` provided is not of the right type
   if (!(inherits(id, "character") || inherits(id, "numeric") || inherits(id, "integer"))) {
     stop("The provided `id` value must be a single character or numeric value.",
@@ -280,6 +277,21 @@ creds_internal <- function(user = NULL,
   )
 }
 
+#' Stops function if the system is not capable of using **keyring**
+#'
+#' @noRd
+validate_keyring_capable <- function() {
+
+  # nocov start
+
+  if (!keyring::has_keyring_support()) {
+    stop("To store SMTP via *keyring*, the system needs to have",
+         "*keyring* support", call. = FALSE)
+  }
+
+  # nocov end
+}
+
 #' Stops function if the **keyring** package isn't installed
 #'
 #' @noRd
@@ -292,20 +304,7 @@ validate_keyring_available <- function(fn_name) {
          "`", fn_name, "()` function", call. = FALSE)
   }
 
-  # nocov end
-}
-
-#' Stops function if the system is not capable of using **keyring**
-#'
-#' @noRd
-validate_keyring_capable <- function() {
-
-  # nocov start
-
-  if (!keyring::has_keyring_support()) {
-    stop("To store SMTP via *keyring*, the system needs to have",
-         "*keyring* support", call. = FALSE)
-  }
+  validate_keyring_capable()
 
   # nocov end
 }
