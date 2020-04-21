@@ -4,10 +4,12 @@
 \alias{add_image}
 \title{Create an HTML fragment for an embedded image}
 \usage{
-add_image(file, alt = NULL)
+add_image(file, img_width = "520", alt = NULL)
 }
 \arguments{
-\item{file}{A path to an image file.}
+\item{file}{A path to an image file.ld like your image to be.}
+
+\item{img_width}{The width in pixels you would like the image to be.}
 
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
 the image (\verb{<img>}) tag for use when image loading is disabled and on

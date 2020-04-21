@@ -2,7 +2,8 @@
 #'
 #' Add a local image inside the body of the email with this helper function.
 #'
-#' @param file A path to an image file.
+#' @param file A path to an image file.ld like your image to be.
+#' @param img_width The width in pixels you would like the image to be.
 #' @param alt Text description of image passed to the `alt` attribute inside of
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. `NULL` default produces blank (`""`) alt text.
@@ -41,7 +42,7 @@
 #' if (interactive()) email
 #'
 #' @export
-add_image <- function(file, alt = NULL) {
+add_image <- function(file, img_width = "520",alt = NULL) {
 
   # Construct a CID based on the filename
   # with a random string prepended to it
@@ -68,7 +69,7 @@ add_image <- function(file, alt = NULL) {
   paste0(
     "<img cid=\"", cid,
     "\" src=\"", uri,
-    "\" width=\"520\" alt=\"", alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"/>\n"
+    "\" width=\"",img_width,"\" alt=\"", alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"/>\n"
   )
 }
 
