@@ -110,12 +110,24 @@ px;">
 =3D"http://www=2Ewebsite=2Enet">Press This Button</a>
     </td>
   </tr>
-</table> <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500" style=3D"=
-"/>
+</table> <table width=3D"100%" align=3D"center" style=3D"">
+  <tr>
+    <td align=3D"center" style=3D"">
+      <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500" style=3D""/>=
+
+    </td>
+  </tr>
+</table>
 </div>
               <div class=3D"message-block block_text" style=3D"text-align:l=
-eft;"><img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520" styl=
+eft;"><table width=3D"100%" align=3D"center" style=3D"">
+  <tr>
+    <td align=3D"center" style=3D"">
+      <img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520" styl=
 e=3D""/>
+    </td>
+  </tr>
+</table>
 </div>
               <div class=3D"message-block block_articles">
                 <table class=3D"articles" cellspacing=3D"12">

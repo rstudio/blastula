@@ -9,7 +9,7 @@ add_ggplot(
   width = 5,
   height = 5,
   alt = NULL,
-  align = c("inline", "left", "center", "right"),
+  align = c("center", "left", "right", "inline"),
   float = c("none", "left", "right")
 )
 }
@@ -25,13 +25,12 @@ the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. Defaults to the \code{ggplot2} plot object's title, if exists.
 Override by passing a custom character string or \code{""} for no text.}
 
-\item{align}{The alignment to be used for the image. If not \code{"inline"} (the
-default), the image will appear in its own block, i.e. there will not be
-text to the left or right of it.}
+\item{align}{The alignment to be used for the image. If not \code{"inline"}, the
+image will appear in its own block, i.e. there will not be text to the left
+or right of it.}
 
 \item{float}{The float value to be used for the image. If not \code{"none"}, text
-will flow around the image. You cannot specify non-default values for
-\code{align} and \code{float} in the same function call.}
+will flow around the image, and the \code{align} argument will be ignored.}
 }
 \value{
 An HTML fragment that can be placed inside the message body wherever

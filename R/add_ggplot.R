@@ -55,7 +55,7 @@ add_ggplot <- function(plot_object,
                        width = 5,
                        height = 5,
                        alt = NULL,
-                       align = c("inline", "left", "center", "right"),
+                       align = c("center", "left", "right", "inline"),
                        float = c("none", "left", "right")) {
 
   # nocov start

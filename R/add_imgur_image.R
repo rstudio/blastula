@@ -27,7 +27,7 @@ add_imgur_image <- function(image,
                             client_id = NULL,
                             alt = NULL,
                             width = 520,
-                            align = c("inline", "left", "center", "right"),
+                            align = c("center", "left", "right", "inline"),
                             float = c("none", "left", "right")) {
   # nocov start
 

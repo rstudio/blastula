@@ -8,7 +8,7 @@ add_image(
   file,
   alt = "",
   width = 520,
-  align = c("inline", "left", "center", "right"),
+  align = c("center", "left", "right", "inline"),
   float = c("none", "left", "right")
 )
 }
@@ -21,13 +21,12 @@ screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
 
 \item{width}{The width to be used for the image, in pixels.}
 
-\item{align}{The alignment to be used for the image. If not \code{"inline"} (the
-default), the image will appear in its own block, i.e. there will not be
-text to the left or right of it.}
+\item{align}{The alignment to be used for the image. If not \code{"inline"}, the
+image will appear in its own block, i.e. there will not be text to the left
+or right of it.}
 
 \item{float}{The float value to be used for the image. If not \code{"none"}, text
-will flow around the image. You cannot specify non-default values for
-\code{align} and \code{float} in the same function call.}
+will flow around the image, and the \code{align} argument will be ignored.}
 }
 \value{
 A character object with an HTML fragment that can be placed inside
