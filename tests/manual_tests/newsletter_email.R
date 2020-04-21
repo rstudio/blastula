@@ -1,11 +1,9 @@
 library(blastula)
-library(glue)
 
 # Attribution Information
 #
 # Uses 'free-to-use' photos from https://photos.icons8.com (conditional on linking back);
 # more information here: https://icons8.com/license
-
 
 # https://i.imgur.com/gpVMFcW.jpg
 # add_imgur_image(
@@ -25,16 +23,22 @@ library(glue)
 #   client_id = ""
 # )
 
+# https://i.imgur.com/8sH6Ggt.jpg
+# add_imgur_image(
+#   image = "tests/manual_tests/your-request-is-my-command.jpg",
+#   client_id = ""
+# )
 
 email <-
   compose_email(
     body =
       blocks(
+        block_spacer(),
         block_title("Exciting New VR Innovations"),
         block_spacer(),
         block_text(paste0(
-"VR is here to stay! New hardware offerings by major VR players are heating up ",
-"the shelves and, later, getting people moving in their living rooms!")),
+          "VR is here to stay! New hardware offerings by major VR players are heating up ",
+          "the shelves and, later, getting people moving in their living rooms!")),
         block_articles(
           article(
             image = "https://i.imgur.com/18fcpkZ.jpg",
@@ -60,7 +64,47 @@ email <-
                down. The Superslim VR Visor prototype only weighs a few
                ounces, using a waveguide display and foveated rendering."
           )
+        ),
+        block_articles(
+          article(
+            image = "https://i.imgur.com/8sH6Ggt.jpg",
+            title = NULL,
+            content =
+              "Soon, we expect VR to be fashionable! Just take a look at
+               this image for a glimpse of haute couture: VR Style."
+          )),
+        block_text(
+          "This wraps up the May 2020 Edition of our monthly newsletter that
+           showcases the latest in VR technologies. Next month, we'll provide
+           info on can't miss VR and AR events in 2020."
         )
+      ),
+    footer =
+      blocks(
+        block_text("Thanks for reading our newsletter. You can also find us here:"),
+        block_social_links(
+          social_link(
+            service = "twitter",
+            link = "https://twitter.com/RtoVR",
+            variant = "color"
+          ),
+          social_link(
+            service = "facebook",
+            link = "http://www.facebook.com/RoadtoVR",
+            variant = "color"
+          ),
+          social_link(
+            service = "youtube",
+            link = "https://www.youtube.com/user/RoadtoVR/videos",
+            variant = "color"
+          ),
+          social_link(
+            service = "rss",
+            link = "https://www.roadtovr.com/feed",
+            variant = "color"
+          )
+        ),
+        block_text("All photos obtained from https://photos.icons8.com")
       )
   )
 
