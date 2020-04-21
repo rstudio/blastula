@@ -20,12 +20,6 @@ article(
 \item{content}{An optional paragraph of text for the article.}
 
 \item{link}{An optional link to apply to the content elements.}
-
-\item{legacy_width}{A number indicating the width in pixels that the image
-should be displayed at in legacy e-mail clients like Outlook. For modern
-email clients, the image will expand to the available width. By default,
-the legacy width will be 552, 250, or 149 depending on whether one, two, or
-three articles are included in the \code{block_articles} call.}
 }
 \description{
 The \code{article()} function is used exclusively within \code{block_articles()},

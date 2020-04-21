@@ -57,6 +57,22 @@ email <-
                truly immersed in the VR world."
           ),
           article(
+            image = "https://i.imgur.com/5aJawp2.jpg",
+            title = "Hyperreal",
+            content =
+              "By utilizing a combination of the Hyperreal headset (and
+               additional measures), one can have the sensation of being
+               truly immersed in the VR world."
+          ),
+          article(
+            image = "https://i.imgur.com/5aJawp2.jpg",
+            title = "Hyperreal",
+            content =
+              "By utilizing a combination of the Hyperreal headset (and
+               additional measures), one can have the sensation of being
+               truly immersed in the VR world."
+          ),
+          article(
             image = "https://i.imgur.com/gpVMFcW.jpg",
             title = "Superslim",
             content =
