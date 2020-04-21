@@ -1,6 +1,6 @@
 > print(x)
 <div class="message-block block_articles">
-  <table class="articles" cellspacing="12" width="100%">
+  <table class="articles" cellspacing="0" cellpadding="0" width="100%">
     <tr>
       <td class="article" valign="top" width="33%">
         <h3 style="margin:0;">
@@ -8,11 +8,17 @@
         </h3>
         <div>content_1</div>
       </td>
+      <td width="1">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=" width="12" height="12" style="width:12px !important;height:12px;max-width:12px !important;min-width:12px !important;"/>
+      </td>
       <td class="article" valign="top" width="33%">
         <h3 style="margin:0;">
           <a href="link_2" style="text-decoration:none;">title_2</a>
         </h3>
         <div>content_2</div>
+      </td>
+      <td width="1">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=" width="12" height="12" style="width:12px !important;height:12px;max-width:12px !important;min-width:12px !important;"/>
       </td>
       <td class="article" valign="top" width="33%">
         <h3 style="margin:0;">

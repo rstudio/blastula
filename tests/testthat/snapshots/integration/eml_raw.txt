@@ -72,10 +72,10 @@ img {
   </head>
 <body style=3D"background-color:#f6f6f6;font-family:Roboto, &#39;Segoe UI&#=
 39;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-=
-serif;color:#222;margin:0;padding:8px;">
+serif;color:#222;margin:0;padding:0;">
   <table width=3D"600" align=3D"center" class=3D"container" style=3D"">
     <tr>
-      <td style=3D"padding:8px;">
+      <td style=3D"padding:24px;">
         <div class=3D"header" style=3D"font-family:Roboto, &#39;Segoe UI&#3=
 9;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-s=
 erif;color:#999999;font-size:12px;font-weight:normal;margin:0 0 24px 0;text=
@@ -83,7 +83,7 @@ erif;color:#999999;font-size:12px;font-weight:normal;margin:0 0 24px 0;text=
         <table width=3D"100%" class=3D"content" style=3D"background-color:w=
 hite;">
           <tr>
-            <td style=3D"padding:8px;">
+            <td style=3D"padding:12px;">
               <h1 class=3D"message-block block_title" style=3D"color:#22222=
 2;font-weight:300;line-height:1=2E4;margin:0;font-size:36px;margin-bottom:4=
 px;text-align:center;">This is a title block</h1>
@@ -130,8 +130,8 @@ e=3D""/>
 </table>
 </div>
               <div class=3D"message-block block_articles">
-                <table class=3D"articles" cellspacing=3D"12" width=3D"100%"=
->
+                <table class=3D"articles" cellspacing=3D"0" cellpadding=3D"=
+0" width=3D"100%">
                   <tr>
                     <td class=3D"article" valign=3D"top" width=3D"33%">
                       <div style=3D"margin-bottom:12px;">
@@ -143,6 +143,11 @@ width=3D"100%" height=3D"200" style=3D"height:auto !important;"/>
               culture, and high-tech development,
               merging Eastern and Western influences=2E</div>
                     </td>
+                    <td width=3D"1">
+                      <img src=3D"cid:img3=2Epng" width=3D"12" height=3D"12=
+" style=3D"width:12px !important;height:12px;max-width:12px !important;min-=
+width:12px !important;"/>
+                    </td>
                     <td class=3D"article" valign=3D"top" width=3D"33%">
                       <div style=3D"margin-bottom:12px;">
                         <img src=3D"https://i=2Eimgur=2Ecom/aYOm3Tk=2Ejpg" =
@@ -152,6 +157,11 @@ width=3D"100%" height=3D"200" style=3D"height:auto !important;"/>
                       <div>Japan is an archipelago consisting
               of 6,852 islands along East Asia's
               Pacific Coast=2E</div>
+                    </td>
+                    <td width=3D"1">
+                      <img src=3D"cid:img3=2Epng" width=3D"12" height=3D"12=
+" style=3D"width:12px !important;height:12px;max-width:12px !important;min-=
+width:12px !important;"/>
                     </td>
                     <td class=3D"article" valign=3D"top" width=3D"33%">
                       <div style=3D"margin-bottom:12px;">
@@ -1907,6 +1917,15 @@ M3+oFJQipKyKlOTjK7Ire1SVznORU13ao8eGywPrTbP77f57VPc/dFVJvmRVKK5DLa2jt7nCopzx
 zzVHUtOiWQMAQSexrSuf+Psf57VU1Pqv1Fbxb5jixEV7Pbqc9e2yrI2M8VRSPzM5JrSv/wDWN9Kz
 4O/+e9enT2PDqLVleLTIp7nzWUmRFKhs849Kg1aBYFG3PNX7Tq9VNc+4tdEG+Y55JcjZkzEhScmo
 vMNSzfdNQV2HEz//2Q==
+--90845e5a-81ce-11ea-aeb2-b32eaa150001
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Disposition: inline
+Content-ID: <img3.png>
+X-Attachment-Id: img3.png
+
+iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK
+02kAAAAASUVORK5CYII=
 --90845e5a-81ce-11ea-aeb2-b32eaa150001
 Content-Type: image/png
 Content-Transfer-Encoding: base64

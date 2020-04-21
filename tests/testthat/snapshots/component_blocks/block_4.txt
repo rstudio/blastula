@@ -6,7 +6,7 @@
   </tr>
 </table>
 <div class="message-block block_articles">
-  <table class="articles" cellspacing="12" width="100%">
+  <table class="articles" cellspacing="0" cellpadding="0" width="100%">
     <tr>
       <td class="article" valign="top" width="100%">
         <div style="margin-bottom:12px;">

@@ -66,9 +66,9 @@ img {
           font_family = font_family,
           color = "#222",
           margin = "0",
-          padding = "8px"
+          padding = "0"
         ),
-        panel(outer_class = "container", outer_align = "center", padding = "8px",
+        panel(outer_class = "container", outer_align = "center", padding = "24px",
           width = content_width,
 
           if (!is.null(html_header)) {
@@ -84,7 +84,7 @@ img {
               html_header
             )
           },
-          panel(outer_class = "content", padding = "8px", background_color = "white",
+          panel(outer_class = "content", padding = "12px", background_color = "white",
             html_body
           ),
           if (!is.null(html_footer)) {

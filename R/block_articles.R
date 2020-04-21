@@ -142,11 +142,29 @@ block_articles <- function(...) {
   pct <- round(100 / length(x))
 
   div(class = "message-block block_articles",
-    tags$table(class = "articles", cellspacing = "12", width = "100%",
+    tags$table(class = "articles", cellspacing = "0", cellpadding = "0", width = "100%",
       tags$tr(
-        lapply(x, function(article) {
-          tags$td(class = "article", valign = "top", width = paste0(pct, "%"),
-            article
+        lapply(seq_along(x), function(i) {
+          article <- x[[i]]
+          tagList(
+            if (i != 1) {
+              tags$td(width = 1,
+                tags$img(
+                  src = get_image_uri(system.file(package = "blastula", "img/blank.png")),
+                  width = 12,
+                  height = 12,
+                  style = css(
+                    width = "12px !important",
+                    height = "12px",
+                    max_width = "12px !important",
+                    min_width = "12px !important"
+                  )
+                )
+              )
+            },
+            tags$td(class = "article", valign = "top", width = paste0(pct, "%"),
+              article
+            )
           )
         })
       )
