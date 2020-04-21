@@ -142,7 +142,7 @@ block_articles <- function(...) {
   pct <- round(100 / length(x))
 
   div(class = "message-block block_articles",
-    tags$table(class = "articles", cellspacing = "12",
+    tags$table(class = "articles", cellspacing = "12", width = "100%",
       tags$tr(
         lapply(x, function(article) {
           tags$td(class = "article", valign = "top", width = paste0(pct, "%"),

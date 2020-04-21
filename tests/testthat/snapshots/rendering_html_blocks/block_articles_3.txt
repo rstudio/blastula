@@ -1,6 +1,6 @@
 > print(x)
 <div class="message-block block_articles">
-  <table class="articles" cellspacing="12">
+  <table class="articles" cellspacing="12" width="100%">
     <tr>
       <td class="article" valign="top" width="33%">
         <h3 style="margin:0;">

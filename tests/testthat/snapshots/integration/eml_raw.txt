@@ -130,7 +130,8 @@ e=3D""/>
 </table>
 </div>
               <div class=3D"message-block block_articles">
-                <table class=3D"articles" cellspacing=3D"12">
+                <table class=3D"articles" cellspacing=3D"12" width=3D"100%"=
+>
                   <tr>
                     <td class=3D"article" valign=3D"top" width=3D"33%">
                       <div style=3D"margin-bottom:12px;">
