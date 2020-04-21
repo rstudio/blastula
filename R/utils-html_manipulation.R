@@ -323,6 +323,7 @@ cid_images <- function(html_file,
     })
 
   images <- new.env(parent = emptyenv())
+  cids <- new.env(parent = emptyenv())
 
   html_cid <-
     replace_attr(html_data_uri, tag_name = "img", attr_name = "src", function(src) {
@@ -332,11 +333,16 @@ cid_images <- function(html_file,
     if (is.na(data)) {
       src
     } else {
-      cid <- next_cid(content_type = content_type)
-      images[[cid]] <- structure(
-        data,
-        "content_type" = paste0("image/", content_type)
-      )
+      cids_key <- digest::digest(src)
+      cid <- cids[[cids_key]]
+      if (is.null(cid)) {
+        cid <- next_cid(content_type = content_type)
+        images[[cid]] <- structure(
+          data,
+          "content_type" = paste0("image/", content_type)
+        )
+        cids[[cids_key]] <- cid
+      }
       paste0("cid:", cid)
     }
   })
