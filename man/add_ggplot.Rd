@@ -19,8 +19,8 @@ screen readers. Defaults to the \code{ggplot2} plot object's title, if exists.
 Override by passing a custom character string or \code{""} for no text.}
 }
 \value{
-A character object with an HTML fragment that can be placed inside
-the message body wherever the plot image should appear.
+An HTML fragment that can be placed inside the message body wherever
+the plot image should appear.
 }
 \description{
 Add an ggplot plot inside the body of the email with this helper function.
