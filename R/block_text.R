@@ -9,7 +9,7 @@
 #'
 #' @param text Plain text or Markdown text (via [md()]).
 #' @param align The text alignment to be used for this block of text. The
-#'   default is `"center"`.
+#'   default is `"left"`.
 #'
 #' @examples
 #' # Create a block of two, side-by-side
@@ -50,7 +50,7 @@
 #' if (interactive()) email
 #'
 #' @export
-block_text <- function(text, align = c("center", "left", "right", "justify")) {
+block_text <- function(text, align = c("left", "center", "right", "justify")) {
   if (length(align) > 1) {
     align <- align[[1]]
   }

@@ -56,6 +56,10 @@ compose_email <- function(body = NULL,
                           ...,
                           template = blastula_template) {
 
+  body <- process_markdown(body)
+  header <- process_markdown(header)
+  footer <- process_markdown(footer)
+
   # Define the title text for the email;
   # use an empty string if not supplied
   title <- title %||% ""
@@ -65,7 +69,10 @@ compose_email <- function(body = NULL,
     template(title = title,
       html_header = header,
       html_body = body,
-      html_footer = footer, ...) %>% as.character()
+      html_footer = footer, ...) %>%
+    # In case the template used md() internally
+    process_markdown() %>%
+    as.character()
 
   email_message <- cid_images(html = body)
   email_message

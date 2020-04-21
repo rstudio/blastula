@@ -88,21 +88,21 @@ hite;">
 2;font-weight:300;line-height:1=2E4;margin:0;font-size:36px;margin-bottom:4=
 px;text-align:center;">This is a title block</h1>
               <div class=3D"message-block block_text" style=3D"text-align:c=
-enter;">This is a text block</div>
+enter;">This is a text block, center aligned</div>
               <table class=3D"message-block block_spacer">
                 <tr>
                   <td>&nbsp;</td>
                 </tr>
               </table>
-              <div class=3D"message-block block_text" style=3D"text-align:c=
-enter;">This is another text block, with a spacer above, and &lt;strong&gt;=
-some html&lt;/strong&gt; and *markdown*</div>
+              <div class=3D"message-block block_text" style=3D"text-align:l=
+eft;">This is another text block, with a spacer above, and &lt;strong&gt;so=
+me html&lt;/strong&gt; and *markdown*</div>
               <div class=3D"message-block block_text" style=3D"text-align:l=
 eft;"><p>This is an md() block, with <strong>some html</strong> and <em>mar=
 kdown</em></p>
 </div>
-              <div class=3D"message-block block_text" style=3D"text-align:c=
-enter;"><table align=3D"center">
+              <div class=3D"message-block block_text" style=3D"text-align:l=
+eft;"><table align=3D"center">
   <tr>
     <td style=3D"background-color:#2288DD;border-radius:6px;padding:10px 20=
 px;">
@@ -112,8 +112,8 @@ px;">
   </tr>
 </table> <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500"/>
 </div>
-              <div class=3D"message-block block_text" style=3D"text-align:c=
-enter;"><img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520"/>
+              <div class=3D"message-block block_text" style=3D"text-align:l=
+eft;"><img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520"/>
 </div>
               <div class=3D"message-block block_articles">
                 <table class=3D"articles" cellspacing=3D"12">
@@ -158,8 +158,8 @@ width=3D"149" style=3D"width:100%;border:none;"/>
 9;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-s=
 erif;color:#999999;font-size:12px;font-weight:normal;margin:24px 0 0 0;text=
 -align:center;">
-          <div class=3D"message-block block_text" style=3D"text-align:cente=
-r;">Thanks for reading! Find us here:</div>
+          <div class=3D"message-block block_text" style=3D"text-align:left;=
+">Thanks for reading! Find us here:</div>
           <table width=3D"100%" style=3D"">
             <tr>
               <td align=3D"center" style=3D"" class=3D"message-block block_=
@@ -185,6 +185,7 @@ ter/inst/social_icons/tripadvisor-color=2Epng" alt=3D"tripadvisor" width=3D=
 --90845e5a-81ce-11ea-aeb2-b32eaa150001
 Content-Type: image/jpeg
 Content-Transfer-Encoding: base64
+Content-Disposition: inline
 Content-ID: <img2.jpeg>
 X-Attachment-Id: img2.jpeg
 
@@ -1894,6 +1895,7 @@ vMNSzfdNQV2HEz//2Q==
 --90845e5a-81ce-11ea-aeb2-b32eaa150001
 Content-Type: image/png
 Content-Transfer-Encoding: base64
+Content-Disposition: inline
 Content-ID: <img1.png>
 X-Attachment-Id: img1.png
 

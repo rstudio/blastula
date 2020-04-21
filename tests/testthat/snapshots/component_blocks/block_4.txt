@@ -20,5 +20,5 @@
     </tr>
   </table>
 </div>
-<div class="message-block block_text" style="text-align:center;">This is a block of text.</div>
+<div class="message-block block_text" style="text-align:left;">This is a block of text.</div>
 

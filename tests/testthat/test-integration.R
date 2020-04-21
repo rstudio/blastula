@@ -4,10 +4,10 @@ library(htmltools)
 test_that("Email that uses all compose features", {
   body <- blocks(
     block_title("This is a title block"),
-    block_text("This is a text block"),
+    block_text("This is a text block, center aligned", align = "center"),
     block_spacer(),
     block_text("This is another text block, with a spacer above, and <strong>some html</strong> and *markdown*"),
-    block_text(align = "left", md("This is an md() block, with <strong>some html</strong> and *markdown*")),
+    block_text(md("This is an md() block, with <strong>some html</strong> and *markdown*")),
     block_text(md(
       paste(
         add_cta_button(
