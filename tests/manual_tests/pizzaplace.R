@@ -3,6 +3,7 @@ library(tidyverse)
 library(gt)
 library(scales)
 library(emo)
+library(glue)
 
 # Create short labels for months (displays
 # better for small plots in email messages)
@@ -98,14 +99,14 @@ pizza_tab_email <-
     currency = "USD"
   ) %>%
   tab_options(
-    summary_row.background.color = "#FFFEEE",
-    stub_group.background.color = "#E6EFFC",
+    summary_row.background.color = "#FFFAAA",
+    row_group.background.color = "#E6EFFC",
     table.font.size = "small",
     heading.title.font.size = "small",
     heading.subtitle.font.size = "x-small",
-    stub_group.font.size = "small",
+    row_group.font.size = "small",
     column_labels.font.size = "small",
-    row.padding = "5px"
+    data_row.padding = "5px"
   ) %>%
   cols_label(
     pies = "Pizzas",
@@ -115,14 +116,6 @@ pizza_tab_email <-
     title = paste0("My ", emo::ji("pizza"), " sales in 2015"),
     subtitle = "Split by the type of pizza and the size"
   ) %>%
-  tab_footnote(
-    footnote = md("Only **The Greek Pizza** comes in this size."),
-    locations = cells_stub(rows = 4:5)
-  ) %>%
-  tab_footnote(
-    footnote = "The small-sized classic pizzas sold the most.",
-    locations = cells_data(columns = 1, rows = 1)
-  ) %>%
   as_raw_html()
 
 
@@ -130,8 +123,7 @@ pizza_tab_email <-
 # `compose_email()` function from the
 # blastula package
 email <-
-  blastula::compose_email(
-    body = "
+  blastula::compose_email(body = blastula::md(glue::glue("
   Hello,
 
   Just wanted to let you know that pizza \\
@@ -160,7 +152,7 @@ email <-
 
   Alfonso
   "
-  )
+  )))
 
 # Preview the email in the RStudio Viewer
 email
