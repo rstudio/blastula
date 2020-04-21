@@ -66,9 +66,10 @@ generate_rfc2822 <- function(eml,
 
   images <- mapply(names(eml$images), eml$images, FUN = function(filename, data) {
     mime_part(
-      mime::guess_type(filename),
+      attr(data, "content_type", exact = TRUE) %||% mime::guess_type(filename),
       headers = list(
         # TODO: escape
+        "Content-Disposition" = "inline",
         "Content-ID" = paste0("<", filename, ">"),
         "X-Attachment-Id" = filename
       ),
