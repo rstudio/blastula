@@ -66,24 +66,6 @@ test_that("the `render_block_articles()` function returns the expected output", 
   snapshot(block_articles_1)
   snapshot(block_articles_2)
   snapshot(block_articles_3)
-
-  # Expect an error if all objects provided to
-  # `block_articles()` are not of the class `article`
-  expect_error(
-    block_articles(
-      article(
-        title = "title_1",
-        content = "content_1",
-        link = "link_1"
-      ),
-      article(
-        title = "title_2",
-        content = "content_2",
-        link = "link_2"
-      ),
-      LETTERS
-    )
-  )
 })
 
 test_that("the social link functions work correctly", {
