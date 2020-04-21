@@ -9,6 +9,7 @@
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. Defaults to the `ggplot2` plot object's title, if exists.
 #'   Override by passing a custom character string or `""` for no text.
+#' @inheritParams add_image
 #'
 #' @examples
 #' library(ggplot2)
@@ -53,7 +54,9 @@
 add_ggplot <- function(plot_object,
                        width = 5,
                        height = 5,
-                       alt = NULL) {
+                       alt = NULL,
+                       align = c("inline", "left", "center", "right"),
+                       float = c("none", "left", "right")) {
 
   # nocov start
 
@@ -87,7 +90,8 @@ add_ggplot <- function(plot_object,
     }
 
   image_html <-
-    add_image(file = tmpfile, alt = alt_text, width = width * 100)
+    add_image(file = tmpfile, alt = alt_text, width = width * 100,
+      align = align, float = float)
 
   image_html
 

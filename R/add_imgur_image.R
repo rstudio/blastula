@@ -26,8 +26,9 @@
 add_imgur_image <- function(image,
                             client_id = NULL,
                             alt = NULL,
-                            width = 520) {
-
+                            width = 520,
+                            align = c("inline", "left", "center", "right"),
+                            float = c("none", "left", "right")) {
   # nocov start
 
   # Using this function requires the `xml2` package
@@ -90,7 +91,8 @@ add_imgur_image <- function(image,
       alt
     }
 
-  add_image(response_list$link, alt = alt_text, width = width)
+  add_image(response_list$link, alt = alt_text, width = width,
+    align = align, float = float)
 
   # nocov end
 }

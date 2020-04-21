@@ -7,6 +7,12 @@
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. `NULL` default produces blank (`""`) alt text.
 #' @param width The width to be used for the image, in pixels.
+#' @param align The alignment to be used for the image. If not `"inline"` (the
+#'   default), the image will appear in its own block, i.e. there will not be
+#'   text to the left or right of it.
+#' @param float The float value to be used for the image. If not `"none"`, text
+#'   will flow around the image. You cannot specify non-default values for
+#'   `align` and `float` in the same function call.
 #'
 #' @return A character object with an HTML fragment that can be placed inside
 #'   the message body wherever the image should appear.
@@ -42,14 +48,34 @@
 #' if (interactive()) email
 #'
 #' @export
-add_image <- function(file, alt = "", width = 520) {
+add_image <- function(file, alt = "", width = 520,
+  align = c("inline", "left", "center", "right"),
+  float = c("none", "left", "right")) {
+
+  align <- match.arg(align)
+  float <- match.arg(float)
+
+  if (align != "inline" && float != "none") {
+    stop("add_image() doesn't support align and float at the same time")
+  }
+
+  if (float == "none") {
+    float <- NULL
+  }
 
   # Create the image URI
   uri <- get_image_uri(file = file)
 
-  # TODO: width of 520??
+  img <- tags$img(src = uri, alt = alt, width = width, align = float,
+    style = css(float = float))
+
+  if (isTRUE(align %in% c("left", "center", "right"))) {
+    img <- panel(outer_align = align, inner_align = align,
+      img
+    )
+  }
   # Must return as HTML string since the result may be inlined into md()
-  HTML(as.character(tags$img(src = uri, alt = alt, width = width)))
+  HTML(as.character(img))
 }
 
 get_image_uri <- function(file) {

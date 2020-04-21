@@ -4,7 +4,14 @@
 \alias{add_imgur_image}
 \title{Deploy a local image to Imgur and create an image tag}
 \usage{
-add_imgur_image(image, client_id = NULL, alt = NULL, width = 520)
+add_imgur_image(
+  image,
+  client_id = NULL,
+  alt = NULL,
+  width = 520,
+  align = c("inline", "left", "center", "right"),
+  float = c("none", "left", "right")
+)
 }
 \arguments{
 \item{image}{The path to the local image we would like to deploy to Imgur and
@@ -17,6 +24,14 @@ the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
 
 \item{width}{The width to be used for the image, in pixels.}
+
+\item{align}{The alignment to be used for the image. If not \code{"inline"} (the
+default), the image will appear in its own block, i.e. there will not be
+text to the left or right of it.}
+
+\item{float}{The float value to be used for the image. If not \code{"none"}, text
+will flow around the image. You cannot specify non-default values for
+\code{align} and \code{float} in the same function call.}
 }
 \value{
 An HTML fragment that can be placed inside the message body wherever

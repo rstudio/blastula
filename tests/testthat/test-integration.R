@@ -1,3 +1,5 @@
+context("integration")
+
 library(ggplot2)
 library(htmltools)
 
