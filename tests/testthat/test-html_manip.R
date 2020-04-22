@@ -118,10 +118,10 @@ test_that("duplicate images are not attached multiple times", {
 
 test_that("HTML manipulation functions can handle large input", {
   big_value <- paste(collapse = "", rep_len("x", 5e7))
-  big_html <- paste0("<img src=\"", big_value, "\"/>")
+  big_html <- paste0("<img src=\"", big_value, "\"/> \u2600")
 
   result <- replace_attr(big_html, "img", attr_name = "src", function(src) {
     "hello"
   })
-  expect_identical(result, "<img src=\"hello\"/>")
+  expect_identical(result, "<img src=\"hello\"/> \u2600")
 })

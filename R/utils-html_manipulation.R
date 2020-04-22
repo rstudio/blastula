@@ -22,9 +22,10 @@
 #
 find_all <- function(string,
                      pattern,
-                     ignore_case = FALSE) {
+                     ignore_case = FALSE,
+                     perl = TRUE) {
 
-  match <- gregexpr(pattern, string, perl = TRUE, ignore.case = ignore_case)[[1]]
+  match <- gregexpr(pattern, string, perl = perl, ignore.case = ignore_case)[[1]]
   match_start <- as.integer(match)
   match_start <- ifelse(match_start <= 0, NA, match_start)
 
@@ -63,9 +64,10 @@ find_all <- function(string,
 gfsub <- function(string,
                   pattern,
                   func,
-                  ignore_case = FALSE) {
+                  ignore_case = FALSE,
+                  perl = TRUE) {
 
-  matches <- find_all(string, pattern, ignore_case = ignore_case)
+  matches <- find_all(string, pattern, ignore_case = ignore_case, perl = perl)
 
   f <- file(open = "w+b", encoding = "UTF-8")
   on.exit(close(f), add = TRUE)
@@ -186,9 +188,11 @@ replace_attr <- function(html,
 
   stopifnot(grepl("^[a-zA-Z]\\w*$", tag_name))
 
-  pattern <- paste0("<", tag_name, "(?!\\w)[^>]*>")
+  pattern <- paste0("<", tag_name, "\\s[^>]*>")
 
-  gfsub(html, pattern, ignore_case = TRUE, function(tag_html) {
+  # perl needs to be FALSE to prevent stack overflow for very very large input
+  # that contains unicode characters, see new_releases_email.R.
+  gfsub(html, pattern, perl = FALSE, ignore_case = TRUE, function(tag_html) {
 
     tag <- parse_tag(tag_html)
     attr_loc <- tag$attributes[[attr_name]]
