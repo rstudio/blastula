@@ -4,13 +4,7 @@
 \alias{article}
 \title{Specify the components of an article}
 \usage{
-article(
-  image = NULL,
-  title = NULL,
-  content = NULL,
-  link = NULL,
-  legacy_width = NULL
-)
+article(image = NULL, title = NULL, content = NULL, link = NULL)
 }
 \arguments{
 \item{image}{An optional URL pointing to an image resource.}

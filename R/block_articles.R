@@ -27,8 +27,7 @@
 #'
 #' if (interactive()) article
 #' @export
-article <- function(image = NULL, title = NULL, content = NULL, link = NULL,
-  legacy_width = NULL) {
+article <- function(image = NULL, title = NULL, content = NULL, link = NULL) {
   maybe_link <- function(...) {
     if (is.null(link)) {
       tagList(...)
@@ -39,10 +38,6 @@ article <- function(image = NULL, title = NULL, content = NULL, link = NULL,
       )
     }
   }
-
-  # This is a bit weird; we return a function instead of HTML. This is because
-  # we don't have enough information to finish the render just yet, it depends
-  # on how many other images we're going to be rendered next to.
 
   tagList(
     if (!is.null(image)) {
