@@ -151,6 +151,7 @@ get_smtp_file_creds <- function(file_name = NULL) {
 #' Retrieve metadata and authentication values from keyring data
 #'
 #' @noRd
+get_smtp_keyring_creds <- function(id) {
 
   id_name <- id
 
@@ -161,12 +162,11 @@ get_smtp_file_creds <- function(file_name = NULL) {
     get_keyring_creds_table() %>%
     dplyr::filter(id == id_name)
 
-  # If the given `key_name` doesn't correspond to an
-  # entry in `blastula_keys_tbl`, stop the function with
-  # an explanatory message
+  # If the given `id` doesn't correspond to an entry in
+  # `blastula_keys_tbl`, stop the function with an explanatory message
   if (nrow(blastula_keys_tbl) == 0) {
-    stop("There is no blastula key that corresponds to the `key_name` of \"",
-         key_name, "\".",
+    stop("There is no blastula key that corresponds to the `id` of \"",
+         id, "\".",
          call. = FALSE)
   }
 
