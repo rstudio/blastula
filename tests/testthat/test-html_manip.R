@@ -115,3 +115,13 @@ test_that("duplicate images are not attached multiple times", {
   email <- compose_email(body = list(img, img))
   expect_identical(length(email$images), 1L)
 })
+
+test_that("HTML manipulation functions can handle large input", {
+  big_value <- paste(collapse = "", rep_len("x", 5e7))
+  big_html <- paste0("<img src=\"", big_value, "\"/>")
+
+  result <- replace_attr(big_html, "img", attr_name = "src", function(src) {
+    "hello"
+  })
+  expect_identical(result, "<img src=\"hello\"/>")
+})

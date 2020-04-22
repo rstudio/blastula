@@ -150,7 +150,9 @@ parse_attr <- function(attr = "src='data'  alt    =  \"whatever\"  id = foo") {
 #' @noRd
 parse_tag <- function(tag) {
 
-  match <- find_all(tag, "^<(?>(\\w+))([^>]*?)(/?)>$")
+  # It's very important that this pattern not perform backtracking (hence the
+  # possessive quantifiers)
+  match <- find_all(tag, "^<(\\w++)([^>]*+)>$")
   if (is.null(match)) {
     return(NULL)
   }
