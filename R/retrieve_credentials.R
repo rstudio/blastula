@@ -151,14 +151,6 @@ get_smtp_file_creds <- function(file_name = NULL) {
 #' Retrieve metadata and authentication values from keyring data
 #'
 #' @noRd
-get_smtp_keyring_creds <- function(id = NULL) {
-
-  # We requires the installation of the keyring package
-  if (!requireNamespace("keyring", quietly = TRUE)) {
-
-    stop("The `keyring` package is required.",
-         call. = FALSE)
-  }
 
   id_name <- id
 
