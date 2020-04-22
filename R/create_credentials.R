@@ -188,7 +188,7 @@ create_smtp_creds_key <- function(id,
   # Set the key in the system's default keyring
   keyring::key_set_with_value(
     service = service_name,
-    user = user,
+    username = user,
     password = serialized
   )
 
