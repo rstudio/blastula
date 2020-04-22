@@ -121,7 +121,7 @@ test_that("HTML manipulation functions can handle large input", {
   big_html <- paste0("<img src=\"", big_value, "\"/> \u2600")
 
   result <- replace_attr(big_html, "img", attr_name = "src", function(src) {
-    "hello"
+    "hello \u2601"
   })
-  expect_identical(result, "<img src=\"hello\"/> \u2600")
+  expect_identical(result, "<img src=\"hello \u2601\"/> \u2600")
 })
