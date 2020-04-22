@@ -7,7 +7,6 @@ title_banner <- add_image("tests/manual_tests/new_r_package_releases.png") %>%
 r_packages_gif <- add_image("tests/manual_tests/r_package_updates.gif") %>%
   gsub("width=\"520\"", "width=\"100%\"", .)
 
-
 cta_github <-
   add_cta_button(
     url = "https://github.com/rich-iannone",
