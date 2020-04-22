@@ -16,7 +16,16 @@ test_that("Email that uses all compose features", {
           url = "http://www.website.net",
           text = "Press This Button"
         ),
-        add_ggplot(ggplot(cars, aes(speed, dist)) + geom_point() + ggtitle("A Plot"))
+        # Work around the fact that ggplot2 doesn't render exactly the same
+        # on different platforms
+        if (Sys.info()["sysname"] == "Linux") {
+          # On Linux, actually do the thing, to make sure this logic gets tested
+          # somewhere at least (and Linux is ideal because it's where we have
+          # the most CI coverage).
+          add_ggplot(ggplot(cars, aes(speed, dist)) + geom_point() + ggtitle("A Plot"))
+        } else {
+          add_image(test_path("ggplot.png"), alt = "A Plot", width = 500)
+        }
       )
     )),
     block_text(md(
