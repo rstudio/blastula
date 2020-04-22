@@ -20,7 +20,7 @@
 #'
 #' @export
 blastula_template <- function(html_body, html_header, html_footer, title,
-  content_width = "85%", font_family = "Helvetica, sans-serif") {
+  content_width = "1000px", font_family = "Helvetica, sans-serif") {
 
   result <- htmltools::renderTags(
     tagList(
@@ -69,7 +69,7 @@ img {
           padding = "0"
         ),
         panel(outer_class = "container", outer_align = "center", padding = "24px",
-          width = content_width,
+          width = "85%", max_width = htmltools::validateCssUnit(content_width),
 
           if (!is.null(html_header)) {
             div(class = "header",

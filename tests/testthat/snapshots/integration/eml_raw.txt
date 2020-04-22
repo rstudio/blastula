@@ -73,7 +73,8 @@ img {
 <body style=3D"background-color:#f6f6f6;font-family:Roboto, &#39;Segoe UI&#=
 39;, &#39;Lucida Grande&#39;, Verdana, &#39;Bitstream Vera Sans&#39;, sans-=
 serif;color:#222;margin:0;padding:0;">
-  <table width=3D"600" align=3D"center" class=3D"container" style=3D"">
+  <table width=3D"85%" align=3D"center" class=3D"container" style=3D"max-wi=
+dth:600px;">
     <tr>
       <td style=3D"padding:24px;">
         <div class=3D"header" style=3D"font-family:Roboto, &#39;Segoe UI&#3=
@@ -110,21 +111,19 @@ px;">
 =3D"http://www=2Ewebsite=2Enet">Press This Button</a>
     </td>
   </tr>
-</table> <table width=3D"100%" align=3D"center" style=3D"">
+</table> <table width=3D"100%" align=3D"center">
   <tr>
-    <td align=3D"center" style=3D"">
-      <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500" style=3D""/>=
-
+    <td align=3D"center">
+      <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500"/>
     </td>
   </tr>
 </table>
 </div>
               <div class=3D"message-block block_text" style=3D"text-align:l=
-eft;"><table width=3D"100%" align=3D"center" style=3D"">
+eft;"><table width=3D"100%" align=3D"center">
   <tr>
-    <td align=3D"center" style=3D"">
-      <img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520" styl=
-e=3D""/>
+    <td align=3D"center">
+      <img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520"/>
     </td>
   </tr>
 </table>
@@ -185,10 +184,9 @@ erif;color:#999999;font-size:12px;font-weight:normal;margin:24px 0 0 0;text=
 -align:center;">
           <div class=3D"message-block block_text" style=3D"text-align:left;=
 ">Thanks for reading! Find us here:</div>
-          <table width=3D"100%" style=3D"">
+          <table width=3D"100%">
             <tr>
-              <td align=3D"center" style=3D"" class=3D"message-block block_=
-social">
+              <td align=3D"center" class=3D"message-block block_social">
                 <a href=3D"https://www=2Epinterest=2Eca/TravelLeisure/"><im=
 g src=3D"https://raw=2Egithubusercontent=2Ecom/rich-iannone/blastula/master=
 /inst/social_icons/pinterest-color=2Epng" alt=3D"pinterest" width=3D"44" he=

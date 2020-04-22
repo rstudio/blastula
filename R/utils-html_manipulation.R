@@ -445,3 +445,14 @@ process_text <- function(text) {
     htmltools::htmlEscape() %>%
     tidy_gsub("\n\n", "<br />\n")
 }
+
+# A shim for htmltools::css that returns NULL in place of "". (This won't be
+# needed after the next CRAN release of htmltools)
+css <- function(..., collapse_ = "") {
+  result <- htmltools::css(..., collapse_ = collapse_)
+  if (identical(result, "")) {
+    NULL
+  } else {
+    result
+  }
+}
