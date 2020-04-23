@@ -1,5 +1,7 @@
 #' The R Markdown `blastula_email` output format
 #'
+#' @param content_width The width of the rendered HTML content. By default, this
+#'   is set to `1000px`.
 #' @param toc If you would like an automatically-generated table of contents in
 #'   the output email, choose `TRUE`. By default, this is `FALSE` where no table
 #'   of contents will be generated.
@@ -41,7 +43,8 @@
 #' @param ... Specify other options in [rmarkdown::html_document()].
 #'
 #' @export
-blastula_email <- function(toc = FALSE,
+blastula_email <- function(content_width = "1000px",
+                           toc = FALSE,
                            toc_depth = 3,
                            toc_float = FALSE,
                            number_sections = FALSE,
@@ -70,6 +73,7 @@ blastula_email <- function(toc = FALSE,
       pandoc_args,
       "--variable=rsc-footer:1",
       # Note bash escaping is handled by R Markdown (via shQuote())
+      paste0("--variable=content-width:", content_width),
       paste0(
         "--variable=rsc-date-time:", add_readable_time(time = Sys.time())),
       paste0(
