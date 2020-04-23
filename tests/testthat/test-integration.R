@@ -82,7 +82,7 @@ test_that("Email that uses all compose features", {
     content_width = 600, font_family = "Roboto, 'Segoe UI', 'Lucida Grande', Verdana, 'Bitstream Vera Sans', sans-serif")
 
   eml_raw <- generate_rfc2822(eml, subject = "Subject",
-    date = as.POSIXct("2020-04-18 16:38:44 GMT", tz = "GMT"),
+    date = as.POSIXct("2020-04-18 16:38:44", tz = "GMT"),
     from = "sender@example.com", to = "recipient@example.com",
     uuid_source = create_uuid_source())
 
