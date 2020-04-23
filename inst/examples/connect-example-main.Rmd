@@ -10,7 +10,7 @@ library(tidyverse)
 library(blastula)
 ```
 
-# An R Markdown Document
+# An R Markdown Document (Main Report)
 
 This is an **R Markdown** document. *Markdown* is a simple formatting syntax for writing on the web. **R Markdown** takes this a step further by combining *Markdown* prose and **R** code into reproducible documents that can be output as HTML, PDF, Word, and many more output formats. For more details on using **R Markdown**, have a look through [its documentation site](https://rmarkdown.rstudio.com/docs/).
 
@@ -51,18 +51,18 @@ dallas_home_sales <-
 dallas_home_sales
 ```
 
-It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_sales)) %>% pull(year)` had the greatest number of sales. What interesting findings! Let's create a CSV for distribution (this code chunk that generates the CSV is ultimately not shown because we used `echo=FALSE` as a chunk option).
+It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_sales)) %>% pull(year)` had the greatest number of sales. Let's create a CSV for distribution (this code chunk that generates the CSV is ultimately not shown because we used `echo=FALSE` as a chunk option).
 
 ```{r write_csv, echo=FALSE}
 dallas_home_sales %>% write_csv("dallas_home_sales.csv")
 ```
 
-We can create an email using **RStudio Connect**, one that aligns with the content from this report. We do this with the `render_connect_email()` and `attach_connect_email()` functions from the **blastula** package. The email subdocument (`"connect-example-email.Rmd"`) is used to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the arguments:
+We can create an email on **RStudio Connect** that aligns with the content from this report. We do this with the `render_connect_email()` and `attach_connect_email()` functions from the **blastula** package. The email subdocument (`"connect-example-email.Rmd"`) is used to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the arguments:
 
-- `attachments` (for any output files or included files), and
-- `attach_report` (which attaches the rendered report) arguments.
+- `attachments` (for any output files or included files)
+- `attach_output` (which attaches the rendered report)
 
-```{r connect_email, echo=FALSE}
+```{r connect_email_setup, echo=FALSE}
 render_connect_email(input = "connect-example-email.Rmd") %>%
   attach_connect_email(
     subject = "RStudio Connect HTML Email",
