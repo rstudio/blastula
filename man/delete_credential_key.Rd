@@ -6,6 +6,11 @@
 \usage{
 delete_credential_key(id)
 }
+\arguments{
+\item{id}{The identifying label for the credential key. Use the same \code{id}
+that was used to create the key with the \code{\link[=create_smtp_creds_key]{create_smtp_creds_key()}}
+function.}
+}
 \description{
 It may be important to delete a credential key and the
 \code{delete_credential_key()} function makes this possible. To understand which
@@ -20,7 +25,7 @@ We can use \code{install.packages("keyring")} to install \strong{keyring}.
 }
 \examples{
 # Delete the credential key with
-# the `id` value of `outlook`
+# the `id` value of "outlook"
 
 # delete_credential_key("outlook")
 
