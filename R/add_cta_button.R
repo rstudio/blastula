@@ -57,5 +57,5 @@ add_cta_button <- function(url,
         )
       )
     )
-  ) %>% as.character %>% HTML
+  ) %>% as.character() %>% HTML()
 }
