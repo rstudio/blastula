@@ -98,9 +98,9 @@
 #'
 #' @export
 social_link <- function(service,
-                        link,
-                        variant = NULL,
-                        alt = NULL) {
+  link,
+  variant = NULL,
+  alt = NULL) {
 
   # Lowercase the input given as `service`
   service <- tolower(service)
@@ -117,21 +117,10 @@ social_link <- function(service,
     alt <- service
   }
 
-  # Add the social link components to the
-  # `social_link_item_list` object
-  social_link_item_list <-
-    list(
-      service = service,
-      link = link,
-      icon = icon,
-      variant = variant,
-      alt = alt
-    )
-
-  # Apply the `social_link` class
-  class(social_link_item_list) <- "social_link"
-
-  social_link_item_list
+  tags$a(.noWS = c("after-begin", "before-end"),
+    href = link,
+    tags$img(src = icon, alt = alt, width = "44", height = "44", style = "border: none;")
+  )
 }
 
 #' A block of social sharing icons with links
@@ -198,69 +187,8 @@ social_link <- function(service,
 #'
 #' @export
 block_social_links <- function(...) {
-
-  x <- list(...)
-
-  # Stop function if nothing is provided
-  if (length(x) == 0) {
-    stop("One or more `social_link()` items must be supplied.",
-         call. = FALSE)
-  }
-
-  # Stop function if all of the items
-  # provided aren't of the class `social_link`
-  if (!all((lapply(x, class) %>% unlist()) %in% "social_link")) {
-
-    stop("All objects provided to `block_social_links()` must be of the ",
-         "class `social_link`:\n",
-         " * These objects are created by the `social_link()` function.",
-         call. = FALSE)
-  }
-
-  class(x) <- "block_social_links"
-
-  x
+  panel(class = "message-block block_social", inner_align = "center", ...)
 }
-
-#' @noRd
-render_block_social_links <- function(x) {
-
-  for (i in seq_along(x)) {
-
-    link <- x[[i]]$link
-    icon <- x[[i]]$icon
-    alt <- x[[i]]$alt
-
-    x[[i]] <-
-      social_link_line_template %>%
-      tidy_gsub("\\{link\\}", link %>% process_text()) %>%
-      tidy_gsub("\\{icon\\}", icon %>% process_text()) %>%
-      tidy_gsub("\\{alt\\}", alt %>% process_text())
-  }
-
-  social_links <- x %>% unlist() %>% paste(collapse = "\n")
-
-  social_link_block_template %>%
-    tidy_gsub("\\{social_links\\}", social_links)
-}
-
-social_link_line_template <-
-  "<a href=\"{link}\" style=\"text-decoration: underline; color: #999999; font-size: 12px; text-align: center;\"><img src=\"{icon}\" alt=\"{alt}\" width=\"44\" class=\"social-sharing-icon\" style=\"border: none; -ms-interpolation-mode: bicubic; max-width: 100%; height: 44px; margin: 0 2px;\"></a>&nbsp;"
-
-social_link_block_template <-
-"<tr>
-<td class=\"content-block\" style=\"font-family: Helvetica, sans-serif; vertical-align: top; padding-top: 0; padding-bottom: 24px; font-size: 12px; color: #999999; text-align: center;\" valign=\"top\" align=\"center\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"social-sharing\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: auto; margin: 0 auto; text-align: center;\" align=\"center\">
-<tbody>
-<tr>
-<td style=\"font-family: Helvetica, sans-serif; vertical-align: top; font-size: 12px; color: #999999; text-align: center;\" valign=\"top\" align=\"center\">
-{social_links}
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>"
 
 #' @noRd
 icon_for_social_service <- function(service,

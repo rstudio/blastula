@@ -4,7 +4,13 @@
 \alias{add_image}
 \title{Create an HTML fragment for an embedded image}
 \usage{
-add_image(file, alt = NULL)
+add_image(
+  file,
+  alt = "",
+  width = 520,
+  align = c("center", "left", "right", "inline"),
+  float = c("none", "left", "right")
+)
 }
 \arguments{
 \item{file}{A path to an image file.}
@@ -12,6 +18,15 @@ add_image(file, alt = NULL)
 \item{alt}{Text description of image passed to the \code{alt} attribute inside of
 the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. \code{NULL} default produces blank (\code{""}) alt text.}
+
+\item{width}{The width to be used for the image, in pixels.}
+
+\item{align}{The alignment to be used for the image. If not \code{"inline"}, the
+image will appear in its own block, i.e. there will not be text to the left
+or right of it.}
+
+\item{float}{The float value to be used for the image. If not \code{"none"}, text
+will flow around the image, and the \code{align} argument will be ignored.}
 }
 \value{
 A character object with an HTML fragment that can be placed inside

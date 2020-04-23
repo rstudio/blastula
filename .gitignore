@@ -13,7 +13,6 @@ blastula-*
 # Docs folder from `pkgdown::build_site()`
 docs/
 inst/doc
-inst/img
 inst/examples/*.html
 inst/examples/rsconnect
 

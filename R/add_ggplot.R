@@ -9,6 +9,7 @@
 #'   the image (`<img>`) tag for use when image loading is disabled and on
 #'   screen readers. Defaults to the `ggplot2` plot object's title, if exists.
 #'   Override by passing a custom character string or `""` for no text.
+#' @inheritParams add_image
 #'
 #' @examples
 #' library(ggplot2)
@@ -47,15 +48,19 @@
 #'
 #' if (interactive()) email
 #'
-#' @return A character object with an HTML fragment that can be placed inside
-#'   the message body wherever the plot image should appear.
+#' @return An HTML fragment that can be placed inside the message body wherever
+#'   the plot image should appear.
 #' @export
 add_ggplot <- function(plot_object,
                        width = 5,
                        height = 5,
-                       alt = NULL) {
+                       alt = NULL,
+                       align = c("center", "left", "right", "inline"),
+                       float = c("none", "left", "right")) {
 
   # nocov start
+
+  tmpfile <- tempfile("ggplot", fileext = ".png")
 
   # If the `ggplot2` package is available, then
   # use the `ggplot2::ggsave()` function
@@ -64,7 +69,7 @@ add_ggplot <- function(plot_object,
     ggplot2::ggsave(
       device = "png",
       plot = plot_object,
-      filename = "temp_ggplot.png",
+      filename = tmpfile,
       dpi = 200,
       width = width,
       height = height)
@@ -74,7 +79,7 @@ add_ggplot <- function(plot_object,
          call. = FALSE)
   }
 
-  Sys.sleep(2)
+  on.exit(file.remove(tmpfile), add = TRUE)
 
   # Determine alt text
   alt_text <-
@@ -85,9 +90,8 @@ add_ggplot <- function(plot_object,
     }
 
   image_html <-
-    add_image(file = "temp_ggplot.png", alt = alt_text)
-
-  file.remove("temp_ggplot.png")
+    add_image(file = tmpfile, alt = alt_text, width = width * 100,
+      align = align, float = float)
 
   image_html
 

@@ -1,13 +1,14 @@
 Type: Package
 Package: blastula
 Title: Easily Send HTML Email Messages
-Version: 0.3.1.9000
+Version: 0.3.1.9001
 Authors@R: c(
     person("Richard", "Iannone", role = c("aut", "cre"), email = "riannone@me.com",
            comment = c(ORCID = "0000-0003-3925-190X")),
     person("Joe", "Cheng", role = "aut", email = "joe@rstudio.com"),
     person("Jeroen", "Ooms", role = "ctb", email = "jeroen@berkeley.edu",
-      comment = c(ORCID = "0000-0002-4035-0289"))
+      comment = c(ORCID = "0000-0002-4035-0289")),
+    person("Ted", "Goas", role = "cph", comment = "cerberus-meta.html")
     )
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
@@ -23,11 +24,12 @@ Imports:
     base64enc (>= 0.1-3),
     commonmark (>= 1.7),
     curl (>= 4.3),
+    digest,
     dplyr (>= 0.8.3),
     fs (>= 1.3.1),
     getPass (>= 0.2-2),
     here (>= 0.1),
-    htmltools (>= 0.3.6),
+    htmltools (>= 0.4.0),
     httr (>= 1.4.0),
     jsonlite (>= 1.6),
     magrittr (>= 1.5),

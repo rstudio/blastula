@@ -5,6 +5,7 @@
 \title{The R Markdown \code{blastula_email} output format}
 \usage{
 blastula_email(
+  content_width = "1000px",
   toc = FALSE,
   toc_depth = 3,
   toc_float = FALSE,
@@ -26,6 +27,9 @@ blastula_email(
 )
 }
 \arguments{
+\item{content_width}{The width of the rendered HTML content. By default, this
+is set to \verb{1000px}.}
+
 \item{toc}{If you would like an automatically-generated table of contents in
 the output email, choose \code{TRUE}. By default, this is \code{FALSE} where no table
 of contents will be generated.}
