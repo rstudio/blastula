@@ -1,6 +1,6 @@
 > print(x)
 MIME-Version: 1.0
-Date: Sat, 18 Apr 2020 16:38:44 -0700
+Date: Sat, 18 Apr 2020 16:38:44 +0000
 Message-ID: <90845e5a-81ce-11ea-aeb2-b32eaa150000@blastula.local>
 Subject: Subject
 From: <sender@example.com>
