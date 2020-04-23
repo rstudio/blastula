@@ -134,6 +134,8 @@ creds_envvar <- function(user = NULL,
 #' @export
 creds_key <- function(id) {
 
+  validate_keyring_available(fn_name = "creds_key")
+
   creds_list <- get_smtp_keyring_creds(id = id)
 
   class(creds_list) <- c("creds_key", "blastula_creds")
