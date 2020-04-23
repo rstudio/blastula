@@ -59,12 +59,11 @@ img {
   =2Econtainer {
     width: 100%;
   }
-  =2Earticles {
-    display: block;
-  }
-  =2Earticle {
+  =2Earticles, =2Earticles tr, =2Earticles td {
     display: block;
     width: 100%;
+  }
+  =2Earticle {
     margin-bottom: 24px;
   }
 }
