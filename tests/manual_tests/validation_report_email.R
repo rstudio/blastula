@@ -3,6 +3,8 @@ library(tidyverse)
 library(pointblank)
 library(RSQLite)
 
+# Attribution Information available in `README-attribution.txt`
+
 # Create an in-memory SQLite database and connection
 con <- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 
@@ -17,8 +19,13 @@ dplyr::copy_to(
 
 tbl_sqlite <- dplyr::tbl(con, "small_table")
 
+# Perform a pointblank validation with an agent
 agent <-
-  create_agent(tbl = tbl_sqlite) %>%
+  create_agent(
+    tbl = tbl_sqlite,
+    name = "sqlite: small_table",
+    actions = action_levels(warn_at = 0.2, stop_at = 0.45),
+  ) %>%
   col_vals_gt(vars(d), 100) %>%
   col_vals_gte(vars(c), 2, na_pass = TRUE) %>%
   col_vals_equal(vars(e), 1, preconditions = ~tbl %>% dplyr::filter(e == 1)) %>%
@@ -53,10 +60,6 @@ agent <-
   ) %>%
   interrogate()
 
-email <-
-  agent %>%
-  email_preview(
-    msg_body = stock_msg_body()
-  )
+email <- email_preview(agent)
 
 email

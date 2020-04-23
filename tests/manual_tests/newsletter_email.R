@@ -1,9 +1,8 @@
 library(blastula)
 
-# Attribution Information
-#
-# Uses 'free-to-use' photos from https://photos.icons8.com (conditional on linking back);
-# more information here: https://icons8.com/license
+# Attribution Information available in `README-attribution.txt`
+
+# Note: images were previously deployed to Imgur using the following calls:
 
 # https://i.imgur.com/gpVMFcW.jpg
 # add_imgur_image(
@@ -36,9 +35,10 @@ email <-
         block_spacer(),
         block_title("Exciting New VR Innovations"),
         block_spacer(),
-        block_text(paste0(
-          "VR is here to stay! New hardware offerings by major VR players are heating up ",
-          "the shelves and, later, getting people moving in their living rooms!")),
+        block_text(
+"VR is here to stay! New hardware offerings by major VR players are heating up
+the shelves and, later, getting people moving in their living rooms!"
+        ),
         block_articles(
           article(
             image = "https://i.imgur.com/18fcpkZ.jpg",
@@ -52,8 +52,8 @@ email <-
             image = "https://i.imgur.com/5aJawp2.jpg",
             title = "Hyperreal",
             content =
-              "By utilizing a combination of the Hyperreal headset (and
-               additional measures), one can have the sensation of being
+              "By utilizing a combination of the Hyperreal headset and
+               additional measures, one can have the sensation of being
                truly immersed in the VR world."
           ),
           article(
@@ -65,6 +65,7 @@ email <-
                ounces, using a waveguide display and foveated rendering."
           )
         ),
+        block_spacer(),
         block_articles(
           article(
             image = "https://i.imgur.com/8sH6Ggt.jpg",
@@ -73,15 +74,19 @@ email <-
               "Soon, we expect VR to be fashionable! Just take a look at
                this image for a glimpse of haute couture: VR Style."
           )),
-        block_text(
-          "This wraps up the May 2020 Edition of our monthly newsletter that
-           showcases the latest in VR technologies. Next month, we'll provide
-           info on can't miss VR and AR events in 2020."
-        )
+        block_text(md(
+"### See you next Month!
+ This wraps up the May 2020 Edition of our monthly newsletter that
+ showcases the latest in VR technologies. Next month, we'll provide
+ info on can't miss VR and AR events in 2020."
+        ))
       ),
     footer =
       blocks(
-        block_text("Thanks for reading our newsletter. You can also find us here:"),
+        block_text(
+          md("Thanks for reading our newsletter. You can also find us here:<br>"),
+          align = "center"
+        ),
         block_social_links(
           social_link(
             service = "twitter",
@@ -104,7 +109,10 @@ email <-
             variant = "color"
           )
         ),
-        block_text("All photos obtained from https://photos.icons8.com")
+        block_text(
+          md("All photos obtained from https://photos.icons8.com<br>"),
+          align = "center"
+        )
       )
   )
 

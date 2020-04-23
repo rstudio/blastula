@@ -5,13 +5,15 @@ library(scales)
 library(emo)
 library(glue)
 
+# Attribution Information available in `README-attribution.txt`
+
 # Create short labels for months (displays
 # better for small plots in email messages)
 initial_months <-
   c("D",
     "J", "F", "M", "A", "M", "J",
     "J", "A", "S", "O", "N", "D",
-    " ")
+    "J")
 
 # Create a plot using the `pizzaplace` dataset
 pizza_plot <-
@@ -45,23 +47,24 @@ pizza_plot <-
     plot.caption = element_text(color = "grey25"),
     plot.subtitle = element_text(color = "grey25"),
     plot.margin = unit(c(20, 20, 20, 20), "points"),
+    plot.title.position = "plot",
     legend.box.spacing = unit(2, "points"),
-    legend.position = "bottom")
+    legend.position = "bottom"
+  )
 
 # Make the plot suitable for mailing by
 # converting it to an HTML fragment
 pizza_plot_email <-
   pizza_plot %>%
-  add_ggplot()
+  add_ggplot(alt = "Pizza Sales Plots by type of pizza (in 2015)")
 
 # Create `sizes_order` and `types_order` to
 # support the ordering of pizza sizes and types
 sizes_order <- c("S", "M", "L", "XL", "XXL")
 types_order <- c("Classic", "Chicken", "Supreme", "Veggie")
 
-# Create a gt table that uses the `pizzaplace`
-# dataset; ensure that `as_raw_html()` is used
-# (that gets us an HTML fragement with inlined
+# Create a gt table that uses the `pizzaplace` dataset; ensure that
+# `as_raw_html()` is used (that gets us an HTML fragment with inlined
 # CSS styles)
 pizza_tab_email <-
   pizzaplace %>%
@@ -102,8 +105,6 @@ pizza_tab_email <-
     summary_row.background.color = "#FFFAAA",
     row_group.background.color = "#E6EFFC",
     table.font.size = "small",
-    heading.title.font.size = "small",
-    heading.subtitle.font.size = "x-small",
     row_group.font.size = "small",
     column_labels.font.size = "small",
     data_row.padding = "5px"
@@ -116,14 +117,11 @@ pizza_tab_email <-
     title = paste0("My ", emo::ji("pizza"), " sales in 2015"),
     subtitle = "Split by the type of pizza and the size"
   ) %>%
+  tab_options(table.width = pct(40)) %>%
   as_raw_html()
 
-
-# Create an email message using the
-# `compose_email()` function from the
-# blastula package
 email <-
-  blastula::compose_email(body = blastula::md(glue::glue("
+  compose_email(body = md(glue("
   Hello,
 
   Just wanted to let you know that pizza \\

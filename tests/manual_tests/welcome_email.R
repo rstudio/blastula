@@ -1,21 +1,26 @@
 library(blastula)
 library(glue)
 
-# Attribution Information
-#
-# `young_adult_male.jpg` is a generated photo obtained from https://generated.photos/
-#
-# `msms_logo.png` was generated using the logo generation tools at https://looka.com/
+# Attribution Information available in `README-attribution.txt`
 
-seb_image <- add_image("tests/manual_tests/young_adult_male.jpg", align = "center")
+seb_image <-
+  add_image(
+    "tests/manual_tests/young_adult_male.jpg",
+    alt = "Seb himself",
+    align = "center"
+  )
 
 company_logo <-
-  add_image("tests/manual_tests/msms_logo.png", alt = "msms logo") %>%
-  gsub("width=\"520\"", "width=\"100%\"", .)
+  add_image(
+    "tests/manual_tests/msms_logo.png",
+    alt = "msms logo",
+    width = "50%",
+    align = "center"
+  )
 
 email <-
   compose_email(
-    body = md(glue::glue("
+    body = md(glue("
 
   ### Welcome Sebastian (Seb) Génin to Our Team! &#x263A; &#x263A; &#x263A;
 
@@ -34,7 +39,7 @@ email <-
 
   &nbsp;&nbsp;&nbsp;&mdash;R.M.D. \\
 ")),
-    footer = blastula::md(glue::glue("
+    footer = md(glue("
 
   {company_logo}
 

@@ -1,19 +1,19 @@
 library(blastula)
 library(glue)
 
+# Attribution Information available in `README-attribution.txt`
+
 gt_logo_image <-
-  add_image("tests/manual_tests/gt_logo.png") %>%
-  gsub("width=\"520\"", "width=\"100%\"", .)
+  add_image("tests/manual_tests/gt_logo.png", width = "100%")
 
 gt_logo_image_small <-
-  add_image("tests/manual_tests/gt_logo.png") %>%
-  gsub("width=\"520\"", "width=\"150\"", .)
+  add_image("tests/manual_tests/gt_logo.png", width = 150)
 
 order_number <- "0232358329"
 
 email <-
   compose_email(
-    body = md(glue::glue(
+    body = md(glue(
 "
 {gt_logo_image}
 
@@ -56,7 +56,7 @@ Mit freundlichen Grüßen <br>
 Ihr Glänzend Telekom Team
 
 ")),
-    footer = md(glue::glue(
+    footer = md(glue(
 "
 {gt_logo_image_small}
 
