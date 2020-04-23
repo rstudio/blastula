@@ -1,17 +1,19 @@
 library(blastula)
 library(glue)
 
-# Attribution Information
-#
-# Text and images taken entirely from this public page:
-# https://www.manulife.com/en/about/sustainability/ceo-letter.html
+# Attribution Information available in `README-attribution.txt`
 
-rg_sig <- add_image("tests/manual_tests/rg_sig.jpg") %>%
-  gsub("width=\"520\"", "width=\"10%\"", .)
+rg_sig <-
+  add_image(
+    "tests/manual_tests/rg_sig.jpg",
+    align = "left",
+    width = "10%"
+  )
 
 email <-
   compose_email(
-    body = md(glue::glue("
+    body = md(glue(
+"
 ## A *message* from our President and CEO
 
 In my discussions with employees, one thing I see consistently demonstrated \\

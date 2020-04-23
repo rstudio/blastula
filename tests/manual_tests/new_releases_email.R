@@ -1,11 +1,21 @@
 library(blastula)
 library(glue)
 
-title_banner <- add_image("tests/manual_tests/new_r_package_releases.png") %>%
-  gsub("width=\"520\"", "width=\"100%\"", .)
+# Attribution Information available in `README-attribution.txt`
 
-r_packages_gif <- add_image("tests/manual_tests/r_package_updates.gif") %>%
-  gsub("width=\"520\"", "width=\"100%\"", .)
+title_banner <-
+  add_image(
+    "tests/manual_tests/new_r_package_releases.png",
+    alt = "New Releases",
+    width = "100%"
+  )
+
+r_packages_gif <-
+  add_image(
+    "tests/manual_tests/r_package_updates.gif",
+    alt = "R Package Updates for stationaRy, pointblank, DiagrammeR, and blastula",
+    width = "100%"
+  )
 
 cta_github <-
   add_cta_button(
@@ -16,7 +26,7 @@ cta_github <-
 
 email <-
   compose_email(
-    body = blastula::md(glue::glue("
+    body = md(glue("
 
 {title_banner}
 
@@ -34,12 +44,12 @@ measurements, hundreds of met fields. The update makes it easier than ever \\
 to get this data in the form you need. \u2600 \u2601
 
 You got data? Of course you do. Ever check the quality of it? You really \\
-oughta. The **pointblank** package makes that whole process much easier. \\
-It's like **testthat**, but, for data. Plus there are fancier reports \\
+oughta. The **pointblank** package makes that whole process so much easier. \\
+It's like **testthat**, but, for data. Plus, there are fancier reports \\
 in this update! \u2714 \u2714 \u2714
 
 Data is sometimes *graph-y* and **DiagrammeR** can help you work with \\
-this type of data. This update stamps out a few nasty bugs adds a few new \\
+this type of data. This update stamps out a few nasty bugs and adds a few new \\
 functions for visualizing graphs. Check it out if you have a graph \\
 problem. &xcirc;&#9476;&xcirc;
 
