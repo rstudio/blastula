@@ -49,12 +49,11 @@ img {
   .container {
     width: 100%;
   }
-  .articles {
-    display: block;
-  }
-  .article {
+  .articles, .articles tr, .articles td {
     display: block;
     width: 100%;
+  }
+  .article {
     margin-bottom: 24px;
   }
 }
