@@ -24,7 +24,7 @@ agent <-
   create_agent(
     tbl = tbl_sqlite,
     name = "sqlite: small_table",
-    actions = action_levels(warn_at = 0.2, stop_at = 0.45),
+    actions = action_levels(warn_at = 0.2, stop_at = 0.35, notify_at = 0.45),
   ) %>%
   col_vals_gt(vars(d), 100) %>%
   col_vals_gte(vars(c), 2, na_pass = TRUE) %>%
