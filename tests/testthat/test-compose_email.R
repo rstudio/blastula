@@ -13,14 +13,14 @@ test_that("composing a simple message is possible", {
 
   # Expect the object to be a list of length 3
   expect_equal(
-    length(email), 3
+    length(email), 4
   )
 
   # Expect specific names for each of
   # the list components
   expect_equal(
     names(email),
-    c("html_str", "html_html", "attachments")
+    c("html_str", "html_html", "attachments", "images")
   )
 
   # Expect that the first two list components

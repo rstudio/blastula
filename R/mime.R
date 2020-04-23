@@ -42,14 +42,22 @@ generate_rfc2822 <- function(eml,
                              from = NULL,
                              to = NULL,
                              cc = NULL,
-                             con = NULL) {
+                             con = NULL,
+                             uuid_source = NULL) {
+
+  if (is.null(uuid_source)) {
+    # Do this instead of (the more obvious) `uuid_source = uuid::UUIDgenerate`
+    # in the parameter declaration, to stop R CMD check complaining that uuid
+    # isn't used
+    uuid_source <- uuid::UUIDgenerate
+  }
 
   stopifnot(inherits(eml, "blastula_message"))
 
   headers <- list(
     "MIME-Version" = "1.0",
     "Date" = format_rfc2822_date(date),
-    "Message-ID" = paste0("<", uuid::UUIDgenerate(), "@blastula.local>"),
+    "Message-ID" = paste0("<", uuid_source(), "@blastula.local>"),
     "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
     "From" = format_rfc2822_addr(from, "From"),
     "To" = format_rfc2822_addr_list(to, "To"),
@@ -58,10 +66,12 @@ generate_rfc2822 <- function(eml,
 
   images <- mapply(names(eml$images), eml$images, FUN = function(filename, data) {
     mime_part(
-      mime::guess_type(filename),
+      attr(data, "content_type", exact = TRUE) %||% mime::guess_type(filename),
       headers = list(
         # TODO: escape
-        "Content-ID" = paste0("<", filename, ">")
+        "Content-Disposition" = "inline",
+        "Content-ID" = paste0("<", filename, ">"),
+        "X-Attachment-Id" = filename
       ),
       content = base64enc::base64decode(data)
     )
@@ -72,6 +82,7 @@ generate_rfc2822 <- function(eml,
     raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
 
     quoted_filename <- header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)
+    content_id <- tidy_gsub(uuid_source(), "-", "")
 
     mime_part(
       sprintf("%s; name=%s", attachment$content_type, quoted_filename),
@@ -81,7 +92,8 @@ generate_rfc2822 <- function(eml,
           attachment$disposition,
           quoted_filename
         ),
-        "Content-ID" = paste0("<", tidy_gsub(uuid::UUIDgenerate(), "-", ""), ">")
+        "Content-ID" = paste0("<", content_id, ">"),
+        "X-Attachment-Id" = content_id
       ),
       content = raw_bytes
     )
@@ -96,7 +108,8 @@ generate_rfc2822 <- function(eml,
         content = eml$html_str
       ),
       !!!images
-    )
+    ),
+    boundary = uuid_source()
   )
 
   # This is necessary for attachments to display correctly on
@@ -109,7 +122,8 @@ generate_rfc2822 <- function(eml,
       body_parts = rlang::list2(
         msg,
         !!!attachments
-      )
+      ),
+      boundary = uuid_source()
     )
   }
 
@@ -162,7 +176,7 @@ mime_part <- function(content_type, headers = list(), content) {
 mime_multipart <- function(content_type = c("multipart/alternative", "multipart/related", "multipart/mixed"),
   headers = list(),
   body_parts,
-  boundary = uuid::UUIDgenerate(), preamble = NULL, epilogue = NULL) {
+  boundary, preamble = NULL, epilogue = NULL) {
 
   structure(
     class = "mime_multipart",

@@ -7,7 +7,7 @@ library(glue)
 #
 # `msms_logo.png` was generated using the logo generation tools at https://looka.com/
 
-seb_image <- add_image("tests/manual_tests/young_adult_male.jpg")
+seb_image <- add_image("tests/manual_tests/young_adult_male.jpg", align = "center")
 
 company_logo <-
   add_image("tests/manual_tests/msms_logo.png", alt = "msms logo") %>%

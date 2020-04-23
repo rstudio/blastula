@@ -50,44 +50,9 @@
 #'
 #' @export
 block_spacer <- function() {
-
-  x <- list(a = "&nbsp;")
-
-  class(x) <- "block_spacer"
-
-  x
-}
-
-#' @noRd
-render_block_spacer <- function(context = "body") {
-
-  if (context == "body") {
-
-    padding <- 4
-
-  } else if (context %in% c("header", "footer")) {
-
-    padding <- 0
-  }
-
-  spacer_block_template %>%
-    tidy_gsub(
-      "\\{padding\\}",
-      padding %>% htmltools::htmlEscape(attribute = TRUE)
+  tags$table(class = "message-block block_spacer",
+    tags$tr(
+      tags$td(HTML("&nbsp;"))
     )
+  )
 }
-
-spacer_block_template <-
-"<tr>
-<td class=\"wrapper\" style=\"vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-<tbody>
-<tr>
-<td style=\"vertical-align: top;\" valign=\"top\">
-&nbsp;
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>"

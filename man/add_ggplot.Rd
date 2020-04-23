@@ -4,7 +4,14 @@
 \alias{add_ggplot}
 \title{Create an HTML fragment for an embedded ggplot image}
 \usage{
-add_ggplot(plot_object, width = 5, height = 5, alt = NULL)
+add_ggplot(
+  plot_object,
+  width = 5,
+  height = 5,
+  alt = NULL,
+  align = c("center", "left", "right", "inline"),
+  float = c("none", "left", "right")
+)
 }
 \arguments{
 \item{plot_object}{The \code{ggplot2} plot object.}
@@ -17,10 +24,17 @@ add_ggplot(plot_object, width = 5, height = 5, alt = NULL)
 the image (\verb{<img>}) tag for use when image loading is disabled and on
 screen readers. Defaults to the \code{ggplot2} plot object's title, if exists.
 Override by passing a custom character string or \code{""} for no text.}
+
+\item{align}{The alignment to be used for the image. If not \code{"inline"}, the
+image will appear in its own block, i.e. there will not be text to the left
+or right of it.}
+
+\item{float}{The float value to be used for the image. If not \code{"none"}, text
+will flow around the image, and the \code{align} argument will be ignored.}
 }
 \value{
-A character object with an HTML fragment that can be placed inside
-the message body wherever the plot image should appear.
+An HTML fragment that can be placed inside the message body wherever
+the plot image should appear.
 }
 \description{
 Add an ggplot plot inside the body of the email with this helper function.
