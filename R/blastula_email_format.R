@@ -63,12 +63,7 @@ blastula_email <- function(content_width = "1000px",
                            connect_footer = FALSE,
                            ...) {
 
-  if (!grepl("^[0-9.]*?(|px|%)$", content_width)) {
-    stop("The value for `content_width` is incorrectly formatted:\n",
-         "* Use either as a px value (e.g., \"800px\"), a percent value (e.g., \"80%\"), ",
-         "or a standalone numeric value for px (e.g., 800 -> \"800px\")",
-         call. = FALSE)
-  }
+  content_width <- htmltools::validateCssUnit(content_width)
   
   if (template == "blastula") {
     template <- system.file("rmd", "template.html", package = "blastula")
