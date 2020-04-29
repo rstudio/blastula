@@ -45,9 +45,13 @@ view_credential_keys <- function() {
 #' function cannot be used without that package being available on the system.
 #' We can use `install.packages("keyring")` to install **keyring**.
 #'
+#' @param id The identifying label for the credential key. Use the same `id`
+#'   that was used to create the key with the [create_smtp_creds_key()]
+#'   function.
+#'
 #' @examples
 #' # Delete the credential key with
-#' # the `id` value of `outlook`
+#' # the `id` value of "outlook"
 #'
 #' # delete_credential_key("outlook")
 #'
