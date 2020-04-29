@@ -63,17 +63,18 @@ blastula_email <- function(content_width = "1000px",
                            connect_footer = FALSE,
                            ...) {
 
+  content_width <- htmltools::validateCssUnit(content_width)
+  
   if (template == "blastula") {
     template <- system.file("rmd", "template.html", package = "blastula")
   }
 
-  pandoc_args <- NULL
+  # Note bash escaping is handled by R Markdown (via shQuote())
+  pandoc_args <- paste0("--variable=content-width:", content_width)
   if (isTRUE(connect_footer)) {
     pandoc_args <- c(
       pandoc_args,
       "--variable=rsc-footer:1",
-      # Note bash escaping is handled by R Markdown (via shQuote())
-      paste0("--variable=content-width:", content_width),
       paste0(
         "--variable=rsc-date-time:", add_readable_time(time = Sys.time())),
       paste0(
