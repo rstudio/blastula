@@ -81,13 +81,14 @@ delete_credential_key <- function(id) {
   }
 
   # Obtain the matching service name that corresponds to the `id` value
-  key_to_delete <-
-    creds_tbl %>%
-    dplyr::filter(id == !!id) %>%
-    dplyr::pull(key_name)
+  creds_tbl_1 <- dplyr::filter(creds_tbl, id == !!id)
+
+  # Get a length 1 vectors of key name and username
+  key_name <- creds_tbl_1$key_name
+  username <- creds_tbl_1$username
 
   # Delete with `keyring::key_delete()`
-  keyring::key_delete(service = key_to_delete)
+  keyring::key_delete(service = key_name, username = username)
 
   invisible()
 }
@@ -121,17 +122,19 @@ delete_all_credential_keys <- function() {
 
   creds_tbl <- get_keyring_creds_table()
 
-  # Get a vector of key names, otherwise known as service names in `keyring`
-  keys_to_delete <- creds_tbl$key_name
+  # Get equal-length vectors of key names (otherwise known as
+  # service names in `keyring`) and usernames
+  key_names <- creds_tbl$key_name
+  usernames <- creds_tbl$username
 
   # Stop if there are no keys to delete
-  if (length(keys_to_delete) < 1) {
+  if (length(key_names) < 1) {
     stop("There are no blastula keys available for deletion.", call. = FALSE)
   }
 
   # For every key, delete with `keyring::key_delete()`
-  for (key in keys_to_delete) {
-    keyring::key_delete(service = key)
+  for (i in seq_along(key_names)) {
+    keyring::key_delete(service = key_names[i], username = usernames[i])
   }
 
   invisible()
