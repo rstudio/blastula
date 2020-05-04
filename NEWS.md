@@ -50,7 +50,7 @@ There are new functions for integrating **blastula** with R Markdown publishing 
 
 * Functions from the `getPass` package are used internally to ask for a password whenever necessary during an interactive session
 
-* Functions from the `keyring` package are used internally to aid in the storage and retrieval of STMP config/credentials information in the system-wide key-value store (which is cross platform)
+* Functions from the `keyring` package are used internally to aid in the storage and retrieval of SMTP config/credentials information in the system-wide key-value store (which is cross platform)
 
 # blastula 0.2.1
 

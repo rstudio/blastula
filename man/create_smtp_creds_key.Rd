@@ -26,7 +26,7 @@ cannot be an empty string and it cannot include hyphen characters.}
 \item{user}{The username for the email account. Typically, this is the email
 address associated with the account.}
 
-\item{provider}{An optional email provider shortname for autocompleting STMP
+\item{provider}{An optional email provider shortname for autocompleting SMTP
 configuration details (the \code{host}, \code{port}, \code{use_ssl} options). Options
 currently include \code{gmail}, \code{outlook}, and \code{office365}. If nothing is
 provided then values for \code{host}, \code{port}, and \code{use_ssl} are expected.}
