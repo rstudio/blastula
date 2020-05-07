@@ -1,4 +1,4 @@
-#' Default template for `compose_email`
+#' Default template for `compose_email()`
 #'
 #' A template function that is suitable for using as the `template` argument of
 #' [compose_email()]. Template functions should generally not be called
@@ -11,16 +11,22 @@
 #'   [htmltools::tags()] or [htmltools::HTML()]), or `NULL` to omit.
 #' @param title Plain text title to be used for the `<title>` element; may be
 #'   displayed in mobile phone notifications.
-#' @param content_width The width that should be used for the content area. This
-#'   should NOT be specified CSS units like `"600px"`, but as either an integer
-#'   (for pixels, e.g. `600`) or a percent string like `"85%"`.
+#' @param content_width The width that should be used for the content area. By
+#'   default, this is set to `1000px`. Using widths less than `600px` is
+#'   generally not advised but, if necessary, be sure to test such HTML emails
+#'   with a wide range of email clients before sending to the intended
+#'   recipients.
 #' @param font_family The CSS value to use for `font-family`.
 #'
 #' @return A string containing a complete HTML document.
 #'
 #' @export
-blastula_template <- function(html_body, html_header, html_footer, title,
-  content_width = "1000px", font_family = "Helvetica, sans-serif") {
+blastula_template <- function(html_body,
+                              html_header,
+                              html_footer,
+                              title,
+                              content_width = "1000px",
+                              font_family = "Helvetica, sans-serif") {
 
   result <- htmltools::renderTags(
     tagList(

@@ -14,6 +14,7 @@ reference:
     - compose_email
     - add_attachment
     - prepare_test_message
+    - blastula_template
 
   - title: Add Inline Components
     desc: >
