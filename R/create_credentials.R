@@ -8,7 +8,7 @@
 #' @param file The output filename for the credentials file.
 #' @param user The username for the email account. Typically, this is the email
 #'   address associated with the account.
-#' @param provider An optional email provider shortname for autocompleting STMP
+#' @param provider An optional email provider shortname for autocompleting SMTP
 #'   configuration details (the `host`, `port`, `use_ssl` options). Options
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.

@@ -14,6 +14,7 @@ reference:
     - compose_email
     - add_attachment
     - prepare_test_message
+    - blastula_template
 
   - title: Add Inline Components
     desc: >
@@ -58,6 +59,8 @@ reference:
     - create_smtp_creds_key
     - credential_helpers
     - view_credential_keys
+    - delete_credential_key
+    - delete_all_credential_keys
 
   - title: Email Sending through RStudio Connect
     desc: >

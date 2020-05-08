@@ -2,7 +2,7 @@
 % Please edit documentation in R/bls_template.R
 \name{blastula_template}
 \alias{blastula_template}
-\title{Default template for \code{compose_email}}
+\title{Default template for \code{compose_email()}}
 \usage{
 blastula_template(
   html_body,
@@ -20,9 +20,11 @@ blastula_template(
 \item{title}{Plain text title to be used for the \verb{<title>} element; may be
 displayed in mobile phone notifications.}
 
-\item{content_width}{The width that should be used for the content area. This
-should NOT be specified CSS units like \code{"600px"}, but as either an integer
-(for pixels, e.g. \code{600}) or a percent string like \code{"85\%"}.}
+\item{content_width}{The width that should be used for the content area. By
+default, this is set to \verb{1000px}. Using widths less than \verb{600px} is
+generally not advised but, if necessary, be sure to test such HTML emails
+with a wide range of email clients before sending to the intended
+recipients.}
 
 \item{font_family}{The CSS value to use for \code{font-family}.}
 }

@@ -66,10 +66,13 @@ compose_email <- function(body = NULL,
 
   # Generate the email message body
   body <-
-    template(title = title,
+    template(
+      title = title,
       html_header = header,
       html_body = body,
-      html_footer = footer, ...) %>%
+      html_footer = footer,
+      ...
+    ) %>%
     # In case the template used md() internally
     process_markdown() %>%
     as.character()
