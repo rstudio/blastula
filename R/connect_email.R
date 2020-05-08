@@ -77,7 +77,10 @@ attach_connect_email <- function(email = NULL,
             html, perl = TRUE, ignore.case = TRUE
           )
 
-        writeLines(text = html, con = html_file)
+        html <- enc2utf8(html)
+
+        # useBytes = TRUE is necessary for UTF-8 encoding to survive
+        writeLines(text = html, con = html_file, useBytes = TRUE)
         utils::browseURL(url = html_file)
       }
     }
