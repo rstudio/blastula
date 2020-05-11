@@ -68,7 +68,7 @@ add_image <- function(file, alt = "", width = 520,
   uri <- get_image_uri(file = file)
 
   img <- tags$img(src = uri, alt = alt, width = width, align = float,
-    style = css(float = float))
+    style = css(float = float, width = htmltools::validateCssUnit(width)))
 
   if (!is.null(align)) {
     img <- panel(outer_align = align, inner_align = align,
