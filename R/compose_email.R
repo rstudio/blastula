@@ -16,7 +16,10 @@
 #' @param ... Additional arguments to pass to the `template` function. If you're
 #'   using the default template, you can use `font_family` to control the base
 #'   font, and `content_width` to control the width of the main content; see
-#'   [blastula_template()].
+#'   [blastula_template()]. By default, the `content_width` is set to `1000px`.
+#'   Using widths less than `600px` is generally not advised but, if necessary,
+#'   be sure to test such HTML emails with a wide range of email clients before
+#'   sending to the intended recipients.
 #'
 #' @examples
 #' # Create a simple email message using
