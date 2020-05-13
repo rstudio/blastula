@@ -30,7 +30,8 @@ blastula_email(
 \item{content_width}{The width of the rendered HTML content. By default, this
 is set to \verb{1000px}. Using widths less than \verb{600px} is generally not advised
 but, if necessary, be sure to test such HTML emails with a wide range of
-email clients before sending to the intended recipients.}
+email clients before sending to the intended recipients. The Outlook mail
+client (Windows, Desktop) does not respect \code{content_width}.}
 
 \item{toc}{If you would like an automatically-generated table of contents in
 the output email, choose \code{TRUE}. By default, this is \code{FALSE} where no table

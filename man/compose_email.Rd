@@ -29,7 +29,8 @@ font, and \code{content_width} to control the width of the main content; see
 \code{\link[=blastula_template]{blastula_template()}}. By default, the \code{content_width} is set to \verb{1000px}.
 Using widths less than \verb{600px} is generally not advised but, if necessary,
 be sure to test such HTML emails with a wide range of email clients before
-sending to the intended recipients.}
+sending to the intended recipients. The Outlook mail client (Windows,
+Desktop) does not respect \code{content_width}.}
 
 \item{template}{An email template function to use. The default is
 \code{\link[=blastula_template]{blastula_template()}}.}

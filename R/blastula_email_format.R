@@ -3,7 +3,8 @@
 #' @param content_width The width of the rendered HTML content. By default, this
 #'   is set to `1000px`. Using widths less than `600px` is generally not advised
 #'   but, if necessary, be sure to test such HTML emails with a wide range of
-#'   email clients before sending to the intended recipients.
+#'   email clients before sending to the intended recipients. The Outlook mail
+#'   client (Windows, Desktop) does not respect `content_width`.
 #' @param toc If you would like an automatically-generated table of contents in
 #'   the output email, choose `TRUE`. By default, this is `FALSE` where no table
 #'   of contents will be generated.
