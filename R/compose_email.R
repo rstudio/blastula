@@ -19,7 +19,8 @@
 #'   [blastula_template()]. By default, the `content_width` is set to `1000px`.
 #'   Using widths less than `600px` is generally not advised but, if necessary,
 #'   be sure to test such HTML emails with a wide range of email clients before
-#'   sending to the intended recipients.
+#'   sending to the intended recipients. The Outlook mail client (Windows,
+#'   Desktop) does not respect `content_width`.
 #'
 #' @examples
 #' # Create a simple email message using
