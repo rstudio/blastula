@@ -113,7 +113,8 @@ px;">
 </table> <table width=3D"100%" align=3D"center">
   <tr>
     <td align=3D"center">
-      <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500"/>
+      <img src=3D"cid:img1=2Epng" alt=3D"A Plot" width=3D"500" style=3D"wid=
+th:500px;"/>
     </td>
   </tr>
 </table>
@@ -122,7 +123,8 @@ px;">
 eft;"><table width=3D"100%" align=3D"center">
   <tr>
     <td align=3D"center">
-      <img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520"/>
+      <img src=3D"cid:img2=2Ejpeg" alt=3D"A nice sunset" width=3D"520" styl=
+e=3D"width:520px;"/>
     </td>
   </tr>
 </table>
