@@ -1,4 +1,8 @@
-# blastula (development version)
+# blastula 0.3.2
+
+* Email content width is now customizable in the `blastula_email()` and `compose_email()` functions. The default width is now increased to 1000px. [#178](https://github.com/rich-iannone/blastula/pull/178)
+
+* Added the `delete_credential_key()` and `delete_all_credential_keys()` functions for better management of credential keys added to the system key-value store by the `create_smtp_creds_key()` function. [#173](https://github.com/rich-iannone/blastula/pull/173)
 
 * Added the `creds_envvar()` credential helper function, which allows for SMTP password input via an environment variable. [#159](https://github.com/rich-iannone/blastula/pull/159)
 
