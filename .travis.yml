@@ -37,7 +37,7 @@ jobs:
       r: release
       if: branch IN (master, travis) AND repo = rich-iannone/blastula AND type = push
       script:
-      - Rscript -e "remotes::install_cran(c('pkgdown', 'devtools'))"
+      - Rscript -e "remotes::install_cran(c('pkgdown', 'devtools', 'covr')"
       - Rscript -e "devtools::install()"
       - Rscript -e "Sys.setenv(FULLNAME = 'Richard Iannone'); pkgdown::build_site()"
       - Rscript -e "remove.packages(devtools::as.package('.')$package)"
