@@ -28,9 +28,8 @@ jobs:
     - stage: deploy
       name: covr
       r: release
-      r_binary_packages:
-        - covr
       script:
+        - Rscript -e "remotes::install_cran('covr')"
         - Rscript -e "covr::codecov()"
 
     - stage: deploy
