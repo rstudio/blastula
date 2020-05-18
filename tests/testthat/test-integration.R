@@ -94,5 +94,8 @@ test_that("Email that uses all compose features", {
   # that contain \r\n
   eml_raw <- gsub("\r\n", "\n", eml_raw)
 
+  cat("\n")
+  cat(eml_raw)
+
   snapshot(eml_raw, print = cat)
 })
