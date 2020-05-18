@@ -18,14 +18,10 @@ test_that("Email that uses all compose features", {
         ),
         # Work around the fact that ggplot2 doesn't render exactly the same
         # on different platforms
-        if (Sys.info()["sysname"] == "Linux") {
-          # On Linux, actually do the thing, to make sure this logic gets tested
-          # somewhere at least (and Linux is ideal because it's where we have
-          # the most CI coverage).
-          add_ggplot(ggplot(cars, aes(speed, dist)) + geom_point() + ggtitle("A Plot"))
-        } else {
-          add_image(test_path("ggplot.png"), alt = "A Plot", width = 500)
-        }
+        # 2020-05-08: We can't ever call add_ggplot directly because even on
+        # Linux-only we were seeing differences between Joe's desktop and travis
+        # add_ggplot(ggplot(cars, aes(speed, dist)) + geom_point() + ggtitle("A Plot"))
+        add_image(test_path("ggplot.png"), alt = "A Plot", width = 500)
       )
     )),
     block_text(md(
@@ -94,8 +90,8 @@ test_that("Email that uses all compose features", {
   # that contain \r\n
   eml_raw <- gsub("\r\n", "\n", eml_raw)
 
-  cat("\n")
-  cat(eml_raw)
+  # cat("\n")
+  # cat(eml_raw)
 
   snapshot(eml_raw, print = cat)
 })
