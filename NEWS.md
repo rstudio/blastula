@@ -1,10 +1,14 @@
-# blastula (development version)
+# blastula 0.3.2
 
-* Added the `creds_envvar()` credential helper function, which allows for SMTP password input via an environment variable. [#159](https://github.com/rich-iannone/blastula/pull/159)
+* Email content width is now customizable in the `blastula_email()` and `compose_email()` functions. The default width is now increased to 1000px (#178).
 
-* Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding. Thanks @jdbarillas for identifying the source of the issue! [#153](https://github.com/rich-iannone/blastula/pull/153)
+* Added the `delete_credential_key()` and `delete_all_credential_keys()` functions for better management of credential keys added to the system key-value store by the `create_smtp_creds_key()` function (#173).
 
-* Fixed Unicode issues on Windows. [#154](https://github.com/rich-iannone/blastula/pull/154)
+* Added the `creds_envvar()` credential helper function, which allows for SMTP password input via an environment variable (#159).
+
+* Fixed incorrect rendering in Outlook, due to wrong line endings used for quoted-printable encoding (thanks @jdbarillas for identifying the source of the issue in #153).
+
+* Fixed Unicode issues on Windows (#154).
 
 * Fixed buggy internal logic for decoding numeric HTML entities that represent non-ASCII characters.
 
