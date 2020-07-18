@@ -13,6 +13,8 @@
 #' @param url The URL for the sending domain.
 #' @param api_key The API key registered to the Mailgun service.
 #'
+#' @importFrom httr POST authenticate
+#'
 #' @examples
 #' # Create a simple email message using
 #' # Markdown formatting
@@ -73,7 +75,7 @@ send_by_mailgun <- function(message,
   # Post the message to Mailgun
   httr::POST(
     url = url,
-    authenticate("api", api_key),
+    httr::authenticate("api", api_key),
     encode = "form",
     body = list(
       from = from,
