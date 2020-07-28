@@ -13,8 +13,6 @@
 #' @param url The URL for the sending domain.
 #' @param api_key The API key registered to the Mailgun service.
 #'
-#' @importFrom httr POST authenticate
-#'
 #' @examples
 #' # Create a simple email message using
 #' # Markdown formatting
