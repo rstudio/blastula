@@ -73,7 +73,7 @@ send_by_mailgun <- function(message,
   # Post the message to Mailgun
   httr::POST(
     url = url,
-    authenticate("api", api_key),
+    httr::authenticate("api", api_key),
     encode = "form",
     body = list(
       from = from,
