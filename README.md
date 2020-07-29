@@ -1,14 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href='http://rich-iannone.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="250px" /></a>
+# blastula <a href='http://rstudio.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="250px" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
 [![Codecov test
-coverage](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rich-iannone/blastula?branch=master)
+coverage](https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/blastula?branch=master)
 
 ## Overview
 
@@ -120,7 +120,7 @@ You can install the in-development version of **blastula** from
 
 ``` r
 install.packages("devtools")
-devtools::install_github("rich-iannone/blastula")
+devtools::install_github("rstudio/blastula")
 ```
 
 If you encounter a bug, have usage questions, or want to share ideas to
@@ -136,4 +136,4 @@ contributing to this project, you agree to abide by its terms.
 
 ## License
 
-MIT © Richard Iannone
+MIT © RStudio, PBC

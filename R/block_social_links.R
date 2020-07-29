@@ -230,7 +230,7 @@ icon_for_social_service <- function(service,
 }
 
 social_icons_host_stub <-
-  "raw.githubusercontent.com/rich-iannone/blastula/master/inst/social_icons"
+  "raw.githubusercontent.com/rstudio/blastula/master/inst/social_icons"
 
 #' @noRd
 social_service_icons <- function() {
