@@ -8,7 +8,7 @@ status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.o
 [![Travis-CI Build
 Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
 [![Codecov test
-coverage](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rich-iannone/blastula?branch=master)
+coverage](https://codecov.io/gh/pilipino/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/pilipino/blastula?branch=master)
 
 ## Overview
 
