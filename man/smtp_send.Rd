@@ -13,6 +13,8 @@ smtp_send(
   bcc = NULL,
   credentials = NULL,
   creds_file = "deprecated",
+  ssl_verifypeer = TRUE,
+  ssl_verifyhost = TRUE,
   verbose = FALSE
 )
 }
@@ -57,6 +59,10 @@ Such a file is created using the \code{\link[=create_smtp_creds_file]{create_smt
 \item{creds_file}{An option to specify a credentials file. As this argument
 is deprecated, please consider using \verb{credentials = creds_file(<file>)}
 instead.}
+
+\item{ssl_verifyhost, ssl_verifypeer}{Options passed to curl::send_mail().
+Logical, default is TRUE. Please refer to the original documentation in
+the curl package for further information.}
 
 \item{verbose}{Should verbose output from the internal curl \code{send_mail()}
 call be printed? While the username and password will likely be echoed
