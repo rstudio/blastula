@@ -64,7 +64,7 @@ The blastula team
 "),
   footer = md(
 "
-sent via the [blastula](https://rich-iannone.github.io/blastula) R package
+sent via the [blastula](https://rstudio.github.io/blastula) R package
 ")
 )
 

@@ -162,10 +162,4 @@ The email message was sent successfully.
 
 ## Concluding
 
-This covers the basics on how to get up and running on sending emails through **blastula**'s SMTP functionality. Again, this article applies only to the in-development version of **blastula**, which can be installed using:
-
-```{r install_github, eval=FALSE}
-remotes::install_github("rich-iannone/blastula")
-```
-
-Because the `smtp_send()` is quite new, there are bound to be some problems with it. If you encounter a bug or just have a question or feature request, please file an [issue](https://github.com/rich-iannone/blastula/issues).
+This covers the basics on how to get up and running on sending emails through **blastula**'s SMTP functionality. If you encounter a bug (or just have a question or feature request) please file an [issue](https://github.com/rstudio/blastula/issues).

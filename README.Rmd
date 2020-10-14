@@ -17,11 +17,11 @@ knitr::opts_chunk$set(
 library(blastula)
 ```
 
-# blastula <a href='http://rich-iannone.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="250px" /></a>
+# blastula <a href='http://rstudio.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="250px" /></a>
 
 [![CRAN status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
 [![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
-[![Codecov test coverage](https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rich-iannone/blastula?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/blastula?branch=master)
 
 ## Overview
 
@@ -109,7 +109,7 @@ You can install the in-development version of **blastula** from **GitHub** using
 
 ```{r install_github, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("rich-iannone/blastula")
+devtools::install_github("rstudio/blastula")
 ```
 
 If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/blastula/issues).
@@ -120,4 +120,4 @@ Please note that the **blastula** project is released with a [Contributor Code o
 
 ## License
 
-MIT &copy; Richard Iannone
+MIT &copy; RStudio, PBC

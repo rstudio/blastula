@@ -1,4 +1,4 @@
-url: https://rich-iannone.github.io/blastula
+url: https://rstudio.github.io/blastula
 
 home:
   strip_header: true
@@ -92,4 +92,4 @@ navbar:
     href: news/index.html
   right:
   - icon: fa-github fa-lg
-    href: https://github.com/rich-iannone/blastula
+    href: https://github.com/rstudio/blastula

@@ -15,7 +15,7 @@ blastula_template(
 }
 \arguments{
 \item{html_body, html_header, html_footer}{htmltools tag objects (e.g.
-\code{\link[htmltools:tags]{htmltools::tags()}} or \code{\link[htmltools:HTML]{htmltools::HTML()}}), or \code{NULL} to omit.}
+\code{\link[htmltools:builder]{htmltools::tags()}} or \code{\link[htmltools:HTML]{htmltools::HTML()}}), or \code{NULL} to omit.}
 
 \item{title}{Plain text title to be used for the \verb{<title>} element; may be
 displayed in mobile phone notifications.}
