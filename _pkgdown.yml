@@ -12,6 +12,7 @@ reference:
       `prepare_test_message()`.
     contents:
     - compose_email
+    - md
     - add_attachment
     - prepare_test_message
     - blastula_template
