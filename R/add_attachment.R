@@ -31,16 +31,15 @@ add_attachment <- function(email,
     normalizePath(mustWork = TRUE)
 
   # Create the attachment list
-  attachment_list <-
-    list(
-      file_path = expanded_path,
-      content_type = content_type,
-      disposition = "attachment",
-      filename = filename
-    )
+  attachment_list <- Map(function(path, type, name) list(
+    file_path = path,
+    content_type = type,
+    disposition = "attachment",
+    filename = name
+  ), expanded_path, content_type, filename, USE.NAMES = FALSE)
 
   # Add the attachment list to `email$attachments`
-  email$attachments <- c(email$attachments, list(attachment_list))
+  email$attachments <- c(email$attachments, attachment_list)
 
   email
 }
