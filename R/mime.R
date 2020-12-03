@@ -415,6 +415,7 @@ header_unstructured <- function(str, fieldname, encode_unicode = FALSE) {
 
   if (grepl("[^\x01-\x7F]", str)) {
     if (encode_unicode) {
+      str <- enc2utf8(str)
       str <- sprintf("=?utf-8?B?%s?=", base64enc::base64encode(charToRaw(str)), 0)
     } else {
       warning("The '", fieldname, "' field contains impermissible characters, ",
