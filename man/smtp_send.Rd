@@ -13,7 +13,8 @@ smtp_send(
   bcc = NULL,
   credentials = NULL,
   creds_file = "deprecated",
-  verbose = FALSE
+  verbose = FALSE,
+  ...
 )
 }
 \arguments{
@@ -62,6 +63,8 @@ instead.}
 call be printed? While the username and password will likely be echoed
 during the exchange, such information is encoded and won't be stored on
 the user's system.}
+
+\item{...}{Other options passed to \code{curl::send_mail()}}
 }
 \description{
 Send an email message to one or more recipients via an SMTP server. The email
