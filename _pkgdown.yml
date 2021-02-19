@@ -1,7 +1,7 @@
 url: https://rstudio.github.io/blastula
 
-home:
-  strip_header: true
+template:
+  package: quillt
 
 reference:
   - title: Composing an Email Message
@@ -91,5 +91,5 @@ navbar:
   - text: News
     href: news/index.html
   right:
-  - icon: fa-github fa-lg
+  - icon: fab fa-github fa-lg
     href: https://github.com/rstudio/blastula
