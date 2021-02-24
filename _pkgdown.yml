@@ -2,6 +2,16 @@ url: https://rstudio.github.io/blastula
 
 template:
   package: quillt
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "blastula package"
+    twitter:
+      creator: "@rstudio"
+      card: summary
+
+development:
+  version_tooltip: "Development version"
 
 reference:
   - title: Composing an Email Message
