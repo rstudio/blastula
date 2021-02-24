@@ -37,6 +37,8 @@ reference:
     - add_cta_button
     - add_ggplot
     - add_readable_time
+    - md
+    - pipe
 
   - title: HTML Blocks
     desc: >
