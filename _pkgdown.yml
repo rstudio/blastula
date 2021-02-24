@@ -38,7 +38,7 @@ reference:
     - add_ggplot
     - add_readable_time
     - md
-    - pipe
+    - starts_with("%")
 
   - title: HTML Blocks
     desc: >
