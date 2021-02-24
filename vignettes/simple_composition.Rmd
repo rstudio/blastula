@@ -1,6 +1,8 @@
 ---
 title: "Simple Email Composition"
 output: rmarkdown::html_vignette
+resource_files:
+  - images
 vignette: >
   %\VignetteIndexEntry{simple_composition}
   %\VignetteEngine{knitr::rmarkdown}

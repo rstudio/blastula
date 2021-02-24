@@ -1,6 +1,8 @@
 ---
 title: "Sending Email Using SMTP"
 output: rmarkdown::html_vignette
+resource_files:
+  - images
 vignette: >
   %\VignetteIndexEntry{sending_using_smtp}
   %\VignetteEngine{knitr::rmarkdown}
