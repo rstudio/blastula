@@ -1,6 +1,6 @@
 on:
   push:
-    branches: pkgdown-quillt
+    branches: quillt
   workflow_run:
     workflows: ["R-CMD-check"]
     branches: [main,master]
