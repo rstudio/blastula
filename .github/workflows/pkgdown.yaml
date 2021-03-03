@@ -1,11 +1,18 @@
 on:
   push:
-    branches: quillt
+    branches:
+     - main
+     - master
+  pull_request:
+    branches:
+     - main
+     - master
 
 name: pkgdown
 
 jobs:
   pkgdown:
+    if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'pkgdown/') }}
     runs-on: ubuntu-18.04
     env:
       RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
@@ -13,12 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
+      - uses: r-lib/actions/setup-r@v1
         id: install-r
-        with:
-          r-version: 'release'
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
       - name: Install pak and query dependencies
         run: |
@@ -40,7 +45,7 @@ jobs:
           pak::pkg_system_requirements("pkgdown", execute = TRUE)
         shell: Rscript {0}
 
-      - name: Install package dependencies
+      - name: Install package and dependencies
         run: |
           pak::local_install_dev_deps(upgrade = TRUE)
           pak::pkg_install("r-lib/pkgdown")
@@ -57,10 +62,19 @@ jobs:
       - name: Deploy to Netlify
         # only deploy on the fork for now
         if: github.repository_owner == 'apreshill'
+        id: netlify-deploy
+        uses: nwtgck/actions-netlify@v1.1
         # NETLIFY_AUTH_TOKEN added in the repo's secrets
+        with:
+          publish-dir: 'reference'
+          production-branch: master
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message:
+            'Deploy from GHA: ${{ github.event.head_commit.message }} (${{ github.sha }})'
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+          enable-commit-status: true
+          alias: deploy-preview-${{ github.event.number }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        uses: netlify/actions/cli@master
-        with:
-          args: deploy --prod --dir docs
