@@ -90,18 +90,33 @@ reference:
     - prepare_rsc_example_files
 
 navbar:
+  title: ~
   type: default
-  left:
-  - text: Reference
-    href: reference/index.html
-  - text: Articles
-    menu:
-    - text: Simple Email Composition
-      href: articles/simple_composition.html
-    - text: Sending Email Using SMTP
-      href: articles/sending_using_smtp.html
-  - text: News
-    href: news/index.html
-  right:
-  - icon: fab fa-github fa-lg
-    href: https://github.com/rstudio/blastula
+  structure:
+    left:  [intro, examples, articles]
+    right: [reference, news, github]
+  components:
+    home: ~
+    examples:
+      text: Examples
+      href: ""
+    articles:
+      text: Articles
+      menu:
+        - text: "Sending Email Using SMTP"
+          href: articles/sending_using_smtp.html
+    reference:
+      text: Reference
+      href: reference/index.html
+    news:
+      text: News
+      menu:
+        - text: "Changelog"
+          href: news/index.html
+        - text: "------------------"
+        - text: "Blog posts"
+        - text: "Version 0.3"
+          href: https://blog.rstudio.com/2019/12/05/emails-from-r-blastula-0-3/
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/rstudio/blastula
