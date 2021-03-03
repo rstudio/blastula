@@ -3,6 +3,7 @@ on:
     branches:
      - main
      - master
+     # temp - remove quillt
      - quillt
   pull_request:
     branches:
@@ -61,14 +62,15 @@ jobs:
         shell: Rscript {0}
 
       - name: Deploy to Netlify
-        # only deploy on the fork for now
+        # temp - only deploy on the fork for now, rm if
         if: github.repository_owner == 'apreshill'
         id: netlify-deploy
         uses: nwtgck/actions-netlify@v1.1
         # NETLIFY_AUTH_TOKEN added in the repo's secrets
         with:
           publish-dir: 'docs'
-          production-branch: master
+          # temp - change production-branch
+          production-branch: quillt
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message:
             'Deploy from GHA: ${{ github.event.head_commit.message }} (${{ github.sha }})'
