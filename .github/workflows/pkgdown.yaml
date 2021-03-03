@@ -67,7 +67,7 @@ jobs:
         uses: nwtgck/actions-netlify@v1.1
         # NETLIFY_AUTH_TOKEN added in the repo's secrets
         with:
-          publish-dir: 'reference'
+          publish-dir: 'docs'
           production-branch: master
           github-token: ${{ secrets.GITHUB_TOKEN }}
           deploy-message:
