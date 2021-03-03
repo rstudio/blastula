@@ -114,6 +114,14 @@ devtools::install_github("rstudio/blastula")
 
 If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rich-iannone/blastula/issues).
 
+## Getting help
+
+There are two main places to get help:
+
+1. The [RStudio community](https://community.rstudio.com/c/R-Markdown/10) is a friendly place to ask any questions about rmarkdown and the R Markdown family of packages.
+
+1. [Stack Overflow](https://stackoverflow.com/questions/tagged/r-markdown) is a great source of answers to common rmarkdown questions. It is also a great place to get help, once you have created a reproducible example that illustrates your problem.
+
 ## Code of Conduct
   
 Please note that the blastula project is released with a [Contributor Code of Conduct](https://rstudio.github.io/blastula/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
