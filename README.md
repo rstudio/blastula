@@ -146,7 +146,7 @@ There are two main places to get help:
 
 Please note that the blastula project is released with a [Contributor
 Code of
-Conduct](https://rstudio.github.io/blastula/CODE_OF_CONDUCT.html). By
+Conduct](https://pkgs.rstudio.com/blastula/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
 
 ## License
