@@ -1,4 +1,5 @@
 test_that("md() implementation is gt-compatible", {
+
   x <- md("hello")
 
   # It's important that the implementation of `md()` works exactly like this,

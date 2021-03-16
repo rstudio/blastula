@@ -1,5 +1,3 @@
-context("String manipulation utilities")
-
 test_that("substr2 edge cases", {
 
   expect_identical(substr2("1234567890", 1, 1), "")

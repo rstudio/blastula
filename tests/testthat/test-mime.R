@@ -1,5 +1,3 @@
-context("RFC-2822 message generation")
-
 test_that("`format_rfc2822_date()` produces valid dates", {
 
   # Expect properly formatted POSIXct date-times

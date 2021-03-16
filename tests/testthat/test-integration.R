@@ -73,7 +73,6 @@ test_that("Email that uses all compose features", {
       )
     )
 
-
   eml <-
     compose_email(
       body = body,
