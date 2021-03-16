@@ -20,7 +20,7 @@ library(blastula)
 # blastula <a href='https://rstudio.github.io/blastula'><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
 [![CRAN status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
-[![Travis-CI Build Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
+[![R-CMD-check](https://github.com/rstudio/blastula/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/blastula/actions)
 [![Codecov test coverage](https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/blastula?branch=master)
 
 ## Overview
