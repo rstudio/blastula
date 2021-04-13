@@ -100,6 +100,11 @@ navbar:
     intro:
       text: Introduction
       href: articles/blastula.html
+    articles:
+      text: Articles
+      menu:
+        - text: "Sending Email Using SMTP"
+          href: articles/sending_using_smtp.html
     examples:
       text: Examples
       menu:
@@ -109,11 +114,6 @@ navbar:
           href: https://solutions.rstudio.com/r/blastula/conditional-example/
         - text: "Scheduling Data Science Tasks"
           href: https://solutions.rstudio.com/data-science-admin/scheduling/
-    articles:
-      text: Articles
-      menu:
-        - text: "Sending Email Using SMTP"
-          href: articles/sending_using_smtp.html
     reference:
       text: Reference
       href: reference/index.html
