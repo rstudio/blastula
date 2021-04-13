@@ -100,10 +100,7 @@ A few notes on code style and options. It's good to left-align the text in the c
 In the next example, let's first store the result of that statement in a local variable (`sending_date`). Then, the variable will be placed in the **footer** of the message (using the `footer` argument) along with leading text.
 
 ```{r compose_interpolation_stmt, eval=FALSE}
-#
 # Prepare the text inputs
-#
-
 sender_name <- "Shelly"
 
 sending_date <-
@@ -114,8 +111,9 @@ sending_date <-
     format(Sys.time(), "%Y")
   )
 
+# Generate the body text
 body_text <-
-  glue(md(
+  md(glue(
     "
 Hello,
 
@@ -129,6 +127,7 @@ Cheers,
 "    
   ))
 
+# Generate the footer text
 footer_text <- glue("Sent on {sending_date}.")
 
 # Compose the email message
@@ -147,10 +146,10 @@ Content in the **footer** and **header** sections is styled differently than **b
 
 ## Adding an Image to an Email
 
-The **blastula** package has the `add_image()` function which allows one to add images to an email message. 
+The **blastula** package has the `add_image()` function which allows one to add images to an email message. What `add_image` does is generate an HTML fragment (a piece of HTML that can be included in an HTML document) with the image transformed to text (using Base64 encoding). Knowing that we have an HTML fragment is important because it means we need to use the `md()` function to interpret the content as Markdown/HTML (a Markdown parser will leave any HTML that it sees untouched).
 
 ```{r compose_local_image, eval=FALSE}
-
+# Prepare the image (as a text input)
 img_file_path <-
   system.file(
     "img", "rickenbacker_4001_1972.jpg",
@@ -159,6 +158,7 @@ img_file_path <-
 
 image <- add_image(file = img_file_path)
 
+# Generate the body text
 body_text <-
   md(glue(
     "
@@ -175,6 +175,7 @@ Cheers,
 "
   ))
 
+# Compose the email message
 compose_email(body = body_text)
 ```
 
@@ -197,13 +198,10 @@ gg <-
   ggplot(data, aes(x = variety, y = note, fill = treatment)) + 
   geom_boxplot()
 
+# Prepare the image (as a text input)
 gg_image <- add_ggplot(plot_object = gg)
 
-#
-# Create the `body_text` and then the
-# email message with `compose_email()`
-#
-
+# Generate the body text
 body_text <-
   md(glue(
     "
@@ -220,6 +218,7 @@ Cheers,
 "
   ))
 
+# Compose the email message
 compose_email(body = body_text)
 ```
 
