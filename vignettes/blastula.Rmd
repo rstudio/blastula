@@ -1,5 +1,5 @@
 ---
-title: "Simple Email Composition"
+title: "Getting Started"
 output: rmarkdown::html_vignette
 resource_files:
   - images
@@ -178,6 +178,8 @@ Cheers,
 compose_email(body = body_text)
 ```
 
+<img src="images/compose_image-wide.png" width=100%>
+
 <p align="center">Once you get the hang of `add_image()`, this is really easy</p>
 <br>
 
@@ -221,7 +223,7 @@ Cheers,
 compose_email(body = body_text)
 ```
 
-<img src="images/compose_imgur_ggplot-wide.png" width=100%>
+<img src="images/compose_ggplot-wide.png" width=100%>
 
 <p align="center">A ggplot in your email message</p>
 <br>
