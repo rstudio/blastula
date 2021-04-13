@@ -103,14 +103,12 @@ navbar:
     examples:
       text: Examples
       menu:
-        - text: "RStudio Connect custom emails with blastula 0.3.1"
-          href: https://solutions.rstudio.com/misc/rstudio-connect-custom-emails-with-blastula/
         - text: "Custom Emails with R Markdown and Blastula"
-          href: https://solutions.rstudio.com/examples/blastula-overview/
+          href: https://solutions.rstudio.com/r/blastula/
         - text: "Customized Conditional Emails with RStudio Connect"
-          href: https://solutions.rstudio.com/examples/blastula/conditional-example/
+          href: https://solutions.rstudio.com/r/blastula/conditional-example/
         - text: "Scheduling Data Science Tasks"
-          href: https://solutions.rstudio.com/examples/scheduling/scheduling/
+          href: https://solutions.rstudio.com/data-science-admin/scheduling/
     articles:
       text: Articles
       menu:
