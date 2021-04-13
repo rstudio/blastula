@@ -93,7 +93,7 @@ navbar:
   title: ~
   type: default
   structure:
-    left:  [intro, examples, articles]
+    left:  [intro, articles, examples]
     right: [reference, news, github]
   components:
     home: ~
