@@ -1,20 +1,14 @@
-context("Message Composition")
-
 test_that("composing a simple message is possible", {
 
   # Create a simple email message with no text
   email <- compose_email()
 
-  # Expect an object of class `email_message`
-  expect_is(
-    object = email,
-    class = "email_message"
-  )
+  # Expect an object of class `email_message` and type of 'list'
+  expect_s3_class(email, "email_message")
+  expect_type(email, "list")
 
   # Expect the object to be a list of length 3
-  expect_equal(
-    length(email), 4
-  )
+  expect_equal(length(email), 4)
 
   # Expect specific names for each of
   # the list components
@@ -25,22 +19,11 @@ test_that("composing a simple message is possible", {
 
   # Expect that the first two list components
   # are of the class `character`
-  expect_is(
-    object = email$html_str,
-    class = "character"
-  )
+  expect_type(email$html_str, "character")
+  expect_type(email$html_html, "character")
 
-  expect_is(
-    object = email$html_html,
-    class = "character"
-  )
-
-  # Expect that the third list component
-  # is of the class `list`
-  expect_is(
-    object = email$attachments,
-    class = "list"
-  )
+  # Expect that the third list component is a `list`
+  expect_type(email$attachments, "list")
 })
 
 test_that("email components appear in the HTML message", {
@@ -50,27 +33,21 @@ test_that("email components appear in the HTML message", {
   email <- compose_email(body = "test_text_in_body")
 
   # Expect that the test string is available in the HTML
-  expect_true(
-    grepl("test_text_in_body", email$html_str)
-  )
+  expect_true(grepl("test_text_in_body", email$html_str))
 
   # Create a simple email message with text in
   # the header component
   email <- compose_email(header = "test_text_in_header")
 
   # Expect that the test string is available in the HTML
-  expect_true(
-    grepl("test_text_in_header", email$html_str)
-  )
+  expect_true(grepl("test_text_in_header", email$html_str))
 
   # Create a simple email message with text in
   # the footer component
   email <- compose_email(header = "test_text_in_footer")
 
   # Expect that the test string is available in the HTML
-  expect_true(
-    grepl("test_text_in_footer", email$html_str)
-  )
+  expect_true(grepl("test_text_in_footer", email$html_str))
 
   # Create a simple email message with text in all
   # three components (header, body, and footer)
@@ -85,9 +62,9 @@ test_that("email components appear in the HTML message", {
   expect_true(
     all(
       c(
-      grepl("test_text_in_body", email$html_str),
-      grepl("test_text_in_header", email$html_str),
-      grepl("test_text_in_footer", email$html_str)
+        grepl("test_text_in_body", email$html_str),
+        grepl("test_text_in_header", email$html_str),
+        grepl("test_text_in_footer", email$html_str)
       )
     )
   )
@@ -102,9 +79,7 @@ test_that("email components appear in the HTML message", {
 
   # Expect that the title string appears within <title>
   # tags in the HTML
-  expect_true(
-    grepl("<title>email_title</title>", email$html_str)
-  )
+  expect_true(grepl("<title>email_title</title>", email$html_str))
 
   # Use blocks (`block_text()`) within the body, header,
   # and footer components
@@ -155,16 +130,12 @@ Here is a plot:
   # Create a simple email message with no text
   email <- compose_email(body = md(body_input))
 
-  # Expect an object of class `email_message`
-  expect_is(
-    object = email,
-    class = "email_message"
-  )
+  # Expect an object of class `email_message` and type of 'list'
+  expect_s3_class(email, "email_message")
+  expect_type(email, "list")
 
   # Expect the object to be a list of length 4
-  expect_equal(
-    length(email), 4
-  )
+  expect_equal(length(email), 4)
 
   # Expect specific names for each of
   # the list components
@@ -175,34 +146,18 @@ Here is a plot:
 
   # Expect that the first two list components
   # are of the class `character`
-  expect_is(
-    object = email$html_str,
-    class = "character"
-  )
-
-  expect_is(
-    object = email$html_html,
-    class = "character"
-  )
+  expect_type(email$html_str, "character")
+  expect_type(email$html_html, "character")
 
   # Expect that the third list component
   # is of the class `list`
-  expect_is(
-    object = email$attachments,
-    class = "list"
-  )
+  expect_type(email$attachments, "list")
 
   # Expect that the fourth list component
   # is of the class `list`
-  expect_is(
-    object = email$images,
-    class = "list"
-  )
+  expect_type(email$images, "list")
 
   # Expect that the inner component of
   # `email$images` is of the class `character`
-  expect_is(
-    object = email$images[[1]],
-    class = "character"
-  )
+  expect_type(email$images[[1]], "character")
 })

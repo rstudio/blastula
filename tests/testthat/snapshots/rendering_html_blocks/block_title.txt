@@ -1,3 +1,0 @@
-> print(x)
-<h1 class="message-block block_title" style="color:#222222;font-weight:300;line-height:1.4;margin:0;font-size:36px;margin-bottom:4px;text-align:center;">Test Title</h1>
-

@@ -1,12 +1,9 @@
-context("Component Blocks")
-
-
 test_that("spacer blocks have the correct internal contents", {
 
   # Create a spacer block
   spacer_block <- block_spacer()
 
-  snapshot(spacer_block)
+  expect_snapshot(spacer_block)
 })
 
 test_that("article items have the correct internal contents", {
@@ -25,7 +22,7 @@ Pacific Coast."
       link = "https://en.wikipedia.org/wiki/Japan"
     )
 
-  snapshot(an_article)
+  expect_snapshot(an_article)
 })
 
 test_that("blocks have the correct internal contents", {
@@ -53,5 +50,6 @@ Pacific Coast."
       block_articles(an_article),
       block_text("This is a block of text.")
     )
-  snapshot(block_4)
+
+  expect_snapshot(block_4)
 })

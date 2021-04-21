@@ -1,50 +1,78 @@
 on:
   push:
-    branches: master
+    branches:
+     - main
+     - master
+  pull_request:
+    branches:
+     - main
+     - master
 
 name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'pkgdown/') }}
+    runs-on: ubuntu-18.04
+    env:
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v2
 
-      - uses: r-lib/actions/setup-r@master
-        with:
-          r-version: 'release'
+      - uses: r-lib/actions/setup-r@v1
+        id: install-r
 
-      - uses: r-lib/actions/setup-pandoc@master
+      - uses: r-lib/actions/setup-pandoc@v1
 
-      - name: Query dependencies
+      - name: Install pak and query dependencies
         run: |
-          install.packages('remotes')
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          saveRDS(pak::pkg_deps(".", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
       - name: Cache R packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: macOS-r-4.0-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: macOS-r-4.0-1-
+          key: ${{ runner.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
+          restore-keys: ${{ runner.os }}-${{ steps.install-r.outputs.installed-r-version }}-1-
 
-      - name: Install dependencies
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
         run: |
-          install.packages("remotes")
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_dev("pkgdown")
-          remotes::install_github("tidyverse/tidytemplate")
+          pak::local_system_requirements(execute = TRUE)
+          pak::pkg_system_requirements("pkgdown", execute = TRUE)
+        shell: Rscript {0}
+
+      - name: Install package and dependencies
+        run: |
+          pak::local_install_dev_deps(upgrade = TRUE)
+          pak::pkg_install("r-lib/pkgdown")
+          pak::pkg_install("rstudio/quillt")
         shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Git setup
-        run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-
-      - name: Deploy package
-        run: pkgdown::deploy_to_branch(new_process = FALSE)
+      - name: Build pkgdown site
+        run: pkgdown::build_site(new_process = FALSE)
         shell: Rscript {0}
+
+      - name: Deploy to Netlify
+        id: netlify-deploy
+        uses: nwtgck/actions-netlify@v1.1
+        # NETLIFY_AUTH_TOKEN added in the repo's secrets
+        with:
+          publish-dir: 'docs'
+          production-branch: master
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message:
+            'Deploy from GHA: ${{ github.event.head_commit.message }} (${{ github.sha }})'
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+          enable-commit-status: true
+          alias: deploy-preview-${{ github.event.number }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}

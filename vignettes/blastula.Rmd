@@ -1,6 +1,8 @@
 ---
-title: "Simple Email Composition"
+title: "Getting Started"
 output: rmarkdown::html_vignette
+resource_files:
+  - images
 vignette: >
   %\VignetteIndexEntry{simple_composition}
   %\VignetteEngine{knitr::rmarkdown}
@@ -98,10 +100,7 @@ A few notes on code style and options. It's good to left-align the text in the c
 In the next example, let's first store the result of that statement in a local variable (`sending_date`). Then, the variable will be placed in the **footer** of the message (using the `footer` argument) along with leading text.
 
 ```{r compose_interpolation_stmt, eval=FALSE}
-#
 # Prepare the text inputs
-#
-
 sender_name <- "Shelly"
 
 sending_date <-
@@ -112,8 +111,9 @@ sending_date <-
     format(Sys.time(), "%Y")
   )
 
+# Generate the body text
 body_text <-
-  glue(
+  md(glue(
     "
 Hello,
 
@@ -125,8 +125,9 @@ Cheers,
 
 {sender_name}
 "    
-  ) %>% md()
+  ))
 
+# Generate the footer text
 footer_text <- glue("Sent on {sending_date}.")
 
 # Compose the email message
@@ -143,68 +144,49 @@ compose_email(
 
 Content in the **footer** and **header** sections is styled differently than **body** content (**footer** text will be somewhat smaller for one thing). The main message typically goes into the **body** whereas supplementary information works better in the **footer**.
 
-## Adding an External Image to an HTML Email
+## Adding an Image to an Email
 
-Although the rules for images in HTML email have changed often, the method that seems to work reasonably well these days is to use external images. There is a bit of upfront work in getting the image hosted somewhere but the payoff is fast page loads in email clients. The **blastula** package has a function which takes some of the pain out of getting images to a hosting service, it is the `add_imgur_image()` function. **Imgur** is a fun site for sure (gifs galore!) but did you know that they have an API to make image uploading easy? They do, and this function takes advantage of that.
+The **blastula** package has the `add_image()` function which allows one to add images to an email message. What `add_image` does is generate an HTML fragment (a piece of HTML that can be included in an HTML document) with the image transformed to text (using Base64 encoding). Knowing that we have an HTML fragment is important because it means we need to use the `md()` function to interpret the content as Markdown/HTML (a Markdown parser will leave any HTML that it sees untouched).
 
-Here's an example of an email that includes a local image that is deployed to **Imgur** (available at https://i.imgur.com/8uTB2Py.jpg) for indefinite hosting.
+```{r compose_local_image, eval=FALSE}
+# Prepare the image (as a text input)
+img_file_path <-
+  system.file(
+    "img", "rickenbacker_4001_1972.jpg",
+    package = "blastula"
+  )
 
-```{r imgur_return_value_1, include=FALSE}
+image <- add_image(file = img_file_path)
 
-imgur_image <- 
-  "<a href=\"#\"><img src=\"https://i.imgur.com/8uTB2Py.jpg\" style=\"max-width: 600px; width: 100% !important; display: block; padding: 0; border: 0 !important;\" border=\"0\"></a>"
-```
-
-```{r compose_imgur_local_image, eval=FALSE}
-# Send your image to Imgur with a Client Key;
-# the result is specially-crafted <img> tag
-# imgur_image <-
-#   add_imgur_image(
-#     image = "rickenbacker_4001_1972_fireglo.jpg",
-#     client_id = "<YOUR CLIENT ID>"
-#   )
-
-#
-# Create the `body_text` and then the
-# email message with `compose_email()`
-#
-
+# Generate the body text
 body_text <-
-  glue(
+  md(glue(
     "
 Hello,
 
 I just wanted to let you know that the **1972 Rickenbacker
 4001** is here to pick up. Here is a picture of it:
 
-{imgur_image}
+{image}
 
 Cheers,
 
 {sender_name}
 "
-  ) %>% md()
+  ))
 
+# Compose the email message
 compose_email(body = body_text)
 ```
 
-<img src="images/compose_imgur_local_image-wide.png" width=100%>
+<img src="images/compose_image-wide.png" width=100%>
 
-<p align="center">Once you get that Imgur Client ID, this is really easy</p>
+<p align="center">Once you get the hang of `add_image()`, this is really easy</p>
 <br>
 
-This is how you get the all-important Client ID from **Imgur**. First, [get an account with **Imgur**](https://help.imgur.com/hc/en-us/articles/210076633-Create-an-Account)! Once that's a thing accomplished, we can get the `Client-ID` key for the **Imgur API**. This can be easily done by
-going visiting [the API registration page](https://api.imgur.com/oauth2/addclient) while signed-in to register an application. Give it a name---any name you can think of---and be sure to select the `OAuth 2 authorization type without a callback URL` radio button (the second in the list). After filling in the other necessary information bits and proving that you're not a robot, you'll receive the Client ID key! You'll then have unfettered access to use any images, including animated gifs, in an HTML email message.
+There's also the `add_ggplot()` function which can add a **ggplot2** plot object to a message body. Here's an example of how that works:
 
-Wait, there's more! Since this is **R** and we care about **ggplot2**, we can directly pass in a ggplot object to `add_imgur_image()` and expect a nice ggplot image to appear in the email message. Here's an example of how that works:
-
-```{r imgur_return_value_2, include=FALSE}
-
-imgur_image <- 
-  "<a href=\"#\"><img src=\"https://i.imgur.com/biMpEEA.png\" style=\"max-width: 600px; width:100% !important; display: block; padding: 0; border: 0 !important;\" border=\"0\"></a>"
-```
-
-```{r compose_imgur_ggplot, eval=FALSE}
+```{r compose_ggplot, eval=FALSE}
 # Create the plot data
 variety <- rep(LETTERS[1:7], each = 40)
 treatment <- rep(c("high", "low"), each = 20)
@@ -212,43 +194,35 @@ note <- seq(1:280) + sample(1:150, 280, replace = TRUE)
 data <- data.frame(variety, treatment, note)
 
 # Create the plot
-the_plot <-
+gg <-
   ggplot(data, aes(x = variety, y = note, fill = treatment)) + 
   geom_boxplot()
 
-# Send your ggplot to Imgur with a Client Key;
-# again, you get an <img> tag that works for email
-# imgur_image <-
-#   add_imgur_image(
-#     image = the_plot,
-#     client_id = "<YOUR CLIENT ID>"
-#   )
+# Prepare the image (as a text input)
+gg_image <- add_ggplot(plot_object = gg)
 
-#
-# Create the `body_text` and then the
-# email message with `compose_email()`
-#
-
+# Generate the body text
 body_text <-
-  glue(
+  md(glue(
     "
 Hello,
 
 I just wanted to let you know that the *ggplot* you \\
 wanted to see is right here, in this email:
 
-{imgur_image}
+{gg_image}
 
 Cheers,
 
 {sender_name}
 "
-  ) %>% md()
+  ))
 
+# Compose the email message
 compose_email(body = body_text)
 ```
 
-<img src="images/compose_imgur_ggplot-wide.png" width=100%>
+<img src="images/compose_ggplot-wide.png" width=100%>
 
 <p align="center">A ggplot in your email message</p>
 <br>
@@ -257,4 +231,4 @@ I don't know about you but I'd love to get a ggplot in *my* email.
 
 ## Wrapping Up
 
-We now know how to send really simple email messages with just some text, and, slightly more complex messages including those with images inside. **Imgur** really saves the day when it comes to hosting images as their API service is very permissive and getting access is not at all difficult!
+We now know how to send really simple email messages with just some text, and, slightly more complex messages including those with images inside.

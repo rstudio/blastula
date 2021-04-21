@@ -1,5 +1,3 @@
-context("Utility functions work as expected")
-
 test_that("knitr_sidecar_prefix preconditions hold", {
 
   if (rmarkdown::pandoc_available()) {

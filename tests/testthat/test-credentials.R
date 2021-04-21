@@ -1,5 +1,3 @@
-context("Creating credentials")
-
 test_that("utility functions for credentials work properly", {
 
   # Create a credentials list with no `provider` specified
@@ -87,5 +85,5 @@ test_that("utility functions for credentials work properly", {
   # produces the original credentials list
   credentials_list_1_json %>%
     jsonlite::unserializeJSON() %>%
-    expect_equivalent(credentials_list_1)
+    expect_equal(credentials_list_1)
 })

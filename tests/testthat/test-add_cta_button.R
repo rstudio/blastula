@@ -1,5 +1,3 @@
-context("Getting a CTA button")
-
 test_that("the `add_cta_button()` function returns the expected output", {
 
   cta <-
@@ -9,5 +7,5 @@ test_that("the `add_cta_button()` function returns the expected output", {
       align = "left"
     )
 
-  snapshot(cta)
+  expect_snapshot(cta)
 })

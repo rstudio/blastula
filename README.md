@@ -1,12 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href='http://rstudio.github.io/blastula/'><img src="man/figures/logo.svg" align="right" height="250px" /></a>
+# blastula <a href='https://rstudio.github.io/blastula'><img src='man/figures/logo.svg' align="right" height="139" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
-[![Travis-CI Build
-Status](https://travis-ci.org/rich-iannone/blastula.svg?branch=master)](https://travis-ci.org/rich-iannone/blastula)
+[![R-CMD-check](https://github.com/rstudio/blastula/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/blastula/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/blastula?branch=master)
 
@@ -48,27 +47,21 @@ supply **Markdown** text to any of these content areas to get rendered
 HTML.
 
 In the example code below, the strings that are part of the email body
-and the email footer are combined with `c()` and, since we have Markdown
-and HTML fragments, we need to use the `md()` function.
+and the email footer are combined with `glue::glue()` and, since we have
+Markdown and HTML fragments, we need to use the `md()` function.
 
 ``` r
 email <-
   compose_email(
-    body = md(
-      c(
+    body = md(glue::glue(
 "Hello,
 
 This is a *great* picture I found when looking
 for sun + cloud photos:
-",
-img_string
-      )
-    ),
-footer = md(
-  c(
-    "Email sent on ", date_time, "."
-  )
-)
+
+{img_string}
+")),
+    footer = md(glue::glue("Email sent on {date_time}."))
   )
 ```
 
@@ -86,10 +79,9 @@ email
 ### Sending an Email Message via SMTP
 
 We can store SMTP email credentials in a file using the
-`create_smtp_creds_file()` function. This will create a hidden
-credentials file in the working directory. We can also set SMTP access
-credentials in the system-wide key-value store through the
-`create_smtp_creds_key()` function.
+`create_smtp_creds_file()` function. There are also other ways to set up
+SMTP access credentials (like using system-wide key-value store through
+the `create_smtp_creds_key()` function).
 
 Having generated a credentials file, we can use the `smtp_send()`
 function (along with the `creds_file()` credentials helper function) to
@@ -105,6 +97,15 @@ email %>%
     credentials = creds_file("email_creds")
   )
 ```
+
+### Sending an Email Message through RStudio Connect
+
+We can also send email based on **R Markdown** files through **RStudio
+Connect**. The `prepare_rsc_example_files()` function provides .Rmd
+files that facilitate a main report + email report workflow. The key
+components are the `blastula::blastula_email` output type for the email
+report, and the use of `render_connect_email()` and
+`attach_connect_email()` in the main report.
 
 ## Installation
 
@@ -127,11 +128,26 @@ If you encounter a bug, have usage questions, or want to share ideas to
 make this package better, feel free to file an
 [issue](https://github.com/rich-iannone/blastula/issues).
 
+## Getting help
+
+There are two main places to get help:
+
+1.  The [RStudio
+    community](https://community.rstudio.com/c/R-Markdown/10) is a
+    friendly place to ask any questions about rmarkdown and the R
+    Markdown family of packages.
+
+2.  [Stack
+    Overflow](https://stackoverflow.com/questions/tagged/r-markdown) is
+    a great source of answers to common rmarkdown questions. It is also
+    a great place to get help, once you have created a reproducible
+    example that illustrates your problem.
+
 ## Code of Conduct
 
 Please note that the **blastula** project is released with a
 [Contributor Code of
-Conduct](https://contributor-covenant.org/version/1/0/0). By
+Conduct](https://pkgs.rstudio.com/blastula/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
 
 ## License
