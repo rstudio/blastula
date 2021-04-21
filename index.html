@@ -12,25 +12,41 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Easily Send HTML Email Messages">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><link href="tidyverse-2.css" rel="stylesheet">
+<link href="rmd.css" rel="stylesheet">
+<meta property="og:title" content="Easily Send HTML Email Messages">
 <meta property="og:description" content="Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
     let the user insert embedded images, web link buttons, and ggplot2 plot
     objects into the message body. Messages can be sent through an SMTP
     server, through the RStudio Connect service, or through the Mailgun API
     service &lt;http://mailgun.com/&gt;.">
-<meta property="og:image" content="https://rich-iannone.github.io/blastula/logo.png">
+<meta property="og:image" content="https://rstudio.github.io/blastula/reference/figures/logo.png">
+<meta property="og:image:alt" content="blastula package">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115082821-1');
+</script><!-- javascript assets for rmarkdown --><script src="ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script><script src="holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script><script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script><!-- from quillt: JS redirect for homepage --><script>
+  if (!/(\/|html?)$/.test(window.location.href)){
+    window.location.replace(window.location.href + '/');
+  }
+</script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,16 +57,43 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">blastula</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.3.2</span>
       </span>
+
+      <!--<div class="navbar-brand-container">
+        <a class="navbar-brand" href="index.html">blastula</a>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of  <a href=""></a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.3.2</span>
+        </div>
+      </div>-->
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="articles/blastula.html">Get started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="https://solutions.rstudio.com/r/blastula/">Custom Emails with R Markdown and Blastula</a>
+    </li>
+    <li>
+      <a href="https://solutions.rstudio.com/r/blastula/conditional-example/">Customized Conditional Emails with RStudio Connect</a>
+    </li>
+    <li>
+      <a href="https://solutions.rstudio.com/data-science-admin/scheduling/">Scheduling Data Science Tasks</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -60,21 +103,33 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/simple_composition.html">Simple Email Composition</a>
-    </li>
-    <li>
       <a href="articles/sending_using_smtp.html">Sending Email Using SMTP</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="news/index.html">News</a>
+        <li>
+  <a href="reference/index.html">Reference</a>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="https://github.com/rich-iannone/blastula">
-    <span class="fa fa-github fa-lg"></span>
+      <a href="news/index.html">Changelog</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://blog.rstudio.com/2019/12/05/emails-from-r-blastula-0-3/">Version 0.3</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://github.com/rstudio/blastula">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -90,8 +145,10 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="blastula" class="section level1">
-
+<div id="blastula-" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#blastula-" class="anchor"></a>blastula <a href="https://rstudio.github.io/blastula"><img src="reference/figures/logo.svg" align="right" height="139"></a>
+</h1></div>
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -101,133 +158,156 @@
 <h3 class="hasAnchor">
 <a href="#composing-an-email-message" class="anchor"></a>Composing an Email Message</h3>
 <p>When you compose an email, you can use objects from the global workspace and work them into the message content. Let’s create a nicely formatted date/time string (<code>date_time</code>) with the <code><a href="reference/add_readable_time.html">add_readable_time()</a></code> function, and, transform an image on disk to an HTML string object (<code>img_string</code>).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Get a nicely formatted date/time string</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">date_time &lt;-<span class="st"> </span><span class="kw"><a href="reference/add_readable_time.html">add_readable_time</a></span>()</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Create an image string using an on-disk</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># image file</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">img_file_path &lt;-</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">    <span class="st">"img"</span>, <span class="st">"pexels-photo-267151.jpeg"</span>,</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="dt">package =</span> <span class="st">"blastula"</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">  )</a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">img_string &lt;-<span class="st"> </span><span class="kw"><a href="reference/add_image.html">add_image</a></span>(<span class="dt">file =</span> img_file_path)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get a nicely formatted date/time string</span>
+<span class="va">date_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_readable_time.html">add_readable_time</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="co"># Create an image string using an on-disk</span>
+<span class="co"># image file</span>
+<span class="va">img_file_path</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
+    <span class="st">"img"</span>, <span class="st">"pexels-photo-267151.jpeg"</span>,
+    package <span class="op">=</span> <span class="st">"blastula"</span>
+  <span class="op">)</span>
+
+<span class="va">img_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_image.html">add_image</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">img_file_path</span><span class="op">)</span></code></pre></div>
 <p>Now we use the <code><a href="reference/compose_email.html">compose_email()</a></code> function to compose the email. There are three main arguments here: <code>body</code>, <code>header</code>, and <code>footer</code>. You can supply <strong>Markdown</strong> text to any of these content areas to get rendered HTML.</p>
-<p>In the example code below, the strings that are part of the email body and the email footer are combined with <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> and, since we have Markdown and HTML fragments, we need to use the <code><a href="reference/md.html">md()</a></code> function.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">email &lt;-</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/compose_email.html">compose_email</a></span>(</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="dt">body =</span> <span class="kw"><a href="reference/md.html">md</a></span>(</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">      <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">"Hello,</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="st">This is a *great* picture I found when looking</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">for sun + cloud photos:</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">"</span>,</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">img_string</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">      )</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">    ),</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="dt">footer =</span> <span class="kw"><a href="reference/md.html">md</a></span>(</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">    <span class="st">"Email sent on "</span>, date_time, <span class="st">"."</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">  )</a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">)</a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">  )</a></code></pre></div>
+<p>In the example code below, the strings that are part of the email body and the email footer are combined with <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> and, since we have Markdown and HTML fragments, we need to use the <code><a href="reference/md.html">md()</a></code> function.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">email</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="reference/compose_email.html">compose_email</a></span><span class="op">(</span>
+    body <span class="op">=</span> <span class="fu"><a href="reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span>
+<span class="st">"Hello,
+
+This is a *great* picture I found when looking
+for sun + cloud photos:
+
+{img_string}
+"</span><span class="op">)</span><span class="op">)</span>,
+    footer <span class="op">=</span> <span class="fu"><a href="reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"Email sent on {date_time}."</span><span class="op">)</span><span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
 <p>After creating the email message, we can look at it to ensure that the formatting is as expected. Simply call the object itself and it will be displayed in the Viewer.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Preview the email</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">email</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Preview the email</span>
+<span class="va">email</span></code></pre></div>
 <p><img src="reference/figures/rstudio_preview_email.png"></p>
 </div>
 <div id="sending-an-email-message-via-smtp" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sending-an-email-message-via-smtp" class="anchor"></a>Sending an Email Message via SMTP</h3>
-<p>We can store SMTP email credentials in a file using the <code><a href="reference/create_smtp_creds_file.html">create_smtp_creds_file()</a></code> function. This will create a hidden credentials file in the working directory. We can also set SMTP access credentials in the system-wide key-value store through the <code><a href="reference/create_smtp_creds_key.html">create_smtp_creds_key()</a></code> function.</p>
+<p>We can store SMTP email credentials in a file using the <code><a href="reference/create_smtp_creds_file.html">create_smtp_creds_file()</a></code> function. There are also other ways to set up SMTP access credentials (like using system-wide key-value store through the <code><a href="reference/create_smtp_creds_key.html">create_smtp_creds_key()</a></code> function).</p>
 <p>Having generated a credentials file, we can use the <code><a href="reference/smtp_send.html">smtp_send()</a></code> function (along with the <code><a href="reference/credential_helpers.html">creds_file()</a></code> credentials helper function) to send the email through an SMTP server.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Sending email by SMTP using a credentials file</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">email <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/smtp_send.html">smtp_send</a></span>(</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="dt">to =</span> <span class="st">"jane_doe@example.com"</span>,</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="dt">from =</span> <span class="st">"joe_public@example.net"</span>,</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="dt">subject =</span> <span class="st">"Testing the `smtp_send()` function"</span>,</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="dt">credentials =</span> <span class="kw"><a href="reference/credential_helpers.html">creds_file</a></span>(<span class="st">"email_creds"</span>)</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  )</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Sending email by SMTP using a credentials file</span>
+<span class="va">email</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="reference/smtp_send.html">smtp_send</a></span><span class="op">(</span>
+    to <span class="op">=</span> <span class="st">"jane_doe@example.com"</span>,
+    from <span class="op">=</span> <span class="st">"joe_public@example.net"</span>,
+    subject <span class="op">=</span> <span class="st">"Testing the `smtp_send()` function"</span>,
+    credentials <span class="op">=</span> <span class="fu"><a href="reference/credential_helpers.html">creds_file</a></span><span class="op">(</span><span class="st">"email_creds"</span><span class="op">)</span>
+  <span class="op">)</span></code></pre></div>
+</div>
+<div id="sending-an-email-message-through-rstudio-connect" class="section level3">
+<h3 class="hasAnchor">
+<a href="#sending-an-email-message-through-rstudio-connect" class="anchor"></a>Sending an Email Message through RStudio Connect</h3>
+<p>We can also send email based on <strong>R Markdown</strong> files through <strong>RStudio Connect</strong>. The <code><a href="reference/prepare_rsc_example_files.html">prepare_rsc_example_files()</a></code> function provides .Rmd files that facilitate a main report + email report workflow. The key components are the <code><a href="reference/blastula_email.html">blastula::blastula_email</a></code> output type for the email report, and the use of <code><a href="reference/render_email.html">render_connect_email()</a></code> and <code><a href="reference/attach_connect_email.html">attach_connect_email()</a></code> in the main report.</p>
 </div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>The <strong>blastula</strong> package can be installed from CRAN with <code><a href="https://rdrr.io/r/utils/install.packages.html">install.packages()</a></code>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"blastula"</span>)</a></code></pre></div>
+<p>The <strong>blastula</strong> package can be installed from CRAN with <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"blastula"</span><span class="op">)</span></code></pre></div>
 <p>You can install the in-development version of <strong>blastula</strong> from <strong>GitHub</strong> using the <strong>devtools</strong> package.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"rich-iannone/blastula"</span>)</a></code></pre></div>
-<p>If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an <a href="https://github.com/rich-iannone/blastula/issues">issue</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rstudio/blastula"</span><span class="op">)</span></code></pre></div>
+<p>If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an <a href="https://github.com/rstudio/blastula/issues" class="external-link">issue</a>.</p>
+</div>
+<div id="getting-help" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-help" class="anchor"></a>Getting help</h2>
+<p>There are two main places to get help:</p>
+<ol style="list-style-type: decimal">
+<li><p>The <a href="https://community.rstudio.com/c/R-Markdown/10" class="external-link">RStudio community</a> is a friendly place to ask any questions about rmarkdown and the R Markdown family of packages.</p></li>
+<li><p><a href="https://stackoverflow.com/questions/tagged/r-markdown" class="external-link">Stack Overflow</a> is a great source of answers to common rmarkdown questions. It is also a great place to get help, once you have created a reproducible example that illustrates your problem.</p></li>
+</ol>
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
 <a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
-<p>Please note that the <strong>blastula</strong> project is released with a <a href="https://contributor-covenant.org/version/1/0/0">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the <strong>blastula</strong> project is released with a <a href="https://pkgs.rstudio.com/blastula/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
 <a href="#license" class="anchor"></a>License</h2>
-<p>MIT © Richard Iannone</p>
+<p>MIT © RStudio, PBC</p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=blastula">https://​cloud.r-project.org/​package=blastula</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/rich-iannone/blastula">https://​github.com/​rich-iannone/​blastula</a>
+<li>Browse source code at <br><a href="https://github.com/rstudio/blastula/">https://​github.com/​rstudio/​blastula/​</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/rich-iannone/blastula/issues">https://​github.com/​rich-iannone/​blastula/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/rstudio/blastula/issues">https://​github.com/​rstudio/​blastula/​issues</a>
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Richard Iannone <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3925-190X" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID"></a> </li>
+<li>Richard Iannone <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3925-190X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Joe Cheng <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li>
+<a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a> <br><small class="roles"> Copyright holder, funder </small>  </li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=blastula"><img src="https://www.r-pkg.org/badges/version/blastula" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.org/rich-iannone/blastula"><img src="https://travis-ci.org/rich-iannone/blastula.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://codecov.io/gh/rich-iannone/blastula?branch=master"><img src="https://codecov.io/gh/rich-iannone/blastula/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://CRAN.R-project.org/package=blastula" class="external-link"><img src="https://www.r-pkg.org/badges/version/blastula" alt="CRAN status"></a></li>
+<li><a href="https://github.com/rstudio/blastula/actions" class="external-link"><img src="https://github.com/rstudio/blastula/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/gh/rstudio/blastula?branch=master" class="external-link"><img src="https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
-</div>
-</div>
 
-
-      <footer><div class="copyright">
-  <p>Developed by Richard Iannone, Joe Cheng.</p>
+  </div>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+
+      <footer><div class="tidyverse">
+  <p>blastula is built for <strong>R Markdown</strong>, an ecosystem of packages for creating computational documents in R. Learn more at <a href="https://rmarkdown.rstudio.com">rmarkdown.rstudio.com</a>.</p>
+</div>
+
+<div class="author">
+  <p>
+    Developed by Richard Iannone, Joe Cheng, <a href="https://www.rstudio.com"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
+    Site built with <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+  </p>
 </div>
 
       </footer>
@@ -235,6 +315,8 @@
 
   
 
+
+  
 
   </body>
 </html>

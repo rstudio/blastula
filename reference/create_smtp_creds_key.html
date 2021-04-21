@@ -17,27 +17,33 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
 <!-- Bootstrap -->
+<link href="../tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script>
+<link href="../tidyverse-2.css" rel="stylesheet">
+<link href="../rmd.css" rel="stylesheet">
+
 
 
 
@@ -46,8 +52,10 @@
 <meta property="og:description" content="We can set SMTP access credentials in the system-wide key-value store for the
 purpose of more easily sending email messages through smtp_send(). With
 this key added, the credentials helper creds_key() can be used in the
-credentials argument of smtp_send()." />
-<meta property="og:image" content="https://rich-iannone.github.io/blastula/logo.png" />
+credentials argument of smtp_send() (the id value is used to
+unambiguously refer to each key)." />
+<meta property="og:image" content="https://rstudio.github.io/blastula/reference/figures/logo.png" />
+<meta property="og:image:alt" content="blastula package" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -62,11 +70,30 @@ credentials argument of smtp_send()." />
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115082821-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-115082821-1');
+</script>
+
+<!-- javascript assets for rmarkdown -->
+<script src="../ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="../holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../snippets/snippets.js" type="text/javascript" charset="utf-8"></script>
+
+  
+
+  
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -78,16 +105,43 @@ credentials argument of smtp_send()." />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">blastula</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.3.2</span>
       </span>
+
+      <!--<div class="navbar-brand-container">
+        <a class="navbar-brand" href="../index.html">blastula</a>
+        <div class="info hidden-xs hidden-sm">
+          <span class="partof">part of  <a href=""></a></span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.3.2</span>
+        </div>
+      </div>-->
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../articles/blastula.html">Get started</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://solutions.rstudio.com/r/blastula/">Custom Emails with R Markdown and Blastula</a>
+    </li>
+    <li>
+      <a href="https://solutions.rstudio.com/r/blastula/conditional-example/">Customized Conditional Emails with RStudio Connect</a>
+    </li>
+    <li>
+      <a href="https://solutions.rstudio.com/data-science-admin/scheduling/">Scheduling Data Science Tasks</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -97,21 +151,33 @@ credentials argument of smtp_send()." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/simple_composition.html">Simple Email Composition</a>
-    </li>
-    <li>
       <a href="../articles/sending_using_smtp.html">Sending Email Using SMTP</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/rich-iannone/blastula">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://blog.rstudio.com/2019/12/05/emails-from-r-blastula-0-3/">Version 0.3</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://github.com/rstudio/blastula">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -129,7 +195,7 @@ credentials argument of smtp_send()." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Store SMTP credentials in the system's key-value store</h1>
-    <small class="dont-index">Source: <a href='https://github.com/rich-iannone/blastula/blob/master/R/create_credentials.R'><code>R/create_credentials.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/blastula/blob/master/R/create_credentials.R'><code>R/create_credentials.R</code></a></small>
     <div class="hidden name"><code>create_smtp_creds_key.Rd</code></div>
     </div>
 
@@ -137,17 +203,19 @@ credentials argument of smtp_send()." />
     <p>We can set SMTP access credentials in the system-wide key-value store for the
 purpose of more easily sending email messages through <code><a href='smtp_send.html'>smtp_send()</a></code>. With
 this key added, the credentials helper <code><a href='credential_helpers.html'>creds_key()</a></code> can be used in the
-<code>credentials</code> argument of <code><a href='smtp_send.html'>smtp_send()</a></code>.</p>
+<code>credentials</code> argument of <code><a href='smtp_send.html'>smtp_send()</a></code> (the <code>id</code> value is used to
+unambiguously refer to each key).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>create_smtp_creds_key</span>(
-  <span class='no'>id</span>,
-  <span class='kw'>user</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>provider</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>host</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>port</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use_ssl</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>create_smtp_creds_key</span><span class='op'>(</span>
+  <span class='va'>id</span>,
+  user <span class='op'>=</span> <span class='cn'>NULL</span>,
+  provider <span class='op'>=</span> <span class='cn'>NULL</span>,
+  host <span class='op'>=</span> <span class='cn'>NULL</span>,
+  port <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use_ssl <span class='op'>=</span> <span class='cn'>NULL</span>,
+  overwrite <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -155,7 +223,12 @@ this key added, the credentials helper <code><a href='credential_helpers.html'>c
     <tr>
       <th>id</th>
       <td><p>An identifying label for the keyname. The full key name is
-constructed in the following way: <code>blastula-v1-&lt;id&gt;</code>.</p></td>
+constructed in the following way: <code>blastula-v1-&lt;id&gt;</code>. This <code>id</code> value is
+what's needed later to either use the key with <code><a href='credential_helpers.html'>creds_key()</a></code>, or, delete
+the key with <code><a href='delete_credential_key.html'>delete_credential_key()</a></code>. A single, non-<code>NA</code> character,
+numeric, or integer value can be supplied here; the <code>id</code> will be coerced to
+a character value. If the <code>id</code> is supplied as a single character value, it
+cannot be an empty string and it cannot include hyphen characters.</p></td>
     </tr>
     <tr>
       <th>user</th>
@@ -164,7 +237,7 @@ address associated with the account.</p></td>
     </tr>
     <tr>
       <th>provider</th>
-      <td><p>An optional email provider shortname for autocompleting STMP
+      <td><p>An optional email provider shortname for autocompleting SMTP
 configuration details (the <code>host</code>, <code>port</code>, <code>use_ssl</code> options). Options
 currently include <code>gmail</code>, <code>outlook</code>, and <code>office365</code>. If nothing is
 provided then values for <code>host</code>, <code>port</code>, and <code>use_ssl</code> are expected.</p></td>
@@ -172,67 +245,75 @@ provided then values for <code>host</code>, <code>port</code>, and <code>use_ssl
     <tr>
       <th>host</th>
       <td><p>Configuration info for the SMTP server. The <code>host</code>
-and <code>port</code> parameters are the address and port for the SMTP server;
-<code>use_ssl</code> is an option as to whether to use SSL: supply a <code>TRUE</code> or <code>FALSE</code>
-value.</p></td>
+and <code>port</code> parameters are the address and port for the SMTP server.
+<code>use_ssl</code> is an option as to whether to allow the use of STARTTLS, if
+available: it should be <code>TRUE</code> unless you have a specific reason to set it
+to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>port</th>
       <td><p>Configuration info for the SMTP server. The <code>host</code>
-and <code>port</code> parameters are the address and port for the SMTP server;
-<code>use_ssl</code> is an option as to whether to use SSL: supply a <code>TRUE</code> or <code>FALSE</code>
-value.</p></td>
+and <code>port</code> parameters are the address and port for the SMTP server.
+<code>use_ssl</code> is an option as to whether to allow the use of STARTTLS, if
+available: it should be <code>TRUE</code> unless you have a specific reason to set it
+to <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>use_ssl</th>
       <td><p>Configuration info for the SMTP server. The <code>host</code>
-and <code>port</code> parameters are the address and port for the SMTP server;
-<code>use_ssl</code> is an option as to whether to use SSL: supply a <code>TRUE</code> or <code>FALSE</code>
-value.</p></td>
+and <code>port</code> parameters are the address and port for the SMTP server.
+<code>use_ssl</code> is an option as to whether to allow the use of STARTTLS, if
+available: it should be <code>TRUE</code> unless you have a specific reason to set it
+to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>overwrite</th>
+      <td><p>An option that controls the overwriting of existing keys
+with the same <code>id</code> value. By default, this is <code>FALSE</code> (where overwriting is
+prohibited).</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Support for setting keys through <code>create_smtp_creds_key()</code> is provided
-through the <span class="pkg">keyring</span> package. This function cannot be used without that
-package first being available on the system. We can use
-<code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages("keyring")</a></code> to install</p>
+through the <strong>keyring</strong> package. This function cannot be used without that
+package being available on the system. We can use
+<code><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages("keyring")</a></code> to install <strong>keyring</strong>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># Store SMTP crendentials using the
-# system's secure key-value store to
-# make it much easier to send email
-# out through Gmail with `smtp_send()`;
-# provide the `id` of "gmail_creds"
+    <pre class="examples"><div class='input'><span class='co'># Store SMTP credentials using the</span>
+<span class='co'># system's secure key-value store to</span>
+<span class='co'># make it much easier to send email</span>
+<span class='co'># out through Gmail with `smtp_send()`;</span>
+<span class='co'># provide the `id` of "gmail_creds"</span>
 
-# create_smtp_creds_key(
-#   id = "gmail_creds",
-#   provider = "gmail",
-#   user = "user_name@gmail.com",
-#   )
+<span class='co'># create_smtp_creds_key(</span>
+<span class='co'>#   id = "gmail_creds",</span>
+<span class='co'>#   provider = "gmail",</span>
+<span class='co'>#   user = "user_name@gmail.com",</span>
+<span class='co'>#   )</span>
 
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
-      <div class="copyright">
-  <p>Developed by Richard Iannone, Joe Cheng.</p>
+      <div class="tidyverse">
+  <p>blastula is built for <strong>R Markdown</strong>, an ecosystem of packages for creating computational documents in R. Learn more at <a href="https://rmarkdown.rstudio.com">rmarkdown.rstudio.com</a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+<div class="author">
+  <p>
+    Developed by Richard Iannone, Joe Cheng, <a href='https://www.rstudio.com'><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
+    Site built with <a href="https://pkgdown.r-lib.org">pkgdown</a>.
+  </p>
 </div>
 
       </footer>
@@ -240,6 +321,8 @@ package first being available on the system. We can use
 
   
 
+
+  
 
   </body>
 </html>
