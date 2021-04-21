@@ -126,7 +126,7 @@ devtools::install_github("rstudio/blastula")
 
 If you encounter a bug, have usage questions, or want to share ideas to
 make this package better, feel free to file an
-[issue](https://github.com/rich-iannone/blastula/issues).
+[issue](https://github.com/rstudio/blastula/issues).
 
 ## Getting help
 
