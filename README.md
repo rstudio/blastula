@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href='https://rstudio.github.io/blastula'><img src='man/figures/logo.svg' align="right" height="139" /></a>
+# blastula <a href='https://rstudio.github.io/blastula'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
