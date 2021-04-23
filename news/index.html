@@ -195,7 +195,7 @@
 
     <div id="blastula-032" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.2">
-<a href="#blastula-032" class="anchor"></a>blastula 0.3.2<small> 2020-05-19 </small>
+<a href="#blastula-032" class="anchor" aria-hidden="true"></a>blastula 0.3.2<small> 2020-05-19 </small>
 </h1>
 <ul>
 <li><p>Email content width is now customizable in the <code><a href="../reference/blastula_email.html">blastula_email()</a></code> and <code><a href="../reference/compose_email.html">compose_email()</a></code> functions. The default width is now increased to 1000px (<a href='https://github.com/rstudio/blastula/issues/178'>#178</a>).</p></li>
@@ -208,19 +208,19 @@
 </div>
     <div id="blastula-031" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.1">
-<a href="#blastula-031" class="anchor"></a>blastula 0.3.1<small> 2019-11-27 </small>
+<a href="#blastula-031" class="anchor" aria-hidden="true"></a>blastula 0.3.1<small> 2019-11-27 </small>
 </h1>
 <p>This release contains fixes for R CMD check problems on CRAN test machines.</p>
 </div>
     <div id="blastula-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#blastula-030" class="anchor"></a>blastula 0.3.0<small> 2019-11-22 </small>
+<a href="#blastula-030" class="anchor" aria-hidden="true"></a>blastula 0.3.0<small> 2019-11-22 </small>
 </h1>
 <p>The <strong>blastula</strong> package has transitioned to using the <strong>curl</strong> package for SMTP mailing.</p>
 <p>There are new functions for integrating <strong>blastula</strong> with R Markdown publishing on the RStudio Connect service. And sophisticated email bodies can be generated with <em>HTML Blocks</em>.</p>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking Changes</h2>
+<a href="#breaking-changes" class="anchor" aria-hidden="true"></a>Breaking Changes</h2>
 <ul>
 <li><p><code>send_email_out()</code> has been removed; the <code><a href="../reference/smtp_send.html">smtp_send()</a></code> function is its replacement for sending email through an SMTP server</p></li>
 <li><p>The revised <code><a href="../reference/smtp_send.html">smtp_send()</a></code> function internally uses <code><a href="https://jeroen.cran.dev/curl/reference/send_mail.html" class="external-link">curl::send_mail()</a></code> to send RFC2822 email message that <strong>blastula</strong> now independently generates; now, there is no need to download third-party binaries to send via SMTP</p></li>
@@ -233,7 +233,7 @@
 </div>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New Features</h2>
+<a href="#new-features" class="anchor" aria-hidden="true"></a>New Features</h2>
 <ul>
 <li><p>Added functions useful for scheduled email sending in RStudio Connect during publication of R Markdown documents: <code><a href="../reference/render_email.html">render_email()</a></code>, <code><a href="../reference/render_email.html">render_connect_email()</a></code>, <code><a href="../reference/attach_connect_email.html">attach_connect_email()</a></code>, <code><a href="../reference/blastula_email.html">blastula_email()</a></code>, <code><a href="../reference/suppress_scheduled_email.html">suppress_scheduled_email()</a></code>, <code><a href="../reference/prepare_rsc_example_files.html">prepare_rsc_example_files()</a></code></p></li>
 <li><p>The <code><a href="../reference/compose_email.html">compose_email()</a></code> function now has a <code>header</code> argument, allowing for content to populate the area above the <code>body</code></p></li>
@@ -244,7 +244,7 @@
 </div>
 <div id="notes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#notes" class="anchor"></a>Notes</h2>
+<a href="#notes" class="anchor" aria-hidden="true"></a>Notes</h2>
 <ul>
 <li><p>Functions from the <code>getPass</code> package are used internally to ask for a password whenever necessary during an interactive session</p></li>
 <li><p>Functions from the <code>keyring</code> package are used internally to aid in the storage and retrieval of SMTP config/credentials information in the system-wide key-value store (which is cross platform)</p></li>
@@ -253,7 +253,7 @@
 </div>
     <div id="blastula-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#blastula-021" class="anchor"></a>blastula 0.2.1<small> 2018-07-19 </small>
+<a href="#blastula-021" class="anchor" aria-hidden="true"></a>blastula 0.2.1<small> 2018-07-19 </small>
 </h1>
 <ul>
 <li><p>Moved local image URI data into list component, where references to image data are through CIDs</p></li>
@@ -262,7 +262,7 @@
 </div>
     <div id="blastula-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#blastula-020" class="anchor"></a>blastula 0.2.0<small> 2018-03-27 </small>
+<a href="#blastula-020" class="anchor" aria-hidden="true"></a>blastula 0.2.0<small> 2018-03-27 </small>
 </h1>
 <ul>
 <li><p>Removed dependencies on Java; reworked <code>send_email_out()</code> uses a cross-platform binary to send email message via SMTP</p></li>
@@ -273,7 +273,7 @@
 </div>
     <div id="blastula-01" class="section level1">
 <h1 class="page-header" data-toc-text="0.1">
-<a href="#blastula-01" class="anchor"></a>blastula 0.1<small> 2017-08-20 </small>
+<a href="#blastula-01" class="anchor" aria-hidden="true"></a>blastula 0.1<small> 2017-08-20 </small>
 </h1>
 <ul>
 <li><p>Added functions to compose (<code><a href="../reference/compose_email.html">compose_email()</a></code>), preview (<code>preview_email()</code>), and send (<code>send_email_out()</code> and <code><a href="../reference/send_by_mailgun.html">send_by_mailgun()</a></code>) HTML email messages</p></li>

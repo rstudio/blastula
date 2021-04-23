@@ -147,16 +147,16 @@
   <div class="contents col-md-9">
 <div id="blastula-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#blastula-" class="anchor"></a>blastula <a href="https://rstudio.github.io/blastula"><img src="reference/figures/logo.svg" align="right" height="139"></a>
+<a href="#blastula-" class="anchor" aria-hidden="true"></a>blastula <a href="https://rstudio.github.io/blastula"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<a href="#overview" class="anchor" aria-hidden="true"></a>Overview</h2>
 <p>The <strong>blastula</strong> package makes it easy to produce and send HTML email from <strong>R</strong>. The message can have three content areas (the body, the header, and the footer) and we can insert <strong>Markdown</strong> text, block-based components, and even HTML fragments. The underlying HTML/CSS is meant to display properly across a wide range of email clients and webmail services. The resulting email message is responsive so it’ll look great on both large displays and mobile devices.</p>
 <div id="composing-an-email-message" class="section level3">
 <h3 class="hasAnchor">
-<a href="#composing-an-email-message" class="anchor"></a>Composing an Email Message</h3>
+<a href="#composing-an-email-message" class="anchor" aria-hidden="true"></a>Composing an Email Message</h3>
 <p>When you compose an email, you can use objects from the global workspace and work them into the message content. Let’s create a nicely formatted date/time string (<code>date_time</code>) with the <code><a href="reference/add_readable_time.html">add_readable_time()</a></code> function, and, transform an image on disk to an HTML string object (<code>img_string</code>).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get a nicely formatted date/time string</span>
@@ -194,7 +194,7 @@ for sun + cloud photos:
 </div>
 <div id="sending-an-email-message-via-smtp" class="section level3">
 <h3 class="hasAnchor">
-<a href="#sending-an-email-message-via-smtp" class="anchor"></a>Sending an Email Message via SMTP</h3>
+<a href="#sending-an-email-message-via-smtp" class="anchor" aria-hidden="true"></a>Sending an Email Message via SMTP</h3>
 <p>We can store SMTP email credentials in a file using the <code><a href="reference/create_smtp_creds_file.html">create_smtp_creds_file()</a></code> function. There are also other ways to set up SMTP access credentials (like using system-wide key-value store through the <code><a href="reference/create_smtp_creds_key.html">create_smtp_creds_key()</a></code> function).</p>
 <p>Having generated a credentials file, we can use the <code><a href="reference/smtp_send.html">smtp_send()</a></code> function (along with the <code><a href="reference/credential_helpers.html">creds_file()</a></code> credentials helper function) to send the email through an SMTP server.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -209,13 +209,13 @@ for sun + cloud photos:
 </div>
 <div id="sending-an-email-message-through-rstudio-connect" class="section level3">
 <h3 class="hasAnchor">
-<a href="#sending-an-email-message-through-rstudio-connect" class="anchor"></a>Sending an Email Message through RStudio Connect</h3>
+<a href="#sending-an-email-message-through-rstudio-connect" class="anchor" aria-hidden="true"></a>Sending an Email Message through RStudio Connect</h3>
 <p>We can also send email based on <strong>R Markdown</strong> files through <strong>RStudio Connect</strong>. The <code><a href="reference/prepare_rsc_example_files.html">prepare_rsc_example_files()</a></code> function provides .Rmd files that facilitate a main report + email report workflow. The key components are the <code><a href="reference/blastula_email.html">blastula::blastula_email</a></code> output type for the email report, and the use of <code><a href="reference/render_email.html">render_connect_email()</a></code> and <code><a href="reference/attach_connect_email.html">attach_connect_email()</a></code> in the main report.</p>
 </div>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>The <strong>blastula</strong> package can be installed from CRAN with <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"blastula"</span><span class="op">)</span></code></pre></div>
@@ -227,7 +227,7 @@ for sun + cloud photos:
 </div>
 <div id="getting-help" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-help" class="anchor"></a>Getting help</h2>
+<a href="#getting-help" class="anchor" aria-hidden="true"></a>Getting help</h2>
 <p>There are two main places to get help:</p>
 <ol style="list-style-type: decimal">
 <li><p>The <a href="https://community.rstudio.com/c/R-Markdown/10" class="external-link">RStudio community</a> is a friendly place to ask any questions about rmarkdown and the R Markdown family of packages.</p></li>
@@ -236,12 +236,12 @@ for sun + cloud photos:
 </div>
 <div id="code-of-conduct" class="section level2">
 <h2 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<a href="#code-of-conduct" class="anchor" aria-hidden="true"></a>Code of Conduct</h2>
 <p>Please note that the <strong>blastula</strong> project is released with a <a href="https://pkgs.rstudio.com/blastula/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<a href="#license" class="anchor" aria-hidden="true"></a>License</h2>
 <p>MIT © RStudio, PBC</p>
 </div>
 </div>

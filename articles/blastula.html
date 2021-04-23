@@ -156,7 +156,7 @@
 <p>When using <strong>blastula</strong>, we don’t have to worry much about either view since the API is designed to make emails look their best in both of them. Because we can preview the email message before sending it out, we have a chance to manually resize the browser and inspect the message in a variety of display widths.</p>
 <div id="creating-a-simple-html-email-message" class="section level2">
 <h2 class="hasAnchor">
-<a href="#creating-a-simple-html-email-message" class="anchor"></a>Creating a Simple HTML Email Message</h2>
+<a href="#creating-a-simple-html-email-message" class="anchor" aria-hidden="true"></a>Creating a Simple HTML Email Message</h2>
 <p>For those times where we’d only want to send a simple HTML email message, we can use the <code><a href="../reference/compose_email.html">compose_email()</a></code> function and focus on adding text content to the <strong>body</strong> component. So let’s create a simple email message using some plain text inside <code>body</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>
@@ -177,7 +177,7 @@ This is how it looks, depending on the display width (wide at top, narrow below 
 </div>
 <div id="more-sophisticated-email-text" class="section level2">
 <h2 class="hasAnchor">
-<a href="#more-sophisticated-email-text" class="anchor"></a>More Sophisticated Email Text</h2>
+<a href="#more-sophisticated-email-text" class="anchor" aria-hidden="true"></a>More Sophisticated Email Text</h2>
 <p>A good strategy for longer and more complicated text inputs is to use the <a href="https://glue.tidyverse.org" class="external-link"><strong>glue</strong></a> package. That package allows us to use string interpolation (and avoid the use of <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code> or <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>). Variables in the global workspace can be included in the curly braces of a <code>glue()</code> string expression, and, any <strong>R</strong> expressions in <code>{ }</code> will be evaluated.</p>
 <p>We can include longer <strong>R</strong> statements inside of the curly braces (like <code>{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %&gt;% as.numeric(), ", ", format(Sys.time(), "%Y"))}</code>), however, that would be unwieldy. It’s better to generate local variables with <strong>R</strong> statements and just use those variables inside the <code>{ }</code>.</p>
 <p>Here is an example of the same email message body as in the last example, but using <strong>glue</strong> to preprocess our text:</p>
@@ -203,7 +203,7 @@ come over and do that.
 </div>
 <div id="using-markdown-text-via-the-md-function" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-markdown-text-via-the-md-function" class="anchor"></a>Using Markdown Text via the <code>md()</code> Function</h2>
+<a href="#using-markdown-text-via-the-md-function" class="anchor" aria-hidden="true"></a>Using Markdown Text via the <code>md()</code> Function</h2>
 <p>Markdown text can be used as input for the <code>body</code>, <code>header</code>, and <code>footer</code> arguments. To opt into using Markdown formatting, call the <code><a href="../reference/md.html">md()</a></code> text helper function on any of these text elements. We can use the usual Markdown-formatting you know and you’ll get italicized text, bold text, lists, links, etc. Have a look at <a href="https://commonmark.org/help/" class="external-link">this reference page</a> to quickly understand how to use Markdown. The <strong>blastula</strong> package internally uses the <strong>commonmark</strong> <strong>R</strong> package to perform the conversion from Markdown to HTML.</p>
 <p>A few notes on code style and options. It’s good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a line break, which will result in <code>text like this</code> when using Markdown formatting through <code><a href="../reference/md.html">md()</a></code>.</p>
 <p>In the next example, let’s first store the result of that statement in a local variable (<code>sending_date</code>). Then, the variable will be placed in the <strong>footer</strong> of the message (using the <code>footer</code> argument) along with leading text.</p>
@@ -252,7 +252,7 @@ Complicated string formatting goes into variables, the variables go into the ema
 </div>
 <div id="adding-an-image-to-an-email" class="section level2">
 <h2 class="hasAnchor">
-<a href="#adding-an-image-to-an-email" class="anchor"></a>Adding an Image to an Email</h2>
+<a href="#adding-an-image-to-an-email" class="anchor" aria-hidden="true"></a>Adding an Image to an Email</h2>
 <p>The <strong>blastula</strong> package has the <code><a href="../reference/add_image.html">add_image()</a></code> function which allows one to add images to an email message. What <code>add_image</code> does is generate an HTML fragment (a piece of HTML that can be included in an HTML document) with the image transformed to text (using Base64 encoding). Knowing that we have an HTML fragment is important because it means we need to use the <code><a href="../reference/md.html">md()</a></code> function to interpret the content as Markdown/HTML (a Markdown parser will leave any HTML that it sees untouched).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Prepare the image (as a text input)</span>
@@ -332,7 +332,7 @@ A ggplot in your email message
 </div>
 <div id="wrapping-up" class="section level2">
 <h2 class="hasAnchor">
-<a href="#wrapping-up" class="anchor"></a>Wrapping Up</h2>
+<a href="#wrapping-up" class="anchor" aria-hidden="true"></a>Wrapping Up</h2>
 <p>We now know how to send really simple email messages with just some text, and, slightly more complex messages including those with images inside.</p>
 </div>
   </div>

@@ -155,12 +155,12 @@
 <p>We’ll go through each of these setup steps before getting into several sending examples with <code><a href="../reference/smtp_send.html">smtp_send()</a></code>.</p>
 <div id="requirement-for-using-gmail" class="section level2">
 <h2 class="hasAnchor">
-<a href="#requirement-for-using-gmail" class="anchor"></a>Requirement for Using Gmail</h2>
+<a href="#requirement-for-using-gmail" class="anchor" aria-hidden="true"></a>Requirement for Using Gmail</h2>
 <p>Before using <strong>Gmail</strong> to send out email through <strong>blastula</strong>, there is a key <strong>Gmail</strong> account setting that must changed from the default value. We have to allow <em>Less Secure Apps</em> to use your the <strong>Gmail</strong> account. Details on how to make this account-level change can be found in <a href="https://support.google.com/accounts/answer/6010255" class="external-link">this support document</a>.</p>
 </div>
 <div id="storing-credentials-and-smtp-configuration-data-for-later-use" class="section level2">
 <h2 class="hasAnchor">
-<a href="#storing-credentials-and-smtp-configuration-data-for-later-use" class="anchor"></a>Storing Credentials and SMTP Configuration Data for Later Use</h2>
+<a href="#storing-credentials-and-smtp-configuration-data-for-later-use" class="anchor" aria-hidden="true"></a>Storing Credentials and SMTP Configuration Data for Later Use</h2>
 <p>While we can provide SMTP login and configuration information directly whenever we send email, it can be convenient to store this data for easy retrieval. It should be noted that the manually specifying credentials is more secure since no sensitive information is ever stored on disk (and password entry is obscured). Should you want to store credentials on-disk, however, there are two methods available for this:</p>
 <ol style="list-style-type: decimal">
 <li>Storing credentials in the system’s key-value store</li>
@@ -215,7 +215,7 @@
 </div>
 <div id="sending-email" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sending-email" class="anchor"></a>Sending Email</h2>
+<a href="#sending-email" class="anchor" aria-hidden="true"></a>Sending Email</h2>
 <p>Let’s create a simple test message with the <code><a href="../reference/prepare_test_message.html">prepare_test_message()</a></code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create the test message, this returns</span>
@@ -269,7 +269,7 @@ The test message
 </div>
 <div id="concluding" class="section level2">
 <h2 class="hasAnchor">
-<a href="#concluding" class="anchor"></a>Concluding</h2>
+<a href="#concluding" class="anchor" aria-hidden="true"></a>Concluding</h2>
 <p>This covers the basics on how to get up and running on sending emails through <strong>blastula</strong>’s SMTP functionality. If you encounter a bug (or just have a question or feature request) please file an <a href="https://github.com/rstudio/blastula/issues" class="external-link">issue</a>.</p>
 </div>
   </div>
