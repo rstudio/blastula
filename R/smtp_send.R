@@ -131,7 +131,8 @@ smtp_send <- function(email,
                       bcc = NULL,
                       credentials = NULL,
                       creds_file = "deprecated",
-                      verbose = FALSE) {
+                      verbose = FALSE,
+                      ...) {
 
   # Verify that the `message` object
   # is of the class `email_message`
@@ -215,7 +216,8 @@ smtp_send <- function(email,
       use_ssl = credentials$use_ssl %||% TRUE,
       verbose = verbose,
       username = credentials$user,
-      password = credentials$password
+      password = credentials$password,
+      ...
     )
 
   # Transmit a message about send success depending on the status code
