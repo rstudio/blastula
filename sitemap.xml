@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://rstudio.github.io/blastula/404.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/articles/blastula.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/articles/sending_using_smtp.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/authors.html</loc>
+  </url>
+  <url>
     <loc>https://rstudio.github.io/blastula/index.html</loc>
+  </url>
+  <url>
+    <loc>https://rstudio.github.io/blastula/news/index.html</loc>
   </url>
   <url>
     <loc>https://rstudio.github.io/blastula/reference/add_attachment.html</loc>
@@ -73,6 +100,9 @@
     <loc>https://rstudio.github.io/blastula/reference/get_html_str.html</loc>
   </url>
   <url>
+    <loc>https://rstudio.github.io/blastula/reference/index.html</loc>
+  </url>
+  <url>
     <loc>https://rstudio.github.io/blastula/reference/md.html</loc>
   </url>
   <url>
@@ -104,11 +134,5 @@
   </url>
   <url>
     <loc>https://rstudio.github.io/blastula/reference/view_credential_keys.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/articles/blastula.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/articles/sending_using_smtp.html</loc>
   </url>
 </urlset>

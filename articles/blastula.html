@@ -51,14 +51,14 @@
 
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">blastula</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
       </span>
 
       <!--<div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">blastula</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of  <a href=""></a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Development version">0.3.2</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.2</span>
         </div>
       </div>-->
     </div>
@@ -69,7 +69,7 @@
   <a href="../articles/blastula.html">Get started</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Examples
      
     <span class="caret"></span>
@@ -87,7 +87,7 @@
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -102,7 +102,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
      
     <span class="caret"></span>
@@ -112,7 +112,8 @@
       <a href="../news/index.html">Changelog</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Blog posts</li>
+    </li>
+<li class="dropdown-header">Blog posts</li>
     <li>
       <a href="https://blog.rstudio.com/2019/12/05/emails-from-r-blastula-0-3/" class="external-link">Version 0.3</a>
     </li>
@@ -140,7 +141,7 @@
       <h1 data-toc-skip>Getting Started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/blastula/blob/master/vignettes/blastula.Rmd" class="external-link"><code>vignettes/blastula.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/blastula/blob/HEAD/vignettes/blastula.Rmd" class="external-link"><code>vignettes/blastula.Rmd</code></a></small>
       <div class="hidden name"><code>blastula.Rmd</code></div>
 
     </div>
@@ -154,19 +155,19 @@
 <p>The main components (from top to bottom) are the <strong>header</strong>, the <strong>body</strong>, and the <strong>footer</strong>. The <strong>body</strong> content is inside of a wrapper that functions to differentiate the main content from whatever is in the <strong>header</strong> and <strong>footer</strong> (above and below the <strong>body</strong>).</p>
 <p>Another thing to note is that the HTML used is responsive. Viewing the HTML in a viewport that is greater than or equal to 640 pixels will be different than seeing it with a viewport that’s smaller. This is important because email on mobile devices will often take on the latter view, which is optimized for smaller display widths (e.g., larger font sizes, decreased vertical space between elements, resized images, etc.).</p>
 <p>When using <strong>blastula</strong>, we don’t have to worry much about either view since the API is designed to make emails look their best in both of them. Because we can preview the email message before sending it out, we have a chance to manually resize the browser and inspect the message in a variety of display widths.</p>
-<div id="creating-a-simple-html-email-message" class="section level2">
-<h2 class="hasAnchor">
-<a href="#creating-a-simple-html-email-message" class="anchor" aria-hidden="true"></a>Creating a Simple HTML Email Message</h2>
+<div class="section level2">
+<h2 id="creating-a-simple-html-email-message">Creating a Simple HTML Email Message<a class="anchor" aria-label="anchor" href="#creating-a-simple-html-email-message"></a>
+</h2>
 <p>For those times where we’d only want to send a simple HTML email message, we can use the <code><a href="../reference/compose_email.html">compose_email()</a></code> function and focus on adding text content to the <strong>body</strong> component. So let’s create a simple email message using some plain text inside <code>body</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>
-  body <span class="op">=</span> 
-<span class="st">"Hello,
-
-I just wanted to let you know that the thing that you asked me for is ready to pick up. So, come over and do that.
-
-Cheers
-"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span></span>
+<span>  body <span class="op">=</span> </span>
+<span><span class="st">"Hello,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">I just wanted to let you know that the thing that you asked me for is ready to pick up. So, come over and do that.</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">Cheers</span></span>
+<span><span class="st">"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/compose_simple-wide.png" width="100%"></p>
 <p><img src="images/compose_simple-narrow.png" width="100%"></p>
 <p align="center">
@@ -175,74 +176,74 @@ This is how it looks, depending on the display width (wide at top, narrow below 
 <p><br></p>
 <p>A preview of the HTML email message should appear in the Viewer. Try resizing the Viewer to see how it responds to the different width thresholds.</p>
 </div>
-<div id="more-sophisticated-email-text" class="section level2">
-<h2 class="hasAnchor">
-<a href="#more-sophisticated-email-text" class="anchor" aria-hidden="true"></a>More Sophisticated Email Text</h2>
-<p>A good strategy for longer and more complicated text inputs is to use the <a href="https://glue.tidyverse.org" class="external-link"><strong>glue</strong></a> package. That package allows us to use string interpolation (and avoid the use of <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code> or <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>). Variables in the global workspace can be included in the curly braces of a <code>glue()</code> string expression, and, any <strong>R</strong> expressions in <code>{ }</code> will be evaluated.</p>
-<p>We can include longer <strong>R</strong> statements inside of the curly braces (like <code>{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %&gt;% as.numeric(), ", ", format(Sys.time(), "%Y"))}</code>), however, that would be unwieldy. It’s better to generate local variables with <strong>R</strong> statements and just use those variables inside the <code>{ }</code>.</p>
+<div class="section level2">
+<h2 id="more-sophisticated-email-text">More Sophisticated Email Text<a class="anchor" aria-label="anchor" href="#more-sophisticated-email-text"></a>
+</h2>
+<p>A good strategy for longer and more complicated text inputs is to use the <a href="https://glue.tidyverse.org" class="external-link"><strong>glue</strong></a> package. That package allows us to use string interpolation (and avoid the use of <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code> or <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>). Variables in the global workspace can be included in the curly braces of a <code>glue()</code> string expression, and, any <strong>R</strong> expressions in <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{ }</a></code> will be evaluated.</p>
+<p>We can include longer <strong>R</strong> statements inside of the curly braces (like <code>{paste0(format(Sys.time(), "%A, %B "), format(Sys.time(), "%d") %&gt;% as.numeric(), ", ", format(Sys.time(), "%Y"))}</code>), however, that would be unwieldy. It’s better to generate local variables with <strong>R</strong> statements and just use those variables inside the <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{ }</a></code>.</p>
 <p>Here is an example of the same email message body as in the last example, but using <strong>glue</strong> to preprocess our text:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">what</span> <span class="op">&lt;-</span> <span class="st">"thing"</span>
-<span class="va">salutation</span> <span class="op">&lt;-</span> <span class="st">"Cheers"</span>
-
-<span class="va">body_text</span> <span class="op">&lt;-</span>
-  <span class="fu">glue</span><span class="op">(</span>
-    <span class="st">"
-Hello,
-
-I just wanted to let you know that the {what}
-that you asked me for is ready to pick up. So,
-come over and do that.
-
-{salutation}
-"</span>   
-  <span class="op">)</span>
-
-<span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>body <span class="op">=</span> <span class="va">body_text</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">what</span> <span class="op">&lt;-</span> <span class="st">"thing"</span></span>
+<span><span class="va">salutation</span> <span class="op">&lt;-</span> <span class="st">"Cheers"</span></span>
+<span></span>
+<span><span class="va">body_text</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">glue</span><span class="op">(</span></span>
+<span>    <span class="st">"</span></span>
+<span><span class="st">Hello,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">I just wanted to let you know that the {what}</span></span>
+<span><span class="st">that you asked me for is ready to pick up. So,</span></span>
+<span><span class="st">come over and do that.</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">{salutation}</span></span>
+<span><span class="st">"</span>   </span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>body <span class="op">=</span> <span class="va">body_text</span><span class="op">)</span></span></code></pre></div>
 <p>Any literal quotation marks inside the braces should be escaped using a single <code>\</code>. Blank lines separating blocks of text result in new paragraphs.</p>
 </div>
-<div id="using-markdown-text-via-the-md-function" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-markdown-text-via-the-md-function" class="anchor" aria-hidden="true"></a>Using Markdown Text via the <code>md()</code> Function</h2>
+<div class="section level2">
+<h2 id="using-markdown-text-via-the-md-function">Using Markdown Text via the <code>md()</code> Function<a class="anchor" aria-label="anchor" href="#using-markdown-text-via-the-md-function"></a>
+</h2>
 <p>Markdown text can be used as input for the <code>body</code>, <code>header</code>, and <code>footer</code> arguments. To opt into using Markdown formatting, call the <code><a href="../reference/md.html">md()</a></code> text helper function on any of these text elements. We can use the usual Markdown-formatting you know and you’ll get italicized text, bold text, lists, links, etc. Have a look at <a href="https://commonmark.org/help/" class="external-link">this reference page</a> to quickly understand how to use Markdown. The <strong>blastula</strong> package internally uses the <strong>commonmark</strong> <strong>R</strong> package to perform the conversion from Markdown to HTML.</p>
 <p>A few notes on code style and options. It’s good to left-align the text in the code example since it will reduce the risk of having four or more spaces after a line break, which will result in <code>text like this</code> when using Markdown formatting through <code><a href="../reference/md.html">md()</a></code>.</p>
 <p>In the next example, let’s first store the result of that statement in a local variable (<code>sending_date</code>). Then, the variable will be placed in the <strong>footer</strong> of the message (using the <code>footer</code> argument) along with leading text.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Prepare the text inputs</span>
-<span class="va">sender_name</span> <span class="op">&lt;-</span> <span class="st">"Shelly"</span>
-
-<span class="va">sending_date</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span>
-    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%A, %B "</span><span class="op">)</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%d"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="op">)</span>,
-    <span class="st">", "</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span>
-  <span class="op">)</span>
-
-<span class="co"># Generate the body text</span>
-<span class="va">body_text</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span>
-    <span class="st">"
-Hello,
-
-I just wanted to let you know that the *thing* that
-you asked me for is ready to pick up. So, come over
-and do that.
-
-Cheers,
-
-{sender_name}
-"</span>    
-  <span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Generate the footer text</span>
-<span class="va">footer_text</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="op">(</span><span class="st">"Sent on {sending_date}."</span><span class="op">)</span>
-
-<span class="co"># Compose the email message</span>
-<span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>
-  body <span class="op">=</span> <span class="va">body_text</span>,
-  footer <span class="op">=</span> <span class="va">footer_text</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Prepare the text inputs</span></span>
+<span><span class="va">sender_name</span> <span class="op">&lt;-</span> <span class="st">"Shelly"</span></span>
+<span></span>
+<span><span class="va">sending_date</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%A, %B "</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%d"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    <span class="st">", "</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate the body text</span></span>
+<span><span class="va">body_text</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span></span>
+<span>    <span class="st">"</span></span>
+<span><span class="st">Hello,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">I just wanted to let you know that the *thing* that</span></span>
+<span><span class="st">you asked me for is ready to pick up. So, come over</span></span>
+<span><span class="st">and do that.</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">Cheers,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">{sender_name}</span></span>
+<span><span class="st">"</span>    </span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate the footer text</span></span>
+<span><span class="va">footer_text</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="op">(</span><span class="st">"Sent on {sending_date}."</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compose the email message</span></span>
+<span><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span></span>
+<span>  body <span class="op">=</span> <span class="va">body_text</span>,</span>
+<span>  footer <span class="op">=</span> <span class="va">footer_text</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/compose_interpolation_stmt-wide.png" width="100%"></p>
 <p align="center">
 Complicated string formatting goes into variables, the variables go into the email components
@@ -250,39 +251,39 @@ Complicated string formatting goes into variables, the variables go into the ema
 <p><br></p>
 <p>Content in the <strong>footer</strong> and <strong>header</strong> sections is styled differently than <strong>body</strong> content (<strong>footer</strong> text will be somewhat smaller for one thing). The main message typically goes into the <strong>body</strong> whereas supplementary information works better in the <strong>footer</strong>.</p>
 </div>
-<div id="adding-an-image-to-an-email" class="section level2">
-<h2 class="hasAnchor">
-<a href="#adding-an-image-to-an-email" class="anchor" aria-hidden="true"></a>Adding an Image to an Email</h2>
+<div class="section level2">
+<h2 id="adding-an-image-to-an-email">Adding an Image to an Email<a class="anchor" aria-label="anchor" href="#adding-an-image-to-an-email"></a>
+</h2>
 <p>The <strong>blastula</strong> package has the <code><a href="../reference/add_image.html">add_image()</a></code> function which allows one to add images to an email message. What <code>add_image</code> does is generate an HTML fragment (a piece of HTML that can be included in an HTML document) with the image transformed to text (using Base64 encoding). Knowing that we have an HTML fragment is important because it means we need to use the <code><a href="../reference/md.html">md()</a></code> function to interpret the content as Markdown/HTML (a Markdown parser will leave any HTML that it sees untouched).</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Prepare the image (as a text input)</span>
-<span class="va">img_file_path</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>
-    <span class="st">"img"</span>, <span class="st">"rickenbacker_4001_1972.jpg"</span>,
-    package <span class="op">=</span> <span class="st">"blastula"</span>
-  <span class="op">)</span>
-
-<span class="va">image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_image.html">add_image</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">img_file_path</span><span class="op">)</span>
-
-<span class="co"># Generate the body text</span>
-<span class="va">body_text</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span>
-    <span class="st">"
-Hello,
-
-I just wanted to let you know that the **1972 Rickenbacker
-4001** is here to pick up. Here is a picture of it:
-
-{image}
-
-Cheers,
-
-{sender_name}
-"</span>
-  <span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Compose the email message</span>
-<span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>body <span class="op">=</span> <span class="va">body_text</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Prepare the image (as a text input)</span></span>
+<span><span class="va">img_file_path</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
+<span>    <span class="st">"img"</span>, <span class="st">"rickenbacker_4001_1972.jpg"</span>,</span>
+<span>    package <span class="op">=</span> <span class="st">"blastula"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_image.html">add_image</a></span><span class="op">(</span>file <span class="op">=</span> <span class="va">img_file_path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate the body text</span></span>
+<span><span class="va">body_text</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span></span>
+<span>    <span class="st">"</span></span>
+<span><span class="st">Hello,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">I just wanted to let you know that the **1972 Rickenbacker</span></span>
+<span><span class="st">4001** is here to pick up. Here is a picture of it:</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">{image}</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">Cheers,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">{sender_name}</span></span>
+<span><span class="st">"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compose the email message</span></span>
+<span><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>body <span class="op">=</span> <span class="va">body_text</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/compose_image-wide.png" width="100%"></p>
 <p align="center">
 Once you get the hang of <code><a href="../reference/add_image.html">add_image()</a></code>, this is really easy
@@ -290,39 +291,39 @@ Once you get the hang of <code><a href="../reference/add_image.html">add_image()
 <p><br></p>
 <p>There’s also the <code><a href="../reference/add_ggplot.html">add_ggplot()</a></code> function which can add a <strong>ggplot2</strong> plot object to a message body. Here’s an example of how that works:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Create the plot data</span>
-<span class="va">variety</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, each <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
-<span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"high"</span>, <span class="st">"low"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">20</span><span class="op">)</span>
-<span class="va">note</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">280</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>, <span class="fl">280</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">variety</span>, <span class="va">treatment</span>, <span class="va">note</span><span class="op">)</span>
-
-<span class="co"># Create the plot</span>
-<span class="va">gg</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">variety</span>, y <span class="op">=</span> <span class="va">note</span>, fill <span class="op">=</span> <span class="va">treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># Prepare the image (as a text input)</span>
-<span class="va">gg_image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_ggplot.html">add_ggplot</a></span><span class="op">(</span>plot_object <span class="op">=</span> <span class="va">gg</span><span class="op">)</span>
-
-<span class="co"># Generate the body text</span>
-<span class="va">body_text</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="../reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span>
-    <span class="st">"
-Hello,
-
-I just wanted to let you know that the *ggplot* you \\
-wanted to see is right here, in this email:
-
-{gg_image}
-
-Cheers,
-
-{sender_name}
-"</span>
-  <span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Compose the email message</span>
-<span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>body <span class="op">=</span> <span class="va">body_text</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Create the plot data</span></span>
+<span><span class="va">variety</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">LETTERS</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">]</span>, each <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
+<span><span class="va">treatment</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"high"</span>, <span class="st">"low"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
+<span><span class="va">note</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">280</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>, <span class="fl">280</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">variety</span>, <span class="va">treatment</span>, <span class="va">note</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create the plot</span></span>
+<span><span class="va">gg</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">variety</span>, y <span class="op">=</span> <span class="va">note</span>, fill <span class="op">=</span> <span class="va">treatment</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Prepare the image (as a text input)</span></span>
+<span><span class="va">gg_image</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add_ggplot.html">add_ggplot</a></span><span class="op">(</span>plot_object <span class="op">=</span> <span class="va">gg</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Generate the body text</span></span>
+<span><span class="va">body_text</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/md.html">md</a></span><span class="op">(</span><span class="fu">glue</span><span class="op">(</span></span>
+<span>    <span class="st">"</span></span>
+<span><span class="st">Hello,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">I just wanted to let you know that the *ggplot* you \\</span></span>
+<span><span class="st">wanted to see is right here, in this email:</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">{gg_image}</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">Cheers,</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">{sender_name}</span></span>
+<span><span class="st">"</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Compose the email message</span></span>
+<span><span class="fu"><a href="../reference/compose_email.html">compose_email</a></span><span class="op">(</span>body <span class="op">=</span> <span class="va">body_text</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/compose_ggplot-wide.png" width="100%"></p>
 <p align="center">
 A ggplot in your email message
@@ -330,9 +331,9 @@ A ggplot in your email message
 <p><br></p>
 <p>I don’t know about you but I’d love to get a ggplot in <em>my</em> email.</p>
 </div>
-<div id="wrapping-up" class="section level2">
-<h2 class="hasAnchor">
-<a href="#wrapping-up" class="anchor" aria-hidden="true"></a>Wrapping Up</h2>
+<div class="section level2">
+<h2 id="wrapping-up">Wrapping Up<a class="anchor" aria-label="anchor" href="#wrapping-up"></a>
+</h2>
 <p>We now know how to send really simple email messages with just some text, and, slightly more complex messages including those with images inside.</p>
 </div>
   </div>
@@ -352,10 +353,8 @@ A ggplot in your email message
 </div>
 
 <div class="author">
-  <p>
-    Developed by Richard Iannone, Joe Cheng, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" height="24"></a>.
-    Site built with <a href="https://pkgdown.r-lib.org" class="external-link">pkgdown</a>.
-  </p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer>

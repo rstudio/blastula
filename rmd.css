@@ -459,3 +459,9 @@ a.thumbnail:hover {
 .page-header {
 	padding-bottom: 0px;
 }
+
+/* Size of book cover in README */
+img.book {
+    height: 400px;
+    width: auto;
+}
