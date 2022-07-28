@@ -161,3 +161,17 @@ Here is a plot:
   # `email$images` is of the class `character`
   expect_type(email$images[[1]], "character")
 })
+
+test_that("add_attachment supports multiple files", {
+  files <- c(tempfile(fileext = ".txt"), tempfile(fileext = ".txt"))
+  writeLines("file1", files[1])
+  writeLines("file2", files[2])
+  email <- compose_email("test")
+  out1 <- add_attachment(email, files)$attachments
+  out2 <- local({
+    email <- add_attachment(email, files[1])
+    email <- add_attachment(email, files[2])
+    email$attachments
+  })
+  expect_equal(out1, out2)
+})

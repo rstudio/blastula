@@ -1,3 +1,7 @@
+# blastula 0.3.3
+
+* The `file` argument of `add_attachment()` now supports a vector of strings (#239, thanks @shrektan for the PR).
+
 # blastula 0.3.2
 
 * Email content width is now customizable in the `blastula_email()` and `compose_email()` functions. The default width is now increased to 1000px (#178).
