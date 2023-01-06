@@ -121,9 +121,18 @@ There are two main places to get help:
 1. [Stack Overflow](https://stackoverflow.com/questions/tagged/r-markdown) is a great source of answers to common rmarkdown questions. It is also a great place to get help, once you have created a reproducible example that illustrates your problem.
 
 ## Code of Conduct
-  
-Please note that the **blastula** project is released with a [Contributor Code of Conduct](https://pkgs.rstudio.com/blastula/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
 
-## License
+Please note that the gt project is released with a [contributor code of
+conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By
+participating in this project you agree to abide by its terms.
 
-MIT &copy; RStudio, PBC
+## 📄 License
+
+**gt** is licensed under the MIT license. See the
+[`LICENSE.md`](LICENSE.md) file for more details.
+
+© Posit Software, PBC.
+
+## 🏛️ Governance
+
+This project is primarily maintained by [Rich Iannone](https://twitter.com/riannone). Other authors may occasionally assist with some of these duties.

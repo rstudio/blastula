@@ -145,11 +145,19 @@ There are two main places to get help:
 
 ## Code of Conduct
 
-Please note that the **blastula** project is released with a
-[Contributor Code of
-Conduct](https://pkgs.rstudio.com/blastula/CODE_OF_CONDUCT.html). By
-contributing to this project, you agree to abide by its terms.
+Please note that the gt project is released with a [contributor code of
+conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By
+participating in this project you agree to abide by its terms.
 
-## License
+## 📄 License
 
-MIT © RStudio, PBC
+**gt** is licensed under the MIT license. See the
+[`LICENSE.md`](LICENSE.md) file for more details.
+
+© Posit Software, PBC.
+
+## 🏛️ Governance
+
+This project is primarily maintained by [Rich
+Iannone](https://twitter.com/riannone). Other authors may occasionally
+assist with some of these duties.
