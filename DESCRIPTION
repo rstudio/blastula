@@ -16,7 +16,7 @@ Description: Compose and send out responsive HTML email messages that render
     let the user insert embedded images, web link buttons, and 'ggplot2' plot
     objects into the message body. Messages can be sent through an 'SMTP'
     server, through the 'RStudio Connect' service, or through the 'Mailgun' API
-    service <http://mailgun.com/>.
+    service <https://www.mailgun.com/>.
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/blastula
 BugReports: https://github.com/rstudio/blastula/issues

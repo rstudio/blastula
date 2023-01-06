@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# blastula <a href='https://rstudio.github.io/blastula'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# blastula <a href='https://pkgs.rstudio.com/blastula/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/blastula)](https://CRAN.R-project.org/package=blastula)
 [![R-CMD-check](https://github.com/rstudio/blastula/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/blastula/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/blastula?branch=master)
+coverage](https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rstudio/blastula?branch=master)
 
 ## Overview
 
@@ -133,7 +133,7 @@ make this package better, feel free to file an
 There are two main places to get help:
 
 1.  The [RStudio
-    community](https://community.rstudio.com/c/R-Markdown/10) is a
+    community](https://community.rstudio.com/c/r-markdown/10) is a
     friendly place to ask any questions about rmarkdown and the R
     Markdown family of packages.
 
