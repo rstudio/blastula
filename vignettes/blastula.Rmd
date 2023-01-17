@@ -179,7 +179,7 @@ Cheers,
 compose_email(body = body_text)
 ```
 
-<img src="images/compose_image-wide.png" width=100%>
+<img src="images/compose_image-wide.jpg" width=100%>
 
 <p align="center">Once you get the hang of `add_image()`, this is really easy</p>
 <br>

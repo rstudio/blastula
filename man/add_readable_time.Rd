@@ -25,3 +25,20 @@ current date/time/tz (based on the user's locale information at the time of
 the function call). There are options to specify whether the date, time, and
 time zone parts are to be included.
 }
+\examples{
+
+# Generate a date and time value using a specified date/time value
+add_readable_time(
+  time = ISOdatetime(
+    year = 2022,
+    month = 3,
+    day = 15,
+    hour = 8,
+    min = 30,
+    sec = 0,
+    tz = "GMT"
+   ),
+  use_tz = FALSE
+)
+
+}
