@@ -98,7 +98,7 @@ email %>%
   )
 ```
 
-### Sending an Email Message through RStudio Connect
+### Sending Email Messages through RStudio Connect
 
 We can also send email based on **R Markdown** files through **RStudio
 Connect**. The `prepare_rsc_example_files()` function provides .Rmd
@@ -112,14 +112,14 @@ report, and the use of `render_connect_email()` and
 The **blastula** package can be installed from CRAN with
 `install.packages()`.
 
-``` r
+```r
 install.packages("blastula")
 ```
 
 You can install the in-development version of **blastula** from
 **GitHub** using the **devtools** package.
 
-``` r
+```r
 install.packages("devtools")
 devtools::install_github("rstudio/blastula")
 ```
@@ -143,9 +143,10 @@ There are two main places to get help:
     a great place to get help, once you have created a reproducible
     example that illustrates your problem.
 
-## Code of Conduct
+##### Code of Conduct
 
-Please note that the gt project is released with a [contributor code of
+Please note that the `rstudio/blastula` project is released with a
+[contributor code of
 conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).<br>By
 participating in this project you agree to abide by its terms.
 
