@@ -18,6 +18,7 @@ blastula_email(
   dev = "png",
   smart = TRUE,
   self_contained = TRUE,
+  math_method = "webtex",
   template = "blastula",
   includes = NULL,
   keep_md = FALSE,
@@ -70,6 +71,13 @@ dashes, and instances of \code{...} to ellipses. By default, this is \code{TRUE}
 default, this is \code{TRUE}. The standalone HTML file will have no external
 dependencies, it will use URIs to incorporate the contents of linked
 scripts, stylesheets, images, and videos.}
+
+\item{math_method}{Passed to \code{math_method} in \code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}.
+Only method \code{webtex} is supported at the moment to generate math as svg
+image (default), or png (by specifying a url). See details in
+\code{\link[rmarkdown:html_document]{rmarkdown::html_document()}}. Set to \code{NULL} to deactivate math processing.
+_Note: Using \code{webtex} requires a internet connection when rendering the
+document as an external service is used.}
 
 \item{template}{The Pandoc template to use for rendering. This is the
 \code{"blastula"} template by default.}

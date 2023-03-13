@@ -32,6 +32,12 @@
 #'   default, this is `TRUE`. The standalone HTML file will have no external
 #'   dependencies, it will use URIs to incorporate the contents of linked
 #'   scripts, stylesheets, images, and videos.
+#' @param math_method Passed to `math_method` in [rmarkdown::html_document()].
+#'   Only method `webtex` is supported at the moment to generate math as svg
+#'   image (default), or png (by specifying a url). See details in
+#'   [rmarkdown::html_document()]. Set to `NULL` to deactivate math processing.
+#'   _Note: Using `webtex` requires a internet connection when rendering the
+#'   document as an external service is used.
 #' @param template The Pandoc template to use for rendering. This is the
 #'   `"blastula"` template by default.
 #' @param includes A named list of additional content to include within the
@@ -59,6 +65,7 @@ blastula_email <- function(content_width = "1000px",
                            dev = "png",
                            smart = TRUE,
                            self_contained = TRUE,
+                           math_method = "webtex",
                            template = "blastula",
                            includes = NULL,
                            keep_md = FALSE,
@@ -70,6 +77,10 @@ blastula_email <- function(content_width = "1000px",
 
   if (template == "blastula") {
     template <- system.file("rmd", "template.html", package = "blastula")
+  }
+
+  if (!is.null(math_method) && math_method != "webtex") {
+    stop("Only 'webtex' method is for now supported when math is activated.")
   }
 
   # Note bash escaping is handled by R Markdown (via shQuote())
@@ -111,7 +122,8 @@ blastula_email <- function(content_width = "1000px",
     self_contained = self_contained,
     theme = "default",
     highlight = "default",
-    mathjax = NULL,
+    math_method = math_method,
+    mathjax = "default",
     template = template,
     extra_dependencies = NULL,
     css = NULL,
