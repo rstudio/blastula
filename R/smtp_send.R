@@ -47,6 +47,9 @@
 #' @param creds_file An option to specify a credentials file. As this argument
 #'   is deprecated, please consider using `credentials = creds_file(<file>)`
 #'   instead.
+#' @param ssl_verifyhost,ssl_verifypeer  Options passed to curl::send_mail().
+#'   Logical, default is TRUE. Please refer to the original documentation in
+#'   the curl package for further information.
 #' @param verbose Should verbose output from the internal curl `send_mail()`
 #'   call be printed? While the username and password will likely be echoed
 #'   during the exchange, such information is encoded and won't be stored on
@@ -131,6 +134,8 @@ smtp_send <- function(email,
                       bcc = NULL,
                       credentials = NULL,
                       creds_file = "deprecated",
+                      ssl_verifypeer = TRUE,
+                      ssl_verifyhost = TRUE,
                       verbose = FALSE) {
 
   # Verify that the `message` object
@@ -189,6 +194,11 @@ smtp_send <- function(email,
     }
   }
 
+  if(!credentials$use_ssl){
+    ssl_verifypeer <- FALSE
+    ssl_verifyhost <- FALSE
+  }
+
   # Normalize `subject` so that a `NULL` value becomes an empty string
   subject <- subject %||% ""
 
@@ -213,6 +223,8 @@ smtp_send <- function(email,
       message = email_qp,
       smtp_server = paste0(credentials$host, ":", credentials$port),
       use_ssl = credentials$use_ssl %||% TRUE,
+      ssl_verifypeer = ssl_verifypeer,
+      ssl_verifyhost = ssl_verifyhost,
       verbose = verbose,
       username = credentials$user,
       password = credentials$password
