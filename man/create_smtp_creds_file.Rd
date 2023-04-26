@@ -46,6 +46,6 @@ this file produced, the credentials helper \code{\link[=creds_file]{creds_file()
 #   file = "gmail_creds",
 #   user = "user_name@gmail.com",
 #   provider = "gmail"
-#   )
+# )
 
 }
