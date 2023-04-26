@@ -21,20 +21,23 @@
 #' @return A string containing a complete HTML document.
 #'
 #' @export
-blastula_template <- function(html_body,
-                              html_header,
-                              html_footer,
-                              title,
-                              content_width = "1000px",
-                              font_family = "Helvetica, sans-serif") {
+blastula_template <- function(
+    html_body,
+    html_header,
+    html_footer,
+    title,
+    content_width = "1000px",
+    font_family = "Helvetica, sans-serif"
+) {
 
-  result <- htmltools::renderTags(
-    tagList(
-      tags$head(
-        # derived from https://github.com/TedGoas/Cerberus
-        htmltools::includeHTML(system.file(package = "blastula", "cerberus-meta.html")),
-        tags$title(title),
-        tags$style(HTML(paste0("
+  result <-
+    htmltools::renderTags(
+      tagList(
+        tags$head(
+          # derived from https://github.com/TedGoas/Cerberus
+          htmltools::includeHTML(system.file(package = "blastula", "cerberus-meta.html")),
+          tags$title(title),
+          tags$style(HTML(paste0("
 body {
   font-family: ", font_family, ";
   font-size: 14px;
@@ -73,9 +76,12 @@ img {
           margin = "0",
           padding = "0"
         ),
-        panel(outer_class = "container", outer_align = "center", padding = "24px",
-          width = "85%", max_width = htmltools::validateCssUnit(content_width),
-
+        panel(
+          outer_class = "container",
+          outer_align = "center",
+          padding = "24px",
+          width = "85%",
+          max_width = htmltools::validateCssUnit(content_width),
           if (!is.null(html_header)) {
             div(class = "header",
               style = css(
@@ -89,11 +95,15 @@ img {
               html_header
             )
           },
-          panel(outer_class = "content", padding = "12px", background_color = "white",
+          panel(
+            outer_class = "content",
+            padding = "12px",
+            background_color = "white",
             html_body
           ),
           if (!is.null(html_footer)) {
-            div(class = "footer",
+            div(
+              class = "footer",
               style = css(
                 font_family = font_family,
                 color = "#999999",
@@ -110,11 +120,13 @@ img {
     )
   )
 
-  HTML(sprintf("<!doctype html>
+  HTML(
+    sprintf("<!doctype html>
 <html>
   <head>
 %s
   </head>
 %s
-</html>", result$head, result$html))
+</html>", result$head, result$html)
+  )
 }

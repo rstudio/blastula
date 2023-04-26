@@ -119,7 +119,13 @@ social_link <- function(service,
 
   tags$a(.noWS = c("after-begin", "before-end"),
     href = link,
-    tags$img(src = icon, alt = alt, width = "44", height = "44", style = "border: none;")
+    tags$img(
+      src = icon,
+      alt = alt,
+      width = "44",
+      height = "44",
+      style = "border: none;"
+    )
   )
 }
 
@@ -191,8 +197,10 @@ block_social_links <- function(...) {
 }
 
 #' @noRd
-icon_for_social_service <- function(service,
-                                    variant = NULL) {
+icon_for_social_service <- function(
+    service,
+    variant = NULL
+) {
 
   # Normalize the provided `service` name
   service <-
@@ -210,17 +218,24 @@ icon_for_social_service <- function(service,
   # If a hosted icon isn't availble for the
   # `service`, stop the function
   if (!(service %in% ss_names)) {
-    stop("An icon for the given `service` is not available\n",
-         " * look inside the article at `?social_link` to see which are available\n",
-         call. = FALSE)
+
+    stop(
+      "An icon for the given `service` is not available\n",
+      "* look inside the article at `?social_link` to see which are available\n",
+      call. = FALSE
+    )
   }
 
   # Ensure that the icon variant is valid; if
   # nothing is provided for variant, default to `bw`
   if (!is.null(variant) && !(variant %in% social_service_icon_variants)) {
-    stop("The given `variant` is not available for the social icons\n",
-         " * look inside the article at `?social_link` to see which are available\n",
-         call. = FALSE)
+
+    stop(
+      "The given `variant` is not available for the social icons\n",
+      "* look inside the article at `?social_link` to see which are available\n",
+      call. = FALSE
+    )
+
   } else if (is.null(variant)) {
     variant <- "bw"
   }

@@ -123,24 +123,28 @@
 #' #   )
 #'
 #' @export
-smtp_send <- function(email,
-                      to,
-                      from,
-                      subject = NULL,
-                      cc = NULL,
-                      bcc = NULL,
-                      credentials = NULL,
-                      creds_file = "deprecated",
-                      verbose = FALSE) {
+smtp_send <- function(
+    email,
+    to,
+    from,
+    subject = NULL,
+    cc = NULL,
+    bcc = NULL,
+    credentials = NULL,
+    creds_file = "deprecated",
+    verbose = FALSE
+) {
 
   # Verify that the `message` object
   # is of the class `email_message`
   if (!inherits(email, "email_message")) {
 
-    stop("The object provided in `email` must be an ",
-         "`email_message` object.\n",
-         " * This can be created with the `compose_email()` function.",
-         call. = FALSE)
+    stop(
+      "The object provided in `email` must be an ",
+      "`email_message` object.\n",
+      " * This can be created with the `compose_email()` function.",
+      call. = FALSE
+    )
   }
 
   # If the user provides a path to a creds file in the `creds_file`
@@ -150,9 +154,11 @@ smtp_send <- function(email,
 
     credentials <- creds_file(creds_file)
 
-    warning("The `creds_file` argument is deprecated:\n",
-            " * please consider using `credentials = creds_file(\"", creds_file,
-            "\")` instead")
+    warning(
+      "The `creds_file` argument is deprecated:\n",
+      " * please consider using `credentials = creds_file(\"", creds_file,
+      "\")` instead"
+    )
   }
 
   # If nothing is provided in `credentials`, stop the function
@@ -160,14 +166,16 @@ smtp_send <- function(email,
   # be used
   if (is.null(credentials)) {
 
-    stop("SMTP credentials must be supplied to the `credentials` argument.\n",
-         "We can use either of these three helper functions for this:\n",
-         " * `creds_key()`: uses information stored in the system's key-value ",
-         "store (have a look at `?creds_key`)\n",
-         " * `creds_file()`: takes credentials stored in an on-disk file ",
-         "(use `?creds_file` for further info)\n",
-         " * `creds()`: allows for manual specification of SMTP credentials",
-         call. = FALSE)
+    stop(
+      "SMTP credentials must be supplied to the `credentials` argument.\n",
+      "We can use either of these three helper functions for this:\n",
+      "* `creds_key()`: uses information stored in the system's key-value ",
+      "store (have a look at `?creds_key`)\n",
+      "* `creds_file()`: takes credentials stored in an on-disk file ",
+      "(use `?creds_file` for further info)\n",
+      "* `creds()`: allows for manual specification of SMTP credentials",
+      call. = FALSE
+    )
   }
 
   # If whatever is provided to `credentials` does not have a
@@ -183,9 +191,11 @@ smtp_send <- function(email,
 
     } else {
 
-      stop("The value for `credentials` must be a `blastula_creds` object\n",
-           "* see the article in `?creds` for information on this",
-           call. = FALSE)
+      stop(
+        "The value for `credentials` must be a `blastula_creds` object\n",
+        "* see the article in `?creds` for information on this",
+        call. = FALSE
+      )
     }
   }
 
@@ -220,8 +230,11 @@ smtp_send <- function(email,
 
   # Transmit a message about send success depending on the status code
   if (result$status_code == 250) {
+
     message("The email message was sent successfully.")
+
   } else {
+
     stop(
       "The email message was NOT sent; the error code was ",
       result$status_code, ".",

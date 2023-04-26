@@ -46,25 +46,27 @@
 #' @param ... Specify other options in [rmarkdown::html_document()].
 #'
 #' @export
-blastula_email <- function(content_width = "1000px",
-                           toc = FALSE,
-                           toc_depth = 3,
-                           toc_float = FALSE,
-                           number_sections = FALSE,
-                           section_divs = TRUE,
-                           fig_width = 5.35,
-                           fig_height = 5,
-                           fig_retina = 2,
-                           fig_caption = TRUE,
-                           dev = "png",
-                           smart = TRUE,
-                           self_contained = TRUE,
-                           template = "blastula",
-                           includes = NULL,
-                           keep_md = FALSE,
-                           md_extensions = NULL,
-                           connect_footer = FALSE,
-                           ...) {
+blastula_email <- function(
+    content_width = "1000px",
+    toc = FALSE,
+    toc_depth = 3,
+    toc_float = FALSE,
+    number_sections = FALSE,
+    section_divs = TRUE,
+    fig_width = 5.35,
+    fig_height = 5,
+    fig_retina = 2,
+    fig_caption = TRUE,
+    dev = "png",
+    smart = TRUE,
+    self_contained = TRUE,
+    template = "blastula",
+    includes = NULL,
+    keep_md = FALSE,
+    md_extensions = NULL,
+    connect_footer = FALSE,
+    ...
+) {
 
   content_width <- htmltools::validateCssUnit(content_width)
 
@@ -74,23 +76,37 @@ blastula_email <- function(content_width = "1000px",
 
   # Note bash escaping is handled by R Markdown (via shQuote())
   pandoc_args <- paste0("--variable=content-width:", content_width)
+
   if (isTRUE(connect_footer)) {
-    pandoc_args <- c(
-      pandoc_args,
-      "--variable=rsc-footer:1",
-      paste0(
-        "--variable=rsc-date-time:", add_readable_time(time = Sys.time())),
-      paste0(
-        "--variable=rsc-report-url:",
-        Sys.getenv("RSC_REPORT_URL", unset = "https://connect.example.com/content/1234/")),
-      paste0(
-        "--variable=rsc-report-rendering-url:",
-        Sys.getenv("RSC_REPORT_RENDERING_URL", unset = "https://connect.example.com/content/1234/_rev5678")),
-      paste0(
-        "--variable=rsc-report-subscription-url:",
-        Sys.getenv("RSC_REPORT_SUBSCRIPTION_URL", unset = "https://connect.example.com/connect/#/apps/1234/subscriptions")),
-      paste0("--variable=rsc-report-name:", Sys.getenv("RSC_REPORT_NAME"))
-    )
+
+    pandoc_args <-
+      c(
+        pandoc_args,
+        "--variable=rsc-footer:1",
+        paste0(
+          "--variable=rsc-date-time:", add_readable_time(time = Sys.time())
+        ),
+        paste0(
+          "--variable=rsc-report-url:",
+          Sys.getenv(
+            "RSC_REPORT_URL",
+            unset = "https://connect.example.com/content/1234/"
+          )
+        ),
+        paste0(
+          "--variable=rsc-report-rendering-url:",
+          Sys.getenv(
+            "RSC_REPORT_RENDERING_URL",
+            unset = "https://connect.example.com/content/1234/_rev5678")
+        ),
+        paste0(
+          "--variable=rsc-report-subscription-url:",
+          Sys.getenv(
+            "RSC_REPORT_SUBSCRIPTION_URL",
+            unset = "https://connect.example.com/connect/#/apps/1234/subscriptions")
+        ),
+        paste0("--variable=rsc-report-name:", Sys.getenv("RSC_REPORT_NAME"))
+      )
   }
 
   rmarkdown::html_document(

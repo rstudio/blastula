@@ -33,21 +33,29 @@
 #'   default browser.
 #'
 #' @export
-attach_connect_email <- function(email = NULL,
-                                 subject = NULL,
-                                 attachments = NULL,
-                                 attach_output = FALSE,
-                                 text = NULL,
-                                 preview = TRUE) {
+attach_connect_email <- function(
+    email = NULL,
+    subject = NULL,
+    attachments = NULL,
+    attach_output = FALSE,
+    text = NULL,
+    preview = TRUE
+) {
 
   if (!is.null(email) && !inherits(email, "email_message")) {
-    stop("A blastula email message object must be supplied.",
-         call. = FALSE)
+
+    stop(
+      "A blastula email message object must be supplied.",
+      call. = FALSE
+    )
   }
 
   if (is.null(email) && is.null(text)) {
-    stop("Either a blastula email message object or `text` must be provided",
-         call. = FALSE)
+
+    stop(
+      "Either a blastula email message object or `text` must be provided",
+      call. = FALSE
+    )
   }
 
   # If both an `email` object and `text` are provided, nullify
@@ -137,7 +145,6 @@ attach_connect_email <- function(email = NULL,
 #'   after publication. By default, this is `TRUE`.
 #' @export
 suppress_scheduled_email <- function(suppress = TRUE) {
-
   rmarkdown::output_metadata$set(rsc_email_suppress_scheduled = suppress)
 }
 
@@ -147,6 +154,7 @@ suppress_scheduled_email <- function(suppress = TRUE) {
 create_rmd_preview_message <- function(subject = NULL) {
 
   if (!is.null(subject)) {
+
     subject_ln <-
       paste0(
         "<br><br><strong><span style=\"font-variant: small-caps;\">",
