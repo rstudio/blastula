@@ -1,5 +1,3 @@
-context("Utility functions work as expected")
-
 test_that("knitr_sidecar_prefix preconditions hold", {
 
   if (rmarkdown::pandoc_available()) {
@@ -59,7 +57,7 @@ test_that("the `smtp_settings()` function returns the expected output", {
   smtp_settings() %>% nrow() %>% expect_equal(3)
 
   # Expect 8 columns in the table
-  smtp_settings() %>% ncol() %>% expect_equal(8)
+  smtp_settings() %>% ncol() %>% expect_equal(6)
 })
 
 test_that("the `get_provider_list()` function returns the expected output", {
@@ -83,21 +81,18 @@ test_that("the `get_smtp_provider_values()` function returns the expected output
   get_smtp_provider_values(provider = "gmail") %>%
     names() %>%
     expect_equal(
-      c("short_name", "server", "port", "use_ssl",
-        "use_tls", "authenticate", "user", "long_name")
+      c("short_name", "server", "port", "use_ssl", "user", "long_name")
     )
 
   get_smtp_provider_values(provider = "outlook") %>%
     names() %>%
     expect_equal(
-      c("short_name", "server", "port", "use_ssl",
-        "use_tls", "authenticate", "user", "long_name")
+      c("short_name", "server", "port", "use_ssl", "user", "long_name")
     )
 
   get_smtp_provider_values(provider = "office365") %>%
     names() %>%
     expect_equal(
-      c("short_name", "server", "port", "use_ssl",
-        "use_tls", "authenticate", "user", "long_name")
+      c("short_name", "server", "port", "use_ssl", "user", "long_name")
     )
 })

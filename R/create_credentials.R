@@ -8,14 +8,15 @@
 #' @param file The output filename for the credentials file.
 #' @param user The username for the email account. Typically, this is the email
 #'   address associated with the account.
-#' @param provider An optional email provider shortname for autocompleting STMP
+#' @param provider An optional email provider shortname for autocompleting SMTP
 #'   configuration details (the `host`, `port`, `use_ssl` options). Options
 #'   currently include `gmail`, `outlook`, and `office365`. If nothing is
 #'   provided then values for `host`, `port`, and `use_ssl` are expected.
 #' @param host,port,use_ssl Configuration info for the SMTP server. The `host`
-#'   and `port` parameters are the address and port for the SMTP server;
-#'   `use_ssl` is an option as to whether to use SSL: supply a `TRUE` or `FALSE`
-#'   value.
+#'   and `port` parameters are the address and port for the SMTP server.
+#'   `use_ssl` is an option as to whether to allow the use of STARTTLS, if
+#'   available: it should be `TRUE` unless you have a specific reason to set it
+#'   to `FALSE`.
 #'
 #' @examples
 #' # Create a credentials file to make it
@@ -71,19 +72,28 @@ create_smtp_creds_file <- function(file,
 #' We can set SMTP access credentials in the system-wide key-value store for the
 #' purpose of more easily sending email messages through [smtp_send()]. With
 #' this key added, the credentials helper [creds_key()] can be used in the
-#' `credentials` argument of [smtp_send()].
+#' `credentials` argument of [smtp_send()] (the `id` value is used to
+#' unambiguously refer to each key).
 #'
 #' Support for setting keys through `create_smtp_creds_key()` is provided
-#' through the \pkg{keyring} package. This function cannot be used without that
-#' package first being available on the system. We can use
-#' `install.packages("keyring")` to install
+#' through the **keyring** package. This function cannot be used without that
+#' package being available on the system. We can use
+#' `install.packages("keyring")` to install **keyring**.
 #'
 #' @param id An identifying label for the keyname. The full key name is
-#'   constructed in the following way: `blastula-v1-<id>`.
+#'   constructed in the following way: `blastula-v1-<id>`. This `id` value is
+#'   what's needed later to either use the key with [creds_key()], or, delete
+#'   the key with [delete_credential_key()]. A single, non-`NA` character,
+#'   numeric, or integer value can be supplied here; the `id` will be coerced to
+#'   a character value. If the `id` is supplied as a single character value, it
+#'   cannot be an empty string and it cannot include hyphen characters.
+#' @param overwrite An option that controls the overwriting of existing keys
+#'   with the same `id` value. By default, this is `FALSE` (where overwriting is
+#'   prohibited).
 #' @inheritParams create_smtp_creds_file
 #'
 #' @examples
-#' # Store SMTP crendentials using the
+#' # Store SMTP credentials using the
 #' # system's secure key-value store to
 #' # make it much easier to send email
 #' # out through Gmail with `smtp_send()`;
@@ -101,7 +111,8 @@ create_smtp_creds_key <- function(id,
                                   provider = NULL,
                                   host = NULL,
                                   port = NULL,
-                                  use_ssl = NULL) {
+                                  use_ssl = NULL,
+                                  overwrite = FALSE) {
 
   # nocov start
 
@@ -110,15 +121,52 @@ create_smtp_creds_key <- function(id,
 
   # Creating credentials on the system-wide key-value
   # store requires the installation of the keyring package
-  if (!requireNamespace("keyring", quietly = TRUE)) {
+  validate_keyring_available(fn_name = "create_smtp_creds_key")
 
-    stop("The `keyring` package is required for using the ",
-         "`create_smtp_creds_key()` function",
+  # Stop function if `id` provided is not of the right type
+  if (!(inherits(id, "character") || inherits(id, "numeric") || inherits(id, "integer"))) {
+    stop("The provided `id` value must be a single character or numeric value.",
+         call. = TRUE)
+  }
+
+  # Stop function if the `id` value isn't of length 1
+  if (length(id) != 1) {
+    stop("Only a vector of length 1 should be used for the `id` value.",
          call. = FALSE)
   }
 
-  # Determine whether the keyring package can be used
-  validate_keyring_capable()
+  # Stop function if the `id` is an empty string or NA
+  if (is.na(id) || id == "") {
+    stop("The value for `id` should not be `NA` or an empty string.",
+         call. = FALSE)
+  }
+
+  # Stop function if a hyphen is used within `id`
+  if (is.character(id) && grepl("-", id)) {
+    stop("Hyphens are not allowed as characters for an `id` value",
+         call. = FALSE)
+  }
+
+  # Determine whether the key already exists
+  creds_tbl <- get_keyring_creds_table()
+  existing_key <- id %in% creds_tbl$id
+
+  # Stop the function if the `id` corresponds to an
+  # existing key and `overwrite = FALSE` (the default)
+  if (existing_key && !overwrite) {
+    stop("The specified `id` corresponds to a credential key already in the key-value store:\n",
+         "* Use a different `id` value with `create_smtp_creds_key()`, or\n",
+         "* If intentional, overwrite the existing key using the `overwrite = TRUE` option",
+         call. = FALSE)
+  }
+
+  # Delete the existing key if `overwrite = TRUE`; the
+  # `keyring::key_set_with_value()` function doesn't support
+  # overwriting keys with the same `service_name` and we'd get
+  # a duplicate `key_name` otherwise
+  if (existing_key && overwrite) {
+    delete_credential_key(id = id)
+  }
 
   # Create a credentials list from the function inputs
   credentials_list <-
@@ -140,15 +188,16 @@ create_smtp_creds_key <- function(id,
   # Set the key in the system's default keyring
   keyring::key_set_with_value(
     service = service_name,
-    user = user,
+    username = user,
     password = serialized
   )
 
-  # Issue a message stating that the file has been created
+  # Issue a message that provides identifiers and later usage
   message(
-    "The system key store has been updated with the (`", service_name,
-    "`) key.\n",
-    " * You can use this key within `smtp_send()` with ",
+    "The system key store has been updated with the \"", service_name,
+    "\" key with the `id` value \"", id ,"\".\n",
+    "* Use the `view_credential_keys()` function to see all available keys\n",
+    "* You can use this key within `smtp_send()` with ",
     "`credentials = creds_key(\"", id, "\")`"
   )
 
@@ -228,7 +277,7 @@ creds_internal <- function(user = NULL,
   )
 }
 
-#' Stops function is the system is not capable of using \pkg{keyring}
+#' Stops function if the system is not capable of using **keyring**
 #'
 #' @noRd
 validate_keyring_capable <- function() {
@@ -239,6 +288,23 @@ validate_keyring_capable <- function() {
     stop("To store SMTP via *keyring*, the system needs to have",
          "*keyring* support", call. = FALSE)
   }
+
+  # nocov end
+}
+
+#' Stops function if the **keyring** package isn't installed
+#'
+#' @noRd
+validate_keyring_available <- function(fn_name) {
+
+  # nocov start
+
+  if (!requireNamespace("keyring", quietly = TRUE)) {
+    stop("The `keyring` package is required for using the ",
+         "`", fn_name, "()` function", call. = FALSE)
+  }
+
+  validate_keyring_capable()
 
   # nocov end
 }

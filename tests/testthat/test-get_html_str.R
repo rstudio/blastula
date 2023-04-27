@@ -1,5 +1,3 @@
-context("Extracting the HTML message string")
-
 test_that("the `get_html_str()` function returns the expected output", {
 
   # Create a simple email object

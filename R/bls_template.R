@@ -1,193 +1,120 @@
-bls_standard_template <-
-"<!doctype html>
+#' Default template for `compose_email()`
+#'
+#' A template function that is suitable for using as the `template` argument of
+#' [compose_email()]. Template functions should generally not be called
+#' directly. When implementing your own template function, you must include
+#' parameters for `html_body`, `html_header`, `html_footer`, and `title`; you
+#' may also optionally add your own parameters, which callers to
+#' `compose_email()` can provide through the `...` argument.
+#'
+#' @param html_body,html_header,html_footer htmltools tag objects (e.g.
+#'   [htmltools::tags()] or [htmltools::HTML()]), or `NULL` to omit.
+#' @param title Plain text title to be used for the `<title>` element; may be
+#'   displayed in mobile phone notifications.
+#' @param content_width The width that should be used for the content area. By
+#'   default, this is set to `1000px`. Using widths less than `600px` is
+#'   generally not advised but, if necessary, be sure to test such HTML emails
+#'   with a wide range of email clients before sending to the intended
+#'   recipients.
+#' @param font_family The CSS value to use for `font-family`.
+#'
+#' @return A string containing a complete HTML document.
+#'
+#' @export
+blastula_template <- function(html_body,
+                              html_header,
+                              html_footer,
+                              title,
+                              content_width = "1000px",
+                              font_family = "Helvetica, sans-serif") {
+
+  result <- htmltools::renderTags(
+    tagList(
+      tags$head(
+        # derived from https://github.com/TedGoas/Cerberus
+        htmltools::includeHTML(system.file(package = "blastula", "cerberus-meta.html")),
+        tags$title(title),
+        tags$style(HTML(paste0("
+body {
+  font-family: ", font_family, ";
+  font-size: 14px;
+}
+.content {
+  background-color: white;
+}
+.content .message-block {
+  margin-bottom: 24px;
+}
+.header .message-block, .footer message-block {
+  margin-bottom: 12px;
+}
+img {
+  max-width: 100%;
+}
+@media only screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
+  .articles, .articles tr, .articles td {
+    display: block;
+    width: 100%;
+  }
+  .article {
+    margin-bottom: 24px;
+  }
+}
+      ")))
+      ),
+      tags$body(
+        style = css(
+          background_color = "#f6f6f6",
+          font_family = font_family,
+          color = "#222",
+          margin = "0",
+          padding = "0"
+        ),
+        panel(outer_class = "container", outer_align = "center", padding = "24px",
+          width = "85%", max_width = htmltools::validateCssUnit(content_width),
+
+          if (!is.null(html_header)) {
+            div(class = "header",
+              style = css(
+                font_family = font_family,
+                color = "#999999",
+                font_size = "12px",
+                font_weight = "normal",
+                margin = "0 0 24px 0",
+                text_align = "center"
+              ),
+              html_header
+            )
+          },
+          panel(outer_class = "content", padding = "12px", background_color = "white",
+            html_body
+          ),
+          if (!is.null(html_footer)) {
+            div(class = "footer",
+              style = css(
+                font_family = font_family,
+                color = "#999999",
+                font_size = "12px",
+                font_weight = "normal",
+                margin = "24px 0 0 0",
+                text_align = "center"
+              ),
+              html_footer
+            )
+          }
+        )
+      )
+    )
+  )
+
+  HTML(sprintf("<!doctype html>
 <html>
   <head>
-    <meta name=\"viewport\" content=\"width=device-width\">
-    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">
-    <title>{title}</title>
-    <style media=\"all\" type=\"text/css\">
-    @media only screen and (max-width: 640px) {
-      .span-2,
-      .span-3 {
-        float: none !important;
-        max-width: none !important;
-        width: 100% !important;
-      }
-      .span-2 > table,
-      .span-3 > table {
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-    }
-
-    @media all {
-      .btn-primary table td:hover {
-        background-color: #34495e !important;
-      }
-      .btn-primary a:hover {
-        background-color: #34495e !important;
-        border-color: #34495e !important;
-      }
-    }
-
-    @media all {
-      img {
-        max-width: 100% !important;
-      }
-      .btn-secondary a:hover {
-        border-color: #34495e !important;
-        color: #34495e !important;
-      }
-    }
-
-    @media only screen and (max-width: 640px) {
-      h1 {
-        font-size: 36px !important;
-        margin-bottom: 16px !important;
-      }
-      h2 {
-        font-size: 28px !important;
-        margin-bottom: 8px !important;
-      }
-      h3 {
-        font-size: 22px !important;
-        margin-bottom: 8px !important;
-      }
-      .main p,
-      .main ul,
-      .main ol,
-      .main td,
-      .main span {
-        font-size: 16px !important;
-      }
-      .wrapper {
-        padding: 8px !important;
-      }
-      .article {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-      }
-      .content {
-        padding: 0 !important;
-      }
-      .container {
-        padding: 0 !important;
-        padding-top: 8px !important;
-        width: 100% !important;
-      }
-      .header {
-        margin-bottom: 8px !important;
-        margin-top: 0 !important;
-      }
-      .main {
-        border-left-width: 0 !important;
-        border-radius: 0 !important;
-        border-right-width: 0 !important;
-      }
-      .btn table {
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-      .btn a {
-        font-size: 16px !important;
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-      .img-responsive {
-        height: auto !important;
-        max-width: 100% !important;
-        width: auto !important;
-      }
-      .alert td {
-        border-radius: 0 !important;
-        font-size: 16px !important;
-        padding-bottom: 16px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-        padding-top: 16px !important;
-      }
-      .receipt,
-      .receipt-container {
-        width: 100% !important;
-      }
-      .hr tr:first-of-type td,
-      .hr tr:last-of-type td {
-        height: 16px !important;
-        line-height: 16px !important;
-      }
-    }
-
-    @media all {
-      .ExternalClass {
-        width: 100%;
-      }
-      .ExternalClass,
-      .ExternalClass p,
-      .ExternalClass span,
-      .ExternalClass font,
-      .ExternalClass td,
-      .ExternalClass div {
-        line-height: 100%;
-      }
-      .apple-link a {
-        color: inherit !important;
-        font-family: inherit !important;
-        font-size: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-        text-decoration: none !important;
-      }
-    }
-    </style>
-
-    <!--[if gte mso 9]>
-    <xml>
- <o:OfficeDocumentSettings>
-  <o:AllowPNG/>
-  <o:PixelsPerInch>96</o:PixelsPerInch>
- </o:OfficeDocumentSettings>
-</xml>
-<![endif]-->
+%s
   </head>
-  <body style=\"font-family: Helvetica, sans-serif; -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.4; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; background-color: #f6f6f6; margin: 0; padding: 0;\">
-    <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"body\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background-color: #f6f6f6;\" width=\"100%\" bgcolor=\"#f6f6f6\">
-      <tr>
-        <td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\"><br /></td>
-        <td class=\"container\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; margin: 0 auto !important; max-width: 600px; padding: 0; padding-top: 24px; width: 600px;\" width=\"600\" valign=\"top\">
-          <div class=\"content\" style=\"box-sizing: border-box; display: block; margin: 0 auto; max-width: 600px; padding: 0;\">
-
-            <!-- START CENTERED WHITE CONTAINER -->
-            <span class=\"preheader\" style=\"color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;\"></span>
-
-            <!-- START HEADER -->
-            <div class=\"header\" style=\"margin-bottom: 24px; margin-top: 0; width: 100%;\">
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; min-width: 100%;\" width=\"100%\">
-                {html_header}
-              </table>
-            </div>
-
-            <!-- END HEADER -->
-            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"main\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%; background: #fff; border-radius: 4px;\" width=\"100%\">
-
-              <!-- START MAIN CONTENT AREA -->
-              <tbody>
-                {html_body_text}
-              <!-- END MAIN CONTENT AREA -->
-              </tbody>
-            </table>
-
-            <!-- START FOOTER -->
-            <div class=\"footer\" style=\"clear: both; padding-top: 24px; text-align: center; width: 100%;\">
-              <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-                {html_footer}
-              </table>
-            </div>
-            <!-- END FOOTER -->
-
-  <!-- END CENTERED WHITE CONTAINER --></div>
-          </td>
-          <td style=\"font-family: sans-serif; font-size: 14px; vertical-align: top;\"><br /></td>
-        </tr>
-      </table>
-    </body>
-  </html>"
+%s
+</html>", result$head, result$html))
+}

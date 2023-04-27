@@ -1,5 +1,3 @@
-context("Getting a readable time")
-
 test_that("the `add_readable_time()` function returns the expected output", {
 
   posix_time <-

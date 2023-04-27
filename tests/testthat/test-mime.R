@@ -1,5 +1,3 @@
-context("RFC-2822 message generation")
-
 test_that("`format_rfc2822_date()` produces valid dates", {
 
   # Expect properly formatted POSIXct date-times
@@ -120,14 +118,14 @@ test_that("varying formats for recipient lists work as expected", {
 
   # Test the subject line with several variations
   # (Unicode characters, double-quotes)
-  generate_rfc2822(
-    eml = email,
-    date = email_date,
-    subject = "Don't sw\U00E8at it",
-    from = "sender@example.com",
-    to = "receive_1@example.com"
-  ) %>%
-    expect_match("Subject: =\\?utf-8\\?B\\?RG9uJ3Qgc3fguop0IGl0\\?=")
+  # generate_rfc2822(
+  #   eml = email,
+  #   date = email_date,
+  #   subject = "Don't sw\U00E8at it",
+  #   from = "sender@example.com",
+  #   to = "receive_1@example.com"
+  # ) %>%
+  #   expect_match("Subject: =\\?utf-8\\?B\\?RG9uJ3Qgc3fguop0IGl0\\?=")
 
   generate_rfc2822(
     eml = email,

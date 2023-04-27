@@ -1,33 +1,36 @@
 Type: Package
 Package: blastula
+Version: 0.3.3.9000
 Title: Easily Send HTML Email Messages
-Version: 0.3.1.9000
-Authors@R: c(
-    person("Richard", "Iannone", role = c("aut", "cre"), email = "riannone@me.com",
-           comment = c(ORCID = "0000-0003-3925-190X")),
-    person("Joe", "Cheng", role = "aut", email = "joe@rstudio.com"),
-    person("Jeroen", "Ooms", role = "ctb", email = "jeroen@berkeley.edu",
-      comment = c(ORCID = "0000-0002-4035-0289"))
-    )
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
     let the user insert embedded images, web link buttons, and 'ggplot2' plot
     objects into the message body. Messages can be sent through an 'SMTP'
     server, through the 'RStudio Connect' service, or through the 'Mailgun' API
-    service <http://mailgun.com/>.
+    service <https://www.mailgun.com/>.
+Authors@R: c(
+    person("Richard", "Iannone", role = c("aut", "cre"), email = "rich@posit.co",
+           comment = c(ORCID = "0000-0003-3925-190X")),
+    person("Joe", "Cheng", role = "aut", email = "joe@posit.co"),
+    person("Jeroen", "Ooms", role = "ctb", email = "jeroen@berkeley.edu",
+           comment = c(ORCID = "0000-0002-4035-0289")),
+    person("Ted", "Goas", role = "cph", comment = "cerberus-meta.html"),
+    person("Posit Software, PBC", role = c("cph", "fnd"))
+    )
 License: MIT + file LICENSE
-URL: https://github.com/rich-iannone/blastula
-BugReports: https://github.com/rich-iannone/blastula/issues
+URL: https://github.com/rstudio/blastula
+BugReports: https://github.com/rstudio/blastula/issues
 Depends: R (>= 3.2.1)
 Imports:
     base64enc (>= 0.1-3),
     commonmark (>= 1.7),
-    curl (>= 4.2),
+    curl (>= 4.3),
+    digest,
     dplyr (>= 0.8.3),
     fs (>= 1.3.1),
     getPass (>= 0.2-2),
     here (>= 0.1),
-    htmltools (>= 0.3.6),
+    htmltools (>= 0.4.0),
     httr (>= 1.4.0),
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
@@ -40,15 +43,14 @@ Suggests:
     covr,
     ggplot2,
     glue,
-    testthat (>= 2.1.0),
+    testthat (>= 3.0.0),
     keyring,
     knitr,
     spelling,
     xml2
 SystemRequirements: pandoc (>= 1.12.3) - http://pandoc.org
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
-VignetteBuilder: knitr
+Config/testthat/edition: 3
 Language: en-US

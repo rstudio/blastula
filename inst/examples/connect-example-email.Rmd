@@ -7,19 +7,19 @@ output: blastula::blastula_email
 library(tidyverse)
 ```
 
-# Diamonds and Real Estate in Dallas
+# An R Markdown Document (Summary Report for Email)
 
-We can include parts from the parent `"connect-example-main.Rmd"` document by adding an empty R Markdown code chunk with a matching name (in this case `diamonds_plot`). This is great because we can reuse parts from the main report document.
+We can include parts from the parent `"connect-example-main.Rmd"` document by adding an empty R Markdown code chunk with a matching name (in this case `diamonds_plot`). This is great because we can reuse parts from the parent report document.
 
 ```{r diamonds_plot, echo=FALSE}
 ```
 
-The real estate table (in the parent document's `dallas_home_sales` chunk) can be included in the same way:
+The real estate table (from the parent document's `dallas_home_sales` chunk) can be included in the same way:
 
 ```{r dallas_home_sales, echo=FALSE}
 ```
 
-Note that the `echo = FALSE` parameter was added to each of the the code chunks to prevent printing of the **R** code that generated the plot.
+Note that the `echo=FALSE` parameter was added to each of the the code chunks to prevent printing of the **R** code that generated the plot (we just want the output for the email).
 
 The `dallas_home_sales` object (from the namesake **R** code chunk) is also available and can be further processed to generate different output just for the email document.
 

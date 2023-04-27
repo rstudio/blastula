@@ -1,5 +1,3 @@
-context("Creating credentials")
-
 test_that("utility functions for credentials work properly", {
 
   # Create a credentials list with no `provider` specified
@@ -49,7 +47,7 @@ test_that("utility functions for credentials work properly", {
   # have values
   credentials_list_2$host %>% expect_equal("smtp.gmail.com")
   credentials_list_2$port %>% expect_equal(465)
-  credentials_list_2$use_ssl %>% expect_true()
+  credentials_list_2$use_ssl %>% expect_false()
 
   # Expect an error if `provider` is NULL and any of `host`,
   # `port`, or `use_ssl` are NULL
@@ -87,5 +85,5 @@ test_that("utility functions for credentials work properly", {
   # produces the original credentials list
   credentials_list_1_json %>%
     jsonlite::unserializeJSON() %>%
-    expect_equivalent(credentials_list_1)
+    expect_equal(credentials_list_1)
 })

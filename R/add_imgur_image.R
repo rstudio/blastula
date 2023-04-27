@@ -17,18 +17,18 @@
 #' @param image The path to the local image we would like to deploy to Imgur and
 #'   for which we'd like an image tag.
 #' @param client_id The Imgur Client ID value.
-#' @param alt Text description of image passed to the `alt` attribute inside of
-#'   the image (`<img>`) tag for use when image loading is disabled and on
-#'   screen readers. `NULL` default produces blank (`""`) alt text.
+#' @inheritParams add_image
 #'
-#' @return A character object with an HTML fragment that can be placed inside
-#'   the message body wherever the image should appear.
+#' @return An HTML fragment that can be placed inside the message body wherever
+#'   the image should appear.
 #'
 #' @export
 add_imgur_image <- function(image,
                             client_id = NULL,
-                            alt = NULL) {
-
+                            alt = NULL,
+                            width = 520,
+                            align = c("center", "left", "right", "inline"),
+                            float = c("none", "left", "right")) {
   # nocov start
 
   # Using this function requires the `xml2` package
@@ -91,14 +91,8 @@ add_imgur_image <- function(image,
       alt
     }
 
-  paste0(
-    "<a href=\"#\"><img src=\"",
-    response_list$link %>% htmltools::htmlEscape(attribute = TRUE),
-    "\" alt=\"",
-    alt_text %>% htmltools::htmlEscape(attribute = TRUE), "\"",
-    "style=\"max-width: 512px; width: 100% !important; display: block; padding: 0;",
-    "border: 0 !important;\" border=\"0\"></a>"
-  )
+  add_image(response_list$link, alt = alt_text, width = width,
+    align = align, float = float)
 
   # nocov end
 }

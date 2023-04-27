@@ -47,58 +47,16 @@
 #'
 #' @export
 block_title <- function(title) {
-
-  class(title) <- c("block_title", class(title))
-
-  title
+  tags$h1(class = "message-block block_title",
+    style = css(
+      color = "#222222",
+      font_weight = "300",
+      line_height = "1.4",
+      margin = "0",
+      font_size = "36px",
+      margin_bottom = "4px",
+      text_align = "center"
+    ),
+    title
+  )
 }
-
-#' @noRd
-render_block_title <- function(x, context = "body") {
-
-  if (context == "body") {
-
-    font_size <- 36
-    font_color <- "#222222"
-    margin_bottom <- 4
-    padding <- 12
-
-  } else if (context %in% c("header", "footer")) {
-
-    font_size <- 20
-    font_color <- "#999999"
-    margin_bottom <- 0
-    padding <- 10
-  }
-
-  title_line_rendered <-
-    title_line_template %>%
-    tidy_gsub("\\{font_color\\}", font_color %>% htmltools::htmlEscape(attribute = TRUE)) %>%
-    tidy_gsub("\\{font_size\\}", font_size %>% htmltools::htmlEscape(attribute = TRUE)) %>%
-    tidy_gsub("\\{margin_bottom\\}", margin_bottom %>% htmltools::htmlEscape(attribute = TRUE)) %>%
-    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
-    tidy_gsub("\\{title\\}", x %>% process_text())
-
-  title_block_template %>%
-    tidy_gsub("\\{padding\\}", padding %>% htmltools::htmlEscape(attribute = TRUE)) %>%
-    tidy_gsub("\\{text\\}", title_line_rendered)
-
-}
-
-title_line_template <-
-  "<h1 class=\"align-center\" style=\"color: {font_color}; font-family: Helvetica, sans-serif; font-weight: 300; line-height: 1.4; margin: 0; font-size: {font_size}px; margin-bottom: {margin_bottom}px; text-transform: capitalize; text-align: center;\">{title}</h1>"
-
-title_block_template <-
-"<tr>
-<td class=\"wrapper\" style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top; box-sizing: border-box; padding: {padding}px;\" valign=\"top\">
-<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse: separate; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 100%;\" width=\"100%\">
-<tbody>
-<tr>
-<td style=\"font-family: Helvetica, sans-serif; font-size: 14px; vertical-align: top;\" valign=\"top\">
-{text}
-</td>
-</tr>
-</tbody>
-</table>
-</td>
-</tr>"

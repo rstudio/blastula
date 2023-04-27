@@ -13,7 +13,7 @@ md(text)
 A character object that is tagged for a Markdown-to-HTML
 transformation.
 
-a character object of class \code{from_markdown}.
+A rendered HTML object.
 }
 \description{
 Interpret input text as Markdown-formatted text

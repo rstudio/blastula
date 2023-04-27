@@ -10,50 +10,52 @@ create_smtp_creds_key(
   provider = NULL,
   host = NULL,
   port = NULL,
-  use_ssl = NULL
+  use_ssl = NULL,
+  overwrite = FALSE
 )
 }
 \arguments{
 \item{id}{An identifying label for the keyname. The full key name is
-constructed in the following way: \verb{blastula-v1-<id>}.}
+constructed in the following way: \verb{blastula-v1-<id>}. This \code{id} value is
+what's needed later to either use the key with \code{\link[=creds_key]{creds_key()}}, or, delete
+the key with \code{\link[=delete_credential_key]{delete_credential_key()}}. A single, non-\code{NA} character,
+numeric, or integer value can be supplied here; the \code{id} will be coerced to
+a character value. If the \code{id} is supplied as a single character value, it
+cannot be an empty string and it cannot include hyphen characters.}
 
 \item{user}{The username for the email account. Typically, this is the email
 address associated with the account.}
 
-\item{provider}{An optional email provider shortname for autocompleting STMP
+\item{provider}{An optional email provider shortname for autocompleting SMTP
 configuration details (the \code{host}, \code{port}, \code{use_ssl} options). Options
 currently include \code{gmail}, \code{outlook}, and \code{office365}. If nothing is
 provided then values for \code{host}, \code{port}, and \code{use_ssl} are expected.}
 
-\item{host}{Configuration info for the SMTP server. The \code{host}
-and \code{port} parameters are the address and port for the SMTP server;
-\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value.}
+\item{host, port, use_ssl}{Configuration info for the SMTP server. The \code{host}
+and \code{port} parameters are the address and port for the SMTP server.
+\code{use_ssl} is an option as to whether to allow the use of STARTTLS, if
+available: it should be \code{TRUE} unless you have a specific reason to set it
+to \code{FALSE}.}
 
-\item{port}{Configuration info for the SMTP server. The \code{host}
-and \code{port} parameters are the address and port for the SMTP server;
-\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value.}
-
-\item{use_ssl}{Configuration info for the SMTP server. The \code{host}
-and \code{port} parameters are the address and port for the SMTP server;
-\code{use_ssl} is an option as to whether to use SSL: supply a \code{TRUE} or \code{FALSE}
-value.}
+\item{overwrite}{An option that controls the overwriting of existing keys
+with the same \code{id} value. By default, this is \code{FALSE} (where overwriting is
+prohibited).}
 }
 \description{
 We can set SMTP access credentials in the system-wide key-value store for the
 purpose of more easily sending email messages through \code{\link[=smtp_send]{smtp_send()}}. With
 this key added, the credentials helper \code{\link[=creds_key]{creds_key()}} can be used in the
-\code{credentials} argument of \code{\link[=smtp_send]{smtp_send()}}.
+\code{credentials} argument of \code{\link[=smtp_send]{smtp_send()}} (the \code{id} value is used to
+unambiguously refer to each key).
 }
 \details{
 Support for setting keys through \code{create_smtp_creds_key()} is provided
-through the \pkg{keyring} package. This function cannot be used without that
-package first being available on the system. We can use
-\code{install.packages("keyring")} to install
+through the \strong{keyring} package. This function cannot be used without that
+package being available on the system. We can use
+\code{install.packages("keyring")} to install \strong{keyring}.
 }
 \examples{
-# Store SMTP crendentials using the
+# Store SMTP credentials using the
 # system's secure key-value store to
 # make it much easier to send email
 # out through Gmail with `smtp_send()`;

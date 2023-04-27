@@ -15,3 +15,5 @@
 ^\.httr-oauth$
 ^gmail_
 ^LICENSE\.md$
+inst/examples/rsconnect
+^vignettes$
