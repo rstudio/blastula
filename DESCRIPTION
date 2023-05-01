@@ -37,6 +37,7 @@ Imports:
     mime (>= 0.6),
     rlang (>= 0.4.1),
     rmarkdown,
+    rvest (>= 1.0.3),
     stringr (>= 1.4.0),
     uuid (>= 0.1-2)
 Suggests: 
