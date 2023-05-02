@@ -28,15 +28,17 @@
 #' #   file = "gmail_creds",
 #' #   user = "user_name@gmail.com",
 #' #   provider = "gmail"
-#' #   )
+#' # )
 #'
 #' @export
-create_smtp_creds_file <- function(file,
-                                   user = NULL,
-                                   provider = NULL,
-                                   host = NULL,
-                                   port = NULL,
-                                   use_ssl = NULL) {
+create_smtp_creds_file <- function(
+    file,
+    user = NULL,
+    provider = NULL,
+    host = NULL,
+    port = NULL,
+    use_ssl = NULL
+) {
 
   # nocov start
 
@@ -106,13 +108,15 @@ create_smtp_creds_file <- function(file,
 #' #   )
 #'
 #' @export
-create_smtp_creds_key <- function(id,
-                                  user = NULL,
-                                  provider = NULL,
-                                  host = NULL,
-                                  port = NULL,
-                                  use_ssl = NULL,
-                                  overwrite = FALSE) {
+create_smtp_creds_key <- function(
+    id,
+    user = NULL,
+    provider = NULL,
+    host = NULL,
+    port = NULL,
+    use_ssl = NULL,
+    overwrite = FALSE
+) {
 
   # nocov start
 
@@ -124,27 +128,45 @@ create_smtp_creds_key <- function(id,
   validate_keyring_available(fn_name = "create_smtp_creds_key")
 
   # Stop function if `id` provided is not of the right type
-  if (!(inherits(id, "character") || inherits(id, "numeric") || inherits(id, "integer"))) {
-    stop("The provided `id` value must be a single character or numeric value.",
-         call. = TRUE)
+  if (
+    !(
+      inherits(id, "character") ||
+      inherits(id, "numeric") ||
+      inherits(id, "integer")
+    )
+  ) {
+
+    stop(
+      "The provided `id` value must be a single character or numeric value.",
+      call. = TRUE
+    )
   }
 
   # Stop function if the `id` value isn't of length 1
   if (length(id) != 1) {
-    stop("Only a vector of length 1 should be used for the `id` value.",
-         call. = FALSE)
+
+    stop(
+      "Only a vector of length 1 should be used for the `id` value.",
+      call. = FALSE
+    )
   }
 
   # Stop function if the `id` is an empty string or NA
   if (is.na(id) || id == "") {
-    stop("The value for `id` should not be `NA` or an empty string.",
-         call. = FALSE)
+
+    stop(
+      "The value for `id` should not be `NA` or an empty string.",
+      call. = FALSE
+    )
   }
 
   # Stop function if a hyphen is used within `id`
   if (is.character(id) && grepl("-", id)) {
-    stop("Hyphens are not allowed as characters for an `id` value",
-         call. = FALSE)
+
+    stop(
+      "Hyphens are not allowed as characters for an `id` value",
+      call. = FALSE
+    )
   }
 
   # Determine whether the key already exists
@@ -154,10 +176,13 @@ create_smtp_creds_key <- function(id,
   # Stop the function if the `id` corresponds to an
   # existing key and `overwrite = FALSE` (the default)
   if (existing_key && !overwrite) {
-    stop("The specified `id` corresponds to a credential key already in the key-value store:\n",
-         "* Use a different `id` value with `create_smtp_creds_key()`, or\n",
-         "* If intentional, overwrite the existing key using the `overwrite = TRUE` option",
-         call. = FALSE)
+
+    stop(
+      "The specified `id` corresponds to a credential key already in the key-value store:\n",
+      "* Use a different `id` value with `create_smtp_creds_key()`, or\n",
+      "* If intentional, overwrite the existing key using the `overwrite = TRUE` option",
+      call. = FALSE
+    )
   }
 
   # Delete the existing key if `overwrite = TRUE`; the
@@ -219,12 +244,14 @@ get_password <- function(msg = "Enter the SMTP server password: ") {
 #' Create a credentials list object
 #'
 #' @noRd
-create_credentials_list <- function(provider,
-                                    user,
-                                    password = get_password(),
-                                    host,
-                                    port,
-                                    use_ssl) {
+create_credentials_list <- function(
+    provider,
+    user,
+    password = get_password(),
+    host,
+    port,
+    use_ssl
+) {
 
   creds_internal(
     user = user,
@@ -239,12 +266,14 @@ create_credentials_list <- function(provider,
 #' Create a credentials list object
 #'
 #' @noRd
-creds_internal <- function(user = NULL,
-                           password = NULL,
-                           provider = NULL,
-                           host = NULL,
-                           port = NULL,
-                           use_ssl = NULL) {
+creds_internal <- function(
+    user = NULL,
+    password = NULL,
+    provider = NULL,
+    host = NULL,
+    port = NULL,
+    use_ssl = NULL
+) {
 
   # If a `provider` name is given, extract values for `host`,
   # `port`, `use_ssl`, `use_tls`, and `authenticate`
@@ -262,8 +291,11 @@ creds_internal <- function(user = NULL,
   }
 
   if (any(is.null(host), is.null(port), is.null(use_ssl))) {
-    stop("The `host`, `port`, and `use_ssl` SMTP options must be provided ",
-         "with values.", call. = FALSE)
+
+    stop(
+      "The `host`, `port`, and `use_ssl` SMTP options must be provided with values.",
+      call. = FALSE
+    )
   }
 
   # Generate the credentials list
@@ -285,8 +317,11 @@ validate_keyring_capable <- function() {
   # nocov start
 
   if (!keyring::has_keyring_support()) {
-    stop("To store SMTP via *keyring*, the system needs to have",
-         "*keyring* support", call. = FALSE)
+
+    stop(
+      "To store SMTP via *keyring*, the system needs to have *keyring* support",
+      call. = FALSE
+    )
   }
 
   # nocov end
@@ -300,8 +335,12 @@ validate_keyring_available <- function(fn_name) {
   # nocov start
 
   if (!requireNamespace("keyring", quietly = TRUE)) {
-    stop("The `keyring` package is required for using the ",
-         "`", fn_name, "()` function", call. = FALSE)
+
+    stop(
+      "The `keyring` package is required for using the ",
+      "`", fn_name, "()` function",
+      call. = FALSE
+    )
   }
 
   validate_keyring_capable()
@@ -316,9 +355,11 @@ validate_smtp_provider <- function(provider) {
 
   if (!(provider %in% get_provider_list())) {
 
-    stop("The supplied `provider` name is not one that is supported\n",
-         " * Use either `\"gmail\"`, `\"outlook\"`, or `\"office365\"`.",
-         call. = FALSE)
+    stop(
+      "The supplied `provider` name is not one that is supported\n",
+      " * Use either `\"gmail\"`, `\"outlook\"`, or `\"office365\"`.",
+      call. = FALSE
+    )
   }
 }
 

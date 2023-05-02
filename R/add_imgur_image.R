@@ -23,20 +23,25 @@
 #'   the image should appear.
 #'
 #' @export
-add_imgur_image <- function(image,
-                            client_id = NULL,
-                            alt = NULL,
-                            width = 520,
-                            align = c("center", "left", "right", "inline"),
-                            float = c("none", "left", "right")) {
+add_imgur_image <- function(
+    image,
+    client_id = NULL,
+    alt = NULL,
+    width = 520,
+    align = c("center", "left", "right", "inline"),
+    float = c("none", "left", "right")
+) {
+
   # nocov start
 
   # Using this function requires the `xml2` package
   if (!requireNamespace("xml2", quietly = TRUE)) {
 
-    stop("The `xml2` package is required for using the ",
-         "`add_imgur_image()` function",
-         call. = FALSE)
+    stop(
+      "The `xml2` package is required for using the ",
+      "`add_imgur_image()` function",
+      call. = FALSE
+    )
   }
 
   if (inherits(image, "ggplot")) {
@@ -53,7 +58,7 @@ add_imgur_image <- function(image,
             sample(c(LETTERS, 0:9), 4),
             collapse = ""
           ),
-          "_", Sys.time() %>% as.integer(),
+          "_", as.integer(Sys.time()),
           "_", "ggplot.png"
         )
 
@@ -91,8 +96,13 @@ add_imgur_image <- function(image,
       alt
     }
 
-  add_image(response_list$link, alt = alt_text, width = width,
-    align = align, float = float)
+  add_image(
+    response_list$link,
+    alt = alt_text,
+    width = width,
+    align = align,
+    float = float
+  )
 
   # nocov end
 }

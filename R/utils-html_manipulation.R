@@ -20,10 +20,12 @@
 # start 5 5
 # end   7 6
 #
-find_all <- function(string,
-                     pattern,
-                     ignore_case = FALSE,
-                     perl = TRUE) {
+find_all <- function(
+    string,
+    pattern,
+    ignore_case = FALSE,
+    perl = TRUE
+) {
 
   match <- gregexpr(pattern, string, perl = perl, ignore.case = ignore_case)[[1]]
   match_start <- as.integer(match)
@@ -40,6 +42,7 @@ find_all <- function(string,
     capture_start <- matrix(integer(0), nrow = length(match_start), ncol = 0)
     capture_length <- matrix(integer(0), nrow = length(match_start), ncol = 0)
   }
+
   capture_start <- ifelse(capture_start <= 0, NA, capture_start)
   capture_end <- capture_start + capture_length
 
@@ -47,25 +50,33 @@ find_all <- function(string,
     return(NULL)
   }
 
-  lapply(seq_along(match_start), function(i) {
-    mtx <- rbind(
-      c(match_start[[i]], capture_start[i,]),
-      c(match_end[[i]], capture_end[i,])
-    )
-    rownames(mtx) <- c("start", "end")
-    mtx
-  })
+  lapply(
+    seq_along(match_start),
+    FUN = function(i) {
+
+      mtx <-
+        rbind(
+          c(match_start[[i]], capture_start[i,]),
+          c(match_end[[i]], capture_end[i,])
+        )
+
+      rownames(mtx) <- c("start", "end")
+      mtx
+    }
+  )
 }
 
 # Similar to stringr::str_replace_all, except the replacement is
 # given dynamically by a function. `func` should take a single
 # string as an argument, and either return a single string or
 # NULL.
-gfsub <- function(string,
-                  pattern,
-                  func,
-                  ignore_case = FALSE,
-                  perl = TRUE) {
+gfsub <- function(
+    string,
+    pattern,
+    func,
+    ignore_case = FALSE,
+    perl = TRUE
+) {
 
   matches <- find_all(string, pattern, ignore_case = ignore_case, perl = perl)
 
@@ -79,10 +90,12 @@ gfsub <- function(string,
   pos <- 1
 
   for (match in matches) {
+
     out(substr2(string, pos, match["start",1]))
 
     args <- as.list(substr2(string, match["start",], match["end",]))
     replacement <- do.call(func, args)
+
     if (!is.null(replacement)) {
       out(replacement)
     }
@@ -99,9 +112,11 @@ gfsub <- function(string,
 
 # Like substr, but the end position is exclusive (i.e. it points
 # to the position just beyond the end of the substring).
-substr2 <- function(x,
-                    start,
-                    end) {
+substr2 <- function(
+    x,
+    start,
+    end
+) {
 
   if (missing(end) && length(start) == 2) {
     end <- start[[2]]
@@ -120,24 +135,30 @@ parse_attr <- function(attr = "src='data'  alt    =  \"whatever\"  id = foo") {
     find_all(attr, "(\\w+)\\s*=(?>\\s*)(?:\"([^\"]*)\"|'([^']*)'|([^\\s]*))")
 
   transformed_matches <-
-    lapply(match_list, function(match) {
-      name <- match[,2]
-      value <- ifelse(
-        !is.na(match[,3]), match[,3],
-        ifelse(
-          !is.na(match[,4]), match[,4],
-          ifelse(
-            !is.na(match[,5]), match[,5],
-            NA
-          )
-        )
-      )
+    lapply(
+      match_list,
+      FUN = function(match) {
 
-      # Return a named list with a single element
-      value_list <- list(value)
-      names(value_list) <- tolower(substr2(attr, name[[1]], name[[2]]))
-      value_list
-    })
+        name <- match[,2]
+
+        value <-
+          ifelse(
+            !is.na(match[, 3]), match[, 3],
+            ifelse(
+              !is.na(match[, 4]), match[, 4],
+              ifelse(
+                !is.na(match[, 5]), match[, 5],
+                NA
+              )
+            )
+          )
+
+        # Return a named list with a single element
+        value_list <- list(value)
+        names(value_list) <- tolower(substr2(attr, name[[1]], name[[2]]))
+        value_list
+      }
+    )
 
   # Turn a list of named lists, into a single named list
   do.call("c", transformed_matches)
@@ -154,6 +175,7 @@ parse_tag <- function(tag) {
 
   # It's very important that this pattern not perform backtracking (hence the
   # possessive quantifiers)
+
   match <- find_all(tag, "^<(\\w++)([^>]*+)>$")
   if (is.null(match)) {
     return(NULL)
@@ -162,11 +184,14 @@ parse_tag <- function(tag) {
   match <- match[[1]]
 
   tag_attr <-
-    lapply(parse_attr(substr2(tag, match[,3])), function(attr_loc) {
+    lapply(
+      parse_attr(substr2(tag, match[, 3])),
+      FUN = function(attr_loc) {
 
-    # Adjust attr offset to be relative to `tag`, not substr2(tag, match[,3])
-    attr_loc + (match[1,3] - 1)
-  })
+        # Adjust attr offset to be relative to `tag`, not substr2(tag, match[,3])
+        attr_loc + (match[1, 3] - 1)
+      }
+    )
 
   list(attributes = tag_attr)
 }
@@ -181,10 +206,12 @@ parse_tag <- function(tag) {
 #'   returns an (HTML escaped) attribute string. Please be especially careful
 #'   not to returned unescaped single or double quotes.
 #' @noRd
-replace_attr <- function(html,
-                         tag_name,
-                         attr_name,
-                         func) {
+replace_attr <- function(
+    html,
+    tag_name,
+    attr_name,
+    func
+) {
 
   stopifnot(grepl("^[a-zA-Z]\\w*$", tag_name))
 
@@ -192,26 +219,33 @@ replace_attr <- function(html,
 
   # perl needs to be FALSE to prevent stack overflow for very very large input
   # that contains unicode characters, see new_releases_email.R.
-  gfsub(html, pattern, perl = FALSE, ignore_case = TRUE, function(tag_html) {
+  gfsub(
+    html,
+    pattern,
+    perl = FALSE,
+    ignore_case = TRUE,
+    func = function(tag_html) {
 
-    tag <- parse_tag(tag_html)
-    attr_loc <- tag$attributes[[attr_name]]
+      tag <- parse_tag(tag_html)
 
-    if (is.null(attr_loc)) {
-      # No change
-      return(tag_html)
+      attr_loc <- tag$attributes[[attr_name]]
+
+      if (is.null(attr_loc)) {
+        # No change
+        return(tag_html)
+      }
+
+      pre <- substr2(tag_html, 1, attr_loc[["start"]])
+      attr_val <- substr2(tag_html, attr_loc)
+      post <- substr2(tag_html, attr_loc[["end"]], nchar(tag_html) + 1L)
+
+      paste0(
+        pre,
+        htmltools::htmlEscape(func(html_unescape(attr_val)), attribute = TRUE),
+        post
+      )
     }
-
-    pre <- substr2(tag_html, 1, attr_loc[["start"]])
-    attr_val <- substr2(tag_html, attr_loc)
-    post <- substr2(tag_html, attr_loc[["end"]], nchar(tag_html) + 1L)
-
-    paste0(
-      pre,
-      htmltools::htmlEscape(func(html_unescape(attr_val)), attribute = TRUE),
-      post
-    )
-  })
+  )
 }
 
 # replace_attr(
@@ -238,15 +272,19 @@ file_uri_to_filepath <- function(src) {
 #' Convert HTML decoded, but not URI escaped, file URI to an absolute path,
 #' possibly by resolving the path relative to basedir.
 #' @noRd
-src_to_filepath <- function(src,
-                            basedir) {
+src_to_filepath <- function(
+    src,
+    basedir
+) {
 
   src <- utils::URLdecode(src)
   fs::path_abs(src, basedir)
 }
 
-src_to_datauri <- function(src,
-                           basedir) {
+src_to_datauri <- function(
+    src,
+    basedir
+) {
 
   if (grepl("^https?:", src, ignore.case = TRUE, perl = TRUE)) {
     return(src)
@@ -290,8 +328,10 @@ inline_images <- function(html_file, html = NULL) {
   })
 }
 
-cid_counter <- function(prefix,
-                        initial_value = 1L) {
+cid_counter <- function(
+    prefix,
+    initial_value = 1L
+) {
 
   idx <- initial_value - 1L
 
@@ -303,13 +343,16 @@ cid_counter <- function(prefix,
 
 # Reads in the specified HTML file, and replaces any images found
 # (either data URI or relative file references) with cid references.
-cid_images <- function(html_file,
-                       next_cid = cid_counter("img"),
-                       html = NULL) {
+cid_images <- function(
+    html_file,
+    next_cid = cid_counter("img"),
+    html = NULL
+) {
 
   idx <- 0L
 
   next_cid <- function(content_type) {
+
     idx <<- idx + 1L
     # According to the spec there should be an @domain on this, but it makes
     # attachment UI show up for Outlook.com (e.g. AT00001.bin)
@@ -332,26 +375,41 @@ cid_images <- function(html_file,
   cids <- new.env(parent = emptyenv())
 
   html_cid <-
-    replace_attr(html_data_uri, tag_name = "img", attr_name = "src", function(src) {
-    m <- stringr::str_match(src, "^data:image/(\\w+);(base64,)(.+)")
-    data <- m[1,4]
-    content_type <- m[1,2]
-    if (is.na(data)) {
-      src
-    } else {
-      cids_key <- digest::digest(src)
-      cid <- cids[[cids_key]]
-      if (is.null(cid)) {
-        cid <- next_cid(content_type = content_type)
-        images[[cid]] <- structure(
-          data,
-          "content_type" = paste0("image/", content_type)
-        )
-        cids[[cids_key]] <- cid
+    replace_attr(
+      html_data_uri,
+      tag_name = "img",
+      attr_name = "src",
+      func = function(src) {
+
+        m <- stringr::str_match(src, "^data:image/(\\w+);(base64,)(.+)")
+        data <- m[1,4]
+        content_type <- m[1,2]
+
+        if (is.na(data)) {
+          src
+
+        } else {
+
+          cids_key <- digest::digest(src)
+          cid <- cids[[cids_key]]
+
+          if (is.null(cid)) {
+
+            cid <- next_cid(content_type = content_type)
+
+            images[[cid]] <-
+              structure(
+                data,
+                "content_type" = paste0("image/", content_type)
+              )
+
+            cids[[cids_key]] <- cid
+          }
+
+          paste0("cid:", cid)
+        }
       }
-      paste0("cid:", cid)
-    }
-  })
+    )
 
   structure(
     class = c("blastula_message", "email_message"),
@@ -365,9 +423,11 @@ cid_images <- function(html_file,
 }
 
 decode_hex <- function(hex) {
+
   if (length(hex) != 1) {
     stop("decode_hex requires a single element character vector")
   }
+
   if (!grepl("^[0-9a-f]{1,8}$", hex, ignore.case = TRUE)) {
     stop("Invalid character code '", hex, "'; expected between 1 and 8 hex digits")
   }
@@ -389,20 +449,31 @@ decode_hex <- function(hex) {
 
 html_unescape <- function(html) {
 
-  gfsub(html, "&#x([0-9a-f]+);|&#([0-9]+);|&([a-z0-9]+);", ignore_case = TRUE,
-    function(entity, hex, dec, named) {
+  gfsub(
+    html,
+    pattern = "&#x([0-9a-f]+);|&#([0-9]+);|&([a-z0-9]+);",
+    ignore_case = TRUE,
+    func = function(entity, hex, dec, named) {
+
       if (!is.na(hex)) {
+
         decode_hex(hex)
+
       } else if (!is.na(dec)) {
+
         decode_hex(sprintf("%x", strtoi(dec, 10)))
+
       } else if (!is.na(named)) {
-        switch(named,
+
+        switch(
+          named,
           amp = "&",
           lt = "<",
           gt = ">",
           quot = "\"",
           {
             str <- html_entities[[entity]]
+
             if (!is.null(str)) {
               str
             } else {
@@ -435,8 +506,10 @@ process_text <- function(text) {
   # from `character`; if not, stop the function
   if (!inherits(text, "character")) {
 
-    stop("The input text must be of class `\"character\"`.",
-         call. = FALSE)
+    stop(
+      "The input text must be of class `\"character\"`.",
+      call. = FALSE
+    )
   }
 
   # Fashion plain text into HTML
@@ -449,7 +522,9 @@ process_text <- function(text) {
 # A shim for htmltools::css that returns NULL in place of "". (This won't be
 # needed after the next CRAN release of htmltools)
 css <- function(..., collapse_ = "") {
+
   result <- htmltools::css(..., collapse_ = collapse_)
+
   if (identical(result, "")) {
     NULL
   } else {

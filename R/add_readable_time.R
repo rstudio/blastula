@@ -49,21 +49,26 @@ add_readable_time <- function(
   }
 
   if (isTRUE(use_date)) {
+
     current_date <-
       paste0(
         format(time, "%A, %B "),
-        format(time, "%d") %>% as.numeric(),
+        as.numeric(format(time, "%d")),
         ", ",
-        format(time, "%Y"))
+        format(time, "%Y")
+      )
+
   } else {
     current_date <- ""
   }
 
   if (isTRUE(use_time)) {
+
     current_time <-
       paste0(
         gsub(" |^0", "", format(time, "%I:%M")),
-        toupper(format(time, " %p")))
+        toupper(format(time, " %p"))
+      )
 
     if (isTRUE(use_date)) {
       current_time <- paste0(" at ", current_time)
@@ -74,9 +79,13 @@ add_readable_time <- function(
   }
 
   if (isTRUE(use_tz) && (isTRUE(use_date) || isTRUE(use_time))) {
+
     current_tz <- format(time, " (%Z)")
+
   } else if (isTRUE(use_tz) && (use_date == FALSE && use_time == FALSE)) {
+
     current_tz <- format(time, "%Z")
+
   } else {
     current_tz <- ""
   }
