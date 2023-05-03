@@ -55,11 +55,13 @@ NULL
 
 #' @rdname credential_helpers
 #' @export
-creds <- function(user = NULL,
-                  provider = NULL,
-                  host = NULL,
-                  port = NULL,
-                  use_ssl = TRUE) {
+creds <- function(
+    user = NULL,
+    provider = NULL,
+    host = NULL,
+    port = NULL,
+    use_ssl = TRUE
+) {
 
   # Create a credentials list from the function inputs
   creds_list <-
@@ -77,10 +79,12 @@ creds <- function(user = NULL,
 
 #' @rdname credential_helpers
 #' @export
-creds_anonymous <- function(provider = NULL,
-                            host = NULL,
-                            port = NULL,
-                            use_ssl = TRUE) {
+creds_anonymous <- function(
+    provider = NULL,
+    host = NULL,
+    port = NULL,
+    use_ssl = TRUE
+) {
 
   creds_list <-
     creds_internal(
@@ -98,12 +102,14 @@ creds_anonymous <- function(provider = NULL,
 
 #' @rdname credential_helpers
 #' @export
-creds_envvar <- function(user = NULL,
-                         pass_envvar = "SMTP_PASSWORD",
-                         provider = NULL,
-                         host = NULL,
-                         port = NULL,
-                         use_ssl = TRUE) {
+creds_envvar <- function(
+    user = NULL,
+    pass_envvar = "SMTP_PASSWORD",
+    provider = NULL,
+    host = NULL,
+    port = NULL,
+    use_ssl = TRUE
+) {
 
   # Obtain the password from an environment variable
   # using the `pass_envar` value
@@ -111,8 +117,11 @@ creds_envvar <- function(user = NULL,
 
   # If `Sys.getenv()` returns NA, then stop
   if (is.na(password)) {
-    stop("The environment variable defined by `pass_envvar` doesn't exist.",
-         call. = FALSE)
+
+    stop(
+      "The environment variable defined by `pass_envvar` doesn't exist.",
+      call. = FALSE
+    )
   }
 
   # Create a credentials list from the function inputs
@@ -152,7 +161,6 @@ creds_file <- function(file) {
   creds_list
 }
 
-
 #' @noRd
 #' @export
 format.blastula_creds <- function(x, ...) {
@@ -169,6 +177,5 @@ format.blastula_creds <- function(x, ...) {
 #' @noRd
 #' @export
 print.blastula_creds <- function(x, ...) {
-
   cat(format(x, ...), "\n")
 }

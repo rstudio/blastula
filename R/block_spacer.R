@@ -50,7 +50,9 @@
 #'
 #' @export
 block_spacer <- function() {
-  tags$table(class = "message-block block_spacer",
+
+  tags$table(
+    class = "message-block block_spacer",
     tags$tr(
       tags$td(HTML("&nbsp;"))
     )

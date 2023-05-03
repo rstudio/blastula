@@ -36,14 +36,16 @@
 
 
 # Turns a blastula email object into an RFC2822 message
-generate_rfc2822 <- function(eml,
-                             date = Sys.time(),
-                             subject = NULL,
-                             from = NULL,
-                             to = NULL,
-                             cc = NULL,
-                             con = NULL,
-                             uuid_source = NULL) {
+generate_rfc2822 <- function(
+    eml,
+    date = Sys.time(),
+    subject = NULL,
+    from = NULL,
+    to = NULL,
+    cc = NULL,
+    con = NULL,
+    uuid_source = NULL
+) {
 
   if (is.null(uuid_source)) {
     # Do this instead of (the more obvious) `uuid_source = uuid::UUIDgenerate`
@@ -54,91 +56,125 @@ generate_rfc2822 <- function(eml,
 
   stopifnot(inherits(eml, "blastula_message"))
 
-  headers <- list(
-    "MIME-Version" = "1.0",
-    "Date" = format_rfc2822_date(date),
-    "Message-ID" = paste0("<", uuid_source(), "@blastula.local>"),
-    "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
-    "From" = format_rfc2822_addr(from, "From"),
-    "To" = format_rfc2822_addr_list(to, "To"),
-    "Cc" = format_rfc2822_addr_list(cc, "Cc")
-  )
-
-  images <- mapply(names(eml$images), eml$images, FUN = function(filename, data) {
-    mime_part(
-      attr(data, "content_type", exact = TRUE) %||% mime::guess_type(filename),
-      headers = list(
-        # TODO: escape
-        "Content-Disposition" = "inline",
-        "Content-ID" = paste0("<", filename, ">"),
-        "X-Attachment-Id" = filename
-      ),
-      content = base64enc::base64decode(data)
+  headers <-
+    list(
+      "MIME-Version" = "1.0",
+      "Date" = format_rfc2822_date(date),
+      "Message-ID" = paste0("<", uuid_source(), "@blastula.local>"),
+      "Subject" = header_unstructured(subject, "Subject", encode_unicode = TRUE),
+      "From" = format_rfc2822_addr(from, "From"),
+      "To" = format_rfc2822_addr_list(to, "To"),
+      "Cc" = format_rfc2822_addr_list(cc, "Cc")
     )
-  }, SIMPLIFY = FALSE)
 
-  attachments <- lapply(eml$attachments, function(attachment) {
-
-    raw_bytes <- readBin(attachment$file_path, "raw", n = file.info(attachment$file_path)$size)
-
-    quoted_filename <- header_quoted(attachment$filename, "Filename", encode_unicode = TRUE)
-    content_id <- tidy_gsub(uuid_source(), "-", "")
-
-    mime_part(
-      sprintf("%s; name=%s", attachment$content_type, quoted_filename),
-      headers = list(
-        "Content-Disposition" = sprintf(
-          "%s; filename=%s",
-          attachment$disposition,
-          quoted_filename
-        ),
-        "Content-ID" = paste0("<", content_id, ">"),
-        "X-Attachment-Id" = content_id
-      ),
-      content = raw_bytes
+  images <-
+    mapply(
+      names(eml$images),
+      eml$images,
+      FUN = function(filename, data) {
+        mime_part(
+          attr(data, "content_type", exact = TRUE) %||% mime::guess_type(filename),
+          headers = list(
+            # TODO: escape
+            "Content-Disposition" = "inline",
+            "Content-ID" = paste0("<", filename, ">"),
+            "X-Attachment-Id" = filename
+          ),
+          content = base64enc::base64decode(data)
+        )
+      },
+      SIMPLIFY = FALSE
     )
+
+  attachments <-
+    lapply(
+      eml$attachments,
+      FUN = function(attachment) {
+
+        raw_bytes <-
+          readBin(
+            attachment$file_path,
+            what = "raw",
+            n = file.info(attachment$file_path)$size
+          )
+
+        quoted_filename <-
+          header_quoted(
+            attachment$filename,
+            str = "Filename",
+            encode_unicode = TRUE
+          )
+
+        content_id <- tidy_gsub(uuid_source(), "-", "")
+
+        mime_part(
+          content_type = sprintf(
+            "%s; name=%s",
+            attachment$content_type,
+            quoted_filename
+          ),
+          headers = list(
+            "Content-Disposition" = sprintf(
+              "%s; filename=%s",
+              attachment$disposition,
+              quoted_filename
+            ),
+            "Content-ID" = paste0("<", content_id, ">"),
+            "X-Attachment-Id" = content_id
+          ),
+          content = raw_bytes
+        )
   })
 
 
-  msg <- mime_multipart(
-    "multipart/related",
-    headers = if (length(attachments) == 0) headers else list(),
-    body_parts = rlang::list2(
-      mime_part("text/html; charset=utf-8",
-        content = eml$html_str
+  msg <-
+    mime_multipart(
+      content_type = "multipart/related",
+      headers = if (length(attachments) == 0) headers else list(),
+      body_parts = rlang::list2(
+        mime_part(
+          content_type = "text/html; charset=utf-8",
+          content = eml$html_str
+        ),
+        !!!images
       ),
-      !!!images
-    ),
-    boundary = uuid_source()
-  )
+      boundary = uuid_source()
+    )
 
   # This is necessary for attachments to display correctly on
   # iOS Mail in particular (other clients are more relaxed
   # about showing attachments whenever available)
   if (length(attachments) > 0) {
-    msg <- mime_multipart(
-      "multipart/mixed",
-      headers = headers,
-      body_parts = rlang::list2(
-        msg,
-        !!!attachments
-      ),
-      boundary = uuid_source()
-    )
+
+    msg <-
+      mime_multipart(
+        content_type = "multipart/mixed",
+        headers = headers,
+        body_parts = rlang::list2(
+          msg,
+          !!!attachments
+        ),
+        boundary = uuid_source()
+      )
   }
 
   if (is.null(con)) {
+
     f <- file(open = "w+b")
     on.exit(close(f), add = TRUE)
+
     write_mime(create_output_sink(f), msg)
     str <- readChar(f, seek(f), useBytes = TRUE)
     Encoding(str) <- "UTF-8"
     str
+
   } else {
+
     if (is.character(con)) {
       con <- file(con, open = "w+b")
       on.exit(close(con), add = TRUE)
     }
+
     write_mime(create_output_sink(con), msg)
     invisible()
   }
@@ -148,7 +184,12 @@ generate_rfc2822 <- function(eml,
 crlf <- "\r\n"
 
 # Constructor for a mime message. Can be nested in mime_multipart.
-mime_part <- function(content_type, headers = list(), content) {
+mime_part <- function(
+    content_type,
+    headers = list(),
+    content
+) {
+
   if (is.raw(content)) {
     encoding <- "base64"
   } else if (is.character(content)) {
@@ -173,10 +214,14 @@ mime_part <- function(content_type, headers = list(), content) {
 }
 
 # Constructor for a multipart mime message. Can be nested in mime_multipart.
-mime_multipart <- function(content_type = c("multipart/alternative", "multipart/related", "multipart/mixed"),
-  headers = list(),
-  body_parts,
-  boundary, preamble = NULL, epilogue = NULL) {
+mime_multipart <- function(
+    content_type = c("multipart/alternative", "multipart/related", "multipart/mixed"),
+    headers = list(),
+    body_parts,
+    boundary,
+    preamble = NULL,
+    epilogue = NULL
+) {
 
   structure(
     class = "mime_multipart",
@@ -246,13 +291,17 @@ write_mime.mime_part <- function(out, x) {
 }
 
 write_mime.mime_multipart <- function(out, x) {
+
   # headers, body_parts, boundary, preamble, epilogue
   write_headers(out, x$headers)
   out(x$preamble)
+
   for (body_part in x$body_parts) {
+
     write_boundary(out, x$boundary)
     write_mime(out, body_part)
   }
+
   write_boundary(out, x$boundary, end = TRUE)
   out(x$epilogue)
 }
@@ -262,7 +311,9 @@ write_mime.default <- function(out, x) {
 }
 
 encode_qp <- function(str) {
+
   str <- enc2utf8(str)
+
   # Normalize line endings, as required by RFC2045 Section 6.7.4
   str <- tidy_gsub(str, "\\r?\\n", "\r\n")
 
@@ -271,7 +322,9 @@ encode_qp <- function(str) {
 
   # Section 6.7.1-6.7.4
   # Also encoding 0x2E ('.') to guard against dot stuffing issues
-  needs_encode <- !(bytes %in% as.raw(c(0x09, 0x0A, 0x0D, 0x20, 0x21:0x2D, 0x2F:0x3C, 0x3E:0x7E)))
+  needs_encode <-
+    !(bytes %in% as.raw(c(0x09, 0x0A, 0x0D, 0x20, 0x21:0x2D, 0x2F:0x3C, 0x3E:0x7E)))
+
   enc_chars <- character(length(bytes))
   enc_chars[needs_encode] <- sprintf("=%02X", as.integer(bytes[needs_encode]))
   enc_chars[!needs_encode] <- strsplit(rawToChar(bytes[!needs_encode]), "")[[1]]
@@ -281,17 +334,24 @@ encode_qp <- function(str) {
   out <- create_output_sink(f)
 
   cur_line_len <- 0L
+
   for (chunk in enc_chars) {
+
     # See if soft line break is required (Section 6.7.5)
     if (identical(chunk, "\n")) {
+
       cur_line_len <- -1L
+
     } else if (cur_line_len + nchar(chunk) >= 76) {
+
       out("=\r\n")
       cur_line_len <- 0L
     }
+
     out(chunk)
     cur_line_len <- cur_line_len + nchar(chunk)
   }
+
   # Ensure that trailing spaces are not ignored
   out("=\r\n\r\n")
 
@@ -299,6 +359,7 @@ encode_qp <- function(str) {
 }
 
 format_rfc2822_date <- function(date) {
+
   # Thu, 24 Oct 2019 08:17:43 -0700
 
   dc <- as.POSIXlt(date)
@@ -307,29 +368,32 @@ format_rfc2822_date <- function(date) {
 
   day <- format(dc$mday)
 
-  month <- c("Jan", "Feb", "Mar",
-    "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep",
-    "Oct", "Nov", "Dec")[[dc$mon + 1L]]
+  month <-
+    c(
+      "Jan", "Feb", "Mar",
+      "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep",
+      "Oct", "Nov", "Dec"
+    )[[dc$mon + 1L]]
 
   year <- sprintf("%04d", 1900L + dc$year)
 
   time <- sprintf("%02d:%02d:%02d", dc$hour, dc$min, floor(dc$sec))
 
-  tz <- if (is.null(dc$gmtoff) || dc$gmtoff == 0) {
-    "+0000"
-  } else if (dc$gmtoff < 0) {
-    sprintf("%05d", dc$gmtoff / 3600 * 100)
-  } else {
-    sprintf("+%04d", dc$gmtoff / 3600 * 100)
-  }
+  tz <-
+    if (is.null(dc$gmtoff) || dc$gmtoff == 0) {
+      "+0000"
+    } else if (dc$gmtoff < 0) {
+      sprintf("%05d", dc$gmtoff / 3600 * 100)
+    } else {
+      sprintf("+%04d", dc$gmtoff / 3600 * 100)
+    }
 
-  paste0(dow, ", ",
-    paste(day, month, year, time, tz)
-  )
+  paste0(dow, ", ", paste(day, month, year, time, tz))
 }
 
 format_rfc2822_addr <- function(addr, fieldname) {
+
   # To trigger errors if called without fieldname, even if length(addr) == 1
   force(fieldname)
 
@@ -340,10 +404,12 @@ format_rfc2822_addr <- function(addr, fieldname) {
   if (length(addr) != 1) {
     stop("The '", fieldname, "' field must contain exactly one email address")
   }
+
   format_rfc2822_addr_list(addr, fieldname)
 }
 
 format_rfc2822_addr_list <- function(addrs, fieldname) {
+
   if (length(addrs) == 0) {
     return(NULL)
   }
@@ -364,15 +430,22 @@ format_rfc2822_addr_list <- function(addrs, fieldname) {
 }
 
 # NOTE: str can be length > 1
-header_quoted <- function(str, fieldname, encode_unicode = FALSE) {
+header_quoted <- function(
+    str,
+    fieldname,
+    encode_unicode = FALSE
+) {
+
   if (length(str) == 0) {
     return(str)
   }
 
   force(fieldname)
+
   if (!is.character(str)) {
     stop("The '", fieldname, "' field must be a character vector")
   }
+
   if (any(grepl("[\r\n]", str))) {
     stop("The '", fieldname, "' field must not contain newlines")
   }
@@ -382,21 +455,40 @@ header_quoted <- function(str, fieldname, encode_unicode = FALSE) {
   needs_encoding <- grepl("[^\x01-\x7F]", str)
 
   if (any(needs_encoding)) {
+
     if (encode_unicode) {
-      str[needs_encoding] <- vapply(str[needs_encoding], function(x) {
-        base64enc::base64encode(charToRaw(x), 0)
-      }, character(1)) %>% sprintf("=?utf-8?B?%s?=", .)
+
+      str[needs_encoding] <-
+        vapply(
+          str[needs_encoding],
+          FUN.VALUE = character(1),
+          FUN = function(x) {
+            base64enc::base64encode(charToRaw(x), 0)
+          }) %>%
+        sprintf("=?utf-8?B?%s?=", .)
+
       return(str)
+
     } else {
-      warning("The '", fieldname, "' field contains impermissible characters, ",
-        "please use 7-bit ASCII only")
+
+      warning(
+        "The '", fieldname, "' field contains impermissible characters, ",
+        "please use 7-bit ASCII only"
+      )
     }
+
   } else {
+
     return(paste0("\"", gsub("([\"\\])", "\\\\\\1", str), "\""))
   }
 }
 
-header_unstructured <- function(str, fieldname, encode_unicode = FALSE) {
+header_unstructured <- function(
+    str,
+    fieldname,
+    encode_unicode = FALSE
+) {
+
   force(fieldname)
 
   if (is.null(str)) {
@@ -406,19 +498,27 @@ header_unstructured <- function(str, fieldname, encode_unicode = FALSE) {
   if (!is.character(str)) {
     stop("The '", fieldname, "' field must be a character vector")
   }
+
   if (length(str) != 1) {
     stop("The '", fieldname, "' field must have a single element")
   }
+
   if (any(grepl("[\r\n]", str))) {
     stop("The '", fieldname, "' field must not contain newlines")
   }
 
   if (grepl("[^\x01-\x7F]", str)) {
+
     if (encode_unicode) {
+      str <- enc2utf8(str)
       str <- sprintf("=?utf-8?B?%s?=", base64enc::base64encode(charToRaw(str)), 0)
+
     } else {
-      warning("The '", fieldname, "' field contains impermissible characters, ",
-        "please use 7-bit ASCII only")
+
+      warning(
+        "The '", fieldname, "' field contains impermissible characters, ",
+        "please use 7-bit ASCII only"
+      )
     }
   }
 

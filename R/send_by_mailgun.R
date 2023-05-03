@@ -49,12 +49,14 @@
 #' #     api = "<..mailgun_api_key..>")
 #'
 #' @export
-send_by_mailgun <- function(message,
-                            subject = NULL,
-                            from,
-                            recipients,
-                            url,
-                            api_key) {
+send_by_mailgun <- function(
+    message,
+    subject = NULL,
+    from,
+    recipients,
+    url,
+    api_key
+) {
 
   # nocov start
 
@@ -80,8 +82,10 @@ send_by_mailgun <- function(message,
       from = from,
       to = recipients,
       subject = subject,
-      html = message$html_html),
-    terminate_on = c(403, 404))
+      html = message$html_html
+    ),
+    terminate_on = c(403, 404)
+  )
 
   # nocov end
 }

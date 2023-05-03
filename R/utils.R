@@ -47,7 +47,6 @@ tidy_gsub <- function(x, pattern, replacement, fixed = FALSE) {
 #'   all conflicting arguments.
 #' @noRd
 tidy_grepl <- function(x, pattern, fixed = FALSE) {
-
   grepl(pattern, x, fixed = fixed)
 }
 
@@ -66,8 +65,7 @@ imgur_upload <- function(file, client_id) {
     httr::RETRY(
       verb = "POST",
       url = "https://api.imgur.com/3/image.xml",
-      config = httr::add_headers(
-        Authorization = paste("Client-ID", client_id)),
+      config = httr::add_headers(Authorization = paste("Client-ID", client_id)),
       body = list(image = httr::upload_file(file)),
       terminate_on = c(403, 404)
     )
@@ -78,21 +76,23 @@ imgur_upload <- function(file, client_id) {
 
   # Get response content as raw bytes
   result <-
-    (httr::content(response, as = "raw") %>%
-       xml2::read_xml() %>%
-       xml2::as_list()
+    (
+      httr::content(response, as = "raw") %>%
+        xml2::read_xml() %>%
+        xml2::as_list()
     )[[1]]
 
   # If we get a `NULL` in the `link` field, then
   # the image didn't get uploaded to Imgur
   if (is.null(result$link[[1]])) {
 
-    stop(paste0("The image (", file ,") has failed to upload."),
-         call. = FALSE)
+    stop(
+      paste0("The image (", file ,") has failed to upload."),
+      call. = FALSE
+    )
   }
 
-  # Create a simplified list object from
-  # the result
+  # Create a simplified list object from the result
   list(
     id = result$id[[1]],
     link = result$link[[1]],
@@ -112,9 +112,11 @@ imgur_upload <- function(file, client_id) {
 #' @param values The values to prepend to the list.
 #' @param before The index position for the prepending operation.
 #' @noRd
-prepend_list <- function(x,
-                         values,
-                         before = 1) {
+prepend_list <- function(
+    x,
+    values,
+    before = 1
+) {
 
   n <- length(x)
 
@@ -155,19 +157,24 @@ prepend_list <- function(x,
 #' easier.)
 #'
 #' @noRd
-knitr_sidecar_prefix <- function(default,
-  condition = !is.null(knitr::opts_knit$get("rmarkdown.version")),
-  fig_path = knitr::opts_chunk$get("fig.path")) {
+knitr_sidecar_prefix <- function(
+    default,
+    condition = !is.null(knitr::opts_knit$get("rmarkdown.version")),
+    fig_path = knitr::opts_chunk$get("fig.path")
+) {
 
   if (missing(default)) {
+
     # Fail fast if default is missing.
     # But, don't eagerly evaluate otherwise, because it might be a stop().
     force(default)
   }
 
   if (condition && !is.null(fig_path)) {
+
     m <- regexec("^(.+)_files/figure-[\\w_]+/?$", fig_path, perl = TRUE)
     prefix <- regmatches(fig_path, m)[[1]][2]
+
     if (!is.na(prefix)) {
       return(prefix)
     }

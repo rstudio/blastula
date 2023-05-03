@@ -8,7 +8,7 @@
 # Output files from blastula
 .bls*
 blastula-*
-.mailsend
+/connect_examples
 
 # Docs folder from `pkgdown::build_site()`
 docs/

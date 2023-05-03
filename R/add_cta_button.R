@@ -38,24 +38,35 @@
 #' if (interactive()) email
 #'
 #' @export
-add_cta_button <- function(url,
-                           text,
-                           align = "center") {
+add_cta_button <- function(
+    url,
+    text,
+    align = "center"
+) {
 
-  tags$table(align = align,
-    tags$tr(
-      tags$td(style = css(background_color = "#2288DD", border_radius = "6px",
-        padding = "10px 20px"),
-        tags$a(
-          style = css(
-            color = "white",
-            text_decoration = "none",
-            font_weight = "bold"
-          ),
-          href = url,
-          text
+  HTML(
+    as.character(
+      tags$table(
+        align = align,
+        tags$tr(
+          tags$td(
+            style = css(
+              background_color = "#2288DD",
+              border_radius = "6px",
+              padding = "10px 20px"
+            ),
+            tags$a(
+              style = css(
+                color = "white",
+                text_decoration = "none",
+                font_weight = "bold"
+              ),
+              href = url,
+              text
+            )
+          )
         )
       )
     )
-  ) %>% as.character() %>% HTML()
+  )
 }

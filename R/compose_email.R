@@ -53,12 +53,14 @@
 #'
 #' @return An `email_message` object.
 #' @export
-compose_email <- function(body = NULL,
-                          header = NULL,
-                          footer = NULL,
-                          title = NULL,
-                          ...,
-                          template = blastula_template) {
+compose_email <- function(
+    body = NULL,
+    header = NULL,
+    footer = NULL,
+    title = NULL,
+    ...,
+    template = blastula_template
+) {
 
   body <- process_markdown(body)
   header <- process_markdown(header)

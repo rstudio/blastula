@@ -79,6 +79,7 @@ prepare_rsc_example_files <- function(path = NULL) {
 
     # Write the files
     for (i in seq(file_names)) {
+
       file.copy(
         from = system.file(file.path("examples", file_names[i]), package = "blastula"),
         to = file_paths[i])

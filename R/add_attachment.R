@@ -19,10 +19,12 @@
 #'   default, the basename of `file` is taken to be the attachment's filename.
 #'
 #' @export
-add_attachment <- function(email,
-                           file,
-                           content_type = mime::guess_type(file),
-                           filename = basename(file)) {
+add_attachment <- function(
+    email,
+    file,
+    content_type = mime::guess_type(file),
+    filename = basename(file)
+) {
 
   # Get the expanded path for the file
   expanded_path <-

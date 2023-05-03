@@ -50,12 +50,18 @@
 #' if (interactive()) email
 #'
 #' @export
-block_text <- function(text, align = c("left", "center", "right", "justify")) {
+block_text <- function(
+    text,
+    align = c("left", "center", "right", "justify")
+) {
+
   if (length(align) > 1) {
     align <- align[[1]]
   }
 
-  tags$div(class = "message-block block_text", style = css(text_align = align),
+  tags$div(
+    class = "message-block block_text",
+    style = css(text_align = align),
     text
   )
 }
