@@ -11,14 +11,33 @@
 #'   time will be used.
 #' @param use_date,use_time,use_tz Logical value that indicate whether to
 #'   include the date, time, or time zone components.
+#'
 #' @return A character object that can be placed inside any message component
 #'   message wherever the function is called.
 #'
+#' @examples
+#'
+#' # Generate a date and time value using a specified date/time value
+#' add_readable_time(
+#'   time = ISOdatetime(
+#'     year = 2022,
+#'     month = 3,
+#'     day = 15,
+#'     hour = 8,
+#'     min = 30,
+#'     sec = 0,
+#'     tz = "GMT"
+#'    ),
+#'   use_tz = FALSE
+#' )
+#'
 #' @export
-add_readable_time <- function(time = NULL,
-                              use_date = TRUE,
-                              use_time = TRUE,
-                              use_tz = TRUE) {
+add_readable_time <- function(
+    time = NULL,
+    use_date = TRUE,
+    use_time = TRUE,
+    use_tz = TRUE
+) {
 
   if (is.null(time)) {
 
@@ -30,21 +49,26 @@ add_readable_time <- function(time = NULL,
   }
 
   if (isTRUE(use_date)) {
+
     current_date <-
       paste0(
         format(time, "%A, %B "),
-        format(time, "%d") %>% as.numeric(),
+        as.numeric(format(time, "%d")),
         ", ",
-        format(time, "%Y"))
+        format(time, "%Y")
+      )
+
   } else {
     current_date <- ""
   }
 
   if (isTRUE(use_time)) {
+
     current_time <-
       paste0(
-        gsub(" ", "", format(time, "%l:%M")),
-        toupper(format(time, " %p")))
+        gsub(" |^0", "", format(time, "%I:%M")),
+        toupper(format(time, " %p"))
+      )
 
     if (isTRUE(use_date)) {
       current_time <- paste0(" at ", current_time)
@@ -55,9 +79,13 @@ add_readable_time <- function(time = NULL,
   }
 
   if (isTRUE(use_tz) && (isTRUE(use_date) || isTRUE(use_time))) {
+
     current_tz <- format(time, " (%Z)")
+
   } else if (isTRUE(use_tz) && (use_date == FALSE && use_time == FALSE)) {
+
     current_tz <- format(time, "%Z")
+
   } else {
     current_tz <- ""
   }

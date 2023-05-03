@@ -47,7 +47,9 @@
 #'
 #' @export
 block_title <- function(title) {
-  tags$h1(class = "message-block block_title",
+
+  tags$h1(
+    class = "message-block block_title",
     style = css(
       color = "#222222",
       font_weight = "300",

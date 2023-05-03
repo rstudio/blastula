@@ -25,10 +25,5 @@ process_markdown <- function(x, ...) {
 }
 
 render_markdown <- function(x, ...) {
-  HTML(commonmark::markdown_html(
-    paste(collapse = "\n",
-      as.character(x)
-    ),
-    ...
-  ))
+  HTML(commonmark::markdown_html(paste(collapse = "\n", as.character(x)), ...))
 }

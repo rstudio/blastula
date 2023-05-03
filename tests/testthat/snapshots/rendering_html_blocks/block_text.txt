@@ -1,3 +1,0 @@
-> print(x)
-<div class="message-block block_text" style="text-align:left;">Test Text</div>
-

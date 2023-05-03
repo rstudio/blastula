@@ -1,3 +1,11 @@
+# blastula (development version)
+
+# blastula 0.3.3
+
+* Made a correction to a `format()` statement to comply with CRAN policy.
+
+* Updated the SMTP vignette with regard to Gmail app passwords (#282), (#283, thanks @jnolis!)
+
 # blastula 0.3.2
 
 * Email content width is now customizable in the `blastula_email()` and `compose_email()` functions. The default width is now increased to 1000px (#178).

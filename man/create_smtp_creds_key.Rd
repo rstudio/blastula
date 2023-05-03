@@ -31,19 +31,7 @@ configuration details (the \code{host}, \code{port}, \code{use_ssl} options). Op
 currently include \code{gmail}, \code{outlook}, and \code{office365}. If nothing is
 provided then values for \code{host}, \code{port}, and \code{use_ssl} are expected.}
 
-\item{host}{Configuration info for the SMTP server. The \code{host}
-and \code{port} parameters are the address and port for the SMTP server.
-\code{use_ssl} is an option as to whether to allow the use of STARTTLS, if
-available: it should be \code{TRUE} unless you have a specific reason to set it
-to \code{FALSE}.}
-
-\item{port}{Configuration info for the SMTP server. The \code{host}
-and \code{port} parameters are the address and port for the SMTP server.
-\code{use_ssl} is an option as to whether to allow the use of STARTTLS, if
-available: it should be \code{TRUE} unless you have a specific reason to set it
-to \code{FALSE}.}
-
-\item{use_ssl}{Configuration info for the SMTP server. The \code{host}
+\item{host, port, use_ssl}{Configuration info for the SMTP server. The \code{host}
 and \code{port} parameters are the address and port for the SMTP server.
 \code{use_ssl} is an option as to whether to allow the use of STARTTLS, if
 available: it should be \code{TRUE} unless you have a specific reason to set it

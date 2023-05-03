@@ -51,12 +51,14 @@
 #' @return An HTML fragment that can be placed inside the message body wherever
 #'   the plot image should appear.
 #' @export
-add_ggplot <- function(plot_object,
-                       width = 5,
-                       height = 5,
-                       alt = NULL,
-                       align = c("center", "left", "right", "inline"),
-                       float = c("none", "left", "right")) {
+add_ggplot <- function(
+    plot_object,
+    width = 5,
+    height = 5,
+    alt = NULL,
+    align = c("center", "left", "right", "inline"),
+    float = c("none", "left", "right")
+) {
 
   # nocov start
 
@@ -72,11 +74,15 @@ add_ggplot <- function(plot_object,
       filename = tmpfile,
       dpi = 200,
       width = width,
-      height = height)
+      height = height
+    )
 
   } else {
-    stop("Please ensure that the `ggplot2` package is installed before using `add_ggplot()`.",
-         call. = FALSE)
+
+    stop(
+      "Please ensure that the `ggplot2` package is installed before using `add_ggplot()`.",
+      call. = FALSE
+    )
   }
 
   on.exit(file.remove(tmpfile), add = TRUE)
@@ -90,8 +96,13 @@ add_ggplot <- function(plot_object,
     }
 
   image_html <-
-    add_image(file = tmpfile, alt = alt_text, width = width * 100,
-      align = align, float = float)
+    add_image(
+      file = tmpfile,
+      alt = alt_text,
+      width = width * 100,
+      align = align,
+      float = float
+    )
 
   image_html
 

@@ -1,9 +1,0 @@
-> print(x)
-<div style="margin-bottom:12px;">
-  <a href="https://en.wikipedia.org/wiki/Japan" style="text-decoration:none;"><img src="https://i.imgur.com/aYOm3Tk.jpg" width="100%" height="200" style="height:auto !important;"/></a>
-</div>
-<h3 style="margin:0;">
-  <a href="https://en.wikipedia.org/wiki/Japan" style="text-decoration:none;">Japan</a>
-</h3>
-<div>Japan is an archipelago consisting of 6,852 islands along East Asia's Pacific Coast.</div>
-

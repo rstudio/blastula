@@ -37,8 +37,10 @@
 #' #     )
 #'
 #' @export
-prepare_test_message <- function(incl_ggplot = FALSE,
-                                 incl_image = FALSE) {
+prepare_test_message <- function(
+    incl_ggplot = FALSE,
+    incl_image = FALSE
+) {
 
   # nocov start
 
@@ -96,9 +98,11 @@ you can use Markdown formatting to **embolden** text or to add *emphasis*."
 
     } else {
 
-      stop("Please ensure that the `ggplot2` package is installed before ",
-           "using `add_ggplot()`.",
-           call. = FALSE)
+      stop(
+        "Please ensure that the `ggplot2` package is installed before ",
+        "using `add_ggplot()`.",
+        call. = FALSE
+      )
     }
   }
 

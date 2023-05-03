@@ -1,5 +1,3 @@
-context("Connect emailing")
-
 test_that("The `create_rmd_preview_message()` function works properly", {
 
   # Create an HTML string for the .Rmd preview message

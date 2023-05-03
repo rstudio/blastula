@@ -1,7 +1,0 @@
-> print(x)
-<table class="message-block block_spacer">
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
-</table>
-
