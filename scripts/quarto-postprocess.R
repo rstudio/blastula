@@ -7,21 +7,22 @@ library(rmarkdown)
 library(blastula)
 library(jsonlite)
 
-# Testing with two different HTML renders from Quarto
-quarto_render_html_file <-
-  system.file(
-    "quarto_example_documents/quarto-report-render.html",
-    package = "blastula"
-  )
+# Get the filename for the rendered-by-Quarto HTML
+html_file <- list.files(path = ".", pattern = ".*\\.html")[1]
 
-quarto_render_html_file_2 <-
-  system.file(
-    "quarto_example_documents/quarto-report-render-02.html",
-    package = "blastula"
-  )
+# Get the filename for the rendered-by-Quarto JSON
+json_file <- list.files(path = ".", pattern = ".*\\.json")[1]
+
+# Stop if any of `html_file` or `json_file` are of zero length
+if (length(html_file) < 1 || length(html_file) < 1) {
+  stop("There is no HTML or JSON file for which to generate a Connect email.")
+}
+
+# Stop if the JSON file doesn't contain identifying text
+
 
 # Generate the fragment of HTML that only contains the emailable material
-email_fragment <- get_html_email_fragment(quarto_render_html_file_2)
+email_fragment <- get_html_email_fragment(file = html_file)
 
 # Render the email fragment .Rmd and generate a list object with the
 # needed components for Connect
@@ -36,10 +37,7 @@ rendered_email_obj <-
   )
 
 finalize_quarto_connect_json_file(
-  input_json_file = system.file(
-    "quarto_example_documents/connect-email.json",
-    package = "blastula"
-  ),
-  output_json_file = "finalized.json",
+  input_json_file = json_file,
+  output_json_file = json_file,
   rendered_email_obj = rendered_email_obj
 )
