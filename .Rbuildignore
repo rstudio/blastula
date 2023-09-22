@@ -4,14 +4,11 @@
 ^\.github$
 ^\.travis\.yml$
 ^_pkgdown\.yml$
-^appveyor\.yml$
 ^codecov\.yml$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^cran-comments\.md$
-^CODE_OF_CONDUCT\.md$
 ^tests/manual_tests
-^README\.Rmd$
+^README\.md$
 ^\.httr-oauth$
 ^gmail_
 ^LICENSE\.md$
