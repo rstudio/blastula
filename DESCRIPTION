@@ -20,7 +20,7 @@ Authors@R: c(
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/blastula
 BugReports: https://github.com/rstudio/blastula/issues
-Depends: R (>= 3.2.1)
+Depends: R (>= 3.6)
 Imports:
     base64enc (>= 0.1-3),
     commonmark (>= 1.7),
