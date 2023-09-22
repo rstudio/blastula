@@ -5,7 +5,7 @@
 <br />
 <!-- badges: start -->
 <a href="https://cran.r-project.org/package=blastula"><img src="https://www.r-pkg.org/badges/version/blastula" alt="CRAN status" /></a>
-<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+<a href="https://opensource.org/license/mit/"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
 <a href="https://github.com/rstudio/blastula/actions"><img src="https://github.com/rstudio/blastula/workflows/R-CMD-check/badge.svg" alt="R build status" /></a>
 <a href="https://app.codecov.io/gh/rstudio/blastula?branch=master"><img src="https://codecov.io/gh/rstudio/blastula/branch/master/graph/badge.svg" alt="Coverage status" /></a>
 
@@ -104,31 +104,16 @@ devtools::install_github("rstudio/blastula")
 
 If you encounter a bug, have usage questions, or want to share ideas to make this package better, feel free to file an [issue](https://github.com/rstudio/blastula/issues).
 
-## Getting help
-
-There are two main places to get help:
-
-1.  The [RStudio
-    community](https://community.rstudio.com/c/r-markdown/10) is a
-    friendly place to ask any questions about rmarkdown and the R
-    Markdown family of packages.
-
-2.  [Stack
-    Overflow](https://stackoverflow.com/questions/tagged/r-markdown) is
-    a great source of answers to common rmarkdown questions. It is also
-    a great place to get help, once you have created a reproducible
-    example that illustrates your problem.
-
-##### Code of Conduct
+#### Code of Conduct
 
 Please note that the `rstudio/blastula` project is released with a [contributor code of conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).<br>By participating in this project you agree to abide by its terms.
 
-##### 📄 License
+#### 📄 License
 
 **blastula** is licensed under the MIT license. See the [`LICENSE.md`](LICENSE.md) file for more details.
 
 © Posit Software, PBC.
 
-##### 🏛️ Governance
+#### 🏛️ Governance
 
-This project is primarily maintained by [Rich Iannone](https://twitter.com/riannone). Should there also be other authors, they might occasionally assist with some of these duties.
+This project is primarily maintained by **Richard Iannone**. Should there also be other authors, they might occasionally assist with some of these duties.
