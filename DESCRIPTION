@@ -35,7 +35,7 @@ Imports:
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
     mime (>= 0.6),
-    rlang (>= 0.4.1),
+    rlang (>= 1.0),
     rmarkdown,
     stringr (>= 1.4.0),
     uuid (>= 0.1-2)
