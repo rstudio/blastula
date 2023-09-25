@@ -1,10 +1,16 @@
-# blastula (development version)
+# blastula 0.3.4
+
+* Modified tests to remove specific cases that no longer work in newer versions of R. (#310)
+
+* Fixed a problem where non-ASCII subject lines wouldn't render correctly on the Windows platform when using `smtp_send()` (#241). (#242, thanks @shrektan!)
+
+* We replaced `httr::POST()` with `httr::RETRY()` when interacting with web APIs (Mailgun and Imgur). (#176, thank you @ataustin for contributing this PR.)
 
 # blastula 0.3.3
 
 * Made a correction to a `format()` statement to comply with CRAN policy.
 
-* Updated the SMTP vignette with regard to Gmail app passwords (#282), (#283, thanks @jnolis!)
+* Updated the SMTP vignette with regard to Gmail app passwords (#282). (#283, thanks @jnolis!)
 
 # blastula 0.3.2
 

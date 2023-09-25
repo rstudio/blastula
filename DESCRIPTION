@@ -1,6 +1,6 @@
 Type: Package
 Package: blastula
-Version: 0.3.3.9000
+Version: 0.3.4
 Title: Easily Send HTML Email Messages
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
@@ -20,7 +20,7 @@ Authors@R: c(
 License: MIT + file LICENSE
 URL: https://github.com/rstudio/blastula
 BugReports: https://github.com/rstudio/blastula/issues
-Depends: R (>= 3.2.1)
+Depends: R (>= 3.6)
 Imports:
     base64enc (>= 0.1-3),
     commonmark (>= 1.7),
@@ -35,7 +35,7 @@ Imports:
     jsonlite (>= 1.6),
     magrittr (>= 1.5),
     mime (>= 0.6),
-    rlang (>= 0.4.1),
+    rlang (>= 1.0),
     rmarkdown,
     stringr (>= 1.4.0),
     uuid (>= 0.1-2)
