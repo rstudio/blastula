@@ -100,8 +100,8 @@ generate_rfc2822 <- function(
 
         quoted_filename <-
           header_quoted(
-            attachment$filename,
-            str = "Filename",
+            str = attachment$filename,
+            fieldname = "Filename",
             encode_unicode = TRUE
           )
 
