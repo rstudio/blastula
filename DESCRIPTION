@@ -47,7 +47,9 @@ Suggests:
     keyring,
     knitr,
     spelling,
-    xml2
+    xml2,
+    openxlsx,
+    withr
 SystemRequirements: pandoc (>= 1.12.3) - http://pandoc.org
 Encoding: UTF-8
 RoxygenNote: 7.2.3

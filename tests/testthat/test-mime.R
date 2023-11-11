@@ -144,3 +144,27 @@ test_that("varying formats for recipient lists work as expected", {
     grepl("(?<!\\r)\n", ., perl = TRUE) %>%
     expect_false()
 })
+
+test_that("excel attachment", {
+  email <- compose_email()
+
+  withr::with_tempfile(
+    fileext = ".xlsx",
+    new = "out_file",
+    code = {
+      openxlsx::write.xlsx(x = mtcars, file = out_file)
+
+      email <- email %>%
+        add_attachment(out_file)
+
+      generate_rfc2822(
+        eml = email,
+        date = Sys.Date(),
+        subject = NULL,
+        from = NULL,
+        to = NULL
+      ) %>%
+        expect_match(paste0('filename=\"', basename(out_file)))
+    }
+  )
+})
