@@ -51,6 +51,9 @@
 #'   call be printed? While the username and password will likely be echoed
 #'   during the exchange, such information is encoded and won't be stored on
 #'   the user's system.
+#' @param login_options A string representation of login options allowed by
+#'   [`CURLOPT_LOGIN_OPTIONS`](https://curl.se/libcurl/c/CURLOPT_LOGIN_OPTIONS.html).
+#' @param ... Extra arguments passed to [curl::send_mail()]
 #'
 #' @examples
 #' # Before sending out an email through
@@ -132,7 +135,9 @@ smtp_send <- function(
     bcc = NULL,
     credentials = NULL,
     creds_file = "deprecated",
-    verbose = FALSE
+    verbose = FALSE,
+    login_options = NULL,
+    ...
 ) {
 
   # Verify that the `message` object
@@ -202,6 +207,9 @@ smtp_send <- function(
   # Normalize `subject` so that a `NULL` value becomes an empty string
   subject <- subject %||% ""
 
+  # Normalize `login_options` so that a `NULL` value becomes an empty string
+  login_options <- login_options %||% ""
+
   # Generate an email conforming to the RFC-2822 standard
   email_qp <-
     email %>%
@@ -225,7 +233,9 @@ smtp_send <- function(
       use_ssl = credentials$use_ssl %||% TRUE,
       verbose = verbose,
       username = credentials$user,
-      password = credentials$password
+      password = credentials$password,
+      login_options = login_options,
+      ...
     )
 
   # Transmit a message about send success depending on the status code
