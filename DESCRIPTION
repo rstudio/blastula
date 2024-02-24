@@ -46,7 +46,6 @@ Suggests:
     testthat (>= 3.0.0),
     keyring,
     knitr,
-    spelling,
     xml2,
     openxlsx,
     withr
