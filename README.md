@@ -84,9 +84,9 @@ email |>
   )
 ```
 
-### Sending Email Messages through RStudio Connect
+### Sending Email Messages through Posit Connect
 
-We can also send email based on **R Markdown** files through **RStudio Connect**. The `prepare_rsc_example_files()` function provides .Rmd files that facilitate a main report + email report workflow. The key components are the `blastula::blastula_email` output type for the email report, and the use of `render_connect_email()` and `attach_connect_email()` in the main report.
+We can also send email based on **R Markdown** files through **Posit Connect**. The `prepare_rsc_example_files()` function provides .Rmd files that facilitate a main report + email report workflow. The key components are the `blastula::blastula_email` output type for the email report, and the use of `render_connect_email()` and `attach_connect_email()` in the main report.
 
 ### Installation
 

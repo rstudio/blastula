@@ -2,7 +2,7 @@
 % Please edit documentation in R/connect_email.R
 \name{suppress_scheduled_email}
 \alias{suppress_scheduled_email}
-\title{Suppress any scheduled emailing in RStudio Connect}
+\title{Suppress any scheduled emailing in Posit Connect}
 \usage{
 suppress_scheduled_email(suppress = TRUE)
 }
