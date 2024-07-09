@@ -93,7 +93,7 @@ attach_connect_email <- function(
       }
     }
 
-    # Set the RStudio Posit output metadata options for the email message
+    # Set the Posit Connect output metadata options for the email message
     # body and for the images therein
     rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
     rmarkdown::output_metadata$set(rsc_email_images = email$images)
