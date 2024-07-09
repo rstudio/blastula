@@ -1,12 +1,13 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 on:
   push:
-    branches:
-      - master
+    branches: [main, master]
   pull_request:
-    branches:
-      - master
+    branches: [main, master]
 
 name: R-CMD-check
+
+permissions: read-all
 
 jobs:
   R-CMD-check:
@@ -18,22 +19,21 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-11, r: '4.1'}
-          - {os: macos-11, r: '4.2'}
-          - {os: windows-latest, r: '4.1'}
-          - {os: windows-latest, r: '4.2'}
-          - {os: ubuntu-latest, r: '3.6'}
-          - {os: ubuntu-latest, r: '4.0'}
-          - {os: ubuntu-latest, r: '4.1'}
-          - {os: ubuntu-latest, r: '4.2'}
+          - {os: macos-latest,   r: 'release'}
+          - {os: windows-latest, r: 'release'}
+          - {os: ubuntu-latest,  r: 'devel', http-user-agent: 'release'}
+          - {os: ubuntu-latest,  r: 'release'}
+          - {os: ubuntu-latest,  r: 'oldrel-1'}
+          - {os: ubuntu-latest,  r: 'oldrel-2'}
+          - {os: ubuntu-latest,  r: 'oldrel-3'}
+          - {os: ubuntu-latest,  r: 'oldrel-4'}
 
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       GITHUB_PAT: ${{ secrets.GHA_PAT }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -51,3 +51,4 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
