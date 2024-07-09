@@ -48,6 +48,6 @@ rendering an an email message. We can supply an R Markdown document (.Rmd)
 with the output specified as \code{output: blastula::blastula_email}. While the
 \code{render_email()} and \code{render_connect_email()} functions have similar
 arguments, the \code{render_connect_email()} is preferred when publishing to the
-RStudio Connect service. It allows for the inclusion of a predefined footer
+Posit Connect service. It allows for the inclusion of a predefined footer
 that contains useful links for email recipients.
 }

@@ -1,4 +1,4 @@
-#' Prepare example files for RStudio Connect emailing with R Markdown
+#' Prepare example files for Posit Connect emailing with R Markdown
 #'
 #' A set of example files relevant to emailing with R Markdown in RStudio
 #' Connect can be spawned in a specified location. There is a set of three files
@@ -22,10 +22,10 @@
 #' The main report and associated email can be published by opening
 #' `"connect-example-main.Rmd"` and pressing the Publish button at the top-right
 #' of the Editor pane (please ensure beforehand that you are set up work with
-#' RStudio Connect). If asked `"What do you want to publish?"`, choose the first
+#' Posit Connect). If asked `"What do you want to publish?"`, choose the first
 #' option where only the `"connect-example-main"` document is published. All
 #' three files should be checked in the final dialog box, press the `Publish`
-#' button to publish to RStudio Connect.
+#' button to publish to Posit Connect.
 #'
 #' There is also the single `"connect-example-text-only.Rmd"` file that, when
 #' published, serves as a mechanism to send a text-only email. The content of

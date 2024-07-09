@@ -5,7 +5,7 @@
 #' with the output specified as `output: blastula::blastula_email`. While the
 #' `render_email()` and `render_connect_email()` functions have similar
 #' arguments, the `render_connect_email()` is preferred when publishing to the
-#' RStudio Connect service. It allows for the inclusion of a predefined footer
+#' Posit Connect service. It allows for the inclusion of a predefined footer
 #' that contains useful links for email recipients.
 #'
 #' @param input The input file to be rendered. This should be an R Markdown

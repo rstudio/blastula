@@ -1,6 +1,6 @@
-#' Associate an email when publishing an R Markdown document to RStudio Connect
+#' Associate an email when publishing an R Markdown document to Posit Connect
 #'
-#' This function is used to customize emails sent by RStudio Connect in
+#' This function is used to customize emails sent by Posit Connect in
 #' conjunction with publishing an R Markdown document. It associates a custom
 #' email message with the main R Markdown document, which Connect can send to
 #' selected recipients. The main input is a rendered email message, which can be
@@ -19,7 +19,7 @@
 #' @param subject An option to specify the the email subject while attaching the
 #'   email object.
 #' @param attachments A vector of attachments for the Connect email. These files
-#'   can be any of those deployed when publishing to RStudio Connect, and, any
+#'   can be any of those deployed when publishing to Posit Connect, and, any
 #'   generated files (via R Markdown rendering).
 #' @param attach_output Should the rendered output of the main R Markdown
 #'   document be included as an email attachment? By default, this is `FALSE`.
@@ -93,7 +93,7 @@ attach_connect_email <- function(
       }
     }
 
-    # Set the RStudio Connect output metadata options for the email message
+    # Set the Posit Connect output metadata options for the email message
     # body and for the images therein
     rmarkdown::output_metadata$set(rsc_email_body_html = email$html_str)
     rmarkdown::output_metadata$set(rsc_email_images = email$images)
@@ -128,7 +128,7 @@ attach_connect_email <- function(
   invisible()
 }
 
-#' Suppress any scheduled emailing in RStudio Connect
+#' Suppress any scheduled emailing in Posit Connect
 #'
 #' This function is useful for suppressing the scheduled emailing of a published
 #' R Markdown document. It can be invoked anywhere in the R Markdown document
@@ -171,7 +171,7 @@ create_rmd_preview_message <- function(subject = NULL) {
     paste0(
       "<div style=\"text-align: center; background:#fcfcfc\">",
       "<h2 style=\"margin-bottom: 0; padding-bottom: 0;\">",
-      "This is an email preview for RStudio Connect</h2>",
+      "This is an email preview for Posit Connect</h2>",
       "<p style=\"text-align: center; background:#fcfcfc; ",
       "padding-top: 0; margin-top: 0;\">",
       "Use <code>attach_connect_email(preview = FALSE)</code> ",

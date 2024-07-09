@@ -57,7 +57,7 @@ It looks like the year `r dallas_home_sales %>% filter(total_sales == max(total_
 dallas_home_sales %>% write_csv("dallas_home_sales.csv")
 ```
 
-We can create an email on **RStudio Connect** that aligns with the content from this report. We do this with the `render_connect_email()` and `attach_connect_email()` functions from the **blastula** package. The email subdocument (`"connect-example-email.Rmd"`) is used to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the arguments:
+We can create an email on **Posit Connect** that aligns with the content from this report. We do this with the `render_connect_email()` and `attach_connect_email()` functions from the **blastula** package. The email subdocument (`"connect-example-email.Rmd"`) is used to craft the contents of the email, drawing upon results available in this document. Attachments for the email can added by using the arguments:
 
 - `attachments` (for any output files or included files)
 - `attach_output` (which attaches the rendered report)
@@ -65,7 +65,7 @@ We can create an email on **RStudio Connect** that aligns with the content from 
 ```{r connect_email_setup, echo=FALSE}
 render_connect_email(input = "connect-example-email.Rmd") %>%
   attach_connect_email(
-    subject = "RStudio Connect HTML Email",
+    subject = "Posit Connect HTML Email",
     attach_output = TRUE,
     attachments = c("dallas_home_sales.csv", "austin_home_sales.csv")
   )

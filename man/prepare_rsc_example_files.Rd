@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepare_rsc_example_files.R
 \name{prepare_rsc_example_files}
 \alias{prepare_rsc_example_files}
-\title{Prepare example files for RStudio Connect emailing with R Markdown}
+\title{Prepare example files for Posit Connect emailing with R Markdown}
 \usage{
 prepare_rsc_example_files(path = NULL)
 }
@@ -35,10 +35,10 @@ attachment by way of the \code{attachments} argument in the
 The main report and associated email can be published by opening
 \code{"connect-example-main.Rmd"} and pressing the Publish button at the top-right
 of the Editor pane (please ensure beforehand that you are set up work with
-RStudio Connect). If asked \code{"What do you want to publish?"}, choose the first
+Posit Connect). If asked \code{"What do you want to publish?"}, choose the first
 option where only the \code{"connect-example-main"} document is published. All
 three files should be checked in the final dialog box, press the \code{Publish}
-button to publish to RStudio Connect.
+button to publish to Posit Connect.
 
 There is also the single \code{"connect-example-text-only.Rmd"} file that, when
 published, serves as a mechanism to send a text-only email. The content of

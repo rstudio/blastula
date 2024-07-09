@@ -2,7 +2,7 @@
 % Please edit documentation in R/connect_email.R
 \name{attach_connect_email}
 \alias{attach_connect_email}
-\title{Associate an email when publishing an R Markdown document to RStudio Connect}
+\title{Associate an email when publishing an R Markdown document to Posit Connect}
 \usage{
 attach_connect_email(
   email = NULL,
@@ -23,7 +23,7 @@ format in \code{\link[=render_connect_email]{render_connect_email()}} call (wher
 email object.}
 
 \item{attachments}{A vector of attachments for the Connect email. These files
-can be any of those deployed when publishing to RStudio Connect, and, any
+can be any of those deployed when publishing to Posit Connect, and, any
 generated files (via R Markdown rendering).}
 
 \item{attach_output}{Should the rendered output of the main R Markdown
@@ -40,7 +40,7 @@ supplied then input to \code{text} is ignored.}
 default browser.}
 }
 \description{
-This function is used to customize emails sent by RStudio Connect in
+This function is used to customize emails sent by Posit Connect in
 conjunction with publishing an R Markdown document. It associates a custom
 email message with the main R Markdown document, which Connect can send to
 selected recipients. The main input is a rendered email message, which can be
