@@ -1,138 +1,48 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rstudio.github.io/blastula/404.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/articles/blastula.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/articles/sending_using_smtp.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/add_attachment.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/add_cta_button.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/add_ggplot.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/add_image.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/add_imgur_image.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/add_readable_time.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/article.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/attach_connect_email.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/blastula_email.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/blastula_template.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/block_articles.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/block_social_links.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/block_spacer.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/block_text.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/block_title.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/blocks.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/compose_email.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/create_smtp_creds_file.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/create_smtp_creds_key.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/credential_helpers.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/delete_all_credential_keys.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/delete_credential_key.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/get_html_str.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/md.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/prepare_rsc_example_files.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/prepare_test_message.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/print.blastula_message.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/render_email.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/send_by_mailgun.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/smtp_send.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/social_link.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/suppress_scheduled_email.html</loc>
-  </url>
-  <url>
-    <loc>https://rstudio.github.io/blastula/reference/view_credential_keys.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rstudio.github.io/blastula/404.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/LICENSE-text.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/LICENSE.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/articles/blastula.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/articles/index.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/articles/sending_using_smtp.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/authors.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/index.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/news/index.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/add_attachment.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/add_cta_button.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/add_ggplot.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/add_image.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/add_imgur_image.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/add_readable_time.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/article.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/attach_connect_email.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/blastula_email.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/blastula_template.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/block_articles.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/block_social_links.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/block_spacer.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/block_text.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/block_title.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/blocks.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/compose_email.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/create_smtp_creds_file.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/create_smtp_creds_key.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/credential_helpers.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/delete_all_credential_keys.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/delete_credential_key.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/get_html_str.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/index.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/md.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/pipe.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/prepare_rsc_example_files.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/prepare_test_message.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/print.blastula_message.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/render_email.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/send_by_mailgun.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/smtp_send.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/social_link.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/suppress_scheduled_email.html</loc></url>
+<url><loc>https://rstudio.github.io/blastula/reference/view_credential_keys.html</loc></url>
 </urlset>
+

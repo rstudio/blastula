@@ -15,7 +15,7 @@ attachment) prior to sending through this function."><meta property="og:image" c
 
   gtag('config', 'UA-115082821-1');
 </script><!-- javascript assets for rmarkdown --><script src="../ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script><script src="../holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script><script src="../snippets/snippets.js" type="text/javascript" charset="utf-8"></script></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -30,14 +30,14 @@ attachment) prior to sending through this function."><meta property="og:image" c
 
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">blastula</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.5.9000</span>
       </span>
 
       <!--<div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">blastula</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of  <a href=""></a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.5.9000</span>
         </div>
       </div>-->
     </div>
@@ -49,14 +49,14 @@ attachment) prior to sending through this function."><meta property="og:image" c
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Examples
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
       <a href="https://solutions.rstudio.com/r/blastula/" class="external-link">Custom Emails with R Markdown and Blastula</a>
     </li>
     <li>
-      <a href="https://solutions.rstudio.com/r/blastula/conditional-example/" class="external-link">Customized Conditional Emails with RStudio Connect</a>
+      <a href="https://solutions.rstudio.com/r/blastula/conditional-example/" class="external-link">Customized Conditional Emails with Posit Connect</a>
     </li>
     <li>
       <a href="https://solutions.rstudio.com/data-science-admin/scheduling/" class="external-link">Scheduling Data Science Tasks</a>
@@ -65,7 +65,7 @@ attachment) prior to sending through this function."><meta property="og:image" c
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -78,7 +78,7 @@ attachment) prior to sending through this function."><meta property="og:image" c
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -93,20 +93,20 @@ attachment) prior to sending through this function."><meta property="og:image" c
 <li>
   <a href="https://github.com/rstudio/blastula" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Send an email message through SMTP</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/blastula/blob/HEAD/R/smtp_send.R" class="external-link"><code>R/smtp_send.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/blastula/blob/master/R/smtp_send.R" class="external-link"><code>R/smtp_send.R</code></a></small>
     <div class="hidden name"><code>smtp_send.Rd</code></div>
     </div>
 
@@ -130,25 +130,29 @@ attachment) prior to sending through this function.</p>
 <span>  bcc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  credentials <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  creds_file <span class="op">=</span> <span class="st">"deprecated"</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  login_options <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>email</dt>
+
+
+<dl><dt id="arg-email">email<a class="anchor" aria-label="anchor" href="#arg-email"></a></dt>
 <dd><p>The email message object, as created by the <code><a href="compose_email.html">compose_email()</a></code>
 function. The object's class is <code>email_message</code>.</p></dd>
 
 
-<dt>to</dt>
+<dt id="arg-to">to<a class="anchor" aria-label="anchor" href="#arg-to"></a></dt>
 <dd><p>A vector of email addresses serving as primary recipients for the
 message. For secondary recipients, use the <code>cc</code> and <code>bcc</code> arguments. A
 named character vector can be used to specify the recipient names along
 with the their email address (e.g., <code>c("Jane Doe" = "jane_doe@example.com")</code>).</p></dd>
 
 
-<dt>from</dt>
+<dt id="arg-from">from<a class="anchor" aria-label="anchor" href="#arg-from"></a></dt>
 <dd><p>The email address of the sender. Often this needs to be the same
 email address that is associated with the account actually sending the
 message. As with <code>to</code>, <code>cc</code>, and <code>bcc</code>, we can either supply a single email
@@ -156,13 +160,13 @@ address or use a named character vector with the sender name and email
 address (e.g., <code>c("John Doe" = "john_doe@example.com")</code>).</p></dd>
 
 
-<dt>subject</dt>
+<dt id="arg-subject">subject<a class="anchor" aria-label="anchor" href="#arg-subject"></a></dt>
 <dd><p>The subject of the message, which is usually a brief summary
 of the topic of the message. If not provided, an empty string will be used
 (which is handled differently by email clients).</p></dd>
 
 
-<dt>cc, bcc</dt>
+<dt id="arg-cc-bcc">cc, bcc<a class="anchor" aria-label="anchor" href="#arg-cc-bcc"></a></dt>
 <dd><p>A vector of email addresses for sending the message as a carbon
 copy or blind carbon copy. The CC list pertains to recipients that are to
 receive a copy of a message that is addressed primarily to others. The CC
@@ -173,7 +177,7 @@ vector can be used to specify the recipient names along with the their
 email address (e.g., <code>c("Joe Public" = "joe_public@example.com")</code>).</p></dd>
 
 
-<dt>credentials</dt>
+<dt id="arg-credentials">credentials<a class="anchor" aria-label="anchor" href="#arg-credentials"></a></dt>
 <dd><p>One of three credential helper functions must be used
 here: (1) <code><a href="credential_helpers.html">creds()</a></code>, (2) <code><a href="credential_helpers.html">creds_key()</a></code>, or (3) <code><a href="credential_helpers.html">creds_file()</a></code>. The first,
 <code><a href="credential_helpers.html">creds()</a></code>, allows for a manual specification of SMTP configuration and
@@ -185,17 +189,26 @@ store, through use of the <code><a href="create_smtp_creds_key.html">create_smtp
 Such a file is created using the <code><a href="create_smtp_creds_file.html">create_smtp_creds_file()</a></code> function.</p></dd>
 
 
-<dt>creds_file</dt>
+<dt id="arg-creds-file">creds_file<a class="anchor" aria-label="anchor" href="#arg-creds-file"></a></dt>
 <dd><p>An option to specify a credentials file. As this argument
 is deprecated, please consider using <code>credentials = creds_file(&lt;file&gt;)</code>
 instead.</p></dd>
 
 
-<dt>verbose</dt>
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
 <dd><p>Should verbose output from the internal curl <code>send_mail()</code>
 call be printed? While the username and password will likely be echoed
 during the exchange, such information is encoded and won't be stored on
 the user's system.</p></dd>
+
+
+<dt id="arg-login-options">login_options<a class="anchor" aria-label="anchor" href="#arg-login-options"></a></dt>
+<dd><p>A string representation of login options allowed by
+<a href="https://curl.se/libcurl/c/CURLOPT_LOGIN_OPTIONS.html" class="external-link"><code>CURLOPT_LOGIN_OPTIONS</code></a>.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>Extra arguments passed to <code><a href="https://rdrr.io/pkg/curl/man/send_mail.html" class="external-link">curl::send_mail()</a></code></p></dd>
 
 </dl></div>
     <div id="details">
@@ -291,15 +304,15 @@ store (with the key set by the <code><a href="create_smtp_creds_key.html">create
 </div>
 
 <div class="author">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

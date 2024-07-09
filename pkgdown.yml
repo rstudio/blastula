@@ -1,11 +1,10 @@
-pandoc: 2.7.3
-pkgdown: 2.0.7.9000
-pkgdown_sha: c354aa7e5ea1f9936692494c28c89e5bdd31fc68
+pandoc: 3.1.11
+pkgdown: 2.1.0
+pkgdown_sha: ~
 articles:
   blastula: blastula.html
   sending_using_smtp: sending_using_smtp.html
-last_built: 2023-03-13T14:58Z
+last_built: 2024-07-09T20:57Z
 urls:
   reference: https://rstudio.github.io/blastula/reference
   article: https://rstudio.github.io/blastula/articles
-

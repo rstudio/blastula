@@ -9,7 +9,7 @@
 
   gtag('config', 'UA-115082821-1');
 </script><!-- javascript assets for rmarkdown --><script src="../ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script><script src="../holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script><script src="../snippets/snippets.js" type="text/javascript" charset="utf-8"></script></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -24,14 +24,14 @@
 
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">blastula</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.5.9000</span>
       </span>
 
       <!--<div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">blastula</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of  <a href=""></a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.3.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.5.9000</span>
         </div>
       </div>-->
     </div>
@@ -43,14 +43,14 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Examples
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
       <a href="https://solutions.rstudio.com/r/blastula/" class="external-link">Custom Emails with R Markdown and Blastula</a>
     </li>
     <li>
-      <a href="https://solutions.rstudio.com/r/blastula/conditional-example/" class="external-link">Customized Conditional Emails with RStudio Connect</a>
+      <a href="https://solutions.rstudio.com/r/blastula/conditional-example/" class="external-link">Customized Conditional Emails with Posit Connect</a>
     </li>
     <li>
       <a href="https://solutions.rstudio.com/data-science-admin/scheduling/" class="external-link">Scheduling Data Science Tasks</a>
@@ -59,7 +59,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -72,7 +72,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     News
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
@@ -87,20 +87,20 @@
 <li>
   <a href="https://github.com/rstudio/blastula" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>The R Markdown <code>blastula_email</code> output format</h1>
-    <small class="dont-index">Source: <a href="https://github.com/rstudio/blastula/blob/HEAD/R/blastula_email_format.R" class="external-link"><code>R/blastula_email_format.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/rstudio/blastula/blob/master/R/blastula_email_format.R" class="external-link"><code>R/blastula_email_format.R</code></a></small>
     <div class="hidden name"><code>blastula_email.Rd</code></div>
     </div>
 
@@ -134,7 +134,9 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>content_width</dt>
+
+
+<dl><dt id="arg-content-width">content_width<a class="anchor" aria-label="anchor" href="#arg-content-width"></a></dt>
 <dd><p>The width of the rendered HTML content. By default, this
 is set to <code>1000px</code>. Using widths less than <code>600px</code> is generally not advised
 but, if necessary, be sure to test such HTML emails with a wide range of
@@ -142,93 +144,93 @@ email clients before sending to the intended recipients. The Outlook mail
 client (Windows, Desktop) does not respect <code>content_width</code>.</p></dd>
 
 
-<dt>toc</dt>
+<dt id="arg-toc">toc<a class="anchor" aria-label="anchor" href="#arg-toc"></a></dt>
 <dd><p>If you would like an automatically-generated table of contents in
 the output email, choose <code>TRUE</code>. By default, this is <code>FALSE</code> where no table
 of contents will be generated.</p></dd>
 
 
-<dt>toc_depth</dt>
+<dt id="arg-toc-depth">toc_depth<a class="anchor" aria-label="anchor" href="#arg-toc-depth"></a></dt>
 <dd><p>The depth of headers to include in the table of contents (
 should <code>toc</code> be set to <code>TRUE</code>).</p></dd>
 
 
-<dt>toc_float</dt>
+<dt id="arg-toc-float">toc_float<a class="anchor" aria-label="anchor" href="#arg-toc-float"></a></dt>
 <dd><p>An option to float the table of contents to the left of the
 main document content. By default, this is <code>FALSE</code>.</p></dd>
 
 
-<dt>number_sections</dt>
+<dt id="arg-number-sections">number_sections<a class="anchor" aria-label="anchor" href="#arg-number-sections"></a></dt>
 <dd><p>Sections can be sequentially numbered if this is set
 to <code>TRUE</code>. By default, this is <code>FALSE</code>.</p></dd>
 
 
-<dt>section_divs</dt>
+<dt id="arg-section-divs">section_divs<a class="anchor" aria-label="anchor" href="#arg-section-divs"></a></dt>
 <dd><p>This wraps sections in <code>&lt;section&gt;</code> tags and attaches
 identifiers to the enclosing <code>&lt;section&gt;</code>s. This is set to <code>TRUE</code>.</p></dd>
 
 
-<dt>fig_width, fig_height</dt>
+<dt id="arg-fig-width-fig-height">fig_width, fig_height<a class="anchor" aria-label="anchor" href="#arg-fig-width-fig-height"></a></dt>
 <dd><p>The figure width and height in units of inches.</p></dd>
 
 
-<dt>fig_retina</dt>
+<dt id="arg-fig-retina">fig_retina<a class="anchor" aria-label="anchor" href="#arg-fig-retina"></a></dt>
 <dd><p>The scaling factor for retina displays. The default value
 is <code>2</code>, which is the preferred choice for most retina displays. This can be
 set to <code>NULL</code> to prevent retina scaling. Note that this will always be
 <code>NULL</code> if <code>keep_md</code> is set to <code>TRUE</code>.</p></dd>
 
 
-<dt>fig_caption</dt>
+<dt id="arg-fig-caption">fig_caption<a class="anchor" aria-label="anchor" href="#arg-fig-caption"></a></dt>
 <dd><p>An option to render figures with captions. By default,
 this is set to <code>TRUE</code>.</p></dd>
 
 
-<dt>dev</dt>
+<dt id="arg-dev">dev<a class="anchor" aria-label="anchor" href="#arg-dev"></a></dt>
 <dd><p>The R graphics device for figures. By default, this is the <code>png</code>
 device.</p></dd>
 
 
-<dt>smart</dt>
+<dt id="arg-smart">smart<a class="anchor" aria-label="anchor" href="#arg-smart"></a></dt>
 <dd><p>An option to produce typographically correct output. This will
 convert straight quotes to curly quotes, <code>---</code> to em dashes, <code>--</code> to en
 dashes, and instances of <code>...</code> to ellipses. By default, this is <code>TRUE</code>.</p></dd>
 
 
-<dt>self_contained</dt>
+<dt id="arg-self-contained">self_contained<a class="anchor" aria-label="anchor" href="#arg-self-contained"></a></dt>
 <dd><p>Should a self-contained output file be generated. By
 default, this is <code>TRUE</code>. The standalone HTML file will have no external
 dependencies, it will use URIs to incorporate the contents of linked
 scripts, stylesheets, images, and videos.</p></dd>
 
 
-<dt>template</dt>
+<dt id="arg-template">template<a class="anchor" aria-label="anchor" href="#arg-template"></a></dt>
 <dd><p>The Pandoc template to use for rendering. This is the
 <code>"blastula"</code> template by default.</p></dd>
 
 
-<dt>includes</dt>
+<dt id="arg-includes">includes<a class="anchor" aria-label="anchor" href="#arg-includes"></a></dt>
 <dd><p>A named list of additional content to include within the
 document. This is typically created using the <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/includes.html" class="external-link">rmarkdown::includes()</a></code>
 function. By default, this is set to <code>NULL</code>.</p></dd>
 
 
-<dt>keep_md</dt>
+<dt id="arg-keep-md">keep_md<a class="anchor" aria-label="anchor" href="#arg-keep-md"></a></dt>
 <dd><p>Should you need the keep the intermediate Markdown (.md) file,
 set this to <code>TRUE</code>. By default, the .md file is not kept.</p></dd>
 
 
-<dt>md_extensions</dt>
+<dt id="arg-md-extensions">md_extensions<a class="anchor" aria-label="anchor" href="#arg-md-extensions"></a></dt>
 <dd><p>Markdown extensions to be added or removed from the
 default definition or R Markdown.</p></dd>
 
 
-<dt>connect_footer</dt>
+<dt id="arg-connect-footer">connect_footer<a class="anchor" aria-label="anchor" href="#arg-connect-footer"></a></dt>
 <dd><p>Should a prepared footer message with links be included
 in the rendered email?</p></dd>
 
 
-<dt>...</dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Specify other options in <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/html_document.html" class="external-link">rmarkdown::html_document()</a></code>.</p></dd>
 
 </dl></div>
@@ -245,15 +247,15 @@ in the rendered email?</p></dd>
 </div>
 
 <div class="author">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
