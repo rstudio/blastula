@@ -12,7 +12,6 @@ name: pkgdown
 
 jobs:
   pkgdown:
-    if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'pkgdown/') }}
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GHA_PAT }}
@@ -27,7 +26,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::.
+          extra-packages: any::pkgdown, github::rstudio/quillt, local::.
           needs: website
 
       - name: Install package
@@ -43,10 +42,12 @@ jobs:
           git config --local user.name "GitHub Actions"
 
       - name: Deploy package
+        if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'pkgdown/') }}
         run: pkgdown::deploy_to_branch(new_process = FALSE)
         shell: Rscript {0}
 
       - name: Deploy to Netlify
+        if: ${{ github.event_name == 'push' || startsWith(github.head_ref, 'pkgdown/') }}
         id: netlify-deploy
         uses: nwtgck/actions-netlify@v1.1
         # NETLIFY_AUTH_TOKEN added in the repo's secrets
