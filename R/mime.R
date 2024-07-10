@@ -511,7 +511,7 @@ header_unstructured <- function(
 
     if (encode_unicode) {
       str <- enc2utf8(str)
-      str <- sprintf("=?utf-8?B?%s?=", base64enc::base64encode(charToRaw(str)), 0)
+      str <- sprintf("=?utf-8?B?%s?=", base64enc::base64encode(charToRaw(str)))
 
     } else {
 
