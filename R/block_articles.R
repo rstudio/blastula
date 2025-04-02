@@ -77,7 +77,10 @@ article <- function(
   )
 }
 
-# To allow articles to be snapshot tested using testthat::verify_output
+#' Allow articles to be snapshot tested using testthat::verify_output
+#'
+#' @noRd
+#' @export
 print.article <- function(x, ...) {
   print(x(NULL))
 }
