@@ -141,7 +141,7 @@
 <div class="section level3">
 <h3 id="breaking-changes-0-3-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
 <ul><li><p><code>send_email_out()</code> has been removed; the <code><a href="../reference/smtp_send.html">smtp_send()</a></code> function is its replacement for sending email through an SMTP server</p></li>
-<li><p>The revised <code><a href="../reference/smtp_send.html">smtp_send()</a></code> function internally uses <code><a href="https://rdrr.io/pkg/curl/man/send_mail.html" class="external-link">curl::send_mail()</a></code> to send RFC2822 email message that <strong>blastula</strong> now independently generates; now, there is no need to download third-party binaries to send via SMTP</p></li>
+<li><p>The revised <code><a href="../reference/smtp_send.html">smtp_send()</a></code> function internally uses <code><a href="https://jeroen.r-universe.dev/curl/reference/send_mail.html" class="external-link">curl::send_mail()</a></code> to send RFC2822 email message that <strong>blastula</strong> now independently generates; now, there is no need to download third-party binaries to send via SMTP</p></li>
 <li><p>The <code><a href="../reference/smtp_send.html">smtp_send()</a></code> no longer offers text interpolation in <code><a href="https://rdrr.io/r/base/Paren.html" class="external-link">{ }</a></code> (which was provided by <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code>) since this poses a security risk; email strings can be precomposed using <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> independently, or, by using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code>, <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code>/<code>paste0</code>.</p></li>
 <li><p>If an email message string contains Markdown text or HTML fragments, the <code><a href="../reference/md.html">md()</a></code> function must be used to perform rendering</p></li>
 <li><p>The <code>create_email_creds_file()</code> function has been removed in favor of a suite of functions for storing SMTP configuration info and credentials (<code><a href="../reference/create_smtp_creds_file.html">create_smtp_creds_file()</a></code>, <code><a href="../reference/create_smtp_creds_key.html">create_smtp_creds_key()</a></code>); the following credentials helper functions are available for retrieving or directly specifying configuration and credentials during sending: <code><a href="../reference/credential_helpers.html">creds_file()</a></code>, <code><a href="../reference/credential_helpers.html">creds_key()</a></code>, <code><a href="../reference/credential_helpers.html">creds_anonymous()</a></code>, and <code><a href="../reference/credential_helpers.html">creds()</a></code></p></li>
@@ -194,7 +194,7 @@
 </div>
 
 <div class="author">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>

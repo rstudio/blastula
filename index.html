@@ -34,8 +34,10 @@
 
   gtag('config', 'UA-115082821-1');
 </script><!-- javascript assets for rmarkdown --><script src="ace-1.2.3/ace.js" type="text/javascript" charset="utf-8"></script><script src="holder-2.9.0/holder.min.js" type="text/javascript" charset="utf-8"></script><script src="snippets/snippets.js" type="text/javascript" charset="utf-8"></script><!-- from quillt: JS redirect for homepage --><script>
-  if (!/(\/|html?)$/.test(window.location.href)){
-    window.location.replace(window.location.href + '/');
+  if (!/(\/|html?)$/.test(window.location.pathname)) {
+    const newHome = new URL(window.location.href);
+    newHome.pathname = newHome.pathname + '/';
+    window.location.replace(newHome.toString())
   }
 </script>
 </head>
@@ -291,7 +293,7 @@
 
 <div class="author">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
