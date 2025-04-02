@@ -18,3 +18,4 @@ man/figures/
 tests/testthat/test-add_readable_time.R
 tests/testthat/test-utils.R
 tests/testthat/test-html_manip.R
+tests/testthat/test-mime.R
