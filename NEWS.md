@@ -1,4 +1,4 @@
-# blastula (development version)
+# blastula 0.3.6
 
 # blastula 0.3.5
 

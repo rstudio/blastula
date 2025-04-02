@@ -1,6 +1,6 @@
 Type: Package
 Package: blastula
-Version: 0.3.5.9000
+Version: 0.3.6
 Title: Easily Send HTML Email Messages
 Description: Compose and send out responsive HTML email messages that render
     perfectly across a range of email clients and device sizes. Helper functions
