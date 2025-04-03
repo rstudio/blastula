@@ -1,4 +1,10 @@
-# blastula (development version)
+# blastula 0.3.6
+
+* Fixed erroneous use of `sprintf()`. (#335, thanks @pabecer!)
+
+* Updated full product name of Connect. (#334, thanks @aronatkins!)
+
+* Updated several GHA workflows (#336). (#337)
 
 # blastula 0.3.5
 
